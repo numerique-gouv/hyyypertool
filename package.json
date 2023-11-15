@@ -2,8 +2,12 @@
   "name": "hyyypertool",
   "module": "src/bootstrap.ts",
   "type": "module",
+  "version": "2023.11.15",
+  "dependencies": {
+    "elysia": "^0.7.25"
+  },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "^1.0.10"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

@@ -12,10 +12,12 @@
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "noEmit": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
     "types": ["bun-types"],
     "verbatimModuleSyntax": true
-  }
+  },
+  "include": ["package.json"]
 }
