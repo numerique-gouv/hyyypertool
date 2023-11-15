@@ -1,2 +1,7 @@
 # hyyypertool
-Backoffice moderation tool for MonComptePro
+
+<p align="center">
+    <img src=".github/Charco - Security.png">
+</p>
+
+> Backoffice moderation tool for MonComptePro
