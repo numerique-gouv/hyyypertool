@@ -15,10 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
+    - uses: kolok/deploy-to-scalingo@v1
       with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        known_hosts: ssh.osc-fr1.scalingo.com
-    - name: Deploy to moncomptepro-hyyypertool-preprod
-      run: git push --force git@ssh.osc-fr1.scalingo.com:moncomptepro-hyyypertool-preprod.git ${{ github.event.inputs.commitSHA }}:refs/heads/master
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        app-name: moncomptepro-hyyypertool-preprod
+        known-host: ssh.osc-fr1.scalingo.com
