@@ -9,6 +9,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "build": "echo \"Error: no build specified\" && exit 0"
+    "build": "echo \"Error: no build specified\" && exit 0",
+    "start": "bun src/bootstrap.ts"
   }
 }
