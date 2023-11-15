@@ -2,6 +2,9 @@
   "name": "hyyypertool",
   "module": "src/bootstrap.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun src/bootstrap.ts"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
