@@ -7,7 +7,8 @@
     "elysia": "^0.7.25"
   },
   "devDependencies": {
-    "bun-types": "^1.0.10"
+    "bun-types": "^1.0.10",
+    "prettier": "^3.0.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
