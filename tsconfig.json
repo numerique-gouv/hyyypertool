@@ -15,9 +15,10 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "paths": {
-      ":package.json": ["./package.json"],
+      ":database": ["./src/database"],
       ":env": ["./src/env"],
       ":layout/*": ["./src/layout/*"],
+      ":package.json": ["./package.json"],
       ":www": ["./src/www.router"]
     },
     "plugins": [{ "name": "@kitajs/ts-html-plugin" }],

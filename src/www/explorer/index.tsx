@@ -1,58 +1,113 @@
 //
 
+import { prisma } from ":database";
 import { Main_Layout } from ":layout/main";
 import type { ElysiaWWW } from ":www";
+import { t } from "elysia";
 
 //
 
 export default (www: ElysiaWWW) =>
-  www.get("/", () => (
-    <Main_Layout>
-      <div class="fr-container--fluid min-h-full">
-        <div class="fr-grid-row">
-          <div class="fr-col-12 fr-col-md-4">
-            <Aside />
+  www
+    .get("/", () => (
+      <Main_Layout>
+        <div class="fr-container--fluid">
+          <div class="fr-grid-row ">
+            <aside
+              class="fr-col-12 fr-col-md-4"
+              hx-get="/explorer/_/aside"
+              hx-target="this"
+              hx-trigger="load"
+            />
+            <div class="fr-col-12 fr-col-md-8 fr-py-12v"></div>
           </div>
-          <div class="fr-col-12 fr-col-md-8 fr-py-12v"></div>
         </div>
-      </div>
-    </Main_Layout>
-  ));
+      </Main_Layout>
+    ))
+    .get("/_/aside", async ({ request }) => {
+      console.log({ request }); // TODO(douglasduteil): recover the path
 
-function Aside() {
-  return (
-    <nav class="fr-sidemenu">
-      <div class="fr-sidemenu__inner ">
-        <div class="fr-search-bar pt-6" role="search">
-          <label class="fr-label" for="search-input">
-            Recherche
-          </label>
-          <input
-            class="fr-input"
-            placeholder="Rechercher"
-            type="search"
-            id="search-input"
-            name="search-input"
-          />
-          <button class="fr-btn" title="Rechercher">
-            Rechercher
-          </button>
-        </div>
-        <ul class="fr-sidemenu__list">
-          <AsideItem />
-          <AsideItem />
-          <AsideItem />
-        </ul>
-      </div>
-    </nav>
-  );
-}
+      const moderations = await prisma.moderations.findMany({
+        include: { organizations: true, users: true },
+        take: 10,
+      });
+      return (
+        <nav class="fr-sidemenu  flex-grow">
+          <div class="fr-sidemenu__inner flex max-h-full flex-col ">
+            <div class="fr-search-bar pt-6" role="search">
+              <label class="fr-label" for="search-input">
+                Recherche
+              </label>
+              <input
+                class="fr-input"
+                hx-post="/explorer/_/aside/search"
+                hx-trigger="input changed delay:500ms, search"
+                hx-target="#search-results"
+                id="search-input"
+                name="search-input"
+                placeholder="Rechercher"
+                type="search"
+              />
+              <button class="fr-btn" title="Rechercher">
+                Rechercher
+              </button>
+              <span class="htmx-indicator"> ...</span>
+            </div>
+            <ul
+              class="fr-sidemenu__list h-full min-h-0 flex-1 overflow-y-auto"
+              id="search-results"
+            >
+              {moderations.map(function (moderation) {
+                return (
+                  <AsideItem
+                    name={moderation.users.given_name ?? "Unknown user"}
+                  />
+                );
+              })}
+            </ul>
+          </div>
+        </nav>
+      );
+    })
+    .post(
+      "/_/aside/search",
+      async ({ request, query, body }) => {
+        const moderation_id = query["moderation_id"];
+        const search = body["search-input"];
+        console.log({ query, body, search }); // TODO(douglasduteil): recover the path
 
-function AsideItem() {
+        const moderations = await prisma.moderations.findMany({
+          include: { organizations: true, users: true },
+          where: {
+            users: { given_name: { contains: search, mode: "insensitive" } },
+          },
+          take: 10,
+        });
+
+        return (
+          <>
+            {moderations.map(function (moderation) {
+              return (
+                <AsideItem
+                  name={moderation.users.given_name ?? "Unknown user"}
+                />
+              );
+            })}
+          </>
+        );
+      },
+      {
+        body: t.Object({
+          "search-input": t.String(),
+        }),
+      },
+    );
+
+function AsideItem({ name }: { name?: string }) {
   return (
     <li class="fr-sidemenu__item">
       <button class="fr-sidemenu__btn">
-        <i>User</i>
+        <i safe>{name ? name : "User"}</i>
       </button>
       <div
         id="elements-d-interface-modeles"

@@ -8,18 +8,20 @@ import { Root_Layout } from "./root";
 export function Main_Layout({ children }: PropsWithChildren) {
   return (
     <Root_Layout>
-      <header role="banner" class="fr-header">
-        <div class="fr-header__body">
-          <div class="fr-container">
-            <div class="fr-header__body-row">
-              <Brand />
-              <Tools />
+      <div class="flex flex-grow flex-col">
+        <header role="banner" class="fr-header">
+          <div class="fr-header__body">
+            <div class="fr-container">
+              <div class="fr-header__body-row">
+                <Brand />
+                <Tools />
+              </div>
             </div>
+            {/*  */}
           </div>
-          {/*  */}
-        </div>
-      </header>
-      {children}
+        </header>
+        <div class="relative flex flex-1 flex-col">{children}</div>
+      </div>
     </Root_Layout>
   );
 }
