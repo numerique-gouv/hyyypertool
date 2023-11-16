@@ -14,7 +14,10 @@
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "noEmit": true,
-    "paths": { ":www": ["./src/www.router"] },
+    "paths": {
+      ":package.json": ["./package.json"],
+      ":www": ["./src/www.router"]
+    },
     "plugins": [{ "name": "@kitajs/ts-html-plugin" }],
     "resolveJsonModule": true,
     "skipLibCheck": true,

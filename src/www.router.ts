@@ -1,3 +1,5 @@
+/// <reference types="@kitajs/html/htmx.d.ts" />
+
 //
 
 import { html } from "@elysiajs/html";
