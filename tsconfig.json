@@ -16,6 +16,8 @@
     "noEmit": true,
     "paths": {
       ":package.json": ["./package.json"],
+      ":env": ["./src/env"],
+      ":layout/*": ["./src/layout/*"],
       ":www": ["./src/www.router"]
     },
     "plugins": [{ "name": "@kitajs/ts-html-plugin" }],

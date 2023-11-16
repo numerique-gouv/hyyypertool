@@ -1,5 +1,6 @@
 //
 
+import ENV from ":env";
 import { www } from ":www";
 import staticPlugin from "@elysiajs/static";
 import "@kitajs/html/register";
@@ -19,6 +20,7 @@ new Elysia()
       routesDir: "./www",
     }),
   )
+  //
   .use(staticPlugin())
   //
   .use(
@@ -46,10 +48,10 @@ new Elysia()
     }),
   )
   //
-  .listen(Bun.env.PORT!, (srv) => {
+  .listen(ENV.PORT, (srv) => {
     console.log(
       `${pkg.name}: http://${srv.hostname}:${srv.port}\n` +
-        `- Environment: ${Bun.env.NODE_ENV}\n` +
+        `- Environment: ${ENV.NODE_ENV}\n` +
         `- Version: v${pkg.version}`,
     );
   });
