@@ -5,6 +5,7 @@ import { www } from ":www";
 import staticPlugin from "@elysiajs/static";
 import "@kitajs/html/register";
 import Elysia from "elysia";
+import { autoroutes } from "elysia-autoroutes";
 import pkg from "../package.json";
 import readyz from "./health/readyz";
 
@@ -18,11 +19,11 @@ new Elysia()
   .get("/livez", () => `livez check passed`)
   .use(readyz)
   .use(www)
-  // .use(
-  //   autoroutes({
-  //     routesDir: "./www",
-  //   }),
-  // )
+  .use(
+    autoroutes({
+      routesDir: "./www",
+    }),
+  )
   //
   .use(staticPlugin())
   //
