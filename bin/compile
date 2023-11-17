@@ -83,11 +83,7 @@ fi
 #
 
 header "Installing node binary" | output "$LOG_FILE"
-curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$FNM_DIR" --skip-shell
-eval "$(fnm env --use-on-cd)"
-fnm install --lts
-fnm alias default "$(node -v)"
-fnm use default
+curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
 
 #
 
