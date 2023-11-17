@@ -30,22 +30,6 @@ header() {
   echo "-----> $*" || true
 }
 
-# format output and send a copy to the log
-output() {
-  local logfile="$1"
-
-  while IFS= read -r LINE;
-  do
-    # do not indent headers that are being piped through the output
-    if [[ "$LINE" =~ ^-----\>.* ]]; then
-      echo "$LINE" || true
-    else
-      echo "       $LINE" || true
-    fi
-    echo "$LINE" >> "$logfile" || true
-  done
-}
-
 #
 
 write_profile() {
@@ -69,7 +53,7 @@ echo "" > "$LOG_FILE"
 
 #
 
-header "Creating runtime environment" | output "$LOG_FILE"
+header "Creating runtime environment"
 
 write_profile "$BP_DIR" "$BUILD_DIR"
 
@@ -82,12 +66,12 @@ fi
 
 #
 
-header "Installing node binary" | output "$LOG_FILE"
+header "Installing node binary"
 curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
 
 #
 
-header "Installing bun binary" | output "$LOG_FILE"
+header "Installing bun binary"
 curl -fsSL https://bun.sh/install | bash
 
 #
@@ -96,15 +80,15 @@ cd "$BUILD_DIR"
 
 #
 
-header "Installing dependencies" | output "$LOG_FILE"
-bun install --cache-dir "$CACHE_DIR" | output "$LOG_FILE"
+header "Installing dependencies"
+bun install --cache-dir "$CACHE_DIR"
 
 #
 
-header "Build" | output "$LOG_FILE"
-bun run build | output "$LOG_FILE"
+header "Build"
+bun run build
 
 #
 
-header "Prune dependencies" | output "$LOG_FILE"
-rm -rf node_modules && bun install --production | output "$LOG_FILE"
+header "Prune dependencies"
+rm -rf node_modules && bun install --production
