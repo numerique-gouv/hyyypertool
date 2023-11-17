@@ -39,12 +39,12 @@ new Elysia()
   //     prefix: "/public/animate.css",
   //   }),
   // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/htmx.org",
-  //     prefix: "/public/htmx.org",
-  //   }),
-  // )
+  .use(
+    staticPlugin({
+      assets: "node_modules/htmx.org/dist/htmx.js",
+      prefix: "/public/htmx.org/dist/htmx.js",
+    }),
+  )
   // .use(
   //   staticPlugin({
   //     assets: "node_modules/hyperscript.org",
