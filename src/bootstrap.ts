@@ -27,30 +27,30 @@ new Elysia()
   //
   .use(staticPlugin())
   //
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/@gouvfr/dsfr",
-  //     prefix: "/public/@gouvfr/dsfr",
-  //   }),
-  // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/animate.css",
-  //     prefix: "/public/animate.css",
-  //   }),
-  // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/htmx.org",
-  //     prefix: "/public/htmx.org",
-  //   }),
-  // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/hyperscript.org",
-  //     prefix: "/public/hyperscript.org",
-  //   }),
-  // )
+  .use(
+    staticPlugin({
+      assets: "node_modules/@gouvfr/dsfr",
+      prefix: "/public/@gouvfr/dsfr",
+    }),
+  )
+  .use(
+    staticPlugin({
+      assets: "node_modules/animate.css",
+      prefix: "/public/animate.css",
+    }),
+  )
+  .use(
+    staticPlugin({
+      assets: "node_modules/htmx.org",
+      prefix: "/public/htmx.org",
+    }),
+  )
+  .use(
+    staticPlugin({
+      assets: "node_modules/hyperscript.org",
+      prefix: "/public/hyperscript.org",
+    }),
+  )
   //
   .listen(ENV.PORT, (srv) => {
     console.log(
