@@ -1,51 +1,102 @@
 #!/usr/bin/env bash
 
-set -e -o pipefail
+# Inspired by
+# - https://github.com/Scalingo/nodejs-buildpack/blob/429b9776d8b0f34f775a10caa4eae46677ead0af/bin/compile
 
-steptxt="----->"
+set -o errexit    # always exit on error
+set -o pipefail   # don t ignore exit codes when piping output
 
-start() {
-    echo -n "$steptxt $@... "
+if [ -n "$BUILDPACK_DEBUG" ]; then
+  set -x
+fi
+
+unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
+
+[ "$BUILDPACK_XTRACE" ] && set -o xtrace
+
+#
+
+info() {
+  echo "       $*" || true
 }
 
-finished() {
-    echo "done"
+error() {
+  echo " !     $*" >&2 || true
+  echo "" || true
 }
+
+header() {
+  echo "" || true
+  echo "-----> $*" || true
+}
+
+# format output and send a copy to the log
+output() {
+  local logfile="$1"
+
+  while IFS= read -r LINE;
+  do
+    # do not indent headers that are being piped through the output
+    if [[ "$LINE" =~ ^-----\>.* ]]; then
+      echo "$LINE" || true
+    else
+      echo "       $LINE" || true
+    fi
+    echo "$LINE" >> "$logfile" || true
+  done
+}
+
+#
+
+write_profile() {
+  local bp_dir="$1"
+  local build_dir="$2"
+  mkdir -p "$build_dir/.profile.d"
+  cp "$bp_dir"/profile/* "$build_dir/.profile.d/"
+}
+
+#
+#
+#
 
 BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
-ENV_DIR=${3:-}
+# ENV_DIR=${3:-}
+BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
-echo_export_env_vars() {
-  local BUN_INSTALL="$HOME/.bun"
+LOG_FILE=$(mktemp -t build-log.XXXXX)
+echo "" > "$LOG_FILE"
 
-  echo "export BUN_INSTALL=\$HOME/.bun"
-  echo "export PATH=\$BUN_INSTALL/bin:\$PATH"
-}
+#
 
-write_profile_d_script() {
-  start "Creating .profile.d with env vars"
-    mkdir -p $BUILD_DIR/.profile.d
-    local profile_path="${BUILD_DIR}/.profile.d/bun_buildpack_paths.sh"
+header "Creating runtime environment" | output "$LOG_FILE"
 
-    echo_export_env_vars >> $profile_path
-  finished
-}
+write_profile "$BP_DIR" "$BUILD_DIR"
 
-start "Installing Bun"
-  curl -fsSL https://bun.sh/install | bash
-finished
-export BUN_INSTALL="$HOME/.bun" 
-export PATH="$BUN_INSTALL/bin:$PATH"
-write_profile_d_script
+#
 
-# Build the project
-cd $BUILD_DIR
+header "Installing node binary" | output "$LOG_FILE"
 
-start "Installing Dependencies"
-  bun install
-finished
+INSTALL_DIR="$HOME/.scalingo/fnm" curl -fsSL https://fnm.vercel.app/install | bash
+eval "$(fnm env)"
+fnm install --lts
 
-start "building the app"
-  bun run -b build
-finished
+#
+
+header "Installing bun binary" | output "$LOG_FILE"
+BUN_INSTALL="$HOME/.scalingo/bun" curl -fsSL https://bun.sh/install | bash
+
+#
+
+header "Installing dependencies" | output "$LOG_FILE"
+bun install --cache-dir "$CACHE_DIR" | output "$LOG_FILE"
+
+#
+
+header "Build" | output "$LOG_FILE"
+bun run --bun build | output "$LOG_FILE"
+
+#
+
+header "Prune dependencies" | output "$LOG_FILE"
+rm -rf node_modules && bun install --production | output "$LOG_FILE"
