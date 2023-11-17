@@ -6,14 +6,15 @@ import staticPlugin from "@elysiajs/static";
 import "@kitajs/html/register";
 import Elysia from "elysia";
 import pkg from "../package.json";
+import readyz from "./health/readyz";
 
 //
 
 new Elysia()
   .get("/healthz", () => `healthz check passed`)
   .get("/livez", () => `livez check passed`)
-  .get("/readyz", () => `readyz check passed`)
   .use(www)
+  .use(readyz)
   // .use(
   //   autoroutes({
   //     routesDir: "./www",
