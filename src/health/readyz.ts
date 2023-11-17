@@ -1,6 +1,7 @@
 //
 
 import { prisma } from ":database";
+import { to } from "await-to-js";
 import Elysia from "elysia";
 
 export default async (app: Elysia) =>
@@ -8,10 +9,7 @@ export default async (app: Elysia) =>
     app
       .get("/", () => `readyz check passed`)
       .get("/prisma", async () => {
-        const test = await prisma.$queryRaw`SELECT 1`.then(
-          () => true,
-          () => false,
-        );
-        return "[+]prisma connection" + (test ? "OK" : "FAIL");
+        const [, is_ok] = await to(prisma.$queryRaw`SELECT 1`);
+        return "[+]prisma connection " + (is_ok ? "OK" : "FAIL");
       }),
   );
