@@ -11,6 +11,9 @@ import readyz from "./health/readyz";
 //
 
 new Elysia()
+  .onError(({ code, error }) => {
+    return new Response(error.toString());
+  })
   .get("/healthz", () => `healthz check passed`)
   .get("/livez", () => `livez check passed`)
   .use(readyz)
