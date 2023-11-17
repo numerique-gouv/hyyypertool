@@ -87,11 +87,6 @@ bun install --cache-dir "$CACHE_DIR"
 #
 
 header "Build"
-
-# NOTE(douglasduteil): confusing CACHE_DIR case
-# prisma seems to use the CACHE_DIR on generate
-unset CACHE_DIR
-
 bun run build
 
 #
