@@ -27,18 +27,18 @@ new Elysia()
   //
   .use(staticPlugin())
   //
-  .use(
-    staticPlugin({
-      assets: "node_modules/@gouvfr/dsfr",
-      prefix: "/public/@gouvfr/dsfr",
-    }),
-  )
-  .use(
-    staticPlugin({
-      assets: "node_modules/animate.css",
-      prefix: "/public/animate.css",
-    }),
-  )
+  // .use(
+  //   staticPlugin({
+  //     assets: "node_modules/@gouvfr/dsfr",
+  //     prefix: "/public/@gouvfr/dsfr",
+  //   }),
+  // )
+  // .use(
+  //   staticPlugin({
+  //     assets: "node_modules/animate.css",
+  //     prefix: "/public/animate.css",
+  //   }),
+  // )
   .use(
     staticPlugin({
       assets: "node_modules/htmx.org",
