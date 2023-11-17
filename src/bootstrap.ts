@@ -41,8 +41,8 @@ new Elysia()
   // )
   .use(
     staticPlugin({
-      assets: "node_modules/htmx.org/dist/htmx.js",
-      prefix: "/public/htmx.org/dist/htmx.js",
+      assets: "node_modules/htmx.org/dist",
+      prefix: "/public/htmx.org/dist",
     }),
   )
   // .use(
