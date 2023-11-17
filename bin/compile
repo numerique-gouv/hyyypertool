@@ -73,11 +73,13 @@ header "Creating runtime environment" | output "$LOG_FILE"
 
 write_profile "$BP_DIR" "$BUILD_DIR"
 
+# shellcheck source=../profile/node.sh
+source "$BP_DIR/profile/node.sh"
+
 #
 
 header "Installing node binary" | output "$LOG_FILE"
-
-INSTALL_DIR="$HOME/.scalingo/fnm" curl -fsSL https://fnm.vercel.app/install | bash
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.scalingo/fnm"
 eval "$(fnm env)"
 fnm install --lts
 
