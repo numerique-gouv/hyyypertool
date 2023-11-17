@@ -1,1 +1,1 @@
-postdeploy: sh -x scripts/start_web.sh
+postdeploy: sh -x .scalingo/postdeploy.sh
