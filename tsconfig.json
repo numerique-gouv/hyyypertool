@@ -29,5 +29,5 @@
     "types": ["bun-types"],
     "verbatimModuleSyntax": true
   },
-  "include": ["package.json", "src"]
+  "include": ["package.json", "prisma/client", "src"]
 }
