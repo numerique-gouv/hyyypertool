@@ -90,7 +90,11 @@ fnm install --lts
 #
 
 header "Installing bun binary" | output "$LOG_FILE"
-BUN_INSTALL="$HOME/.scalingo/bun" curl -fsSL https://bun.sh/install | bash
+curl -fsSL https://bun.sh/install | bash
+
+#
+
+cd "$BUILD_DIR"
 
 #
 
