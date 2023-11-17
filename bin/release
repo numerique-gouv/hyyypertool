@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cat << EOF
+---
+addons:
+  []
+default_process_types:
+  web: bun run -b start -p \$PORT
+EOF
