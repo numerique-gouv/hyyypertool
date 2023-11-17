@@ -86,6 +86,8 @@ header "Installing node binary" | output "$LOG_FILE"
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$FNM_DIR"
 eval "$(fnm env)"
 fnm install --lts
+fnm alias default "$(node -v)"
+fnm use default
 
 #
 
@@ -104,7 +106,7 @@ bun install --cache-dir "$CACHE_DIR" | output "$LOG_FILE"
 #
 
 header "Build" | output "$LOG_FILE"
-bun run --bun build | output "$LOG_FILE"
+bun run build | output "$LOG_FILE"
 
 #
 
