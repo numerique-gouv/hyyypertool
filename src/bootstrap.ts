@@ -39,18 +39,18 @@ new Elysia()
   //     prefix: "/public/animate.css",
   //   }),
   // )
-  .use(
-    staticPlugin({
-      assets: "node_modules/htmx.org",
-      prefix: "/public/htmx.org",
-    }),
-  )
-  .use(
-    staticPlugin({
-      assets: "node_modules/hyperscript.org",
-      prefix: "/public/hyperscript.org",
-    }),
-  )
+  // .use(
+  //   staticPlugin({
+  //     assets: "node_modules/htmx.org",
+  //     prefix: "/public/htmx.org",
+  //   }),
+  // )
+  // .use(
+  //   staticPlugin({
+  //     assets: "node_modules/hyperscript.org",
+  //     prefix: "/public/hyperscript.org",
+  //   }),
+  // )
   //
   .listen(ENV.PORT, (srv) => {
     console.log(
