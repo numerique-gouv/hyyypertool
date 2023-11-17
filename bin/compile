@@ -98,3 +98,9 @@ bun install --production
 # NOTE(douglasduteil): explicit prisma generate
 # Ensure that the generated client is not destroy with node_modules manupulations.
 bun x prisma generate
+
+#
+
+bun pm cache rm
+
+rm -rf "$N_PREFIX"
