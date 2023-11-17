@@ -13,8 +13,8 @@ import readyz from "./health/readyz";
 new Elysia()
   .get("/healthz", () => `healthz check passed`)
   .get("/livez", () => `livez check passed`)
-  .use(www)
   .use(readyz)
+  .use(www)
   // .use(
   //   autoroutes({
   //     routesDir: "./www",

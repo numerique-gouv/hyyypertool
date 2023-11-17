@@ -8,12 +8,10 @@ export default async (app: Elysia) =>
     app
       .get("/", () => `readyz check passed`)
       .get("/prisma", async () => {
-        return (
-          "[+]prisma " +
-          (await prisma.$queryRaw`SELECT 1`.then(
-            () => "OK",
-            () => "FAIL",
-          ))
+        const test = await prisma.$queryRaw`SELECT 1`.then(
+          () => true,
+          () => false,
         );
+        return "[+]prisma connection" + (test ? "OK" : "FAIL");
       }),
   );
