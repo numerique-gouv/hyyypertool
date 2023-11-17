@@ -79,7 +79,7 @@ source "$BP_DIR/profile/node.sh"
 #
 
 header "Installing node binary" | output "$LOG_FILE"
-curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.scalingo/fnm"
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$FNM_DIR"
 eval "$(fnm env)"
 fnm install --lts
 

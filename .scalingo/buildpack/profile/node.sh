@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export FNM_DIR="$HOME/.scalingo/fnm"
+export PATH="$FNM_DIR:$PATH:$HOME/bin:$HOME/node_modules/.bin"
 # export PATH="$HOME/.scalingo/node/bin:$HOME/.scalingo/yarn/bin:$PATH:$HOME/bin:$HOME/node_modules/.bin"
 # export NODE_HOME="$HOME/.scalingo/node"
 # export NODE_ENV=${NODE_ENV:-production}
