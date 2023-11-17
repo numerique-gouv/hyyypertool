@@ -91,5 +91,6 @@ bun run build
 
 #
 
-header "Prune dependencies"
-rm -rf node_modules && bun install --production
+header "Installing production dependencies"
+rm -rf node_modules
+bun install --production
