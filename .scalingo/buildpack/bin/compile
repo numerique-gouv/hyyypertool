@@ -73,8 +73,12 @@ header "Creating runtime environment" | output "$LOG_FILE"
 
 write_profile "$BP_DIR" "$BUILD_DIR"
 
-# shellcheck source=../profile/node.sh
-source "$BP_DIR/profile/node.sh"
+if [ -d "$BP_DIR/profile" ]; then
+  for file in "$BP_DIR"/profile/*.sh; do
+    # shellcheck source=/dev/null.
+    source "$file"
+  done
+fi
 
 #
 
