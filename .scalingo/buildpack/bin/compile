@@ -10,7 +10,8 @@ if [ -n "$BUILDPACK_DEBUG" ]; then
   set -x
 fi
 
-unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
+# Avoid GIT_DIR leak from previous build steps
+unset GIT_DIR
 
 [ "$BUILDPACK_XTRACE" ] && set -o xtrace
 
@@ -86,6 +87,11 @@ bun install --cache-dir "$CACHE_DIR"
 #
 
 header "Build"
+
+# NOTE(douglasduteil): confusing CACHE_DIR case
+# prisma seems to use the CACHE_DIR on generate
+unset CACHE_DIR
+
 bun run build
 
 #
