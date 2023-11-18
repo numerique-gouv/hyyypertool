@@ -18,8 +18,9 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           commit_message: ${{ github.event.head_commit.message }}
+          enable_jekyll: true # NOTE(douglasduteil): do not add .nojekyll file
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: scalingo/buildpack
           publish_dir: ./.scalingo/buildpack
-          # NOTE(douglasduteil): do not add .nojekyll file
-          enable_jekyll: true
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          user_name: "github-actions[bot]"
