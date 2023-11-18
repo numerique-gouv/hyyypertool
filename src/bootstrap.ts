@@ -18,14 +18,7 @@ new Elysia()
   .get("/livez", () => `livez check passed`)
   .use(readyz)
   //
-  .use(
-    staticPlugin({
-      headers: {
-        "Cache-Control": "public, max-age=31536000, immutable",
-        "Content-Encoding": "gzip",
-      },
-    }),
-  )
+  .use(staticPlugin())
   //
   // .use(
   //   staticPlugin({
