@@ -19,12 +19,6 @@ new Elysia()
   .get("/healthz", () => `healthz check passed`)
   .get("/livez", () => `livez check passed`)
   .use(readyz)
-  .use(www)
-  .use(
-    autoroutes({
-      routesDir: "./www",
-    }),
-  )
   //
   .use(
     staticPlugin({
@@ -65,6 +59,12 @@ new Elysia()
   //   }),
   // )
   //
+  .use(www)
+  .use(
+    autoroutes({
+      routesDir: "./www",
+    }),
+  )
   .use(compression())
   //
   .listen(env.PORT, ({ hostname, port }) => {

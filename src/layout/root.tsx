@@ -5,13 +5,6 @@ import type { PropsWithChildren } from "@kitajs/html";
 
 //
 
-await Bun.build({
-  entrypoints: ["./src/react/index.tsx"],
-  outdir: "./public",
-});
-
-//
-
 export function Root_Layout({ children }: PropsWithChildren) {
   return (
     <html lang="fr" data-fr-scheme="system">
