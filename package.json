@@ -14,6 +14,7 @@
     "await-to-js": "^3.0.0",
     "elysia": "^0.7.28",
     "elysia-autoroutes": "^0.4.0",
+    "elysia-compression": "^0.0.6",
     "htmx.org": "^1.9.8",
     "hyperscript.org": "^0.9.12"
   },

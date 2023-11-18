@@ -1,11 +1,12 @@
 //
 
-import ENV from ":env";
+import env from ":env";
 import { www } from ":www";
 import staticPlugin from "@elysiajs/static";
 import "@kitajs/html/register";
 import Elysia from "elysia";
 import { autoroutes } from "elysia-autoroutes";
+import { compression } from "elysia-compression";
 import pkg from "../package.json";
 import readyz from "./health/readyz";
 
@@ -25,7 +26,14 @@ new Elysia()
     }),
   )
   //
-  .use(staticPlugin())
+  .use(
+    staticPlugin({
+      headers: {
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "Content-Encoding": "gzip",
+      },
+    }),
+  )
   //
   // .use(
   //   staticPlugin({
@@ -33,18 +41,23 @@ new Elysia()
   //     prefix: "/public/@gouvfr/dsfr",
   //   }),
   // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/animate.css",
-  //     prefix: "/public/animate.css",
-  //   }),
-  // )
   .use(
     staticPlugin({
-      assets: "node_modules/htmx.org/dist",
-      prefix: "/public/htmx.org/dist",
+      assets: "node_modules/animate.css",
+      prefix: "/public/animate.css",
     }),
   )
+  // .use(
+  //   staticPlugin({
+  //     assets: "node_modules/htmx.org/dist",
+  //     prefix: "/public/htmx.org/dist",
+  //     //
+  //     headers: {
+  //       "Cache-Control": "public, max-age=31536000, immutable",
+  //       "Content-Encoding": "gzip",
+  //     },
+  //   }),
+  // )
   // .use(
   //   staticPlugin({
   //     assets: "node_modules/hyperscript.org",
@@ -52,10 +65,12 @@ new Elysia()
   //   }),
   // )
   //
-  .listen(ENV.PORT, (srv) => {
+  .use(compression())
+  //
+  .listen(env.PORT, ({ hostname, port }) => {
     console.log(
-      `${pkg.name}: http://${srv.hostname}:${srv.port}\n` +
-        `- Environment: ${ENV.NODE_ENV}\n` +
+      `${pkg.name}: http://${hostname}:${port}\n` +
+        `- Environment: ${env.NODE_ENV}\n` +
         `- Version: v${pkg.version}`,
     );
   });
