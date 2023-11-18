@@ -1,11 +1,9 @@
 //
 
 import env from ":env";
-import { www } from ":www";
 import staticPlugin from "@elysiajs/static";
 import "@kitajs/html/register";
 import Elysia from "elysia";
-import { autoroutes } from "elysia-autoroutes";
 import { compression } from "elysia-compression";
 import pkg from "../package.json";
 import readyz from "./health/readyz";
@@ -59,12 +57,12 @@ new Elysia()
   //   }),
   // )
   //
-  .use(www)
-  .use(
-    autoroutes({
-      routesDir: "./www",
-    }),
-  )
+  // .use(www)
+  // .use(
+  //   autoroutes({
+  //     routesDir: "./www",
+  //   }),
+  // )
   .use(compression())
   //
   .listen(env.PORT, ({ hostname, port }) => {
