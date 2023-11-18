@@ -1,7 +1,7 @@
 //
 
 import env from ":env";
-import staticPlugin from "@elysiajs/static";
+import { www } from ":www";
 import "@kitajs/html/register";
 import Elysia from "elysia";
 import { compression } from "elysia-compression";
@@ -11,46 +11,15 @@ import readyz from "./health/readyz";
 //
 
 new Elysia()
-  .onError(({ code, error }) => {
-    return new Response(error.toString());
-  })
+  // .onError(({ code, error, set }) => {
+  //   NotFoundError
+  //   return new Response(error.toString());
+  // })
   .get("/healthz", () => `healthz check passed`)
   .get("/livez", () => `livez check passed`)
   .use(readyz)
   //
-  .use(staticPlugin())
-  //
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/@gouvfr/dsfr",
-  //     prefix: "/public/@gouvfr/dsfr",
-  //   }),
-  // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/animate.css",
-  //     prefix: "/public/animate.css",
-  //   }),
-  // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/htmx.org/dist",
-  //     prefix: "/public/htmx.org/dist",
-  //     //
-  //     headers: {
-  //       "Cache-Control": "public, max-age=31536000, immutable",
-  //       "Content-Encoding": "gzip",
-  //     },
-  //   }),
-  // )
-  // .use(
-  //   staticPlugin({
-  //     assets: "node_modules/hyperscript.org",
-  //     prefix: "/public/hyperscript.org",
-  //   }),
-  // )
-  //
-  // .use(www)
+  .use(www)
   // .use(
   //   autoroutes({
   //     routesDir: "./www",

@@ -53,7 +53,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
           rel="stylesheet"
           href="/public/animate.css/source/fading_entrances/fadeInLeftBig.css"
         />
-        <link rel="stylesheet" href="/public/@gouvfr/dsfr/dist/dsfr.min.css" />
+        <link rel="stylesheet" href="/public/@gouvfr/dsfr/dist/dsfr.css" />
 
         <script type="module" src="/public/htmx.org/dist/htmx.js" />
         <script

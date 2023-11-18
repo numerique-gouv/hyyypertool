@@ -25,7 +25,7 @@ export default (www: ElysiaWWW) =>
       </Main_Layout>
     ))
     .get("/_/aside", async ({ request }) => {
-      console.log({ request }); // TODO(douglasduteil): recover the path
+      request; // TODO(douglasduteil): recover the path
 
       const moderations = await prisma.moderations.findMany({
         include: { organizations: true, users: true },
