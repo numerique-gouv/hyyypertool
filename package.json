@@ -30,12 +30,13 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "build:tailwind": "bun x tailwindcss -i ./src/www/styles.css -o ./public/tailwind/styles.css",
     "build:prisma": "bun x prisma generate",
+    "build:tailwind": "bun x tailwindcss -i ./src/www/styles.css -o ./public/tailwind/styles.css",
     "build": "bun x npm-run-all --serial build:**",
     "dev:tailwind": "bun run build:tailwind --watch",
     "dev": "bun --hot src/bootstrap.ts",
     "start": "bun src/bootstrap.ts",
+    "test:type-check": "bun x tsc --noEmit",
     "test:xss-scan": "xss-scan",
     "test": "bun x npm-run-all --serial test:**"
   },

@@ -8,5 +8,9 @@ node_modules/
 
 # Generated style
 public/tailwind/
-# Generated style
+
+# Generated types
 prisma/client/
+
+# Typeschek
+tsconfig.tsbuildinfo
