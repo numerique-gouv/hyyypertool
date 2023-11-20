@@ -8,6 +8,7 @@ node_modules/
 
 # Generated style
 public/tailwind/
+public/client/
 
 # Generated types
 prisma/client/

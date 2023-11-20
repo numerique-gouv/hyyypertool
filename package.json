@@ -4,30 +4,31 @@
   "type": "module",
   "version": "2023.11.15",
   "dependencies": {
-    "@elysiajs/html": "^0.7.3",
-    "@elysiajs/static": "^0.7.1",
-    "@gouvfr/dsfr": "^1.10.2",
-    "@kitajs/html": "^3.0.8",
-    "@kitajs/ts-html-plugin": "^1.3.1",
-    "@prisma/client": "^5.6.0",
-    "animate.css": "^4.1.1",
-    "await-to-js": "^3.0.0",
-    "elysia": "^0.7.28",
-    "elysia-autoroutes": "^0.4.0",
-    "elysia-compression": "^0.0.6",
-    "htmx.org": "^1.9.8",
-    "hyperscript.org": "^0.9.12"
+    "@elysiajs/html": "0.7.3",
+    "@elysiajs/static": "0.7.1",
+    "@gouvfr/dsfr": "1.10.2",
+    "@kitajs/html": "3.0.10",
+    "@kitajs/ts-html-plugin": "1.3.3",
+    "@lit-labs/motion": "^1.0.6",
+    "@prisma/client": "5.6.0",
+    "animate.css": "4.1.1",
+    "await-to-js": "3.0.0",
+    "elysia": "0.7.28",
+    "elysia-autoroutes": "0.4.0",
+    "elysia-compression": "0.0.6",
+    "htmx.org": "1.9.8",
+    "hyperscript.org": "0.9.12",
+    "lit": "^3.1.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10",
-    "bun-types": "^1.0.12",
-    "prettier": "^3.1.0",
-    "prettier-plugin-tailwindcss": "^0.5.7",
-    "prisma": "^5.6.0",
-    "tailwindcss": "^3.3.5"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "@tailwindcss/typography": "0.5.10",
+    "@tsconfig/bun": "1.0.1",
+    "bun-types": "1.0.13",
+    "prettier": "3.1.0",
+    "prettier-plugin-tailwindcss": "0.5.7",
+    "prisma": "5.6.0",
+    "tailwindcss": "3.3.5",
+    "typescript": "5.2.2"
   },
   "scripts": {
     "build:prisma": "bun x prisma generate",

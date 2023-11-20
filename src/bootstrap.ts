@@ -11,20 +11,13 @@ import readyz from "./health/readyz";
 //
 
 new Elysia()
-  // .onError(({ code, error, set }) => {
-  //   NotFoundError
-  //   return new Response(error.toString());
-  // })
+  //
   .get("/healthz", () => `healthz check passed`)
   .get("/livez", () => `livez check passed`)
   .use(readyz)
   //
   .use(www)
-  // .use(
-  //   autoroutes({
-  //     routesDir: "./www",
-  //   }),
-  // )
+  //
   .use(compression())
   //
   .listen(env.PORT, ({ hostname, port }) => {

@@ -20,10 +20,31 @@ export const www = new Elysia()
         .get("/@gouvfr/dsfr/dist/*", ({ params: { ["*"]: file_path } }) =>
           Bun.file(`node_modules/@gouvfr/dsfr/dist/${file_path}`),
         )
+        .get("/animate.css/*", ({ params: { ["*"]: file_path } }) =>
+          Bun.file(`node_modules/animate.css/${file_path}`),
+        )
         .get("/animate.css/source/*", ({ params: { ["*"]: file_path } }) =>
           Bun.file(`node_modules/animate.css/source/${file_path}`),
         )
         //
+        .get("/lit", async () => {
+          const {
+            outputs: [output],
+          } = await Bun.build({
+            entrypoints: [Bun.resolveSync(`lit`, process.cwd())],
+            minify: env.NODE_ENV === "production",
+          });
+          return new Response(output);
+        })
+        .get("/lit/*", async ({ params: { ["*"]: file_path } }) => {
+          const {
+            outputs: [output],
+          } = await Bun.build({
+            entrypoints: [Bun.resolveSync(`lit/${file_path}`, process.cwd())],
+            minify: env.NODE_ENV === "production",
+          });
+          return new Response(output);
+        })
         .get("/htmx.org/dist/htmx.js", async () => {
           const {
             outputs: [output],

@@ -1,19 +1,12 @@
 {
+  "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
     "composite": true,
-    "downlevelIteration": true,
-    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
     "jsx": "react",
     "jsxFactory": "Html.createElement",
     "jsxFragmentFactory": "Html.Fragment",
-    "lib": ["ESNext"],
-    "module": "esnext",
-    "moduleDetection": "force",
-    "moduleResolution": "bundler",
-    "noEmit": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
       ":database": ["./src/database"],
       ":env": ["./src/env"],
@@ -23,10 +16,6 @@
     },
     "plugins": [{ "name": "@kitajs/ts-html-plugin" }],
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext",
-    "types": ["bun-types"],
     "verbatimModuleSyntax": true
   },
   "include": ["package.json", "prisma/client", "src"]

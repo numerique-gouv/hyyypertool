@@ -55,15 +55,25 @@ export function Root_Layout({ children }: PropsWithChildren) {
         />
         <link rel="stylesheet" href="/public/@gouvfr/dsfr/dist/dsfr.css" />
 
+        <script type="importmap">
+          {JSON.stringify({
+            imports: {
+              "public/client/hyyypertitle.js": "/public/client/hyyypertitle.js",
+              lit: "/public/lit",
+              "lit/": "/public/lit/",
+            },
+          })}
+        </script>
         <script type="module" src="/public/htmx.org/dist/htmx.js" />
-        <script
-          type="module"
-          src="/public/hyperscript.org/dist/_hyperscript.js"
-        />
         <title>
-          H{Array.from({ length: Math.max(1, Math.random() * 5) }).fill("y")}
+          H{Array.from({ length: Math.max(3, Math.random() * 5) }).fill("y")}
           pertool
         </title>
+
+        <meta
+          name="htmx-config"
+          content='{"historyEnabled":false,"defaultSettleDelay":0}'
+        />
       </head>
       <body class="flex min-h-screen flex-col">
         <div class="flex flex-1 flex-col">{children}</div>
