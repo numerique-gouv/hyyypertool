@@ -14,6 +14,12 @@ export const www = new Elysia()
   .group("/public", function virtuak_public_folder(app) {
     return (
       app
+        .onRequest(function cache_control({ set }) {
+          set.headers["Cache-Control"] =
+            env.NODE_ENV === "production"
+              ? "public, max-age=31536000, immutable"
+              : "max-age=6000";
+        })
         .get("/tailwind/*", ({ params: { ["*"]: file_path } }) =>
           Bun.file(`public/tailwind/${file_path}`),
         )
@@ -85,3 +91,5 @@ www.use((app) => {
 //
 
 export type ElysiaWWW = typeof www;
+
+//
