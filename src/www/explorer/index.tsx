@@ -29,7 +29,7 @@ export default (www: ElysiaWWW) =>
 
       const moderations = await prisma.moderations.findMany({
         include: { organizations: true, users: true },
-        take: 10,
+        take: 25,
       });
       return (
         <nav class="fr-sidemenu  flex-grow">
