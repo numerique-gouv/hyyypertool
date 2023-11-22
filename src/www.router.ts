@@ -7,6 +7,7 @@ import { html } from "@elysiajs/html";
 import Elysia from "elysia";
 import explorer_index from "./www/explorer/index";
 import www_index from "./www/index";
+import legacy_index from "./www/legacy/index";
 import login_index from "./www/login/index";
 
 export const www = new Elysia()
@@ -85,7 +86,8 @@ www.use((app) => {
   return app
     .use(www_index)
     .group("/login", (app) => app.use(login_index))
-    .group("/explorer", (app) => app.use(explorer_index));
+    .group("/explorer", (app) => app.use(explorer_index))
+    .group("/legacy", (app) => app.use(legacy_index));
 });
 
 //

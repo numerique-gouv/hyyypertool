@@ -14,7 +14,7 @@ export default (www: ElysiaWWW) =>
     .post("/", ({ set }) => {
       console.log("ENV.DEPLOY_ENV", ENV.DEPLOY_ENV);
       if (ENV.DEPLOY_ENV === "preview") {
-        set.headers["HX-Redirect"] = "/explorer";
+        set.headers["HX-Redirect"] = "/legacy";
         return;
       }
 
