@@ -2,28 +2,23 @@
 
 import env from ":env";
 import { www } from ":www";
-import "@kitajs/html/register";
-import Elysia from "elysia";
-import { compression } from "elysia-compression";
-import pkg from "../package.json";
-import readyz from "./health/readyz";
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import { readyz } from "./health/readyz";
 
 //
 
-new Elysia()
-  //
-  .get("/healthz", () => `healthz check passed`)
-  .get("/livez", () => `livez check passed`)
-  .use(readyz)
-  //
-  .use(www)
-  //
-  .use(compression())
-  //
-  .listen(env.PORT, ({ hostname, port }) => {
-    console.log(
-      `${pkg.name}: http://${hostname}:${port}\n` +
-        `- Environment: ${env.NODE_ENV}\n` +
-        `- Version: v${pkg.version}`,
-    );
-  });
+const app = new Hono();
+
+app.use("*", logger());
+// app.use("*", compress());  `CompressionStream` is not yet supported in bun.
+app.get("/healthz", ({ text }) => text(`healthz check passed`));
+app.get("/livez", ({ text }) => text(`livez check passed`));
+app.route("/readyz", readyz);
+app.route("/", www);
+
+if (env.DEPLOY_ENV === "preview") {
+  app.showRoutes();
+}
+
+export default app;

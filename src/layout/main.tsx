@@ -1,11 +1,11 @@
 //
 
-import type { PropsWithChildren } from "@kitajs/html";
+import type { Child } from "hono/jsx";
 import { Root_Layout } from "./root";
 
 //
 
-export function Main_Layout({ children }: PropsWithChildren) {
+export function Main_Layout({ children }: { children?: Child }) {
   return (
     <Root_Layout>
       <div class="flex flex-grow flex-col">

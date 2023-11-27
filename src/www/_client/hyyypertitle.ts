@@ -1,7 +1,12 @@
+//
+
 import { animate, fadeIn } from "@lit-labs/motion";
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
+
+//
+
 @customElement("hyyyper-title")
 export class Hyyyper_title extends LitElement {
   static styles = css`
@@ -12,36 +17,49 @@ export class Hyyyper_title extends LitElement {
       display: none;
     }
   `;
-  hyper = Array.from({ length: Math.max(3 + Math.random() * 5) }).fill("y");
+
+  //
+
   @property({ type: Boolean })
   is_yyy_done = false;
+
+  //
+
+  hyper = Array.from({ length: Math.max(3 + Math.random() * 5) }).fill("y");
+
   duration = 444;
+
+  //
+
   on_all_animation_complete(is_last_element: boolean) {
     if (!is_last_element) return;
     this.is_yyy_done = true;
   }
   render() {
-    return html` <link
+    return html` <!--  -->
+      <link
         rel="stylesheet"
-        href="/public/@gouvfr/dsfr/dist/dsfr.css"
+        href="/node_modules/animate.css/source/_vars.css"
+      />
+      <link
+        rel="stylesheet"
+        href="/node_modules/animate.css/source/_base.css"
+      />
+      <link
+        rel="stylesheet"
+        href="/node_modules/animate.css/source/zooming_entrances/zoomInDown.css"
+      />
+      <link
+        rel="stylesheet"
+        href="/node_modules/animate.css/source/attention_seekers/flash.css"
       />
 
-      <link rel="stylesheet" href="/public/animate.css/source/_vars.css" />
-      <link rel="stylesheet" href="/public/animate.css/source/_base.css" />
-      <link
-        rel="stylesheet"
-        href="/public/animate.css/source/zooming_entrances/zoomInDown.css"
-      />
-      <link
-        rel="stylesheet"
-        href="/public/animate.css/source/attention_seekers/flash.css"
-      />
-      <link
-        rel="stylesheet"
-        href="/public/animate.css/source/fading_entrances/fadeInLeftBig.css"
-      />
+      <!--  -->
 
       <link rel="stylesheet" href="/public/tailwind/styles.css" />
+
+      <!--  -->
+
       <div class="inline-flex">
         <span class="text-[--text-active-blue-france]">H</span>
         <span class="text-[--text-active-blue-france]"

@@ -3,18 +3,19 @@
   "compilerOptions": {
     "composite": true,
     "experimentalDecorators": true,
-    "jsx": "react",
-    "jsxFactory": "Html.createElement",
-    "jsxFragmentFactory": "Html.Fragment",
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
       ":database": ["./src/database"],
       ":env": ["./src/env"],
+      ":ui/*": ["./src/ui/*"],
       ":layout/*": ["./src/layout/*"],
+      ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":package.json": ["./package.json"],
       ":www": ["./src/www.router"]
     },
-    "plugins": [{ "name": "@kitajs/ts-html-plugin" }],
+    "plugins": [],
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true
   },

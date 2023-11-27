@@ -4,24 +4,20 @@
   "type": "module",
   "version": "2023.11.15",
   "dependencies": {
-    "@elysiajs/html": "0.7.3",
-    "@elysiajs/static": "0.7.1",
     "@gouvfr/dsfr": "1.10.2",
-    "@kitajs/html": "3.0.10",
-    "@kitajs/ts-html-plugin": "1.3.3",
+    "@hono/zod-validator": "^0.1.11",
     "@lit-labs/motion": "^1.0.6",
     "@prisma/client": "5.6.0",
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
-    "elysia": "0.7.28",
-    "elysia-autoroutes": "0.4.0",
-    "elysia-compression": "0.0.6",
+    "hono": "^3.10.2",
     "htmx.org": "1.9.9",
     "hyperscript.org": "0.9.12",
     "lit": "^3.1.0",
     "query-string": "^8.1.0",
     "tailwind-variants": "^0.1.18",
-    "ts-pattern": "^5.0.5"
+    "ts-pattern": "^5.0.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.10",

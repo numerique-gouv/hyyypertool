@@ -1,22 +1,18 @@
 //
 
-import ENV from ":env";
-import type { ElysiaWWW } from ":www";
-import { NotFoundError } from "elysia";
+import env from ":env";
+import { Hono } from "hono";
 
 //
 
-export default (www: ElysiaWWW) =>
-  www
-    .get("/", ({ set }) => {
-      set.redirect = "/";
-    })
-    .post("/", ({ set }) => {
-      console.log("ENV.DEPLOY_ENV", ENV.DEPLOY_ENV);
-      if (ENV.DEPLOY_ENV === "preview") {
-        set.headers["HX-Redirect"] = "/legacy";
-        return;
-      }
+export default new Hono()
+  .get("/", ({ redirect }) => redirect("/"))
+  .post("/", ({ html, text, req }) => {
+    if (env.DEPLOY_ENV === "preview") {
+      return text("", 200, {
+        "HX-Redirect": "/legacy",
+      });
+    }
 
-      throw new NotFoundError("Not Implemented");
-    });
+    return html(<>Not Implemented</>, 404);
+  });
