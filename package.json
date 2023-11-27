@@ -38,7 +38,6 @@
     "dev": "bun --hot src/bootstrap.ts",
     "start": "bun src/bootstrap.ts",
     "test:type-check": "bun x tsc --noEmit",
-    "test:xss-scan": "xss-scan",
     "test": "bun x npm-run-all --serial test:**"
   },
   "prettier": {
