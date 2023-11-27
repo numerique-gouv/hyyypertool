@@ -1,6 +1,7 @@
 //
 
 import { prisma } from ":database";
+import type { MCP_Moderation } from ":moncomptepro";
 import type { Prisma, moderations, organizations, users } from "@prisma/client";
 import { html } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
@@ -163,7 +164,7 @@ function Row({
       hx-push-url={`/legacy?id=${moderation.id}`}
     >
       <td safe title={moderation.type}>
-        {match(moderation.type as Moderation["type"])
+        {match(moderation.type as MCP_Moderation["type"])
           // .with("big_organization_join", () => "🏢")
           .with("non_verified_domain", () => "🔓")
           .with("organization_join_block", () => "🕵️")

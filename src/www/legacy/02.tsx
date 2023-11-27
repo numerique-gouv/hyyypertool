@@ -1,6 +1,7 @@
 //
 
 import { prisma } from ":database";
+import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import queryString from "query-string";
 import { match } from "ts-pattern";
@@ -35,7 +36,7 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
       <h2>
         🤗 <span safe>{moderation.users.given_name}</span>{" "}
         <span safe>
-          {match(moderation.type as Moderation["type"])
+          {match(moderation.type as MCP_Moderation["type"])
             .with("ask_for_sponsorship", () => "demande un sponsorship")
             .with(
               "non_verified_domain",
