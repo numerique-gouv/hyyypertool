@@ -76,30 +76,30 @@ model pgmigrations {
 }
 
 model users {
-  id                                                        Int                   @id @default(autoincrement())
-  email                                                     String                @unique(map: "index_users_on_email") @default("") @db.VarChar
-  encrypted_password                                        String?               @default("") @db.VarChar
-  reset_password_token                                      String?               @unique(map: "index_users_on_reset_password_token") @db.VarChar
-  reset_password_sent_at                                    DateTime?             @db.Timestamptz(6)
-  sign_in_count                                             Int                   @default(0)
-  last_sign_in_at                                           DateTime?             @db.Timestamptz(6)
-  created_at                                                DateTime              @db.Timestamptz(6)
-  updated_at                                                DateTime              @db.Timestamptz(6)
-  legacy_user                                               Boolean               @default(false)
-  email_verified                                            Boolean               @default(false)
-  verify_email_token                                        String?               @db.VarChar
-  verify_email_sent_at                                      DateTime?             @db.Timestamptz(6)
-  given_name                                                String?               @db.VarChar
-  family_name                                               String?               @db.VarChar
-  phone_number                                              String?               @db.VarChar
-  job                                                       String?               @db.VarChar
-  magic_link_token                                          String?               @db.VarChar
-  magic_link_sent_at                                        DateTime?             @db.Timestamptz(6)
-  email_verified_at                                         DateTime?             @db.Timestamptz(6)
-  moderations                                               moderations[]
-  users_oidc_clients                                        users_oidc_clients[]
-  users_organizations_users_organizations_sponsor_idTousers users_organizations[] @relation("users_organizations_sponsor_idTousers")
-  users_organizations_users_organizations_user_idTousers    users_organizations[] @relation("users_organizations_user_idTousers")
+  id                     Int                   @id @default(autoincrement())
+  email                  String                @unique(map: "index_users_on_email") @default("") @db.VarChar
+  encrypted_password     String?               @default("") @db.VarChar
+  reset_password_token   String?               @unique(map: "index_users_on_reset_password_token") @db.VarChar
+  reset_password_sent_at DateTime?             @db.Timestamptz(6)
+  sign_in_count          Int                   @default(0)
+  last_sign_in_at        DateTime?             @db.Timestamptz(6)
+  created_at             DateTime              @db.Timestamptz(6)
+  updated_at             DateTime              @db.Timestamptz(6)
+  legacy_user            Boolean               @default(false)
+  email_verified         Boolean               @default(false)
+  verify_email_token     String?               @db.VarChar
+  verify_email_sent_at   DateTime?             @db.Timestamptz(6)
+  given_name             String?               @db.VarChar
+  family_name            String?               @db.VarChar
+  phone_number           String?               @db.VarChar
+  job                    String?               @db.VarChar
+  magic_link_token       String?               @db.VarChar
+  magic_link_sent_at     DateTime?             @db.Timestamptz(6)
+  email_verified_at      DateTime?             @db.Timestamptz(6)
+  moderations            moderations[]
+  users_oidc_clients     users_oidc_clients[]
+  organization_sponsors  users_organizations[] @relation("users_organizations_sponsor_idTousers")
+  organization_members   users_organizations[] @relation("users_organizations_user_idTousers")
 }
 
 model users_oidc_clients {
@@ -128,8 +128,8 @@ model users_organizations {
   official_contact_email_verification_token   String?       @db.VarChar
   official_contact_email_verification_sent_at DateTime?     @db.Timestamptz(6)
   organizations                               organizations @relation(fields: [organization_id], references: [id], onDelete: NoAction)
-  users_users_organizations_sponsor_idTousers users?        @relation("users_organizations_sponsor_idTousers", fields: [sponsor_id], references: [id], onUpdate: NoAction)
-  users_users_organizations_user_idTousers    users         @relation("users_organizations_user_idTousers", fields: [user_id], references: [id], onDelete: Cascade)
+  sponsor                                     users?        @relation("users_organizations_sponsor_idTousers", fields: [sponsor_id], references: [id], onUpdate: NoAction)
+  user                                        users         @relation("users_organizations_user_idTousers", fields: [user_id], references: [id], onDelete: Cascade)
 
   @@id([user_id, organization_id])
 }

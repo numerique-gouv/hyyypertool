@@ -204,11 +204,13 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
         </li>
       </ul>
       <hr />
-      {/* <div
-        hx-get={`/dashboard/_/organizations/${moderation.organization_id}/members`}
+      <h3>Membres enregistrés dans cette organisation :</h3>
+      <div
+        hx-get={`/legacy/organizations/${moderation.organization_id}/members`}
         hx-target="this"
         hx-trigger="load"
-      ></div> */}
+        class="fr-table"
+      ></div>
       <hr />
       <h3>
         #### 👨‍💻 A propos de <span safe>{moderation.users.given_name}</span>
@@ -239,48 +241,46 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
       <b safe>{moderation.users.given_name}</b> est enregistré(e) dans les
       organisations suivantes :
       <div class="fr-table max-w-full overflow-x-auto">
-        <table>
-          <thead>
-            <tr>
-              {[
-                "siret",
-                "cached_libelle",
-                "Interne",
-                "verified_email_domains",
-                "authorized_email_domains",
-                "external_authorized_email_domains",
-                "cached_code_officiel_geographique",
-                "authentication_by_peers_type",
-                "has_been_greeted",
-                "sponsor_id",
-                "needs_official_contact_email_verification",
-                "official_contact_email_verification_token",
-                "official_contact_email_verification_sent_at",
-              ].map((name) => (
-                <th safe>{name}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-          </tbody>
-        </table>
+        <div
+          hx-get={`/legacy/users/${moderation.user_id}/organizations`}
+          hx-target="this"
+          hx-trigger="load"
+          class="fr-table"
+        ></div>
       </div>
+      ### Détails de l'organisation sélectionnée ci-dessus :
+      <ul>
+        <li>
+          Dénomination : <b>{moderation.organizations.cached_libelle}</b>
+        </li>
+        <li>
+          Tranche d'effectif :{" "}
+          <b>
+            {moderation.organizations.cached_libelle_tranche_effectif} (code :{" "}
+            {moderation.organizations.cached_tranche_effectifs}) (
+            <a
+              href="https://www.sirene.fr/sirene/public/variable/tefen"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              liste code effectif INSEE
+            </a>
+            )
+          </b>
+        </li>
+        <li>
+          État administratif :{" "}
+          <b>{moderation.organizations.cached_etat_administratif}</b> (
+          <a
+            href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            liste état administratif INSEE
+          </a>
+          )
+        </li>
+      </ul>
     </div>
   );
 }

@@ -37,6 +37,7 @@
     "dev:tailwind": "bun run build:tailwind --watch",
     "dev": "bun --hot src/bootstrap.ts",
     "start": "bun src/bootstrap.ts",
+    "studio": "bun x prisma studio",
     "test:type-check": "bun x tsc --noEmit",
     "test": "bun x npm-run-all --serial test:**"
   },

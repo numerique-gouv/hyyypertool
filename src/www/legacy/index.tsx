@@ -27,7 +27,7 @@ const Query_SchemaValidator = zValidator(
     .default({}),
 );
 
-const Id_Schema = z.object({
+export const Id_Schema = z.object({
   id: z.string(),
 });
 
