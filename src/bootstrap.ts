@@ -20,6 +20,9 @@ app.route("/", www);
 
 if (env.DEPLOY_ENV === "preview") {
   app.showRoutes();
+  console.debug("- NODE_ENV " + env.NODE_ENV);
+  console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
+  console.debug("- VERSION " + env.VERSION);
 }
 
 export default app;
