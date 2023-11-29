@@ -40,6 +40,13 @@ write_profile() {
   cp "$bp_dir"/profile/* "$build_dir/.profile.d/"
 }
 
+overwrite_profile_git() {
+  local bp_dir="$1"
+  local build_dir="$2"
+  mkdir -p "$build_dir/.profile.d"
+  echo "export GIT_SHA=$(git rev-parse HEAD)" > "$build_dir/.profile.d/git.sh"
+}
+
 #
 #
 #
@@ -57,6 +64,7 @@ echo "" > "$LOG_FILE"
 header "Creating runtime environment"
 
 write_profile "$BP_DIR" "$BUILD_DIR"
+overwrite_profile_git "$BP_DIR" "$BUILD_DIR"
 
 if [ -d "$BP_DIR/profile" ]; then
   for file in "$BP_DIR"/profile/*.sh; do
