@@ -18,69 +18,91 @@ export function Root_Layout({ children }: { children?: Child }) {
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#000091" />
 
-        <link
-          rel="apple-touch-icon"
-          href="/node_modules/@gouvfr/dsfr/dist/favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          href="/node_modules/@gouvfr/dsfr/dist/favicon/favicon.svg"
-          type="image/svg+xml"
-        />
-        <link
-          rel="shortcut icon"
-          href="/node_modules/@gouvfr/dsfr/dist/favicon/favicon.ico"
-          type="image/x-icon"
-        />
-        <link
-          rel="manifest"
-          href="/node_modules/@gouvfr/dsfr/dist/favicon/manifest.webmanifest"
-          crossorigin="use-credentials"
-        />
-
-        <link
-          rel="stylesheet"
-          href="/node_modules/animate.css/source/_vars.css"
-        />
-
-        <link rel="stylesheet" href="/public/tailwind/styles.css" />
-
-        <link
-          rel="stylesheet"
-          href="/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-        />
-
         {html`
+          <link
+            rel="apple-touch-icon"
+            href="/assets/${env.VERSION}/node_modules/@gouvfr/dsfr/dist/favicon/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            href="/assets/${env.VERSION}/node_modules/@gouvfr/dsfr/dist/favicon/favicon.svg"
+            type="image/svg+xml"
+          />
+          <link
+            rel="shortcut icon"
+            href="/assets/${env.VERSION}/node_modules/@gouvfr/dsfr/dist/favicon/favicon.ico"
+            type="image/x-icon"
+          />
+          <link
+            rel="manifest"
+            href="/assets/${env.VERSION}/node_modules/@gouvfr/dsfr/dist/favicon/manifest.webmanifest"
+            crossorigin="use-credentials"
+          />
+
+          <!--  -->
+
+          <link
+            rel="stylesheet"
+            href="/assets/${env.VERSION}/node_modules/animate.css/source/_vars.css"
+          />
+
+          <!--  -->
+
+          <link
+            rel="stylesheet"
+            href="/assets/${env.VERSION}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+          />
+
+          <!--  -->
+
+          <link
+            rel="stylesheet"
+            href="/assets/${env.VERSION}/public/tailwind/styles.css"
+          />
+
+          <!--  -->
+
           <script type="importmap" type="application/json">
             {
               "imports": {
-                "public/client/hyyypertitle.js": "/public/client/hyyypertitle.js",
-                "lit": "/bundle/lit.js",
-                "lit/": "/bundle/lit/"
+                ":env": "/assets/${env.VERSION}/bundle/env.js",
+                "lit": "/assets/${env.VERSION}/bundle/lit.js",
+                "lit/": "/assets/${env.VERSION}/bundle/lit/"
               }
             }
           </script>
-        `}
 
-        <script type="module" src="/node_modules/htmx.org/dist/htmx.js" />
-        <meta
-          name="htmx-config"
-          content='{"historyEnabled":true,"defaultSettleDelay":0}'
-        />
-        {env.DEPLOY_ENV === "preview" ? (
+          <!--  -->
+
           <script
             type="module"
-            src="/node_modules/htmx.org/dist/ext/debug.js"
+            src="/assets/${env.VERSION}/node_modules/htmx.org/dist/htmx.js"
+          ></script>
+
+          <meta
+            name="htmx-config"
+            content='{"historyEnabled":true,"defaultSettleDelay":0}'
           />
-        ) : null}
-        <script
-          type="module"
-          src="/node_modules/htmx.org/dist/ext/include-vals.js"
-        />
-        <script
-          type="module"
-          src="/node_modules/hyperscript.org/dist/_hyperscript.min.js"
-        />
+
+          ${env.DEPLOY_ENV === "preview" ? (
+            <script
+              type="module"
+              src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/debug.js"
+            />
+          ) : null}
+
+          <script
+            type="module"
+            src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/include-vals.js"
+          ></script>
+
+          <!--  -->
+
+          <script
+            type="module"
+            src="/assets/${env.VERSION}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
+          ></script>
+        `}
 
         <title>
           H{Array.from({ length: Math.max(3, Math.random() * 5) }).fill("y")}

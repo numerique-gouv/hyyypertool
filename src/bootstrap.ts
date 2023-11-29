@@ -11,6 +11,7 @@ import { readyz } from "./health/readyz";
 const app = new Hono();
 
 app.use("*", logger());
+// import { compress } from 'hono/compress'
 // app.use("*", compress());  `CompressionStream` is not yet supported in bun.
 app.get("/healthz", ({ text }) => text(`healthz check passed`));
 app.get("/livez", ({ text }) => text(`livez check passed`));

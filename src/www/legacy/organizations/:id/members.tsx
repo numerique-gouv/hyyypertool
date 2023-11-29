@@ -23,7 +23,6 @@ export default new Hono().get(
 
     return html(
       <>
-        src/www/legacy/organizations/{organization_id}/members.tsx
         <Table users={users} />
       </>,
     );

@@ -4,6 +4,7 @@ import { Main_Layout } from ":layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
+import { renderToReadableStream } from "hono/jsx/streaming";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
 import { PageContext_01, Table as Table_01, _01 } from "./01";
@@ -86,17 +87,19 @@ export default new Hono()
   .get(
     "/_/moderation/:id",
     zValidator("param", Id_Schema),
-    async ({ html, req, notFound }) => {
+    async ({ body, req, notFound }) => {
       const { id } = req.valid("param");
       const moderation_id = Number(id);
       if (isNaN(moderation_id)) return notFound();
 
-      return html(
-        <>
-          <_02 moderation_id={moderation_id} />
-          <_03 moderation_id={Number(id)} />
-          <_04 moderation_id={Number(id)} />
-        </>,
+      return body(
+        renderToReadableStream(
+          <>
+            <_02 moderation_id={moderation_id} />
+            <_03 moderation_id={Number(id)} />
+            <_04 moderation_id={Number(id)} />
+          </>,
+        ),
       );
     },
   )

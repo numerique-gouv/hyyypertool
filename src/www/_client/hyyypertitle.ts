@@ -1,5 +1,6 @@
 //
 
+import env from ":env";
 import { animate, fadeIn } from "@lit-labs/motion";
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
@@ -39,24 +40,27 @@ export class Hyyyper_title extends LitElement {
     return html` <!--  -->
       <link
         rel="stylesheet"
-        href="/node_modules/animate.css/source/_vars.css"
+        href="/assets/${env.VERSION}/node_modules/animate.css/source/_vars.css"
       />
       <link
         rel="stylesheet"
-        href="/node_modules/animate.css/source/_base.css"
+        href="/assets/${env.VERSION}/node_modules/animate.css/source/_base.css"
       />
       <link
         rel="stylesheet"
-        href="/node_modules/animate.css/source/zooming_entrances/zoomInDown.css"
+        href="/assets/${env.VERSION}/node_modules/animate.css/source/zooming_entrances/zoomInDown.css"
       />
       <link
         rel="stylesheet"
-        href="/node_modules/animate.css/source/attention_seekers/flash.css"
+        href="/assets/${env.VERSION}/node_modules/animate.css/source/attention_seekers/flash.css"
       />
 
       <!--  -->
 
-      <link rel="stylesheet" href="/public/tailwind/styles.css" />
+      <link
+        rel="stylesheet"
+        href="/assets/${env.VERSION}/public/tailwind/styles.css"
+      />
 
       <!--  -->
 
