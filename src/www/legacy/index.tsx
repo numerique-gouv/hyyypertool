@@ -8,7 +8,7 @@ import { renderToReadableStream } from "hono/jsx/streaming";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
 import { PageContext_01, Table as Table_01, _01 } from "./01";
-import { _02 } from "./02";
+import { Duplicate_Warning, List_Leaders, _02 } from "./02";
 import { _03 } from "./03";
 import { _04 } from "./04";
 
@@ -16,31 +16,9 @@ import { _04 } from "./04";
 
 export const base = "/legacy";
 
-const Query_SchemaValidator = zValidator(
-  "query",
-  z
-    .object({
-      page: z.string(),
-      "search-email": z.string(),
-      "search-siret": z.string(),
-    })
-    .partial()
-    .default({}),
-);
-
 export const Id_Schema = z.object({
   id: z.string(),
 });
-
-const Id_SchemaValidator = zValidator(
-  "query",
-  z
-    .object({
-      id: z.string(),
-    })
-    .partial()
-    .default({}),
-);
 
 export default new Hono()
   .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
@@ -157,5 +135,41 @@ export default new Hono()
         );
       },
     ),
+  )
+  .route(
+    "/_/02",
+    new Hono()
+      .get(
+        "/duplicate_warning",
+        zValidator(
+          "query",
+          z.object({
+            organization_id: z.string(),
+            user_id: z.string(),
+          }),
+        ),
+        async function ({ html, req }) {
+          const { organization_id, user_id } = req.valid("query");
+          return html(
+            <Duplicate_Warning
+              organization_id={Number(organization_id)}
+              user_id={Number(user_id)}
+            />,
+          );
+        },
+      )
+      .get(
+        "/list_leaders",
+        zValidator(
+          "query",
+          z.object({
+            siret: z.string(),
+          }),
+        ),
+        async function ({ html, req }) {
+          const { siret } = req.valid("query");
+          return html(<List_Leaders siret={siret} />);
+        },
+      ),
   );
 const row = tv({ variants: { is_active: { true: "!bg-green-300" } } });

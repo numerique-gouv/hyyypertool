@@ -9,7 +9,7 @@ import type { Child } from "hono/jsx";
 
 export function Root_Layout({ children }: { children?: Child }) {
   return (
-    <html lang="fr" data-fr-scheme="system">
+    <html lang="fr" data-fr-scheme="system" hx-ext="debug">
       <head>
         <meta charset="utf-8" />
         <meta
@@ -85,16 +85,20 @@ export function Root_Layout({ children }: { children?: Child }) {
             content='{"historyEnabled":true,"defaultSettleDelay":0}'
           />
 
-          ${env.DEPLOY_ENV === "preview" ? (
-            <script
-              type="module"
-              src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/debug.js"
-            />
-          ) : null}
+          ${env.DEPLOY_ENV === "preview"
+            ? html`<script
+                type="module"
+                src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/debug.js"
+              ></script>`
+            : ""}
 
           <script
             type="module"
             src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/include-vals.js"
+          ></script>
+          <script
+            type="module"
+            src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/sse.js"
           ></script>
 
           <!--  -->

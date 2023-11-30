@@ -5,7 +5,6 @@ import env from ":env";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import type { moderations, organizations, users } from "@prisma/client";
-import { Suspense } from "hono/jsx/streaming";
 import lodash_sortby from "lodash.sortby";
 import queryString from "query-string";
 import { match } from "ts-pattern";
@@ -19,27 +18,25 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
   });
 
   const domain = moderation.users.email.split("@")[1];
-  const moderationCount = await prisma.moderations.count({
-    where: {
-      organization_id: moderation.organization_id,
-      user_id: moderation.user_id,
-    },
-  });
+
   const [authorized_email_domain] =
     moderation.organizations.authorized_email_domains;
   const [verified_email_domain] =
     moderation.organizations.verified_email_domains;
+
   return (
     <div class="mx-auto mt-6 !max-w-4xl" id="02">
       <h1>🗃️ 2. Je consulte les données relative au cas à l'étude</h1>
-      {moderationCount > 1 ? (
-        <div class="fr-alert fr-alert--warning">
-          <h3 class="fr-alert__title">Attention : demande multiples</h3>
-          <p>
-            Il s'agit de la {moderationCount}e demande pour cette organisation
-          </p>
-        </div>
-      ) : null}
+      <div
+        hx-get="/legacy/_/02/duplicate_warning"
+        hx-trigger="load"
+        hx-vals={JSON.stringify({
+          organization_id: moderation.organization_id,
+          user_id: moderation.user_id,
+        })}
+      >
+        Demande multiples ?
+      </div>
       <hr />
       <h2>
         🤗 <span safe>{moderation.users.given_name}</span>{" "}
@@ -229,7 +226,7 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
           class="fr-table"
         ></div>
       </div>
-      ### Détails de l'organisation sélectionnée ci-dessus :
+      <h3>### Détails de l'organisation sélectionnée ci-dessus :</h3>
       <ul>
         <li>
           Dénomination : <b>{moderation.organizations.cached_libelle}</b>
@@ -262,6 +259,30 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
           )
         </li>
       </ul>
+    </div>
+  );
+}
+
+export async function Duplicate_Warning({
+  organization_id,
+  user_id,
+}: {
+  organization_id: number;
+  user_id: number;
+}) {
+  const moderationCount = await prisma.moderations.count({
+    where: {
+      organization_id,
+      user_id,
+    },
+  });
+
+  if (moderationCount <= 1) return <></>;
+
+  return (
+    <div class="fr-alert fr-alert--warning">
+      <h3 class="fr-alert__title">Attention : demande multiples</h3>
+      <p>Il s'agit de la {moderationCount}e demande pour cette organisation</p>
     </div>
   );
 }
@@ -324,9 +345,16 @@ function About({
         <li>
           siret : <b safe>{moderation.organizations.siret}</b>
         </li>
-        <Suspense fallback={<>loading...</>}>
-          <List_Leaders siret={moderation.organizations.siret} />
-        </Suspense>
+
+        <div
+          hx-get="/legacy/_/02/list_leaders"
+          hx-trigger="load"
+          hx-vals={JSON.stringify({
+            siret: moderation.organizations.siret,
+          })}
+        >
+          Liste des dirigeants...
+        </div>
       </ul>
       <br />
 
@@ -353,7 +381,7 @@ interface Entreprise_API_Association_Response {
   };
 }
 
-async function List_Leaders({ siret }: { siret: string }) {
+export async function List_Leaders({ siret }: { siret: string }) {
   const siren = siret.substring(0, 9);
   const query_params = new URLSearchParams({
     context: "Modération MonComptePro",
