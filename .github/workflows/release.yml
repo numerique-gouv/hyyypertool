@@ -20,5 +20,6 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@betagouv"
       - run: npm publish
+        working-directory: ./packages/trpc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
