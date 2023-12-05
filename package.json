@@ -2,6 +2,7 @@
   "name": "hyyypertool",
   "module": "src/bootstrap.ts",
   "type": "module",
+  "private": true,
   "version": "2023.11.15",
   "dependencies": {
     "@gouvfr/dsfr": "1.10.2",
@@ -50,5 +51,8 @@
     "tailwindFunctions": [
       "tv"
     ]
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
