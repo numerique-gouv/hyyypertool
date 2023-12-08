@@ -84,9 +84,9 @@ export default new Hono<Oidc_Context & Session_Context>()
     const session = c.get("session");
     const { req, redirect, get } = c;
 
-    // if (env.DEPLOY_ENV === "preview") {
-    //   return redirect("/legacy");
-    // }
+    if (env.DEPLOY_ENV === "preview") {
+      return redirect("/legacy");
+    }
 
     const client = get("oidc");
     const code_verifier = generators.codeVerifier();
