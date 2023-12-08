@@ -22,7 +22,7 @@ export default new Hono()
           <button class="agentconnect-button"></button>
           <form method="post" action="/login">
             <div class="fr-connect-group">
-              <button class="fr-connect">
+              <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>
                 <span class="fr-connect__brand">AgentConnect</span>
               </button>
