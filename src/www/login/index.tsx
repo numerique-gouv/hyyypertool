@@ -99,9 +99,7 @@ export default new Hono<Oidc_Context & Session_Context>()
 
     const code_challenge = generators.codeChallenge(code_verifier);
     const redirect_url = client.authorizationUrl({
-      redirect_uri:
-        "https://moncomptepro-hyyypertool-preprod.osc-secnum-fr1.scalingo.io/proxy/localhost:3000",
-      // redirect_uri: env.HOST ?? new URL(CALLBACK, req.url).toString(),
+      redirect_uri: env.HOST ?? new URL(CALLBACK, req.url).toString(),
       scope: env.AGENTCONNECT_OIDC_SCOPES,
       acr_values: "eidas1",
       claims: `{"id_token":{"amr":{"essential":true}}}`,
