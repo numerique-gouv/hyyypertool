@@ -17,6 +17,43 @@ const DEPLOY_ENV_SHEMA = z.enum(["preview", "preproduction", "production"]);
 
 export default z
   .object({
+    AGENT_CONNECT_OIDC_CLIENT_ID: z.string().trim(),
+    AGENT_CONNECT_OIDC_ID_TOKEN_SIGNED_RESPONSE_ALG: z
+      .string()
+      .trim()
+      .default("ES256"),
+    AGENT_CONNECT_OIDC_ISSUER: z.string().trim(),
+    AGENT_CONNECT_OIDC_SCOPES: z
+      .string()
+      .default(
+        ["email", "given_name", "openid", "siret", "uid", "usual_name"].join(
+          " ",
+        ),
+      ),
+    AGENT_CONNECT_OIDC_SECRET_ID: z.string().trim(),
+    AGENT_CONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG: z
+      .string()
+      .trim()
+      .default("ES256"),
+    AC_SCOPE: z
+      .string()
+      .trim()
+      .default(
+        [
+          "email",
+          "given_name",
+          "openid",
+          "organizational_unit",
+          "siren",
+          "siret",
+          "uid",
+          "usual_name",
+        ].join(" "),
+      ),
+    COOKIE_ENCRYPTION_KEY: z
+      .string()
+      .trim()
+      .default("password_at_least_32_characters_long"),
     DATABASE_URL: z
       .string()
       .trim()
@@ -27,6 +64,7 @@ export default z
     DEPLOY_ENV: DEPLOY_ENV_SHEMA.default("preview"),
     ENTREPRISE_API_GOUV_TOKEN: z.string().trim(),
     GIT_SHA: GIT_SHA_SHEMA,
+    HOST: z.string().trim().url().default("http://localhost:3000"),
     NODE_ENV: z.enum(["development", "production"]).default("development"),
     PORT: z.coerce.number().default(3000),
     VERSION: z.string().default(

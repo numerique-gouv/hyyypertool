@@ -20,7 +20,8 @@ const router = new Bun.FileSystemRouter({
 });
 
 for (const [route, file_path] of Object.entries(router.routes)) {
-  if (route.includes("_")) continue;
+  if (route.split("/").some((partial_path) => partial_path.startsWith("_")))
+    continue;
 
   const module = (await import(file_path)) as { default: Hono };
   www.route(route, module.default);
