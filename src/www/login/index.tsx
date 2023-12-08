@@ -29,19 +29,19 @@ interface Oidc_Context extends Env {
 
 function agentconnect(): MiddlewareHandler<Oidc_Context> {
   return async function agentconnect_middleware(c, next) {
-    const agent_connect_oidc_issuer = await Issuer.discover(
-      env.AGENT_CONNECT_OIDC_ISSUER,
+    const AGENTCONNECT_oidc_issuer = await Issuer.discover(
+      env.AGENTCONNECT_OIDC_ISSUER,
     );
 
-    const client = new agent_connect_oidc_issuer.Client({
-      client_id: env.AGENT_CONNECT_OIDC_CLIENT_ID,
-      client_secret: env.AGENT_CONNECT_OIDC_SECRET_ID,
+    const client = new AGENTCONNECT_oidc_issuer.Client({
+      client_id: env.AGENTCONNECT_OIDC_CLIENT_ID,
+      client_secret: env.AGENTCONNECT_OIDC_SECRET_ID,
       id_token_signed_response_alg:
-        env.AGENT_CONNECT_OIDC_ID_TOKEN_SIGNED_RESPONSE_ALG,
-      redirect_uris: [redirectUri],
+        env.AGENTCONNECT_OIDC_ID_TOKEN_SIGNED_RESPONSE_ALG,
+      // redirect_uris: [redirectUri],
       response_types: ["code"],
       userinfo_signed_response_alg:
-        env.AGENT_CONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG,
+        env.AGENTCONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG,
     });
 
     //
@@ -84,17 +84,25 @@ export default new Hono<Oidc_Context & Session_Context>()
     const session = c.get("session");
     const { req, redirect, get } = c;
 
-    if (env.DEPLOY_ENV === "preview") {
-      return redirect("/legacy");
-    }
-
-    const client = await get("oidc");
+    // if (env.DEPLOY_ENV === "preview") {
+    //   return redirect("/legacy");
+    // }
+    console.log();
+    console.log(
+      new URL(CALLBACK, req.url),
+      new URL(CALLBACK, req.url).toString(),
+    );
+    console.log();
+    const client = get("oidc");
     const code_verifier = generators.codeVerifier();
     session.set("code_verifier", code_verifier);
 
     const code_challenge = generators.codeChallenge(code_verifier);
     const redirect_url = client.authorizationUrl({
-      scope: env.AGENT_CONNECT_OIDC_SCOPES,
+      redirect_uri:
+        "https://moncomptepro-hyyypertool-preprod.osc-secnum-fr1.scalingo.io/proxy/localhost:3000",
+      // redirect_uri: env.HOST ?? new URL(CALLBACK, req.url).toString(),
+      scope: env.AGENTCONNECT_OIDC_SCOPES,
       acr_values: "eidas1",
       claims: `{"id_token":{"amr":{"essential":true}}}`,
       prompt: "login consent",
@@ -103,6 +111,7 @@ export default new Hono<Oidc_Context & Session_Context>()
       code_challenge,
       code_challenge_method: "S256",
     });
+    console.log({ redirect_url });
 
     return redirect(redirect_url);
   });

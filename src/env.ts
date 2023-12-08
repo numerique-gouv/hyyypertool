@@ -17,21 +17,21 @@ const DEPLOY_ENV_SHEMA = z.enum(["preview", "preproduction", "production"]);
 
 export default z
   .object({
-    AGENT_CONNECT_OIDC_CLIENT_ID: z.string().trim(),
-    AGENT_CONNECT_OIDC_ID_TOKEN_SIGNED_RESPONSE_ALG: z
+    AGENTCONNECT_OIDC_CLIENT_ID: z.string().trim(),
+    AGENTCONNECT_OIDC_ID_TOKEN_SIGNED_RESPONSE_ALG: z
       .string()
       .trim()
       .default("ES256"),
-    AGENT_CONNECT_OIDC_ISSUER: z.string().trim(),
-    AGENT_CONNECT_OIDC_SCOPES: z
+    AGENTCONNECT_OIDC_ISSUER: z.string().trim(),
+    AGENTCONNECT_OIDC_SCOPES: z
       .string()
       .default(
         ["email", "given_name", "openid", "siret", "uid", "usual_name"].join(
           " ",
         ),
       ),
-    AGENT_CONNECT_OIDC_SECRET_ID: z.string().trim(),
-    AGENT_CONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG: z
+    AGENTCONNECT_OIDC_SECRET_ID: z.string().trim(),
+    AGENTCONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG: z
       .string()
       .trim()
       .default("ES256"),
