@@ -87,19 +87,15 @@ export default new Hono<Oidc_Context & Session_Context>()
     // if (env.DEPLOY_ENV === "preview") {
     //   return redirect("/legacy");
     // }
-    console.log();
-    console.log(
-      new URL(CALLBACK, req.url),
-      new URL(CALLBACK, req.url).toString(),
-    );
-    console.log();
+
     const client = get("oidc");
     const code_verifier = generators.codeVerifier();
     session.set("code_verifier", code_verifier);
-
+    const redirect_uri = new URL(CALLBACK, env.HOST ?? req.url).toString();
+    console.log({ redirect_uri });
     const code_challenge = generators.codeChallenge(code_verifier);
     const redirect_url = client.authorizationUrl({
-      redirect_uri: env.HOST ?? new URL(CALLBACK, req.url).toString(),
+      redirect_uri,
       scope: env.AGENTCONNECT_OIDC_SCOPES,
       acr_values: "eidas1",
       claims: `{"id_token":{"amr":{"essential":true}}}`,
