@@ -17,9 +17,15 @@ app.get("/healthz", ({ text }) => text(`healthz check passed`));
 app.get("/livez", ({ text }) => text(`livez check passed`));
 app.route("/readyz", readyz);
 app.route("/", www);
+app.get("/proxy/localhost:3000/*", ({ req, redirect }) => {
+  const uri = new URL(
+    req.path.replace("/proxy/localhost:3000/", ""),
+    "http://localhost:3000",
+  );
+  return redirect(uri.toString());
+});
 
 if (env.DEPLOY_ENV === "preview") {
-  app.showRoutes();
   console.debug("- NODE_ENV " + env.NODE_ENV);
   console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
   console.debug("- VERSION " + env.VERSION);
