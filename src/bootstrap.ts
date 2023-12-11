@@ -19,7 +19,7 @@ app.route("/readyz", readyz);
 app.route("/", www);
 app.get("/proxy/localhost:3000/*", ({ req, redirect }) => {
   const uri = new URL(
-    req.path.replace("/proxy/localhost:3000/", ""),
+    req.url.replace("/proxy/localhost:3000", ""),
     "http://localhost:3000",
   );
   return redirect(uri.toString());
