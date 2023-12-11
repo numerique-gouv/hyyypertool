@@ -3,6 +3,7 @@
 import env from ":env";
 import { www } from ":www";
 import { Hono } from "hono";
+import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
 import { readyz } from "./health/readyz";
 
@@ -22,13 +23,16 @@ app.get("/proxy/localhost:3000/*", ({ req, redirect }) => {
     req.url.replace("/proxy/localhost:3000", ""),
     "http://localhost:3000/",
   );
+  uri.hostname = "localhost";
+  uri.port = "3000";
   return redirect(uri.toString());
 });
 
 if (env.DEPLOY_ENV === "preview") {
-  console.debug("- NODE_ENV " + env.NODE_ENV);
-  console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
-  console.debug("- VERSION " + env.VERSION);
+  showRoutes(app);
 }
+console.debug("- NODE_ENV " + env.NODE_ENV);
+console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
+console.debug("- VERSION " + env.VERSION);
 
 export default app;
