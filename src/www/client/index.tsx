@@ -91,6 +91,7 @@ export default new Hono<Oidc_Context & Session_Context>()
     const nonce = generators.nonce();
 
     const redirect_uri = get_redirect_uri(req.url);
+    console.log({ url: req.url, redirect_uri });
 
     session.set("verifier", code_verifier);
     session.set("state", state);
@@ -112,6 +113,7 @@ export default new Hono<Oidc_Context & Session_Context>()
     const client = get("oidc");
 
     const post_logout_redirect_uri = get_logout_redirect_uri(req.url);
+    console.log({ url: req.url, post_logout_redirect_uri });
 
     const logoutUrl = client.endSessionUrl({
       id_token_hint: session.get("idtoken"),
