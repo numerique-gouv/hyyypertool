@@ -127,17 +127,13 @@ export default new Hono<Oidc_Context & Session_Context>()
 
 function get_redirect_uri(url: string) {
   const _url = new URL(url);
-  const protocol = _url.protocol;
-  const host = _url.host;
   const redirect_uri = `${
-    env.HOST ? env.HOST : `${protocol}//`
-  }/${host}/client/${OIDC_CALLBACK}`;
+    env.HOST ? env.HOST : _url.origin
+  }/client/${OIDC_CALLBACK}`;
   return redirect_uri;
 }
 function get_logout_redirect_uri(url: string) {
   const _url = new URL(url);
-  const protocol = _url.protocol;
-  const host = _url.host;
-  const redirect_uri = `${env.HOST ? env.HOST : `${protocol}//`}/${host}`;
+  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}`;
   return redirect_uri;
 }
