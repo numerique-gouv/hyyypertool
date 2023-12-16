@@ -1,27 +1,23 @@
 //
 
 import { Main_Layout } from ":layout/main";
+import { Id_Schema } from ":schema";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { renderToReadableStream } from "hono/jsx/streaming";
-import { tv } from "tailwind-variants";
 import { z } from "zod";
-import { PageContext_01, Table as Table_01, _01 } from "./01";
-import { Duplicate_Warning, List_Leaders, _02 } from "./02";
+import { hyyyyyypertool_session, type Session_Context } from "../session";
+import { _01, PageContext_01, Table as Table_01 } from "./01";
+import { _02, Duplicate_Warning, List_Leaders } from "./02";
 import { _03 } from "./03";
 import { _04 } from "./04";
 
 //
 
-export const base = "/legacy";
-
-export const Id_Schema = z.object({
-  id: z.string(),
-});
-
-export default new Hono()
+export default new Hono<Session_Context>()
   .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
+  .use("*", hyyyyyypertool_session)
   .get(
     "/",
     zValidator(
@@ -33,8 +29,16 @@ export default new Hono()
         .partial()
         .default({}),
     ),
-    function ({ render, req }) {
+    function ({ render, req, get, redirect }) {
       const { id } = req.valid("query");
+      const session = get("session");
+      const userinfo = session.get("userinfo");
+      if (!userinfo) {
+        return redirect("/");
+      }
+      const { usual_name, given_name } = userinfo;
+      const username = `${given_name} ${usual_name}`;
+
       return render(
         <>
           <PageContext_01.Provider
@@ -59,6 +63,9 @@ export default new Hono()
             ) : null}
           </section>
         </>,
+        {
+          username,
+        },
       );
     },
   )
@@ -158,6 +165,12 @@ export default new Hono()
           );
         },
       )
+      .get("/domains/internal/edit", async function ({ html, req }) {
+        return html(<>/domains/internal/edit</>);
+      })
+      .get("/domains/external/edit", async function ({ html, req }) {
+        return html(<>/domains/external/edit</>);
+      })
       .get(
         "/list_leaders",
         zValidator(
@@ -172,4 +185,3 @@ export default new Hono()
         },
       ),
   );
-const row = tv({ variants: { is_active: { true: "!bg-green-300" } } });

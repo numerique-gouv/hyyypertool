@@ -20,7 +20,7 @@ export default new Hono()
 
         <div class="animated delay-2s fadeInLeftBig flex flex-col items-center">
           <button class="agentconnect-button"></button>
-          <form method="post" action="/login">
+          <form method="post" action="/client/login">
             <div class="fr-connect-group">
               <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>

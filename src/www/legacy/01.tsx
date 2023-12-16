@@ -20,7 +20,7 @@ export const PageContext_01 = createContext({
 
 export function _01() {
   return (
-    <div class="mx-auto mt-6 !max-w-4xl" id="01">
+    <div class="mx-auto mt-6 !max-w-6xl" id="01">
       <h1>🖱️ 1. Je sélectionne le cas que je veux traiter</h1>
       <hr />
       <label class="fr-label" for="search-siret">
@@ -80,7 +80,7 @@ export async function Table() {
     prisma.moderations.count({ where }),
   ]);
   return (
-    <table>
+    <table class="!table">
       <thead>
         <tr>
           <th>Cat</th>

@@ -9,10 +9,11 @@
     "paths": {
       ":database": ["./src/database"],
       ":env": ["./src/env"],
-      ":ui/*": ["./src/ui/*"],
       ":layout/*": ["./src/layout/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":package.json": ["./package.json"],
+      ":schema": ["./src/schema"],
+      ":ui/*": ["./src/ui/*"],
       ":www": ["./src/www.router"]
     },
     "plugins": [],

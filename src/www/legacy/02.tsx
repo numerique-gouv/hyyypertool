@@ -19,13 +19,8 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
 
   const domain = moderation.users.email.split("@")[1];
 
-  const [authorized_email_domain] =
-    moderation.organizations.authorized_email_domains;
-  const [verified_email_domain] =
-    moderation.organizations.verified_email_domains;
-
   return (
-    <div class="mx-auto mt-6 !max-w-4xl" id="02">
+    <div class="mx-auto mt-6 !max-w-6xl" id="02">
       <h1>🗃️ 2. Je consulte les données relative au cas à l'étude</h1>
       <div
         hx-get="/legacy/_/02/duplicate_warning"
@@ -39,8 +34,8 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
       </div>
       <hr />
       <h2>
-        🤗 <span safe>{moderation.users.given_name}</span>{" "}
-        <span safe>
+        🤗 <span>{moderation.users.given_name}</span>{" "}
+        <span class="text-gray-600">
           {match(moderation.type as MCP_Moderation["type"])
             .with("ask_for_sponsorship", () => "demande un sponsorship")
             .with(
@@ -55,19 +50,21 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
               (type) => `veut effectuer une action inconnue (type ${type})`,
             )}
         </span>{" "}
-        « <span safe>{moderation.organizations.cached_libelle}</span> »
+        « <span>{moderation.organizations.cached_libelle}</span> »
       </h2>
       <div>
         <a
-          class="col-span-full"
+          class={button()}
           href={datapass_from_email(moderation.users.email)}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Voir les demandes DataPass déposées par{" "}
-          <span safe>{moderation.users.given_name}</span>
+          <span>
+            Voir les demandes DataPass déposées par{" "}
+            {moderation.users.given_name}
+          </span>
         </a>
-
+        <br />
         <button
           _="
           on click
@@ -116,67 +113,18 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
           🔍 Rechercher le domaine
         </a>
 
-        <div class="col-span-full mt-5">
-          <About moderation={moderation} />
+        <Search_Domain
+          domain={domain}
+          organization={moderation.organizations}
+        />
+
+        <div class="mt-5 block">
+          <About_Organisation moderation={moderation} />
         </div>
       </div>
       <div>
-        <a
-          href={google_search(domain)}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          « <span safe>{domain}</span> » sur Google
-        </a>
-        <a
-          href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${moderation.organizations.siret}`}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          fiche Annuaire Entreprises
-        </a>
-        <a
-          href={`https://lannuaire.service-public.fr/recherche?where=${moderation.organizations.cached_code_postal}&whoWhat=Mairie`}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Mairie sur Annuaire Service Public
-        </a>
-        <a
-          href={`https://lannuaire.service-public.fr/recherche?where=${moderation.organizations.cached_code_postal}`}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Service sur Annuaire Service Public
-        </a>
-        <a
-          href={`https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D${moderation.organizations.siret}  `}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Établissement sur l'annuaire Éducation Nationale
-        </a>
-
-        <div>
-          <div>
-            domaines internes :{" "}
-            {verified_email_domain ? (
-              <b>🔒 {authorized_email_domain}</b>
-            ) : (
-              <i>{authorized_email_domain}</i>
-            )}
-            <button class="fr-btn">Éditer les domaines internes</button>
-          </div>
-          <div>
-            domaines externes :{" "}
-            <b>{moderation.organizations.external_authorized_email_domains}</b>
-            <button class="fr-btn">Éditer les domaines externes</button>
-          </div>
+        <div class="my-3">
+          <Edit_Domain organization={moderation.organizations} />
         </div>
       </div>
       <br />
@@ -188,35 +136,36 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
         hx-target="this"
         hx-trigger="load"
         class="fr-table"
+        id="table-organisation-members"
       ></div>
       <hr />
-      <h3>
-        #### 👨‍💻 A propos de <span safe>{moderation.users.given_name}</span>
+      <h3 class="mt-2">
+        #### 👨‍💻 A propos de <span>{moderation.users.given_name}</span>
       </h3>
       <ul>
         <li>
           id : <b>{moderation.user_id}</b>
         </li>
         <li>
-          email : <b safe>{moderation.users.email}</b>
+          email : <b>{moderation.users.email}</b>
         </li>
         <li>
-          prénom : <b safe>{moderation.users.given_name}</b>
+          prénom : <b>{moderation.users.given_name}</b>
         </li>
         <li>
-          nom : <b safe>{moderation.users.family_name}</b>
+          nom : <b>{moderation.users.family_name}</b>
         </li>
         <li>
-          téléphone : <b safe>{moderation.users.phone_number}</b>
+          téléphone : <b>{moderation.users.phone_number}</b>
         </li>
         <li>
-          poste : <b safe>{moderation.users.job}</b>
+          poste : <b>{moderation.users.job}</b>
         </li>
         <li>
           nombre de connection : <b>{moderation.users.sign_in_count}</b>
         </li>
       </ul>
-      <b safe>{moderation.users.given_name}</b> est enregistré(e) dans les
+      <b>{moderation.users.given_name}</b> est enregistré(e) dans les
       organisations suivantes :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
@@ -263,6 +212,29 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
   );
 }
 
+export async function Edit_Domain({
+  organization,
+}: {
+  organization: organizations;
+}) {
+  return (
+    <div class="grid grid-cols-2">
+      <div
+        class="fr-table"
+        hx-get={`/legacy/organizations/${organization.id}/domains/internal`}
+        hx-trigger="load, organisation_internal_domain_updated from:body"
+        id="edit-domain"
+      ></div>
+      <div
+        class="fr-table"
+        hx-get={`/legacy/organizations/${organization.id}/domains/external`}
+        hx-trigger="load, organisation_external_domain_updated from:body"
+        id="edit-domain"
+      ></div>
+    </div>
+  );
+}
+
 export async function Duplicate_Warning({
   organization_id,
   user_id,
@@ -287,7 +259,60 @@ export async function Duplicate_Warning({
   );
 }
 
-function About({
+function Search_Domain({
+  domain,
+  organization,
+}: {
+  domain: string;
+  organization: organizations;
+}) {
+  return (
+    <>
+      <a
+        href={google_search(domain)}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        « <span>{domain}</span> » sur Google
+      </a>
+      <a
+        href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        fiche Annuaire Entreprises
+      </a>
+      <a
+        href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Mairie sur Annuaire Service Public
+      </a>
+      <a
+        href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Service sur Annuaire Service Public
+      </a>
+      <a
+        href={`https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D${organization.siret}`}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Établissement sur l'annuaire Éducation Nationale
+      </a>
+    </>
+  );
+}
+
+function About_Organisation({
   moderation,
 }: {
   moderation: moderations & { organizations: organizations; users: users };
@@ -295,29 +320,24 @@ function About({
   const domain = moderation.users.email.split("@")[1];
   return (
     <>
-      <h3>#### 🏛 A propos de l'organisation</h3>
+      <h3 class="mt-12"> 🏛 A propos de l'organisation</h3>
       <ul>
         <li>
-          Dénomination : <b safe>{moderation.organizations.cached_libelle}</b>
+          Dénomination : <b>{moderation.organizations.cached_libelle}</b>
         </li>
         <li>
           Activité principale de l’établissement (NAF/APE) :{" "}
-          <b safe>
-            {moderation.organizations.cached_libelle_activite_principale}
-          </b>
+          <b>{moderation.organizations.cached_libelle_activite_principale}</b>
         </li>
         <li>
           Nature juridique :{" "}
-          <b safe>
-            {moderation.organizations.cached_libelle_categorie_juridique}
-          </b>
+          <b>{moderation.organizations.cached_libelle_categorie_juridique}</b>
         </li>
         <li>
           Tranche d'effectif :{" "}
-          <b safe>{moderation.organizations.cached_libelle_tranche_effectif}</b>{" "}
+          <b>{moderation.organizations.cached_libelle_tranche_effectif}</b>{" "}
           (code :{" "}
-          <span safe>{moderation.organizations.cached_tranche_effectifs}</span>)
-          (
+          <span>{moderation.organizations.cached_tranche_effectifs}</span>) (
           <a
             href="https://www.sirene.fr/sirene/public/variable/tefen"
             target="_blank"
@@ -328,7 +348,7 @@ function About({
         </li>
         <li>
           État administratif :{" "}
-          <b safe>{moderation.organizations.cached_etat_administratif}</b> (
+          <b>{moderation.organizations.cached_etat_administratif}</b> (
           <a
             href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
             target="_blank"
@@ -343,7 +363,7 @@ function About({
           id : <b>{moderation.organizations.id}</b>
         </li>
         <li>
-          siret : <b safe>{moderation.organizations.siret}</b>
+          siret : <b>{moderation.organizations.siret}</b>
         </li>
 
         <div
@@ -358,11 +378,12 @@ function About({
       </ul>
       <br />
 
-      <button class={button({ intent: "warning" })}>
-        🪄 Action en un click : - ajouter le domaine <b>{domain}</b>
-        dans les domaines internes (si pas déjà présent) - marquer ce domaine
-        comme vérifié (si pas déjà vérifié) - marquer les membres existants de
-        l'orga comme `verified_email_domain` (si pas de vérification effectuée)
+      <button class={button({ className: "block", intent: "warning" })}>
+        🪄 Action en un click :<br /> - ajouter le domaine <b>{domain}</b> dans
+        les domaines internes (si pas déjà présent)
+        <br /> - marquer ce domaine comme vérifié (si pas déjà vérifié)
+        <br /> - marquer les membres existants de l'orga comme
+        `verified_email_domain` (si pas de vérification effectuée)
       </button>
     </>
   );

@@ -15,7 +15,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
     cc: `moncomptepro@beta.gouv.fr`,
   });
   return (
-    <div class="mx-auto !max-w-4xl">
+    <div class="mx-auto !max-w-6xl">
       <h1>
         ✉️ 3. J'ai pris ma décision, je copie le message que je souhaite
         répondre par mail

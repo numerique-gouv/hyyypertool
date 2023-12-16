@@ -4,8 +4,23 @@ import type { Child } from "hono/jsx";
 import { Root_Layout } from "./root";
 
 //
-
-export function Main_Layout({ children }: { children?: Child }) {
+declare module "hono" {
+  interface ContextRenderer {
+    (
+      content: string | Promise<string>,
+      props?: Main_Layout_Props,
+    ): Response | Promise<Response>;
+  }
+}
+interface Main_Layout_Props {
+  username: string;
+}
+export function Main_Layout({
+  children,
+  username,
+}: {
+  children?: Child;
+} & Main_Layout_Props) {
   return (
     <Root_Layout>
       <div class="flex flex-grow flex-col">
@@ -14,7 +29,7 @@ export function Main_Layout({ children }: { children?: Child }) {
             <div class="fr-container">
               <div class="fr-header__body-row">
                 <Brand />
-                <Tools />
+                <Tools username={username} />
               </div>
             </div>
             {/*  */}
@@ -48,21 +63,19 @@ function Brand() {
   );
 }
 
-function Tools() {
+function Tools({ username }: { username?: string }) {
   return (
     <div class="fr-header__tools">
       <div class="fr-header__tools-links">
         <ul class="fr-btns-group">
-          {/* <li>
-            <a class="fr-btn fr-icon-add-circle-line" href="[url - à modifier]">
-              Créer un espace
+          <li>
+            <a
+              class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-fi-logout-box-r-line fr-btn--icon-left"
+              href="/client/logout"
+            >
+              {username}
             </a>
           </li>
-          <li>
-            <a class="fr-btn fr-icon-account-line" href="[url - à modifier]">
-              S’enregistrer
-            </a>
-          </li> */}
         </ul>
       </div>
     </div>
