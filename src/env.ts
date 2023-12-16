@@ -64,7 +64,7 @@ export default z
     DEPLOY_ENV: DEPLOY_ENV_SHEMA.default("preview"),
     ENTREPRISE_API_GOUV_TOKEN: z.string().trim(),
     GIT_SHA: GIT_SHA_SHEMA,
-    HOST: z.string().trim().url().default("http://localhost:3000"),
+    HOST: z.string().trim().url().optional(),
     NODE_ENV: z.enum(["development", "production"]).default("development"),
     PORT: z.coerce.number().default(3000),
     VERSION: z.string().default(
