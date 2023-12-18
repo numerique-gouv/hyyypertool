@@ -8,10 +8,10 @@
     "@gouvfr/dsfr": "1.11.0",
     "@hono/zod-validator": "0.1.11",
     "@lit-labs/motion": "1.0.6",
-    "@prisma/client": "5.7.0",
+    "@prisma/client": "5.7.1",
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
-    "hono": "3.11.7",
+    "hono": "3.11.8",
     "hono-sessions": "0.3.3",
     "htmx.org": "1.9.9",
     "hyperscript.org": "0.9.12",
@@ -21,12 +21,12 @@
     "lodash.xor": "^4.5.0",
     "openid-client": "^5.6.1",
     "query-string": "8.1.0",
-    "tailwind-variants": "0.1.18",
+    "tailwind-variants": "0.1.19",
     "ts-pattern": "5.0.6",
     "zod": "3.22.4"
   },
   "overrides": {
-    "hono": "3.11.7"
+    "hono": "3.11.8"
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.10",
@@ -37,8 +37,8 @@
     "moncomptepro": "betagouv/moncomptepro",
     "prettier": "3.1.1",
     "prettier-plugin-tailwindcss": "0.5.9",
-    "prisma": "5.7.0",
-    "tailwindcss": "3.3.6",
+    "prisma": "5.7.1",
+    "tailwindcss": "3.3.7",
     "typescript": "5.3.3"
   },
   "scripts": {
