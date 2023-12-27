@@ -1,8 +1,8 @@
 //
 
+import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import type { MCP_Moderation } from ":moncomptepro";
-import type { moderations, organizations, users } from "@prisma/client";
 import {
   and,
   asc,
@@ -170,9 +170,9 @@ function Row({
   moderation,
   variants,
 }: {
-  moderation: moderations & {
-    users: users;
-    organizations: organizations;
+  moderation: Moderation & {
+    users: User;
+    organizations: Organization;
   };
   variants: VariantProps<typeof row>;
 }) {

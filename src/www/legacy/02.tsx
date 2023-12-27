@@ -1,21 +1,28 @@
 //
 
-import { prisma } from ":database";
+import type { Moderation, Organization, User } from ":database:moncomptepro";
+import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import env from ":env";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
-import type { moderations, organizations, users } from "@prisma/client";
+import { and, count, eq } from "drizzle-orm";
 import lodash_sortby from "lodash.sortby";
+import { ok } from "node:assert";
 import queryString from "query-string";
 import { match } from "ts-pattern";
 
 //
 
 export async function _02({ moderation_id }: { moderation_id: number }) {
-  const moderation = await prisma.moderations.findUniqueOrThrow({
-    include: { organizations: true, users: true },
-    where: { id: moderation_id },
+  const moderation = await moncomptepro_pg.query.moderations.findFirst({
+    where: eq(schema.moderations.id, moderation_id),
+    with: {
+      organizations: true,
+      users: true,
+    },
   });
+
+  ok(moderation);
 
   const domain = moderation.users.email.split("@")[1];
 
@@ -134,7 +141,7 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
       <div
         hx-get={`/legacy/organizations/${moderation.organization_id}/members`}
         hx-target="this"
-        hx-trigger="load"
+        hx-trigger="load, users_organizations_updated from:body"
         class="fr-table"
         id="table-organisation-members"
       ></div>
@@ -173,6 +180,7 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
           hx-target="this"
           hx-trigger="load"
           class="fr-table"
+          id="table-user-organisations"
         ></div>
       </div>
       <h3>### Détails de l'organisation sélectionnée ci-dessus :</h3>
@@ -215,7 +223,7 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
 export async function Edit_Domain({
   organization,
 }: {
-  organization: organizations;
+  organization: Organization;
 }) {
   return (
     <div class="grid grid-cols-2">
@@ -242,19 +250,22 @@ export async function Duplicate_Warning({
   organization_id: number;
   user_id: number;
 }) {
-  const moderationCount = await prisma.moderations.count({
-    where: {
-      organization_id,
-      user_id,
-    },
-  });
+  const [{ value: moderation_count }] = await moncomptepro_pg
+    .select({ value: count() })
+    .from(schema.moderations)
+    .where(
+      and(
+        eq(schema.moderations.organization_id, organization_id),
+        eq(schema.moderations.user_id, user_id),
+      ),
+    );
 
-  if (moderationCount <= 1) return <></>;
+  if (moderation_count <= 1) return <></>;
 
   return (
     <div class="fr-alert fr-alert--warning">
       <h3 class="fr-alert__title">Attention : demande multiples</h3>
-      <p>Il s'agit de la {moderationCount}e demande pour cette organisation</p>
+      <p>Il s'agit de la {moderation_count}e demande pour cette organisation</p>
     </div>
   );
 }
@@ -264,7 +275,7 @@ function Search_Domain({
   organization,
 }: {
   domain: string;
-  organization: organizations;
+  organization: Organization;
 }) {
   return (
     <>
@@ -315,7 +326,7 @@ function Search_Domain({
 function About_Organisation({
   moderation,
 }: {
-  moderation: moderations & { organizations: organizations; users: users };
+  moderation: Moderation & { organizations: Organization; users: User };
 }) {
   const domain = moderation.users.email.split("@")[1];
   return (

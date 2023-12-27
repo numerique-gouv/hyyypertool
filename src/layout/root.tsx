@@ -9,7 +9,7 @@ import type { Child } from "hono/jsx";
 
 export function Root_Layout({ children }: { children?: Child }) {
   return (
-    <html lang="fr" data-fr-scheme="system" hx-ext="debug">
+    <html lang="fr" data-fr-scheme="system" hx-ext="debug,chunked-transfer">
       <head>
         <meta charset="utf-8" />
         <meta
@@ -99,6 +99,10 @@ export function Root_Layout({ children }: { children?: Child }) {
           <script
             type="module"
             src="/assets/${env.VERSION}/node_modules/htmx.org/dist/ext/sse.js"
+          ></script>
+          <script
+            type="module"
+            src="/assets/${env.VERSION}/node_modules/htmx.ext...chunked-transfer/dist/index.js"
           ></script>
 
           <!--  -->

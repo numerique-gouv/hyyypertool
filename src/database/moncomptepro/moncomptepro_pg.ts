@@ -13,7 +13,13 @@ export const connection = new Client({
 
 //
 
-await connection.connect();
+try {
+  await connection.connect();
+} catch (error) {
+  console.error(error);
+  console.error("Could not connect to database");
+  process.exit(1);
+}
 
 //
 
@@ -22,3 +28,7 @@ export const moncomptepro_pg = drizzle(connection, {
   logger: env.DEPLOY_ENV === "preview",
 });
 export * as schema from "./drizzle/schema";
+export type User = typeof schema.users.$inferSelect;
+export type Organization = typeof schema.organizations.$inferSelect;
+export type Users_Organizations =
+  typeof schema.users_organizations.$inferSelect;

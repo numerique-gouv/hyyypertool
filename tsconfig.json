@@ -7,7 +7,6 @@
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
-      ":database": ["./src/database"],
       ":database:moncomptepro": [
         "./src/database/moncomptepro/moncomptepro_pg.ts"
       ],

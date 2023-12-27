@@ -1,8 +1,14 @@
-import { prisma } from ":database";
+//
+
+import {
+  moncomptepro_pg,
+  schema,
+  type Organization,
+} from ":database:moncomptepro";
 import { Id_Schema } from ":schema";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
-import type { organizations } from "@prisma/client";
+import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 
@@ -16,12 +22,14 @@ router.get(
   zValidator("param", Id_Schema),
   async function ({ html, req, notFound }) {
     const { id } = req.valid("param");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
 
-    const organization = await prisma.organizations.findUniqueOrThrow({
-      where: { id: organization_id },
+    const organization = await moncomptepro_pg.query.organizations.findFirst({
+      where: eq(schema.organizations.id, id),
     });
+
+    if (!organization) {
+      return notFound();
+    }
 
     return html(<Table organization={organization} />);
   },
@@ -34,15 +42,14 @@ router.put(
   async function ({ text, req, notFound }) {
     const { id } = req.valid("param");
     const { domain } = req.valid("form");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
 
-    await prisma.organizations.update({
-      data: {
-        external_authorized_email_domains: { push: domain },
-      },
-      where: { id: organization_id },
-    });
+    await moncomptepro_pg
+      .update(schema.organizations)
+      .set({
+        external_authorized_email_domains: sql`array_append(external_authorized_email_domains, ${domain})`,
+      })
+      .where(eq(schema.organizations.id, id));
+
     return text("", 200, {
       "HX-Trigger": "organisation_external_domain_updated",
     });
@@ -54,21 +61,14 @@ router.delete(
   zValidator("param", Id_Schema.extend({ domain: z.string() })),
   async function ({ text, req, notFound }) {
     const { id, domain } = req.valid("param");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
-    const organization = await prisma.organizations.findUniqueOrThrow({
-      where: { id: organization_id },
-    });
-    await prisma.organizations.update({
-      data: {
-        external_authorized_email_domains:
-          organization.external_authorized_email_domains.filter(
-            (external_authorized_email_domain) =>
-              external_authorized_email_domain !== domain,
-          ),
-      },
-      where: { id: organization_id },
-    });
+
+    await moncomptepro_pg
+      .update(schema.organizations)
+      .set({
+        external_authorized_email_domains: sql`array_remove(external_authorized_email_domains, ${domain})`,
+      })
+      .where(eq(schema.organizations.id, id));
+
     return text("", 200, {
       "HX-Trigger": "organisation_external_domain_updated",
     });
@@ -77,7 +77,7 @@ router.delete(
 
 //
 
-export function Table({ organization }: { organization: organizations }) {
+export function Table({ organization }: { organization: Organization }) {
   const { external_authorized_email_domains } = organization;
 
   return (

@@ -1,15 +1,22 @@
 //
-
-import { prisma } from ":database";
+import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { button } from ":ui/button";
+import { eq } from "drizzle-orm";
+import { ok } from "node:assert";
 
 //
 
 export async function _03({ moderation_id }: { moderation_id: number }) {
-  const moderation = await prisma.moderations.findUniqueOrThrow({
-    include: { organizations: true, users: true },
-    where: { id: moderation_id },
+  const moderation = await moncomptepro_pg.query.moderations.findFirst({
+    where: eq(schema.moderations.id, moderation_id),
+    with: {
+      organizations: true,
+      users: true,
+    },
   });
+
+  ok(moderation);
+
   const mailto_query = new URLSearchParams({
     subject: `[MonComptePro] Demande pour rejoindre ${moderation.organizations.cached_libelle}`,
     cc: `moncomptepro@beta.gouv.fr`,

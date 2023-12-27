@@ -1,10 +1,10 @@
-import { prisma } from ":database";
+import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { Id_Schema } from ":schema";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
 import type { organizations } from "@prisma/client";
+import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
-import lodash_xor from "lodash.xor";
 import { z } from "zod";
 
 const router = new Hono();
@@ -20,9 +20,18 @@ router.get(
     const organization_id = Number(id);
     if (isNaN(organization_id)) return notFound();
 
-    const organization = await prisma.organizations.findUniqueOrThrow({
-      where: { id: organization_id },
+    const organization = await moncomptepro_pg.query.organizations.findFirst({
+      where: eq(schema.organizations.id, id),
+      columns: {
+        authorized_email_domains: true,
+        id: true,
+        verified_email_domains: true,
+      },
     });
+
+    if (!organization) {
+      return notFound();
+    }
 
     return html(<Table organization={organization} />);
   },
@@ -35,17 +44,14 @@ router.put(
   async function ({ text, req, notFound }) {
     const { id } = req.valid("param");
     const { domain } = req.valid("form");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
-    const organization = await prisma.organizations.findUniqueOrThrow({
-      where: { id: organization_id },
-    });
-    await prisma.organizations.update({
-      data: {
-        authorized_email_domains: { push: domain },
-      },
-      where: { id: organization_id },
-    });
+
+    await moncomptepro_pg
+      .update(schema.organizations)
+      .set({
+        authorized_email_domains: sql`array_append(authorized_email_domains, ${domain})`,
+      })
+      .where(eq(schema.organizations.id, id));
+
     return text("", 200, {
       "HX-Trigger": "organisation_internal_domain_updated",
     });
@@ -57,19 +63,14 @@ router.delete(
   zValidator("param", Id_Schema.extend({ domain: z.string() })),
   async function ({ text, req, notFound }) {
     const { id, domain } = req.valid("param");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
-    const organization = await prisma.organizations.findUniqueOrThrow({
-      where: { id: organization_id },
-    });
-    await prisma.organizations.update({
-      data: {
-        authorized_email_domains: organization.authorized_email_domains.filter(
-          (authorized_email_domain) => authorized_email_domain !== domain,
-        ),
-      },
-      where: { id: organization_id },
-    });
+
+    await moncomptepro_pg
+      .update(schema.organizations)
+      .set({
+        authorized_email_domains: sql`array_remove(authorized_email_domains, ${domain})`,
+      })
+      .where(eq(schema.organizations.id, id));
+
     return text("OK", 200, {
       "HX-Trigger": "organisation_internal_domain_updated",
     });
@@ -77,24 +78,32 @@ router.delete(
 );
 
 router.patch(
-  "/:domain/verified",
+  "/:domain",
   zValidator("param", Id_Schema.extend({ domain: z.string() })),
+  zValidator(
+    "form",
+    z.object({
+      // NOTE(douglasduteil): behold the false positive in z.coerce.boolean
+      // \see https://github.com/colinhacks/zod/issues/1630
+      is_verified: z
+        .string()
+        .pipe(z.enum(["true", "false"]).transform((v) => v === "true"))
+        .optional(),
+    }),
+  ),
   async function ({ text, req, notFound }) {
-    const { id, domain } = req.valid("param");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
-    const organization = await prisma.organizations.findUniqueOrThrow({
-      where: { id: organization_id },
-    });
-    await prisma.organizations.update({
-      data: {
-        verified_email_domains: lodash_xor(
-          organization.verified_email_domains,
-          [domain],
-        ),
-      },
-      where: { id: organization_id },
-    });
+    const { domain, id } = req.valid("param");
+    const { is_verified } = req.valid("form");
+
+    await moncomptepro_pg
+      .update(schema.organizations)
+      .set({
+        verified_email_domains: is_verified
+          ? sql`array_append(verified_email_domains, ${domain})`
+          : sql`array_remove(verified_email_domains, ${domain})`,
+      })
+      .where(eq(schema.organizations.id, id));
+
     return text("OK", 200, {
       "HX-Trigger": "organisation_internal_domain_updated",
     });
@@ -103,7 +112,14 @@ router.patch(
 
 //
 
-export function Table({ organization }: { organization: organizations }) {
+export function Table({
+  organization,
+}: {
+  organization: Pick<
+    organizations,
+    "authorized_email_domains" | "id" | "verified_email_domains"
+  >;
+}) {
   const { authorized_email_domains, verified_email_domains } = organization;
   const domain_and_state = authorized_email_domains.map(
     (domain) => [domain, verified_email_domains.includes(domain)] as const,
@@ -135,7 +151,10 @@ export function Table({ organization }: { organization: organizations }) {
                 </button>
                 <button
                   class={button()}
-                  hx-patch={`/legacy/organizations/${organization.id}/domains/internal/${domain}/verified`}
+                  hx-patch={`/legacy/organizations/${organization.id}/domains/internal/${domain}`}
+                  hx-vals={JSON.stringify({
+                    is_verified: !is_verified,
+                  })}
                   hx-swap="none"
                 >
                   🔄 vérifié

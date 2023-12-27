@@ -32,7 +32,10 @@ export default new Hono<Session_Context>()
     function ({ render, req, get, redirect }) {
       const { id } = req.valid("query");
       const session = get("session");
-      const userinfo = session.get("userinfo");
+      const userinfo = session.get("userinfo") || {
+        usual_name: "",
+        given_name: "",
+      };
       if (!userinfo) {
         return redirect("/");
       }

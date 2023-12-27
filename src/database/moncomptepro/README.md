@@ -29,6 +29,7 @@ $ bun x prettier -w src/database
 $ bun x drizzle-kit studio --config src/database/moncomptepro/drizzle.config.ts
 # Confirm that the database is explorable :)
 
+# [...]
 
 # Fixing introspect timestamp("xxxxxx") with no {mode: string}
 # Fixing explicit one to one relation on moderation table
