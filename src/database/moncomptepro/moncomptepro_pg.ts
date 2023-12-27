@@ -30,5 +30,6 @@ export const moncomptepro_pg = drizzle(connection, {
 export * as schema from "./drizzle/schema";
 export type User = typeof schema.users.$inferSelect;
 export type Organization = typeof schema.organizations.$inferSelect;
+export type Moderation = typeof schema.moderations.$inferSelect;
 export type Users_Organizations =
   typeof schema.users_organizations.$inferSelect;

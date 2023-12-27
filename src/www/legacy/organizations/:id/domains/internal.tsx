@@ -1,8 +1,10 @@
+//
+
+import type { Organization } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { Id_Schema } from ":schema";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
-import type { organizations } from "@prisma/client";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
@@ -17,8 +19,6 @@ router.get(
   zValidator("param", Id_Schema),
   async function ({ html, req, notFound }) {
     const { id } = req.valid("param");
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
 
     const organization = await moncomptepro_pg.query.organizations.findFirst({
       where: eq(schema.organizations.id, id),
@@ -116,7 +116,7 @@ export function Table({
   organization,
 }: {
   organization: Pick<
-    organizations,
+    Organization,
     "authorized_email_domains" | "id" | "verified_email_domains"
   >;
 }) {

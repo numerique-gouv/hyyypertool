@@ -10,9 +10,6 @@ node_modules/
 public/tailwind/
 public/client/
 
-# Generated types
-prisma/client/
-
 # Typeschek
 tsconfig.tsbuildinfo
 

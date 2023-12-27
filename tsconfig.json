@@ -22,5 +22,5 @@
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["package.json", "prisma/client", "src"]
+  "include": ["package.json", "src"]
 }
