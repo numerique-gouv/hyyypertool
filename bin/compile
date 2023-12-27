@@ -103,10 +103,6 @@ header "Installing production dependencies"
 rm -rf node_modules
 bun install --production
 
-# NOTE(douglasduteil): explicit prisma generate
-# Ensure that the generated client is not destroy with node_modules manupulations.
-bun x prisma generate
-
 #
 
 bun pm cache rm
