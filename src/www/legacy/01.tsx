@@ -1,8 +1,16 @@
 //
 
-import { prisma } from ":database";
+import type { Moderation, Organization, User } from ":database:moncomptepro";
+import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import type { MCP_Moderation } from ":moncomptepro";
-import type { Prisma, moderations, organizations, users } from "@prisma/client";
+import {
+  and,
+  asc,
+  count as drizzle_count,
+  eq,
+  ilike,
+  isNull,
+} from "drizzle-orm";
 import { html } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
 import { Suspense } from "hono/jsx/streaming";
@@ -63,22 +71,36 @@ export function _01() {
 export async function Table() {
   const { active_id, page, search, take } = useContext(PageContext_01);
 
-  const where: Prisma.moderationsWhereInput = {
-    moderated_at: null,
-    organizations: { siret: { contains: search.siret } },
-    users: { email: { contains: search.email } },
-  };
+  const where = and(
+    ilike(schema.organizations.siret, `%${search.siret}%`),
+    ilike(schema.users.email, `%${search.email}%`),
+    isNull(schema.moderations.moderated_at),
+  );
+  const { moderations, count } = await moncomptepro_pg.transaction(async () => {
+    const moderations = await moncomptepro_pg
+      .select()
+      .from(schema.moderations)
+      .innerJoin(schema.users, eq(schema.moderations.user_id, schema.users.id))
+      .innerJoin(
+        schema.organizations,
+        eq(schema.moderations.organization_id, schema.organizations.id),
+      )
+      .where(where)
+      .orderBy(asc(schema.moderations.created_at))
+      .limit(take)
+      .offset(page * take);
+    const [{ value: count }] = await moncomptepro_pg
+      .select({ value: drizzle_count() })
+      .from(schema.moderations)
+      .innerJoin(schema.users, eq(schema.moderations.user_id, schema.users.id))
+      .innerJoin(
+        schema.organizations,
+        eq(schema.moderations.organization_id, schema.organizations.id),
+      )
+      .where(where);
+    return { moderations, count };
+  });
 
-  const [moderations, count] = await prisma.$transaction([
-    prisma.moderations.findMany({
-      include: { organizations: true, users: true },
-      orderBy: { created_at: "asc" },
-      skip: page * take,
-      take,
-      where,
-    }),
-    prisma.moderations.count({ where }),
-  ]);
   return (
     <table class="!table">
       <thead>
@@ -107,12 +129,12 @@ export async function Table() {
             }
           </style>
         `}
-        {moderations.map(function (moderation) {
+        {moderations.map(function ({ moderations, users, organizations }) {
           return (
             <Row
-              moderation={moderation}
+              moderation={{ ...moderations, users, organizations }}
               variants={{
-                is_active: active_id === Number(moderation.id),
+                is_active: active_id === moderations.id,
               }}
             />
           );
@@ -148,9 +170,9 @@ function Row({
   moderation,
   variants,
 }: {
-  moderation: moderations & {
-    users: users;
-    organizations: organizations;
+  moderation: Moderation & {
+    users: User;
+    organizations: Organization;
   };
   variants: VariantProps<typeof row>;
 }) {

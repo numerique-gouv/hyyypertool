@@ -7,7 +7,9 @@
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
-      ":database": ["./src/database"],
+      ":database:moncomptepro": [
+        "./src/database/moncomptepro/moncomptepro_pg.ts"
+      ],
       ":env": ["./src/env"],
       ":layout/*": ["./src/layout/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
@@ -20,5 +22,5 @@
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["package.json", "prisma/client", "src"]
+  "include": ["package.json", "src"]
 }

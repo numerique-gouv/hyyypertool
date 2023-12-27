@@ -32,7 +32,10 @@ export default new Hono<Session_Context>()
     function ({ render, req, get, redirect }) {
       const { id } = req.valid("query");
       const session = get("session");
-      const userinfo = session.get("userinfo");
+      const userinfo = session.get("userinfo") || {
+        usual_name: "",
+        given_name: "",
+      };
       if (!userinfo) {
         return redirect("/");
       }
@@ -72,17 +75,15 @@ export default new Hono<Session_Context>()
   .get(
     "/_/moderation/:id",
     zValidator("param", Id_Schema),
-    async ({ body, req, notFound }) => {
+    async ({ body, req }) => {
       const { id } = req.valid("param");
-      const moderation_id = Number(id);
-      if (isNaN(moderation_id)) return notFound();
 
       return body(
         renderToReadableStream(
           <>
-            <_02 moderation_id={moderation_id} />
-            <_03 moderation_id={Number(id)} />
-            <_04 moderation_id={Number(id)} />
+            <_02 moderation_id={id} />
+            <_03 moderation_id={id} />
+            <_04 moderation_id={id} />
           </>,
         ),
       );

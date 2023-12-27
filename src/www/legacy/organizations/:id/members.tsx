@@ -1,8 +1,15 @@
-import { prisma } from ":database";
-import type { MCP_UserOrganizationLink } from ":moncomptepro";
+//
+
+import {
+  moncomptepro_pg,
+  schema,
+  type User,
+  type Users_Organizations,
+} from ":database:moncomptepro";
+import { type MCP_UserOrganizationLink } from ":moncomptepro";
 import { Id_Schema, Pagination_Schema } from ":schema";
 import { zValidator } from "@hono/zod-validator";
-import type { Prisma, users } from "@prisma/client";
+import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -16,6 +23,16 @@ const Table_Context = createContext({
   count: 0,
 });
 
+type Verification_Type = MCP_UserOrganizationLink["verification_type"];
+
+const Verification_Type_Schema = z.enum([
+  "code_sent_to_official_contact_email",
+  "in_liste_dirigeants_rna",
+  "official_contact_domain",
+  "official_contact_email",
+  "verified_email_domain",
+]);
+
 //
 
 const router = new Hono();
@@ -28,30 +45,44 @@ router.get(
   zValidator("param", Id_Schema),
   zValidator("query", Pagination_Schema),
   async function ({ html, req, notFound }) {
-    const { id } = req.valid("param");
+    const { id: organization_id } = req.valid("param");
     const { page } = req.valid("query");
     const take = 5;
-    const organization_id = Number(id);
-    if (isNaN(organization_id)) return notFound();
 
-    const where: Prisma.usersWhereInput = {
-      organization_members: { some: { organization_id } },
-    };
+    const where = and(
+      eq(schema.users_organizations.organization_id, organization_id),
+    );
 
-    const [users, count] = await prisma.$transaction([
-      prisma.users.findMany({
-        include: { organization_members: { select: { is_external: true } } },
-        skip: page * take,
-        take,
-        orderBy: { id: "asc" },
-        where,
-      }),
-      prisma.users.count({ where }),
-    ]);
+    const { users, count } = await moncomptepro_pg.transaction(async () => {
+      const users = await moncomptepro_pg
+        .select()
+        .from(schema.users)
+        .innerJoin(
+          schema.users_organizations,
+          eq(schema.users.id, schema.users_organizations.user_id),
+        )
+        .where(where)
+        .orderBy(asc(schema.users.id))
+        .limit(take)
+        .offset(page * take);
+      const [{ value: count }] = await moncomptepro_pg
+        .select({ value: drizzle_count() })
+        .from(schema.users)
+        .innerJoin(
+          schema.users_organizations,
+          eq(schema.users.id, schema.users_organizations.user_id),
+        )
+        .where(where);
+
+      return { users, count };
+    });
+
     const users_with_external = users.map((user) => ({
-      ...user,
-      is_external: Boolean(user.organization_members.at(0)?.is_external),
+      ...user.users,
+      is_external: user.users_organizations.is_external,
+      verification_type: user.users_organizations.verification_type,
     }));
+
     return html(
       <Table_Context.Provider value={{ page, take, count }}>
         <Table organization_id={organization_id} users={users_with_external} />
@@ -61,7 +92,50 @@ router.get(
 );
 
 router.patch(
-  "/:user_id/verified",
+  "/:user_id",
+  zValidator(
+    "param",
+    Id_Schema.extend({
+      user_id: z.string().pipe(z.coerce.number()),
+    }),
+  ),
+  zValidator(
+    "form",
+    z.object({
+      verification_type: Verification_Type_Schema.optional(),
+      // NOTE(douglasduteil): behold the false positive in z.coerce.boolean
+      // \see https://github.com/colinhacks/zod/issues/1630
+      is_external: z
+        .string()
+        .pipe(z.enum(["true", "false"]).transform((v) => v === "true"))
+        .optional(),
+    }),
+  ),
+  async function ({ text, req }) {
+    const { id: organization_id, user_id } = req.valid("param");
+    const { verification_type, is_external } = req.valid("form");
+
+    await moncomptepro_pg
+      .update(schema.users_organizations)
+      .set({
+        is_external,
+        verification_type,
+      })
+      .where(
+        and(
+          eq(schema.users_organizations.organization_id, organization_id),
+          eq(schema.users_organizations.user_id, user_id),
+        ),
+      );
+
+    return text("OK", 200, {
+      "HX-Trigger": "users_organizations_updated",
+    });
+  },
+);
+
+router.delete(
+  "/:user_id",
   zValidator(
     "param",
     Id_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
@@ -69,28 +143,32 @@ router.patch(
   async function ({ text, req }) {
     const { id: organization_id, user_id } = req.valid("param");
 
-    const { is_external } = await prisma.users_organizations.findUniqueOrThrow({
-      where: { user_id_organization_id: { organization_id, user_id } },
-    });
-    await prisma.users_organizations.update({
-      data: {
-        is_external: !is_external,
-      },
-      where: { user_id_organization_id: { organization_id, user_id } },
-    });
+    await moncomptepro_pg
+      .delete(schema.users_organizations)
+      .where(
+        and(
+          eq(schema.users_organizations.organization_id, organization_id),
+          eq(schema.users_organizations.user_id, user_id),
+        ),
+      );
+
     return text("OK", 200, {
       "HX-Trigger": "users_organizations_updated",
     });
   },
 );
+
 //
+
+type RowData = User &
+  Pick<Users_Organizations, "is_external" | "verification_type">;
 
 function Table({
   organization_id,
   users,
 }: {
   organization_id: number;
-  users: Array<users & { is_external: boolean }>;
+  users: Array<RowData>;
 }) {
   const { page, take, count } = useContext(Table_Context);
 
@@ -112,7 +190,7 @@ function Table({
           {users.map((user) => (
             <>
               <Row user={user} />
-              <Actions email={user.email} />
+              <Actions user={user} organization_id={organization_id} />
             </>
           ))}
         </tr>
@@ -146,12 +224,11 @@ function Table({
 function Row({
   user,
   variants,
-  verification_type,
 }: {
-  user: users & { is_external: boolean };
-  verification_type?: MCP_UserOrganizationLink["verification_type"];
+  user: RowData;
   variants?: VariantProps<typeof row>;
 }) {
+  const verification_type = user.verification_type as Verification_Type;
   return (
     <tr class={row(variants)}>
       <td>{user.given_name}</td>
@@ -164,15 +241,68 @@ function Row({
   );
 }
 
-function Actions({ email }: { email: string }) {
+function Actions({
+  user,
+  organization_id,
+}: {
+  user: RowData;
+  organization_id: number;
+}) {
+  const { email, id: user_id, is_external } = user;
+
   return (
     <tr>
       <td colspan={6}>
-        <button class="fr-btn">🚪🚶retirer de l'orga</button>
-        <button class="fr-btn">🔄 vérif: liste dirigeants</button>
-        <button class="fr-btn">🔄 vérif: domaine email</button>
-        <button class="fr-btn">🔄 vérif: mail officiel</button>
-        <button class="fr-btn">🔄 interne/externe</button>
+        <button
+          class="fr-btn"
+          hx-delete={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-swap="none"
+        >
+          🚪🚶retirer de l'orga
+        </button>
+        <button
+          class="fr-btn"
+          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-swap="none"
+          hx-vals={JSON.stringify({
+            verification_type:
+              Verification_Type_Schema.Enum.in_liste_dirigeants_rna,
+          })}
+        >
+          🔄 vérif: liste dirigeants
+        </button>
+        <button
+          class="fr-btn"
+          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-swap="none"
+          hx-vals={JSON.stringify({
+            verification_type:
+              Verification_Type_Schema.Enum.verified_email_domain,
+          })}
+        >
+          🔄 vérif: domaine email
+        </button>
+        <button
+          class="fr-btn"
+          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-swap="none"
+          hx-vals={JSON.stringify({
+            verification_type:
+              Verification_Type_Schema.Enum.official_contact_email,
+          })}
+        >
+          🔄 vérif: mail officiel
+        </button>
+        <button
+          class="fr-btn"
+          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-swap="none"
+          hx-vals={JSON.stringify({
+            is_external: !is_external,
+          })}
+        >
+          🔄 interne/externe
+        </button>
         <button
           _="
          on click
