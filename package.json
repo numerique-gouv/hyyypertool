@@ -4,9 +4,6 @@
   "private": true,
   "type": "module",
   "module": "src/bootstrap.ts",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:**",
     "build:tailwind": "bun x tailwindcss -i ./src/assets/tailwind.css -o ./public/assets/tailwind.css",
