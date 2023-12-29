@@ -5,7 +5,7 @@ import {
   hyyyyyypertool_session,
   type Session_Context,
 } from ":common/session.ts";
-import { app_hc } from ":hc";
+import { api_ref } from ":paths";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { generators } from "openid-client";
@@ -76,7 +76,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
       session.set("userinfo", userinfo);
       session.set("idtoken", tokenSet.id_token);
 
-      return redirect("/legacy");
+      return redirect(api_ref("/legacy", {}));
     },
   )
   .get("/logout", async ({ req, get, redirect }) => {
@@ -103,9 +103,10 @@ export type AuthRouter_Schema = typeof router;
 
 function get_redirect_uri(url: string) {
   const _url = new URL(url);
-  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}/${
-    app_hc.auth.login.callback.$url().pathname
-  }`;
+  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}${api_ref(
+    "/auth/login/callback",
+    {},
+  )}`;
   return redirect_uri;
 }
 

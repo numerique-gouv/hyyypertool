@@ -6,6 +6,9 @@ import { path, type Params } from "static-path";
 
 type KnownPath =
   | "/"
+  | "/auth/login"
+  | "/auth/login/callback"
+  | "/auth/logout"
   | "/legacy"
   | "/legacy/duplicate_warning"
   | "/legacy/leaders"

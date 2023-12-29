@@ -74,8 +74,9 @@ export function Root_Layout({ children }: { children?: Child }) {
         </script>
 
         <title>
-          H${Array.from({ length: Math.max(3, Math.random() * 5) }).fill("y")}
-          pertool
+          H${Array.from({ length: Math.max(3, Math.random() * 5) })
+            .fill("y")
+            .join("") + "pertool"}
         </title>
       </head>
       <body class="flex min-h-screen flex-col" hx-ext="include-vals">
