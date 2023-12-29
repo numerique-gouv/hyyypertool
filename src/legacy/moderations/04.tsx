@@ -26,3 +26,25 @@ export async function _04({ moderation_id }: { moderation_id: number }) {
     </div>
   );
 }
+
+//
+// En attente - avec parainale
+// Refusé
+//   - Merci de ...
+// Validé
+//
+
+//
+// Enquete
+//
+//
+
+//
+// Page 1 :
+// Aller vers la gestion des comptes après recheche
+//
+
+//
+// Page 2 :
+// Rajouter des espaces entre les boutons
+//

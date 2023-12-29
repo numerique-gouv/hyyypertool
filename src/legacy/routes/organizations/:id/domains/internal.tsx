@@ -171,6 +171,7 @@ export function Table({
               class="grid grid-cols-[1fr_min-content]"
               hx-put={`/legacy/organizations/${organization.id}/domains/internal`}
             >
+              {/* TODO(douglasduteil): Should auto complete with the current domain email */}
               <input class="fr-input" type="text" name="domain" />
               <button class="fr-btn" type="submit">
                 Add

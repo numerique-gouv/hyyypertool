@@ -55,7 +55,7 @@ export async function _02() {
       </h2>
       <FirstToolBox
         email={moderation.users.email}
-        given_name={moderation.users.given_name}
+        given_name={moderation.users.given_name ?? undefined}
         domain={domain}
         organization={moderation.organizations}
       />
@@ -186,7 +186,7 @@ function FirstToolBox({
 }: {
   email: string;
   domain: string;
-  given_name: string;
+  given_name: string | undefined;
   organization: Organization;
 }) {
   return (
