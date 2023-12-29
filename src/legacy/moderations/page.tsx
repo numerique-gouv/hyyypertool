@@ -9,7 +9,7 @@ export function ModerationPage({
 }: {
   active_id: number | undefined;
 }) {
-  if (!active_id) return null;
+  if (!active_id) return <></>;
   return (
     <section id="moderation">
       <_02 moderation_id={active_id} />
