@@ -103,21 +103,6 @@ export function Table({ organization }: { organization: Organization }) {
                 >
                   🗑️ Supprimer
                 </button>
-                <button
-                  _="
-                  on click
-                    set text to @data-domain
-                    js(me, text)
-                      if ('clipboard' in window.navigator) {
-                        navigator.clipboard.writeText(text)
-                      }
-                    end
-                  "
-                  class={button()}
-                  data-domain={domain}
-                >
-                  📋 copier le domaine
-                </button>
               </td>
             </tr>
           </>

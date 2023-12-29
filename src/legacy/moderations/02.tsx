@@ -7,23 +7,16 @@ import type { MCP_Moderation } from ":moncomptepro";
 import { api_ref } from ":paths";
 import { button } from ":ui/button/button.ts";
 import { and, count, eq } from "drizzle-orm";
+import { useContext } from "hono/jsx";
 import lodash_sortby from "lodash.sortby";
-import { ok } from "node:assert";
 import queryString from "query-string";
 import { match } from "ts-pattern";
+import { ModerationPage_Context } from "./page";
 
 //
 
-export async function _02({ moderation_id }: { moderation_id: number }) {
-  const moderation = await moncomptepro_pg.query.moderations.findFirst({
-    where: eq(schema.moderations.id, moderation_id),
-    with: {
-      organizations: true,
-      users: true,
-    },
-  });
-
-  ok(moderation);
+export async function _02() {
+  const { moderation } = useContext(ModerationPage_Context);
 
   const domain = moderation.users.email.split("@")[1];
 
@@ -60,75 +53,14 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
         </span>{" "}
         « <span>{moderation.organizations.cached_libelle}</span> »
       </h2>
-      <div>
-        <a
-          class={button()}
-          href={datapass_from_email(moderation.users.email)}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <span>
-            Voir les demandes DataPass déposées par{" "}
-            {moderation.users.given_name}
-          </span>
-        </a>
-        <br />
-        <button
-          _="
-          on click
-            set text to @data-email
-            js(me, text)
-              if ('clipboard' in window.navigator) {
-                navigator.clipboard.writeText(text)
-              }
-            end"
-          class={button()}
-          data-email={moderation.users.email}
-        >
-          📋 Copier l'email
-        </button>
-
-        <a
-          href={google_search(moderation.users.email)}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          🔍 Rechercher l'email
-        </a>
-
-        <button
-          _="
-          on click
-            set text to @data-email
-            js(me, text)
-              if ('clipboard' in window.navigator) {
-                navigator.clipboard.writeText(text)
-              }
-            end"
-          class={button()}
-          data-email={domain}
-        >
-          📋 Copier le domaine
-        </button>
-
-        <a
-          href={google_search(domain)}
-          class={button()}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          🔍 Rechercher le domaine
-        </a>
-
-        <Search_Domain
-          domain={domain}
-          organization={moderation.organizations}
-        />
-
-        <div class="mt-5 block">
-          <About_Organisation moderation={moderation} />
-        </div>
+      <FirstToolBox
+        email={moderation.users.email}
+        given_name={moderation.users.given_name}
+        domain={domain}
+        organization={moderation.organizations}
+      />
+      <div class="mt-5 block">
+        <About_Organisation moderation={moderation} />
       </div>
       <div>
         <div class="my-3">
@@ -173,6 +105,27 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
         </li>
         <li>
           nombre de connection : <b>{moderation.users.sign_in_count}</b>
+        </li>
+        <li>
+          Dernière connexion :{" "}
+          <b>
+            {moderation.users.last_sign_in_at?.toLocaleDateString()}{" "}
+            {moderation.users.last_sign_in_at?.toLocaleTimeString()}
+          </b>
+        </li>
+        <li>
+          Creation de compte :{" "}
+          <b>
+            {moderation.users.created_at.toLocaleDateString()}{" "}
+            {moderation.users.created_at.toLocaleTimeString()}
+          </b>
+        </li>
+        <li>
+          Demande de création :{" "}
+          <b>
+            {moderation.created_at.toLocaleDateString()}{" "}
+            {moderation.users.created_at.toLocaleTimeString()}
+          </b>
         </li>
       </ul>
       <b>{moderation.users.given_name}</b> est enregistré(e) dans les
@@ -225,6 +178,76 @@ export async function _02({ moderation_id }: { moderation_id: number }) {
   );
 }
 
+function FirstToolBox({
+  email,
+  domain,
+  given_name,
+  organization,
+}: {
+  email: string;
+  domain: string;
+  given_name: string;
+  organization: Organization;
+}) {
+  return (
+    <div class="grid  grid-cols-2 gap-1 ">
+      <a
+        class={button()}
+        href={datapass_from_email(email)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <span>Voir les demandes DataPass déposées par {given_name}</span>
+      </a>
+      <div></div>
+      <button
+        _="
+          on click
+            set text to @data-email
+            js(me, text)
+              if ('clipboard' in window.navigator) {
+                navigator.clipboard.writeText(text)
+              }
+            end"
+        class={button()}
+        data-email={email}
+      >
+        📋 Copier l'email
+      </button>{" "}
+      <a
+        href={google_search(email)}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        🔍 Rechercher l'email
+      </a>
+      <button
+        _="
+          on click
+            set text to @data-email
+            js(me, text)
+              if ('clipboard' in window.navigator) {
+                navigator.clipboard.writeText(text)
+              }
+            end"
+        class={button()}
+        data-email={domain}
+      >
+        📋 Copier le domaine
+      </button>
+      <a
+        href={google_search(domain)}
+        class={button()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        🔍 Rechercher le domaine
+      </a>
+      <Search_Domain domain={domain} organization={organization} />
+    </div>
+  );
+}
 export async function Edit_Domain({
   organization,
 }: {

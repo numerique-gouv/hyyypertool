@@ -49,6 +49,7 @@ router.put(
       .update(schema.organizations)
       .set({
         authorized_email_domains: sql`array_append(authorized_email_domains, ${domain})`,
+        verified_email_domains: sql`array_append(authorized_email_domains, ${domain})`,
       })
       .where(eq(schema.organizations.id, id));
 
@@ -68,6 +69,7 @@ router.delete(
       .update(schema.organizations)
       .set({
         authorized_email_domains: sql`array_remove(authorized_email_domains, ${domain})`,
+        verified_email_domains: sql`array_remove(verified_email_domains, ${domain})`,
       })
       .where(eq(schema.organizations.id, id));
 
@@ -158,21 +160,6 @@ export function Table({
                   hx-swap="none"
                 >
                   🔄 vérifié
-                </button>
-                <button
-                  _="
-                  on click
-                    set text to @data-domain
-                    js(me, text)
-                      if ('clipboard' in window.navigator) {
-                        navigator.clipboard.writeText(text)
-                      }
-                    end
-                  "
-                  class={button()}
-                  data-domain={domain}
-                >
-                  📋 copier le domaine
                 </button>
               </td>
             </tr>
