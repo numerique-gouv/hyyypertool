@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:**",
-    "build:tailwind": "bun x tailwindcss -i ./src/www/styles.css -o ./public/tailwind/styles.css",
+    "build:tailwind": "bun x tailwindcss -i ./src/assets/tailwind.css -o ./public/assets/tailwind.css",
     "dev": "bun --hot src/bootstrap.ts",
     "dev:inspect-brk": "bun --hot --inspect-brk src/bootstrap.ts",
     "dev:tailwind": "bun run build:tailwind --watch",
@@ -47,8 +47,10 @@
     "openid-client": "^5.6.2",
     "pg": "^8.11.3",
     "query-string": "8.1.0",
+    "static-path": "^0.0.4",
     "tailwind-variants": "0.1.19",
     "ts-pattern": "5.0.6",
+    "youch": "^3.3.3",
     "zod": "3.22.4"
   },
   "devDependencies": {

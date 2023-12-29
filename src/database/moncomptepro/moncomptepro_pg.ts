@@ -1,6 +1,6 @@
 //
 
-import env from ":env";
+import env from ":common/env.ts";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Client } from "pg";
 import * as schema from "./drizzle/schema";

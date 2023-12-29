@@ -1,20 +1,22 @@
 {
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
+      ":assets/*": ["./src/assets/*"],
+      ":auth/*": ["./src/auth/*"],
       ":database:moncomptepro": [
         "./src/database/moncomptepro/moncomptepro_pg.ts"
       ],
-      ":env": ["./src/env"],
-      ":layout/*": ["./src/layout/*"],
+      ":common/*": ["./src/common/*"],
+      ":hc": ["./src/client"],
+      ":legacy/*": ["./src/legacy/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":package.json": ["./package.json"],
-      ":schema": ["./src/schema"],
+      ":paths": ["./src/paths.ts"],
       ":ui/*": ["./src/ui/*"],
       ":www": ["./src/www.router"]
     },
