@@ -8,6 +8,7 @@ import { Hono } from "hono";
 //
 
 export const readyz = new Hono();
+
 readyz.get("/", ({ text }) => text(`readyz check passed`));
 
 readyz.get("/drizzle/moncomptepro", async ({ text }) => {

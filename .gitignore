@@ -7,8 +7,7 @@ node_modules/
 .env.*
 
 # Generated style
-public/tailwind/
-public/client/
+public/assets
 
 # Typeschek
 tsconfig.tsbuildinfo

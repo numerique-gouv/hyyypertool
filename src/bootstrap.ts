@@ -1,38 +1,49 @@
 //
 
-import env from ":env";
-import { www } from ":www";
+import env from ":common/env";
+import legacy from ":legacy/route";
 import { Hono } from "hono";
 import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
+import Youch from "youch";
+import asserts_router from "./assets/route";
+import auth_router from "./auth/route";
 import { readyz } from "./health/readyz";
+import { proxy } from "./proxy/route";
+import welcome_router from "./welcome/route";
 
 //
 
-const app = new Hono();
+const app = new Hono()
+  .use("*", logger())
 
-app.use("*", logger());
-// import { compress } from 'hono/compress'
-// app.use("*", compress());  `CompressionStream` is not yet supported in bun.
-app.get("/healthz", ({ text }) => text(`healthz check passed`));
-app.get("/livez", ({ text }) => text(`livez check passed`));
-app.route("/readyz", readyz);
-app.route("/", www);
-app.get("/proxy/localhost:3000/*", ({ req, redirect }) => {
-  const uri = new URL(
-    req.url.replace("/proxy/localhost:3000", ""),
-    "http://localhost:3000/",
-  );
-  uri.hostname = "localhost";
-  uri.port = "3000";
-  return redirect(uri.toString());
-});
+  // import { compress } from 'hono/compress'
+  // app.use("*", compress());  `CompressionStream` is not yet supported in bun.
+
+  .get("/healthz", ({ text }) => text(`healthz check passed`))
+  .get("/livez", ({ text }) => text(`livez check passed`))
+  .route("/readyz", readyz)
+  .route("", asserts_router)
+  .route("", auth_router)
+  .route("", welcome_router)
+  .route("", legacy)
+  .route("", proxy)
+  .onError(async (error, { html, req }) => {
+    const youch = new Youch(error, req.raw);
+    return html(await youch.toHTML());
+  });
+
+//
 
 if (env.DEPLOY_ENV === "preview") {
   showRoutes(app);
 }
+
 console.debug("- NODE_ENV " + env.NODE_ENV);
 console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
 console.debug("- VERSION " + env.VERSION);
 
+//
+
+export type Router = typeof app;
 export default app;
