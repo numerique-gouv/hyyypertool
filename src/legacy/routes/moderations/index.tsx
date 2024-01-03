@@ -1,7 +1,12 @@
 //
 
 import { Id_Schema } from ":common/schema";
-import { PageContext_01, Table as Table_01 } from ":legacy/01";
+import {
+  PageContext_01,
+  SEARCH_EMAIL_INPUT_ID,
+  SEARCH_SIRET_INPUT_ID,
+  Table as Table_01,
+} from ":legacy/01";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";
@@ -18,8 +23,8 @@ export default new Hono().get(
           .string()
           .default("0")
           .pipe(z.coerce.number().int().nonnegative()),
-        "search-email": z.string().default(""),
-        "search-siret": z.string().default(""),
+        [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
+        [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
       })
       .merge(Id_Schema.partial()),
   ),
@@ -27,8 +32,8 @@ export default new Hono().get(
     const {
       id,
       page,
-      "search-email": search_email,
-      "search-siret": search_siret,
+      [SEARCH_EMAIL_INPUT_ID]: search_email,
+      [SEARCH_SIRET_INPUT_ID]: search_siret,
     } = req.valid("query");
 
     return html(

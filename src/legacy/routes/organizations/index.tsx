@@ -2,7 +2,7 @@
 
 import { Id_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
-import { LegacyPage } from ":legacy/page";
+import OrganizationPage from ":legacy/organizations/page";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
@@ -17,8 +17,6 @@ export default new Hono<Session_Context>()
     "/",
     zValidator("query", Id_Schema.partial().default({})),
     function ({ render, req, get, redirect }) {
-      const { id } = req.valid("query");
-
       const session = get("session");
       const userinfo = session.get("userinfo");
 
@@ -27,6 +25,7 @@ export default new Hono<Session_Context>()
       }
 
       const username = userinfo_to_username(userinfo);
-      return render(<LegacyPage active_id={id} />, { username });
+
+      return render(<OrganizationPage />, { username });
     },
   );

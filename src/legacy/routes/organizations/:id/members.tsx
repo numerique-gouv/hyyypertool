@@ -9,7 +9,7 @@ import {
 } from ":database:moncomptepro";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
 import { zValidator } from "@hono/zod-validator";
-import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
+import { and, desc, count as drizzle_count, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -62,7 +62,7 @@ router.get(
           eq(schema.users.id, schema.users_organizations.user_id),
         )
         .where(where)
-        .orderBy(asc(schema.users.id))
+        .orderBy(desc(schema.users.created_at))
         .limit(take)
         .offset(page * take);
       const [{ value: count }] = await moncomptepro_pg

@@ -1,5 +1,7 @@
 //
 
+import type { AgentConnect_UserInfo } from ":common/session";
+import { api_ref } from ":paths";
 import type { Child } from "hono/jsx";
 import { Root_Layout } from "./root";
 
@@ -39,12 +41,25 @@ export function Main_Layout({
             </div>
             {/*  */}
           </div>
+
+          <div class="fr-header__menu fr-modal">
+            <div class="fr-container">
+              <Nav />
+            </div>
+          </div>
         </header>
         <div class="relative flex flex-1 flex-col">{children}</div>
       </div>
     </Root_Layout>
   );
 }
+
+export function userinfo_to_username(userinfo: AgentConnect_UserInfo) {
+  const { given_name, usual_name } = userinfo;
+  return `${given_name} ${usual_name}`;
+}
+
+//
 
 function Brand() {
   return (
@@ -84,5 +99,42 @@ function Tools({ username }: { username?: string }) {
         </ul>
       </div>
     </div>
+  );
+}
+
+function Nav() {
+  return (
+    <nav
+      class="fr-nav"
+      id="navigation-494"
+      role="navigation"
+      aria-label="Menu principal"
+    >
+      <ul class="fr-nav__list">
+        <li class="fr-nav__item">
+          <a class="fr-nav__link" href={api_ref("/legacy", {})} target="_self">
+            Legacy
+          </a>
+        </li>
+        <li class="fr-nav__item">
+          <a
+            class="fr-nav__link"
+            href={api_ref("/legacy/users", {})}
+            target="_self"
+          >
+            Utilisateurs
+          </a>
+        </li>
+        <li class="fr-nav__item">
+          <a
+            class="fr-nav__link"
+            href={api_ref("/legacy/organizations", {})}
+            target="_self"
+          >
+            Organisations
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 }

@@ -14,11 +14,14 @@ type KnownPath =
   | "/legacy/leaders"
   | "/legacy/moderations"
   | "/legacy/moderations/:id"
+  | "/legacy/organizations"
   | "/legacy/organizations/:id/domains/external"
   | "/legacy/organizations/:id/domains/external/:domain"
   | "/legacy/organizations/:id/domains/internal"
   | "/legacy/organizations/:id/domains/internal/:domain"
   | "/legacy/organizations/:id/members"
+  | "/legacy/users"
+  | "/legacy/users/:id"
   | "/legacy/users/:id/organizations";
 
 //

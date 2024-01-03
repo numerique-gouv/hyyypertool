@@ -1,12 +1,13 @@
 //
 
-import { Id_Schema } from ":common/schema";
+import { Id_Schema, Pagination_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
-import { LegacyPage } from ":legacy/page";
+import UsersPage, { SEARCH_EMAIL_INPUT_ID } from ":legacy/users/page";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
+import { z } from "zod";
 
 //
 
@@ -15,18 +16,24 @@ export default new Hono<Session_Context>()
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
-    zValidator("query", Id_Schema.partial().default({})),
+    zValidator(
+      "query",
+      Pagination_Schema.extend({
+        [SEARCH_EMAIL_INPUT_ID]: z.string().optional(),
+      }).merge(Id_Schema.partial()),
+    ),
     function ({ render, req, get, redirect }) {
-      const { id } = req.valid("query");
-
       const session = get("session");
       const userinfo = session.get("userinfo");
+      const { id, page, [SEARCH_EMAIL_INPUT_ID]: email } = req.valid("query");
+      const take = 5;
 
       if (!userinfo) {
         return redirect("/");
       }
 
       const username = userinfo_to_username(userinfo);
-      return render(<LegacyPage active_id={id} />, { username });
+
+      return render(<UsersPage page={page} email={email} />, { username });
     },
   );
