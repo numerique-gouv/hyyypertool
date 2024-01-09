@@ -28,6 +28,10 @@ const app = new Hono()
   .route("", welcome_router)
   .route("", legacy)
   .route("", proxy)
+  .notFound(async ({ html, req }) => {
+    const youch = new Youch(new Error("Not Found"), req.raw);
+    return html(await youch.toHTML());
+  })
   .onError(async (error, { html, req }) => {
     const youch = new Youch(error, req.raw);
     return html(await youch.toHTML());
