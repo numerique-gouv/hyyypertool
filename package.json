@@ -32,7 +32,7 @@
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
     "drizzle-orm": "^0.29.3",
-    "hono": "3.11.12",
+    "hono": "3.12.1",
     "hono-sessions": "0.3.3",
     "htmx.ext...chunked-transfer": "^1.0.1",
     "htmx.org": "1.9.10",
@@ -41,11 +41,11 @@
     "lit": "3.1.0",
     "lodash.sortby": "4.7.0",
     "lodash.xor": "^4.5.0",
-    "openid-client": "^5.6.2",
+    "openid-client": "^5.6.4",
     "pg": "^8.11.3",
     "query-string": "8.1.0",
     "static-path": "^0.0.4",
-    "tailwind-variants": "0.1.19",
+    "tailwind-variants": "0.1.20",
     "ts-pattern": "5.0.6",
     "youch": "^3.3.3",
     "zod": "3.22.4"
@@ -56,14 +56,14 @@
     "@types/lodash.sortby": "4.7.9",
     "@types/lodash.xor": "^4.5.9",
     "bun-types": "1.0.21",
-    "drizzle-kit": "^0.20.9",
+    "drizzle-kit": "^0.20.10",
     "moncomptepro": "betagouv/moncomptepro",
     "prettier": "3.1.1",
-    "prettier-plugin-tailwindcss": "0.5.10",
-    "tailwindcss": "3.4.0",
+    "prettier-plugin-tailwindcss": "0.5.11",
+    "tailwindcss": "3.4.1",
     "typescript": "5.3.3"
   },
   "overrides": {
-    "hono": "3.11.12"
+    "hono": "3.12.1"
   }
 }
