@@ -15,6 +15,7 @@ type KnownPath =
   | "/legacy/moderations"
   | "/legacy/moderations/:id"
   | "/legacy/organizations"
+  | "/legacy/organizations/:id"
   | "/legacy/organizations/:id/domains/external"
   | "/legacy/organizations/:id/domains/external/:domain"
   | "/legacy/organizations/:id/domains/internal"

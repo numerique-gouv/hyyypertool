@@ -25,8 +25,7 @@ export default new Hono<Session_Context>()
     function ({ render, req, get, redirect }) {
       const session = get("session");
       const userinfo = session.get("userinfo");
-      const { id, page, [SEARCH_EMAIL_INPUT_ID]: email } = req.valid("query");
-      const take = 5;
+      const { page, [SEARCH_EMAIL_INPUT_ID]: email } = req.valid("query");
 
       if (!userinfo) {
         return redirect("/");
