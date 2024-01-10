@@ -44,7 +44,6 @@ write_profile_git() {
   local bp_dir="$1"
   local build_dir="$2"
   mkdir -p "$build_dir/.profile.d"
-  echo "export GIT_SHA=$(git rev-parse HEAD)" > "$build_dir/.profile.d/git.sh"
 }
 
 #
@@ -86,6 +85,7 @@ curl -fsSL https://bun.sh/install | bash
 #
 
 cd "$BUILD_DIR"
+echo "export GIT_SHA=$(git rev-parse HEAD)" > "$build_dir/.profile.d/git.sh"
 
 #
 
