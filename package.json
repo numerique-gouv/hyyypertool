@@ -46,6 +46,7 @@
     "query-string": "8.1.0",
     "static-path": "^0.0.4",
     "tailwind-variants": "0.1.20",
+    "ts-dedent": "^2.2.0",
     "ts-pattern": "5.0.6",
     "youch": "^3.3.3",
     "zod": "3.22.4"

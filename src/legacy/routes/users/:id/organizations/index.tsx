@@ -12,6 +12,7 @@ import { zValidator } from "@hono/zod-validator";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
+import { match } from "ts-pattern";
 
 //
 
@@ -121,7 +122,6 @@ export function Table({
             >
               {fields.map((name) => (
                 <td>
-                  {" "}
                   {match(organizations[name])
                     .when(
                       (x): x is Array<string> => x instanceof Array,
