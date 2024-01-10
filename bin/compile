@@ -85,7 +85,7 @@ curl -fsSL https://bun.sh/install | bash
 #
 
 cd "$BUILD_DIR"
-echo "export GIT_SHA=$(git rev-parse HEAD)" > "$build_dir/.profile.d/git.sh"
+echo "export $SOURCE_VERSION"
 
 #
 
