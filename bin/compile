@@ -44,6 +44,7 @@ write_profile_git() {
   local bp_dir="$1"
   local build_dir="$2"
   mkdir -p "$build_dir/.profile.d"
+  echo "export GIT_SHA=$SOURCE_VERSION"
 }
 
 #
@@ -85,7 +86,6 @@ curl -fsSL https://bun.sh/install | bash
 #
 
 cd "$BUILD_DIR"
-echo "export $SOURCE_VERSION"
 
 #
 
