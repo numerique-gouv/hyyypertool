@@ -91,7 +91,7 @@ function Tools({ username }: { username?: string }) {
           <li>
             <a
               class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-fi-logout-box-r-line fr-btn--icon-left"
-              href="/client/logout"
+              href={api_ref("/auth/logout", {})}
             >
               {username}
             </a>
