@@ -1,5 +1,6 @@
 //
 
+import { date_to_string } from ":common/date";
 import env from ":common/env.ts";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
@@ -55,6 +56,7 @@ export async function _02() {
         </span>{" "}
         « <span>{moderation.organizations.cached_libelle}</span> »
       </h2>
+      <ModerationCallout moderation={moderation} />
       <FirstToolBox
         email={moderation.users.email}
         given_name={moderation.users.given_name ?? undefined}
@@ -445,7 +447,15 @@ function datapass_from_email(email: string) {
   return `https://datapass.api.gouv.fr/habilitations?${query}`;
 }
 
-function google_search(q: string) {
-  const query = new URLSearchParams({ q });
-  return `https://www.google.com/search?${query}`;
+function ModerationCallout({ moderation }: { moderation: Moderation }) {
+  if (!moderation.moderated_at) return <></>;
+  return (
+    <div class="fr-callout fr-callout--green-emeraude fr-icon-information-line">
+      <h3 class="fr-callout__title">Modération traitée</h3>
+      <p class="fr-callout__text">
+        Cette modération a été marqué comme traitée le{" "}
+        <b>{date_to_string(moderation.moderated_at)}</b>.
+      </p>
+    </div>
+  );
 }

@@ -1,6 +1,7 @@
 //
 
 import { Id_Schema } from ":common/schema";
+import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Organization } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { button } from ":ui/button";
@@ -85,12 +86,7 @@ router.patch(
   zValidator(
     "form",
     z.object({
-      // NOTE(douglasduteil): behold the false positive in z.coerce.boolean
-      // \see https://github.com/colinhacks/zod/issues/1630
-      is_verified: z
-        .string()
-        .pipe(z.enum(["true", "false"]).transform((v) => v === "true"))
-        .optional(),
+      is_verified: z.string().pipe(z_coerce_boolean).optional(),
     }),
   ),
   async function ({ text, req, notFound }) {

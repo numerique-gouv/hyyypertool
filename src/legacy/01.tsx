@@ -11,6 +11,7 @@ import {
   count as drizzle_count,
   eq,
   ilike,
+  isNotNull,
   isNull,
 } from "drizzle-orm";
 import { html } from "hono/html";
@@ -25,11 +26,12 @@ export const PageContext_01 = createContext({
   active_id: NaN,
   page: 0,
   take: 5,
-  search: { email: "", siret: "" },
+  search: { email: "", siret: "", show_archived: false },
 });
 
 export const SEARCH_SIRET_INPUT_ID = "search-siret";
 export const SEARCH_EMAIL_INPUT_ID = "search-email";
+export const PROCESSED_REQUESTS_INPUT_ID = "processed_requests";
 export const MODERATION_TABLE_ID = "moderation-table";
 
 export function _01() {
@@ -37,34 +39,60 @@ export function _01() {
     <div class="mx-auto mt-6 !max-w-6xl" id="01">
       <h1>🖱️ 1. Je sélectionne le cas que je veux traiter</h1>
       <hr />
-      <label class="fr-label" for="search-siret">
-        Siret
-      </label>
-      <input
-        class="fr-input"
-        hx-get={api_ref("/legacy/moderations", {})}
-        hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
-        hx-target={`#${MODERATION_TABLE_ID}`}
-        hx-trigger="input changed delay:500ms, search"
-        id={SEARCH_SIRET_INPUT_ID}
-        name="search-siret"
-        placeholder="Recherche par SIRET"
-        type="search"
-      />
-      <label class="fr-label" for="search-email">
-        Email
-      </label>
-      <input
-        class="fr-input"
-        hx-get={api_ref("/legacy/moderations", {})}
-        hx-include={`#${SEARCH_SIRET_INPUT_ID}`}
-        hx-target={`#${MODERATION_TABLE_ID}`}
-        hx-trigger="input changed delay:500ms, search"
-        id={SEARCH_EMAIL_INPUT_ID}
-        name="search-email"
-        placeholder="Recherche par Email"
-        type="email"
-      />
+      <div class="fr-input-group ">
+        <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
+          Siret
+        </label>
+        <input
+          class="fr-input"
+          hx-get={api_ref("/legacy/moderations", {})}
+          hx-include={`#${SEARCH_EMAIL_INPUT_ID},#${PROCESSED_REQUESTS_INPUT_ID}`}
+          hx-target={`#${MODERATION_TABLE_ID}`}
+          hx-trigger="input changed delay:500ms, search"
+          id={SEARCH_SIRET_INPUT_ID}
+          name={SEARCH_SIRET_INPUT_ID}
+          placeholder="Recherche par SIRET"
+          type="search"
+        />
+      </div>
+      <div class="fr-input-group ">
+        <label class="fr-label" for={SEARCH_EMAIL_INPUT_ID}>
+          Email
+        </label>
+        <input
+          class="fr-input"
+          hx-get={api_ref("/legacy/moderations", {})}
+          hx-include={`#${SEARCH_SIRET_INPUT_ID},#${PROCESSED_REQUESTS_INPUT_ID}`}
+          hx-target={`#${MODERATION_TABLE_ID}`}
+          hx-trigger="input changed delay:500ms, search"
+          id={SEARCH_EMAIL_INPUT_ID}
+          name={SEARCH_EMAIL_INPUT_ID}
+          placeholder="Recherche par Email"
+          type="email"
+        />
+      </div>
+      <div class="fr-fieldset__element">
+        <div class="fr-checkbox-group">
+          <input
+            aria-describedby="checkboxes-1-messages"
+            hx-get={api_ref("/legacy/moderations", {})}
+            hx-include={`#${SEARCH_EMAIL_INPUT_ID},#${SEARCH_SIRET_INPUT_ID}`}
+            hx-target={`#${MODERATION_TABLE_ID}`}
+            id={PROCESSED_REQUESTS_INPUT_ID}
+            name={PROCESSED_REQUESTS_INPUT_ID}
+            value="true"
+            type="checkbox"
+          />
+          <label class="fr-label" for={PROCESSED_REQUESTS_INPUT_ID}>
+            Voir les demandes traitées
+          </label>
+          <div
+            class="fr-messages-group"
+            id="checkboxes-1-messages"
+            aria-live="assertive"
+          ></div>
+        </div>
+      </div>
       <Suspense fallback={<p>Loading...</p>}>
         <div class="fr-table" id={MODERATION_TABLE_ID}>
           <Table />
@@ -80,7 +108,9 @@ export async function Table() {
   const where = and(
     ilike(schema.organizations.siret, `%${search.siret}%`),
     ilike(schema.users.email, `%${search.email}%`),
-    isNull(schema.moderations.moderated_at),
+    search.show_archived
+      ? isNotNull(schema.moderations.moderated_at)
+      : isNull(schema.moderations.moderated_at),
   );
   const { moderations, count } = await moncomptepro_pg.transaction(async () => {
     const moderations = await moncomptepro_pg

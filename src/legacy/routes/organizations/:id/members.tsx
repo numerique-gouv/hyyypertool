@@ -1,6 +1,7 @@
 //
 
 import { Id_Schema, Pagination_Schema } from ":common/schema";
+import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
   moncomptepro_pg,
   schema,
@@ -106,12 +107,7 @@ router.patch(
     "form",
     z.object({
       verification_type: Verification_Type_Schema.optional(),
-      // NOTE(douglasduteil): behold the false positive in z.coerce.boolean
-      // \see https://github.com/colinhacks/zod/issues/1630
-      is_external: z
-        .string()
-        .pipe(z.enum(["true", "false"]).transform((v) => v === "true"))
-        .optional(),
+      is_external: z.string().pipe(z_coerce_boolean).optional(),
     }),
   ),
   async function ({ text, req }) {

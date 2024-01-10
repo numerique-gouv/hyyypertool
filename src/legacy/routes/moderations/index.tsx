@@ -1,7 +1,9 @@
 //
 
 import { Id_Schema } from ":common/schema";
+import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
+  PROCESSED_REQUESTS_INPUT_ID,
   PageContext_01,
   SEARCH_EMAIL_INPUT_ID,
   SEARCH_SIRET_INPUT_ID,
@@ -23,6 +25,12 @@ export default new Hono().get(
           .string()
           .default("0")
           .pipe(z.coerce.number().int().nonnegative()),
+        [PROCESSED_REQUESTS_INPUT_ID]: z
+          .string()
+          .default("false")
+          .pipe(z_coerce_boolean)
+
+          .optional(),
         [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
         [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
       })
@@ -32,6 +40,7 @@ export default new Hono().get(
     const {
       id,
       page,
+      [PROCESSED_REQUESTS_INPUT_ID]: processed_requests,
       [SEARCH_EMAIL_INPUT_ID]: search_email,
       [SEARCH_SIRET_INPUT_ID]: search_siret,
     } = req.valid("query");
@@ -46,6 +55,7 @@ export default new Hono().get(
             search: {
               email: search_email,
               siret: search_siret,
+              show_archived: Boolean(processed_requests),
             },
           }}
         >

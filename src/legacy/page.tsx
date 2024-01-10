@@ -13,7 +13,7 @@ export function LegacyPage({ active_id }: { active_id: number | undefined }) {
           active_id: active_id ?? NaN,
           page: 0,
           take: 5,
-          search: { email: "", siret: "" },
+          search: { email: "", siret: "", show_archived: false },
         }}
       >
         <_01 />
