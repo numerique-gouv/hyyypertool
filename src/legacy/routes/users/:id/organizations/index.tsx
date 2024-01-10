@@ -104,7 +104,7 @@ export function Table({
       <thead>
         <tr>
           {fields.map((name) => (
-            <th safe>{name}</th>
+            <th>{name}</th>
           ))}
         </tr>
       </thead>
@@ -120,7 +120,15 @@ export function Table({
               class={row({ is_clickable: true })}
             >
               {fields.map((name) => (
-                <td safe>{organizations[name]}</td>
+                <td>
+                  {" "}
+                  {match(organizations[name])
+                    .when(
+                      (x): x is Array<string> => x instanceof Array,
+                      (value) => value.join(", "),
+                    )
+                    .otherwise((value) => value)}
+                </td>
               ))}
             </tr>
           ))}
