@@ -46,6 +46,7 @@ if (env.DEPLOY_ENV === "preview") {
 console.debug("- NODE_ENV " + env.NODE_ENV);
 console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
 console.debug("- VERSION " + env.VERSION);
+console.debug("- GIT_SHA " + env.GIT_SHA);
 
 //
 
