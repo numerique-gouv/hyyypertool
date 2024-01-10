@@ -44,7 +44,7 @@ write_profile_git() {
   local bp_dir="$1"
   local build_dir="$2"
   mkdir -p "$build_dir/.profile.d"
-  echo "export GIT_SHA=$SOURCE_VERSION"
+  echo "export GIT_SHA=$SOURCE_VERSION" > "$build_dir/.profile.d/git.sh"
 }
 
 #
