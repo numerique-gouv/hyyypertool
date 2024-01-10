@@ -1,7 +1,7 @@
 //
 
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import { button } from ":ui/button/button.ts";
+import { button } from ":ui/button";
 import { eq } from "drizzle-orm";
 import { ok } from "node:assert";
 

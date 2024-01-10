@@ -6,6 +6,8 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
+import { api_ref } from ":paths";
+import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -110,7 +112,13 @@ export function Table({
       <tbody>
         <tr>
           {organizations.map(({ organizations }) => (
-            <tr>
+            <tr
+              _={`on click set the window's location to '${api_ref(
+                "/legacy/organizations/:id",
+                { id: String(organizations.id) },
+              )}'`}
+              class={row({ is_clickable: true })}
+            >
               {fields.map((name) => (
                 <td safe>{organizations[name]}</td>
               ))}

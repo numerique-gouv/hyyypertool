@@ -6,7 +6,7 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
-import { button } from ":ui/button/button";
+import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";

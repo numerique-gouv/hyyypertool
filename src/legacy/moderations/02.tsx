@@ -5,7 +5,9 @@ import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import type { MCP_Moderation } from ":moncomptepro";
 import { api_ref } from ":paths";
-import { button } from ":ui/button/button.ts";
+import { button } from ":ui/button";
+import { CopyButton } from ":ui/button/copy";
+import { GoogleSearchButton } from ":ui/button/search";
 import { and, count, eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
 import lodash_sortby from "lodash.sortby";
@@ -200,50 +202,12 @@ function FirstToolBox({
         <span>Voir les demandes DataPass déposées par {given_name}</span>
       </a>
       <div></div>
-      <button
-        _="
-          on click
-            set text to @data-email
-            js(me, text)
-              if ('clipboard' in window.navigator) {
-                navigator.clipboard.writeText(text)
-              }
-            end"
-        class={button()}
-        data-email={email}
-      >
-        📋 Copier l'email
-      </button>{" "}
-      <a
-        href={google_search(email)}
-        class={button()}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        🔍 Rechercher l'email
-      </a>
-      <button
-        _="
-          on click
-            set text to @data-email
-            js(me, text)
-              if ('clipboard' in window.navigator) {
-                navigator.clipboard.writeText(text)
-              }
-            end"
-        class={button()}
-        data-email={domain}
-      >
-        📋 Copier le domaine
-      </button>
-      <a
-        href={google_search(domain)}
-        class={button()}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        🔍 Rechercher le domaine
-      </a>
+      <CopyButton text={email}>Copier l'email</CopyButton>
+      <GoogleSearchButton query={email}>Rechercher l'email</GoogleSearchButton>
+      <CopyButton text={domain}>Copier le domaine</CopyButton>
+      <GoogleSearchButton query={domain}>
+        Rechercher le domaine
+      </GoogleSearchButton>
       <Search_Domain domain={domain} organization={organization} />
     </div>
   );
@@ -311,14 +275,10 @@ function Search_Domain({
 }) {
   return (
     <>
-      <a
-        href={google_search(domain)}
-        class={button()}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <GoogleSearchButton query={domain}>
         « <span>{domain}</span> » sur Google
-      </a>
+      </GoogleSearchButton>
+
       <a
         href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
         class={button()}

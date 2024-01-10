@@ -4,6 +4,7 @@ import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import type { MCP_Moderation } from ":moncomptepro";
 import { api_ref } from ":paths";
+import { row } from ":ui/table";
 import {
   and,
   asc,
@@ -15,7 +16,7 @@ import {
 import { html } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
 import { Suspense } from "hono/jsx/streaming";
-import { tv, type VariantProps } from "tailwind-variants";
+import { type VariantProps } from "tailwind-variants";
 import { match } from "ts-pattern";
 
 //
@@ -209,6 +210,3 @@ function Row({
     </tr>
   );
 }
-
-const row = tv({ variants: { is_active: { true: "is_active" } } });
-// const row = tv({ variants: { is_active: { true: "!bg-green-300" } } });

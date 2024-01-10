@@ -8,11 +8,14 @@ import {
   type Users_Organizations,
 } from ":database:moncomptepro";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
+import { api_ref } from ":paths";
+import { CopyButton } from ":ui/button/copy";
+import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
 import { and, desc, count as drizzle_count, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
-import { tv, type VariantProps } from "tailwind-variants";
+import { type VariantProps } from "tailwind-variants";
 import { z } from "zod";
 
 //
@@ -230,7 +233,15 @@ function Row({
 }) {
   const verification_type = user.verification_type as Verification_Type;
   return (
-    <tr class={row(variants)}>
+    <tr
+      _={`on click set the window's location to '${api_ref(
+        "/legacy/users/:id",
+        {
+          id: String(user.id),
+        },
+      )}'`}
+      class={row({ is_clickable: true, ...variants })}
+    >
       <td>{user.given_name}</td>
       <td>{user.family_name}</td>
       <td>{user.is_external ? "❌" : "✅"}</td>
@@ -303,23 +314,8 @@ function Actions({
         >
           🔄 interne/externe
         </button>
-        <button
-          _="
-         on click
-           set text to @data-email
-           js(me, text)
-             if ('clipboard' in window.navigator) {
-               navigator.clipboard.writeText(text)
-             }
-           end"
-          class="fr-btn"
-          data-email={email}
-        >
-          📋 copier email
-        </button>
+        <CopyButton text={email}>copier email</CopyButton>
       </td>
     </tr>
   );
 }
-
-const row = tv({ variants: { is_active: { true: "bg-green-300" } } });

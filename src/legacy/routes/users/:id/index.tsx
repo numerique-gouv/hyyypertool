@@ -5,6 +5,9 @@ import { Id_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { moncomptepro_pg, schema, type User } from ":database:moncomptepro";
 import { api_ref } from ":paths";
+import { button } from ":ui/button";
+import { CopyButton } from ":ui/button/copy";
+import { GoogleSearchButton } from ":ui/button/search";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
@@ -42,6 +45,10 @@ export default new Hono<Session_Context>()
           <h1>👨‍💻 A propos de {user.given_name}</h1>
           <Fiche user={user} />
           <AccountInfo user={user} />
+          <hr />
+          <Actions user={user} />
+          <br />
+          <hr />
           <b>{user.given_name}</b> est enregistré(e) dans les organisations
           suivantes :
           <div class="fr-table max-w-full overflow-x-auto">
@@ -62,6 +69,26 @@ export default new Hono<Session_Context>()
   );
 
 //
+
+function Actions({ user }: { user: User }) {
+  const { email } = user;
+  const domain = email.split("@")[1];
+  return (
+    <div class="grid grid-cols-3 justify-items-center gap-1">
+      <CopyButton text={email}>Copier l'email</CopyButton>
+      <CopyButton text={domain}>Copier le domain</CopyButton>
+      <GoogleSearchButton query={domain}>
+        « <span>{domain}</span> » sur Google
+      </GoogleSearchButton>
+      <button class={button({ intent: "danger" })}>
+        🚫 réinitialiser la vérification de l’email (bloquer) [TODO]
+      </button>
+      <button class={button({ intent: "dark" })}>
+        🗑️ supprimer définitivement un compte [TODO]
+      </button>
+    </div>
+  );
+}
 
 function Fiche({ user }: { user: User }) {
   return (
