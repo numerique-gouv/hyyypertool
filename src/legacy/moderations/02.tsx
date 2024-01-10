@@ -145,39 +145,6 @@ export async function _02() {
           id="table-user-organisations"
         ></div>
       </div>
-      <h3>### Détails de l'organisation sélectionnée ci-dessus :</h3>
-      <ul>
-        <li>
-          Dénomination : <b>{moderation.organizations.cached_libelle}</b>
-        </li>
-        <li>
-          Tranche d'effectif :{" "}
-          <b>
-            {moderation.organizations.cached_libelle_tranche_effectif} (code :{" "}
-            {moderation.organizations.cached_tranche_effectifs}) (
-            <a
-              href="https://www.sirene.fr/sirene/public/variable/tefen"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              liste code effectif INSEE
-            </a>
-            )
-          </b>
-        </li>
-        <li>
-          État administratif :{" "}
-          <b>{moderation.organizations.cached_etat_administratif}</b> (
-          <a
-            href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            liste état administratif INSEE
-          </a>
-          )
-        </li>
-      </ul>
     </div>
   );
 }
