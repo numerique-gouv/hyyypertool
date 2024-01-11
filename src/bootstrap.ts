@@ -9,6 +9,7 @@ import Youch from "youch";
 import asserts_router from "./assets/route";
 import auth_router from "./auth/route";
 import { readyz } from "./health/readyz";
+import { NotFound } from "./not-found";
 import { proxy } from "./proxy/route";
 import welcome_router from "./welcome/route";
 
@@ -28,9 +29,8 @@ const app = new Hono()
   .route("", welcome_router)
   .route("", legacy)
   .route("", proxy)
-  .notFound(async ({ html, req }) => {
-    const youch = new Youch(new Error("Not Found"), req.raw);
-    return html(await youch.toHTML());
+  .notFound(async ({ html }) => {
+    return html(NotFound(), 404);
   })
   .onError(async (error, { html, req }) => {
     const youch = new Youch(error, req.raw);

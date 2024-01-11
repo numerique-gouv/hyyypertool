@@ -18,7 +18,6 @@ try {
 } catch (error) {
   console.error(error);
   console.error("Could not connect to database");
-  process.exit(1);
 }
 
 //
