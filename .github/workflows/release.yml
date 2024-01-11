@@ -5,9 +5,18 @@ name: 🚢 Release It !
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
