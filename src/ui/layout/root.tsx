@@ -2,7 +2,6 @@
 
 import { ASSETS_PATH } from ":assets/config";
 import env from ":common/env.ts";
-import { version } from ":package.json";
 import { html } from "hono/html";
 import type { Child } from "hono/jsx";
 
@@ -84,14 +83,12 @@ export function Root_Layout({ children }: { children?: Child }) {
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© ${new Date().getFullYear()} 🇫🇷</div>
           <a
-            href=${`https://github.com/betagouv/hyyypertool/tree/${
-              env.VERSION === version ? "v" : ""
-            }${env.VERSION}`}
+            href=${`https://github.com/betagouv/hyyypertool/tree/${env.VERSION}`}
             rel="noopener noreferrer"
             target="_blank"
             safe
           >
-            v${env.VERSION}
+            <small>version ${env.VERSION}</small>
           </a>
         </footer>
       </body>
