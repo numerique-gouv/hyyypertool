@@ -23,7 +23,10 @@ export default z
       .trim()
       .default("ES256"),
     AGENTCONNECT_OIDC_ISSUER: z.string().trim(),
-    AGENTCONNECT_OIDC_SCOPE: z.string().trim().default(["openid"].join(" ")),
+    AGENTCONNECT_OIDC_SCOPE: z
+      .string()
+      .trim()
+      .default(["openid", "given_name", "usual_name", "email"].join(" ")),
     AGENTCONNECT_OIDC_SECRET_ID: z.string().trim(),
     AGENTCONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG: z
       .string()
