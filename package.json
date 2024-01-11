@@ -1,6 +1,6 @@
 {
   "name": "hyyypertool",
-  "version": "2023.11.15",
+  "version": "2023.11.11",
   "private": true,
   "type": "module",
   "module": "src/bootstrap.ts",
