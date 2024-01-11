@@ -77,6 +77,9 @@
     "github": {
       "release": true
     },
+    "hooks": {
+      "before:git:release": "git switch -c release/${version}"
+    },
     "npm": {
       "publish": false
     },
