@@ -37,8 +37,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
       acr_values: "eidas1",
       nonce,
       redirect_uri,
-      scope:
-        "openid uid given_name usual_name email siren siret organizational_unit belonging_population phone chorusdt idp_id idp_acr",
+      scope: env.AGENTCONNECT_OIDC_SCOPE,
       state,
     });
 
@@ -68,8 +67,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
         grant_type: "authorization_code",
         code: params.code,
         redirect_uri,
-        scope:
-          "openid uid given_name usual_name email siren siret organizational_unit belonging_population phone chorusdt idp_id idp_acr",
+        scope: env.AGENTCONNECT_OIDC_SCOPE,
       });
 
       const userinfo = await client.userinfo(tokenSet.access_token ?? "");

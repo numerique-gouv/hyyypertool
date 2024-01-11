@@ -23,33 +23,12 @@ export default z
       .trim()
       .default("ES256"),
     AGENTCONNECT_OIDC_ISSUER: z.string().trim(),
-    AGENTCONNECT_OIDC_SCOPES: z
-      .string()
-      .default(
-        ["email", "given_name", "openid", "siret", "uid", "usual_name"].join(
-          " ",
-        ),
-      ),
+    AGENTCONNECT_OIDC_SCOPE: z.string().trim().default(["openid"].join(" ")),
     AGENTCONNECT_OIDC_SECRET_ID: z.string().trim(),
     AGENTCONNECT_OIDC_USERINFO_SIGNED_RESPONSE_ALG: z
       .string()
       .trim()
       .default("ES256"),
-    AC_SCOPE: z
-      .string()
-      .trim()
-      .default(
-        [
-          "email",
-          "given_name",
-          "openid",
-          "organizational_unit",
-          "siren",
-          "siret",
-          "uid",
-          "usual_name",
-        ].join(" "),
-      ),
     COOKIE_ENCRYPTION_KEY: z
       .string()
       .trim()
