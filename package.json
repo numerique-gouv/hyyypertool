@@ -78,14 +78,14 @@
       "release": true
     },
     "hooks": {
-      "before:git:release": "git switch -c release/${version}"
+      "after:git:release": "git switch -c release/${version} && git push origin release/${version}"
     },
     "npm": {
       "publish": false
     },
     "plugins": {
       "@csmith/release-it-calver-plugin": {
-        "format": "yyyy.0m.0d.patch",
+        "format": "yyyy.0m.0d.minor",
         "increment": "calendar.minor"
       },
       "@release-it/conventional-changelog": {
