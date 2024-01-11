@@ -1,6 +1,6 @@
 #
 
-name: CI
+name: 🚢 Release It !
 
 on:
   workflow_dispatch:
@@ -15,5 +15,4 @@ jobs:
       - uses: oven-sh/setup-bun@v1
       - run: bun x release-it
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
