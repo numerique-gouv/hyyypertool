@@ -1,5 +1,12 @@
 
 
+## [2023.11.12](https://github.com/betagouv/hyyypertool/compare/2023.11.11...2023.11.12) (2024-01-11)
+
+
+### Reverts
+
+* Revert "ci(github): force no increment version every release" ([90c40ca](https://github.com/betagouv/hyyypertool/commit/90c40ca32bcb627afc2725a5883c34b88784b64f))
+
 ## [2023.11.11](https://github.com/betagouv/hyyypertool/compare/8fc248ad305391b85d7d96f25ce07d1336180481...2023.11.11) (2024-01-11)
 
 
