@@ -77,6 +77,9 @@
     "github": {
       "release": true
     },
+    "npm": {
+      "publish": false
+    },
     "plugins": {
       "@csmith/release-it-calver-plugin": {},
       "@release-it/conventional-changelog": {
