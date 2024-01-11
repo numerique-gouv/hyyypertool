@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: oven-sh/setup-bun@v1
+      - run: bun install
       - run: bun x release-it
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
