@@ -32,6 +32,9 @@ export default z
       .string()
       .trim()
       .default("ES256"),
+    API_AUTH_PASSWORD: z.string().trim(),
+    API_AUTH_URL: z.string().trim().url().default("localhost:3001"),
+    API_AUTH_USERNAME: z.string().trim(),
     COOKIE_ENCRYPTION_KEY: z
       .string()
       .trim()

@@ -32,6 +32,7 @@
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
     "drizzle-orm": "^0.29.3",
+    "error-custom-class": "^10.0.0",
     "hono": "3.12.4",
     "hono-sessions": "0.3.3",
     "htmx.ext...chunked-transfer": "^1.0.1",

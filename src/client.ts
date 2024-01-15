@@ -1,12 +1,11 @@
 //
 
-import env from ":common/env";
 import { hc } from "hono/client";
 import type { Router } from "./bootstrap";
 
 //
 
-export const app_hc = hc<Router>(env.HOST ?? "http://localhost:3000", {
+export const app_hc = hc<Router>("http://localhost:3000", {
   fetch: (url: URL) => {
     // NOTE(douglasduteil): do not fetch
     // This is a hack to make the type system happy

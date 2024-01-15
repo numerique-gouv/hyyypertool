@@ -7,6 +7,7 @@ import {
   type Organization,
   type User,
 } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { eq } from "drizzle-orm";
 import { ok } from "node:assert";
@@ -310,9 +311,27 @@ function SendModerationProcessedEmail({
     moderation.type !== "organization_join_block" &&
     moderation.type !== "ask_for_sponsorship";
   return (
-    <button class={button({ intent: "dark" })} disabled={disabled}>
-      🪄 Action en un click : Envoyer l'email « Votre demande a été traitée »
-      [TODO]
-    </button>
+    <form
+      hx-patch={
+        app_hc.legacy.moderations[":id"].processed.$url({
+          param: { id: moderation.id.toString() },
+        }).pathname
+      }
+      hx-swap="none"
+    >
+      <button
+        // _={`
+        // on click
+        //   toggle @disabled until htmx:afterOnLoad
+        //   set the window's location to '/legacy'
+        // end
+        // `}
+        class={button({ intent: "dark" })}
+        disabled={disabled}
+      >
+        🪄 Action en un click : Envoyer l'email « Votre demande a été traitée »
+        [TODO]
+      </button>
+    </form>
   );
 }
