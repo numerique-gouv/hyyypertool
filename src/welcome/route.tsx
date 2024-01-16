@@ -1,5 +1,6 @@
 //
 
+import type { Csp_Context } from ":common/csp_headers";
 import env from ":common/env";
 import { type Session_Context } from ":common/session";
 import { api_ref } from ":paths";
@@ -9,16 +10,17 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-const router = new Hono<Session_Context>()
+const router = new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Root_Layout, { docType: true, stream: true }))
-  .get("/", ({ render }) =>
+  .get("/", ({ render, var: { nonce } }) =>
     render(
       <main class="flex h-full flex-grow flex-col items-center justify-center">
         <h1 class="fr-display--xl drop-shadow-lg ">
           <hyyyper-title />
           <script
-            type="module"
+            nonce={nonce}
             src={`/assets/${env.VERSION}/_client/hyyypertitle.js`}
+            type="module"
           ></script>
         </h1>
 
@@ -44,6 +46,7 @@ const router = new Hono<Session_Context>()
           </form>
         </div>
       </main>,
+      { nonce },
     ),
   )
   .get(`/assets/${env.VERSION}/_client/hyyypertitle.js`, async () => {

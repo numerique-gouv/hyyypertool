@@ -319,18 +319,8 @@ function SendModerationProcessedEmail({
       }
       hx-swap="none"
     >
-      <button
-        // _={`
-        // on click
-        //   toggle @disabled until htmx:afterOnLoad
-        //   set the window's location to '/legacy'
-        // end
-        // `}
-        class={button({ intent: "dark" })}
-        disabled={disabled}
-      >
+      <button class={button({ intent: "dark" })} disabled={disabled}>
         🪄 Action en un click : Envoyer l'email « Votre demande a été traitée »
-        [TODO]
       </button>
     </form>
   );

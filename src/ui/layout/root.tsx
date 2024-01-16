@@ -7,7 +7,14 @@ import type { Child } from "hono/jsx";
 
 //
 
-export function Root_Layout({ children }: { children?: Child }) {
+export interface Root_Layout_Props {
+  nonce?: string;
+}
+
+export function Root_Layout({
+  children,
+  nonce,
+}: { children?: Child } & Root_Layout_Props) {
   return html`
     <html lang="fr" data-fr-scheme="system" hx-ext="debug,chunked-transfer">
       <head>
@@ -62,7 +69,11 @@ export function Root_Layout({ children }: { children?: Child }) {
 
         <!--  -->
 
-        <script type="importmap" type="application/json">
+        <script
+          hash="sha256-ZtVO4euNrRnx0KrqoCatLuOIaHv1Z7zi++KgINh8SqM="
+          nonce="${nonce ?? ""}"
+          type="importmap"
+        >
           {
             "imports": {
               ":common/env.ts": "${ASSETS_PATH}/bundle/env.js",
@@ -96,8 +107,9 @@ export function Root_Layout({ children }: { children?: Child }) {
       <!--  -->
 
       <script
-        type="module"
+        nonce="${nonce ?? ""}"
         src="${ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
+        type="module"
       ></script>
 
       <meta
@@ -107,29 +119,34 @@ export function Root_Layout({ children }: { children?: Child }) {
 
       ${env.DEPLOY_ENV === "preview"
         ? html`<script
-            type="module"
+            nonce="${nonce ?? ""}"
             src="${ASSETS_PATH}/node_modules/htmx.org/dist/ext/debug.js"
+            type="module"
           ></script>`
         : ""}
 
       <script
-        type="module"
+        nonce="${nonce ?? ""}"
         src="${ASSETS_PATH}/node_modules/htmx.org/dist/ext/include-vals.js"
+        type="module"
       ></script>
       <script
-        type="module"
+        nonce="${nonce ?? ""}"
         src="${ASSETS_PATH}/node_modules/htmx.org/dist/ext/sse.js"
+        type="module"
       ></script>
       <script
-        type="module"
+        nonce="${nonce ?? ""}"
         src="${ASSETS_PATH}/node_modules/htmx.ext...chunked-transfer/dist/index.js"
+        type="module"
       ></script>
 
       <!--  -->
 
       <script
-        type="module"
+        nonce="${nonce ?? ""}"
         src="${ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
+        type="module"
       ></script>
     </html>
   `;

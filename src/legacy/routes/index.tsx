@@ -1,5 +1,6 @@
 //
 
+import type { Csp_Context } from ":common/csp_headers";
 import { Id_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { LegacyPage } from ":legacy/page";
@@ -10,16 +11,15 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-export default new Hono<Session_Context>()
+export default new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
     zValidator("query", Id_Schema.partial().default({})),
-    function ({ render, req, get, redirect }) {
+    function ({ render, req, var: { session, nonce }, redirect }) {
       const { id } = req.valid("query");
 
-      const session = get("session");
       const userinfo = session.get("userinfo");
 
       if (!userinfo) {
@@ -27,6 +27,6 @@ export default new Hono<Session_Context>()
       }
 
       const username = userinfo_to_username(userinfo);
-      return render(<LegacyPage active_id={id} />, { username });
+      return render(<LegacyPage active_id={id} />, { username, nonce });
     },
   );

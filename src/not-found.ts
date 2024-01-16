@@ -6,7 +6,7 @@ import { html } from "hono/html";
 
 //
 
-export function NotFound() {
+export function NotFound({ nonce }: { nonce?: string }) {
   return Root_Layout({
     children: html`
       <main class="flex h-full flex-grow flex-col items-center justify-center">
@@ -20,5 +20,6 @@ export function NotFound() {
         </div>
       </main>
     `,
+    nonce,
   });
 }

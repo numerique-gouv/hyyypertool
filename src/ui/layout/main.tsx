@@ -3,33 +3,25 @@
 import type { AgentConnect_UserInfo } from ":common/session";
 import { api_ref } from ":paths";
 import type { Child } from "hono/jsx";
-import { Root_Layout } from "./root";
+import { Root_Layout, type Root_Layout_Props } from "./root";
 
 //
 
-declare module "hono" {
-  interface ContextRenderer {
-    (
-      content: string | Promise<string>,
-      props?: Main_Layout_Props,
-    ): Response | Promise<Response>;
-  }
-}
-
-interface Main_Layout_Props {
-  username: string;
+export interface Main_Layout_Props extends Root_Layout_Props {
+  username?: string;
 }
 
 //
 
 export function Main_Layout({
   children,
+  nonce,
   username,
 }: {
   children?: Child;
 } & Main_Layout_Props) {
   return (
-    <Root_Layout>
+    <Root_Layout nonce={nonce}>
       <div class="flex flex-grow flex-col">
         <header role="banner" class="fr-header">
           <div class="fr-header__body">

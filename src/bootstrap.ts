@@ -1,5 +1,6 @@
 //
 
+import { csp_headers, type Csp_Context } from ":common/csp_headers";
 import env from ":common/env";
 import legacy from ":legacy/route";
 import { Hono } from "hono";
@@ -13,10 +14,9 @@ import { NotFound } from "./not-found";
 import { proxy } from "./proxy/route";
 import welcome_router from "./welcome/route";
 
-//
-
-const app = new Hono()
+const app = new Hono<Csp_Context>()
   .use("*", logger())
+  .use("*", csp_headers())
 
   // import { compress } from 'hono/compress'
   // app.use("*", compress());  `CompressionStream` is not yet supported in bun.
@@ -29,8 +29,8 @@ const app = new Hono()
   .route("", welcome_router)
   .route("", legacy)
   .route("", proxy)
-  .notFound(async ({ html }) => {
-    return html(NotFound(), 404);
+  .notFound(async ({ html, var: { nonce } }) => {
+    return html(NotFound({ nonce }), 404);
   })
   .onError(async (error, { html, req }) => {
     const youch = new Youch(error, req.raw);
