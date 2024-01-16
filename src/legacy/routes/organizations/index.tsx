@@ -1,5 +1,6 @@
 //
 
+import type { Csp_Context } from ":common/csp_headers";
 import { Id_Schema, Pagination_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import OrganizationPage, {
@@ -13,7 +14,7 @@ import { z } from "zod";
 
 //
 
-export default new Hono<Session_Context>()
+export default new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
   .use("*", hyyyyyypertool_session)
   .get(
@@ -24,8 +25,7 @@ export default new Hono<Session_Context>()
         [SEARCH_SIRET_INPUT_ID]: z.string().optional(),
       }).merge(Id_Schema.partial()),
     ),
-    function ({ render, req, get, redirect }) {
-      const session = get("session");
+    function ({ render, req, redirect, var: { nonce, session } }) {
       const userinfo = session.get("userinfo");
       const { page, [SEARCH_SIRET_INPUT_ID]: siret } = req.valid("query");
 
@@ -36,6 +36,7 @@ export default new Hono<Session_Context>()
       const username = userinfo_to_username(userinfo);
 
       return render(<OrganizationPage page={page} siret={siret} />, {
+        nonce,
         username,
       });
     },

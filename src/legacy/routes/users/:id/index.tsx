@@ -1,5 +1,6 @@
 //
 
+import type { Csp_Context } from ":common/csp_headers";
 import { date_to_string } from ":common/date";
 import { Id_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
@@ -16,14 +17,13 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-export default new Hono<Session_Context>()
+export default new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
     zValidator("param", Id_Schema),
-    async ({ req, get, render, redirect, notFound }) => {
-      const session = get("session");
+    async ({ req, render, redirect, notFound, var: { nonce, session } }) => {
       const userinfo = session.get("userinfo");
       if (!userinfo) {
         return redirect("/");
@@ -63,7 +63,7 @@ export default new Hono<Session_Context>()
             ></div>
           </div>
         </main>,
-        { username },
+        { nonce, username },
       );
     },
   );

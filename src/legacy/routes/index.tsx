@@ -17,7 +17,7 @@ export default new Hono<Session_Context & Csp_Context>()
   .get(
     "/",
     zValidator("query", Id_Schema.partial().default({})),
-    function ({ render, req, var: { session, nonce }, redirect }) {
+    function ({ render, req, redirect, var: { nonce, session } }) {
       const { id } = req.valid("query");
 
       const userinfo = session.get("userinfo");
@@ -27,6 +27,6 @@ export default new Hono<Session_Context & Csp_Context>()
       }
 
       const username = userinfo_to_username(userinfo);
-      return render(<LegacyPage active_id={id} />, { username, nonce });
+      return render(<LegacyPage active_id={id} />, { nonce, username });
     },
   );
