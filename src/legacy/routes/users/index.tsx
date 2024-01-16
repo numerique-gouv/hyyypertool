@@ -24,14 +24,9 @@ export default new Hono<Session_Context & Csp_Context>()
       }).merge(Id_Schema.partial()),
     ),
     function ({ render, req, redirect, var: { nonce, session } }) {
-      const userinfo = session.get("userinfo");
       const { page, [SEARCH_EMAIL_INPUT_ID]: email } = req.valid("query");
 
-      if (!userinfo) {
-        return redirect("/");
-      }
-
-      const username = userinfo_to_username(userinfo);
+      const username = userinfo_to_username(session.get("userinfo")!);
 
       return render(<UsersPage page={page} email={email} />, {
         nonce,

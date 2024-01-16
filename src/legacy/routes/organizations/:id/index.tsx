@@ -24,11 +24,6 @@ export default new Hono<Session_Context & Csp_Context>()
     "/",
     zValidator("param", Id_Schema),
     async ({ req, render, redirect, notFound, var: { nonce, session } }) => {
-      const userinfo = session.get("userinfo");
-      if (!userinfo) {
-        return redirect("/");
-      }
-
       const { id } = req.valid("param");
 
       const organization = await moncomptepro_pg.query.organizations.findFirst({
@@ -39,7 +34,7 @@ export default new Hono<Session_Context & Csp_Context>()
         return notFound();
       }
 
-      const username = userinfo_to_username(userinfo);
+      const username = userinfo_to_username(session.get("userinfo")!);
       return render(
         <main class="fr-container">
           <h1>👨‍💻 A propos de {organization.cached_libelle}</h1>

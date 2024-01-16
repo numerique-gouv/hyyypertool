@@ -114,7 +114,11 @@ export function Root_Layout({
 
       <meta
         name="htmx-config"
-        content='{"historyEnabled":true,"defaultSettleDelay":0}'
+        content="${JSON.stringify({
+          defaultSettleDelay: 0,
+          historyEnabled: true,
+          inlineScriptNonce: nonce ?? "",
+        })}"
       />
 
       ${env.DEPLOY_ENV === "preview"

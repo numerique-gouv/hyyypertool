@@ -17,16 +17,10 @@ export default new Hono<Session_Context & Csp_Context>()
   .get(
     "/",
     zValidator("query", Id_Schema.partial().default({})),
-    function ({ render, req, redirect, var: { nonce, session } }) {
+    function ({ render, req, var: { nonce, session } }) {
       const { id } = req.valid("query");
 
-      const userinfo = session.get("userinfo");
-
-      if (!userinfo) {
-        return redirect("/");
-      }
-
-      const username = userinfo_to_username(userinfo);
+      const username = userinfo_to_username(session.get("userinfo")!);
       return render(<LegacyPage active_id={id} />, { nonce, username });
     },
   );
