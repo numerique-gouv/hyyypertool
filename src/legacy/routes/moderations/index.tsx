@@ -8,7 +8,7 @@ import {
   SEARCH_EMAIL_INPUT_ID,
   SEARCH_SIRET_INPUT_ID,
   Table as Table_01,
-} from ":legacy/01";
+} from ":legacy/moderations/01";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";

@@ -1,6 +1,7 @@
 //
 
 import type { Moderation } from ":database:moncomptepro";
+import { moderation_type_to_emoji } from ":legacy/moderations/moderation_type_to_emoji";
 import { row } from ":ui/table";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
@@ -43,6 +44,14 @@ export function ModerationTable({
               {fields.map((name) => (
                 <td>
                   {match(moderation[name])
+                    .when(
+                      () => name === "type",
+                      () => (
+                        <span title={moderation.type}>
+                          {moderation_type_to_emoji(moderation.type)}
+                        </span>
+                      ),
+                    )
                     .when(
                       (x): x is Date => x instanceof Date,
                       (value) =>

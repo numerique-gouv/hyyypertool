@@ -1,9 +1,8 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { Moderation, Organization, User } from ":database:moncomptepro";
+import type { Moderation, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import type { MCP_Moderation } from ":moncomptepro";
 import { row } from ":ui/table";
 import {
   and,
@@ -18,7 +17,7 @@ import { html } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
 import { Suspense } from "hono/jsx/streaming";
 import { type VariantProps } from "tailwind-variants";
-import { match } from "ts-pattern";
+import { moderation_type_to_emoji } from "./moderation_type_to_emoji";
 
 //
 
@@ -168,7 +167,7 @@ export async function Table() {
         {moderations.map(function ({ moderations, users, organizations }) {
           return (
             <Row
-              moderation={{ ...moderations, users, organizations }}
+              moderation={{ ...moderations, users }}
               variants={{
                 is_active: active_id === moderations.id,
               }}
@@ -208,11 +207,10 @@ function Row({
 }: {
   moderation: Moderation & {
     users: User;
-    organizations: Organization;
   };
   variants: VariantProps<typeof row>;
 }) {
-  const { users, organizations } = moderation;
+  const { users } = moderation;
   return (
     <tr
       aria-selected="false"
@@ -222,12 +220,7 @@ function Row({
       hx-push-url={`/legacy?id=${moderation.id}`}
     >
       <td safe title={moderation.type}>
-        {match(moderation.type as MCP_Moderation["type"])
-          // .with("big_organization_join", () => "🏢")
-          .with("non_verified_domain", () => "🔓")
-          .with("organization_join_block", () => "🕵️")
-          .with("ask_for_sponsorship", () => "🧑‍🤝‍🧑")
-          .otherwise(() => "?")}
+        {moderation_type_to_emoji(moderation.type)}
       </td>
       <td>
         <span safe>{users.created_at.toLocaleDateString("fr-FR")}</span>{" "}

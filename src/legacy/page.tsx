@@ -2,7 +2,7 @@
 
 import { ErrorBoundary } from "hono/jsx";
 import { Suspense } from "hono/jsx/streaming";
-import { PageContext_01, _01 } from "./01";
+import { PageContext_01, _01 } from "./moderations/01";
 import { ModerationPage } from "./moderations/page";
 
 //
