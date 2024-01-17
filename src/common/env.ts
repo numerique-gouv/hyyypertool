@@ -52,6 +52,7 @@ export default z
     HOST: z.string().trim().url().optional(),
     NODE_ENV: z.enum(["development", "production"]).default("development"),
     PORT: z.coerce.number().default(3000),
+    SENTRY_DNS: z.string().trim().url().optional(),
     VERSION: z.string().default(
       match(
         DEPLOY_ENV_SHEMA.optional().parse(Bun.env.DEPLOY_ENV, {

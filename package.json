@@ -29,6 +29,7 @@
     "@gouvfr/dsfr": "1.11.0",
     "@hono/zod-validator": "0.1.11",
     "@lit-labs/motion": "1.0.6",
+    "@sentry/bun": "^7.93.0",
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
     "drizzle-orm": "^0.29.3",

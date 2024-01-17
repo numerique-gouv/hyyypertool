@@ -11,6 +11,9 @@
       ":database:moncomptepro": [
         "./src/database/moncomptepro/moncomptepro_pg.ts"
       ],
+      ":database:moncomptepro/middleware": [
+        "./src/database/moncomptepro/middleware.ts"
+      ],
       ":common/*": ["./src/common/*"],
       ":hc": ["./src/client"],
       ":legacy/*": ["./src/legacy/*"],

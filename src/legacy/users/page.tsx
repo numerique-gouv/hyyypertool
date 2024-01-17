@@ -20,7 +20,6 @@ export default async function Page({
   page: number;
 }) {
   const take = 10;
-
   const where = and(like(schema.users.email, `%${email ?? ""}%`));
   const { users, count } = await moncomptepro_pg.transaction(async () => {
     const users = await moncomptepro_pg
