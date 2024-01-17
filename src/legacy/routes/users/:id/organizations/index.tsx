@@ -93,7 +93,7 @@ const fields = [
   // "official_contact_email_verification_sent_at",
 ] as const;
 
-export function Table({
+function Table({
   organizations,
 }: {
   organizations: { organizations: Organization }[];

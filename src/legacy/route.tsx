@@ -4,6 +4,7 @@ import { hono_autoroute } from ":common/autorouter";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { Hono } from "hono";
 import { moderations_router } from "./moderations/route";
+import { users_router } from "./users/route";
 
 //
 
@@ -23,4 +24,5 @@ export default new Hono<Session_Context>()
     return next();
   })
   .route("", legacy_autoroute)
-  .route("/legacy/moderations", moderations_router);
+  .route("/legacy/moderations", moderations_router)
+  .route("/legacy/users", users_router);

@@ -86,7 +86,13 @@ export async function _02() {
       ></div>
       <hr />
       <h3 class="mt-2">
-        #### 👨‍💻 A propos de <span>{moderation.users.given_name}</span>
+        <a
+          href={api_ref("/legacy/users/:id", {
+            id: moderation.user_id.toString(),
+          })}
+        >
+          #### 👨‍💻 A propos de <span>{moderation.users.given_name}</span>
+        </a>
       </h3>
       <ul>
         <li>

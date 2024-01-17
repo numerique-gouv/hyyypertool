@@ -7,6 +7,7 @@ import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { moncomptepro_pg, schema, type User } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
@@ -24,7 +25,7 @@ export default new Hono<Session_Context & Csp_Context>()
   .get(
     "/",
     zValidator("param", Id_Schema),
-    async ({ req, render, redirect, notFound, var: { nonce, session } }) => {
+    async ({ req, render, notFound, var: { nonce, session } }) => {
       const { id } = req.valid("param");
 
       const user = await moncomptepro_pg.query.users.findFirst({
@@ -51,6 +52,22 @@ export default new Hono<Session_Context & Csp_Context>()
             <div
               hx-get={api_ref("/legacy/users/:id/organizations", {
                 id: String(user.id),
+              })}
+              hx-target="this"
+              hx-trigger="load"
+              class="fr-table"
+              id="table-user-organisations"
+            ></div>
+          </div>
+          <hr />
+          <b>{user.given_name}</b> est enregistré(e) dans les modérations
+          suivantes :
+          <div class="fr-table max-w-full overflow-x-auto">
+            <div
+              hx-get={app_hc.legacy.users[":id"].moderations.$url({
+                param: {
+                  id: user.id.toString(),
+                },
               })}
               hx-target="this"
               hx-trigger="load"

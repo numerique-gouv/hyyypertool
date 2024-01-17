@@ -11,11 +11,11 @@ export function moncomptepro_pg_database({
 }: {
   connectionString: string;
 }): MiddlewareHandler<moncomptepro_pg_Context> {
-  const connection = new Client({
-    connectionString: connectionString ?? env.DATABASE_URL,
-  });
-
   return async function moncomptepro_pg_middleware({ req, set }, next) {
+    const connection = new Client({ connectionString: connectionString });
+
+    await connection.connect();
+
     const moncomptepro_pg = drizzle(connection, {
       schema,
       logger: env.DEPLOY_ENV === "preview",
@@ -24,6 +24,8 @@ export function moncomptepro_pg_database({
     set("moncomptepro_pg", moncomptepro_pg);
 
     await next();
+
+    await connection.end();
   };
 }
 
