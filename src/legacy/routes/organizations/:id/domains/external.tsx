@@ -1,5 +1,6 @@
 //
 
+import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema } from ":common/schema";
 import {
   moncomptepro_pg,
@@ -52,7 +53,7 @@ router.put(
 
     return text("", 200, {
       "HX-Trigger": "organisation_external_domain_updated",
-    });
+    } as Htmx_Header);
   },
 );
 
@@ -71,7 +72,7 @@ router.delete(
 
     return text("", 200, {
       "HX-Trigger": "organisation_external_domain_updated",
-    });
+    } as Htmx_Header);
   },
 );
 

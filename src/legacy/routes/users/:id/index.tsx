@@ -1,11 +1,12 @@
 //
 
+import { api_ref } from ":api_ref";
 import type { Csp_Context } from ":common/csp_headers";
 import { date_to_string } from ":common/date";
+import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { moncomptepro_pg, schema, type User } from ":database:moncomptepro";
-import { api_ref } from ":paths";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
@@ -24,11 +25,6 @@ export default new Hono<Session_Context & Csp_Context>()
     "/",
     zValidator("param", Id_Schema),
     async ({ req, render, redirect, notFound, var: { nonce, session } }) => {
-      const userinfo = session.get("userinfo");
-      if (!userinfo) {
-        return redirect("/");
-      }
-
       const { id } = req.valid("param");
 
       const user = await moncomptepro_pg.query.users.findFirst({
@@ -39,7 +35,7 @@ export default new Hono<Session_Context & Csp_Context>()
         return notFound();
       }
 
-      const username = userinfo_to_username(userinfo);
+      const username = userinfo_to_username(session.get("userinfo")!);
       return render(
         <main class="fr-container">
           <h1>👨‍💻 A propos de {user.given_name}</h1>
@@ -66,12 +62,29 @@ export default new Hono<Session_Context & Csp_Context>()
         { nonce, username },
       );
     },
-  );
+  )
+  .delete("", zValidator("param", Id_Schema), async ({ text, req }) => {
+    const { id } = req.valid("param");
+    await moncomptepro_pg.delete(schema.users).where(eq(schema.users.id, id));
+    return text("OK", 200, {
+      "HX-Location": api_ref("/legacy/users", {}),
+    } as Htmx_Header);
+  })
+  .patch("/reset", zValidator("param", Id_Schema), async ({ text, req }) => {
+    const { id } = req.valid("param");
+    await moncomptepro_pg
+      .update(schema.users)
+      .set({
+        email_verified: false,
+      })
+      .where(eq(schema.users.id, id));
+    return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
+  });
 
 //
 
 function Actions({ user }: { user: User }) {
-  const { email } = user;
+  const { email, id } = user;
   const domain = email.split("@")[1];
   return (
     <div class="grid grid-cols-3 justify-items-center gap-1">
@@ -80,11 +93,19 @@ function Actions({ user }: { user: User }) {
       <GoogleSearchButton query={domain}>
         « <span>{domain}</span> » sur Google
       </GoogleSearchButton>
-      <button class={button({ intent: "danger" })}>
-        🚫 réinitialiser la vérification de l’email (bloquer) [TODO]
+      <button
+        class={button({ intent: "danger" })}
+        hx-patch={api_ref("/legacy/users/:id/reset", { id: id.toString() })}
+        hx-swap="none"
+      >
+        🚫 réinitialiser la vérification de l’email (bloquer)
       </button>
-      <button class={button({ intent: "dark" })}>
-        🗑️ supprimer définitivement un compte [TODO]
+      <button
+        class={button({ intent: "dark" })}
+        hx-delete={api_ref("/legacy/users/:id", { id: id.toString() })}
+        hx-swap="none"
+      >
+        🗑️ supprimer définitivement ce compte
       </button>
     </div>
   );

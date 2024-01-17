@@ -1,5 +1,5 @@
+import { api_ref } from ":api_ref";
 import { type Organization } from ":database:moncomptepro";
-import { api_ref } from ":paths";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { ORGANIZATIONS_TABLE_ID } from "./page";

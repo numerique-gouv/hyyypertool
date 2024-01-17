@@ -1,7 +1,7 @@
 //
 
+import { api_ref } from ":api_ref";
 import type { AgentConnect_UserInfo } from ":common/session";
-import { api_ref } from ":paths";
 import type { Child } from "hono/jsx";
 import { Root_Layout, type Root_Layout_Props } from "./root";
 

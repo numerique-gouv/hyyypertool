@@ -19,7 +19,7 @@
       ":legacy/*": ["./src/legacy/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":package.json": ["./package.json"],
-      ":paths": ["./src/paths.ts"],
+      ":api_ref": ["./src/api_ref.ts"],
       ":ui/*": ["./src/ui/*"],
       ":www": ["./src/www.router"]
     },

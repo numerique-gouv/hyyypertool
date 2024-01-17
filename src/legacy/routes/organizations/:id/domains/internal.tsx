@@ -1,5 +1,6 @@
 //
 
+import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Organization } from ":database:moncomptepro";
@@ -56,7 +57,7 @@ router.put(
 
     return text("", 200, {
       "HX-Trigger": "organisation_internal_domain_updated",
-    });
+    } as Htmx_Header);
   },
 );
 
@@ -76,7 +77,7 @@ router.delete(
 
     return text("OK", 200, {
       "HX-Trigger": "organisation_internal_domain_updated",
-    });
+    } as Htmx_Header);
   },
 );
 
@@ -104,7 +105,7 @@ router.patch(
 
     return text("OK", 200, {
       "HX-Trigger": "organisation_internal_domain_updated",
-    });
+    } as Htmx_Header);
   },
 );
 

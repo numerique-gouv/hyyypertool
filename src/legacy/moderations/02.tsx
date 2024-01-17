@@ -1,11 +1,11 @@
 //
 
+import { api_ref } from ":api_ref";
 import { date_to_string } from ":common/date";
 import env from ":common/env.ts";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import type { MCP_Moderation } from ":moncomptepro";
-import { api_ref } from ":paths";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";

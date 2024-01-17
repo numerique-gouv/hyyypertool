@@ -1,5 +1,6 @@
 //
 
+import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema } from ":common/schema";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { sendModerationProcessedEmail } from ":legacy/services/mcp_admin_api";
@@ -39,7 +40,7 @@ const moderation_router = new Hono()
 
       return text("OK", 200, {
         "HX-Location": "/legacy",
-      });
+      } as Htmx_Header);
     },
   );
 

@@ -23,7 +23,8 @@ type KnownPath =
   | "/legacy/organizations/:id/members"
   | "/legacy/users"
   | "/legacy/users/:id"
-  | "/legacy/users/:id/organizations";
+  | "/legacy/users/:id/organizations"
+  | "/legacy/users/:id/reset";
 
 //
 

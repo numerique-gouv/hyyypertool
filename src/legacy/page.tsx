@@ -5,6 +5,8 @@ import { Suspense } from "hono/jsx/streaming";
 import { PageContext_01, _01 } from "./01";
 import { ModerationPage } from "./moderations/page";
 
+//
+
 export function LegacyPage({ active_id }: { active_id: number | undefined }) {
   return (
     <>

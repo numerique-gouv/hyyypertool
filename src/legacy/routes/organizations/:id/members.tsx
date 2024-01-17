@@ -1,5 +1,7 @@
 //
 
+import { api_ref } from ":api_ref";
+import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema, Pagination_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
@@ -9,7 +11,6 @@ import {
   type Users_Organizations,
 } from ":database:moncomptepro";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
-import { api_ref } from ":paths";
 import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
@@ -129,7 +130,7 @@ router.patch(
 
     return text("OK", 200, {
       "HX-Trigger": "users_organizations_updated",
-    });
+    } as Htmx_Header);
   },
 );
 
@@ -153,7 +154,7 @@ router.delete(
 
     return text("OK", 200, {
       "HX-Trigger": "users_organizations_updated",
-    });
+    } as Htmx_Header);
   },
 );
 

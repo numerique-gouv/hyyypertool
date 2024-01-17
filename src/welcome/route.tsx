@@ -1,9 +1,9 @@
 //
 
+import { api_ref } from ":api_ref";
 import type { Csp_Context } from ":common/csp_headers";
 import env from ":common/env";
 import { type Session_Context } from ":common/session";
-import { api_ref } from ":paths";
 import { Root_Layout } from ":ui/layout/root";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";

@@ -1,9 +1,9 @@
 //
 
+import { api_ref } from ":api_ref";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import type { MCP_Moderation } from ":moncomptepro";
-import { api_ref } from ":paths";
 import { row } from ":ui/table";
 import {
   and,

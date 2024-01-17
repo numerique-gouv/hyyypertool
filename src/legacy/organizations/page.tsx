@@ -1,7 +1,7 @@
 //
 
+import { api_ref } from ":api_ref";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import { api_ref } from ":paths";
 import { and, asc, count as drizzle_count, like } from "drizzle-orm";
 import { Table, Table_Context } from "./Table";
 
