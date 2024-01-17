@@ -11,6 +11,10 @@ export const readyz = new Hono();
 
 readyz.get("/", ({ text }) => text(`readyz check passed`));
 
+readyz.get("/sentry/error", async ({ text }) => {
+  throw new Error("Sentry error");
+});
+
 readyz.get("/drizzle/moncomptepro", async ({ text }) => {
   const [, is_ok] = await to(moncomptepro_pg.execute(sql`SELECT 1`));
   return text("[+]drizzle moncomptepro connection " + (is_ok ? "OK" : "FAIL"));
