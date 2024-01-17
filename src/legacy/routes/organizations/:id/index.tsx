@@ -64,6 +64,9 @@ function Fiche({ organization }: { organization: Organization }) {
   return (
     <ul>
       <li>
+        id : <b>{organization.id}</b>
+      </li>
+      <li>
         Dénomination : <b>{organization.cached_libelle}</b>
       </li>
       <li>
@@ -89,10 +92,14 @@ function Fiche({ organization }: { organization: Organization }) {
         )
       </li>
       <li>
-        id : <b>{organization.id}</b>
-      </li>
-      <li>
-        siret : <b>{organization.siret}</b>
+        siret : <b>{organization.siret}</b> (
+        <a
+          href={`https://annuaire-entreprises.data.gouv.fr/entreprise/${organization.siret}`}
+          target="_blank"
+        >
+          Voir la fiche annuaire entreprise de cette organisation
+        </a>
+        )
       </li>
     </ul>
   );
