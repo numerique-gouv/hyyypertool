@@ -19,9 +19,9 @@ import { ModerationPage_Context } from "./page";
 //
 
 export async function _02() {
-  const { moderation } = useContext(ModerationPage_Context);
-
-  const domain = moderation.users.email.split("@")[1];
+  const { moderation, domain, users_organizations } = useContext(
+    ModerationPage_Context,
+  );
 
   return (
     <div class="mx-auto mt-6 !max-w-6xl" id="02">
@@ -43,6 +43,10 @@ export async function _02() {
           {match(moderation.type as MCP_Moderation["type"])
             .with("ask_for_sponsorship", () => "demande un sponsorship")
             .with(
+              "big_organization_join",
+              () => "a rejoint l'organisation de plus de 50 employés",
+            )
+            .with(
               "non_verified_domain",
               () => "a rejoint une organisation avec un domain non vérifié  ",
             )
@@ -54,7 +58,15 @@ export async function _02() {
               (type) => `veut effectuer une action inconnue (type ${type})`,
             )}
         </span>{" "}
-        « <span>{moderation.organizations.cached_libelle}</span> »
+        « <span>{moderation.organizations.cached_libelle}</span> »{" "}
+        {users_organizations ? (
+          <span>
+            <span class="text-gray-600">en tant</span>{" "}
+            {users_organizations.is_external ? "qu'externe" : "qu'interne"}
+          </span>
+        ) : (
+          <></>
+        )}
       </h2>
       <ModerationCallout moderation={moderation} />
       <FirstToolBox
