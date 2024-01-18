@@ -10,6 +10,7 @@ import {
   type User,
   type Users_Organizations,
 } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
 import { button } from ":ui/button";
@@ -42,7 +43,73 @@ const Verification_Type_Schema = z.enum([
 
 //
 
-export default new Hono()
+export const organization_member_router = new Hono()
+  .basePath(":user_id")
+  .patch(
+    "/",
+    zValidator(
+      "param",
+      Id_Schema.extend({
+        user_id: z.string().pipe(z.coerce.number()),
+      }),
+    ),
+    zValidator(
+      "form",
+      z.object({
+        verification_type: Verification_Type_Schema.or(
+          z.literal(""),
+        ).optional(),
+        is_external: z.string().pipe(z_coerce_boolean).optional(),
+      }),
+    ),
+    async function ({ text, req }) {
+      const { id: organization_id, user_id } = req.valid("param");
+      const { verification_type, is_external } = req.valid("form");
+
+      await moncomptepro_pg
+        .update(schema.users_organizations)
+        .set({
+          is_external,
+          verification_type,
+        })
+        .where(
+          and(
+            eq(schema.users_organizations.organization_id, organization_id),
+            eq(schema.users_organizations.user_id, user_id),
+          ),
+        );
+
+      return text("OK", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
+      } as Htmx_Header);
+    },
+  )
+  .delete(
+    "/",
+    zValidator(
+      "param",
+      Id_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
+    ),
+    async function ({ text, req }) {
+      const { id: organization_id, user_id } = req.valid("param");
+
+      await moncomptepro_pg
+        .delete(schema.users_organizations)
+        .where(
+          and(
+            eq(schema.users_organizations.organization_id, organization_id),
+            eq(schema.users_organizations.user_id, user_id),
+          ),
+        );
+
+      return text("OK", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
+      } as Htmx_Header);
+    },
+  );
+
+export const organization_members_router = new Hono()
+  .route("", organization_member_router)
   .get(
     "/",
     zValidator("param", Id_Schema),
@@ -95,66 +162,6 @@ export default new Hono()
         </Table_Context.Provider>,
       );
     },
-  )
-  .patch(
-    "/:user_id",
-    zValidator(
-      "param",
-      Id_Schema.extend({
-        user_id: z.string().pipe(z.coerce.number()),
-      }),
-    ),
-    zValidator(
-      "form",
-      z.object({
-        verification_type: Verification_Type_Schema.optional(),
-        is_external: z.string().pipe(z_coerce_boolean).optional(),
-      }),
-    ),
-    async function ({ text, req }) {
-      const { id: organization_id, user_id } = req.valid("param");
-      const { verification_type, is_external } = req.valid("form");
-
-      await moncomptepro_pg
-        .update(schema.users_organizations)
-        .set({
-          is_external,
-          verification_type,
-        })
-        .where(
-          and(
-            eq(schema.users_organizations.organization_id, organization_id),
-            eq(schema.users_organizations.user_id, user_id),
-          ),
-        );
-
-      return text("OK", 200, {
-        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-      } as Htmx_Header);
-    },
-  )
-  .delete(
-    "/:user_id",
-    zValidator(
-      "param",
-      Id_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
-    ),
-    async function ({ text, req }) {
-      const { id: organization_id, user_id } = req.valid("param");
-
-      await moncomptepro_pg
-        .delete(schema.users_organizations)
-        .where(
-          and(
-            eq(schema.users_organizations.organization_id, organization_id),
-            eq(schema.users_organizations.user_id, user_id),
-          ),
-        );
-
-      return text("OK", 200, {
-        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-      } as Htmx_Header);
-    },
   );
 
 //
@@ -206,7 +213,11 @@ function Table({
           <td colspan={2} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={`/legacy/organizations/${organization_id}/members`}
+              hx-get={app_hc.legacy.organizations[":id"].members.$url({
+                param: {
+                  id: organization_id.toString(),
+                },
+              })}
               hx-trigger="input changed delay:500ms"
               hx-target="#table-organisation-members"
               id="page"
@@ -264,14 +275,28 @@ function Actions({
       <td colspan={6}>
         <button
           class={button()}
-          hx-delete={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-delete={app_hc.legacy.organizations[":id"].members[
+            ":user_id"
+          ].$url({
+            param: {
+              id: organization_id.toString(),
+              user_id: user_id.toString(),
+            },
+          })}
           hx-swap="none"
         >
           🚪🚶retirer de l'orga
         </button>
         <button
           class={button()}
-          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
+            {
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            },
+          )}
           hx-swap="none"
           hx-vals={JSON.stringify({
             verification_type:
@@ -282,7 +307,14 @@ function Actions({
         </button>
         <button
           class={button()}
-          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
+            {
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            },
+          )}
           hx-swap="none"
           hx-vals={JSON.stringify({
             verification_type:
@@ -293,7 +325,14 @@ function Actions({
         </button>
         <button
           class={button()}
-          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
+            {
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            },
+          )}
           hx-swap="none"
           hx-vals={JSON.stringify({
             verification_type:
@@ -303,20 +342,27 @@ function Actions({
           🔄 vérif: mail officiel
         </button>
         {verification_type ? (
-          <></>
-        ) : (
           <button
             class={button({ intent: "danger" })}
             hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
             hx-swap="none"
-            hx-vals={JSON.stringify({ verification_type: null })}
+            hx-vals={JSON.stringify({ verification_type: "" })}
           >
             🚫 non vérifié
           </button>
+        ) : (
+          <></>
         )}
         <button
           class={button()}
-          hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
+            {
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            },
+          )}
           hx-swap="none"
           hx-vals={JSON.stringify({
             is_external: !is_external,

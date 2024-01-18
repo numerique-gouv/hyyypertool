@@ -4,7 +4,7 @@ import { hono_autoroute } from ":common/autorouter";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { Hono } from "hono";
 import { moderations_router } from "./moderations/route";
-import { organizations_router } from "./organizations/route";
+import { organizations_router } from "./organizations/api/route";
 import { users_router } from "./users/route";
 
 //

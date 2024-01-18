@@ -6,11 +6,13 @@ import { mark_domain_as_verified } from ":legacy/services/mcp_admin_api";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";
-import { ORGANISATION_EVENTS } from "./event";
+import { ORGANISATION_EVENTS } from "../event";
+import { organization_members_router } from "./members";
 //
 
 const organization_router = new Hono()
   .basePath(":id")
+  .route("members", organization_members_router)
   .patch(
     "verify/:domain",
     zValidator("param", Id_Schema.extend({ domain: z.string() })),

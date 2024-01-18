@@ -310,7 +310,16 @@ function About_Organisation({
   const domain = moderation.users.email.split("@")[1];
   return (
     <>
-      <h3 class="mt-12"> 🏛 A propos de l'organisation</h3>
+      <h3 class="mt-12">
+        <a
+          href={api_ref("/legacy/organizations/:id", {
+            id: moderation.organization_id.toString(),
+          })}
+        >
+          #### 🏛 A propos de l'organisation :{" "}
+          <b>{moderation.organizations.cached_libelle}</b>
+        </a>
+      </h3>
       <ul>
         <li>
           Dénomination : <b>{moderation.organizations.cached_libelle}</b>
