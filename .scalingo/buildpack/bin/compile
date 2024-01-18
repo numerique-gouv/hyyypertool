@@ -44,6 +44,7 @@ write_profile_git() {
   local bp_dir="$1"
   local build_dir="$2"
   mkdir -p "$build_dir/.profile.d"
+  echo "export NODE_ENV=production" > "$build_dir/.profile.d/node.sh"
   echo "export GIT_SHA=$SOURCE_VERSION" > "$build_dir/.profile.d/git.sh"
 }
 
@@ -94,12 +95,15 @@ bun run build
 
 #
 
-header "Installing production dependencies"
+header "Remove development dependencies"
 rm -rf node_modules
+
+#
+
+header "Installing production dependencies"
 bun install --production
 
 #
 
+header "Remove package manager cache"
 bun pm cache rm
-
-rm -rf "$N_PREFIX"
