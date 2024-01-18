@@ -7,7 +7,7 @@
 $ cd ___moncomptepro___
 $ docker compose up
 
-$ bun x drizzle-kit introspect:pg --config src/database/moncomptepro/drizzle.config.
+$ bun x drizzle-kit introspect:pg --config src/database/moncomptepro/drizzle.config.ts
 drizzle-kit: v0.20.7
 drizzle-orm: v0.29.1
 
