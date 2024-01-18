@@ -145,7 +145,9 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
         />
       </div>
 
-      <h6>B) Coller le texte en réponse à l'email correspondant :</h6>
+      <h6 class="mt-12">
+        B) Coller le texte en réponse à l'email correspondant :
+      </h6>
       <a
         href={`mailto:${moderation.users.email}?${mailto_query}`}
         class={button()}
@@ -312,6 +314,7 @@ function SendModerationProcessedEmail({
     moderation.type !== "ask_for_sponsorship";
   return (
     <form
+      class="m-auto my-12 w-fit"
       hx-patch={
         app_hc.legacy.moderations[":id"].processed.$url({
           param: { id: moderation.id.toString() },

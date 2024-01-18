@@ -12,7 +12,6 @@ import { and, eq } from "drizzle-orm";
 import { createContext } from "hono/jsx";
 import { _02 } from "./02";
 import { _03 } from "./03";
-import { _04 } from "./04";
 
 //
 
@@ -59,8 +58,6 @@ export async function ModerationPage({
       <_02 />
       <hr />
       <_03 moderation_id={active_id} />
-      <hr />
-      <_04 moderation_id={active_id} />
     </ModerationPage_Context.Provider>
   );
 }
