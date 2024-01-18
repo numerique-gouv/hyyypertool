@@ -243,11 +243,13 @@ function Table({
           <td colspan={2} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={app_hc.legacy.organizations[":id"].members.$url({
-                param: {
-                  id: organization_id.toString(),
-                },
-              })}
+              hx-get={
+                app_hc.legacy.organizations[":id"].members.$url({
+                  param: {
+                    id: organization_id.toString(),
+                  },
+                }).pathname
+              }
               hx-trigger="input changed delay:500ms"
               hx-target="#table-organisation-members"
               id="page"
@@ -305,28 +307,28 @@ function Actions({
       <td colspan={6}>
         <button
           class={button()}
-          hx-delete={app_hc.legacy.organizations[":id"].members[
-            ":user_id"
-          ].$url({
-            param: {
-              id: organization_id.toString(),
-              user_id: user_id.toString(),
-            },
-          })}
+          hx-delete={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            }).pathname
+          }
           hx-swap="none"
         >
           🚪🚶retirer de l'orga
         </button>
         <button
           class={button()}
-          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
-            {
+          hx-patch={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
-            },
-          )}
+            }).pathname
+          }
           hx-swap="none"
           hx-vals={JSON.stringify({
             verification_type:
@@ -337,14 +339,14 @@ function Actions({
         </button>
         <button
           class={button()}
-          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
-            {
+          hx-patch={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
-            },
-          )}
+            }).pathname
+          }
           hx-swap="none"
           hx-vals={JSON.stringify({
             verification_type:
@@ -355,14 +357,14 @@ function Actions({
         </button>
         <button
           class={button()}
-          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
-            {
+          hx-patch={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
-            },
-          )}
+            }).pathname
+          }
           hx-swap="none"
           hx-vals={JSON.stringify({
             verification_type:
@@ -374,7 +376,14 @@ function Actions({
         {verification_type ? (
           <button
             class={button({ intent: "danger" })}
-            hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+            hx-patch={
+              app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+                param: {
+                  id: organization_id.toString(),
+                  user_id: user_id.toString(),
+                },
+              }).pathname
+            }
             hx-swap="none"
             hx-vals={JSON.stringify({ verification_type: "" })}
           >
@@ -385,14 +394,14 @@ function Actions({
         )}
         <button
           class={button()}
-          hx-patch={app_hc.legacy.organizations[":id"].members[":user_id"].$url(
-            {
+          hx-patch={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
-            },
-          )}
+            }).pathname
+          }
           hx-swap="none"
           hx-vals={JSON.stringify({
             is_external: !is_external,
