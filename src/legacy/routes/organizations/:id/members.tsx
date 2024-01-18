@@ -10,6 +10,7 @@ import {
   type User,
   type Users_Organizations,
 } from ":database:moncomptepro";
+import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
 import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
@@ -129,7 +130,7 @@ router.patch(
       );
 
     return text("OK", 200, {
-      "HX-Trigger": "users_organizations_updated",
+      "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
     } as Htmx_Header);
   },
 );
@@ -153,7 +154,7 @@ router.delete(
       );
 
     return text("OK", 200, {
-      "HX-Trigger": "users_organizations_updated",
+      "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
     } as Htmx_Header);
   },
 );

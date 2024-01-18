@@ -94,7 +94,7 @@ export async function _02() {
           id: String(moderation.organization_id),
         })}
         hx-target="this"
-        hx-trigger="load, users_organizations_updated from:body"
+        hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED} from:body`}
         class="fr-table"
         id="table-organisation-members"
       ></div>
