@@ -5,6 +5,7 @@ import { date_to_string } from ":common/date";
 import env from ":common/env.ts";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
@@ -368,7 +369,16 @@ function About_Organisation({
       </ul>
       <br />
 
-      <button class={button({ className: "block", intent: "warning" })}>
+      <button
+        class={button({ className: "block", intent: "warning" })}
+        hx-patch={app_hc.legacy.organizations[":id"].verify[":domain"].$url({
+          param: {
+            id: moderation.organizations.id.toString(),
+            domain: domain,
+          },
+        })}
+        hx-swap="none"
+      >
         🪄 Action en un click :<br /> - ajouter le domaine <b>{domain}</b> dans
         les domaines internes (si pas déjà présent)
         <br /> - marquer ce domaine comme vérifié (si pas déjà vérifié)
