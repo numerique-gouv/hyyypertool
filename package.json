@@ -34,7 +34,7 @@
     "await-to-js": "3.0.0",
     "drizzle-orm": "^0.29.3",
     "error-custom-class": "^10.0.0",
-    "hono": "3.12.4",
+    "hono": "3.12.5",
     "hono-sessions": "0.3.3",
     "htmx.ext...chunked-transfer": "^1.0.1",
     "htmx.org": "1.9.10",
@@ -60,17 +60,17 @@
     "@tsconfig/bun": "1.0.1",
     "@types/lodash.sortby": "4.7.9",
     "@types/lodash.xor": "^4.5.9",
-    "bun-types": "1.0.22",
-    "drizzle-kit": "^0.20.12",
+    "bun-types": "1.0.23",
+    "drizzle-kit": "^0.20.13",
     "moncomptepro": "betagouv/moncomptepro#c412a610be297840e0ae11e10d8e25029f665136",
-    "prettier": "3.2.2",
+    "prettier": "3.2.4",
     "prettier-plugin-tailwindcss": "0.5.11",
     "release-it": "^17.0.1",
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3"
   },
   "overrides": {
-    "hono": "3.12.4"
+    "hono": "3.12.5"
   },
   "release-it": {
     "git": {
