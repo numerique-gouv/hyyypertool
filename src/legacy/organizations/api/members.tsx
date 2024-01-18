@@ -12,6 +12,7 @@ import {
 } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
+import { join_organization } from ":legacy/services/mcp_admin_api";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
@@ -45,6 +46,35 @@ const Verification_Type_Schema = z.enum([
 
 export const organization_member_router = new Hono()
   .basePath(":user_id")
+  .post(
+    "/",
+    zValidator(
+      "form",
+      z.object({
+        is_external: z.string().pipe(z_coerce_boolean),
+      }),
+    ),
+    zValidator(
+      "param",
+      Id_Schema.extend({
+        user_id: z.string().pipe(z.coerce.number()),
+      }),
+    ),
+    async function ({ text, req }) {
+      const { id: organization_id, user_id } = req.valid("param");
+      const { is_external } = req.valid("form");
+
+      await join_organization({
+        is_external,
+        organization_id,
+        user_id,
+      });
+
+      return text("OK", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
+      } as Htmx_Header);
+    },
+  )
   .patch(
     "/",
     zValidator(

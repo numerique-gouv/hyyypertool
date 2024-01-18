@@ -98,6 +98,53 @@ export async function _02() {
         class="fr-table"
         id="table-organisation-members"
       ></div>
+      <div class="grid grid-cols-2 gap-1">
+        <button
+          class={button({ className: "block", intent: "warning" })}
+          hx-post={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: moderation.organization_id.toString(),
+                user_id: moderation.user_id.toString(),
+              },
+            }).pathname
+          }
+          hx-swap="none"
+          hx-vals={JSON.stringify({
+            is_external: true,
+          })}
+        >
+          🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
+          l'organisation EN TANT QU'INTERNE (si pas déjà dans l'orga)
+          <br />
+          - lui envoyer un mail avec la liste des personnes présente dans
+          l'organisation (le cas échéant et si pas déjà envoyé)
+          <br />- envoyer un mail au membre existant de l'organisation pour les
+          prévenir de l'arrivée de {moderation.users.given_name} (le cas échéant
+          et si pas déjà envoyé)
+        </button>
+        <button
+          class={button({ className: "block", intent: "warning" })}
+          hx-post={
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: moderation.organization_id.toString(),
+                user_id: moderation.user_id.toString(),
+              },
+            }).pathname
+          }
+          hx-swap="none"
+          hx-vals={JSON.stringify({
+            is_external: false,
+          })}
+        >
+          🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
+          l'organisation EN TANT QUE EXTERNE (si pas déjà dans l'orga)
+          <br />- envoyer un mail au membre existant de l'organisation pour les
+          prévenir de l'arrivée de {moderation.users.given_name} (le cas échéant
+          et si pas déjà envoyé)
+        </button>
+      </div>
       <hr />
       <h3 class="mt-2">
         <a
