@@ -111,7 +111,7 @@ export async function _02() {
           }
           hx-swap="none"
           hx-vals={JSON.stringify({
-            is_external: true,
+            is_external: false,
           })}
         >
           🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
@@ -135,7 +135,7 @@ export async function _02() {
           }
           hx-swap="none"
           hx-vals={JSON.stringify({
-            is_external: false,
+            is_external: true,
           })}
         >
           🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
