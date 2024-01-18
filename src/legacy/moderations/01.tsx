@@ -6,7 +6,7 @@ import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { row } from ":ui/table";
 import {
   and,
-  asc,
+  desc,
   count as drizzle_count,
   eq,
   ilike,
@@ -121,7 +121,7 @@ export async function Table() {
         eq(schema.moderations.organization_id, schema.organizations.id),
       )
       .where(where)
-      .orderBy(asc(schema.moderations.created_at))
+      .orderBy(desc(schema.moderations.created_at))
       .limit(take)
       .offset(page * take);
     const [{ value: count }] = await moncomptepro_pg
