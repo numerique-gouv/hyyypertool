@@ -75,11 +75,6 @@ fi
 
 #
 
-header "Installing node binary"
-curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
-
-#
-
 header "Installing bun binary"
 curl -fsSL https://bun.sh/install | bash
 
