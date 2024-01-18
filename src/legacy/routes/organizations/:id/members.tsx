@@ -12,6 +12,7 @@ import {
 } from ":database:moncomptepro";
 import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
 import { type MCP_UserOrganizationLink } from ":moncomptepro";
+import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
@@ -41,128 +42,127 @@ const Verification_Type_Schema = z.enum([
 
 //
 
-const router = new Hono();
-export default router;
+export default new Hono()
+  .get(
+    "/",
+    zValidator("param", Id_Schema),
+    zValidator("query", Pagination_Schema),
+    async function ({ html, req }) {
+      const { id: organization_id } = req.valid("param");
+      const { page } = req.valid("query");
+      const take = 5;
 
-//
-
-router.get(
-  "/",
-  zValidator("param", Id_Schema),
-  zValidator("query", Pagination_Schema),
-  async function ({ html, req }) {
-    const { id: organization_id } = req.valid("param");
-    const { page } = req.valid("query");
-    const take = 5;
-
-    const where = and(
-      eq(schema.users_organizations.organization_id, organization_id),
-    );
-
-    const { users, count } = await moncomptepro_pg.transaction(async () => {
-      const users = await moncomptepro_pg
-        .select()
-        .from(schema.users)
-        .innerJoin(
-          schema.users_organizations,
-          eq(schema.users.id, schema.users_organizations.user_id),
-        )
-        .where(where)
-        .orderBy(desc(schema.users.created_at))
-        .limit(take)
-        .offset(page * take);
-      const [{ value: count }] = await moncomptepro_pg
-        .select({ value: drizzle_count() })
-        .from(schema.users)
-        .innerJoin(
-          schema.users_organizations,
-          eq(schema.users.id, schema.users_organizations.user_id),
-        )
-        .where(where);
-
-      return { users, count };
-    });
-
-    const users_with_external = users.map((user) => ({
-      ...user.users,
-      is_external: user.users_organizations.is_external,
-      verification_type: user.users_organizations.verification_type,
-    }));
-
-    return html(
-      <Table_Context.Provider value={{ page, take, count }}>
-        <Table organization_id={organization_id} users={users_with_external} />
-      </Table_Context.Provider>,
-    );
-  },
-);
-
-router.patch(
-  "/:user_id",
-  zValidator(
-    "param",
-    Id_Schema.extend({
-      user_id: z.string().pipe(z.coerce.number()),
-    }),
-  ),
-  zValidator(
-    "form",
-    z.object({
-      verification_type: Verification_Type_Schema.optional(),
-      is_external: z.string().pipe(z_coerce_boolean).optional(),
-    }),
-  ),
-  async function ({ text, req }) {
-    const { id: organization_id, user_id } = req.valid("param");
-    const { verification_type, is_external } = req.valid("form");
-
-    await moncomptepro_pg
-      .update(schema.users_organizations)
-      .set({
-        is_external,
-        verification_type,
-      })
-      .where(
-        and(
-          eq(schema.users_organizations.organization_id, organization_id),
-          eq(schema.users_organizations.user_id, user_id),
-        ),
+      const where = and(
+        eq(schema.users_organizations.organization_id, organization_id),
       );
 
-    return text("OK", 200, {
-      "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-    } as Htmx_Header);
-  },
-);
+      const { users, count } = await moncomptepro_pg.transaction(async () => {
+        const users = await moncomptepro_pg
+          .select()
+          .from(schema.users)
+          .innerJoin(
+            schema.users_organizations,
+            eq(schema.users.id, schema.users_organizations.user_id),
+          )
+          .where(where)
+          .orderBy(desc(schema.users.created_at))
+          .limit(take)
+          .offset(page * take);
+        const [{ value: count }] = await moncomptepro_pg
+          .select({ value: drizzle_count() })
+          .from(schema.users)
+          .innerJoin(
+            schema.users_organizations,
+            eq(schema.users.id, schema.users_organizations.user_id),
+          )
+          .where(where);
 
-router.delete(
-  "/:user_id",
-  zValidator(
-    "param",
-    Id_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
-  ),
-  async function ({ text, req }) {
-    const { id: organization_id, user_id } = req.valid("param");
+        return { users, count };
+      });
 
-    await moncomptepro_pg
-      .delete(schema.users_organizations)
-      .where(
-        and(
-          eq(schema.users_organizations.organization_id, organization_id),
-          eq(schema.users_organizations.user_id, user_id),
-        ),
+      const users_with_external = users.map((user) => ({
+        ...user.users,
+        is_external: user.users_organizations.is_external,
+        verification_type: user.users_organizations.verification_type,
+      }));
+
+      return html(
+        <Table_Context.Provider value={{ page, take, count }}>
+          <Table
+            organization_id={organization_id}
+            users={users_with_external}
+          />
+        </Table_Context.Provider>,
       );
+    },
+  )
+  .patch(
+    "/:user_id",
+    zValidator(
+      "param",
+      Id_Schema.extend({
+        user_id: z.string().pipe(z.coerce.number()),
+      }),
+    ),
+    zValidator(
+      "form",
+      z.object({
+        verification_type: Verification_Type_Schema.optional(),
+        is_external: z.string().pipe(z_coerce_boolean).optional(),
+      }),
+    ),
+    async function ({ text, req }) {
+      const { id: organization_id, user_id } = req.valid("param");
+      const { verification_type, is_external } = req.valid("form");
 
-    return text("OK", 200, {
-      "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-    } as Htmx_Header);
-  },
-);
+      await moncomptepro_pg
+        .update(schema.users_organizations)
+        .set({
+          is_external,
+          verification_type,
+        })
+        .where(
+          and(
+            eq(schema.users_organizations.organization_id, organization_id),
+            eq(schema.users_organizations.user_id, user_id),
+          ),
+        );
+
+      return text("OK", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
+      } as Htmx_Header);
+    },
+  )
+  .delete(
+    "/:user_id",
+    zValidator(
+      "param",
+      Id_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
+    ),
+    async function ({ text, req }) {
+      const { id: organization_id, user_id } = req.valid("param");
+
+      await moncomptepro_pg
+        .delete(schema.users_organizations)
+        .where(
+          and(
+            eq(schema.users_organizations.organization_id, organization_id),
+            eq(schema.users_organizations.user_id, user_id),
+          ),
+        );
+
+      return text("OK", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
+      } as Htmx_Header);
+    },
+  );
 
 //
 
 type RowData = User &
   Pick<Users_Organizations, "is_external" | "verification_type">;
+
+//
 
 function Table({
   organization_id,
@@ -257,20 +257,20 @@ function Actions({
   user: RowData;
   organization_id: number;
 }) {
-  const { email, id: user_id, is_external } = user;
+  const { email, id: user_id, is_external, verification_type } = user;
 
   return (
     <tr>
       <td colspan={6}>
         <button
-          class="fr-btn"
+          class={button()}
           hx-delete={`/legacy/organizations/${organization_id}/members/${user_id}`}
           hx-swap="none"
         >
           🚪🚶retirer de l'orga
         </button>
         <button
-          class="fr-btn"
+          class={button()}
           hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
           hx-swap="none"
           hx-vals={JSON.stringify({
@@ -281,7 +281,7 @@ function Actions({
           🔄 vérif: liste dirigeants
         </button>
         <button
-          class="fr-btn"
+          class={button()}
           hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
           hx-swap="none"
           hx-vals={JSON.stringify({
@@ -292,7 +292,7 @@ function Actions({
           🔄 vérif: domaine email
         </button>
         <button
-          class="fr-btn"
+          class={button()}
           hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
           hx-swap="none"
           hx-vals={JSON.stringify({
@@ -302,8 +302,20 @@ function Actions({
         >
           🔄 vérif: mail officiel
         </button>
+        {verification_type ? (
+          <></>
+        ) : (
+          <button
+            class={button({ intent: "danger" })}
+            hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
+            hx-swap="none"
+            hx-vals={JSON.stringify({ verification_type: null })}
+          >
+            🚫 non vérifié
+          </button>
+        )}
         <button
-          class="fr-btn"
+          class={button()}
           hx-patch={`/legacy/organizations/${organization_id}/members/${user_id}`}
           hx-swap="none"
           hx-vals={JSON.stringify({
