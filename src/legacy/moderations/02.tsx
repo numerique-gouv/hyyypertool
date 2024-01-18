@@ -371,12 +371,14 @@ function About_Organisation({
 
       <button
         class={button({ className: "block", intent: "warning" })}
-        hx-patch={app_hc.legacy.organizations[":id"].verify[":domain"].$url({
-          param: {
-            id: moderation.organizations.id.toString(),
-            domain: domain,
-          },
-        })}
+        hx-patch={
+          app_hc.legacy.organizations[":id"].verify[":domain"].$url({
+            param: {
+              id: moderation.organizations.id.toString(),
+              domain: domain,
+            },
+          }).pathname
+        }
         hx-swap="none"
       >
         🪄 Action en un click :<br /> - ajouter le domaine <b>{domain}</b> dans
