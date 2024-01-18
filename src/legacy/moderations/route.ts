@@ -3,7 +3,7 @@
 import type { Htmx_Header } from ":common/htmx";
 import { Id_Schema } from ":common/schema";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import { sendModerationProcessedEmail } from ":legacy/services/mcp_admin_api";
+import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -30,7 +30,7 @@ const moderation_router = new Hono()
 
       const { organization_id, user_id } = moderation;
 
-      await sendModerationProcessedEmail({ organization_id, user_id });
+      await send_moderation_processed_email({ organization_id, user_id });
       await moncomptepro_pg
         .update(schema.moderations)
         .set({

@@ -30,6 +30,9 @@ const app = new Hono<Csp_Context & Sentry_Context>()
   .get("/livez", ({ text }) => text(`livez check passed`))
   .route("/readyz", readyz)
   .route("", proxy)
+
+  //
+
   .route("", asserts_router)
   .route("", auth_router)
   .route("", welcome_router)

@@ -5,7 +5,24 @@ import { HTTPError } from ":common/errors";
 
 //
 
-export async function sendModerationProcessedEmail({
+export async function mark_domain_as_verified({
+  domain,
+  organization_id,
+}: {
+  domain: string;
+  organization_id: number;
+}): Promise<{}> {
+  return fetch_mcp_admin_api({
+    endpoint: "/api/admin/mark-domain-as-verified",
+    method: "POST",
+    searchParams: {
+      domain: String(domain),
+      organization_id: String(organization_id),
+    },
+  });
+}
+
+export async function send_moderation_processed_email({
   organization_id,
   user_id,
 }: {
@@ -24,11 +41,17 @@ export async function sendModerationProcessedEmail({
 
 //
 
-type options = {
-  endpoint: "/api/admin/send-moderation-processed-email";
-  method: "POST";
-  searchParams: { organization_id: string; user_id: string };
-};
+type options =
+  | {
+      endpoint: "/api/admin/mark-domain-as-verified";
+      method: "POST";
+      searchParams: { domain: string; organization_id: string };
+    }
+  | {
+      endpoint: "/api/admin/send-moderation-processed-email";
+      method: "POST";
+      searchParams: { organization_id: string; user_id: string };
+    };
 
 async function fetch_mcp_admin_api(options: options) {
   const searchParams = new URLSearchParams(options.searchParams);
