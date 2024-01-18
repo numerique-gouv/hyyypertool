@@ -7,7 +7,7 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
-import { ORGANISATION_EXTERNAL_DOMAIN_UPDATED } from ":legacy/organizations/event";
+import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
 import { eq, sql } from "drizzle-orm";
@@ -53,7 +53,7 @@ router.put(
       .where(eq(schema.organizations.id, id));
 
     return text("", 200, {
-      "HX-Trigger": ORGANISATION_EXTERNAL_DOMAIN_UPDATED,
+      "HX-Trigger": ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED,
     } as Htmx_Header);
   },
 );
@@ -72,7 +72,7 @@ router.delete(
       .where(eq(schema.organizations.id, id));
 
     return text("", 200, {
-      "HX-Trigger": ORGANISATION_EXTERNAL_DOMAIN_UPDATED,
+      "HX-Trigger": ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED,
     } as Htmx_Header);
   },
 );

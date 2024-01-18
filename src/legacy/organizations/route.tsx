@@ -5,7 +5,7 @@ import { Id_Schema } from ":common/schema";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";
-import { ORGANISATION_INTERNAL_DOMAIN_UPDATED } from "./event";
+import { ORGANISATION_EVENTS } from "./event";
 //
 
 const organization_router = new Hono()
@@ -17,7 +17,10 @@ const organization_router = new Hono()
       const { id, domain } = req.valid("param");
       console.log({ id, domain });
       return text("OK", 200, {
-        "HX-Trigger": [ORGANISATION_INTERNAL_DOMAIN_UPDATED].join(", "),
+        "HX-Trigger": [
+          ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED,
+          ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
+        ].join(", "),
       } as Htmx_Header);
     },
   );
