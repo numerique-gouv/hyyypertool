@@ -14,7 +14,8 @@ const legacy_autoroute = await hono_autoroute({
 });
 export default new Hono<Session_Context>()
   .use("*", hyyyyyypertool_session)
-  .use("*", async function guard({ redirect, var: { session } }, next) {
+  .route("", legacy_autoroute)
+  .use("/legacy", async function guard({ redirect, var: { session } }, next) {
     const userinfo = session.get("userinfo");
 
     if (!userinfo) {
@@ -23,6 +24,5 @@ export default new Hono<Session_Context>()
 
     return next();
   })
-  .route("", legacy_autoroute)
   .route("/legacy/moderations", moderations_router)
   .route("/legacy/users", users_router);
