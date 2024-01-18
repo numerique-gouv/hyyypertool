@@ -29,11 +29,11 @@ const app = new Hono<Csp_Context & Sentry_Context>()
   .get("/healthz", ({ text }) => text(`healthz check passed`))
   .get("/livez", ({ text }) => text(`livez check passed`))
   .route("/readyz", readyz)
+  .route("", proxy)
   .route("", asserts_router)
   .route("", auth_router)
   .route("", welcome_router)
   .route("", legacy)
-  .route("", proxy)
   .notFound(async ({ html, var: { nonce } }) => {
     return html(NotFound({ nonce }), 404);
   })
