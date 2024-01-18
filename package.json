@@ -1,6 +1,6 @@
 {
   "name": "hyyypertool",
-  "version": "2024.1.1",
+  "version": "2024.1.1-8.0",
   "private": true,
   "type": "module",
   "module": "src/bootstrap.ts",
@@ -86,7 +86,9 @@
       "publish": false
     },
     "plugins": {
-      "@csmith/release-it-calver-plugin": {},
+      "@csmith/release-it-calver-plugin": {
+        "format": "yyyy.0m.0d.micro.dev"
+      },
       "@release-it/conventional-changelog": {
         "preset": "angular",
         "infile": "CHANGELOG.md"
