@@ -1,5 +1,53 @@
 
 
+## [2024.1.18](https://github.com/betagouv/hyyypertool/compare/2024.01.11.0...null) (2024-01-18)
+
+
+### Bug Fixes
+
+* **legacy:** inversed is_external action ([e81e3bd](https://github.com/betagouv/hyyypertool/commit/e81e3bda6b9094cb9b30aa14870266801df88c69))
+* **legacy:** remove host prefixes from action buttons ([7d10cdd](https://github.com/betagouv/hyyypertool/commit/7d10cddb4e0007e444fc5209696fa3101f56b06d))
+* make email and name required by default ([b604606](https://github.com/betagouv/hyyypertool/commit/b604606eb3d5ecd009ac4c2ffa2d181c54b35e9c))
+* **organizations:** add verified route ([0da5c0a](https://github.com/betagouv/hyyypertool/commit/0da5c0a509df8e0fa2e7ce0772a5e6bbed99df54))
+* use AGENTCONNECT_OIDC_SCOPE as scope ([b411e25](https://github.com/betagouv/hyyypertool/commit/b411e259f589c5abc4881514148edcf80d9ee59d))
+* use direct env version number ([a0ca6b4](https://github.com/betagouv/hyyypertool/commit/a0ca6b404c35ec4559144d3da02e586aaff93eda))
+
+
+### Features
+
+* add reel 404 page ([5211d7d](https://github.com/betagouv/hyyypertool/commit/5211d7d6ebabf0833cb048ac8c4e64ad1867fbe3))
+* dummy orange buttons ([83743a8](https://github.com/betagouv/hyyypertool/commit/83743a8fd2c50141a807671045cc81c2d67ca0b2))
+* force major version update ([b23c390](https://github.com/betagouv/hyyypertool/commit/b23c390868739657dc33fe9d054c89fcf685829f))
+* introduce sentry error catcher ([3525d0c](https://github.com/betagouv/hyyypertool/commit/3525d0caa5d20584032c90692b1dc08c8b2cee46))
+* **legacy:** remove 4th section ([79bda07](https://github.com/betagouv/hyyypertool/commit/79bda071340bacc050dabffae3c26ad369d8f69e))
+* **legacy:** sort by last created at by default ([4a85a9c](https://github.com/betagouv/hyyypertool/commit/4a85a9c876bbcfa70b760838e85a972e386ba21e))
+* **moderations:** display is_external if defined ([371b4ea](https://github.com/betagouv/hyyypertool/commit/371b4ead59f4fe52d8634634562358ae2c4c5b48))
+* **moderations:** share type to emoji ([bc15afa](https://github.com/betagouv/hyyypertool/commit/bc15afa59f54256d04d391707fca2403375fb52a))
+* **moderations:** support legacy types ([d22e8e9](https://github.com/betagouv/hyyypertool/commit/d22e8e97721f2f60523198ccf25d9c0fd312136a))
+* **organizations:** add join_organization ([8f10142](https://github.com/betagouv/hyyypertool/commit/8f10142560e6e38cce5ad59c729c315c39ebfc40))
+* **organizations:** add link to organization ([9c9f8fc](https://github.com/betagouv/hyyypertool/commit/9c9f8fc78ab92a2a02298230d15d037f9300f83e))
+* **organizations:** add remove verified button ([8f2ed28](https://github.com/betagouv/hyyypertool/commit/8f2ed284f95da28a8e2b3a57c8e0853a1b832185))
+* **organizations:** add see annuaire fiche link ([1e7b126](https://github.com/betagouv/hyyypertool/commit/1e7b126c8dde0dd1b531d2b6dc7c1173ac896a7b))
+* **organizations:** add verified route ([6c7b437](https://github.com/betagouv/hyyypertool/commit/6c7b437a2ddf5fb794e7a377a77d26b427790a6e))
+* **organizations:** call mark-domain-as-verified ([71d7b75](https://github.com/betagouv/hyyypertool/commit/71d7b758281e52a8e643b6ac0338d842243de0c2))
+* **organizations:** share events ([736ca45](https://github.com/betagouv/hyyypertool/commit/736ca451fe46fefc319feec5cbd70c5ae4c0380f))
+* **organizations:** share events using z.enum ([341f325](https://github.com/betagouv/hyyypertool/commit/341f325867c5ea0c24c3bb32f10a48e153774244))
+* **organizations:** use members updated event ([a9224eb](https://github.com/betagouv/hyyypertool/commit/a9224eb465123a53177daec2450b8ad68105e2cc))
+* **proxy:** ensure to proxy before the legacy guard route ([aaed65e](https://github.com/betagouv/hyyypertool/commit/aaed65ee1382a088b76241f4d1b92e0c1e6d4593))
+* **proxy:** ensure to set the guard on legacy routes only ([7d0612a](https://github.com/betagouv/hyyypertool/commit/7d0612aaa12578f99f65016c557244c3339193f4))
+* **sentry:** add dummy sentry endpoint test ([d4dad64](https://github.com/betagouv/hyyypertool/commit/d4dad64b027ff85c66c9e65a5da184cc830372b5))
+* share the nonce ([86b9be6](https://github.com/betagouv/hyyypertool/commit/86b9be67306911e1810884470b9db61b55846de5))
+* share the nonce (2) ([c9d9d39](https://github.com/betagouv/hyyypertool/commit/c9d9d39bd3280123fd21d3845ec7f79a7203fabb))
+* share the nonce (3) ([cd7149b](https://github.com/betagouv/hyyypertool/commit/cd7149b82c2e2e884246dc3f896e516cedcccf60))
+* share the nonce (4) ([b9a3a52](https://github.com/betagouv/hyyypertool/commit/b9a3a5208dcafc57b2fe8dedade424de285b0b60))
+* **users:** link to moderations ([ab9bebf](https://github.com/betagouv/hyyypertool/commit/ab9bebf5a8a85563097d07a1018df48c38ee1951))
+* **users:** remove and reset button ([5c98475](https://github.com/betagouv/hyyypertool/commit/5c984750806b738c530f7540628dd28ebf3952d0))
+
+
+### Reverts
+
+* Revert "ci(github): zdd incremental flag to release-it command" ([916449b](https://github.com/betagouv/hyyypertool/commit/916449bbcff24dd4465ca7df9b6066e003efde51))
+
 ## [2023.11.12](https://github.com/betagouv/hyyypertool/compare/2023.11.11...2023.11.12) (2024-01-11)
 
 
