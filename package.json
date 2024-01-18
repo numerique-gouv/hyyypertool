@@ -87,7 +87,8 @@
     },
     "plugins": {
       "@csmith/release-it-calver-plugin": {
-        "format": "yyyy.0m.0d-micro.dev"
+        "format": "yyyy.0m.0d-micro.dev",
+        "ignoreVersion": true
       },
       "@release-it/conventional-changelog": {
         "preset": "angular",
