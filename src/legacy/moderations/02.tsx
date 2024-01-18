@@ -6,6 +6,10 @@ import env from ":common/env.ts";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { app_hc } from ":hc";
+import {
+  ORGANISATION_EXTERNAL_DOMAIN_UPDATED,
+  ORGANISATION_INTERNAL_DOMAIN_UPDATED,
+} from ":legacy/organizations/event";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
@@ -212,7 +216,7 @@ export async function Edit_Domain({
         hx-get={api_ref(`/legacy/organizations/:id/domains/internal`, {
           id: String(organization.id),
         })}
-        hx-trigger="load, organisation_internal_domain_updated from:body"
+        hx-trigger={`load, ${ORGANISATION_INTERNAL_DOMAIN_UPDATED} from:body`}
         id="edit-domain"
       ></div>
       <div
@@ -220,7 +224,7 @@ export async function Edit_Domain({
         hx-get={api_ref(`/legacy/organizations/:id/domains/external`, {
           id: String(organization.id),
         })}
-        hx-trigger="load, organisation_external_domain_updated from:body"
+        hx-trigger={`load, ${ORGANISATION_EXTERNAL_DOMAIN_UPDATED} from:body`}
         id="edit-domain"
       ></div>
     </div>

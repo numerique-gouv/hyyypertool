@@ -5,6 +5,7 @@ import { Id_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Organization } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
+import { ORGANISATION_INTERNAL_DOMAIN_UPDATED } from ":legacy/organizations/event";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
 import { eq, sql } from "drizzle-orm";
@@ -56,7 +57,7 @@ router.put(
       .where(eq(schema.organizations.id, id));
 
     return text("", 200, {
-      "HX-Trigger": "organisation_internal_domain_updated",
+      "HX-Trigger": ORGANISATION_INTERNAL_DOMAIN_UPDATED,
     } as Htmx_Header);
   },
 );
@@ -76,7 +77,7 @@ router.delete(
       .where(eq(schema.organizations.id, id));
 
     return text("OK", 200, {
-      "HX-Trigger": "organisation_internal_domain_updated",
+      "HX-Trigger": ORGANISATION_INTERNAL_DOMAIN_UPDATED,
     } as Htmx_Header);
   },
 );
@@ -104,7 +105,7 @@ router.patch(
       .where(eq(schema.organizations.id, id));
 
     return text("OK", 200, {
-      "HX-Trigger": "organisation_internal_domain_updated",
+      "HX-Trigger": ORGANISATION_INTERNAL_DOMAIN_UPDATED,
     } as Htmx_Header);
   },
 );

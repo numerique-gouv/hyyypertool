@@ -9,6 +9,10 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
+import {
+  ORGANISATION_EXTERNAL_DOMAIN_UPDATED,
+  ORGANISATION_INTERNAL_DOMAIN_UPDATED,
+} from ":legacy/organizations/event";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
@@ -117,7 +121,7 @@ export async function Edit_Domain({
         hx-get={api_ref(`/legacy/organizations/:id/domains/internal`, {
           id: String(organization.id),
         })}
-        hx-trigger="load, organisation_internal_domain_updated from:body"
+        hx-trigger={`load, ${ORGANISATION_INTERNAL_DOMAIN_UPDATED} from:body`}
         id="edit-domain"
       ></div>
       <div
@@ -125,7 +129,7 @@ export async function Edit_Domain({
         hx-get={api_ref(`/legacy/organizations/:id/domains/external`, {
           id: String(organization.id),
         })}
-        hx-trigger="load, organisation_external_domain_updated from:body"
+        hx-trigger={`load, ${ORGANISATION_EXTERNAL_DOMAIN_UPDATED} from:body`}
         id="edit-domain"
       ></div>
     </div>
