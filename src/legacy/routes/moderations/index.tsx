@@ -1,10 +1,11 @@
 //
 
-import { Id_Schema } from ":common/schema";
+import { Entity_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
   PROCESSED_REQUESTS_INPUT_ID,
   PageContext_01,
+  PageContext_01_default,
   SEARCH_EMAIL_INPUT_ID,
   SEARCH_SIRET_INPUT_ID,
   Table as Table_01,
@@ -12,6 +13,7 @@ import {
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";
+import { fromZodError } from "zod-validation-error";
 
 //
 
@@ -34,7 +36,25 @@ export default new Hono().get(
         [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
         [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
       })
-      .merge(Id_Schema.partial()),
+      .merge(Entity_Schema.partial()),
+    (result, { html }) => {
+      if (result.success) {
+        return;
+      }
+      const { error } = result;
+      const validationError = fromZodError(error);
+
+      return html(
+        <div class="fr-input-group fr-input-group--error">
+          <div>
+            <p class={"fr-error-text"}>{validationError.toString()}.</p>
+          </div>
+          <PageContext_01.Provider value={PageContext_01_default}>
+            <Table_01 />
+          </PageContext_01.Provider>
+        </div>,
+      );
+    },
   ),
   async function ({ html, req }) {
     const {
@@ -49,9 +69,9 @@ export default new Hono().get(
       <>
         <PageContext_01.Provider
           value={{
+            ...PageContext_01_default,
             active_id: id ?? NaN,
             page,
-            take: 5,
             search: {
               email: search_email,
               siret: search_siret,

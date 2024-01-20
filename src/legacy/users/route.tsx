@@ -1,7 +1,7 @@
 //
 
 import env from ":common/env";
-import { Id_Schema } from ":common/schema";
+import { Entity_Schema } from ":common/schema";
 import { schema } from ":database:moncomptepro";
 import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import { zValidator } from "@hono/zod-validator";
@@ -16,7 +16,7 @@ const user_router = new Hono()
   .get(
     "/moderations",
     moncomptepro_pg_database({ connectionString: env.DATABASE_URL }),
-    zValidator("param", Id_Schema),
+    zValidator("param", Entity_Schema),
     async ({ html, req, var: { moncomptepro_pg } }) => {
       const { id } = req.valid("param");
 

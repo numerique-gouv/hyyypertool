@@ -1,7 +1,7 @@
 //
 
 import type { Htmx_Header } from ":common/htmx";
-import { Id_Schema } from ":common/schema";
+import { Entity_Schema } from ":common/schema";
 import { mark_domain_as_verified } from ":legacy/services/mcp_admin_api";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
@@ -15,7 +15,7 @@ const organization_router = new Hono()
   .route("members", organization_members_router)
   .patch(
     "verify/:domain",
-    zValidator("param", Id_Schema.extend({ domain: z.string() })),
+    zValidator("param", Entity_Schema.extend({ domain: z.string() })),
     async ({ text, req }) => {
       const { id, domain } = req.valid("param");
 

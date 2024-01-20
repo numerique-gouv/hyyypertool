@@ -1,7 +1,7 @@
 //
 
 import type { Htmx_Header } from ":common/htmx";
-import { Id_Schema } from ":common/schema";
+import { Entity_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Organization } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
@@ -19,7 +19,7 @@ export default router;
 
 router.get(
   "/",
-  zValidator("param", Id_Schema),
+  zValidator("param", Entity_Schema),
   async function ({ html, req, notFound }) {
     const { id } = req.valid("param");
 
@@ -42,7 +42,7 @@ router.get(
 
 router.put(
   "/",
-  zValidator("param", Id_Schema),
+  zValidator("param", Entity_Schema),
   zValidator("form", z.object({ domain: z.string() })),
   async function ({ text, req, notFound }) {
     const { id } = req.valid("param");
@@ -64,7 +64,7 @@ router.put(
 
 router.delete(
   "/:domain",
-  zValidator("param", Id_Schema.extend({ domain: z.string() })),
+  zValidator("param", Entity_Schema.extend({ domain: z.string() })),
   async function ({ text, req, notFound }) {
     const { id, domain } = req.valid("param");
 
@@ -84,7 +84,7 @@ router.delete(
 
 router.patch(
   "/:domain",
-  zValidator("param", Id_Schema.extend({ domain: z.string() })),
+  zValidator("param", Entity_Schema.extend({ domain: z.string() })),
   zValidator(
     "form",
     z.object({

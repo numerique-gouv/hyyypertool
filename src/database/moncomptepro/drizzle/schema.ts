@@ -1,10 +1,12 @@
 import { relations } from "drizzle-orm";
 import {
+  bigint,
   boolean,
   integer,
   pgTable,
   primaryKey,
   serial,
+  text,
   timestamp,
   uniqueIndex,
   varchar,
@@ -73,80 +75,6 @@ export const organizations = pgTable(
   },
 );
 
-export const moderations = pgTable("moderations", {
-  id: serial("id").primaryKey().notNull(),
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  organization_id: integer("organization_id")
-    .notNull()
-    .references(() => organizations.id, { onDelete: "cascade" }),
-  type: varchar("type").notNull(),
-  created_at: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-  moderated_at: timestamp("moderated_at", {
-    withTimezone: true,
-  }),
-  comment: varchar("comment"),
-});
-
-export const moderationsRelations = relations(moderations, ({ one }) => ({
-  users: one(users, { fields: [moderations.user_id], references: [users.id] }),
-  organizations: one(organizations, {
-    fields: [moderations.organization_id],
-    references: [organizations.id],
-  }),
-}));
-
-export const users = pgTable(
-  "users",
-  {
-    id: serial("id").primaryKey().notNull(),
-    email: varchar("email").default("").notNull(),
-    encrypted_password: varchar("encrypted_password").default(""),
-    reset_password_token: varchar("reset_password_token"),
-    reset_password_sent_at: timestamp("reset_password_sent_at", {
-      withTimezone: true,
-    }),
-    sign_in_count: integer("sign_in_count").default(0).notNull(),
-    last_sign_in_at: timestamp("last_sign_in_at", {
-      withTimezone: true,
-    }),
-    created_at: timestamp("created_at", {
-      withTimezone: true,
-    }).notNull(),
-    updated_at: timestamp("updated_at", {
-      withTimezone: true,
-    }).notNull(),
-    legacy_user: boolean("legacy_user").default(false).notNull(),
-    email_verified: boolean("email_verified").default(false).notNull(),
-    verify_email_token: varchar("verify_email_token"),
-    verify_email_sent_at: timestamp("verify_email_sent_at", {
-      withTimezone: true,
-    }),
-    given_name: varchar("given_name"),
-    family_name: varchar("family_name"),
-    phone_number: varchar("phone_number"),
-    job: varchar("job"),
-    magic_link_token: varchar("magic_link_token"),
-    magic_link_sent_at: timestamp("magic_link_sent_at", {
-      withTimezone: true,
-    }),
-    email_verified_at: timestamp("email_verified_at", {
-      withTimezone: true,
-    }),
-  },
-  (table) => {
-    return {
-      index_users_on_email: uniqueIndex("index_users_on_email").on(table.email),
-      index_users_on_reset_password_token: uniqueIndex(
-        "index_users_on_reset_password_token",
-      ).on(table.reset_password_token),
-    };
-  },
-);
-
 export const oidc_clients = pgTable("oidc_clients", {
   id: serial("id").primaryKey().notNull(),
   client_name: varchar("client_name").notNull(),
@@ -198,6 +126,114 @@ export const users_oidc_clients = pgTable("users_oidc_clients", {
     { onDelete: "set null", onUpdate: "cascade" },
   ),
 });
+
+export const moderations = pgTable("moderations", {
+  id: serial("id").primaryKey().notNull(),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  organization_id: integer("organization_id")
+    .notNull()
+    .references(() => organizations.id, { onDelete: "cascade" }),
+  type: varchar("type").notNull(),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  moderated_at: timestamp("moderated_at", {
+    withTimezone: true,
+  }),
+  comment: varchar("comment"),
+  ticket_id: integer("ticket_id"),
+});
+
+export const moderationsRelations = relations(moderations, ({ one }) => ({
+  users: one(users, { fields: [moderations.user_id], references: [users.id] }),
+  organizations: one(organizations, {
+    fields: [moderations.organization_id],
+    references: [organizations.id],
+  }),
+}));
+
+export const users = pgTable(
+  "users",
+  {
+    id: serial("id").primaryKey().notNull(),
+    email: varchar("email").default("").notNull(),
+    encrypted_password: varchar("encrypted_password").default(""),
+    reset_password_token: varchar("reset_password_token"),
+    reset_password_sent_at: timestamp("reset_password_sent_at", {
+      withTimezone: true,
+    }),
+    sign_in_count: integer("sign_in_count").default(0).notNull(),
+    last_sign_in_at: timestamp("last_sign_in_at", {
+      withTimezone: true,
+    }),
+    created_at: timestamp("created_at", {
+      withTimezone: true,
+    }).notNull(),
+    updated_at: timestamp("updated_at", {
+      withTimezone: true,
+    }).notNull(),
+    legacy_user: boolean("legacy_user").default(false).notNull(),
+    email_verified: boolean("email_verified").default(false).notNull(),
+    verify_email_token: varchar("verify_email_token"),
+    verify_email_sent_at: timestamp("verify_email_sent_at", {
+      withTimezone: true,
+    }),
+    given_name: varchar("given_name"),
+    family_name: varchar("family_name"),
+    phone_number: varchar("phone_number"),
+    job: varchar("job"),
+    magic_link_token: varchar("magic_link_token"),
+    magic_link_sent_at: timestamp("magic_link_sent_at", {
+      withTimezone: true,
+    }),
+    email_verified_at: timestamp("email_verified_at", {
+      withTimezone: true,
+    }),
+    current_challenge: varchar("current_challenge"),
+  },
+  (table) => {
+    return {
+      index_users_on_email: uniqueIndex("index_users_on_email").on(table.email),
+      index_users_on_reset_password_token: uniqueIndex(
+        "index_users_on_reset_password_token",
+      ).on(table.reset_password_token),
+    };
+  },
+);
+
+export const authenticators = pgTable(
+  "authenticators",
+  {
+    credential_id: text("credential_id").primaryKey().notNull(),
+    // TODO: failed to parse database type 'bytea'
+    credential_public_key: varchar("credential_public_key").notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    counter: bigint("counter", { mode: "number" }).notNull(),
+    credential_device_type: varchar("credential_device_type", { length: 32 }),
+    credential_backed_up: boolean("credential_backed_up").notNull(),
+    transports: varchar("transports", { length: 255 }).default("{}").array(),
+    user_id: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    display_name: varchar("display_name"),
+    created_at: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    last_used_at: timestamp("last_used_at", {
+      withTimezone: true,
+    }),
+    usage_count: integer("usage_count").default(0).notNull(),
+  },
+  (table) => {
+    return {
+      index_authenticators_on_credential_id: uniqueIndex(
+        "index_authenticators_on_credential_id",
+      ).on(table.credential_id),
+    };
+  },
+);
 
 export const users_organizations = pgTable(
   "users_organizations",

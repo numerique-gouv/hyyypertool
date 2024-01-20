@@ -6,6 +6,7 @@
 # Initial
 $ cd ___moncomptepro___
 $ docker compose up
+$ docker compose exec -T postgres pg_restore --clean --no-owner --dbname postgres --user postgres < moncomptepro-staging-database_XXXXXXXXXXXXXX.sql
 
 $ bun x drizzle-kit introspect:pg --config src/database/moncomptepro/drizzle.config.ts
 drizzle-kit: v0.20.7
@@ -23,8 +24,9 @@ Reading config file '/home/x/zzz/github/betagouv/hyyypertool/src/database/moncom
 [✓] You schema file is ready ➜ src/database/moncomptepro/drizzle/schema.ts 🚀
 
 $ bun x prettier -w src/database
-# Fixing varchar("xxxxxx", { length:  }) error
-# Fixing timestamp("xxxxxx").default('1970-01-01 00:00:00'::timestamp without time zone) error
+# Fixing varchar("xxxxxx", { length:  }) error : remove ", { length:  }"
+# Fixing timestamp("xxxxxx").default('1970-01-01 00:00:00'::timestamp without time zone) error : replace by .defaultNow()
+# Fixing unknown("credential_public_key") : replace by text()"credential_public_key")
 
 $ bun x drizzle-kit studio --config src/database/moncomptepro/drizzle.config.ts
 # Confirm that the database is explorable :)

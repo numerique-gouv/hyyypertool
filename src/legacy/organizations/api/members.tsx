@@ -2,7 +2,7 @@
 
 import { api_ref } from ":api_ref";
 import type { Htmx_Header } from ":common/htmx";
-import { Id_Schema, Pagination_Schema } from ":common/schema";
+import { Entity_Schema, Pagination_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
   moncomptepro_pg,
@@ -56,7 +56,7 @@ export const organization_member_router = new Hono()
     ),
     zValidator(
       "param",
-      Id_Schema.extend({
+      Entity_Schema.extend({
         user_id: z.string().pipe(z.coerce.number()),
       }),
     ),
@@ -79,7 +79,7 @@ export const organization_member_router = new Hono()
     "/",
     zValidator(
       "param",
-      Id_Schema.extend({
+      Entity_Schema.extend({
         user_id: z.string().pipe(z.coerce.number()),
       }),
     ),
@@ -118,7 +118,7 @@ export const organization_member_router = new Hono()
     "/",
     zValidator(
       "param",
-      Id_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
+      Entity_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
     ),
     async function ({ text, req }) {
       const { id: organization_id, user_id } = req.valid("param");
@@ -142,7 +142,7 @@ export const organization_members_router = new Hono()
   .route("", organization_member_router)
   .get(
     "/",
-    zValidator("param", Id_Schema),
+    zValidator("param", Entity_Schema),
     zValidator("query", Pagination_Schema),
     async function ({ html, req }) {
       const { id: organization_id } = req.valid("param");

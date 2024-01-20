@@ -47,6 +47,7 @@ export default z
         "postgresql://postgres:postgres@localhost:5432/postgres?schema=public",
       ),
     DEPLOY_ENV: DEPLOY_ENV_SHEMA.default("preview"),
+    DO_NOT_SEND_MAIL: z.coerce.boolean().default(false),
     ENTREPRISE_API_GOUV_TOKEN: z.string().trim(),
     GIT_SHA: GIT_SHA_SHEMA,
     HOST: z.string().trim().url().optional(),
@@ -67,6 +68,9 @@ export default z
             }) ?? version,
         ),
     ),
+    ZAMMAD_MODERATION_TAG: z.string().trim().default("moderation"),
+    ZAMMAD_TOKEN: z.string().trim(),
+    ZAMMAD_URL: z.string().trim().url(),
   })
   .parse(Bun.env, {
     path: ["Bun.env"],

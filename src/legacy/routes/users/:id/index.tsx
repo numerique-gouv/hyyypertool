@@ -4,7 +4,7 @@ import { api_ref } from ":api_ref";
 import type { Csp_Context } from ":common/csp_headers";
 import { date_to_string } from ":common/date";
 import type { Htmx_Header } from ":common/htmx";
-import { Id_Schema } from ":common/schema";
+import { Entity_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import { moncomptepro_pg, schema, type User } from ":database:moncomptepro";
 import { app_hc } from ":hc";
@@ -24,7 +24,7 @@ export default new Hono<Session_Context & Csp_Context>()
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
-    zValidator("param", Id_Schema),
+    zValidator("param", Entity_Schema),
     async ({ req, render, notFound, var: { nonce, session } }) => {
       const { id } = req.valid("param");
 
@@ -80,23 +80,27 @@ export default new Hono<Session_Context & Csp_Context>()
       );
     },
   )
-  .delete("", zValidator("param", Id_Schema), async ({ text, req }) => {
+  .delete("", zValidator("param", Entity_Schema), async ({ text, req }) => {
     const { id } = req.valid("param");
     await moncomptepro_pg.delete(schema.users).where(eq(schema.users.id, id));
     return text("OK", 200, {
       "HX-Location": api_ref("/legacy/users", {}),
     } as Htmx_Header);
   })
-  .patch("/reset", zValidator("param", Id_Schema), async ({ text, req }) => {
-    const { id } = req.valid("param");
-    await moncomptepro_pg
-      .update(schema.users)
-      .set({
-        email_verified: false,
-      })
-      .where(eq(schema.users.id, id));
-    return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
-  });
+  .patch(
+    "/reset",
+    zValidator("param", Entity_Schema),
+    async ({ text, req }) => {
+      const { id } = req.valid("param");
+      await moncomptepro_pg
+        .update(schema.users)
+        .set({
+          email_verified: false,
+        })
+        .where(eq(schema.users.id, id));
+      return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
+    },
+  );
 
 //
 

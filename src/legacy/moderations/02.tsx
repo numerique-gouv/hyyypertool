@@ -11,6 +11,7 @@ import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
+import { callout } from ":ui/callout";
 import { and, count, eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
 import lodash_sortby from "lodash.sortby";
@@ -501,10 +502,11 @@ function datapass_from_email(email: string) {
 
 function ModerationCallout({ moderation }: { moderation: Moderation }) {
   if (!moderation.moderated_at) return <></>;
+  const { base, text, title } = callout({ intent: "success" });
   return (
-    <div class="fr-callout fr-callout--green-emeraude fr-icon-information-line">
-      <h3 class="fr-callout__title">Modération traitée</h3>
-      <p class="fr-callout__text">
+    <div class={base()}>
+      <h3 class={text()}>Modération traitée</h3>
+      <p class={title()}>
         Cette modération a été marqué comme traitée le{" "}
         <b>{date_to_string(moderation.moderated_at)}</b>.
       </p>

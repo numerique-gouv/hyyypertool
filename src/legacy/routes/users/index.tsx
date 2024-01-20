@@ -1,7 +1,7 @@
 //
 
 import type { Csp_Context } from ":common/csp_headers";
-import { Id_Schema, Pagination_Schema } from ":common/schema";
+import { Entity_Schema, Pagination_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import UsersPage, { SEARCH_EMAIL_INPUT_ID } from ":legacy/users/page";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
@@ -21,7 +21,7 @@ export default new Hono<Session_Context & Csp_Context>()
       "query",
       Pagination_Schema.extend({
         [SEARCH_EMAIL_INPUT_ID]: z.string().optional(),
-      }).merge(Id_Schema.partial()),
+      }).merge(Entity_Schema.partial()),
     ),
     function ({ render, req, redirect, var: { nonce, session } }) {
       const { page, [SEARCH_EMAIL_INPUT_ID]: email } = req.valid("query");

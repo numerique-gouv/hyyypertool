@@ -9,23 +9,24 @@
       ":assets/*": ["./src/assets/*"],
       ":auth/*": ["./src/auth/*"],
       ":database:moncomptepro": [
-        "./src/database/moncomptepro/moncomptepro_pg.ts"
+        "./src/database/moncomptepro/moncomptepro_pg.ts",
       ],
       ":database:moncomptepro/middleware": [
-        "./src/database/moncomptepro/middleware.ts"
+        "./src/database/moncomptepro/middleware.ts",
       ],
+      ":api_ref": ["./src/api_ref.ts"],
       ":common/*": ["./src/common/*"],
       ":hc": ["./src/client"],
       ":legacy/*": ["./src/legacy/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":package.json": ["./package.json"],
-      ":api_ref": ["./src/api_ref.ts"],
       ":ui/*": ["./src/ui/*"],
-      ":www": ["./src/www.router"]
+      ":www": ["./src/www.router"],
+      "hono-slotify/*": ["./src/hono-slotify/*"],
     },
     "plugins": [],
     "resolveJsonModule": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
   },
-  "include": ["package.json", "src"]
+  "include": ["package.json", "src"],
 }

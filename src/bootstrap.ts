@@ -2,9 +2,9 @@
 
 import { csp_headers, type Csp_Context } from ":common/csp_headers";
 import env from ":common/env";
-import { sentry, type Sentry_Context } from ":common/sentry";
+// import { sentry, type Sentry_Context } from ":common/sentry";
 import legacy from ":legacy/route";
-import { captureException } from "@sentry/bun";
+import { sentry } from "@hono/sentry";
 import { Hono } from "hono";
 import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
@@ -17,10 +17,18 @@ import { NotFound } from "./not-found";
 import { proxy } from "./proxy/route";
 import welcome_router from "./welcome/route";
 
-const app = new Hono<Csp_Context & Sentry_Context>()
+const app = new Hono<Csp_Context>()
   .use("*", logger())
   .use("*", csp_headers())
-  .use("*", sentry({ scope: "main" }))
+  .use(
+    "*",
+    sentry({
+      debug: env.DEPLOY_ENV === "preview",
+      dsn: env.SENTRY_DNS,
+      environment: env.DEPLOY_ENV,
+      release: env.VERSION,
+    }),
+  )
   .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))
 
   // import { compress } from 'hono/compress'
@@ -40,10 +48,10 @@ const app = new Hono<Csp_Context & Sentry_Context>()
   .notFound(async ({ html, var: { nonce } }) => {
     return html(NotFound({ nonce }), 404);
   })
-  .onError(async (error, { html, req }) => {
-    captureException(error);
+  .onError(async (error, { html, req, var: { sentry } }) => {
+    sentry.captureException(error);
     const youch = new Youch(error, req.raw);
-    return html(await youch.toHTML());
+    return html(await youch.toHTML(), 500);
   });
 
 //

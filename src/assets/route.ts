@@ -2,8 +2,12 @@
 
 import { immutable } from ":common/cache";
 import env from ":common/env";
+import { Id_Schema } from ":common/schema";
+import { get_zammad_attachment } from ":legacy/services/zammad_api";
+import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
+import { z } from "zod";
 import { ASSETS_PATH } from "./config";
 import { rewriteAssetRequestPath } from "./rewrite";
 
@@ -22,6 +26,27 @@ const asserts_router = new Hono()
     serveStatic({
       rewriteRequestPath: rewriteAssetRequestPath,
     }),
+  )
+  .get(
+    "/zammad/attachment/:ticket_id/:article_id/:attachment_id",
+    zValidator(
+      "param",
+      z.object({
+        article_id: Id_Schema,
+        attachment_id: Id_Schema,
+        ticket_id: Id_Schema,
+      }),
+    ),
+    async ({ body, req }) => {
+      const { article_id, attachment_id, ticket_id } = req.valid("param");
+      const image = await get_zammad_attachment({
+        article_id,
+        attachment_id,
+        ticket_id,
+      });
+
+      return image;
+    },
   )
   .get("/bundle/env.js", async ({ text }) => {
     const { VERSION } = env;

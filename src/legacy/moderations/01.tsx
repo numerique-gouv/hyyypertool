@@ -1,12 +1,14 @@
 //
 
 import { api_ref } from ":api_ref";
+import { date_to_string } from ":common/date";
+import { Htmx_Events, hx_include, prefix_id } from ":common/htmx";
 import type { Moderation, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { row } from ":ui/table";
 import {
   and,
-  desc,
+  asc,
   count as drizzle_count,
   eq,
   ilike,
@@ -21,12 +23,13 @@ import { moderation_type_to_emoji } from "./moderation_type_to_emoji";
 
 //
 
-export const PageContext_01 = createContext({
+export const PageContext_01_default = {
   active_id: NaN,
   page: 0,
   take: 5,
   search: { email: "", siret: "", show_archived: false },
-});
+};
+export const PageContext_01 = createContext(PageContext_01_default);
 
 export const SEARCH_SIRET_INPUT_ID = "search-siret";
 export const SEARCH_EMAIL_INPUT_ID = "search-email";
@@ -45,7 +48,10 @@ export function _01() {
         <input
           class="fr-input"
           hx-get={api_ref("/legacy/moderations", {})}
-          hx-include={`#${SEARCH_EMAIL_INPUT_ID},#${PROCESSED_REQUESTS_INPUT_ID}`}
+          hx-include={hx_include([
+            PROCESSED_REQUESTS_INPUT_ID,
+            SEARCH_EMAIL_INPUT_ID,
+          ])}
           hx-target={`#${MODERATION_TABLE_ID}`}
           hx-trigger="input changed delay:500ms, search"
           id={SEARCH_SIRET_INPUT_ID}
@@ -61,8 +67,11 @@ export function _01() {
         <input
           class="fr-input"
           hx-get={api_ref("/legacy/moderations", {})}
-          hx-include={`#${SEARCH_SIRET_INPUT_ID},#${PROCESSED_REQUESTS_INPUT_ID}`}
-          hx-target={`#${MODERATION_TABLE_ID}`}
+          hx-include={hx_include([
+            PROCESSED_REQUESTS_INPUT_ID,
+            SEARCH_SIRET_INPUT_ID,
+          ])}
+          hx-target={prefix_id(MODERATION_TABLE_ID)}
           hx-trigger="input changed delay:500ms, search"
           id={SEARCH_EMAIL_INPUT_ID}
           name={SEARCH_EMAIL_INPUT_ID}
@@ -75,8 +84,11 @@ export function _01() {
           <input
             aria-describedby="checkboxes-1-messages"
             hx-get={api_ref("/legacy/moderations", {})}
-            hx-include={`#${SEARCH_EMAIL_INPUT_ID},#${SEARCH_SIRET_INPUT_ID}`}
-            hx-target={`#${MODERATION_TABLE_ID}`}
+            hx-include={hx_include([
+              SEARCH_EMAIL_INPUT_ID,
+              SEARCH_SIRET_INPUT_ID,
+            ])}
+            hx-target={prefix_id(MODERATION_TABLE_ID)}
             id={PROCESSED_REQUESTS_INPUT_ID}
             name={PROCESSED_REQUESTS_INPUT_ID}
             value="true"
@@ -121,7 +133,7 @@ export async function Table() {
         eq(schema.moderations.organization_id, schema.organizations.id),
       )
       .where(where)
-      .orderBy(desc(schema.moderations.created_at))
+      .orderBy(asc(schema.moderations.created_at))
       .limit(take)
       .offset(page * take);
     const [{ value: count }] = await moncomptepro_pg
@@ -135,7 +147,7 @@ export async function Table() {
       .where(where);
     return { moderations, count };
   });
-
+  const last_page = Math.floor(count / take);
   return (
     <table class="!table">
       <thead>
@@ -150,7 +162,7 @@ export async function Table() {
       </thead>
       <tbody
         _={`
-        on htmx:afterOnLoad
+        on ${Htmx_Events.Enum["htmx:afterOnLoad"]}
         set @aria-selected of <[aria-selected=true]/> to false
         tell the target take .is_active set @aria-selected to true
         go to the top of #moderation smoothly
@@ -182,18 +194,54 @@ export async function Table() {
             {page * take}-{page * take + take} of {count}
           </td>
           <td colspan={2} class="inline-flex justify-center">
-            <input
-              class="text-right"
+            <button
+              disabled={page <= 0}
               hx-get={api_ref("/legacy/moderations", {})}
-              hx-include={`#${SEARCH_EMAIL_INPUT_ID},#${SEARCH_SIRET_INPUT_ID}`}
+              hx-include={hx_include([
+                PROCESSED_REQUESTS_INPUT_ID,
+                SEARCH_EMAIL_INPUT_ID,
+                SEARCH_SIRET_INPUT_ID,
+              ])}
+              hx-target={prefix_id(MODERATION_TABLE_ID)}
+              hx-vals={JSON.stringify({
+                page: page - 1,
+              })}
+            >
+              Précédent
+            </button>
+
+            <input
+              class="max-w-12 text-right"
+              hx-get={api_ref("/legacy/moderations", {})}
+              hx-include={hx_include([
+                PROCESSED_REQUESTS_INPUT_ID,
+                SEARCH_EMAIL_INPUT_ID,
+                SEARCH_SIRET_INPUT_ID,
+              ])}
               hx-trigger="input changed delay:500ms"
-              hx-target={`#${MODERATION_TABLE_ID}`}
+              hx-target={prefix_id(MODERATION_TABLE_ID)}
               id="page"
               name="page"
               type="number"
               value={String(page)}
             />
-            <span> of {Math.floor(count / take)}</span>
+            <span> of {last_page}</span>
+
+            <button
+              disabled={page >= last_page}
+              hx-get={api_ref("/legacy/moderations", {})}
+              hx-include={hx_include([
+                PROCESSED_REQUESTS_INPUT_ID,
+                SEARCH_EMAIL_INPUT_ID,
+                SEARCH_SIRET_INPUT_ID,
+              ])}
+              hx-target={prefix_id(MODERATION_TABLE_ID)}
+              hx-vals={JSON.stringify({
+                page: page + 1,
+              })}
+            >
+              Suivant
+            </button>
           </td>
         </tr>
       </tfoot>
@@ -219,16 +267,13 @@ function Row({
       hx-target="#moderation"
       hx-push-url={`/legacy?id=${moderation.id}`}
     >
-      <td safe title={moderation.type}>
+      <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
       </td>
-      <td>
-        <span safe>{users.created_at.toLocaleDateString("fr-FR")}</span>{" "}
-        <span safe>{users.created_at.toLocaleTimeString("fr-FR")}</span>
-      </td>
-      <td safe>{users.given_name}</td>
-      <td safe>{users.family_name}</td>
-      <td safe>{users.email}</td>
+      <td>{date_to_string(users.created_at)}</td>
+      <td>{users.given_name}</td>
+      <td>{users.family_name}</td>
+      <td>{users.email}</td>
       <td>{moderation.id}</td>
     </tr>
   );

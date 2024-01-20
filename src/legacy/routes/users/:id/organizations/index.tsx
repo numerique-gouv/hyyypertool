@@ -1,7 +1,7 @@
 //
 
 import { api_ref } from ":api_ref";
-import { Id_Schema, Pagination_Schema } from ":common/schema";
+import { Entity_Schema, Pagination_Schema } from ":common/schema";
 import {
   moncomptepro_pg,
   schema,
@@ -33,7 +33,7 @@ export default router;
 router.get(
   "/",
 
-  zValidator("param", Id_Schema),
+  zValidator("param", Entity_Schema),
   zValidator("query", Pagination_Schema),
   async function ({ html, req, notFound }) {
     const { id } = req.valid("param");

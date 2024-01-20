@@ -2,7 +2,7 @@
 
 import { api_ref } from ":api_ref";
 import type { Csp_Context } from ":common/csp_headers";
-import { Id_Schema } from ":common/schema";
+import { Entity_Schema } from ":common/schema";
 import { hyyyyyypertool_session, type Session_Context } from ":common/session";
 import {
   moncomptepro_pg,
@@ -23,7 +23,7 @@ export default new Hono<Session_Context & Csp_Context>()
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
-    zValidator("param", Id_Schema),
+    zValidator("param", Entity_Schema),
     async ({ req, render, redirect, notFound, var: { nonce, session } }) => {
       const { id } = req.valid("param");
 

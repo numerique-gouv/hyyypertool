@@ -61,7 +61,7 @@ export async function send_moderation_processed_email({
 
 //
 
-type options =
+type Options =
   | {
       endpoint: "/api/admin/join-organization";
       method: "POST";
@@ -82,7 +82,7 @@ type options =
       searchParams: { organization_id: string; user_id: string };
     };
 
-async function fetch_mcp_admin_api(options: options) {
+async function fetch_mcp_admin_api(options: Options) {
   const searchParams = new URLSearchParams(options.searchParams);
   const url = `${env.API_AUTH_URL}${options.endpoint}?${searchParams}`;
   const headers = new Headers({

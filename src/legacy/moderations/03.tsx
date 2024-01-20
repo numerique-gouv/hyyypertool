@@ -1,5 +1,8 @@
 //
 
+import { date_to_string } from ":common/date";
+import env from ":common/env";
+import { Htmx_Events, hx_include, hx_trigger_from_body } from ":common/htmx";
 import {
   moncomptepro_pg,
   schema,
@@ -8,10 +11,16 @@ import {
   type User,
 } from ":database:moncomptepro";
 import { app_hc } from ":hc";
+import { get_zammad_mail } from ":legacy/services/zammad_api";
 import { button } from ":ui/button";
+import { callout } from ":ui/callout";
+import { Loader } from ":ui/loader/Loader";
 import { eq } from "drizzle-orm";
+import { createSlot } from "hono-slotify/index";
 import { ok } from "node:assert";
 import { dedent } from "ts-dedent";
+import { Message } from "./Message";
+import { MODERATION_EVENTS } from "./event";
 
 //
 
@@ -19,6 +28,7 @@ export const RESPONSE_MESSAGE_SELECT_ID = "response-message";
 export const RESPONSE_TEXTAREA_ID = "response";
 export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
 export const EMAIL_TO_INPUT_ID = "mail-to";
+export const MAX_ARTICLE_COUNT = 3;
 
 //
 
@@ -33,28 +43,51 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
 
   ok(moderation);
 
-  const mailto_query = new URLSearchParams({
-    subject: `[MonComptePro] Demande pour rejoindre ${moderation.organizations.cached_libelle}`,
-    cc: `moncomptepro@beta.gouv.fr`,
-  });
-
   return (
     <div class="mx-auto !max-w-6xl">
-      <h1>
-        ✉️ 3. J'ai pris ma décision, je copie le message que je souhaite
-        répondre par mail
-      </h1>
+      <h1>✉️ 3. J'ai pris ma décision</h1>
 
       <hr />
 
+      <h2>Valider la modération : </h2>
       <SendModerationProcessedEmail moderation={moderation} />
+      <MarkModerationProcessed moderation={moderation} />
+
+      <hr />
+
+      <h2>Rejeter la modération : </h2>
+
+      <div
+        hx-get={
+          app_hc.legacy.moderations[":id"].email.$url({
+            param: { id: moderation.id.toString() },
+          }).pathname
+        }
+        hx-trigger={[
+          "load",
+          hx_trigger_from_body([
+            MODERATION_EVENTS.Enum.MODERATION_EMAIL_UPDATED,
+          ]),
+        ].join(", ")}
+      >
+        <div class="my-24 flex flex-col items-center justify-center">
+          Chargement des échanges avec {moderation.users.given_name}
+          <br />
+          <Loader />
+        </div>
+      </div>
+
+      <MarkModerationProcessed moderation={moderation} />
+
+      <hr />
 
       <div class="fr-select-group">
         <label class="fr-label" for={RESPONSE_MESSAGE_SELECT_ID}>
-          <h6>A) Copier le message à envoyer en réponse : </h6>
+          <h6>Motif de rejet : </h6>
         </label>
         <ResponseMessageSelector moderation={moderation} />
       </div>
+
       <div class="fr-input-group">
         <label
           class="fr-label flex flex-row justify-between"
@@ -144,16 +177,47 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
           value={moderation.users.email}
         />
       </div>
+      {moderation.ticket_id ? (
+        <form
+          class="text-right"
+          hx-put={
+            app_hc.legacy.moderations[":id"].email.$url({
+              param: { id: moderation.id.toString() },
+            }).pathname
+          }
+          hx-include={hx_include([
+            EMAIL_SUBJECT_INPUT_ID,
+            RESPONSE_TEXTAREA_ID,
+          ])}
+          hx-swap="none"
+        >
+          <button
+            _={`
+          on click
+            wait for ${Htmx_Events.Enum["htmx:afterSwap"]} from body
+            go to the top of .last-message smoothly
+          `}
+            type="submit"
+            class={button()}
+          >
+            <span>Envoyer une réponse via Zammad</span>
+          </button>
+          <div></div>
+          <div>
+            <Loader htmx_indicator={true} />
+          </div>
+        </form>
+      ) : (
+        <div class="m-auto my-12 w-fit">
+          <a
+            href={`https://support.etalab.gouv.fr/#search/${moderation.users.email}`}
+          >
+            Trouver l'email correspondant dans Zammad
+          </a>
+        </div>
+      )}
 
-      <h6 class="mt-12">
-        B) Coller le texte en réponse à l'email correspondant :
-      </h6>
-      <a
-        href={`mailto:${moderation.users.email}?${mailto_query}`}
-        class={button()}
-      >
-        Envoyer un nouvel email
-      </a>
+      <hr />
     </div>
   );
 }
@@ -186,6 +250,7 @@ const reponse_templates: Array<{
         Je reste à votre disposition pour tout complément d'information.
 
         Excellente journée,
+        L’équipe MonComptePro.
       `;
     },
   },
@@ -202,6 +267,7 @@ const reponse_templates: Array<{
         Nous vous recommandons de demander directement à l'organisation que vous représentez d'effectuer la démarche.
 
         Excellente journée,
+        L’équipe MonComptePro.
       `;
     },
   },
@@ -218,6 +284,7 @@ const reponse_templates: Array<{
         Je reste à votre disposition pour tout complément d'information.
 
         Excellente journée,
+        L’équipe MonComptePro.
       `;
     },
   },
@@ -234,6 +301,7 @@ const reponse_templates: Array<{
         Je reste à votre disposition pour tout complément d'information.
 
         Excellente journée,
+        L’équipe MonComptePro.
       `;
     },
   },
@@ -254,6 +322,7 @@ const reponse_templates: Array<{
         Je reste à votre disposition pour tout complément d'information.
 
         Excellente journée,
+        L’équipe MonComptePro.
       `;
     },
   },
@@ -322,9 +391,142 @@ function SendModerationProcessedEmail({
       }
       hx-swap="none"
     >
-      <button class={button({ intent: "dark" })} disabled={disabled}>
+      <button
+        _={`
+        on click
+          wait for ${Htmx_Events.Enum["htmx:afterOnLoad"]} from body
+          go to the top of body
+          wait 1s
+          set the window's location to "/legacy"
+        `}
+        class={button({ intent: "dark" })}
+        disabled={disabled}
+      >
         🪄 Action en un click : Envoyer l'email « Votre demande a été traitée »
       </button>
     </form>
+  );
+}
+
+function MarkModerationProcessed({ moderation }: { moderation: Moderation }) {
+  if (moderation.moderated_at)
+    return (
+      <button class={button({ intent: "dark" })} disabled={true}>
+        Cette modération a été marqué comme traitée le{" "}
+        <b>{date_to_string(moderation.moderated_at)}</b>.
+      </button>
+    );
+
+  return (
+    <form
+      class="m-auto my-12 w-fit"
+      hx-patch={
+        app_hc.legacy.moderations[":id"].processed.$url({
+          param: { id: moderation.id.toString() },
+        }).pathname
+      }
+      hx-swap="none"
+    >
+      <button
+        _={`
+        on click
+          wait for ${Htmx_Events.Enum["htmx:afterOnLoad"]} from body
+          go to the top of body
+          wait 1s
+          set the window's location to "/legacy"
+        `}
+        class={button({ intent: "dark" })}
+      >
+        🪄 Marquer comme traité
+      </button>
+    </form>
+  );
+}
+
+export async function ListZammadArticles({
+  moderation,
+}: {
+  moderation: Moderation & { users: User };
+}) {
+  if (!moderation.ticket_id) {
+    return (
+      <div class="m-auto my-12 w-fit">
+        <a
+          href={`https://support.etalab.gouv.fr/#search/${moderation.users.email}`}
+        >
+          Trouver l'email correspondant dans Zammad
+        </a>
+      </div>
+    );
+  }
+
+  const articles = await get_zammad_mail({ ticket_id: moderation.ticket_id });
+  const show_more = articles.length > MAX_ARTICLE_COUNT;
+  const displayed_articles = articles.slice(-MAX_ARTICLE_COUNT);
+
+  return (
+    <section>
+      <h5 class="flex flex-row justify-between">
+        <span>{articles.at(0)?.subject}</span>
+        <OpenInZammad ticket_id={moderation.ticket_id} />
+      </h5>
+      <ul class="list-none">
+        {show_more ? (
+          <li class="my-12 text-center">
+            <ShowMoreCallout ticket_id={moderation.ticket_id}></ShowMoreCallout>
+          </li>
+        ) : (
+          <></>
+        )}
+        {displayed_articles.map((article, index) => (
+          <li
+            class={
+              index === displayed_articles.length - 1 ? "last-message" : ""
+            }
+            id={`${article.id}`}
+          >
+            <p class="text-center text-sm font-bold">
+              <time datetime={article.created_at} title={article.created_at}>
+                {date_to_string(new Date(article.created_at))}
+              </time>
+            </p>
+            <Message article={article} moderation={moderation} />
+            <hr />
+          </li>
+        ))}
+        <li>
+          <hr />
+        </li>
+      </ul>
+    </section>
+  );
+}
+
+function ShowMoreCallout({ ticket_id }: { ticket_id: number }) {
+  const { base, text, title } = callout({ intent: "warning" });
+  return (
+    <div class={base()}>
+      <p class={title()}>Afficher plus de messages</p>
+      <p class={text()}>
+        Seul les {MAX_ARTICLE_COUNT} derniers messages sont affichés.
+        <br />
+        Consulter tous les messages sur Zammad{" "}
+        <OpenInZammad ticket_id={ticket_id} />
+      </p>
+    </div>
+  );
+}
+ShowMoreCallout.Title = createSlot();
+ShowMoreCallout.Text = createSlot();
+
+function OpenInZammad({ ticket_id }: { ticket_id: number }) {
+  return (
+    <a
+      href={`${env.ZAMMAD_URL}/#ticket/zoom/${ticket_id}`}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      #{ticket_id}
+    </a>
   );
 }
