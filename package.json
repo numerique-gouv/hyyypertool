@@ -88,7 +88,7 @@
     },
     "plugins": {
       "@csmith/release-it-calver-plugin": {
-        "format": "yyyy.0m.minor",
+        "format": "yyyy.mm.minor",
         "increment": "calendar.patch"
       },
       "@release-it/conventional-changelog": {
