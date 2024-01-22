@@ -1,5 +1,12 @@
 
 
+## [2024.1.6](https://github.com/betagouv/hyyypertool/compare/2024.1.5...2024.1.6) (2024-01-22)
+
+
+### Bug Fixes
+
+* **legacy:** display moderation created_at not user's ([40ad9ca](https://github.com/betagouv/hyyypertool/commit/40ad9ca09dc8f87b4dc92da078a47a7367897dbb))
+
 ## [2024.1.5](https://github.com/betagouv/hyyypertool/compare/2024.1.4...2024.1.5) (2024-01-22)
 
 
