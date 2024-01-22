@@ -11,7 +11,7 @@ export function moncomptepro_pg_database({
 }: {
   connectionString: string;
 }): MiddlewareHandler<moncomptepro_pg_Context> {
-  return async function moncomptepro_pg_middleware({ req, set }, next) {
+  return async function moncomptepro_pg_middleware({ set }, next) {
     const connection = new Client({ connectionString: connectionString });
 
     await connection.connect();

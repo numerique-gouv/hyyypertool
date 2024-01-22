@@ -13,6 +13,15 @@ const NORMAL_PRIORITY_ID = "1";
 
 //
 
+export async function get_zammad_me() {
+  const response = await fetch_zammad_api({
+    endpoint: `/api/v1/users/me`,
+    method: "GET",
+    searchParams: {},
+  });
+
+  return response.json() as Promise<User>;
+}
 export async function get_zammad_mail({ ticket_id }: { ticket_id: number }) {
   const response = await fetch_zammad_api({
     endpoint: `/api/v1/ticket_articles/by_ticket/${ticket_id}`,
@@ -27,6 +36,7 @@ export async function get_zammad_mail({ ticket_id }: { ticket_id: number }) {
 
   return response.json() as Promise<Zammad_Article[]>;
 }
+
 export async function get_zammad_attachment({
   article_id,
   attachment_id,
@@ -77,17 +87,23 @@ export async function send_zammad_mail({
 
 //
 
-interface CreateArticle {
-  body: string;
-  content_type: "text/html";
-  internal: false;
-  origin_by_id: string;
-  sender: string;
-  subject: string;
-  ticket_id: number;
-  time_unit: "15";
-  type: "email";
+interface User {
+  active: boolean;
+  created_at: string;
+  email: string;
+  firstname: string;
+  id: number;
+  image: string;
+  last_login: string;
+  lastname: string;
+  login: string;
+  note: string;
+  organization_id: number;
+  updated_at: string;
+  updated_by_id: string;
+  verified: boolean;
 }
+
 interface Ticket {
   id: number;
   title: string;
@@ -125,6 +141,11 @@ interface Zammad_Order {
 }
 
 type Options =
+  | {
+      endpoint: `/api/v1/users/me`;
+      method: "GET";
+      searchParams: {};
+    }
   | {
       endpoint: `/api/v1/tickets/${number}`;
       method: "PUT";

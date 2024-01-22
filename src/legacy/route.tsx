@@ -25,7 +25,7 @@ export const legacy_router = new Hono()
 export default new Hono<Session_Context>()
   .use("*", hyyyyyypertool_session)
   .use(
-    "*",
+    "/legacy/*",
     async function guard({ redirect, req, var: { sentry, session } }, next) {
       const userinfo = session.get("userinfo");
 
@@ -35,7 +35,7 @@ export default new Hono<Session_Context>()
 
       sentry.setUser({
         email: userinfo.email,
-        id: userinfo.uid,
+        id: userinfo.sub,
         username: userinfo.given_name,
         ip_address: req.header("x-forwarded-for"),
       });
