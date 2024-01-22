@@ -87,7 +87,10 @@
       "publish": false
     },
     "plugins": {
-      "@csmith/release-it-calver-plugin": {},
+      "@csmith/release-it-calver-plugin": {
+        "format": "yyyy.mm.minor",
+        "increment": "calendar.patch"
+      },
       "@release-it/conventional-changelog": {
         "preset": "angular",
         "infile": "CHANGELOG.md"
