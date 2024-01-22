@@ -27,6 +27,9 @@ const app = new Hono<Csp_Context>()
       dsn: env.SENTRY_DNS,
       environment: env.DEPLOY_ENV,
       release: env.VERSION,
+      initialScope: {
+        tags: { NODE_ENV: env.NODE_ENV, HOST: env.HOST, GIT_SHA: env.GIT_SHA },
+      },
     }),
   )
   .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))

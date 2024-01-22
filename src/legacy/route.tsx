@@ -26,20 +26,28 @@ export default new Hono<Session_Context>()
   .use("*", hyyyyyypertool_session)
   .use(
     "*",
-    hyyyyyypertool_session,
-    async function guard({ redirect, var: { session } }, next) {
+    async function guard({ redirect, req, var: { sentry, session } }, next) {
       const userinfo = session.get("userinfo");
 
       if (!userinfo) {
         return redirect("/");
       }
 
+      sentry.setUser({
+        email: userinfo.email,
+        id: userinfo.uid,
+        username: userinfo.given_name,
+        ip_address: req.header("x-forwarded-for"),
+      });
+
       const is_allowed = env.ALLOWED_USERS.split(",").includes(userinfo.email);
       if (!is_allowed) {
         return redirect("/");
       }
 
-      return next();
+      await next();
+
+      sentry.setUser(null);
     },
   )
   .route("", legacy_autoroute)

@@ -11,7 +11,7 @@ export const readyz = new Hono();
 
 readyz.get("/", ({ text }) => text(`readyz check passed`));
 
-readyz.get("/sentry/error", async ({ text }) => {
+readyz.get("/sentry/error", async function sentry_error({}) {
   throw new Error("Sentry error");
 });
 
