@@ -258,7 +258,7 @@ function Row({
   };
   variants: VariantProps<typeof row>;
 }) {
-  const { users } = moderation;
+  const { created_at, users } = moderation;
   return (
     <tr
       aria-selected="false"
@@ -270,7 +270,7 @@ function Row({
       <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
       </td>
-      <td>{date_to_string(users.created_at)}</td>
+      <td>{date_to_string(created_at)}</td>
       <td>{users.given_name}</td>
       <td>{users.family_name}</td>
       <td>{users.email}</td>
