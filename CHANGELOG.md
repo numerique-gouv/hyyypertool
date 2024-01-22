@@ -1,5 +1,12 @@
 
 
+## [2024.1.5](https://github.com/betagouv/hyyypertool/compare/2024.1.4...2024.1.5) (2024-01-22)
+
+
+### Features
+
+* **health:** add zammad me check ([c92bcb1](https://github.com/betagouv/hyyypertool/commit/c92bcb156a1df80c1d1bad3b0cd0c856d8296e42))
+
 ## [2024.1.4](https://github.com/betagouv/hyyypertool/compare/2024.1.3...2024.1.4) (2024-01-22)
 
 # [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.1.2...2024.2.0) (2024-01-22)
