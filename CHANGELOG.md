@@ -1,5 +1,13 @@
 
 
+## [2024.1.22-0.0](https://github.com/betagouv/hyyypertool/compare/2024.01.18.0...null) (2024-01-22)
+
+
+### Features
+
+* **legacy:** major zammad power ([8a58122](https://github.com/betagouv/hyyypertool/commit/8a581228693ba42c7cf17fb53e0c8c1cca910c53))
+* restrict users ([49d7b2c](https://github.com/betagouv/hyyypertool/commit/49d7b2c62af5d8399018619bc0fdd3e6d9e22e20))
+
 # [2024.01.18.0](https://github.com/betagouv/hyyypertool/compare/2024.01.11.0...2024.01.18.0) (2024-01-22)
 
 
