@@ -1,5 +1,7 @@
 
 
+## [2024.1.4](https://github.com/betagouv/hyyypertool/compare/2024.1.3...2024.1.4) (2024-01-22)
+
 # [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.1.2...2024.2.0) (2024-01-22)
 
 
