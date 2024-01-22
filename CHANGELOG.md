@@ -1,5 +1,12 @@
 
 
+# [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.1.2...2024.2.0) (2024-01-22)
+
+
+### Features
+
+* **sentry:** better sentry tags ([7220125](https://github.com/betagouv/hyyypertool/commit/72201253871ac1aa7cca3d88c4f9c0693d8014eb))
+
 # [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.01.18.0...2024.2.0) (2024-01-22)
 
 
