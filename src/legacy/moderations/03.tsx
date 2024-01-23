@@ -1,8 +1,8 @@
 //
 
 import { date_to_string } from ":common/date";
-import env from ":common/env";
 import { Htmx_Events, hx_include, hx_trigger_from_body } from ":common/htmx";
+import { OpenInZammad } from ":common/zammad";
 import {
   moncomptepro_pg,
   schema,
@@ -468,7 +468,9 @@ export async function ListZammadArticles({
     <section>
       <h5 class="flex flex-row justify-between">
         <span>{articles.at(0)?.subject}</span>
-        <OpenInZammad ticket_id={moderation.ticket_id} />
+        <OpenInZammad ticket_id={moderation.ticket_id}>
+          #{moderation.ticket_id}
+        </OpenInZammad>
       </h5>
       <ul class="list-none">
         {show_more ? (
@@ -511,22 +513,10 @@ function ShowMoreCallout({ ticket_id }: { ticket_id: number }) {
         Seul les {MAX_ARTICLE_COUNT} derniers messages sont affichés.
         <br />
         Consulter tous les messages sur Zammad{" "}
-        <OpenInZammad ticket_id={ticket_id} />
+        <OpenInZammad ticket_id={ticket_id}>#{ticket_id}</OpenInZammad>
       </p>
     </div>
   );
 }
 ShowMoreCallout.Title = createSlot();
 ShowMoreCallout.Text = createSlot();
-
-function OpenInZammad({ ticket_id }: { ticket_id: number }) {
-  return (
-    <a
-      href={`${env.ZAMMAD_URL}/#ticket/zoom/${ticket_id}`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      #{ticket_id}
-    </a>
-  );
-}
