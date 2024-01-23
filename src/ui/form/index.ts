@@ -9,6 +9,7 @@ export const input_group = tv({
     fr-input-group
   `,
   slots: {
+    hint: "fr-hint-text",
     input: "fr-input",
     label: "fr-label",
     text: "",
