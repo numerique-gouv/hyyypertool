@@ -1,5 +1,13 @@
 
 
+## [2024.1.7](https://github.com/betagouv/hyyypertool/compare/2024.1.6...2024.1.7) (2024-01-23)
+
+
+### Features
+
+* **legacy:** duplicate warning list the moderation with state ([ce89ebb](https://github.com/betagouv/hyyypertool/commit/ce89ebbbe5da34ff95302c5985b63ab482520c5b))
+* **legacy:** isolate duplicate warning ([c461944](https://github.com/betagouv/hyyypertool/commit/c461944e86083248eb4717e56fa2b5a272f8e4c3))
+
 ## [2024.1.6](https://github.com/betagouv/hyyypertool/compare/2024.1.5...2024.1.6) (2024-01-22)
 
 
