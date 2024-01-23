@@ -1,6 +1,8 @@
 //
 
-import { ErrorBoundary } from "hono/jsx";
+import { UserInfo_Context } from ":auth/userinfo.context";
+import { Root_Provider } from ":common/root.provider";
+import { ErrorBoundary, useContext } from "hono/jsx";
 import { Suspense } from "hono/jsx/streaming";
 import { PageContext_01, _01 } from "./moderations/01";
 import { ModerationPage } from "./moderations/page";
@@ -8,6 +10,8 @@ import { ModerationPage } from "./moderations/page";
 //
 
 export function LegacyPage({ active_id }: { active_id: number | undefined }) {
+  const userinfo = useContext(UserInfo_Context);
+
   return (
     <>
       <PageContext_01.Provider
@@ -26,7 +30,9 @@ export function LegacyPage({ active_id }: { active_id: number | undefined }) {
           onError={(error) => console.error(error)}
         >
           <Suspense fallback={<>Chargement...</>}>
-            <ModerationPage active_id={active_id} />
+            <Root_Provider userinfo={userinfo}>
+              <ModerationPage active_id={active_id} />
+            </Root_Provider>
           </Suspense>
         </ErrorBoundary>
       </section>

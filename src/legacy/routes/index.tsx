@@ -1,6 +1,7 @@
 //
 
 import type { Csp_Context } from ":common/csp_headers";
+import { Root_Provider } from ":common/root.provider";
 import { Entity_Schema } from ":common/schema";
 import { type Session_Context } from ":common/session";
 import { LegacyPage } from ":legacy/page";
@@ -18,8 +19,13 @@ export default new Hono<Session_Context & Csp_Context>()
     zValidator("query", Entity_Schema.partial().default({})),
     function ({ render, req, var: { nonce, session } }) {
       const { id } = req.valid("query");
-
-      const username = userinfo_to_username(session.get("userinfo")!);
-      return render(<LegacyPage active_id={id} />, { nonce, username });
+      const userinfo = session.get("userinfo")!;
+      const username = userinfo_to_username(userinfo);
+      return render(
+        <Root_Provider userinfo={userinfo}>
+          <LegacyPage active_id={id} />
+        </Root_Provider>,
+        { nonce, username },
+      );
     },
   );

@@ -16,12 +16,14 @@ import {
   ListZammadArticles,
   RESPONSE_TEXTAREA_ID,
 } from "./03";
+import { moderation_comment_router } from "./comment/route";
 import { MODERATION_EVENTS } from "./event";
 
 //
 
 const moderation_router = new Hono()
   .basePath("/:id")
+  .route("/comment", moderation_comment_router)
   .get(
     "/email",
     moncomptepro_pg_database({ connectionString: env.DATABASE_URL }),
