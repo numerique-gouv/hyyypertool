@@ -4,7 +4,6 @@ import { api_ref } from ":api_ref";
 import { date_to_string } from ":common/date";
 import env from ":common/env.ts";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
-import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
 import type { MCP_Moderation } from ":moncomptepro";
@@ -12,7 +11,6 @@ import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
 import { callout } from ":ui/callout";
-import { and, count, eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
 import lodash_sortby from "lodash.sortby";
 import queryString from "query-string";
@@ -270,33 +268,6 @@ export async function Edit_Domain({
         })}
         hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED} from:body`}
       ></div>
-    </div>
-  );
-}
-
-export async function Duplicate_Warning({
-  organization_id,
-  user_id,
-}: {
-  organization_id: number;
-  user_id: number;
-}) {
-  const [{ value: moderation_count }] = await moncomptepro_pg
-    .select({ value: count() })
-    .from(schema.moderations)
-    .where(
-      and(
-        eq(schema.moderations.organization_id, organization_id),
-        eq(schema.moderations.user_id, user_id),
-      ),
-    );
-
-  if (moderation_count <= 1) return <></>;
-
-  return (
-    <div class="fr-alert fr-alert--warning">
-      <h3 class="fr-alert__title">Attention : demande multiples</h3>
-      <p>Il s'agit de la {moderation_count}e demande pour cette organisation</p>
     </div>
   );
 }
