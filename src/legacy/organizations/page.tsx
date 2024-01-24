@@ -2,7 +2,7 @@
 
 import { api_ref } from ":api_ref";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import { and, asc, count as drizzle_count, like } from "drizzle-orm";
+import { and, desc, count as drizzle_count, like } from "drizzle-orm";
 import { Table, Table_Context } from "./Table";
 
 //
@@ -28,7 +28,7 @@ export default async function Page({
         .select()
         .from(schema.organizations)
         .where(where)
-        .orderBy(asc(schema.organizations.id))
+        .orderBy(desc(schema.organizations.id))
         .limit(take)
         .offset(page * take);
       const [{ value: count }] = await moncomptepro_pg
