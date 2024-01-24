@@ -220,18 +220,17 @@ function Table({
           <th>Email</th>
           <th>Job</th>
           <th>verification_type</th>
+          <th>Lien</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr>
-          {users.map((user) => (
-            <>
-              <Row user={user} />
-              <Actions user={user} organization_id={organization_id} />
-            </>
-          ))}
-        </tr>
+        {users.map((user) => (
+          <>
+            <Row user={user} />
+            <Actions user={user} organization_id={organization_id} />
+          </>
+        ))}
       </tbody>
 
       <tfoot>
@@ -274,21 +273,22 @@ function Row({
 }) {
   const verification_type = user.verification_type as Verification_Type;
   return (
-    <tr
-      _={`on click set the window's location to '${api_ref(
-        "/legacy/users/:id",
-        {
-          id: String(user.id),
-        },
-      )}'`}
-      class={row({ is_clickable: true, ...variants })}
-    >
+    <tr class={row(variants)}>
       <td>{user.given_name}</td>
       <td>{user.family_name}</td>
       <td>{user.is_external ? "❌" : "✅"}</td>
       <td>{user.email}</td>
       <td>{user.job}</td>
       <td>{verification_type}</td>
+      <td>
+        <a
+          href={api_ref("/legacy/users/:id", {
+            id: String(user.id),
+          })}
+        >
+          ➡️
+        </a>
+      </td>
     </tr>
   );
 }
@@ -304,7 +304,7 @@ function Actions({
 
   return (
     <tr>
-      <td colspan={6}>
+      <td colspan={7}>
         <button
           class={button()}
           hx-delete={

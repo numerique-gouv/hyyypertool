@@ -30,16 +30,12 @@ export function Table({ users }: { users: User[] }) {
           {fields.map((name) => (
             <th>{name}</th>
           ))}
+          <th>Lien</th>
         </tr>
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr
-            _={`on click set the window's location to '${api_ref(
-              "/legacy/users/:id",
-              { id: String(user.id) },
-            )}'`}
-          >
+          <tr>
             {fields.map((name) => (
               <td>
                 {match(user[name])
@@ -51,6 +47,15 @@ export function Table({ users }: { users: User[] }) {
                   .otherwise((value) => value)}
               </td>
             ))}
+            <td>
+              <a
+                href={api_ref("/legacy/users/:id", {
+                  id: String(user.id),
+                })}
+              >
+                ➡️
+              </a>
+            </td>
           </tr>
         ))}
       </tbody>

@@ -28,21 +28,35 @@ export function Table({ organizations }: { organizations: Organization[] }) {
       <thead>
         <tr>
           {fields.map((name) => (
-            <th>{name}</th>
+            <th class="max-w-32 break-words">{name}</th>
           ))}
+
+          <th>Lien</th>
         </tr>
       </thead>
       <tbody>
         {organizations.map((organization) => (
-          <tr
-            _={`on click set the window's location to '${api_ref(
-              "/legacy/organizations/:id",
-              { id: String(organization.id) },
-            )}'`}
-          >
+          <tr>
             {fields.map((name) => (
-              <td>{match(organization[name]).otherwise((value) => value)}</td>
+              <td class="break-words">
+                {match(organization[name])
+                  .when(
+                    () => name === "authorized_email_domains",
+                    () => organization.authorized_email_domains.join(", "),
+                  )
+                  .otherwise((value) => value)}
+              </td>
             ))}
+
+            <td>
+              <a
+                href={api_ref("/legacy/organizations/:id", {
+                  id: String(organization.id),
+                })}
+              >
+                ➡️
+              </a>
+            </td>
           </tr>
         ))}
       </tbody>

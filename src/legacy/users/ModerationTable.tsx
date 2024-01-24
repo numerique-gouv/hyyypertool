@@ -31,6 +31,7 @@ export function ModerationTable({
           {fields.map((name) => (
             <th>{name}</th>
           ))}
+          <th>Lien</th>
         </tr>
       </thead>
 
@@ -60,6 +61,9 @@ export function ModerationTable({
                     .otherwise((value) => value)}
                 </td>
               ))}
+              <td>
+                <a href={`/legacy?id=${moderation.id}`}>➡️</a>
+              </td>
             </tr>
           ))}
         </tr>

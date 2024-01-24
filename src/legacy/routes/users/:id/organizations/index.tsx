@@ -105,23 +105,19 @@ function Table({
       <thead>
         <tr>
           {fields.map((name) => (
-            <th>{name}</th>
+            <th class="max-w-32 break-words">{name}</th>
           ))}
+
+          <th>Lien</th>
         </tr>
       </thead>
 
       <tbody>
         <tr>
           {organizations.map(({ organizations }) => (
-            <tr
-              _={`on click set the window's location to '${api_ref(
-                "/legacy/organizations/:id",
-                { id: String(organizations.id) },
-              )}'`}
-              class={row({ is_clickable: true })}
-            >
+            <tr class={row()}>
               {fields.map((name) => (
-                <td>
+                <td class="break-words">
                   {match(organizations[name])
                     .when(
                       (x): x is Array<string> => x instanceof Array,
@@ -130,6 +126,16 @@ function Table({
                     .otherwise((value) => value)}
                 </td>
               ))}
+
+              <td>
+                <a
+                  href={api_ref("/legacy/organizations/:id", {
+                    id: String(organizations.id),
+                  })}
+                >
+                  ➡️
+                </a>
+              </td>
             </tr>
           ))}
         </tr>
