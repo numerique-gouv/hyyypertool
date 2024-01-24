@@ -60,7 +60,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}
               hx-target={`#${ORGANIZATIONS_TABLE_ID}`}
-              hx-trigger="input changed delay:500ms"
+              hx-trigger="input changed delay:2s"
               id="page"
               name="page"
               type="number"

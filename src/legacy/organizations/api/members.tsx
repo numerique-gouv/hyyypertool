@@ -250,7 +250,7 @@ function Table({
                   },
                 }).pathname
               }
-              hx-trigger="input changed delay:500ms"
+              hx-trigger="input changed delay:2s"
               hx-target="#table-organisation-members"
               id="page"
               name="page"

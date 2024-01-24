@@ -218,7 +218,7 @@ export async function Table() {
                 SEARCH_EMAIL_INPUT_ID,
                 SEARCH_SIRET_INPUT_ID,
               ])}
-              hx-trigger="input changed delay:500ms"
+              hx-trigger="input changed delay:2s"
               hx-target={prefix_id(MODERATION_TABLE_ID)}
               id="page"
               name="page"

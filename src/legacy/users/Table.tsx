@@ -68,7 +68,7 @@ export function Table({ users }: { users: User[] }) {
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${USER_TABLE_ID} > table`}
               hx-target={`#${USER_TABLE_ID}`}
-              hx-trigger="input changed delay:500ms"
+              hx-trigger="input changed delay:2s"
               id="page"
               name="page"
               type="number"

@@ -145,7 +145,7 @@ function Table({
             <input
               class="text-right"
               hx-get={`/legacy/users/${user_id}/organizations`}
-              hx-trigger="input changed delay:500ms"
+              hx-trigger="input changed delay:2s"
               hx-target="#table-user-organisations"
               id="page"
               name="page"
