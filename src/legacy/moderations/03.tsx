@@ -420,7 +420,7 @@ function MarkModerationProcessed({ moderation }: { moderation: Moderation }) {
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        app_hc.legacy.moderations[":id"].processed.$url({
+        app_hc.legacy.moderations[":id"].rejected.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }

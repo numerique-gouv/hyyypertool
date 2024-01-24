@@ -3,10 +3,12 @@
 import env from ":common/env";
 import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema } from ":common/schema";
+import type { Session_Context } from ":common/session";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import { send_zammad_mail } from ":legacy/services/zammad_api";
+import { userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -21,7 +23,7 @@ import { MODERATION_EVENTS } from "./event";
 
 //
 
-const moderation_router = new Hono()
+const moderation_router = new Hono<Session_Context>()
   .basePath("/:id")
   .route("/comment", moderation_comment_router)
   .get(
@@ -52,8 +54,11 @@ const moderation_router = new Hono()
         [RESPONSE_TEXTAREA_ID]: z.string().trim(),
       }),
     ),
-    async ({ text, req, notFound }) => {
+    async ({ text, req, notFound, redirect, var: { session } }) => {
       const { id: moderation_id } = req.valid("param");
+      const userinfo = session.get("userinfo");
+      if (!userinfo) return redirect("/");
+      const username = userinfo_to_username(userinfo);
       const {
         [EMAIL_SUBJECT_INPUT_ID]: subject,
         [RESPONSE_TEXTAREA_ID]: body,
@@ -71,7 +76,7 @@ const moderation_router = new Hono()
       if (!moderation.ticket_id) return notFound();
 
       await send_zammad_mail({
-        body: body.replace(/\n/g, "<br />"),
+        body: body.concat(`\n${username}`).replace(/\n/g, "<br />"),
         subject,
         ticket_id: moderation.ticket_id,
         state: "closed",
