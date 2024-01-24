@@ -9,6 +9,10 @@ import { ModerationPage } from "./moderations/page";
 
 //
 
+export const MODERATION_SECTION_ID = "moderation";
+
+//
+
 export function LegacyPage({
   active_id,
   page,
@@ -30,7 +34,7 @@ export function LegacyPage({
       >
         <_01 />
       </PageContext_01.Provider>
-      <section id="moderation">
+      <section id={MODERATION_SECTION_ID}>
         <ErrorBoundary
           fallback={<>Quesque chose à mal tourné...</>}
           onError={(error) => console.error(error)}

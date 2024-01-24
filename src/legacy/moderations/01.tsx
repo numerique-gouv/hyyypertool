@@ -5,6 +5,7 @@ import { date_to_string } from ":common/date";
 import { Htmx_Events, hx_include, prefix_id } from ":common/htmx";
 import type { Moderation, User } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
+import { MODERATION_SECTION_ID } from ":legacy/page";
 import { row } from ":ui/table";
 import {
   and,
@@ -169,7 +170,7 @@ export async function Table() {
         on ${Htmx_Events.Enum["htmx:afterOnLoad"]}
         set @aria-selected of <[aria-selected=true]/> to false
         tell the target take .is_active set @aria-selected to true
-        go to the top of #moderation smoothly
+        go to the top of #${MODERATION_SECTION_ID} smoothly
      `}
       >
         {html`
@@ -268,7 +269,7 @@ function Row({
       aria-selected="false"
       class={row(variants)}
       hx-get={api_ref("/legacy/moderations/:id", { id: String(moderation.id) })}
-      hx-target="#moderation"
+      hx-target={`#${MODERATION_SECTION_ID}`}
       hx-push-url={`/legacy?id=${moderation.id}`}
     >
       <td title={moderation.type}>
