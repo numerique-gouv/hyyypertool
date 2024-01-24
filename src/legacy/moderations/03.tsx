@@ -395,9 +395,8 @@ function SendModerationProcessedEmail({
         _={`
         on click
           wait for ${Htmx_Events.Enum["htmx:afterOnLoad"]} from body
-          go to the top of body
+          go to the top of body smoothly
           wait 1s
-          set the window's location to "/legacy"
         `}
         class={button({ intent: "dark" })}
         disabled={disabled}
@@ -431,9 +430,8 @@ function MarkModerationProcessed({ moderation }: { moderation: Moderation }) {
         _={`
         on click
           wait for ${Htmx_Events.Enum["htmx:afterOnLoad"]} from body
-          go to the top of body
+          go to the top of body smoothly
           wait 1s
-          set the window's location to "/legacy"
         `}
         class={button({ intent: "dark" })}
       >

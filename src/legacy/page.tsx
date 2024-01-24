@@ -9,7 +9,13 @@ import { ModerationPage } from "./moderations/page";
 
 //
 
-export function LegacyPage({ active_id }: { active_id: number | undefined }) {
+export function LegacyPage({
+  active_id,
+  page,
+}: {
+  active_id: number | undefined;
+  page: number | undefined;
+}) {
   const userinfo = useContext(UserInfo_Context);
 
   return (
@@ -17,7 +23,7 @@ export function LegacyPage({ active_id }: { active_id: number | undefined }) {
       <PageContext_01.Provider
         value={{
           active_id: active_id ?? NaN,
-          page: 0,
+          page: page ?? 0,
           take: 5,
           search: { email: "", siret: "", show_archived: false },
         }}

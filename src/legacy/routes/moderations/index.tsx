@@ -3,6 +3,7 @@
 import { Entity_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
+  MODERATION_PAGE_ID,
   PROCESSED_REQUESTS_INPUT_ID,
   PageContext_01,
   PageContext_01_default,
@@ -23,7 +24,7 @@ export default new Hono().get(
     "query",
     z
       .object({
-        page: z
+        [MODERATION_PAGE_ID]: z
           .string()
           .default("0")
           .pipe(z.coerce.number().int().nonnegative()),
@@ -59,7 +60,7 @@ export default new Hono().get(
   async function ({ html, req }) {
     const {
       id,
-      page,
+      [MODERATION_PAGE_ID]: page,
       [PROCESSED_REQUESTS_INPUT_ID]: processed_requests,
       [SEARCH_EMAIL_INPUT_ID]: search_email,
       [SEARCH_SIRET_INPUT_ID]: search_siret,

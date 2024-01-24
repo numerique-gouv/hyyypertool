@@ -31,6 +31,7 @@ export const PageContext_01_default = {
 };
 export const PageContext_01 = createContext(PageContext_01_default);
 
+export const MODERATION_PAGE_ID = "moderation-table-page";
 export const SEARCH_SIRET_INPUT_ID = "search-siret";
 export const SEARCH_EMAIL_INPUT_ID = "search-email";
 export const PROCESSED_REQUESTS_INPUT_ID = "processed_requests";
@@ -204,7 +205,7 @@ export async function Table() {
               ])}
               hx-target={prefix_id(MODERATION_TABLE_ID)}
               hx-vals={JSON.stringify({
-                page: page - 1,
+                [MODERATION_PAGE_ID]: page - 1,
               })}
             >
               Précédent
@@ -220,8 +221,8 @@ export async function Table() {
               ])}
               hx-trigger="input changed delay:2s"
               hx-target={prefix_id(MODERATION_TABLE_ID)}
-              id="page"
-              name="page"
+              id={MODERATION_PAGE_ID}
+              name={MODERATION_PAGE_ID}
               type="number"
               value={String(page)}
             />
@@ -237,7 +238,7 @@ export async function Table() {
               ])}
               hx-target={prefix_id(MODERATION_TABLE_ID)}
               hx-vals={JSON.stringify({
-                page: page + 1,
+                [MODERATION_PAGE_ID]: page + 1,
               })}
             >
               Suivant
