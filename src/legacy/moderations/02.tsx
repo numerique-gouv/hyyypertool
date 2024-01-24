@@ -15,7 +15,6 @@ import { useContext } from "hono/jsx";
 import lodash_sortby from "lodash.sortby";
 import queryString from "query-string";
 import { match } from "ts-pattern";
-import { Comment } from "./comment/Comment";
 import { ModerationPage_Context } from "./page";
 
 //
@@ -77,9 +76,9 @@ export async function _02() {
         domain={domain}
         organization={moderation.organizations}
       />
-      <div class="mt-5 block">
+      {/* <div class="mt-5 block">
         <Comment moderation={moderation} />
-      </div>
+      </div> */}
       <div class="mt-5 block">
         <About_Organisation moderation={moderation} />
       </div>
