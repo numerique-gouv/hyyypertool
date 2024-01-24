@@ -32,7 +32,7 @@ const user_router = new Hono()
         <ModerationTable_Context.Provider
           value={{
             page: 0,
-            take: 5,
+            take: 10,
             count: 0,
             user_id: NaN,
           }}

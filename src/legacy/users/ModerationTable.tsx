@@ -10,7 +10,7 @@ import { match } from "ts-pattern";
 
 export const ModerationTable_Context = createContext({
   page: 0,
-  take: 5,
+  take: 10,
   count: 0,
   user_id: NaN,
 });

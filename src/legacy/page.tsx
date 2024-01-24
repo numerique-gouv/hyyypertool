@@ -4,7 +4,7 @@ import { UserInfo_Context } from ":auth/userinfo.context";
 import { Root_Provider } from ":common/root.provider";
 import { ErrorBoundary, useContext } from "hono/jsx";
 import { Suspense } from "hono/jsx/streaming";
-import { PageContext_01, _01 } from "./moderations/01";
+import { PageContext_01, PageContext_01_default, _01 } from "./moderations/01";
 import { ModerationPage } from "./moderations/page";
 
 //
@@ -22,9 +22,9 @@ export function LegacyPage({
     <>
       <PageContext_01.Provider
         value={{
+          ...PageContext_01_default,
           active_id: active_id ?? NaN,
           page: page ?? 0,
-          take: 5,
           search: { email: "", siret: "", show_archived: false },
         }}
       >

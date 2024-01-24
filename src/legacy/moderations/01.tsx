@@ -26,7 +26,7 @@ import { moderation_type_to_emoji } from "./moderation_type_to_emoji";
 export const PageContext_01_default = {
   active_id: NaN,
   page: 0,
-  take: 5,
+  take: 10,
   search: { email: "", siret: "", show_archived: false },
 };
 export const PageContext_01 = createContext(PageContext_01_default);
