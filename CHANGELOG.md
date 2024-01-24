@@ -1,5 +1,12 @@
 
 
+## [2024.1.10](https://github.com/betagouv/hyyypertool/compare/2024.1.9...2024.1.10) (2024-01-24)
+
+
+### Features
+
+* **legacy:** show more moderations ([c8e3532](https://github.com/betagouv/hyyypertool/commit/c8e3532fe6459a1599014e89efe5fefdf734ea72))
+
 ## [2024.1.9](https://github.com/betagouv/hyyypertool/compare/2024.1.8...2024.1.9) (2024-01-24)
 
 
