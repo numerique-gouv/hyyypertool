@@ -1,5 +1,17 @@
 
 
+## [2024.1.8](https://github.com/betagouv/hyyypertool/compare/2024.1.7...2024.1.8) (2024-01-24)
+
+
+### Features
+
+* **legacy:** add comment field in the shadow ([53b84d3](https://github.com/betagouv/hyyypertool/commit/53b84d37209e72a0d96f411e27186a518e5f3ce3))
+* **legacy:** durty dsfr hack for the 01 section ([bffb204](https://github.com/betagouv/hyyypertool/commit/bffb204281dd13fea53355fafe3257e312d52e80))
+* **legacy:** hold the session userinfo in a context through the stream ([b7218f3](https://github.com/betagouv/hyyypertool/commit/b7218f36a4ee7d26c6277333a6413440ea20370c))
+* **legacy:** smooth markers ([4b55378](https://github.com/betagouv/hyyypertool/commit/4b55378bb00e92aed86862fa8b6688145d1447db))
+* **legacy:** wait 2s for the input to change ([3a3dd18](https://github.com/betagouv/hyyypertool/commit/3a3dd18a55124e3aa2d385fda0c5c839d1e9b554))
+* **ui:** add input group hint ([c8e238e](https://github.com/betagouv/hyyypertool/commit/c8e238e271160d32345387b3f1c8053ca10eea1d))
+
 ## [2024.1.7](https://github.com/betagouv/hyyypertool/compare/2024.1.6...2024.1.7) (2024-01-23)
 
 
