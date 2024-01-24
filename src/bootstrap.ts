@@ -12,7 +12,7 @@ import { logger } from "hono/logger";
 import Youch from "youch";
 import asserts_router from "./assets/route";
 import auth_router from "./auth/route";
-import { readyz } from "./health/readyz";
+import { readyz } from "./health/readyz/route";
 import { NotFound } from "./not-found";
 import { proxy } from "./proxy/route";
 import welcome_router from "./welcome/route";
