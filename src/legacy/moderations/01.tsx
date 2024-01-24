@@ -40,7 +40,10 @@ export const MODERATION_TABLE_ID = "moderation-table";
 export function _01() {
   return (
     <div class="mx-auto mt-6 !max-w-6xl" id="01">
-      <h1>🖱️ 1. Je sélectionne le cas que je veux traiter</h1>
+      <h1>
+        🖱️ 1. Je sélectionne le cas que je veux traiter{" "}
+        <span class="text-white">........................</span>
+      </h1>
       <hr />
       <div class="fr-input-group ">
         <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
@@ -106,7 +109,7 @@ export function _01() {
         </div>
       </div>
       <Suspense fallback={<p>Loading...</p>}>
-        <div class="fr-table" id={MODERATION_TABLE_ID}>
+        <div class="fr-table w-full" id={MODERATION_TABLE_ID}>
           <Table />
         </div>
       </Suspense>
