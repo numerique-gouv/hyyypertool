@@ -1,9 +1,8 @@
 //
 
-import env from ":common/env";
 import { Entity_Schema } from ":common/schema";
 import { schema } from ":database:moncomptepro";
-import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { zValidator } from "@hono/zod-validator";
 import { asc, desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -11,11 +10,10 @@ import { ModerationTable, ModerationTable_Context } from "./ModerationTable";
 
 //
 
-const user_router = new Hono()
+const user_router = new Hono<moncomptepro_pg_Context>()
   .basePath("/:id")
   .get(
     "/moderations",
-    moncomptepro_pg_database({ connectionString: env.DATABASE_URL }),
     zValidator("param", Entity_Schema),
     async ({ html, req, var: { moncomptepro_pg } }) => {
       const { id } = req.valid("param");
