@@ -1,5 +1,12 @@
 
 
+## [2024.1.9](https://github.com/betagouv/hyyypertool/compare/2024.1.8...2024.1.9) (2024-01-24)
+
+
+### Features
+
+* **legacy:** mark rejected moderations ([226343b](https://github.com/betagouv/hyyypertool/commit/226343bba888d7f2c04794b8a8eb13e04c8677a5))
+
 ## [2024.1.8](https://github.com/betagouv/hyyypertool/compare/2024.1.7...2024.1.8) (2024-01-24)
 
 
