@@ -95,7 +95,9 @@ async function fetch_mcp_admin_api(options: Options) {
   });
 
   if (!response.ok) {
-    throw new HTTPError(`${url} ${response.status} ${response.statusText}`);
+    throw new HTTPError(
+      `${options.method} ${url} ${response.status} ${response.statusText}`,
+    );
   }
 
   return response.json();
