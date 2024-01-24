@@ -1,5 +1,13 @@
 
 
+## [2024.1.11](https://github.com/betagouv/hyyypertool/compare/2024.1.10...2024.1.11) (2024-01-24)
+
+
+### Features
+
+* **legacy:** display latest users and organizations first ([3c2d76b](https://github.com/betagouv/hyyypertool/commit/3c2d76b5a84292256b3228454c17fb18966cb28f))
+* **legacy:** separate row and links ([d8010a4](https://github.com/betagouv/hyyypertool/commit/d8010a4243c5e9f648b2fb31d0574765dbc2a4a0))
+
 ## [2024.1.10](https://github.com/betagouv/hyyypertool/compare/2024.1.9...2024.1.10) (2024-01-24)
 
 
