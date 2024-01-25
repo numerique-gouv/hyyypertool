@@ -1,5 +1,29 @@
 
 
+## [2024.1.12](https://github.com/betagouv/hyyypertool/compare/2024.1.11...2024.1.12) (2024-01-25)
+
+
+### Bug Fixes
+
+* **common:** rename UserError to HTTPError ([2928c7e](https://github.com/betagouv/hyyypertool/commit/2928c7edf1fdde505d309788c0af28e291784bab))
+* **services:** ensure to log the method on error ([ef837f3](https://github.com/betagouv/hyyypertool/commit/ef837f39ca627cede226729d0ff88bd36028403f))
+
+
+* feat(moderations)!: move /legacy to /moderations (#9) ([f3aa797](https://github.com/betagouv/hyyypertool/commit/f3aa797ba0caa0abedc29b42cbf3bbe30022ab51)), closes [#9](https://github.com/betagouv/hyyypertool/issues/9)
+* feat(legacy)!: change moderation navigation (#8) ([86af83e](https://github.com/betagouv/hyyypertool/commit/86af83e4183ad124c6ef23b9ccb858f1e87a57d2)), closes [#8](https://github.com/betagouv/hyyypertool/issues/8)
+
+
+### Features
+
+* **legacy:** add confirm prompt on mark as processed buttons ([f75e864](https://github.com/betagouv/hyyypertool/commit/f75e8648190ef6bc553267bf87beb6ea19ae15d4))
+* **legacy:** centrelize moderation id name ([1b6f889](https://github.com/betagouv/hyyypertool/commit/1b6f8895d9a5b5c51c11b6186f3131ffa17a4476))
+
+
+### BREAKING CHANGES
+
+* the `/legacy` is no more `/moderations` 
+* the `/legacy?id=xxxx` is no more `/legacy/moderations/xxxx`
+
 ## [2024.1.11](https://github.com/betagouv/hyyypertool/compare/2024.1.10...2024.1.11) (2024-01-24)
 
 
