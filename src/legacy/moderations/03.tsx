@@ -44,7 +44,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
   ok(moderation);
 
   return (
-    <div class="mx-auto !max-w-6xl">
+    <div class="fr-container">
       <h1>✉️ 3. J'ai pris ma décision</h1>
 
       <hr />
