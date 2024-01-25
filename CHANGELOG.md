@@ -1,5 +1,12 @@
 
 
+## [2024.1.14](https://github.com/betagouv/hyyypertool/compare/2024.1.13...2024.1.14) (2024-01-25)
+
+
+### Features
+
+* **moderations:** add hide non_verified_domain ([101046d](https://github.com/betagouv/hyyypertool/commit/101046df6d021f413749266084d2107a553e75e5))
+
 ## [2024.1.13](https://github.com/betagouv/hyyypertool/compare/2024.1.12...2024.1.13) (2024-01-25)
 
 
