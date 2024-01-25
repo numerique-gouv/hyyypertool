@@ -206,6 +206,8 @@ function Foot({
             disabled={page <= 0}
             hx-get={app_hc.moderations.$url().pathname}
             hx-include={hx_include([
+              MODERATION_TABLE_PAGE_ID,
+              NON_VERIFIED_DOMAIN_INPUT_ID,
               PROCESSED_REQUESTS_INPUT_ID,
               SEARCH_EMAIL_INPUT_ID,
               SEARCH_SIRET_INPUT_ID,
@@ -221,6 +223,7 @@ function Foot({
             class="fr-input inline-block w-auto"
             hx-get={app_hc.moderations.$url().pathname}
             hx-include={hx_include([
+              NON_VERIFIED_DOMAIN_INPUT_ID,
               PROCESSED_REQUESTS_INPUT_ID,
               SEARCH_EMAIL_INPUT_ID,
               SEARCH_SIRET_INPUT_ID,
