@@ -34,7 +34,7 @@
     "await-to-js": "3.0.0",
     "drizzle-orm": "0.29.3",
     "error-custom-class": "10.0.0",
-    "hono": "3.12.6",
+    "hono": "3.12.7",
     "hono-sessions": "0.3.3",
     "htmx.ext...chunked-transfer": "1.0.1",
     "htmx.org": "1.9.10",
@@ -69,7 +69,7 @@
     "typescript": "5.3.3"
   },
   "overrides": {
-    "hono": "3.12.6"
+    "hono": "3.12.7"
   },
   "release-it": {
     "git": {
