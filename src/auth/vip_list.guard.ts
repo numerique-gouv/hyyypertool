@@ -1,17 +1,25 @@
 //
 
-import type { MiddlewareHandler } from "hono";
+import type { AgentConnect_UserInfo, Session_Context } from ":common/session";
+import type { Env, MiddlewareHandler } from "hono";
 
 //
 
-//  const UserInfo_Context = createContext<AgentConnect_UserInfo>({} as any);
+export interface UserInfo_Context extends Env {
+  Variables: {
+    userinfo: AgentConnect_UserInfo;
+  };
+}
+
+//
+
 export function vip_list_guard({
   vip_list,
 }: {
   vip_list: string[];
-}): MiddlewareHandler {
+}): MiddlewareHandler<UserInfo_Context & Session_Context> {
   return async function vip_list_guard_middleware(
-    { redirect, req, var: { sentry, session } },
+    { redirect, req, set, var: { sentry, session } },
     next,
   ) {
     const userinfo = session.get("userinfo");
@@ -31,6 +39,8 @@ export function vip_list_guard({
     if (!is_allowed) {
       return redirect("/");
     }
+
+    set("userinfo", userinfo);
 
     await next();
 

@@ -1,8 +1,8 @@
 //
 
+import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Csp_Context } from ":common/csp_headers";
 import { Pagination_Schema } from ":common/schema";
-import type { Session_Context } from ":common/session";
 import { Moderations_Page, Search_Schema } from ":moderations/page";
 import {
   Main_Layout,
@@ -16,14 +16,12 @@ import { moderation_router } from "./:id/route";
 
 //
 
-const moderations_page_route = new Hono<Session_Context & Csp_Context>()
+const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
   .use("/", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
     zValidator("query", Search_Schema.merge(Pagination_Schema).partial()),
-    function GET({ redirect, render, req, var: { nonce, session } }) {
-      const userinfo = session.get("userinfo");
-      if (!userinfo) return redirect("/");
+    function GET({ render, req, var: { nonce, userinfo } }) {
       const { page, search_email, search_siret, processed_requests } =
         req.valid("query");
       const username = userinfo_to_username(userinfo);
