@@ -2,6 +2,7 @@
 
 import { OpenInZammad, SearchInZammad } from ":common/zammad";
 import { schema } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { get_zammad_mail } from ":legacy/services/zammad_api";
 import to from "await-to-js";
 import { and, asc, eq } from "drizzle-orm";
@@ -45,7 +46,13 @@ export async function Duplicate_Warning({
       <ul>
         {moderation_ticket.map(({ moderation, zammad_ticket }) => (
           <li>
-            <a href={`/legacy?id=${moderation.id}#02`}>
+            <a
+              href={
+                app_hc.legacy.moderations[":id"].$url({
+                  param: { id: moderation.id.toString() },
+                }).pathname
+              }
+            >
               Moderation#{moderation.id}
             </a>{" "}
             {moderation.moderated_at ? "✔️" : "❌"}:{" "}
