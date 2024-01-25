@@ -48,9 +48,9 @@ const app = new Hono<Csp_Context>()
 
   .route("", asserts_router)
   .route("", auth_router)
+  .use("*", hyyyyyypertool_session)
   .route("", welcome_router)
   .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))
-  .use("*", hyyyyyypertool_session)
   .use(
     "/moderations/*",
     vip_list_guard({ vip_list: env.ALLOWED_USERS.split(",") }),

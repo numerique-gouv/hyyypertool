@@ -12,8 +12,11 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 const router = new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Root_Layout, { docType: true, stream: true }))
-  .get("/", ({ render, var: { nonce } }) =>
-    render(
+  .get("/", function GET({ render, redirect, var: { nonce, session } }) {
+    if (session.get("userinfo")) {
+      return redirect(api_ref("/moderations", {}));
+    }
+    return render(
       <main class="flex h-full flex-grow flex-col items-center justify-center">
         <h1 class="fr-display--xl drop-shadow-lg ">
           <hyyyper-title />
@@ -47,8 +50,8 @@ const router = new Hono<Session_Context & Csp_Context>()
         </div>
       </main>,
       { nonce },
-    ),
-  )
+    );
+  })
   .get(`/assets/${env.VERSION}/_client/hyyypertitle.js`, async () => {
     const {
       outputs: [output],
