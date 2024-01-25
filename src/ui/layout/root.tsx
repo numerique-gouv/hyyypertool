@@ -116,6 +116,7 @@ export function Root_Layout({
         name="htmx-config"
         content="${JSON.stringify({
           defaultSettleDelay: 0,
+          globalViewTransitions: true,
           historyEnabled: true,
           inlineScriptNonce: nonce ?? "",
         })}"
