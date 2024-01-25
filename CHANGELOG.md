@@ -1,5 +1,13 @@
 
 
+## [2024.1.16](https://github.com/betagouv/hyyypertool/compare/2024.1.15...2024.1.16) (2024-01-25)
+
+
+### Bug Fixes
+
+* **moderation:** next page ignore part of the filter ([ef326bd](https://github.com/betagouv/hyyypertool/commit/ef326bd000b767cc6f468c65f4c98a9fec16c10b))
+* **moderation:** next page ignore part of the filter (2) ([50d5e31](https://github.com/betagouv/hyyypertool/commit/50d5e317532e834d0f22ee738cc76964e8641621))
+
 ## [2024.1.15](https://github.com/betagouv/hyyypertool/compare/2024.1.14...2024.1.15) (2024-01-25)
 
 
