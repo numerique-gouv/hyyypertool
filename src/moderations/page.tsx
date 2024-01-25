@@ -282,7 +282,7 @@ const getDayOfYear = (date: Date) =>
 
 function text_color(date: Date) {
   const diff = getDayOfYear(new Date()) - getDayOfYear(date);
-  const hue = Math.floor(diff * 11).toString(10);
+  const hue = Math.floor(diff * 111).toString(10);
   const saturation = "75%";
   const lightness = "33%";
   return `color : hsl(${hue},${saturation},${lightness});`;
