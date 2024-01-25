@@ -1,6 +1,7 @@
 //
 
 import type { Moderation } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { moderation_type_to_emoji } from ":legacy/moderations/moderation_type_to_emoji";
 import { row } from ":ui/table";
 import { createContext, useContext } from "hono/jsx";
@@ -38,10 +39,7 @@ export function ModerationTable({
       <tbody>
         <tr>
           {moderations.map((moderation) => (
-            <tr
-              _={`on click set the window's location to '/legacy?id=${moderation.id}'`}
-              class={row({ is_clickable: true })}
-            >
+            <tr class={row()}>
               {fields.map((name) => (
                 <td>
                   {match(moderation[name])
@@ -62,7 +60,15 @@ export function ModerationTable({
                 </td>
               ))}
               <td>
-                <a href={`/legacy?id=${moderation.id}`}>➡️</a>
+                <a
+                  href={
+                    app_hc.legacy.moderations[":id"].$url({
+                      param: { id: moderation.id.toString() },
+                    }).pathname
+                  }
+                >
+                  ➡️
+                </a>
               </td>
             </tr>
           ))}
