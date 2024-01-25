@@ -15,7 +15,7 @@ import { useContext } from "hono/jsx";
 import lodash_sortby from "lodash.sortby";
 import queryString from "query-string";
 import { match } from "ts-pattern";
-import { ModerationPage_Context } from "./:id/page";
+import { ModerationPage_Context } from "./page";
 
 //
 

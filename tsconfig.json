@@ -18,6 +18,7 @@
       ":common/*": ["./src/common/*"],
       ":hc": ["./src/client"],
       ":legacy/*": ["./src/legacy/*"],
+      ":moderations/*": ["./src/moderations/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":package.json": ["./package.json"],
       ":ui/*": ["./src/ui/*"],

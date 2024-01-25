@@ -2,6 +2,7 @@
 
 import { api_ref } from ":api_ref";
 import type { AgentConnect_UserInfo } from ":common/session";
+import { app_hc } from ":hc";
 import type { Child } from "hono/jsx";
 import { Root_Layout, type Root_Layout_Props } from "./root";
 
@@ -104,8 +105,12 @@ function Nav() {
     >
       <ul class="fr-nav__list">
         <li class="fr-nav__item">
-          <a class="fr-nav__link" href={api_ref("/legacy", {})} target="_self">
-            Legacy
+          <a
+            class="fr-nav__link"
+            href={app_hc.moderations.$url().pathname}
+            target="_self"
+          >
+            Moderations
           </a>
         </li>
         <li class="fr-nav__item">

@@ -9,10 +9,8 @@ type KnownPath =
   | "/auth/login"
   | "/auth/login/callback"
   | "/auth/logout"
-  | "/legacy"
   | "/legacy/duplicate_warning"
   | "/legacy/leaders"
-  | "/legacy/moderations"
   | "/legacy/moderations/:id"
   | "/legacy/organizations"
   | "/legacy/organizations/:id"
@@ -24,7 +22,8 @@ type KnownPath =
   | "/legacy/users"
   | "/legacy/users/:id"
   | "/legacy/users/:id/organizations"
-  | "/legacy/users/:id/reset";
+  | "/legacy/users/:id/reset"
+  | "/moderations";
 
 //
 

@@ -12,6 +12,7 @@ import {
 } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import { get_zammad_mail } from ":legacy/services/zammad_api";
+import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
 import { callout } from ":ui/callout";
 import { Loader } from ":ui/loader/Loader";
@@ -20,7 +21,6 @@ import { createSlot } from "hono-slotify/index";
 import { ok } from "node:assert";
 import { dedent } from "ts-dedent";
 import { Message } from "./Message";
-import { MODERATION_EVENTS } from "./event";
 
 //
 

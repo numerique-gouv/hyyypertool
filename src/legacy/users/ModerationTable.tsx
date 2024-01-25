@@ -2,7 +2,7 @@
 
 import type { Moderation } from ":database:moncomptepro";
 import { app_hc } from ":hc";
-import { moderation_type_to_emoji } from ":legacy/moderations/moderation_type_to_emoji";
+import { moderation_type_to_emoji } from ":moderations/moderation_type_to_emoji";
 import { row } from ":ui/table";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";

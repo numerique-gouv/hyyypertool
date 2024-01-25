@@ -1,11 +1,12 @@
 //
 
 import { api_ref } from ":api_ref";
+import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Csp_Context } from ":common/csp_headers";
 import { date_to_string } from ":common/date";
 import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema } from ":common/schema";
-import { hyyyyyypertool_session, type Session_Context } from ":common/session";
+import { hyyyyyypertool_session } from ":common/session";
 import { moncomptepro_pg, schema, type User } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import { button } from ":ui/button";
@@ -19,13 +20,13 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-export default new Hono<Session_Context & Csp_Context>()
+export default new Hono<UserInfo_Context & Csp_Context>()
   .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async ({ req, render, notFound, var: { nonce, session } }) => {
+    async ({ req, render, notFound, var: { nonce, userinfo } }) => {
       const { id } = req.valid("param");
 
       const user = await moncomptepro_pg.query.users.findFirst({
@@ -36,7 +37,7 @@ export default new Hono<Session_Context & Csp_Context>()
         return notFound();
       }
 
-      const username = userinfo_to_username(session.get("userinfo")!);
+      const username = userinfo_to_username(userinfo);
       return render(
         <main class="fr-container">
           <h1>👨‍💻 A propos de {user.given_name}</h1>
