@@ -9,6 +9,7 @@ import {
   ilike,
   isNotNull,
   isNull,
+  not,
 } from "drizzle-orm";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 
@@ -20,12 +21,17 @@ export function get_moderations_list(
     search,
     pagination = { page: 0, take: 10 },
   }: {
-    search: { siret?: string; email?: string; show_archived?: boolean };
+    search: {
+      siret?: string;
+      email?: string;
+      show_archived?: boolean;
+      hide_non_verified_domain?: boolean;
+    };
     pagination?: { page: number; take: number };
   },
 ) {
   const { page, take } = pagination;
-  const { email, siret, show_archived } = search;
+  const { email, siret, show_archived, hide_non_verified_domain } = search;
 
   const where = and(
     ilike(schema.organizations.siret, `%${siret ?? ""}%`),
@@ -33,6 +39,9 @@ export function get_moderations_list(
     show_archived
       ? isNotNull(schema.moderations.moderated_at)
       : isNull(schema.moderations.moderated_at),
+    hide_non_verified_domain
+      ? not(eq(schema.moderations.type, "non_verified_domain"))
+      : undefined,
   );
 
   return pg.transaction(async function moderation_count() {

@@ -20,11 +20,13 @@ export const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
 export const SEARCH_SIRET_INPUT_ID = "search_siret";
 export const SEARCH_EMAIL_INPUT_ID = "search_email";
 export const PROCESSED_REQUESTS_INPUT_ID = "processed_requests";
+export const NON_VERIFIED_DOMAIN_INPUT_ID = "non_verified_domain";
 
 export const Search_Schema = z.object({
   [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
   [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
   [PROCESSED_REQUESTS_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
+  [NON_VERIFIED_DOMAIN_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
 });
 export type Search = z.infer<typeof Search_Schema>;
 
@@ -53,6 +55,7 @@ function Filter({ search }: { search: Search }) {
       hx-get={app_hc.moderations.$url().pathname}
       hx-include={hx_include([
         MODERATION_TABLE_PAGE_ID,
+        NON_VERIFIED_DOMAIN_INPUT_ID,
         PROCESSED_REQUESTS_INPUT_ID,
         SEARCH_EMAIL_INPUT_ID,
         SEARCH_SIRET_INPUT_ID,
@@ -61,9 +64,10 @@ function Filter({ search }: { search: Search }) {
       hx-select={`#${MODERATION_TABLE_ID} > table`}
       hx-target={`#${MODERATION_TABLE_ID}`}
       hx-trigger={[
-        `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
-        `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
+        `input from:#${NON_VERIFIED_DOMAIN_INPUT_ID}`,
         `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
+        `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
+        `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 0 } as Pagination)}
     >
@@ -106,6 +110,21 @@ function Filter({ search }: { search: Search }) {
           </label>
         </div>
       </div>
+      <div class="fr-fieldset__element">
+        <div class="fr-checkbox-group">
+          <input
+            _="on click set @value to my checked"
+            id={NON_VERIFIED_DOMAIN_INPUT_ID}
+            name={NON_VERIFIED_DOMAIN_INPUT_ID}
+            value={search[NON_VERIFIED_DOMAIN_INPUT_ID] ? "true" : "false"}
+            checked={search[NON_VERIFIED_DOMAIN_INPUT_ID]}
+            type="checkbox"
+          />
+          <label class="fr-label" for={NON_VERIFIED_DOMAIN_INPUT_ID}>
+            Cacher les {moderation_type_to_emoji("non_verified_domain")}
+          </label>
+        </div>
+      </div>
     </form>
   );
 }
@@ -121,12 +140,18 @@ async function ModerationList_Table({
     var: { moncomptepro_pg },
   } = useRequestContext<moncomptepro_pg_Context>();
   const { page, page_size } = pagination;
-  const { search_email, search_siret, processed_requests } = search;
+  const {
+    search_email,
+    search_siret,
+    processed_requests,
+    non_verified_domain,
+  } = search;
   const { count, moderations } = await get_moderations_list(moncomptepro_pg, {
     search: {
       email: search_email,
       siret: search_siret,
       show_archived: processed_requests,
+      hide_non_verified_domain: non_verified_domain,
     },
     pagination: { page, take: page_size },
   });
