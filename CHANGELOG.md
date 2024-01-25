@@ -1,5 +1,12 @@
 
 
+## [2024.1.15](https://github.com/betagouv/hyyypertool/compare/2024.1.14...2024.1.15) (2024-01-25)
+
+
+### Bug Fixes
+
+* **moderation:** typo on moderation type label ([220d7e6](https://github.com/betagouv/hyyypertool/commit/220d7e6b930b625a977c72bd8073d6f97652ff3d))
+
 ## [2024.1.14](https://github.com/betagouv/hyyypertool/compare/2024.1.13...2024.1.14) (2024-01-25)
 
 
