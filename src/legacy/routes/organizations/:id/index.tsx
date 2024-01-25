@@ -24,7 +24,7 @@ export default new Hono<Session_Context & Csp_Context>()
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async ({ req, render, redirect, notFound, var: { nonce, session } }) => {
+    async ({ req, render, notFound, var: { nonce, session } }) => {
       const { id } = req.valid("param");
 
       const organization = await moncomptepro_pg.query.organizations.findFirst({

@@ -9,6 +9,7 @@ import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import { send_zammad_mail } from ":legacy/services/zammad_api";
+import { MODERATION_EVENTS } from ":moderations/event";
 import {
   Main_Layout,
   userinfo_to_username,
@@ -23,8 +24,7 @@ import {
   EMAIL_SUBJECT_INPUT_ID,
   ListZammadArticles,
   RESPONSE_TEXTAREA_ID,
-} from "../03";
-import { MODERATION_EVENTS } from "../event";
+} from "./03";
 import { moderation_comment_router } from "./comment/route";
 import { Moderation_Page } from "./page";
 

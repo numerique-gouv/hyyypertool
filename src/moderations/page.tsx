@@ -15,7 +15,6 @@ import { get_moderations_list } from "./repository";
 
 //
 
-export const MODERATION_SECTION_ID = "moderation";
 export const MODERATION_TABLE_ID = "moderation_table";
 export const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
 export const SEARCH_SIRET_INPUT_ID = "search_siret";
@@ -51,7 +50,7 @@ export function Moderations_Page({
 function Filter({ search }: { search: Search }) {
   return (
     <form
-      hx-get="/legacy"
+      hx-get={app_hc.moderations.$url().pathname}
       hx-include={hx_include([
         MODERATION_TABLE_PAGE_ID,
         PROCESSED_REQUESTS_INPUT_ID,
@@ -67,7 +66,6 @@ function Filter({ search }: { search: Search }) {
         `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 0 } as Pagination)}
-      id="moderation_filter"
     >
       <div class="fr-input-group ">
         <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
@@ -181,7 +179,7 @@ function Foot({
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
             disabled={page <= 0}
-            hx-get="/legacy"
+            hx-get={app_hc.moderations.$url().pathname}
             hx-include={hx_include([
               PROCESSED_REQUESTS_INPUT_ID,
               SEARCH_EMAIL_INPUT_ID,
@@ -196,7 +194,7 @@ function Foot({
           </button>
           <input
             class="fr-input inline-block w-auto"
-            hx-get="/legacy"
+            hx-get={app_hc.moderations.$url().pathname}
             hx-include={hx_include([
               PROCESSED_REQUESTS_INPUT_ID,
               SEARCH_EMAIL_INPUT_ID,
@@ -213,7 +211,7 @@ function Foot({
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
             disabled={page >= last_page}
-            hx-get="/legacy"
+            hx-get={app_hc.moderations.$url().pathname}
             hx-include={hx_include([
               PROCESSED_REQUESTS_INPUT_ID,
               SEARCH_EMAIL_INPUT_ID,

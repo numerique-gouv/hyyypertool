@@ -74,7 +74,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
       session.set("userinfo", userinfo);
       session.set("idtoken", tokenSet.id_token);
 
-      return redirect(api_ref("/legacy", {}));
+      return redirect(api_ref("/moderations", {}));
     },
   )
   .get("/logout", async ({ req, get, redirect }) => {
