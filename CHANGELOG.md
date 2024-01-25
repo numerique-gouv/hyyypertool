@@ -1,5 +1,17 @@
 
 
+## [2024.1.13](https://github.com/betagouv/hyyypertool/compare/2024.1.12...2024.1.13) (2024-01-25)
+
+
+### Bug Fixes
+
+* **moderation:** change magic color number ([302645d](https://github.com/betagouv/hyyypertool/commit/302645d697f32b34c1b3777ef40524d4ea87007b))
+
+
+### Features
+
+* **welcome:** auto redirect to /moderation if already logged ([58973a6](https://github.com/betagouv/hyyypertool/commit/58973a678415d242a211eb602bfbcb7b447b1dcd))
+
 ## [2024.1.12](https://github.com/betagouv/hyyypertool/compare/2024.1.11...2024.1.12) (2024-01-25)
 
 
