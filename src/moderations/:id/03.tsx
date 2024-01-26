@@ -228,6 +228,7 @@ const reponse_templates: Array<{
   label: string;
   template: (options: {
     moderation: Moderation & { organizations: Organization; users: User };
+    members_email: string[];
   }) => string;
 }> = [
   {
@@ -307,7 +308,7 @@ const reponse_templates: Array<{
   },
   {
     label: "Vous possédez déjà un compte MonComptePro",
-    template({ moderation }) {
+    template({ moderation, members_email }) {
       return dedent`
         Bonjour,
 
@@ -315,7 +316,7 @@ const reponse_templates: Array<{
 
         Vous possédez déjà un compte MonComptePro :
 
-        - ${moderation.organizations.authorized_email_domains.join("\n- ")}
+        - ${members_email.join("\n- ")}
 
         Merci de bien vouloir vous connecter avec le compte déjà existant.
 
@@ -348,11 +349,33 @@ const reponse_templates: Array<{
   },
 ];
 
-function ResponseMessageSelector({
+function get_organization_members({
+  organization_id,
+}: {
+  organization_id: number;
+}) {
+  return moncomptepro_pg
+    .select()
+    .from(schema.users)
+    .innerJoin(
+      schema.users_organizations,
+      eq(schema.users.id, schema.users_organizations.user_id),
+    )
+    .where(eq(schema.users_organizations.organization_id, organization_id));
+}
+async function ResponseMessageSelector({
   moderation,
 }: {
   moderation: Moderation & { organizations: Organization; users: User };
 }) {
+  const users_and_organizations = await get_organization_members({
+    organization_id: moderation.organizations.id,
+  });
+
+  const members_email = users_and_organizations
+    .map(({ users }) => users.email)
+    .toSorted();
+
   return (
     <select
       _={`
@@ -367,7 +390,7 @@ function ResponseMessageSelector({
         Sélectionner une response
       </option>
       {reponse_templates.map(({ label, template }) => (
-        <option value={template({ moderation })}>{label}</option>
+        <option value={template({ moderation, members_email })}>{label}</option>
       ))}
     </select>
   );
