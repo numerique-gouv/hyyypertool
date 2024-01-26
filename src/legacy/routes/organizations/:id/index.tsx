@@ -9,6 +9,7 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
@@ -44,8 +45,10 @@ export default new Hono<UserInfo_Context & Csp_Context>()
           <br />
           <h3>Membres enregistrés dans cette organisation :</h3>
           <div
-            hx-get={api_ref("/legacy/organizations/:id/members", {
-              id: String(organization.id),
+            hx-get={app_hc.legacy.organizations[":id"].members.$url({
+              param: {
+                id: organization.id.toString(),
+              },
             })}
             hx-target="this"
             hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED} from:body`}
