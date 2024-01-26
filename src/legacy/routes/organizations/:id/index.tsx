@@ -9,7 +9,7 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
-import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
+import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";

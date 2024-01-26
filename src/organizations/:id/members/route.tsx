@@ -1,19 +1,17 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema, Pagination_Schema } from ":common/schema";
-import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import {
   moncomptepro_pg,
   schema,
-  type User,
   type Users_Organizations,
 } from ":database:moncomptepro";
 import { app_hc } from ":hc";
-import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
-import { join_organization } from ":legacy/services/mcp_admin_api";
-import { type MCP_UserOrganizationLink } from ":moncomptepro";
+import {
+  Verification_Type_Schema,
+  type Verification_Type,
+} from ":organizations/services/verification_type";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
@@ -21,8 +19,8 @@ import { zValidator } from "@hono/zod-validator";
 import { and, desc, count as drizzle_count, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
-import { type VariantProps } from "tailwind-variants";
-import { z } from "zod";
+import type { VariantProps } from "tailwind-variants";
+import organization_member_router from "./:user_id/route";
 
 //
 
@@ -32,114 +30,11 @@ const Table_Context = createContext({
   count: 0,
 });
 
-type Verification_Type = MCP_UserOrganizationLink["verification_type"];
-
-const Verification_Type_Schema = z.enum([
-  "code_sent_to_official_contact_email",
-  "in_liste_dirigeants_rna",
-  "official_contact_domain",
-  "official_contact_email",
-  "verified_email_domain",
-]);
-
 //
-
-export const organization_member_router = new Hono()
-  .basePath(":user_id")
-  .post(
-    "/",
-    zValidator(
-      "form",
-      z.object({
-        is_external: z.string().pipe(z_coerce_boolean),
-      }),
-    ),
-    zValidator(
-      "param",
-      Entity_Schema.extend({
-        user_id: z.string().pipe(z.coerce.number()),
-      }),
-    ),
-    async function ({ text, req }) {
-      const { id: organization_id, user_id } = req.valid("param");
-      const { is_external } = req.valid("form");
-
-      await join_organization({
-        is_external,
-        organization_id,
-        user_id,
-      });
-
-      return text("OK", 200, {
-        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-      } as Htmx_Header);
-    },
-  )
-  .patch(
-    "/",
-    zValidator(
-      "param",
-      Entity_Schema.extend({
-        user_id: z.string().pipe(z.coerce.number()),
-      }),
-    ),
-    zValidator(
-      "form",
-      z.object({
-        verification_type: Verification_Type_Schema.or(
-          z.literal(""),
-        ).optional(),
-        is_external: z.string().pipe(z_coerce_boolean).optional(),
-      }),
-    ),
-    async function ({ text, req }) {
-      const { id: organization_id, user_id } = req.valid("param");
-      const { verification_type, is_external } = req.valid("form");
-
-      await moncomptepro_pg
-        .update(schema.users_organizations)
-        .set({
-          is_external,
-          verification_type,
-        })
-        .where(
-          and(
-            eq(schema.users_organizations.organization_id, organization_id),
-            eq(schema.users_organizations.user_id, user_id),
-          ),
-        );
-
-      return text("OK", 200, {
-        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-      } as Htmx_Header);
-    },
-  )
-  .delete(
-    "/",
-    zValidator(
-      "param",
-      Entity_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
-    ),
-    async function ({ text, req }) {
-      const { id: organization_id, user_id } = req.valid("param");
-
-      await moncomptepro_pg
-        .delete(schema.users_organizations)
-        .where(
-          and(
-            eq(schema.users_organizations.organization_id, organization_id),
-            eq(schema.users_organizations.user_id, user_id),
-          ),
-        );
-
-      return text("OK", 200, {
-        "HX-Trigger": ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
-      } as Htmx_Header);
-    },
-  );
-
-export const organization_members_router = new Hono()
-  .route("", organization_member_router)
+export default new Hono()
+  //
+  .route("/:user_id", organization_member_router)
+  //
   .get(
     "/",
     zValidator("param", Entity_Schema),

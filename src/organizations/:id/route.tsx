@@ -3,16 +3,18 @@
 import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema } from ":common/schema";
 import { mark_domain_as_verified } from ":legacy/services/mcp_admin_api";
+import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { z } from "zod";
-import { ORGANISATION_EVENTS } from "../event";
-import { organization_members_router } from "./members";
+import organization_members_router from "./members/route";
+
 //
 
-const organization_router = new Hono()
-  .basePath(":id")
+export default new Hono()
+  //
   .route("members", organization_members_router)
+  //
   .patch(
     "verify/:domain",
     zValidator("param", Entity_Schema.extend({ domain: z.string() })),
@@ -29,5 +31,3 @@ const organization_router = new Hono()
       } as Htmx_Header);
     },
   );
-
-export const organizations_router = new Hono().route("", organization_router);

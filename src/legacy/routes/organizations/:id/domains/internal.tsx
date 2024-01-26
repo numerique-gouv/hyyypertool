@@ -5,7 +5,7 @@ import { Entity_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Organization } from ":database:moncomptepro";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
+import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
 import { eq, sql } from "drizzle-orm";

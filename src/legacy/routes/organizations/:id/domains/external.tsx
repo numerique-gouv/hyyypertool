@@ -7,7 +7,7 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
-import { ORGANISATION_EVENTS } from ":legacy/organizations/event";
+import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { button } from ":ui/button";
 import { zValidator } from "@hono/zod-validator";
 import { eq, sql } from "drizzle-orm";

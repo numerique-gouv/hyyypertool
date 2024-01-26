@@ -20,6 +20,7 @@
       ":legacy/*": ["./src/legacy/*"],
       ":moderations/*": ["./src/moderations/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
+      ":organizations/*": ["./src/organizations/*"],
       ":package.json": ["./package.json"],
       ":ui/*": ["./src/ui/*"],
       ":www": ["./src/www.router"],
