@@ -92,11 +92,13 @@ export async function _02() {
       <br />
       <h3>Membres enregistrés dans cette organisation :</h3>
       <div
-        hx-get={app_hc.legacy.organizations[":id"].members.$url({
-          param: {
-            id: moderation.organization_id.toString(),
-          },
-        })}
+        hx-get={
+          app_hc.legacy.organizations[":id"].members.$url({
+            param: {
+              id: moderation.organization_id.toString(),
+            },
+          }).pathname
+        }
         hx-target="this"
         hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED} from:body`}
         class="fr-table"

@@ -49,7 +49,7 @@ export default new Hono<UserInfo_Context & Csp_Context>()
               param: {
                 id: organization.id.toString(),
               },
-            })}
+            }).pathname}
             hx-target="this"
             hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED} from:body`}
             class="fr-table"
