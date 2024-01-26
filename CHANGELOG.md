@@ -1,5 +1,12 @@
 
 
+## [2024.1.18](https://github.com/betagouv/hyyypertool/compare/2024.1.17...2024.1.18) (2024-01-26)
+
+
+### Bug Fixes
+
+* **moderation:** pathname bug in organization routes ([b319edf](https://github.com/betagouv/hyyypertool/commit/b319edfc287ba06b934b46f6b55c2180f4630672))
+
 ## [2024.1.17](https://github.com/betagouv/hyyypertool/compare/2024.1.16...2024.1.17) (2024-01-26)
 
 
