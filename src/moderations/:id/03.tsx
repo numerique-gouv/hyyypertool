@@ -315,7 +315,7 @@ const reponse_templates: Array<{
 
         Vous possédez déjà un compte MonComptePro :
 
-        - ${moderation.users.email}
+        - ${moderation.organizations.authorized_email_domains.join("\n- ")}
 
         Merci de bien vouloir vous connecter avec le compte déjà existant.
 
