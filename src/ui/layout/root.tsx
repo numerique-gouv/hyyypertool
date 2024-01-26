@@ -89,7 +89,14 @@ export function Root_Layout({
             .join("") + "pertool"}
         </title>
       </head>
-      <body class="flex min-h-screen flex-col" hx-ext="include-vals">
+      <body
+        _="
+          on every htmx:beforeSend NProgress.start()
+          on every htmx:afterOnLoad NProgress.done()
+        "
+        class="flex min-h-screen flex-col"
+        hx-ext="include-vals"
+      >
         <div class="flex flex-1 flex-col">${children}</div>
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© ${new Date().getFullYear()} 🇫🇷</div>
@@ -151,8 +158,21 @@ export function Root_Layout({
       <script
         nonce="${nonce ?? ""}"
         src="${ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
-        type="module"
       ></script>
+
+      <!--  -->
+
+      <script
+        nonce="${nonce ?? ""}"
+        src="${ASSETS_PATH}/node_modules/nprogress/nprogress.js"
+      ></script>
+
+      <link
+        rel="stylesheet"
+        href="${ASSETS_PATH}/node_modules/nprogress/nprogress.css"
+      />
+
+      <!--  -->
     </html>
   `;
 }
