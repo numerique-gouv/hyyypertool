@@ -68,6 +68,8 @@ function Filter({ search }: { search: Search }) {
         `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
+        `every 5s [document.visibilityState === 'visible']`,
+        `visibilitychange[document.visibilityState === 'visible'] from:document`,
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 0 } as Pagination)}
     >
