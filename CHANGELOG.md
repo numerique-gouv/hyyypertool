@@ -1,5 +1,18 @@
 
 
+## [2024.1.17](https://github.com/betagouv/hyyypertool/compare/2024.1.16...2024.1.17) (2024-01-26)
+
+
+### Bug Fixes
+
+* **moderation:** extract members email in reponse ([b7e4430](https://github.com/betagouv/hyyypertool/commit/b7e443040104428cbd8f79fa1b292cec9b72ed42))
+* **moderation:** list authorized_email_domains in reponse template ([8d264d0](https://github.com/betagouv/hyyypertool/commit/8d264d081139f8d25f9b48ab1e0c52225588cfb8))
+
+
+### Features
+
+* **ui:** activate globalViewTransitions ([3df9eaf](https://github.com/betagouv/hyyypertool/commit/3df9eaf995870680c33f450bb0d67336cc92fc08))
+
 ## [2024.1.16](https://github.com/betagouv/hyyypertool/compare/2024.1.15...2024.1.16) (2024-01-25)
 
 
