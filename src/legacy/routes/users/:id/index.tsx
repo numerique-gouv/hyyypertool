@@ -65,11 +65,13 @@ export default new Hono<UserInfo_Context & Csp_Context>()
           suivantes :
           <div class="fr-table max-w-full overflow-x-auto">
             <div
-              hx-get={app_hc.legacy.users[":id"].moderations.$url({
-                param: {
-                  id: user.id.toString(),
-                },
-              })}
+              hx-get={
+                app_hc.legacy.users[":id"].moderations.$url({
+                  param: {
+                    id: user.id.toString(),
+                  },
+                }).pathname
+              }
               hx-target="this"
               hx-trigger="load"
               class="fr-table"
