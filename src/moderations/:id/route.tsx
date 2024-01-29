@@ -9,7 +9,10 @@ import type { Session_Context } from ":common/session";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
-import { send_zammad_mail } from ":legacy/services/zammad_api";
+import {
+  GROUP_MONCOMPTEPRO_SENDER_ID,
+  send_zammad_mail,
+} from ":legacy/services/zammad_api";
 import { MODERATION_EVENTS } from ":moderations/event";
 import {
   Main_Layout,
@@ -100,9 +103,11 @@ export const moderation_router = new Hono<UserInfo_Context>()
 
       await send_zammad_mail({
         body: body.concat(`\n${username}`).replace(/\n/g, "<br />"),
+        sender_id: GROUP_MONCOMPTEPRO_SENDER_ID,
+        state: "closed",
         subject,
         ticket_id: moderation.ticket_id,
-        state: "closed",
+        to: moderation.users.email,
       });
 
       return text("OK", 200, {

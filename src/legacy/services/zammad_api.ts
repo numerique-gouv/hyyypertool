@@ -2,11 +2,13 @@
 
 import env from ":common/env";
 import { HTTPError } from ":common/errors";
+import { z } from "zod";
 
 //
 
 const CLOSED_STATE_ID = "4";
-const EMAIL_TYPE_ID = 1;
+const ARTICLE_TYPE = z.nativeEnum({ EMAIL: 1 } as const);
+type Article_Type = z.infer<typeof ARTICLE_TYPE>;
 const GROUP_MONCOMPTEPRO = "MonComptePro";
 export const GROUP_MONCOMPTEPRO_SENDER_ID = 1;
 const NORMAL_PRIORITY_ID = "1";
@@ -57,22 +59,30 @@ export async function get_zammad_attachment({
 
 export async function send_zammad_mail({
   body,
+  sender_id,
   state,
   subject,
   ticket_id,
+  to,
 }: {
-  subject: string;
   body: string;
-  ticket_id: number;
+  sender_id: number;
   state: UpdateTicket["state"];
+  subject: string;
+  ticket_id: number;
+  to: string;
 }) {
   const response = await fetch_zammad_api({
     body: {
       state,
       article: {
-        subject,
         body,
         content_type: "text/html",
+        sender_id,
+        subject,
+        subtype: "reply",
+        to,
+        type_id: ARTICLE_TYPE.enum.EMAIL,
       },
     },
     endpoint: `/api/v1/tickets/${ticket_id}`,
@@ -112,11 +122,15 @@ interface Ticket {
 interface UpdateTicket {
   state: "closed" | "open";
   article: {
-    subject: string;
     body: string;
+    content_type: "text/html";
     from?: string;
     internal?: boolean;
-    content_type: "text/html";
+    subject: string;
+    subtype: "reply";
+    to: string;
+    sender_id: number;
+    type_id: Article_Type;
   };
 }
 
