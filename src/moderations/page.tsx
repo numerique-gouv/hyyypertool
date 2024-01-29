@@ -8,6 +8,7 @@ import type { Moderation, Organization } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { button } from ":ui/button";
+import { row } from ":ui/table";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import { moderation_type_to_emoji } from "./moderation_type_to_emoji";
@@ -184,11 +185,9 @@ async function ModerationList_Table({
           </tr>
         </thead>
         <tbody>
-          {moderations.map(({ moderations, users, organizations }) => {
-            return (
-              <Row moderation={{ ...moderations, users, organizations }} />
-            );
-          })}
+          {moderations.map(({ moderations, users, organizations }) => (
+            <Row moderation={{ ...moderations, users, organizations }} />
+          ))}
         </tbody>
         <Foot count={count} pagination={pagination} />
       </table>
@@ -211,7 +210,8 @@ function Foot({
     <tfoot>
       <tr>
         <th colspan={2} class="whitespace-nowrap" scope="row">
-          Showing {page_index * page_size}-{page_index * page_size + page_size} of {count}
+          Showing {page_index * page_size}-{page_index * page_size + page_size}{" "}
+          of {count}
         </th>
         <td colspan={6}>
           <button
@@ -254,7 +254,16 @@ function Row({
 }) {
   const { users, organizations } = moderation;
   return (
-    <tr aria-selected="false" style={text_color(moderation.created_at)}>
+    <tr
+      _={`on click set the window's location to '${
+        app_hc.legacy.moderations[":id"].$url({
+          param: { id: moderation.id.toString() },
+        }).pathname
+      }'`}
+      class={row({ is_clickable: true })}
+      aria-selected="false"
+      style={text_color(moderation.created_at)}
+    >
       <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
       </td>
@@ -271,17 +280,7 @@ function Row({
       </td>
       <td class="break-words">{organizations.siret}</td>
       <td>{moderation.id}</td>
-      <td>
-        <a
-          href={
-            app_hc.legacy.moderations[":id"].$url({
-              param: { id: moderation.id.toString() },
-            }).pathname
-          }
-        >
-          ➡️
-        </a>
-      </td>
+      <td>➡️</td>
     </tr>
   );
 }
