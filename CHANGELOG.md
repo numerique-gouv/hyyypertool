@@ -1,5 +1,26 @@
 
 
+## [2024.1.19](https://github.com/betagouv/hyyypertool/compare/2024.1.18...2024.1.19) (2024-01-29)
+
+
+### Bug Fixes
+
+* **moderation:** ensure zammad send an email ([#26](https://github.com/betagouv/hyyypertool/issues/26)) ([a1a05bb](https://github.com/betagouv/hyyypertool/commit/a1a05bb9a23a553f0fcffc3f081ad475ced1a483))
+* **moderations:** refresh the table when visible ([#19](https://github.com/betagouv/hyyypertool/issues/19)) ([e5a3b04](https://github.com/betagouv/hyyypertool/commit/e5a3b048e036b84fa17ccaef8533003bd4f8a0e8))
+* **moderations:** the table pagination starts at 1 ([#23](https://github.com/betagouv/hyyypertool/issues/23)) ([0ae26c8](https://github.com/betagouv/hyyypertool/commit/0ae26c80432adf6cacf7de0291a522c385f0a296))
+* **users:** organization member pathname bug in user routes ([8b20f41](https://github.com/betagouv/hyyypertool/commit/8b20f41fdb33acd778ec512f58c52970c0ee8ba5))
+
+
+### Features
+
+* add background activity indicator ([#22](https://github.com/betagouv/hyyypertool/issues/22)) ([8989e3f](https://github.com/betagouv/hyyypertool/commit/8989e3f9cf1434c23c47f91853f151329af6499e))
+* **moderations:** make the whole moderation line clickable ([#24](https://github.com/betagouv/hyyypertool/issues/24)) ([8482d1e](https://github.com/betagouv/hyyypertool/commit/8482d1e20371f910bdd11c6efbc2e61d5af24b61))
+
+
+### Reverts
+
+* **legacy:** add confirm prompt on mark as processed buttons ([#25](https://github.com/betagouv/hyyypertool/issues/25)) ([6c6cf3d](https://github.com/betagouv/hyyypertool/commit/6c6cf3db6fc23ffec91025b615a40428182fd219))
+
 ## [2024.1.18](https://github.com/betagouv/hyyypertool/compare/2024.1.17...2024.1.18) (2024-01-26)
 
 
