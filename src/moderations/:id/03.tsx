@@ -407,7 +407,6 @@ function SendModerationProcessedEmail({
   return (
     <form
       class="m-auto my-12 w-fit"
-      hx-confirm="Êtes-vous sûr de vouloir marquer cette modération comme traitée et d'envoyer l'email « Votre demande a été traitée » ?"
       hx-patch={
         app_hc.legacy.moderations[":id"].processed.$url({
           param: { id: moderation.id.toString() },
@@ -443,7 +442,6 @@ function MarkModerationProcessed({ moderation }: { moderation: Moderation }) {
   return (
     <form
       class="m-auto my-12 w-fit"
-      hx-confirm="Êtes-vous sûr de vouloir marquer cette modération comme traitée ?"
       hx-patch={
         app_hc.legacy.moderations[":id"].rejected.$url({
           param: { id: moderation.id.toString() },
