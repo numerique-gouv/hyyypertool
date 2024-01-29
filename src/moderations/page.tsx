@@ -81,7 +81,7 @@ function Filter({ search }: { search: Search }) {
         `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
       ].join(", ")}
-      hx-vals={JSON.stringify({ page: 0 } as Pagination)}
+      hx-vals={JSON.stringify({ page: 1 } as Pagination)}
     >
       <div class="fr-input-group ">
         <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
@@ -165,7 +165,7 @@ async function ModerationList_Table({
       show_archived: processed_requests,
       hide_non_verified_domain: non_verified_domain,
     },
-    pagination: { page, take: page_size },
+    pagination: { page: page - 1, take: page_size },
   });
 
   return (
@@ -204,18 +204,19 @@ function Foot({
   pagination: Pagination;
 }) {
   const { page, page_size } = pagination;
-  const last_page = Math.floor(count / page_size);
+  const last_page = Math.floor(count / page_size) + 1;
+  const page_index = page - 1;
 
   return (
     <tfoot>
       <tr>
         <th colspan={2} class="whitespace-nowrap" scope="row">
-          Showing {page * page_size}-{page * page_size + page_size} of {count}
+          Showing {page_index * page_size}-{page_index * page_size + page_size} of {count}
         </th>
         <td colspan={6}>
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
-            disabled={page <= 0}
+            disabled={page <= 1}
             {...hx_moderations_query_props}
             hx-vals={JSON.stringify({ page: page - 1 } as Pagination)}
           >
