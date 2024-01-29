@@ -32,6 +32,20 @@ export type Search = z.infer<typeof Search_Schema>;
 
 //
 
+const hx_moderations_query_props = {
+  "hx-get": app_hc.moderations.$url().pathname,
+  "hx-include": hx_include([
+    MODERATION_TABLE_PAGE_ID,
+    NON_VERIFIED_DOMAIN_INPUT_ID,
+    PROCESSED_REQUESTS_INPUT_ID,
+    SEARCH_EMAIL_INPUT_ID,
+    SEARCH_SIRET_INPUT_ID,
+  ]),
+  "hx-replace-url": true,
+  "hx-select": `#${MODERATION_TABLE_ID} > table`,
+  "hx-target": `#${MODERATION_TABLE_ID}`,
+};
+
 export function Moderations_Page({
   pagination,
   search,
@@ -40,7 +54,15 @@ export function Moderations_Page({
   search: Search;
 }) {
   return (
-    <main class="fr-container my-12" hx-sync="this">
+    <main
+      class="fr-container my-12"
+      {...hx_moderations_query_props}
+      hx-sync="this"
+      hx-trigger={[
+        `every 11s [document.visibilityState === 'visible']`,
+        `visibilitychange[document.visibilityState === 'visible'] from:document`,
+      ].join(", ")}
+    >
       <Filter search={search} />
       <ModerationList_Table pagination={pagination} search={search} />
     </main>
@@ -52,24 +74,12 @@ export function Moderations_Page({
 function Filter({ search }: { search: Search }) {
   return (
     <form
-      hx-get={app_hc.moderations.$url().pathname}
-      hx-include={hx_include([
-        MODERATION_TABLE_PAGE_ID,
-        NON_VERIFIED_DOMAIN_INPUT_ID,
-        PROCESSED_REQUESTS_INPUT_ID,
-        SEARCH_EMAIL_INPUT_ID,
-        SEARCH_SIRET_INPUT_ID,
-      ])}
-      hx-replace-url="true"
-      hx-select={`#${MODERATION_TABLE_ID} > table`}
-      hx-target={`#${MODERATION_TABLE_ID}`}
+      {...hx_moderations_query_props}
       hx-trigger={[
         `input from:#${NON_VERIFIED_DOMAIN_INPUT_ID}`,
         `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
-        `every 5s [document.visibilityState === 'visible']`,
-        `visibilitychange[document.visibilityState === 'visible'] from:document`,
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 0 } as Pagination)}
     >
@@ -206,32 +216,14 @@ function Foot({
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
             disabled={page <= 0}
-            hx-get={app_hc.moderations.$url().pathname}
-            hx-include={hx_include([
-              NON_VERIFIED_DOMAIN_INPUT_ID,
-              PROCESSED_REQUESTS_INPUT_ID,
-              SEARCH_EMAIL_INPUT_ID,
-              SEARCH_SIRET_INPUT_ID,
-            ])}
-            hx-replace-url="true"
-            hx-select={`#${MODERATION_TABLE_ID} > table`}
-            hx-target={`#${MODERATION_TABLE_ID}`}
+            {...hx_moderations_query_props}
             hx-vals={JSON.stringify({ page: page - 1 } as Pagination)}
           >
             Précédent
           </button>
           <input
             class="fr-input inline-block w-auto"
-            hx-get={app_hc.moderations.$url().pathname}
-            hx-include={hx_include([
-              NON_VERIFIED_DOMAIN_INPUT_ID,
-              PROCESSED_REQUESTS_INPUT_ID,
-              SEARCH_EMAIL_INPUT_ID,
-              SEARCH_SIRET_INPUT_ID,
-            ])}
-            hx-replace-url="true"
-            hx-select={`#${MODERATION_TABLE_ID} > table`}
-            hx-target={`#${MODERATION_TABLE_ID}`}
+            {...hx_moderations_query_props}
             id={MODERATION_TABLE_PAGE_ID}
             name={"page" as keyof Pagination}
             value={page}
@@ -240,16 +232,7 @@ function Foot({
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
             disabled={page >= last_page}
-            hx-get={app_hc.moderations.$url().pathname}
-            hx-include={hx_include([
-              NON_VERIFIED_DOMAIN_INPUT_ID,
-              PROCESSED_REQUESTS_INPUT_ID,
-              SEARCH_EMAIL_INPUT_ID,
-              SEARCH_SIRET_INPUT_ID,
-            ])}
-            hx-replace-url="true"
-            hx-select={`#${MODERATION_TABLE_ID} > table`}
-            hx-target={`#${MODERATION_TABLE_ID}`}
+            {...hx_moderations_query_props}
             hx-vals={JSON.stringify({ page: page + 1 } as Pagination)}
           >
             Suivant

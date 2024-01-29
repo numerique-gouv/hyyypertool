@@ -16,7 +16,15 @@ export function Root_Layout({
   nonce,
 }: { children?: Child } & Root_Layout_Props) {
   return html`
-    <html lang="fr" data-fr-scheme="system" hx-ext="debug,chunked-transfer">
+    <html
+      lang="fr"
+      data-fr-scheme="system"
+      hx-ext="${[
+        env.NODE_ENV === "production" ? "" : "debug",
+        "chunked-transfer",
+        "include-vals",
+      ].join(", ")}"
+    >
       <head>
         <meta charset="utf-8" />
         <meta
@@ -93,9 +101,9 @@ export function Root_Layout({
         _="
           on every htmx:beforeSend NProgress.start()
           on every htmx:afterOnLoad NProgress.done()
+          on every htmx:afterSettle NProgress.done()
         "
         class="flex min-h-screen flex-col"
-        hx-ext="include-vals"
       >
         <div class="flex flex-1 flex-col">${children}</div>
         <footer class="container mx-auto flex flex-row justify-between p-2">
