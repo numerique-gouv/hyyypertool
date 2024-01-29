@@ -33,7 +33,7 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
       return render(
         <Moderations_Page
           pagination={{
-            page: page ?? 0,
+            page: page ?? 1,
             page_size: 10,
           }}
           search={{
