@@ -1,5 +1,12 @@
 
 
+## [2024.1.21](https://github.com/betagouv/hyyypertool/compare/2024.1.20...2024.1.21) (2024-01-30)
+
+
+### Features
+
+* **auth:** add unauthorized page ([#30](https://github.com/betagouv/hyyypertool/issues/30)) ([49a10a7](https://github.com/betagouv/hyyypertool/commit/49a10a728c304da978733864e5718289fcc83514))
+
 ## [2024.1.20](https://github.com/betagouv/hyyypertool/compare/2024.1.19...2024.1.20) (2024-01-30)
 
 
