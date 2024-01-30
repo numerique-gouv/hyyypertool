@@ -1,5 +1,12 @@
 
 
+## [2024.1.20](https://github.com/betagouv/hyyypertool/compare/2024.1.19...2024.1.20) (2024-01-30)
+
+
+### Features
+
+* **moderations:** add hide join organization filter the table ([#27](https://github.com/betagouv/hyyypertool/issues/27)) ([58051ed](https://github.com/betagouv/hyyypertool/commit/58051ed930cc6d97f66321e916987a08defec7dc))
+
 ## [2024.1.19](https://github.com/betagouv/hyyypertool/compare/2024.1.18...2024.1.19) (2024-01-29)
 
 
