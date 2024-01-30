@@ -23,11 +23,12 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
     zValidator("query", Search_Schema.merge(Pagination_Schema).partial()),
     function GET({ render, req, var: { nonce, userinfo } }) {
       const {
+        hide_join_organization,
+        non_verified_domain,
         page,
+        processed_requests,
         search_email,
         search_siret,
-        processed_requests,
-        non_verified_domain,
       } = req.valid("query");
       const username = userinfo_to_username(userinfo);
       return render(
@@ -37,6 +38,7 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
             page_size: 10,
           }}
           search={{
+            hide_join_organization: hide_join_organization ?? false,
             non_verified_domain: non_verified_domain ?? false,
             processed_requests: processed_requests ?? false,
             search_email: search_email ?? "",
