@@ -24,7 +24,7 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
     function GET({ render, req, var: { nonce, userinfo } }) {
       const {
         hide_join_organization,
-        non_verified_domain,
+        hide_non_verified_domain,
         page,
         processed_requests,
         search_email,
@@ -39,7 +39,7 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
           }}
           search={{
             hide_join_organization: hide_join_organization ?? false,
-            non_verified_domain: non_verified_domain ?? false,
+            hide_non_verified_domain: hide_non_verified_domain ?? false,
             processed_requests: processed_requests ?? false,
             search_email: search_email ?? "",
             search_siret: search_siret ?? "",

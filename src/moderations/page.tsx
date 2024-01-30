@@ -21,14 +21,17 @@ export const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
 export const SEARCH_SIRET_INPUT_ID = "search_siret";
 export const SEARCH_EMAIL_INPUT_ID = "search_email";
 export const PROCESSED_REQUESTS_INPUT_ID = "processed_requests";
-export const NON_VERIFIED_DOMAIN_INPUT_ID = "non_verified_domain";
+export const HIDE_NON_VERIFIED_DOMAIN_INPUT_ID = "hide_non_verified_domain";
 export const HIDE_JOIN_ORGANIZATION_INPUT_ID = "hide_join_organization";
 
 export const Search_Schema = z.object({
   [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
   [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
   [PROCESSED_REQUESTS_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
-  [NON_VERIFIED_DOMAIN_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
+  [HIDE_NON_VERIFIED_DOMAIN_INPUT_ID]: z
+    .string()
+    .pipe(z_coerce_boolean)
+    .default(""),
   [HIDE_JOIN_ORGANIZATION_INPUT_ID]: z
     .string()
     .pipe(z_coerce_boolean)
@@ -43,7 +46,7 @@ const hx_moderations_query_props = {
   "hx-include": hx_include([
     HIDE_JOIN_ORGANIZATION_INPUT_ID,
     MODERATION_TABLE_PAGE_ID,
-    NON_VERIFIED_DOMAIN_INPUT_ID,
+    HIDE_NON_VERIFIED_DOMAIN_INPUT_ID,
     PROCESSED_REQUESTS_INPUT_ID,
     SEARCH_EMAIL_INPUT_ID,
     SEARCH_SIRET_INPUT_ID,
@@ -84,7 +87,7 @@ function Filter({ search }: { search: Search }) {
       {...hx_moderations_query_props}
       hx-trigger={[
         `input from:#${HIDE_JOIN_ORGANIZATION_INPUT_ID}`,
-        `input from:#${NON_VERIFIED_DOMAIN_INPUT_ID}`,
+        `input from:#${HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}`,
         `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
@@ -134,13 +137,13 @@ function Filter({ search }: { search: Search }) {
         <div class="fr-checkbox-group">
           <input
             _="on click set @value to my checked"
-            id={NON_VERIFIED_DOMAIN_INPUT_ID}
-            name={NON_VERIFIED_DOMAIN_INPUT_ID}
-            value={search[NON_VERIFIED_DOMAIN_INPUT_ID] ? "true" : "false"}
-            checked={search[NON_VERIFIED_DOMAIN_INPUT_ID]}
+            id={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}
+            name={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}
+            value={search[HIDE_NON_VERIFIED_DOMAIN_INPUT_ID] ? "true" : "false"}
+            checked={search[HIDE_NON_VERIFIED_DOMAIN_INPUT_ID]}
             type="checkbox"
           />
-          <label class="fr-label" for={NON_VERIFIED_DOMAIN_INPUT_ID}>
+          <label class="fr-label" for={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}>
             Cacher les {moderation_type_to_emoji("non_verified_domain")}
           </label>
         </div>
@@ -177,7 +180,7 @@ async function ModerationList_Table({
   const { page, page_size } = pagination;
   const {
     hide_join_organization,
-    non_verified_domain,
+    hide_non_verified_domain,
     processed_requests,
     search_email,
     search_siret,
@@ -187,8 +190,8 @@ async function ModerationList_Table({
       email: search_email,
       siret: search_siret,
       show_archived: processed_requests,
-      hide_non_verified_domain: non_verified_domain,
-      hide_join_organization: hide_join_organization,
+      hide_non_verified_domain,
+      hide_join_organization,
     },
     pagination: { page: page - 1, take: page_size },
   });
