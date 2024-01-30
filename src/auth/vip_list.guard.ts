@@ -1,7 +1,9 @@
 //
 
+import type { Csp_Context } from ":common/csp_headers";
 import type { AgentConnect_UserInfo, Session_Context } from ":common/session";
 import type { Env, MiddlewareHandler } from "hono";
+import { NotAuthorized } from "./NotAuthorized";
 
 //
 
@@ -13,13 +15,13 @@ export interface UserInfo_Context extends Env {
 
 //
 
-export function vip_list_guard({
+export function vip_list_guard<E extends Env = any>({
   vip_list,
 }: {
   vip_list: string[];
-}): MiddlewareHandler<UserInfo_Context & Session_Context> {
+}): MiddlewareHandler<UserInfo_Context & Session_Context & Csp_Context> {
   return async function vip_list_guard_middleware(
-    { redirect, req, set, var: { sentry, session } },
+    { html, redirect, req, set, var: { sentry, session, nonce } },
     next,
   ) {
     const userinfo = session.get("userinfo");
@@ -37,7 +39,7 @@ export function vip_list_guard({
 
     const is_allowed = vip_list.includes(userinfo.email);
     if (!is_allowed) {
-      return redirect("/");
+      return html(NotAuthorized({ nonce }));
     }
 
     set("userinfo", userinfo);
