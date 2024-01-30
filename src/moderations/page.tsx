@@ -22,12 +22,17 @@ export const SEARCH_SIRET_INPUT_ID = "search_siret";
 export const SEARCH_EMAIL_INPUT_ID = "search_email";
 export const PROCESSED_REQUESTS_INPUT_ID = "processed_requests";
 export const NON_VERIFIED_DOMAIN_INPUT_ID = "non_verified_domain";
+export const HIDE_JOIN_ORGANIZATION_INPUT_ID = "hide_join_organization";
 
 export const Search_Schema = z.object({
   [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
   [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
   [PROCESSED_REQUESTS_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
   [NON_VERIFIED_DOMAIN_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
+  [HIDE_JOIN_ORGANIZATION_INPUT_ID]: z
+    .string()
+    .pipe(z_coerce_boolean)
+    .default(""),
 });
 export type Search = z.infer<typeof Search_Schema>;
 
@@ -36,6 +41,7 @@ export type Search = z.infer<typeof Search_Schema>;
 const hx_moderations_query_props = {
   "hx-get": app_hc.moderations.$url().pathname,
   "hx-include": hx_include([
+    HIDE_JOIN_ORGANIZATION_INPUT_ID,
     MODERATION_TABLE_PAGE_ID,
     NON_VERIFIED_DOMAIN_INPUT_ID,
     PROCESSED_REQUESTS_INPUT_ID,
@@ -77,6 +83,7 @@ function Filter({ search }: { search: Search }) {
     <form
       {...hx_moderations_query_props}
       hx-trigger={[
+        `input from:#${HIDE_JOIN_ORGANIZATION_INPUT_ID}`,
         `input from:#${NON_VERIFIED_DOMAIN_INPUT_ID}`,
         `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
         `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
@@ -138,6 +145,21 @@ function Filter({ search }: { search: Search }) {
           </label>
         </div>
       </div>
+      <div class="fr-fieldset__element">
+        <div class="fr-checkbox-group">
+          <input
+            _="on click set @value to my checked"
+            id={HIDE_JOIN_ORGANIZATION_INPUT_ID}
+            name={HIDE_JOIN_ORGANIZATION_INPUT_ID}
+            value={search[HIDE_JOIN_ORGANIZATION_INPUT_ID] ? "true" : "false"}
+            checked={search[HIDE_JOIN_ORGANIZATION_INPUT_ID]}
+            type="checkbox"
+          />
+          <label class="fr-label" for={HIDE_JOIN_ORGANIZATION_INPUT_ID}>
+            Cacher les {moderation_type_to_emoji("organization_join_block")}
+          </label>
+        </div>
+      </div>
     </form>
   );
 }
@@ -154,10 +176,11 @@ async function ModerationList_Table({
   } = useRequestContext<moncomptepro_pg_Context>();
   const { page, page_size } = pagination;
   const {
+    hide_join_organization,
+    non_verified_domain,
+    processed_requests,
     search_email,
     search_siret,
-    processed_requests,
-    non_verified_domain,
   } = search;
   const { count, moderations } = await get_moderations_list(moncomptepro_pg, {
     search: {
@@ -165,6 +188,7 @@ async function ModerationList_Table({
       siret: search_siret,
       show_archived: processed_requests,
       hide_non_verified_domain: non_verified_domain,
+      hide_join_organization: hide_join_organization,
     },
     pagination: { page: page - 1, take: page_size },
   });

@@ -22,16 +22,23 @@ export function get_moderations_list(
     pagination = { page: 0, take: 10 },
   }: {
     search: {
-      siret?: string;
       email?: string;
-      show_archived?: boolean;
+      hide_join_organization?: boolean;
       hide_non_verified_domain?: boolean;
+      show_archived?: boolean;
+      siret?: string;
     };
     pagination?: { page: number; take: number };
   },
 ) {
   const { page, take } = pagination;
-  const { email, siret, show_archived, hide_non_verified_domain } = search;
+  const {
+    email,
+    hide_join_organization,
+    hide_non_verified_domain,
+    show_archived,
+    siret,
+  } = search;
 
   const where = and(
     ilike(schema.organizations.siret, `%${siret ?? ""}%`),
@@ -41,6 +48,9 @@ export function get_moderations_list(
       : isNull(schema.moderations.moderated_at),
     hide_non_verified_domain
       ? not(eq(schema.moderations.type, "non_verified_domain"))
+      : undefined,
+    hide_join_organization
+      ? not(eq(schema.moderations.type, "organization_join_block"))
       : undefined,
   );
 
