@@ -1,5 +1,17 @@
 
 
+## [2024.1.22](https://github.com/betagouv/hyyypertool/compare/2024.1.21...2024.1.22) (2024-01-31)
+
+
+### Bug Fixes
+
+* link icon is just to tiny ([#34](https://github.com/betagouv/hyyypertool/issues/34)) ([57fcfaa](https://github.com/betagouv/hyyypertool/commit/57fcfaa435aa0ed3027eb19c43c9b19274ff6a34))
+
+
+### Features
+
+* **moderation:** try to guest the owner of the ticket ([#33](https://github.com/betagouv/hyyypertool/issues/33)) ([1982e35](https://github.com/betagouv/hyyypertool/commit/1982e3568f78f7d50450fe05191f9cbac87a9b14))
+
 ## [2024.1.21](https://github.com/betagouv/hyyypertool/compare/2024.1.20...2024.1.21) (2024-01-30)
 
 
