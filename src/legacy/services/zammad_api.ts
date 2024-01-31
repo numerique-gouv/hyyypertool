@@ -185,17 +185,21 @@ async function fetch_zammad_api(options: Options) {
     Authorization: `Bearer ${env.ZAMMAD_TOKEN}`,
   });
 
-  // if (env.DO_NOT_SEND_MAIL) {
-  //   console.info(`Send mail not send to ${ticket_id}:`);
-  //   console.info(data);
-  //   return { id: null } as Ticket;
-  // }
-  console.debug(`fetch_zammad_api: ${url}`);
+  if (env.DEPLOY_ENV === "preview") {
+    console.debug(` <-- ${options.method} ${url}`);
+  }
+
   const response = await fetch(url, {
     method: options.method,
     headers,
     body: options.method === "GET" ? undefined : JSON.stringify(options.body),
   });
+
+  if (env.DEPLOY_ENV === "preview") {
+    console.debug(
+      ` --> ${options.method} ${url} ${response.status} ${response.statusText}`,
+    );
+  }
 
   if (!response.ok) {
     throw new HTTPError(`${url} ${response.status} ${response.statusText}`);
