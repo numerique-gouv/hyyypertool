@@ -50,6 +50,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
 
             <td>
               <a
+                class="p-3"
                 href={api_ref("/legacy/organizations/:id", {
                   id: String(organization.id),
                 })}

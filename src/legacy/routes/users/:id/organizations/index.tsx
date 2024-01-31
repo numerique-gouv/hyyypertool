@@ -129,6 +129,7 @@ function Table({
 
               <td>
                 <a
+                  class="p-3"
                   href={api_ref("/legacy/organizations/:id", {
                     id: String(organizations.id),
                   })}
