@@ -49,6 +49,7 @@ export function Table({ users }: { users: User[] }) {
             ))}
             <td>
               <a
+                class="p-3"
                 href={api_ref("/legacy/users/:id", {
                   id: String(user.id),
                 })}

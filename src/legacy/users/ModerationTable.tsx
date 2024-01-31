@@ -61,6 +61,7 @@ export function ModerationTable({
               ))}
               <td>
                 <a
+                  class="p-3"
                   href={
                     app_hc.legacy.moderations[":id"].$url({
                       param: { id: moderation.id.toString() },

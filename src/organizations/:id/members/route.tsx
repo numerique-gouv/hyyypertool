@@ -177,6 +177,7 @@ function Row({
       <td>{verification_type}</td>
       <td>
         <a
+          class="p-3"
           href={api_ref("/legacy/users/:id", {
             id: String(user.id),
           })}
