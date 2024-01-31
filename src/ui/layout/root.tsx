@@ -99,9 +99,13 @@ export function Root_Layout({
       </head>
       <body
         _="
-          on every htmx:beforeSend NProgress.start()
-          on every htmx:afterOnLoad NProgress.done()
-          on every htmx:afterSettle NProgress.done()
+          on every htmx:beforeSend NProgress.start() end
+          on every htmx:afterOnLoad NProgress.done() end
+          on every htmx:afterSettle NProgress.done() end
+          on every htmx:beforeSend
+            tell <button/>
+              toggle [@disabled=true] until htmx:afterOnLoad
+          end
         "
         class="flex min-h-screen flex-col"
       >
