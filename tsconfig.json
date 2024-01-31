@@ -25,6 +25,7 @@
       ":ui/*": ["./src/ui/*"],
       ":www": ["./src/www.router"],
       "hono-slotify/*": ["./src/hono-slotify/*"],
+      "@~/common.ui/*": ["./packages/~/common/ui/src/*"],
     },
     "plugins": [],
     "resolveJsonModule": true,

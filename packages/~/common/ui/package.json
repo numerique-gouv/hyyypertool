@@ -1,0 +1,29 @@
+{
+  "name": "@~/common.ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^13.3.8",
+    "@tsconfig/bun": "1.0.1",
+    "bun-types": "1.0.25",
+    "htmx.org": "1.9.10",
+    "hyperscript.org": "0.9.12"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

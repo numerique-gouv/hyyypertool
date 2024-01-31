@@ -1,0 +1,6 @@
+#
+
+telemetry = false
+
+[test]
+preload = "./happydom.ts"
