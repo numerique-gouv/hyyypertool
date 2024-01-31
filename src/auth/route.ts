@@ -4,6 +4,7 @@ import { api_ref } from ":api_ref";
 import env from ":common/env.ts";
 import {
   hyyyyyypertool_session,
+  type AgentConnect_UserInfo,
   type Session_Context,
 } from ":common/session.ts";
 import { zValidator } from "@hono/zod-validator";
@@ -70,9 +71,11 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
         scope: env.AGENTCONNECT_OIDC_SCOPE,
       });
 
-      const userinfo = await client.userinfo(tokenSet.access_token ?? "");
+      const userinfo = await client.userinfo<AgentConnect_UserInfo>(
+        tokenSet.access_token ?? "",
+      );
       session.set("userinfo", userinfo);
-      session.set("idtoken", tokenSet.id_token);
+      session.set("idtoken", tokenSet.id_token ?? "");
 
       return redirect(api_ref("/moderations", {}));
     },

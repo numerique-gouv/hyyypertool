@@ -1,6 +1,7 @@
 //
 
 import env from ":common/env.ts";
+import type { User } from ":legacy/services/zammad_api";
 import type { Env } from "hono";
 import { CookieStore, Session, sessionMiddleware } from "hono-sessions";
 import type { BaseClient, TokenSet } from "openid-client";
@@ -13,29 +14,25 @@ export const hyyyyyypertool_session = sessionMiddleware({
   sessionCookieName: "hyyyyyypertool",
 });
 
+interface Session_KeyMapping {
+  verifier: string;
+  oidc: BaseClient;
+  userinfo: AgentConnect_UserInfo;
+  idtoken: string;
+  oauth2token: TokenSet;
+  state: string;
+  nonce: string;
+  zammad_user: User;
+}
+
 export interface Session_Context extends Env {
   Variables: {
-    session: Session & {
-      get(key: "verifier"): string;
-      set(key: "verifier", value: string): void;
-    } & {
-      get(key: "oidc"): BaseClient;
-      set(key: "oidc", value: BaseClient): void;
-    } & {
-      get(key: "userinfo"): AgentConnect_UserInfo | undefined;
-      set(key: "userinfo", value: AgentConnect_UserInfo): void;
-    } & {
-      get(key: "idtoken"): string;
-      set(key: "idtoken", value: string): void;
-    } & {
-      get(key: "oauth2token"): TokenSet;
-      set(key: "oauth2token", value: TokenSet): void;
-    } & {
-      get(key: "state"): string;
-      set(key: "state", value: string): void;
-    } & {
-      get(key: "nonce"): string;
-      set(key: "nonce", value: string): void;
+    session: Omit<Session, "get" | "set"> & {
+      get<K extends keyof Session_KeyMapping>(key: K): Session_KeyMapping[K];
+      set<K extends keyof Session_KeyMapping>(
+        key: K,
+        value: Session_KeyMapping[K],
+      ): void;
     };
   };
 }

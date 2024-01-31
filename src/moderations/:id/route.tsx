@@ -11,6 +11,7 @@ import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import {
   GROUP_MONCOMPTEPRO_SENDER_ID,
+  get_full_ticket,
   send_zammad_mail,
 } from ":legacy/services/zammad_api";
 import { MODERATION_EVENTS } from ":moderations/event";
@@ -101,6 +102,13 @@ export const moderation_router = new Hono<UserInfo_Context>()
       if (!moderation) return notFound();
       if (!moderation.ticket_id) return notFound();
 
+      const result = await get_full_ticket({
+        ticket_id: moderation.ticket_id,
+      });
+      const user = Object.values(result.assets.User || {}).find((user) => {
+        return user.email === userinfo.email;
+      });
+
       await send_zammad_mail({
         body: body.concat(`\n${username}`).replace(/\n/g, "<br />"),
         sender_id: GROUP_MONCOMPTEPRO_SENDER_ID,
@@ -108,6 +116,7 @@ export const moderation_router = new Hono<UserInfo_Context>()
         subject,
         ticket_id: moderation.ticket_id,
         to: moderation.users.email,
+        owner_id: user?.id,
       });
 
       return text("OK", 200, {
