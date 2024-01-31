@@ -24,6 +24,17 @@ export async function get_zammad_me() {
 
   return response.json() as Promise<User>;
 }
+
+export async function get_full_ticket({ ticket_id }: { ticket_id: number }) {
+  const response = await fetch_zammad_api({
+    endpoint: `/api/v1/tickets/${ticket_id}`,
+    method: "GET",
+    searchParams: { all: "true" },
+  });
+
+  return response.json() as Promise<SearchResult>;
+}
+
 export async function get_zammad_mail({ ticket_id }: { ticket_id: number }) {
   const response = await fetch_zammad_api({
     endpoint: `/api/v1/ticket_articles/by_ticket/${ticket_id}`,
@@ -59,6 +70,7 @@ export async function get_zammad_attachment({
 
 export async function send_zammad_mail({
   body,
+  owner_id,
   sender_id,
   state,
   subject,
@@ -66,6 +78,7 @@ export async function send_zammad_mail({
   to,
 }: {
   body: string;
+  owner_id: number | undefined;
   sender_id: number;
   state: UpdateTicket["state"];
   subject: string;
@@ -75,6 +88,7 @@ export async function send_zammad_mail({
   const response = await fetch_zammad_api({
     body: {
       state,
+      owner_id,
       article: {
         body,
         content_type: "text/html",
@@ -97,7 +111,18 @@ export async function send_zammad_mail({
 
 //
 
-interface User {
+export interface SearchResult {
+  tickets: number[];
+  tickets_count: number;
+  assets: {
+    Ticket?: Record<`${number}`, Ticket>;
+    Group?: Record<`${number}`, unknown>;
+    User?: Record<`${number}`, User>;
+    Role?: Record<`${number}`, unknown>;
+  };
+}
+
+export interface User {
   active: boolean;
   created_at: string;
   email: string;
@@ -121,6 +146,7 @@ interface Ticket {
 }
 interface UpdateTicket {
   state: "closed" | "open";
+  owner_id: number | undefined;
   article: {
     body: string;
     content_type: "text/html";
@@ -162,6 +188,11 @@ type Options =
     }
   | {
       endpoint: `/api/v1/tickets/${number}`;
+      method: "GET";
+      searchParams: { all: "true" | "false" };
+    }
+  | {
+      endpoint: `/api/v1/tickets/${number}`;
       method: "PUT";
       body: UpdateTicket;
       searchParams: {};
@@ -186,7 +217,7 @@ async function fetch_zammad_api(options: Options) {
   });
 
   if (env.DEPLOY_ENV === "preview") {
-    console.debug(` <-- ${options.method} ${url}`);
+    console.debug(`  <-- ${options.method} ${url}`);
   }
 
   const response = await fetch(url, {
@@ -197,7 +228,7 @@ async function fetch_zammad_api(options: Options) {
 
   if (env.DEPLOY_ENV === "preview") {
     console.debug(
-      ` --> ${options.method} ${url} ${response.status} ${response.statusText}`,
+      `  --> ${options.method} ${url} ${response.status} ${response.statusText}`,
     );
   }
 
