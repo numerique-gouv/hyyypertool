@@ -1,5 +1,12 @@
 
 
+## [2024.2.1](https://github.com/betagouv/hyyypertool/compare/2024.2.0...2024.2.1) (2024-02-01)
+
+
+### Features
+
+* **moderation:** add livreurs / mobilic response ([#37](https://github.com/betagouv/hyyypertool/issues/37)) ([be490cc](https://github.com/betagouv/hyyypertool/commit/be490cc72a834d1d91c1672d7f3261965aaa816c))
+
 # [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.1.22...2024.2.0) (2024-02-01)
 
 
