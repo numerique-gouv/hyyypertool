@@ -167,24 +167,47 @@ function AccountInfo({ user }: { user: User }) {
         nombre de connection : <b>{user.sign_in_count}</b>
       </li>
       <li>
-        Création : <b>{date_to_string(user.created_at)}</b>
+        Création :{" "}
+        <b>
+          <time datetime={user.created_at?.toISOString()}>
+            {date_to_string(user.created_at)}
+          </time>
+        </b>
       </li>
       <li>
-        Dernière connectio : <b>{date_to_string(user.last_sign_in_at)}</b>
+        Dernière connectio :{" "}
+        <b>
+          <time datetime={user.last_sign_in_at?.toISOString()}>
+            {date_to_string(user.last_sign_in_at)}
+          </time>
+        </b>
       </li>
       <li>
-        Dernière modif :<b>{date_to_string(user.updated_at)}</b>
+        Dernière modif :
+        <b>
+          <time datetime={user.updated_at.toISOString()}>
+            {date_to_string(user.updated_at)}
+          </time>
+        </b>
       </li>
       <li>
         Email vérifié : <b>{user.email_verified ? "✅" : "❌"}</b>
       </li>
       <li>
         mail de vérif envoyé :{" "}
-        <b>{date_to_string(user.verify_email_sent_at)}</b>
+        <b>
+          <time datetime={user.verify_email_sent_at?.toISOString()}>
+            {date_to_string(user.verify_email_sent_at)}
+          </time>
+        </b>
       </li>
       <li>
         mail chgmt mdp envoyé :{" "}
-        <b>{date_to_string(user.reset_password_sent_at)}</b>
+        <b>
+          <time datetime={user.reset_password_sent_at?.toISOString()}>
+            {date_to_string(user.reset_password_sent_at)}
+          </time>
+        </b>
       </li>
     </ul>
   );
