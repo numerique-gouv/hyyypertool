@@ -15,7 +15,7 @@ import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
 import { eq } from "drizzle-orm";
 import { ok } from "node:assert";
-import { dedent } from "ts-dedent";
+import { reponse_templates } from "./reponse_templates";
 
 //
 
@@ -215,133 +215,6 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
     </div>
   );
 }
-
-//
-
-const reponse_templates: Array<{
-  label: string;
-  template: (options: {
-    moderation: Moderation & { organizations: Organization; users: User };
-    members_email: string[];
-  }) => string;
-}> = [
-  {
-    label: "nom et prénom et job",
-    template({ moderation }) {
-      return dedent`
-        Bonjour,
-
-        Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
-
-        Les comptes MonComptePro doivent être associés à une personne physique. Merci de renseigner correctement vos nom, prénom ainsi que votre fonction.
-
-        Pour se faire :
-
-        - connectez vous à https://app.moncomptepro.beta.gouv.fr/
-        - cliquez sur le lien suivant https://app.moncomptepro.beta.gouv.fr/users/personal-information
-        - corrigez vos informations
-        - sélectionnez votre organisation (numéro SIRET : ${moderation.organizations.siret})
-
-        Je reste à votre disposition pour tout complément d'information.
-
-        Excellente journée,
-        L’équipe MonComptePro.
-      `;
-    },
-  },
-  {
-    label: "Quel lien avec l'organisation ?",
-    template({ moderation }) {
-      return dedent`
-        Bonjour,
-
-        Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
-
-        Afin de donner suite à cette demande, pourriez vous nous préciser le lien que vous avez avec cette organisation ?
-
-        Nous vous recommandons de demander directement à l'organisation que vous représentez d'effectuer la démarche.
-
-        Excellente journée,
-        L’équipe MonComptePro.
-      `;
-    },
-  },
-  {
-    label: "Merci d'utiliser votre adresse email professionnelle",
-    template({ moderation }) {
-      return dedent`
-        Bonjour,
-
-        Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
-
-        Afin de donner suite à votre demande, merci d'effectuer votre inscription avec votre adresse mail professionnelle.
-
-        Je reste à votre disposition pour tout complément d'information.
-
-        Excellente journée,
-        L’équipe MonComptePro.
-      `;
-    },
-  },
-  {
-    label: "Merci d'utiliser votre adresse officielle de contact",
-    template({ moderation }) {
-      return dedent`
-        Bonjour,
-
-        Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
-
-        Afin de donner suite à votre demande, merci d'effectuer votre inscription avec votre email officiel de contact ADRESSE, tel que déclaré sur LIEN
-
-        Je reste à votre disposition pour tout complément d'information.
-
-        Excellente journée,
-        L’équipe MonComptePro.
-      `;
-    },
-  },
-  {
-    label: "Vous possédez déjà un compte MonComptePro",
-    template({ moderation, members_email }) {
-      return dedent`
-        Bonjour,
-
-        Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
-
-        Vous possédez déjà un compte MonComptePro :
-
-        - ${members_email.join("\n- ")}
-
-        Merci de bien vouloir vous connecter avec le compte déjà existant.
-
-        Je reste à votre disposition pour tout complément d'information.
-
-        Excellente journée,
-        L’équipe MonComptePro.
-      `;
-    },
-  },
-  {
-    label: "Quel lien avec le Ministère de l'Éduc Nat",
-    template({ moderation }) {
-      return dedent`
-      Bonjour,
-
-      Votre demande pour rejoindre l'organisation « ${
-        moderation.organizations.cached_libelle
-      } » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
-
-      Afin de donner suite à cette demande, pourriez vous nous préciser le lien que vous avez avec cette organisation ? Votre adresse mail correspond au rectorat ${
-        moderation.users.email.split("@")[1]
-      }. Merci de bien vouloir rejoindre ce dernier ou utiliser une adresse mail dont le nom de domaine est : education.gouv.fr
-
-      Nous vous recommandons de demander directement à l'organisation que vous représentez d'effectuer la démarche.
-
-      Excellente journée,
-      `;
-    },
-  },
-];
 
 function get_organization_members({
   organization_id,
