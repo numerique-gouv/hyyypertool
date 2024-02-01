@@ -2,7 +2,7 @@
 
 import { api_ref } from ":api_ref";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
-import { and, desc, count as drizzle_count, like } from "drizzle-orm";
+import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import { Table, Table_Context } from "./Table";
 
 //
@@ -20,7 +20,7 @@ export default async function Page({
   page: number;
 }) {
   const take = 10;
-  const where = and(like(schema.users.email, `%${email ?? ""}%`));
+  const where = and(ilike(schema.users.email, `%${email ?? ""}%`));
   const { users, count } = await moncomptepro_pg.transaction(async () => {
     const users = await moncomptepro_pg
       .select()
