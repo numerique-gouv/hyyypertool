@@ -1,5 +1,13 @@
 
 
+# [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.1.22...2024.2.0) (2024-02-01)
+
+
+### Features
+
+* allow case-insensitive search ([379c64f](https://github.com/betagouv/hyyypertool/commit/379c64ffb23b7cbb079f3f1b3474b2ec5c1ebdf0))
+* **users:** display iso string ([7fbbc6b](https://github.com/betagouv/hyyypertool/commit/7fbbc6b5bbc72568fc1563118f91fc486a5ca009))
+
 ## [2024.1.22](https://github.com/betagouv/hyyypertool/compare/2024.1.21...2024.1.22) (2024-01-31)
 
 
