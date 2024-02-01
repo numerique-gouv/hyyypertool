@@ -102,6 +102,7 @@ export function Root_Layout({
           on every htmx:beforeSend NProgress.start()
           on every htmx:afterOnLoad NProgress.done()
           on every htmx:afterSettle NProgress.done()
+          on every htmx:afterRequest NProgress.done()
         "
         class="flex min-h-screen flex-col"
       >

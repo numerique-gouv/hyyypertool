@@ -1,6 +1,5 @@
 //
 
-import { date_to_string } from ":common/date";
 import { hx_include } from ":common/htmx";
 import type { Pagination } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
@@ -9,6 +8,7 @@ import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware"
 import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { row } from ":ui/table";
+import { LocalTime } from ":ui/time/LocalTime";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import { moderation_type_to_emoji } from "./moderation_type_to_emoji";
@@ -294,7 +294,9 @@ function Row({
       <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
       </td>
-      <td>{date_to_string(moderation.created_at)}</td>
+      <td>
+        <LocalTime date={moderation.created_at} />
+      </td>
       <td
         class="max-w-32 overflow-hidden text-ellipsis"
         title={users.family_name ?? ""}

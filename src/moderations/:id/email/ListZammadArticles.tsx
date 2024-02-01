@@ -1,10 +1,10 @@
 //
 
-import { date_to_string } from ":common/date";
 import { OpenInZammad } from ":common/zammad";
 import { type Moderation, type User } from ":database:moncomptepro";
 import { get_zammad_mail } from ":legacy/services/zammad_api";
 import { callout } from ":ui/callout";
+import { LocalTime } from ":ui/time/LocalTime";
 import { Message } from "./Message";
 
 //
@@ -57,9 +57,7 @@ export async function ListZammadArticles({
             id={`${article.id}`}
           >
             <p class="text-center text-sm font-bold">
-              <time datetime={article.created_at} title={article.created_at}>
-                {date_to_string(new Date(article.created_at))}
-              </time>
+              <LocalTime date={new Date(article.created_at)} />
             </p>
             <Message article={article} moderation={moderation} />
             <hr />

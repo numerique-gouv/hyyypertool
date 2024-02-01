@@ -36,7 +36,7 @@
     "error-custom-class": "10.0.0",
     "hono": "3.12.8",
     "hono-sessions": "0.3.3",
-    "htmx.ext...chunked-transfer": "1.0.1",
+    "htmx.ext...chunked-transfer": "1.0.2",
     "htmx.org": "1.9.10",
     "hyperscript.org": "0.9.12",
     "jose": "5.2.0",

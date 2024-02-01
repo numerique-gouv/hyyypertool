@@ -12,8 +12,6 @@ type KnownPath =
   | "/legacy/duplicate_warning"
   | "/legacy/leaders"
   | "/legacy/moderations/:id"
-  | "/legacy/organizations"
-  | "/legacy/organizations/:id"
   | "/legacy/organizations/:id/domains/external"
   | "/legacy/organizations/:id/domains/external/:domain"
   | "/legacy/organizations/:id/domains/internal"
