@@ -6,6 +6,7 @@
   "module": "src/bootstrap.ts",
   "scripts": {
     "build": "bun x npm-run-all --serial build:**",
+    "build:api": "bun x tsc --project src/api/tsconfig.json > /dev/null || bun x tsc --project src/api/tsconfig.json",
     "build:tailwind": "bun x tailwindcss -i ./src/assets/tailwind.css -o ./public/assets/tailwind.css",
     "dev": "bun --hot src/bootstrap.ts",
     "dev:inspect-brk": "bun --hot --inspect-brk src/bootstrap.ts",
