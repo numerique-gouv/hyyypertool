@@ -68,7 +68,7 @@ function Brand() {
       </div>
       <div class="fr-header__service">
         <a href="/" title="Accueil ">
-          <p class="fr-header__service-title">Hypertool</p>
+          <p class="fr-header__service-title">Hyyypertool</p>
         </a>
         <p class="fr-header__service-tagline">hyyyyyyyypertool</p>
       </div>
