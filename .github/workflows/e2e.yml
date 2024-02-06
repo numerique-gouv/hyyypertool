@@ -40,6 +40,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
+          package_json_file: ./e2e/package.json
           run_install: false
 
       - name: ⎔ Setup node
