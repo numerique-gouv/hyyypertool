@@ -84,7 +84,7 @@ function Tools({ username }: { username?: string }) {
           <li>
             <a
               class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-fi-logout-box-r-line fr-btn--icon-left"
-              href={api_ref("/auth/logout", {})}
+              href={app_hc.auth.logout.$url().pathname}
             >
               {username}
             </a>
@@ -125,7 +125,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={api_ref("/legacy/organizations", {})}
+            href={app_hc.legacy.organizations.$url().pathname}
             target="_self"
           >
             Organisations

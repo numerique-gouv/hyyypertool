@@ -1,9 +1,9 @@
 //
 
-import { api_ref } from ":api_ref";
 import type { Csp_Context } from ":common/csp_headers";
 import env from ":common/env";
 import { type Session_Context } from ":common/session";
+import { app_hc } from ":hc";
 import { Root_Layout } from ":ui/layout/root";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -14,8 +14,9 @@ const router = new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Root_Layout, { docType: true, stream: true }))
   .get("/", function GET({ render, redirect, var: { nonce, session } }) {
     if (session.get("userinfo")) {
-      return redirect(api_ref("/moderations", {}));
+      return redirect(app_hc.moderations.$url().pathname);
     }
+
     return render(
       <main class="flex h-full flex-grow flex-col items-center justify-center">
         <h1 class="fr-display--xl drop-shadow-lg ">
@@ -29,7 +30,7 @@ const router = new Hono<Session_Context & Csp_Context>()
 
         <div class="animated delay-2s fadeInLeftBig flex flex-col items-center">
           <button class="agentconnect-button"></button>
-          <form method="post" action={api_ref("/auth/login", {})}>
+          <form method="post" action={app_hc.auth.login.$url().pathname}>
             <div class="fr-connect-group">
               <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>
@@ -60,6 +61,7 @@ const router = new Hono<Session_Context & Csp_Context>()
       external: ["lit", ":common/env.ts"],
       minify: env.NODE_ENV === "production",
     });
+
     return new Response(output);
   });
 

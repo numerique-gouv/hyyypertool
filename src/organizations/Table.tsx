@@ -1,11 +1,15 @@
+//
+
 import { type Organization } from ":database:moncomptepro";
 import { app_hc } from ":hc";
+import { LocalTime } from ":ui/time/LocalTime";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { ORGANIZATIONS_TABLE_ID } from "./page";
 
+//
+
 const fields = [
-  "id",
   "cached_libelle",
   "siret",
   "authorized_email_domains",
@@ -27,16 +31,21 @@ export function Table({ organizations }: { organizations: Organization[] }) {
     <table>
       <thead>
         <tr>
+          <th>Date de création</th>
           {fields.map((name) => (
             <th class="max-w-32 break-words">{name}</th>
           ))}
 
-          <th>Lien</th>
+          <th>ID</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {organizations.map((organization) => (
           <tr>
+            <td>
+              <LocalTime date={organization.created_at} />
+            </td>
             {fields.map((name) => (
               <td class="break-words">
                 {match(organization[name])
@@ -48,12 +57,15 @@ export function Table({ organizations }: { organizations: Organization[] }) {
               </td>
             ))}
 
+            <td>{organization.id}</td>
             <td>
               <a
                 class="p-3"
                 href={
                   app_hc.legacy.organizations[":id"].$url({
-                    param: { id: organization.id.toString() },
+                    param: {
+                      id: organization.id.toString(),
+                    },
                   }).pathname
                 }
               >
@@ -74,6 +86,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
             <input
               class="text-right"
               hx-get={app_hc.legacy.organizations.$url().pathname}
+              hx-replace-url="true"
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}
               hx-target={`#${ORGANIZATIONS_TABLE_ID}`}

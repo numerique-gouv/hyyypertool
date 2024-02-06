@@ -1,7 +1,7 @@
 //
 
-import { api_ref } from ":api_ref";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import { Table, Table_Context } from "./Table";
 
@@ -48,7 +48,7 @@ export default async function Page({
       </label>
       <input
         class="fr-input"
-        hx-get={api_ref("/legacy/organizations", {})}
+        hx-get={app_hc.legacy.organizations.$url().pathname}
         hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}
         hx-target={`#${ORGANIZATIONS_TABLE_ID}`}
         hx-trigger="input changed delay:500ms, search"

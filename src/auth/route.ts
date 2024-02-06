@@ -1,12 +1,12 @@
 //
 
-import { api_ref } from ":api_ref";
 import env from ":common/env.ts";
 import {
   hyyyyyypertool_session,
   type AgentConnect_UserInfo,
   type Session_Context,
 } from ":common/session.ts";
+import { app_hc } from ":hc";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { generators } from "openid-client";
@@ -77,7 +77,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
       session.set("userinfo", userinfo);
       session.set("idtoken", tokenSet.id_token ?? "");
 
-      return redirect(api_ref("/moderations", {}));
+      return redirect(app_hc.moderations.$url().pathname);
     },
   )
   .get("/logout", async ({ req, get, redirect }) => {
@@ -104,10 +104,7 @@ export type AuthRouter_Schema = typeof router;
 
 function get_redirect_uri(url: string) {
   const _url = new URL(url);
-  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}${api_ref(
-    "/auth/login/callback",
-    {},
-  )}`;
+  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}${app_hc.auth.login.callback.$url().pathname}`;
   return redirect_uri;
 }
 
