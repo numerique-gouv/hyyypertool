@@ -263,17 +263,31 @@ export async function Edit_Domain({
     <div class="grid grid-cols-2">
       <div
         class="fr-table"
-        hx-get={api_ref(`/legacy/organizations/:id/domains/internal`, {
-          id: String(organization.id),
-        })}
-        hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED} from:body`}
+        hx-get={
+          app_hc.legacy.organizations[":id"].domains.internal.$url({
+            param: {
+              id: organization.id.toString(),
+            },
+          }).pathname
+        }
+        hx-trigger={[
+          "load",
+          `${ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED} from:body`,
+        ].join(", ")}
       ></div>
       <div
         class="fr-table"
-        hx-get={api_ref(`/legacy/organizations/:id/domains/external`, {
-          id: String(organization.id),
-        })}
-        hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED} from:body`}
+        hx-get={
+          app_hc.legacy.organizations[":id"].domains.external.$url({
+            param: {
+              id: organization.id.toString(),
+            },
+          }).pathname
+        }
+        hx-trigger={[
+          "load",
+          `${ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED} from:body`,
+        ].join(", ")}
       ></div>
     </div>
   );
@@ -338,9 +352,13 @@ function About_Organisation({
     <>
       <h3 class="mt-12">
         <a
-          href={api_ref("/legacy/organizations/:id", {
-            id: moderation.organization_id.toString(),
-          })}
+          href={
+            app_hc.legacy.organizations[":id"].$url({
+              param: {
+                id: moderation.organization_id.toString(),
+              },
+            }).pathname
+          }
         >
           #### 🏛 A propos de l'organisation :{" "}
           <b>{moderation.organizations.cached_libelle}</b>

@@ -1,5 +1,6 @@
 //
 
+import { api_ref } from ":api_ref";
 import type { Users_Organizations } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import {
@@ -107,11 +108,7 @@ function Row({
       <td>
         <a
           class="p-3"
-          href={
-            app_hc.legacy.users[":id"].$url({
-              param: { id: user.id.toString() },
-            }).pathname
-          }
+          href={api_ref("/legacy/users/:id", { id: user.id.toString() })}
         >
           ➡️
         </a>

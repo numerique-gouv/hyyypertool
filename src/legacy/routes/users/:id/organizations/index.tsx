@@ -7,6 +7,7 @@ import {
   schema,
   type Organization,
 } from ":database:moncomptepro";
+import { app_hc } from ":hc";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
@@ -130,9 +131,13 @@ function Table({
               <td>
                 <a
                   class="p-3"
-                  href={api_ref("/legacy/organizations/:id", {
-                    id: String(organizations.id),
-                  })}
+                  href={
+                    app_hc.legacy.organizations[":id"].$url({
+                      param: {
+                        id: String(organizations.id),
+                      },
+                    }).pathname
+                  }
                 >
                   ➡️
                 </a>
@@ -151,7 +156,9 @@ function Table({
           <td colspan={2} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={`/legacy/users/${user_id}/organizations`}
+              hx-get={api_ref(`/legacy/users/:id/organizations`, {
+                id: user_id.toString(),
+              })}
               hx-trigger="input changed delay:2s"
               hx-target="#table-user-organisations"
               id="page"
