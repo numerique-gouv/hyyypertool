@@ -85,4 +85,3 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos
-          working-directory: e2e
