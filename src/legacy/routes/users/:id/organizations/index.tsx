@@ -7,7 +7,7 @@ import {
   type Pagination,
 } from ":common/schema";
 import { schema, type Organization } from ":database:moncomptepro";
-import { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
