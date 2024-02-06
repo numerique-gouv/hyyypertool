@@ -132,13 +132,12 @@ function Actions({
         <button
           class={button()}
           hx-delete={
-            ""
-            // app_hc.legacy.organizations[":id"].members[":user_id"].$url({
-            //   param: {
-            //     id: organization_id.toString(),
-            //     user_id: user_id.toString(),
-            //   },
-            // }).pathname
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            }).pathname
           }
           hx-swap="none"
         >
@@ -147,13 +146,12 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            ""
-            // app_hc.legacy.organizations[":id"].members[":user_id"].$url({
-            //   param: {
-            //     id: organization_id.toString(),
-            //     user_id: user_id.toString(),
-            //   },
-            // }).pathname
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            }).pathname
           }
           hx-swap="none"
           hx-vals={JSON.stringify({
@@ -166,13 +164,12 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            ""
-            // app_hc.legacy.organizations[":id"].members[":user_id"].$url({
-            //   param: {
-            //     id: organization_id.toString(),
-            //     user_id: user_id.toString(),
-            //   },
-            // }).pathname
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            }).pathname
           }
           hx-swap="none"
           hx-vals={JSON.stringify({
@@ -185,13 +182,12 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            ""
-            // app_hc.legacy.organizations[":id"].members[":user_id"].$url({
-            //   param: {
-            //     id: organization_id.toString(),
-            //     user_id: user_id.toString(),
-            //   },
-            // }).pathname
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            }).pathname
           }
           hx-swap="none"
           hx-vals={JSON.stringify({
@@ -205,13 +201,12 @@ function Actions({
           <button
             class={button({ intent: "danger" })}
             hx-patch={
-              ""
-              // app_hc.legacy.organizations[":id"].members[":user_id"].$url({
-              //   param: {
-              //     id: organization_id.toString(),
-              //     user_id: user_id.toString(),
-              //   },
-              // }).pathname
+              app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+                param: {
+                  id: organization_id.toString(),
+                  user_id: user_id.toString(),
+                },
+              }).pathname
             }
             hx-swap="none"
             hx-vals={JSON.stringify({ verification_type: "" })}
@@ -224,13 +219,12 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            ""
-            // app_hc.legacy.organizations[":id"].members[":user_id"].$url({
-            //   param: {
-            //     id: organization_id.toString(),
-            //     user_id: user_id.toString(),
-            //   },
-            // }).pathname
+            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+            }).pathname
           }
           hx-swap="none"
           hx-vals={JSON.stringify({
