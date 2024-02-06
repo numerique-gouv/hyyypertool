@@ -48,6 +48,7 @@ jobs:
         with:
           cache: "pnpm"
           node-version-file: ./e2e/package.json
+          cache-dependency-path: "./e2e/pnpm-lock.yaml"
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
