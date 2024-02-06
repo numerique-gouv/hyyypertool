@@ -73,4 +73,16 @@ jobs:
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
         with:
           start: bun run start
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
           working-directory: e2e
