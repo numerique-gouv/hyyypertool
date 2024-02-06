@@ -67,7 +67,7 @@ jobs:
           DO_NOT_SEND_MAIL: "true"
           ENTREPRISE_API_GOUV_TOKEN: "???"
           HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
-          SENTRY_DNS: "https://???@errors.data.gouv.fr//XX"
+          SENTRY_DNS: "https://123456789@errors.data.gouv.fr//XX"
           TZ: "Europe/Paris"
           ZAMMAD_TOKEN: ""
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
