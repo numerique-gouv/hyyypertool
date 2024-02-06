@@ -112,6 +112,8 @@ function Table({
   organizations: { organizations: Organization }[];
 }) {
   const { page, take, count, user_id } = useContext(Table_Context);
+  const page_index = page - 1;
+  const last_page = Math.floor(count / take) + 1;
 
   return (
     <table>
@@ -163,7 +165,7 @@ function Table({
         <tr>
           <th scope="row">Showing </th>
           <td colspan={2}>
-            {page * take}-{page * take + take} of {count}
+            {page_index * count}-{page_index * count + count} of {count}
           </td>
           <td colspan={2} class="inline-flex justify-center">
             <input
@@ -178,7 +180,7 @@ function Table({
               type="number"
               value={String(page)}
             />
-            <span> of {Math.floor(count / take)}</span>
+            <span> of {last_page}</span>
           </td>
         </tr>
       </tfoot>
