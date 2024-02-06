@@ -40,7 +40,6 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          cache-dependency-path: e2e
           package_json_file: ./e2e/package.json
           run_install: false
 
@@ -48,7 +47,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: "pnpm"
-          node-version-file: ./e2e/package.json
+          cache-dependency-path: e2e
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
