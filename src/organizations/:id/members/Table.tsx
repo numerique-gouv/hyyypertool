@@ -21,7 +21,7 @@ type RowData = User &
 //
 
 export const Table_Context = createContext({
-  page: 0,
+  page: 1,
   take: 5,
   count: 0,
 });
@@ -36,6 +36,8 @@ export function Table({
   users: Array<RowData>;
 }) {
   const { page, take, count } = useContext(Table_Context);
+  const page_index = page - 1;
+  const last_page = Math.floor(count / take) + 1;
 
   return (
     <table class="!table">
@@ -64,7 +66,7 @@ export function Table({
         <tr>
           <th scope="row">Showing </th>
           <td colspan={2}>
-            {page * take}-{page * take + take} of {count}
+            {page_index * count}-{page_index * count + count} of {count}
           </td>
           <td colspan={2} class="inline-flex justify-center">
             <input
@@ -81,7 +83,7 @@ export function Table({
               type="number"
               value={String(page)}
             />
-            <span> of {Math.floor(count / take)}</span>
+            <span> of {last_page}</span>
           </td>
         </tr>
       </tfoot>

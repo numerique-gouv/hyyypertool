@@ -19,13 +19,15 @@ const fields = [
 ] as const;
 
 export const Table_Context = createContext({
-  page: 0,
+  page: 1,
   take: 10,
   count: 0,
 });
 
 export function Table({ organizations }: { organizations: Organization[] }) {
   const { page, take, count } = useContext(Table_Context);
+  const page_index = page - 1;
+  const last_page = Math.floor(count / take) + 1;
 
   return (
     <table>
@@ -80,7 +82,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
         <tr>
           <th scope="row">Showing </th>
           <td colspan={2}>
-            {page * take}-{page * take + take} of {count}
+            {page_index * count}-{page_index * count + count} of {count}
           </td>
           <td colspan={3} class="inline-flex justify-center">
             <input
@@ -96,7 +98,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
               type="number"
               value={String(page)}
             />
-            <span> of {Math.floor(count / take)}</span>
+            <span> of {last_page}</span>
           </td>
         </tr>
       </tfoot>
