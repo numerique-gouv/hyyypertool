@@ -17,6 +17,7 @@ export default defineConfig({
     setupNodeEvents,
     supportFile: false,
   },
+  video: true,
 });
 
 //
@@ -59,8 +60,6 @@ async function seed() {
     ticket_id: 73930,
     comment: "This is a test",
   });
-
-  console.log({ moderation });
 
   return null;
 }
