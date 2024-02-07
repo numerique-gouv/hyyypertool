@@ -1,16 +1,71 @@
 import { relations } from "drizzle-orm";
 import {
-  bigint,
   boolean,
   integer,
   pgTable,
   primaryKey,
   serial,
-  text,
   timestamp,
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
+
+export const moderations = pgTable("moderations", {
+  id: serial("id").primaryKey().notNull(),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  organization_id: integer("organization_id")
+    .notNull()
+    .references(() => organizations.id, { onDelete: "cascade" }),
+  type: varchar("type").notNull(),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  moderated_at: timestamp("moderated_at", {
+    withTimezone: true,
+  }),
+  comment: varchar("comment"),
+  ticket_id: integer("ticket_id"),
+  moderated_by: varchar("moderated_by"),
+});
+
+export const moderations_relations = relations(moderations, ({ one }) => ({
+  users: one(users, { fields: [moderations.user_id], references: [users.id] }),
+  organizations: one(organizations, {
+    fields: [moderations.organization_id],
+    references: [organizations.id],
+  }),
+}));
+
+export const oidc_clients = pgTable("oidc_clients", {
+  id: serial("id").primaryKey().notNull(),
+  client_name: varchar("client_name").notNull(),
+  client_id: varchar("client_id").notNull(),
+  client_secret: varchar("client_secret").notNull(),
+  redirect_uris: varchar("redirect_uris").default("{}").array().notNull(),
+  created_at: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  post_logout_redirect_uris: varchar("post_logout_redirect_uris")
+    .default("{}")
+    .array()
+    .notNull(),
+  scope: varchar("scope").default("openid email").notNull(),
+  client_uri: varchar("client_uri"),
+  client_description: varchar("client_description"),
+  userinfo_signed_response_alg: varchar("userinfo_signed_response_alg"),
+  id_token_signed_response_alg: varchar("id_token_signed_response_alg"),
+  authorization_signed_response_alg: varchar(
+    "authorization_signed_response_alg",
+  ),
+  introspection_signed_response_alg: varchar(
+    "introspection_signed_response_alg",
+  ),
+});
 
 export const organizations = pgTable(
   "organizations",
@@ -28,10 +83,10 @@ export const organizations = pgTable(
       .array()
       .notNull(),
     created_at: timestamp("created_at", { withTimezone: true })
-      .defaultNow()
+      .default(new Date(0))
       .notNull(),
     updated_at: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+      .default(new Date(0))
       .notNull(),
     cached_libelle: varchar("cached_libelle"),
     cached_nom_complet: varchar("cached_nom_complet"),
@@ -74,85 +129,6 @@ export const organizations = pgTable(
     };
   },
 );
-
-export const oidc_clients = pgTable("oidc_clients", {
-  id: serial("id").primaryKey().notNull(),
-  client_name: varchar("client_name").notNull(),
-  client_id: varchar("client_id").notNull(),
-  client_secret: varchar("client_secret").notNull(),
-  redirect_uris: varchar("redirect_uris").default("{}").array().notNull(),
-  created_at: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-  updated_at: timestamp("updated_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-  post_logout_redirect_uris: varchar("post_logout_redirect_uris")
-    .default("{}")
-    .array()
-    .notNull(),
-  scope: varchar("scope").default("openid email").notNull(),
-  client_uri: varchar("client_uri"),
-  client_description: varchar("client_description"),
-  userinfo_signed_response_alg: varchar("userinfo_signed_response_alg"),
-  id_token_signed_response_alg: varchar("id_token_signed_response_alg"),
-  authorization_signed_response_alg: varchar(
-    "authorization_signed_response_alg",
-  ),
-  introspection_signed_response_alg: varchar(
-    "introspection_signed_response_alg",
-  ),
-});
-
-export const users_oidc_clients = pgTable("users_oidc_clients", {
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  oidc_client_id: integer("oidc_client_id")
-    .notNull()
-    .references(() => oidc_clients.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    }),
-  created_at: timestamp("created_at", {
-    withTimezone: true,
-  }).notNull(),
-  updated_at: timestamp("updated_at", {
-    withTimezone: true,
-  }).notNull(),
-  id: serial("id").primaryKey().notNull(),
-  organization_id: integer("organization_id").references(
-    () => organizations.id,
-    { onDelete: "set null", onUpdate: "cascade" },
-  ),
-});
-
-export const moderations = pgTable("moderations", {
-  id: serial("id").primaryKey().notNull(),
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  organization_id: integer("organization_id")
-    .notNull()
-    .references(() => organizations.id, { onDelete: "cascade" }),
-  type: varchar("type").notNull(),
-  created_at: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-  moderated_at: timestamp("moderated_at", {
-    withTimezone: true,
-  }),
-  comment: varchar("comment"),
-  ticket_id: integer("ticket_id"),
-});
-
-export const moderationsRelations = relations(moderations, ({ one }) => ({
-  users: one(users, { fields: [moderations.user_id], references: [users.id] }),
-  organizations: one(organizations, {
-    fields: [moderations.organization_id],
-    references: [organizations.id],
-  }),
-}));
 
 export const users = pgTable(
   "users",
@@ -203,37 +179,28 @@ export const users = pgTable(
   },
 );
 
-export const authenticators = pgTable(
-  "authenticators",
-  {
-    credential_id: text("credential_id").primaryKey().notNull(),
-    // TODO: failed to parse database type 'bytea'
-    credential_public_key: varchar("credential_public_key").notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    counter: bigint("counter", { mode: "number" }).notNull(),
-    credential_device_type: varchar("credential_device_type", { length: 32 }),
-    credential_backed_up: boolean("credential_backed_up").notNull(),
-    transports: varchar("transports", { length: 255 }).default("{}").array(),
-    user_id: integer("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    display_name: varchar("display_name"),
-    created_at: timestamp("created_at", { withTimezone: true })
-      .defaultNow()
-      .notNull(),
-    last_used_at: timestamp("last_used_at", {
-      withTimezone: true,
+export const users_oidc_clients = pgTable("users_oidc_clients", {
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  oidc_client_id: integer("oidc_client_id")
+    .notNull()
+    .references(() => oidc_clients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
     }),
-    usage_count: integer("usage_count").default(0).notNull(),
-  },
-  (table) => {
-    return {
-      index_authenticators_on_credential_id: uniqueIndex(
-        "index_authenticators_on_credential_id",
-      ).on(table.credential_id),
-    };
-  },
-);
+  created_at: timestamp("created_at", {
+    withTimezone: true,
+  }).notNull(),
+  updated_at: timestamp("updated_at", {
+    withTimezone: true,
+  }).notNull(),
+  id: serial("id").primaryKey().notNull(),
+  organization_id: integer("organization_id").references(
+    () => organizations.id,
+    { onDelete: "set null", onUpdate: "cascade" },
+  ),
+});
 
 export const users_organizations = pgTable(
   "users_organizations",
@@ -246,10 +213,10 @@ export const users_organizations = pgTable(
       .references(() => organizations.id, { onUpdate: "cascade" }),
     is_external: boolean("is_external").default(false).notNull(),
     created_at: timestamp("created_at", { withTimezone: true })
-      .defaultNow()
+      .default(new Date(0))
       .notNull(),
     updated_at: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+      .default(new Date(0))
       .notNull(),
     verification_type: varchar("verification_type"),
     authentication_by_peers_type: varchar("authentication_by_peers_type"),

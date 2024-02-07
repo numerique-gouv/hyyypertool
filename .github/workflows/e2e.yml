@@ -1,0 +1,95 @@
+#
+
+name: E2E
+
+# Automatically cancel in-progress actions on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "e2e"
+
+    env:
+      DATABASE_URL_TEST: postgres://postgres:postgres@localhost:5432/postgres
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 🌭 Install bun
+        uses: oven-sh/setup-bun@v1
+      - run: bun install --frozen-lockfile
+        working-directory: "."
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          package_json_file: ./e2e/package.json
+          run_install: false
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+          cache-dependency-path: e2e
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        env:
+          AGENTCONNECT_OIDC_AUTHORIZE: "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"
+          AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
+          AGENTCONNECT_OIDC_ISSUER: "https://fca.integ01.dev-agentconnect.fr/api/v2"
+          AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
+          AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
+          ALLOWED_USERS: "user@yopmail.com"
+          API_AUTH_PASSWORD: "???"
+          API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
+          API_AUTH_USERNAME: "???"
+          DO_NOT_SEND_MAIL: "true"
+          ENTREPRISE_API_GOUV_TOKEN: "???"
+          HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
+          SENTRY_DNS: "https://123456789@errors.data.gouv.fr//XX"
+          TZ: "Europe/Paris"
+          ZAMMAD_TOKEN: ""
+          ZAMMAD_URL: "https://support.etalab.gouv.fr"
+        with:
+          build: bun run build
+          start: bun run start
+          working-directory: e2e
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          compression-level: 9
+          name: cypress-screenshots
+          path: e2e/cypress/screenshots
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          compression-level: 9
+          name: cypress-videos
+          path: e2e/cypress/videos

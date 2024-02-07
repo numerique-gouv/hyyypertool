@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "dom"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "es5",
+    "types": ["cypress", "node"]
+  },
+  "include": ["**/*.ts"]
+}

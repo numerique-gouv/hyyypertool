@@ -16,6 +16,13 @@ export default {
   introspect: {
     casing: "preserve",
   },
-  tablesFilter: ["!pgmigrations"],
+  tablesFilter: [
+    "moderations",
+    "oidc_clients",
+    "organizations",
+    "users_oidc_clients",
+    "users_organizations",
+    "users",
+  ],
   verbose: true,
 } satisfies Config;

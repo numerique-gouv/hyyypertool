@@ -1,5 +1,6 @@
 import { api_ref } from ":api_ref";
 import { type User } from ":database:moncomptepro";
+import { LocalTime } from ":ui/time/LocalTime";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { USER_TABLE_ID } from "./page";
@@ -40,9 +41,11 @@ export function Table({ users }: { users: User[] }) {
               <td>
                 {match(user[name])
                   .when(
-                    (x): x is Date => x instanceof Date,
-                    (value) =>
-                      `${value.toLocaleDateString()} ${value.toLocaleTimeString()}`,
+                    (x): x is string =>
+                      name === "email_verified_at" ||
+                      name === "last_sign_in_at" ||
+                      name === "created_at",
+                    (value) => <LocalTime date={value} />,
                   )
                   .otherwise((value) => value)}
               </td>

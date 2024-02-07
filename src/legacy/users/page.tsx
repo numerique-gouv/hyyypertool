@@ -1,8 +1,11 @@
 //
 
 import { api_ref } from ":api_ref";
-import { moncomptepro_pg, schema } from ":database:moncomptepro";
+import type { Pagination } from ":common/schema";
+import { schema, type MonComptePro_PgDatabase } from ":database:moncomptepro";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
+import { useRequestContext } from "hono/jsx-renderer";
 import { Table, Table_Context } from "./Table";
 
 //
@@ -12,31 +15,55 @@ export const USER_TABLE_ID = "user-table";
 
 //
 
-export default async function Page({
-  page,
-  email,
-}: {
-  email: string | undefined;
-  page: number;
-}) {
-  const take = 10;
+function get_users_list(
+  pg: MonComptePro_PgDatabase,
+  {
+    search,
+    pagination = { page: 0, take: 10 },
+  }: {
+    search: {
+      email?: string;
+    };
+    pagination?: { page: number; take: number };
+  },
+) {
+  const { page, take } = pagination;
+  const { email } = search;
+
   const where = and(ilike(schema.users.email, `%${email ?? ""}%`));
-  const { users, count } = await moncomptepro_pg.transaction(async () => {
-    const users = await moncomptepro_pg
+
+  return pg.transaction(async function users_with_count() {
+    const users = await pg
       .select()
       .from(schema.users)
       .where(where)
-      .orderBy(desc(schema.users.id))
+      .orderBy(desc(schema.users.created_at))
       .limit(take)
       .offset(page * take);
-    const [{ value: count }] = await moncomptepro_pg
+    const [{ value: count }] = await pg
       .select({ value: drizzle_count() })
       .from(schema.users)
       .where(where);
-
     return { users, count };
   });
+}
+//
 
+export default async function Page({
+  pagination,
+  email,
+}: {
+  email: string | undefined;
+  pagination: Pagination;
+}) {
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<moncomptepro_pg_Context>();
+  const { page, page_size } = pagination;
+  const { count, users } = await get_users_list(moncomptepro_pg, {
+    search: { email },
+    pagination: { page: page - 1, take: page_size },
+  });
   return (
     <main class="fr-container">
       <h1>Liste des utilisateurs</h1>
@@ -54,7 +81,7 @@ export default async function Page({
         placeholder="Recherche par Email"
         type="email"
       />
-      <Table_Context.Provider value={{ page, take, count }}>
+      <Table_Context.Provider value={{ page, take: page_size, count }}>
         <div class="fr-table" id={USER_TABLE_ID}>
           <Table users={users} />
         </div>

@@ -11,7 +11,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 //
 
 const router = new Hono<Session_Context & Csp_Context>()
-  .use("*", jsxRenderer(Root_Layout, { docType: true, stream: true }))
+  .use("*", jsxRenderer(Root_Layout, { docType: true }))
   .get("/", function GET({ render, redirect, var: { nonce, session } }) {
     if (session.get("userinfo")) {
       return redirect(app_hc.moderations.$url().pathname);
@@ -20,7 +20,7 @@ const router = new Hono<Session_Context & Csp_Context>()
     return render(
       <main class="flex h-full flex-grow flex-col items-center justify-center">
         <h1 class="fr-display--xl drop-shadow-lg ">
-          <hyyyper-title />
+          <hyyyper-title>Bonjour Hyyypertool !</hyyyper-title>
           <script
             nonce={nonce}
             src={`/assets/${env.VERSION}/_client/hyyypertitle.js`}

@@ -31,7 +31,7 @@ const page_router = new Hono<UserInfo_Context & Csp_Context>()
       return render(
         <Organizations_Page
           pagination={{
-            page: page ?? 1,
+            page: page,
             page_size: 10,
           }}
           search={{ [SEARCH_SIRET_INPUT_ID]: siret ?? "" }}
