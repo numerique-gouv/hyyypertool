@@ -9,7 +9,7 @@ Fonctionnalité: Connexion de user@yopmail.com
     Alors je vois "Bonjour Hyyypertool !"
     Quand je clique sur le bouton "AgentConnect"
 
-    Quand je me connecte en tant que "user@yopmail.com" sur dev-agentconnect.fr
+    Quand je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
     Alors je suis redirigé sur "/moderations"
     Et je vois "Jean User"
