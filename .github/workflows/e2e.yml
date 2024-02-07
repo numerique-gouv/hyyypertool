@@ -63,7 +63,7 @@ jobs:
           API_AUTH_PASSWORD: "???"
           API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
           API_AUTH_USERNAME: "???"
-          DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/postgres?schema=public"
+          DATABASE_URL: "postgresql://postgres:postgres@postgres/postgres?schema=public"
           DO_NOT_SEND_MAIL: "true"
           ENTREPRISE_API_GOUV_TOKEN: "???"
           HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
