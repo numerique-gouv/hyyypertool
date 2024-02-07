@@ -3,7 +3,6 @@
 import { api_ref } from ":api_ref";
 import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Csp_Context } from ":common/csp_headers";
-import { date_to_string } from ":common/date";
 import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema } from ":common/schema";
 import { hyyyyyypertool_session } from ":common/session";
@@ -13,6 +12,7 @@ import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
+import { LocalTime } from ":ui/time/LocalTime";
 import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -169,25 +169,19 @@ function AccountInfo({ user }: { user: User }) {
       <li>
         Création :{" "}
         <b>
-          <time datetime={user.created_at?.toISOString()}>
-            {date_to_string(user.created_at)}
-          </time>
+          <LocalTime date={user.created_at} />
         </b>
       </li>
       <li>
         Dernière connectio :{" "}
         <b>
-          <time datetime={user.last_sign_in_at?.toISOString()}>
-            {date_to_string(user.last_sign_in_at)}
-          </time>
+          <LocalTime date={user.last_sign_in_at} />
         </b>
       </li>
       <li>
         Dernière modif :
         <b>
-          <time datetime={user.updated_at.toISOString()}>
-            {date_to_string(user.updated_at)}
-          </time>
+          <LocalTime date={user.updated_at} />
         </b>
       </li>
       <li>
@@ -196,17 +190,13 @@ function AccountInfo({ user }: { user: User }) {
       <li>
         mail de vérif envoyé :{" "}
         <b>
-          <time datetime={user.verify_email_sent_at?.toISOString()}>
-            {date_to_string(user.verify_email_sent_at)}
-          </time>
+          <LocalTime date={user.verify_email_sent_at} />
         </b>
       </li>
       <li>
         mail chgmt mdp envoyé :{" "}
         <b>
-          <time datetime={user.reset_password_sent_at?.toISOString()}>
-            {date_to_string(user.reset_password_sent_at)}
-          </time>
+          <LocalTime date={user.reset_password_sent_at} />
         </b>
       </li>
     </ul>

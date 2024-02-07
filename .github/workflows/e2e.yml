@@ -72,6 +72,7 @@ jobs:
           ZAMMAD_TOKEN: ""
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
         with:
+          build: bun run build
           start: bun run start
           working-directory: e2e
 
