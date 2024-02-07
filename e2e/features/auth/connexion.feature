@@ -1,8 +1,8 @@
 #language: fr
 Fonctionnalité: Connexion de user@yopmail.com
 
-  # Contexte:
-    # Soit  une base de données nourrie au grain
+  Contexte:
+    Soit  une base de données nourrie au grain
 
   Scénario: Connexion d'un utilisateur
     Etant donné que je navigue sur la page
