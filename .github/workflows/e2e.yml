@@ -55,10 +55,10 @@ jobs:
         uses: cypress-io/github-action@v6
         env:
           AGENTCONNECT_OIDC_AUTHORIZE: "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"
-          AGENTCONNECT_OIDC_CLIENT_ID: "???"
+          AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
           AGENTCONNECT_OIDC_ISSUER: "https://fca.integ01.dev-agentconnect.fr/api/v2"
           AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
-          AGENTCONNECT_OIDC_SECRET_ID: "???"
+          AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
           ALLOWED_USERS: "user@yopmail.com"
           API_AUTH_PASSWORD: "???"
           API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
