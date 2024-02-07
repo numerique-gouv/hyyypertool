@@ -19,11 +19,16 @@ jobs:
       run:
         working-directory: "e2e"
 
+    env:
+      DATABASE_URL_TEST: postgres://postgres:postgres@localhost:5432/postgres
+
     services:
       postgres:
         image: postgres:16-alpine
         env:
           POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -63,7 +68,6 @@ jobs:
           API_AUTH_PASSWORD: "???"
           API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
           API_AUTH_USERNAME: "???"
-          DATABASE_URL: "postgresql://postgres:postgres@postgres/postgres?schema=public"
           DO_NOT_SEND_MAIL: "true"
           ENTREPRISE_API_GOUV_TOKEN: "???"
           HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
