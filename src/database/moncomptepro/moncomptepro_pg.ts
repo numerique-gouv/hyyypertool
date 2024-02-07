@@ -1,7 +1,7 @@
 //
 
 import env from ":common/env.ts";
-import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Client } from "pg";
 import * as schema from "./drizzle/schema";
 
@@ -27,6 +27,10 @@ export const moncomptepro_pg = drizzle(connection, {
   logger: env.DEPLOY_ENV === "preview",
 });
 export * as schema from "./drizzle/schema";
+export type MonComptePro_PgDatabase = NodePgDatabase<typeof schema>;
+
+//
+
 export type User = typeof schema.users.$inferSelect;
 export type Organization = typeof schema.organizations.$inferSelect;
 export type Moderation = typeof schema.moderations.$inferSelect;

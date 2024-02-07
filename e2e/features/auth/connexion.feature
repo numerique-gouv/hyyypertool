@@ -1,10 +1,10 @@
 #language: fr
-Fonctionnalité: Connexion de user@yopmail.com
+Fonctionnalité: Connexion d'un utilisateur
 
   Contexte:
-    Soit  une base de données nourrie au grain
+    Soit une base de données nourrie au grain
 
-  Scénario: Connexion d'un utilisateur
+  Scénario: Connexion de user@yopmail.com
     Etant donné que je navigue sur la page
     Alors je vois "Bonjour Hyyypertool !"
     Quand je clique sur le bouton "AgentConnect"

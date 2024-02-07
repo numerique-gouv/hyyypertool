@@ -13,7 +13,7 @@ import { z } from "zod";
 //
 
 export default new Hono<UserInfo_Context & Csp_Context>()
-  .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
+  .use("*", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
     zValidator(
@@ -27,9 +27,18 @@ export default new Hono<UserInfo_Context & Csp_Context>()
 
       const username = userinfo_to_username(userinfo);
 
-      return render(<UsersPage page={page} email={email} />, {
-        nonce,
-        username,
-      });
+      return render(
+        <UsersPage
+          pagination={{
+            page: page,
+            page_size: 10,
+          }}
+          email={email}
+        />,
+        {
+          nonce,
+          username,
+        },
+      );
     },
   );

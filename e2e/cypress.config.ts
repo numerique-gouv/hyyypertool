@@ -8,6 +8,8 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { env } from "node:process";
 import pg from "pg";
 import * as schema from "../src/database/moncomptepro/drizzle/schema.js";
+import { delete_database } from "../src/database/moncomptepro/seed/delete.js";
+import { insert_database } from "../src/database/moncomptepro/seed/insert.js";
 
 //
 
@@ -47,19 +49,18 @@ async function setupNodeEvents(
 
 async function seed() {
   const client = new pg.Client({
-    connectionString: env.DATABASE_URL,
+    connectionString:
+      env.DATABASE_URL ??
+      "postgresql://postgres:postgres@localhost:5432/postgres",
   });
   await client.connect();
 
   const db = drizzle(client, { schema });
 
-  await db.insert(schema.moderations).values({
-    organization_id: 1,
-    user_id: 1,
-    type: "organization_join_block",
-    ticket_id: 73930,
-    comment: "This is a test",
-  });
+  await delete_database(db);
+  await insert_database(db);
+
+  await client.end();
 
   return null;
 }

@@ -21,7 +21,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 //
 
 export default new Hono<UserInfo_Context & Csp_Context>()
-  .use("*", jsxRenderer(Main_Layout, { docType: true, stream: true }))
+  .use("*", jsxRenderer(Main_Layout, { docType: true }))
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
