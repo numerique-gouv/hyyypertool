@@ -5,6 +5,7 @@ import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esb
 import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { defineConfig } from "cypress";
 import { drizzle } from "drizzle-orm/node-postgres";
+import { env } from "node:process";
 import pg from "pg";
 import * as schema from "../src/database/moncomptepro/drizzle/schema.js";
 
@@ -46,13 +47,13 @@ async function setupNodeEvents(
 
 async function seed() {
   const client = new pg.Client({
-    connectionString: Bun.env.DATABASE_URL,
+    connectionString: env.DATABASE_URL,
   });
   await client.connect();
 
   const db = drizzle(client, { schema });
 
-  const moderation = await db.insert(schema.moderations).values({
+  await db.insert(schema.moderations).values({
     organization_id: 1,
     user_id: 1,
     type: "organization_join_block",
