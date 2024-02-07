@@ -80,14 +80,16 @@ jobs:
           start: bun run start
           working-directory: e2e
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
+          compression-level: 9
           name: cypress-screenshots
           path: e2e/cypress/screenshots
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
+          compression-level: 9
           name: cypress-videos
           path: e2e/cypress/videos
