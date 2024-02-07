@@ -8,10 +8,7 @@ import type { MonComptePro_PgDatabase } from "../moncomptepro_pg";
 export async function insert_database(db: MonComptePro_PgDatabase) {
   try {
     const raphael = await insert_raphael(db);
-
-    console.log({
-      raphael,
-    });
+    console.log(`🌱 ${raphael.command} ${raphael.rowCount} Raphael`);
   } catch (err) {
     console.error("Something went wrong...");
     console.error(err);
