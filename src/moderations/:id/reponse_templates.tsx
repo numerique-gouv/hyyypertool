@@ -141,4 +141,20 @@ export const reponse_templates: Array<{
       `;
     },
   },
+  {
+    label: "refus prestataires",
+    template({ moderation }) {
+      return dedent`
+      Bonjour,
+
+      Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur [https://app.moncomptepro.beta.gouv.fr](https://app.moncomptepro.beta.gouv.fr/).
+
+      Vous n'êtes pas autorisé à créer un compte au nom d'une organisation qui n'est pas la vôtre.
+
+      Merci de bien vouloir demander à l'organisation d'effectuer elle-même la démarche ou de vous fournir une adresse mail dont le nom de domaine lui appartient.
+
+      Excellente journée,
+      `;
+    },
+  },
 ];
