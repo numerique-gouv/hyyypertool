@@ -6,6 +6,7 @@ import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { defineConfig } from "cypress";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
+import env from "../src/common/env.js";
 import * as schema from "../src/database/moncomptepro/drizzle/schema.js";
 
 //
@@ -46,8 +47,7 @@ async function setupNodeEvents(
 
 async function seed() {
   const client = new pg.Client({
-    connectionString:
-      "postgresql://postgres:postgres@localhost:5432/postgres?schema=public",
+    connectionString: env.DATABASE_URL,
   });
   await client.connect();
 
