@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -28,6 +29,14 @@ export const moderations = pgTable("moderations", {
   ticket_id: integer("ticket_id"),
   moderated_by: varchar("moderated_by"),
 });
+
+export const moderations_relations = relations(moderations, ({ one }) => ({
+  users: one(users, { fields: [moderations.user_id], references: [users.id] }),
+  organizations: one(organizations, {
+    fields: [moderations.organization_id],
+    references: [organizations.id],
+  }),
+}));
 
 export const oidc_clients = pgTable("oidc_clients", {
   id: serial("id").primaryKey().notNull(),
