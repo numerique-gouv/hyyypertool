@@ -1,4 +1,16 @@
-import { JSXNode, type Child, type FC } from "hono/jsx";
+//
+// Inspired by https://github.com/andrey-skl/react-slotify
+//
+
+import {
+  cloneElement,
+  isValidElement,
+  type Child,
+  type FC,
+  type JSXNode,
+} from "hono/jsx";
+
+//
 
 interface RendererProps {
   childs: Child;
@@ -24,7 +36,7 @@ type SlotType<P> = {
 };
 
 export function createSlot<P extends {}>(): SlotType<P> {
-  const Slot: SlotType<P> = (({ children, showChildren, restProps }) => {
+  const Slot = (({ children, showChildren, restProps }) => {
     if (!showChildren) {
       return null;
     }
@@ -40,16 +52,22 @@ export function createSlot<P extends {}>(): SlotType<P> {
     }
 
     const slotted = childs.find((child) => {
-      return child instanceof JSXNode && child.tag === Slot;
+      return isValidElement(child) && child.tag === Slot;
     });
 
-    if (!slotted || !(slotted instanceof JSXNode)) {
+    if (!slotted || !isValidElement(slotted)) {
       return <>{children}</>;
     }
 
-    // TODO(dougladuteil): this is a hack to make sure typescript is happy
-    // This is not working as expected, but it's not a big deal for now
-    return <>{new JSXNode(slotted.tag, restProps, children as Child[])}</>;
+    return (
+      <>
+        {cloneElement(
+          slotted,
+          { showChildren: true, restProps },
+          children as Child[],
+        )}
+      </>
+    );
   };
 
   Slot.Renderer = Renderer;
