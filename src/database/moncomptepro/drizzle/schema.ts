@@ -1,6 +1,6 @@
 //
 
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -87,10 +87,10 @@ export const organizations = pgTable(
       .array()
       .notNull(),
     created_at: timestamp("created_at", { withTimezone: false })
-      .default(sql`'1970-01-01 00:00:00'::timestamp`)
+      .default(new Date(0))
       .notNull(),
     updated_at: timestamp("updated_at", { withTimezone: false })
-      .default(sql`'1970-01-01 00:00:00'::timestamp`)
+      .default(new Date(0))
       .notNull(),
     cached_libelle: varchar("cached_libelle"),
     cached_nom_complet: varchar("cached_nom_complet"),
@@ -221,10 +221,10 @@ export const users_organizations = pgTable(
       .references(() => organizations.id, { onUpdate: "cascade" }),
     is_external: boolean("is_external").default(false).notNull(),
     created_at: timestamp("created_at", { withTimezone: false })
-      .default(sql`'1970-01-01 00:00:00'::timestamp`)
+      .default(new Date(0))
       .notNull(),
     updated_at: timestamp("updated_at", { withTimezone: true })
-      .default(sql`'1970-01-01 00:00:00'::timestamp`)
+      .default(new Date(0))
       .notNull(),
     verification_type: varchar("verification_type"),
     authentication_by_peers_type: varchar("authentication_by_peers_type"),
