@@ -1,4 +1,6 @@
-import { relations } from "drizzle-orm";
+//
+
+import { relations, sql } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -9,6 +11,8 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
+
+//
 
 export const moderations = pgTable("moderations", {
   id: serial("id").primaryKey().notNull(),
@@ -82,11 +86,11 @@ export const organizations = pgTable(
       .default("{}")
       .array()
       .notNull(),
-    created_at: timestamp("created_at", { withTimezone: true })
-      .default(new Date(0))
+    created_at: timestamp("created_at", { withTimezone: false })
+      .default(sql`'1970-01-01 00:00:00'::timestamp`)
       .notNull(),
-    updated_at: timestamp("updated_at", { withTimezone: true })
-      .default(new Date(0))
+    updated_at: timestamp("updated_at", { withTimezone: false })
+      .default(sql`'1970-01-01 00:00:00'::timestamp`)
       .notNull(),
     cached_libelle: varchar("cached_libelle"),
     cached_nom_complet: varchar("cached_nom_complet"),
@@ -120,6 +124,10 @@ export const organizations = pgTable(
     cached_code_officiel_geographique: varchar(
       "cached_code_officiel_geographique",
     ),
+    trackdechets_email_domains: varchar("trackdechets_email_domains")
+      .default("{}")
+      .array()
+      .notNull(),
   },
   (table) => {
     return {
@@ -212,11 +220,11 @@ export const users_organizations = pgTable(
       .notNull()
       .references(() => organizations.id, { onUpdate: "cascade" }),
     is_external: boolean("is_external").default(false).notNull(),
-    created_at: timestamp("created_at", { withTimezone: true })
-      .default(new Date(0))
+    created_at: timestamp("created_at", { withTimezone: false })
+      .default(sql`'1970-01-01 00:00:00'::timestamp`)
       .notNull(),
     updated_at: timestamp("updated_at", { withTimezone: true })
-      .default(new Date(0))
+      .default(sql`'1970-01-01 00:00:00'::timestamp`)
       .notNull(),
     verification_type: varchar("verification_type"),
     authentication_by_peers_type: varchar("authentication_by_peers_type"),

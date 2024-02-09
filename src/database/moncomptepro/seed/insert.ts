@@ -128,6 +128,7 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
       created_at: new Date("2022-08-08T15:43:15.501Z"),
       external_authorized_email_domains: [],
       siret: "51935970700022",
+      trackdechets_email_domains: [],
       updated_at: new Date("2022-08-08T15:43:15.501Z"),
       organization_info_fetched_at: new Date("2022-08-08T15:43:15.501Z"),
       verified_email_domains: [],
@@ -152,6 +153,7 @@ async function insert_dinum(db: MonComptePro_PgDatabase) {
       created_at: new Date("2018-07-13 15:35:15"),
       external_authorized_email_domains: ["prestataire.modernisation.gouv.fr"],
       siret: "13002526500013",
+      trackdechets_email_domains: [],
       updated_at: new Date("2023-06-22 14:34:34"),
       verified_email_domains: ["beta.gouv.fr", "modernisation.gouv.fr"],
     })

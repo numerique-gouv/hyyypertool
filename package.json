@@ -64,7 +64,7 @@
     "@types/lodash.sortby": "4.7.9",
     "bun-types": "1.0.26",
     "drizzle-kit": "0.20.14",
-    "moncomptepro": "betagouv/moncomptepro#88151a0d2d09094d9b9c55de324b2ab74a96c796",
+    "moncomptepro": "betagouv/moncomptepro#0ecf952c0d1cf980604e00fda799249d5a9b372d",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.11",
     "release-it": "17.0.3",

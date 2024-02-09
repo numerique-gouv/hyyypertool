@@ -361,6 +361,13 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "trackdechets_email_domains": {
+          "name": "trackdechets_email_domains",
+          "type": "varchar[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'"
         }
       },
       "indexes": {

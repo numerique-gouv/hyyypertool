@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS "organizations" (
 	"cached_libelle_categorie_juridique" varchar,
 	"organization_info_fetched_at" timestamp with time zone,
 	"verified_email_domains" varchar[] DEFAULT '{}' NOT NULL,
-	"cached_code_officiel_geographique" varchar
+	"cached_code_officiel_geographique" varchar,
+	"trackdechets_email_domains" varchar[] DEFAULT '{}' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
@@ -158,4 +159,3 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
-
