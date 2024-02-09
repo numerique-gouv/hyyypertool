@@ -8,16 +8,16 @@
     "build": "bun x npm-run-all --serial build:**",
     "build:api": "bun x tsc --project src/api/tsconfig.json > /dev/null || bun x tsc --project src/api/tsconfig.json",
     "build:tailwind": "bun x tailwindcss -i ./src/assets/tailwind.css -o ./public/assets/tailwind.css",
+    "db:moncomptepro:migrator": "bun src/database/moncomptepro/migration.ts",
     "dev": "bun --hot src/bootstrap.ts",
     "dev:inspect-brk": "bun --hot --inspect-brk src/bootstrap.ts",
     "dev:tailwind": "bun run build:tailwind --watch",
+    "e2e": "cd e2e && bun run test",
     "format": "bun x prettier --check .",
     "format:fix": "bun x prettier --write .",
     "start": "bun src/bootstrap.ts",
     "studio:moncomptepro": "bun x drizzle-kit studio --config src/database/moncomptepro/drizzle.config.ts",
-    "db:moncomptepro:migrator": "bun src/database/moncomptepro/migration.ts",
     "test": "bun x npm-run-all --serial test:**",
-    "e2e": "cd e2e && bun run test",
     "test:type-check": "bun x tsc --noEmit"
   },
   "prettier": {
