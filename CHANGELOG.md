@@ -1,5 +1,22 @@
 
 
+## [2024.2.2](https://github.com/betagouv/hyyypertool/compare/2024.2.1...2024.2.2) (2024-02-09)
+
+
+### Bug Fixes
+
+* **organization:** use common pagination schema ([#41](https://github.com/betagouv/hyyypertool/issues/41)) ([5799d4d](https://github.com/betagouv/hyyypertool/commit/5799d4d68b1d65feedb5c5b1f5d5d9acd56233ae))
+
+
+### Features
+
+* **moderation:** add refus prestataires response ([#50](https://github.com/betagouv/hyyypertool/issues/50)) ([ade5c49](https://github.com/betagouv/hyyypertool/commit/ade5c498a710330004b4d283c3a55af4a460b950))
+
+
+### Reverts
+
+* **deps:** hono dependency update ([9ea5638](https://github.com/betagouv/hyyypertool/commit/9ea5638534b11d5080b442b58c8a3b7468ffe538))
+
 ## [2024.2.1](https://github.com/betagouv/hyyypertool/compare/2024.2.0...2024.2.1) (2024-02-01)
 
 
