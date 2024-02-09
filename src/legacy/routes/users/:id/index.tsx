@@ -6,7 +6,8 @@ import type { Csp_Context } from ":common/csp_headers";
 import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema } from ":common/schema";
 import { hyyyyyypertool_session } from ":common/session";
-import { moncomptepro_pg, schema, type User } from ":database:moncomptepro";
+import { schema, type User } from ":database:moncomptepro";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
@@ -20,13 +21,20 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-export default new Hono<UserInfo_Context & Csp_Context>()
+export default new Hono<
+  moncomptepro_pg_Context & UserInfo_Context & Csp_Context
+>()
   .use("*", jsxRenderer(Main_Layout, { docType: true }))
   .use("*", hyyyyyypertool_session)
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async ({ req, render, notFound, var: { nonce, userinfo } }) => {
+    async function GET({
+      req,
+      render,
+      notFound,
+      var: { nonce, userinfo, moncomptepro_pg },
+    }) {
       const { id } = req.valid("param");
 
       const user = await moncomptepro_pg.query.users.findFirst({
@@ -83,17 +91,21 @@ export default new Hono<UserInfo_Context & Csp_Context>()
       );
     },
   )
-  .delete("", zValidator("param", Entity_Schema), async ({ text, req }) => {
-    const { id } = req.valid("param");
-    await moncomptepro_pg.delete(schema.users).where(eq(schema.users.id, id));
-    return text("OK", 200, {
-      "HX-Location": api_ref("/legacy/users", {}),
-    } as Htmx_Header);
-  })
+  .delete(
+    "/",
+    zValidator("param", Entity_Schema),
+    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
+      const { id } = req.valid("param");
+      await moncomptepro_pg.delete(schema.users).where(eq(schema.users.id, id));
+      return text("OK", 200, {
+        "HX-Location": api_ref("/legacy/users", {}),
+      } as Htmx_Header);
+    },
+  )
   .patch(
     "/reset",
     zValidator("param", Entity_Schema),
-    async ({ text, req }) => {
+    async function PATCH_RESET({ text, req, var: { moncomptepro_pg } }) {
       const { id } = req.valid("param");
       await moncomptepro_pg
         .update(schema.users)

@@ -21,14 +21,18 @@ Then("je vois la ligne de table {string}", function (text: string) {
 Then("sur la même ligne je vois {string}", function (text: string) {
   cy.get("@row").contains(text);
 });
-
 //
 
 When("je clique sur {string}", (text: string) => {
   cy.contains(text).click();
 });
+
 When("je clique sur le bouton {string}", (text: string) => {
   cy.contains("button", text).click();
+});
+
+When("sur la même ligne je clique sur {string}", function (text: string) {
+  cy.get("@row").contains(text).click();
 });
 
 When("je suis redirigé sur {string}", (path: string) => {

@@ -9,9 +9,6 @@ export function Fiche({ organization }: { organization: Organization_DTO }) {
   return (
     <ul>
       <li>
-        id : <b>{organization.id}</b>
-      </li>
-      <li>
         Creation de l'organisation :{" "}
         <b>
           <LocalTime date={organization.created_at} />
@@ -25,6 +22,12 @@ export function Fiche({ organization }: { organization: Organization_DTO }) {
       </li>
       <li>
         Dénomination : <b>{organization.cached_libelle}</b>
+      </li>
+      <li>
+        Nom complet : <b>{organization.cached_nom_complet}</b>
+      </li>
+      <li>
+        NAF/APE : <b>{organization.cached_activite_principale}</b>
       </li>
       <li>
         Tranche d'effectif :{" "}
@@ -47,6 +50,9 @@ export function Fiche({ organization }: { organization: Organization_DTO }) {
           liste état administratif INSEE
         </a>
         )
+      </li>
+      <li>
+        id : <b>{organization.id}</b>
       </li>
       <li>
         siret : <b>{organization.siret}</b> (
