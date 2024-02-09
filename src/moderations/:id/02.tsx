@@ -39,7 +39,10 @@ export async function _02() {
       </div>
       <hr />
       <h2>
-        🤗 <span>{moderation.users.given_name}</span>{" "}
+        🤗{" "}
+        <span>
+          {moderation.users.given_name} {moderation.users.family_name}
+        </span>{" "}
         <span class="text-gray-600">
           {match(moderation.type as MCP_Moderation["type"])
             .with("ask_for_sponsorship", () => "demande un sponsorship")

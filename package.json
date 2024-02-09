@@ -17,6 +17,7 @@
     "studio:moncomptepro": "bun x drizzle-kit studio --config src/database/moncomptepro/drizzle.config.ts",
     "db:moncomptepro:migrator": "bun src/database/moncomptepro/migration.ts",
     "test": "bun x npm-run-all --serial test:**",
+    "e2e": "cd e2e && bun run test",
     "test:type-check": "bun x tsc --noEmit"
   },
   "prettier": {

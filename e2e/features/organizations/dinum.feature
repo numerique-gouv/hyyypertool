@@ -11,15 +11,17 @@ Fonctionnalité: Page organisation
   Scénario:
     Quand je clique sur "Organisations"
     Alors je suis redirigé sur "/legacy/organizations"
-    Et je vois "Liste des organisations"
-    Et je vois "DINUM"
-    Et je clique sur "➡️"
+    * je vois "Liste des organisations"
+    * je vois la ligne de table "13002526500013"
+    * sur la même ligne je vois "DINUM"
 
   # Scénario: Fiche de DINUM
-    Alors je vois "A propos de Direction interministerielle du numerique (DINUM)"
+    Quand sur la même ligne je clique sur "➡️"
+    Alors je vois "A propos de DINUM"
     * je vois "Creation de l'organisation : 13/07/2018 15:35:15"
     * je vois "Dernière mise à jour : 22/06/2023 14:34:34"
-    * je vois "Dénomination : Direction interministerielle du numerique (DINUM)"
+    * je vois "Dénomination : DINUM"
+    * je vois "Nom complet : Direction interministerielle du numerique (DINUM)"
     * je vois "Tranche d'effectif : 100 à 199 salariés, en 2021 (code : 22) (liste code effectif INSEE)"
     * je vois "État administratif : A (liste état administratif INSEE)"
     * je vois "siret : 13002526500013 (Voir la fiche annuaire entreprise de cette organisation)"
