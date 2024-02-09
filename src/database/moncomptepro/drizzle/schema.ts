@@ -117,7 +117,6 @@ export const organizations = pgTable(
     ),
     organization_info_fetched_at: timestamp("organization_info_fetched_at", {
       withTimezone: true,
-      mode: "string",
     }),
     verified_email_domains: varchar("verified_email_domains")
       .default("{}")
@@ -149,27 +148,22 @@ export const users = pgTable(
     reset_password_token: varchar("reset_password_token"),
     reset_password_sent_at: timestamp("reset_password_sent_at", {
       withTimezone: true,
-      mode: "string",
     }),
     sign_in_count: integer("sign_in_count").default(0).notNull(),
     last_sign_in_at: timestamp("last_sign_in_at", {
       withTimezone: true,
-      mode: "string",
     }),
     created_at: timestamp("created_at", {
       withTimezone: true,
-      mode: "string",
     }).notNull(),
     updated_at: timestamp("updated_at", {
       withTimezone: true,
-      mode: "string",
     }).notNull(),
     legacy_user: boolean("legacy_user").default(false).notNull(),
     email_verified: boolean("email_verified").default(false).notNull(),
     verify_email_token: varchar("verify_email_token"),
     verify_email_sent_at: timestamp("verify_email_sent_at", {
       withTimezone: true,
-      mode: "string",
     }),
     given_name: varchar("given_name"),
     family_name: varchar("family_name"),
@@ -178,11 +172,9 @@ export const users = pgTable(
     magic_link_token: varchar("magic_link_token"),
     magic_link_sent_at: timestamp("magic_link_sent_at", {
       withTimezone: true,
-      mode: "string",
     }),
     email_verified_at: timestamp("email_verified_at", {
       withTimezone: true,
-      mode: "string",
     }),
     current_challenge: varchar("current_challenge"),
   },
