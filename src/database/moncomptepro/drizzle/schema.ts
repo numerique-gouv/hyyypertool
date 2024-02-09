@@ -28,7 +28,6 @@ export const moderations = pgTable("moderations", {
     .notNull(),
   moderated_at: timestamp("moderated_at", {
     withTimezone: true,
-    mode: "string",
   }),
   comment: varchar("comment"),
   ticket_id: integer("ticket_id"),
@@ -200,11 +199,9 @@ export const users_oidc_clients = pgTable("users_oidc_clients", {
     }),
   created_at: timestamp("created_at", {
     withTimezone: true,
-    mode: "string",
   }).notNull(),
   updated_at: timestamp("updated_at", {
     withTimezone: true,
-    mode: "string",
   }).notNull(),
   id: serial("id").primaryKey().notNull(),
   organization_id: integer("organization_id").references(
