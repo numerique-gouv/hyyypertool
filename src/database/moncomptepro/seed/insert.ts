@@ -12,11 +12,15 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     console.log(`🌱 INSERT user Raphael Dubigny`);
     const jeanbon = await insert_jeanbon(db);
     console.log(`🌱 INSERT user Jean Bon`);
+    const pierrebon = await insert_pierrebon(db);
+    console.log(`🌱 INSERT user Jean Bon`);
 
     //
 
     const dinum = await insert_dinum(db);
     console.log(`🌱 INSERT organization DINUM`);
+    const aldp = await insert_aldp(db);
+    console.log(`🌱 INSERT organization ALDP`);
     const abracadabra = await insert_abracadabra(db);
     console.log(`🌱 INSERT organization Abracadabra`);
 
@@ -48,6 +52,15 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     });
     console.log(
       `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} Jean wants to join Abracadabra`,
+    );
+
+    const pierrebon_aldp = await insert_moderation(db, {
+      organization_id: aldp.id,
+      type: "big_organization_join" as MCP_Moderation["type"],
+      user_id: pierrebon.id,
+    });
+    console.log(
+      `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} Pierre wants to join Aldpasso`,
     );
   } catch (err) {
     console.error("Something went wrong...");
@@ -85,6 +98,25 @@ async function insert_jeanbon(db: MonComptePro_PgDatabase) {
       phone_number: "0123456789",
       updated_at: new Date("2023-06-22 14:34:34"),
       verify_email_sent_at: new Date("2023-06-22 14:34:34"),
+    })
+    .returning();
+
+  return insert.at(0)!;
+}
+
+async function insert_pierrebon(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.users)
+    .values({
+      created_at: new Date("2022-02-03T11:23:48.375Z"),
+      email: "pierrebon@aldp-asso.fr",
+      family_name: "Bon",
+      given_name: "Pierre",
+      job: "Médiateur sociale et interculturelle",
+      email_verified: true,
+      phone_number: "0123456789",
+      updated_at: new Date("2022-02-03T11:25:06.312Z"),
+      verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z"),
     })
     .returning();
 
@@ -131,6 +163,31 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
       trackdechets_email_domains: [],
       updated_at: new Date("2022-08-08T15:43:15.501Z"),
       organization_info_fetched_at: new Date("2022-08-08T15:43:15.501Z"),
+      verified_email_domains: [],
+    })
+    .returning();
+  return insert.at(0)!;
+}
+
+async function insert_aldp(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.organizations)
+    .values({
+      authorized_email_domains: ["aldp-asso.fr"],
+      cached_activite_principale:
+        "94.99Z - Autres organisations fonctionnant par adhésion volontaire",
+      cached_categorie_juridique: "Association déclarée",
+      cached_etat_administratif: "A",
+      cached_libelle_tranche_effectif: "50 à 99 salariés, en 2019",
+      cached_libelle: "ALDP",
+      cached_nom_complet:
+        "Association des loisirs de la diversite et du partage (ALDP)",
+      cached_tranche_effectifs: "21",
+      created_at: new Date("2022-02-03T12:27:30.000Z"),
+      external_authorized_email_domains: [],
+      siret: "81797266400038",
+      trackdechets_email_domains: [],
+      updated_at: new Date("2022-02-03T12:27:30.000Z"),
       verified_email_domains: [],
     })
     .returning();

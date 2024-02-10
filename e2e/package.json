@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "cd .. && bun run build && bun run db:moncomptepro:migrator",
-    "open": "cypress open",
+    "open": "cypress open -b electron --e2e",
     "start": "cd .. && bun start",
     "test": "cypress run"
   },
