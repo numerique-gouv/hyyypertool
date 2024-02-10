@@ -45,16 +45,16 @@ jobs:
       - run: bun install --frozen-lockfile --production
         working-directory: "."
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          package_json_file: ./e2e/package.json
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v4
         with:
           cache: "pnpm"
           cache-dependency-path: e2e
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          package_json_file: ./e2e/package.json
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
