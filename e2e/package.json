@@ -6,7 +6,7 @@
     "build": "cd .. && bun run build && bun run db:moncomptepro:migrator",
     "open": "cypress open -b electron --e2e",
     "start": "cd .. && bun start",
-    "test": "cypress run"
+    "test": "cypress run -e filterSpecs=true"
   },
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "20.0.1",
