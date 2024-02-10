@@ -75,8 +75,11 @@ jobs:
           TZ: "Europe/Paris"
           ZAMMAD_TOKEN: ""
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
+          DEPLOY_ENV: "production"
+          NODE_ENV: "production"
         with:
           build: bun run build
+          spec: features/${{ matrix.e2e_test }}
           start: bun run start
           working-directory: e2e
 
@@ -84,12 +87,20 @@ jobs:
         if: failure()
         with:
           compression-level: 9
-          name: cypress-screenshots
+          name: cypress-${{ matrix.e2e_test }}-screenshots
           path: e2e/cypress/screenshots
 
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           compression-level: 9
-          name: cypress-videos
+          name: cypress-${{ matrix.e2e_test }}-videos
           path: e2e/cypress/videos
+
+    strategy:
+      matrix:
+        e2e_test:
+          - auth
+          - moderations
+          - organizations
+          - users

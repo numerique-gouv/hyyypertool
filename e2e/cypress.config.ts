@@ -6,6 +6,7 @@ import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { defineConfig } from "cypress";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { env } from "node:process";
+import { fileURLToPath } from "node:url";
 import pg from "pg";
 import * as schema from "../src/database/moncomptepro/drizzle/schema.js";
 import { delete_database } from "../src/database/moncomptepro/seed/delete.js";
@@ -16,8 +17,13 @@ import { insert_database } from "../src/database/moncomptepro/seed/insert.js";
 export default defineConfig({
   e2e: {
     baseUrl: "http://localhost:3000",
-    specPattern: "**/*.feature",
+    reporter: fileURLToPath(
+      await import.meta.resolve(
+        "@badeball/cypress-cucumber-preprocessor/pretty-reporter",
+      ),
+    ),
     setupNodeEvents,
+    specPattern: "**/*.feature",
     supportFile: false,
   },
   video: true,

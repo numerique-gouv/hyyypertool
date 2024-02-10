@@ -21,6 +21,7 @@ Then("je vois la ligne de table {string}", function (text: string) {
 Then("sur la même ligne je vois {string}", function (text: string) {
   cy.get("@row").contains(text);
 });
+
 //
 
 When("je clique sur {string}", (text: string) => {

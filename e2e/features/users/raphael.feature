@@ -12,10 +12,10 @@ Fonctionnalité: Page utilisateur
   # Scénario: Fiche de Raphael
     Quand je clique sur "Utilisateurs"
     Alors je suis redirigé sur "/legacy/users"
-    Et je vois "Liste des utilisateurs"
-    Et je vois "Raphael"
+    * je vois "Liste des utilisateurs"
+    * je vois la ligne de table "Raphael"
 
-    Quand je clique sur "➡️"
+    Quand sur la même ligne je clique sur "➡️"
     Alors je vois "A propos de Raphael"
     * je vois "email : rdubigny@beta.gouv.fr"
     * je vois "prénom : Raphael"
