@@ -79,7 +79,6 @@ jobs:
           NODE_ENV: "production"
         with:
           build: bun run build
-          install: false
           spec: features/${{ matrix.e2e_test }}
           start: bun run start
           working-directory: e2e
