@@ -42,7 +42,7 @@ jobs:
       - name: 🌭 Install bun
         uses: oven-sh/setup-bun@v1
 
-      - run: bun install --frozen-lockfile --production
+      - run: bun install --frozen-lockfile
         working-directory: "."
 
       - name: Install pnpm
