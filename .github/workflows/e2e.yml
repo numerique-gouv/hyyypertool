@@ -87,14 +87,14 @@ jobs:
         if: failure()
         with:
           compression-level: 9
-          name: cypress-screenshots
+          name: cypress-${{ matrix.e2e_test }}-screenshots
           path: e2e/cypress/screenshots
 
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           compression-level: 9
-          name: cypress-videos
+          name: cypress-${{ matrix.e2e_test }}-videos
           path: e2e/cypress/videos
 
     strategy:

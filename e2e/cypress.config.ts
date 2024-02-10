@@ -26,9 +26,6 @@ export default defineConfig({
     specPattern: "**/*.feature",
     supportFile: false,
   },
-  retries: {
-    runMode: 2,
-  },
   video: true,
 });
 
