@@ -1,28 +1,36 @@
 //
 
 import type { MCP_Moderation } from ":moncomptepro";
+import { env } from "node:process";
 import * as schema from "../drizzle/schema";
 import type { MonComptePro_PgDatabase } from "../moncomptepro_pg";
+
+//
+
+const logger =
+  env.DEPLOY_ENV === "preview"
+    ? console
+    : { log(_message?: any, ..._optionalParams: any[]) {} };
 
 //
 
 export async function insert_database(db: MonComptePro_PgDatabase) {
   try {
     const raphael = await insert_raphael(db);
-    console.log(`🌱 INSERT user Raphael Dubigny`);
+    logger.log(`🌱 INSERT user Raphael Dubigny`);
     const jeanbon = await insert_jeanbon(db);
-    console.log(`🌱 INSERT user Jean Bon`);
+    logger.log(`🌱 INSERT user Jean Bon`);
     const pierrebon = await insert_pierrebon(db);
-    console.log(`🌱 INSERT user Jean Bon`);
+    logger.log(`🌱 INSERT user Jean Bon`);
 
     //
 
     const dinum = await insert_dinum(db);
-    console.log(`🌱 INSERT organization DINUM`);
+    logger.log(`🌱 INSERT organization DINUM`);
     const aldp = await insert_aldp(db);
-    console.log(`🌱 INSERT organization ALDP`);
+    logger.log(`🌱 INSERT organization ALDP`);
     const abracadabra = await insert_abracadabra(db);
-    console.log(`🌱 INSERT organization Abracadabra`);
+    logger.log(`🌱 INSERT organization Abracadabra`);
 
     //
 
@@ -30,7 +38,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: dinum.id,
       user_id: raphael.id,
     });
-    console.log(
+    logger.log(
       `🌱 ${raphael_dinum.command} ${raphael_dinum.rowCount} Raphael join DINUM`,
     );
 
@@ -41,7 +49,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jeanbon.id,
     });
-    console.log(
+    logger.log(
       `🌱 ${jeanbon_dinum.command} ${jeanbon_dinum.rowCount} Jean wants to join DINUM`,
     );
 
@@ -50,7 +58,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jeanbon.id,
     });
-    console.log(
+    logger.log(
       `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} Jean wants to join Abracadabra`,
     );
 
@@ -59,7 +67,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "big_organization_join" as MCP_Moderation["type"],
       user_id: pierrebon.id,
     });
-    console.log(
+    logger.log(
       `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} Pierre wants to join Aldpasso`,
     );
   } catch (err) {
