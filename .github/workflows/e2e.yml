@@ -77,7 +77,6 @@ jobs:
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
           DEPLOY_ENV: "production"
         with:
-          install: false
           build: bun run build
           start: bun run start
           working-directory: e2e
