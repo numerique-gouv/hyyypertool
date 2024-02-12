@@ -7,9 +7,11 @@ import { z } from "zod";
 //
 
 const CLOSED_STATE_ID = "4";
-const ARTICLE_TYPE = z.nativeEnum({ EMAIL: 1 } as const);
+export const ARTICLE_TYPE = z.nativeEnum({ EMAIL: 1 } as const);
 type Article_Type = z.infer<typeof ARTICLE_TYPE>;
-const GROUP_MONCOMPTEPRO = "MonComptePro";
+export const PRIORITY_TYPE = z.nativeEnum({ NORMAL: 1 } as const);
+type Priority_Type = z.infer<typeof PRIORITY_TYPE>;
+export const GROUP_MONCOMPTEPRO = "MonComptePro";
 export const GROUP_MONCOMPTEPRO_SENDER_ID = 1;
 const NORMAL_PRIORITY_ID = "1";
 
@@ -47,7 +49,7 @@ export async function get_zammad_mail({ ticket_id }: { ticket_id: number }) {
     },
   });
 
-  return response.json() as Promise<Zammad_Article[]>;
+  return response.json() as Promise<Article[]>;
 }
 
 export async function get_zammad_attachment({
@@ -68,37 +70,25 @@ export async function get_zammad_attachment({
   return response;
 }
 
-export async function send_zammad_mail({
-  body,
-  owner_id,
-  sender_id,
-  state,
-  subject,
-  ticket_id,
-  to,
-}: {
-  body: string;
-  owner_id: number | undefined;
-  sender_id: number;
-  state: UpdateTicket["state"];
-  subject: string;
-  ticket_id: number;
-  to: string;
-}) {
+export async function send_zammad_new_email(body: NewTicket) {
   const response = await fetch_zammad_api({
-    body: {
-      state,
-      owner_id,
-      article: {
-        body,
-        content_type: "text/html",
-        sender_id,
-        subject,
-        subtype: "reply",
-        to,
-        type_id: ARTICLE_TYPE.enum.EMAIL,
-      },
-    },
+    body,
+    endpoint: `/api/v1/tickets`,
+    method: "POST",
+    searchParams: {},
+  });
+
+  const ticket: Ticket = await response.json();
+
+  return ticket;
+}
+
+export async function send_zammad_response(
+  ticket_id: number,
+  body: UpdateTicket,
+) {
+  const response = await fetch_zammad_api({
+    body,
     endpoint: `/api/v1/tickets/${ticket_id}`,
     method: "PUT",
     searchParams: {},
@@ -139,35 +129,42 @@ export interface User {
   verified: boolean;
 }
 
-interface Ticket {
-  id: number;
-  title: string;
+export interface Ticket {
   article_ids: number[];
-}
-interface UpdateTicket {
-  state: "closed" | "open";
+  customer_id: number | `guess:${string}`;
+  group: string;
+  id: number;
   owner_id: number | undefined;
-  article: {
-    body: string;
-    content_type: "text/html";
-    from?: string;
-    internal?: boolean;
-    subject: string;
-    subtype: "reply";
-    to: string;
-    sender_id: number;
-    type_id: Article_Type;
-  };
+  priority_id: Priority_Type;
+  state: "closed" | "open";
+  title: string;
 }
 
-export interface Zammad_Article {
+export interface NewArticle
+  extends Omit<Article, "id" | "created_at" | "created_by"> {}
+
+export interface NewTicket extends Omit<Ticket, "article_ids" | "id"> {
+  article: NewArticle;
+}
+
+export interface UpdateTicket
+  extends Omit<Partial<Ticket>, "article_ids" | "customer_id" | "id"> {
+  article: NewArticle;
+}
+
+export interface Article {
   body: string;
+  content_type: "text/html";
   created_at: string;
   created_by: string;
+  from?: "MonComptePro" | string;
   id: number;
-  from: string;
+  internal?: boolean;
   sender_id: number;
   subject: string;
+  subtype?: "reply";
+  to: string;
+  type_id: Article_Type;
 }
 
 interface Zammad_Pagination {
@@ -190,6 +187,12 @@ type Options =
       endpoint: `/api/v1/tickets/${number}`;
       method: "GET";
       searchParams: { all: "true" | "false" };
+    }
+  | {
+      endpoint: `/api/v1/tickets`;
+      method: "POST";
+      body: NewTicket;
+      searchParams: {};
     }
   | {
       endpoint: `/api/v1/tickets/${number}`;
