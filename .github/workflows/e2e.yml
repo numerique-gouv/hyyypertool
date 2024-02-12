@@ -56,6 +56,9 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: e2e
 
+      - name: Cypress install
+        run: pnpm cypress install
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
