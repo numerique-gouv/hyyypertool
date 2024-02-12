@@ -386,6 +386,7 @@ function About_Organisation({
           <span>{moderation.organizations.cached_tranche_effectifs}</span>) (
           <a
             href="https://www.sirene.fr/sirene/public/variable/tefen"
+            rel="noopener noreferrer"
             target="_blank"
           >
             liste code effectif INSEE
@@ -397,6 +398,7 @@ function About_Organisation({
           <b>{moderation.organizations.cached_etat_administratif}</b> (
           <a
             href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
+            rel="noopener noreferrer"
             target="_blank"
           >
             liste état administratif INSEE
@@ -482,7 +484,9 @@ export async function List_Leaders({ siret }: { siret: string }) {
   const doc = sortedDocs.findLast(({ sous_type: { code } }) => code === "LDC");
 
   return doc ? (
-    <a href={doc.url}>Liste des dirigeants</a>
+    <a href={doc.url} rel="noopener noreferrer" target="_blank">
+      Liste des dirigeants
+    </a>
   ) : (
     <>Pas de liste des dirigeants</>
   );

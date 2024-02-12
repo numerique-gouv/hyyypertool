@@ -35,6 +35,7 @@ export function Fiche({ organization }: { organization: Organization_DTO }) {
         {organization.cached_tranche_effectifs}) (
         <a
           href="https://www.sirene.fr/sirene/public/variable/tefen"
+          rel="noopener noreferrer"
           target="_blank"
         >
           liste code effectif INSEE
@@ -45,6 +46,7 @@ export function Fiche({ organization }: { organization: Organization_DTO }) {
         État administratif : <b>{organization.cached_etat_administratif}</b> (
         <a
           href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
+          rel="noopener noreferrer"
           target="_blank"
         >
           liste état administratif INSEE
@@ -58,6 +60,7 @@ export function Fiche({ organization }: { organization: Organization_DTO }) {
         siret : <b>{organization.siret}</b> (
         <a
           href={`https://annuaire-entreprises.data.gouv.fr/entreprise/${organization.siret}`}
+          rel="noopener noreferrer"
           target="_blank"
         >
           Voir la fiche annuaire entreprise de cette organisation
