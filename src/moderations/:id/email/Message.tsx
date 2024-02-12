@@ -6,7 +6,7 @@ import env from ":common/env";
 import { type Moderation } from ":database:moncomptepro";
 import {
   GROUP_MONCOMPTEPRO_SENDER_ID,
-  type Zammad_Article,
+  type Article,
 } from ":legacy/services/zammad_api";
 import { quote } from ":ui/quote";
 import { tv } from "tailwind-variants";
@@ -17,7 +17,7 @@ export function Message({
   article,
   moderation,
 }: {
-  article: Zammad_Article;
+  article: Article;
   moderation: Moderation;
 }) {
   const is_family = article.sender_id === GROUP_MONCOMPTEPRO_SENDER_ID;

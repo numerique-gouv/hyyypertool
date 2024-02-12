@@ -137,7 +137,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
           type="text"
           id={EMAIL_SUBJECT_INPUT_ID}
           name={EMAIL_SUBJECT_INPUT_ID}
-          value={`[MonComptePro] Demande pour rejoindre ${moderation.organizations.cached_libelle}»`}
+          value={`[MonComptePro] Demande pour rejoindre « ${moderation.organizations.cached_libelle} »`}
         />
       </div>
 
@@ -171,45 +171,32 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
           value={moderation.users.email}
         />
       </div>
-      {moderation.ticket_id ? (
-        <form
-          class="text-right"
-          hx-put={
-            app_hc.legacy.moderations[":id"].email.$url({
-              param: { id: moderation.id.toString() },
-            }).pathname
-          }
-          hx-include={hx_include([
-            EMAIL_SUBJECT_INPUT_ID,
-            RESPONSE_TEXTAREA_ID,
-          ])}
-          hx-swap="none"
-        >
-          <button
-            _={`
+      <form
+        class="text-right"
+        hx-put={
+          app_hc.legacy.moderations[":id"].email.$url({
+            param: { id: moderation.id.toString() },
+          }).pathname
+        }
+        hx-include={hx_include([EMAIL_SUBJECT_INPUT_ID, RESPONSE_TEXTAREA_ID])}
+        hx-swap="none"
+      >
+        <button
+          _={`
           on click
             wait for ${Htmx_Events.Enum["htmx:afterSwap"]} from body
             go to the top of .last-message smoothly
           `}
-            type="submit"
-            class={button()}
-          >
-            <span>Envoyer une réponse via Zammad</span>
-          </button>
-          <div></div>
-          <div>
-            <Loader htmx_indicator={true} />
-          </div>
-        </form>
-      ) : (
-        <div class="m-auto my-12 w-fit">
-          <a
-            href={`https://support.etalab.gouv.fr/#search/${moderation.users.email}`}
-          >
-            Trouver l'email correspondant dans Zammad
-          </a>
+          type="submit"
+          class={button()}
+        >
+          <span>Envoyer une réponse via Zammad</span>
+        </button>
+        <div></div>
+        <div>
+          <Loader htmx_indicator={true} />
         </div>
-      )}
+      </form>
 
       <hr />
     </div>
