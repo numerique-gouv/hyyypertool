@@ -41,6 +41,7 @@ jobs:
 
       - name: Create mocked services
         run: docker compose -f ./mocks/docker-compose.mocks.yaml up --build --detach
+        working-directory: "."
 
       - name: 🌭 Install bun
         uses: oven-sh/setup-bun@v1
