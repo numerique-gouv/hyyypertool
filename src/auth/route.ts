@@ -42,17 +42,11 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
       state,
     });
 
-    console.log(req.url, {
-      code_verifier,
-      nonce,
-      redirect_uri,
-      scope: env.AGENTCONNECT_OIDC_SCOPE,
-      state,
-    });
-
     return redirect(redirectUrl);
   })
-  .get(`/fake/login/callback`, ({ redirect, var: { session } }) => {
+  .get(`/fake/login/callback`, ({ notFound, redirect, var: { session } }) => {
+    if (env.NODE_ENV !== "development") return notFound();
+
     session.set("userinfo", {
       sub: "f52c691e7cc33e3116172d1115eee5e6016f0036095e9a514c86d741f364e88f",
       uid: "1",
@@ -92,20 +86,12 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
 
       const redirect_uri = get_redirect_uri(req.url);
 
-      console.log({
-        grant_type: "authorization_code",
-        code: params.code,
-        redirect_uri,
-        scope: env.AGENTCONNECT_OIDC_SCOPE,
-      });
-
       const tokenSet = await client.grant({
         grant_type: "authorization_code",
         code: params.code,
         redirect_uri,
         scope: env.AGENTCONNECT_OIDC_SCOPE,
       });
-      console.log({ tokenSet });
 
       const userinfo = await client.userinfo<AgentConnect_UserInfo>(
         tokenSet.access_token ?? "",

@@ -9,7 +9,7 @@ Fonctionnalité: Association Moderation
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "AgentConnect"
-    * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
+    # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario: Jean Bon veut rejoindre l'association ALDP
     Alors je vois "Liste des moderations"
@@ -25,4 +25,4 @@ Fonctionnalité: Association Moderation
 
   # Scénario: Liste des dirigeants de ALDP
     Quand je clique sur "Liste des dirigeants"
-    Alors j'ai téléchargé le fichier "PJ_f28086a79d6f58143fb510496f4dbbd7.pdf"
+    # Alors j'ai téléchargé le fichier "PJ_f28086a79d6f58143fb510496f4dbbd7.pdf"

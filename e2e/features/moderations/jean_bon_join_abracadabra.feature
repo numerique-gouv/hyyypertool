@@ -6,7 +6,7 @@ Fonctionnalité: Moderation blockante à accepter
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "AgentConnect"
-    * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
+    # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario: Jean Bon veut rejoindre l'organisation « Abracadabra »
     Alors je vois "Liste des moderations"

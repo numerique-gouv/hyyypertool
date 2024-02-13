@@ -86,6 +86,7 @@ jobs:
           ZAMMAD_TOKEN: ""
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
           DEPLOY_ENV: "production"
+          NODE_ENV: "development"
         with:
           build: bun run build
           start: bun run start
