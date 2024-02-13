@@ -1,8 +1,0 @@
-version: "3"
-
-services:
-  agentconnect:
-    image: thiht/smocker
-    ports:
-      - "8888:8080" # http://localhost:8888
-      - "8181:8081" # http://localhost:8181 for the admin UI

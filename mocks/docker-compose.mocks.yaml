@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  agentconnect:
+    image: mockserver/mockserver:5.15.0
+    command: -proxyRemoteHost fca.integ01.dev-agentconnect.fr -proxyRemotePort 443
+    environment:
+      MOCKSERVER_LOG_LEVEL: DEBUG
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
+    volumes:
+      - ./mocks/agenconnect/mockserverInitialization.json:/config/mockserverInitialization.json
+    ports:
+      - 8888:1080

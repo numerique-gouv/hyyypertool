@@ -26,6 +26,7 @@ export function vip_list_guard<E extends Env = any>({
   ) {
     const userinfo = session.get("userinfo");
 
+    console.log(session.get("idtoken"));
     if (!userinfo) {
       return redirect("/");
     }
