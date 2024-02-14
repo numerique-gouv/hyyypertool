@@ -72,9 +72,10 @@ jobs:
       - name: Wait for mocked services to be ready
         run: |
           docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml ps
-          echo "Fake AgentConnect ready"
+          echo "Fake AgentConnect"
           curl -sSf -XGET ${{ env.MOCKED_AGENTCONNECT_URL }}/readyz
-          echo "Fake Api ready"
+          echo
+          echo "Fake https://entreprise.api.gouv.fr ready"
           curl -sSf -XGET ${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}/readyz
         working-directory: "."
 
