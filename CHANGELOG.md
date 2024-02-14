@@ -1,5 +1,12 @@
 
 
+## [2024.2.4](https://github.com/betagouv/hyyypertool/compare/2024.2.3...2024.2.4) (2024-02-14)
+
+
+### Bug Fixes
+
+* **moderation:** duplicate_warning not found ([#66](https://github.com/betagouv/hyyypertool/issues/66)) ([dd252d1](https://github.com/betagouv/hyyypertool/commit/dd252d182cbe9400a244a01aefab88a42a823010))
+
 ## [2024.2.3](https://github.com/betagouv/hyyypertool/compare/2024.2.2...2024.2.3) (2024-02-12)
 
 
