@@ -1,15 +1,16 @@
 //
 
 import {
-  moncomptepro_pg,
   schema,
   type Moderation,
   type Organization,
   type User,
   type Users_Organizations,
 } from ":database:moncomptepro";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { and, eq } from "drizzle-orm";
 import { createContext } from "hono/jsx";
+import { useRequestContext } from "hono/jsx-renderer";
 import { _02 } from "./02";
 import { _03 } from "./03";
 
@@ -26,6 +27,10 @@ export async function Moderation_Page({
 }: {
   active_id: number | undefined;
 }) {
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<moncomptepro_pg_Context>();
+
   if (!active_id) return <></>;
 
   const moderation = await moncomptepro_pg.query.moderations.findFirst({

@@ -52,6 +52,18 @@
   {
     "httpRequest": {
       "method": "GET",
+      "path": "/v4/djepva/api-association/associations/{siren_or_rna}",
+      "pathParameters": {
+        "siren_or_rna": ["\\d+"]
+      }
+    },
+    "httpResponse": {
+      "body": {}
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
       "path": "/proxy/files/{id}",
       "pathParameters": {
         "id": ["\\w+"]
