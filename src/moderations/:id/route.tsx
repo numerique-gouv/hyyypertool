@@ -44,25 +44,26 @@ export const moderation_router = new Hono<UserInfo_Context>()
   .patch(
     "/rejected",
     zValidator("param", Entity_Schema),
-    async ({ text, req }) => {
+    async ({ text, req, var: { userinfo } }) => {
       const { id } = req.valid("param");
 
       await moncomptepro_pg
         .update(schema.moderations)
         .set({
           moderated_at: new Date(),
+          moderated_by: userinfo.email,
         })
         .where(eq(schema.moderations.id, id));
 
       return text("OK", 200, {
-        "HX-Trigger": MODERATION_EVENTS.Enum.MODERATION_EMAIL_UPDATED,
+        "HX-Trigger": MODERATION_EVENTS.Enum.MODERATION_UPDATED,
       } as Htmx_Header);
     },
   )
   .patch(
     "/processed",
     zValidator("param", Entity_Schema),
-    async ({ text, req, notFound }) => {
+    async ({ text, req, notFound, var: { userinfo } }) => {
       const { id } = req.valid("param");
 
       const moderation = await moncomptepro_pg.query.moderations.findFirst({
@@ -78,11 +79,31 @@ export const moderation_router = new Hono<UserInfo_Context>()
         .update(schema.moderations)
         .set({
           moderated_at: new Date(),
+          moderated_by: userinfo.email,
         })
         .where(eq(schema.moderations.id, id));
 
       return text("OK", 200, {
-        "HX-Trigger": MODERATION_EVENTS.Enum.MODERATION_EMAIL_UPDATED,
+        "HX-Trigger": [
+          MODERATION_EVENTS.Enum.MODERATION_EMAIL_UPDATED,
+          MODERATION_EVENTS.Enum.MODERATION_UPDATED,
+        ].join(", "),
+      } as Htmx_Header);
+    },
+  )
+  .patch(
+    "/reprocess",
+    zValidator("param", Entity_Schema),
+    async ({ text, req }) => {
+      const { id } = req.valid("param");
+
+      await moncomptepro_pg
+        .update(schema.moderations)
+        .set({ moderated_at: null, moderated_by: null })
+        .where(eq(schema.moderations.id, id));
+
+      return text("OK", 200, {
+        "HX-Trigger": MODERATION_EVENTS.Enum.MODERATION_UPDATED,
       } as Htmx_Header);
     },
   );

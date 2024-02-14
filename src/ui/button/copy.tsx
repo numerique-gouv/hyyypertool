@@ -1,17 +1,17 @@
 //
 
 import type { Child } from "hono/jsx";
+import type { VariantProps } from "tailwind-variants";
 import { button } from ".";
 
 //
 
-export function CopyButton({
-  text,
-  children,
-}: {
+export function CopyButton(props: {
   text: string;
   children?: Child;
+  variant?: VariantProps<typeof button>;
 }) {
+  const { text, children, variant } = props;
   return (
     <button
       _="
@@ -22,7 +22,7 @@ export function CopyButton({
             navigator.clipboard.writeText(text)
           }
         end"
-      class={button()}
+      class={button(variant)}
       data-text={text}
     >
       📋 {children}

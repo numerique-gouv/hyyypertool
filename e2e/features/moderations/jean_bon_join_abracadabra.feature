@@ -17,4 +17,4 @@ Fonctionnalité: Moderation blockante à accepter
 
   # Scénario: Fiche de DINUM
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra »"
+    Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"

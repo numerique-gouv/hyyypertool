@@ -1,5 +1,6 @@
 //
 
+import { hx_trigger_from_body } from ":common/htmx";
 import {
   schema,
   type Moderation,
@@ -8,11 +9,17 @@ import {
   type Users_Organizations,
 } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
+import { app_hc } from ":hc";
+import { MODERATION_EVENTS } from ":moderations/event";
+import { button } from ":ui/button";
 import { and, eq } from "drizzle-orm";
 import { createContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import { _02 } from "./02";
 import { _03 } from "./03";
+import { About_Organisation } from "./About_Organisation";
+import { About_User } from "./About_User";
+import { Header } from "./Header";
 
 //
 
@@ -60,6 +67,41 @@ export async function Moderation_Page({
     <ModerationPage_Context.Provider
       value={{ moderation, domain, users_organizations }}
     >
+      <main
+        class="fr-container my-12"
+        hx-get={
+          app_hc.moderations[":id"].$url({
+            param: { id: moderation.id.toString() },
+          }).pathname
+        }
+        hx-select="main"
+        hx-trigger={hx_trigger_from_body([
+          MODERATION_EVENTS.Enum.MODERATION_UPDATED,
+        ])}
+      >
+        <button
+          _="on click go back"
+          class={button({
+            class: "fr-btn--icon-left fr-icon-checkbox-circle-line",
+            type: "tertiary",
+            size: "sm",
+          })}
+        >
+          retour
+        </button>
+
+        <hr class="bg-none pt-6" />
+
+        <Header />
+
+        <hr class="my-12" />
+
+        <div class="grid grid-cols-2">
+          <About_User />
+          <About_Organisation />
+        </div>
+      </main>
+
       <_02 />
       <hr />
       <_03 moderation_id={active_id} />

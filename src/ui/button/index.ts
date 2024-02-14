@@ -14,5 +14,12 @@ export const button = tv({
         "bg-[--background-action-high-green-bourgeon] hover:enabled:!bg-[--background-action-high-green-bourgeon-hover]",
       warning: "bg-[--warning-425-625] hover:!bg-[--warning-425-625-hover]",
     },
+    size: {
+      sm: "fr-btn--sm",
+      lg: "fr-btn--lg",
+    },
+    type: {
+      tertiary: "fr-btn--tertiary",
+    },
   },
 });
