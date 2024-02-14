@@ -126,5 +126,15 @@
         "userinfo_signing_alg_values_supported": ["HS256", "ES256", "RS256"]
       }
     }
+  },
+  {
+    "httpRequest": {
+      "path": "/readyz"
+    },
+    "httpResponse": {
+      "body": "readyz check passed",
+      "reasonPhrase": "OK",
+      "statusCode": 200
+    }
   }
 ]
