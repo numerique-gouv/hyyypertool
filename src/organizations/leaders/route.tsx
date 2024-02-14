@@ -27,7 +27,11 @@ export default new Hono().get(
 async function List_Leaders({ siret }: { siret: string }) {
   const doc = await load_leaders({ siret });
   if (!doc) return <>Pas de liste des dirigeants</>;
-  return <a href={doc.url}>Liste des dirigeants</a>;
+  return (
+    <a href={doc.url} rel="noopener noreferrer" target="_blank">
+      Liste des dirigeants
+    </a>
+  );
 }
 
 async function load_leaders({ siret }: { siret: string }) {

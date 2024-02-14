@@ -22,6 +22,8 @@ export async function ListZammadArticles({
       <div class="m-auto my-12 w-fit">
         <a
           href={`https://support.etalab.gouv.fr/#search/${moderation.users.email}`}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Trouver l'email correspondant dans Zammad
         </a>

@@ -1,5 +1,18 @@
 
 
+## [2024.2.3](https://github.com/betagouv/hyyypertool/compare/2024.2.2...2024.2.3) (2024-02-12)
+
+
+### Bug Fixes
+
+* **database:** use new Date(0) ([1c9339f](https://github.com/betagouv/hyyypertool/commit/1c9339febc5844ca11d44d80d9193b587daef579))
+
+
+### Features
+
+* **database:** update moncomptepro schema ([#58](https://github.com/betagouv/hyyypertool/issues/58)) ([2814b0b](https://github.com/betagouv/hyyypertool/commit/2814b0bf27d0be3798040d45c456336ea0219272))
+* **moderation:** create ticket from moderation reponse ([#61](https://github.com/betagouv/hyyypertool/issues/61)) ([3812f2b](https://github.com/betagouv/hyyypertool/commit/3812f2b9b1d60b7f4f3e0d873c3a2adcd599a8d4)), closes [#45](https://github.com/betagouv/hyyypertool/issues/45)
+
 ## [2024.2.2](https://github.com/betagouv/hyyypertool/compare/2024.2.1...2024.2.2) (2024-02-09)
 
 
