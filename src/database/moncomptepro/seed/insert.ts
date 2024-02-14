@@ -17,24 +17,28 @@ const logger =
 export async function insert_database(db: MonComptePro_PgDatabase) {
   try {
     const raphael = await insert_raphael(db);
-    logger.log(`🌱 INSERT user Raphael Dubigny`);
+    logger.log(`🌱 INSERT user ${raphael.given_name} ${raphael.family_name}`);
     const jean_bon = await insert_jeanbon(db);
-    logger.log(`🌱 INSERT user Jean Bon`);
+    logger.log(`🌱 INSERT user ${jean_bon.given_name} ${jean_bon.family_name}`);
     const pierre_bon = await insert_pierrebon(db);
-    logger.log(`🌱 INSERT user Jean Bon`);
+    logger.log(
+      `🌱 INSERT user ${pierre_bon.given_name} ${pierre_bon.family_name}`,
+    );
     const richard_bon = await insert_richardbon(db);
-    logger.log(`🌱 INSERT user Paul Bon`);
+    logger.log(
+      `🌱 INSERT user ${richard_bon.given_name} ${richard_bon.family_name}`,
+    );
 
     //
 
     const dinum = await insert_dinum(db);
-    logger.log(`🌱 INSERT organization DINUM`);
+    logger.log(`🌱 INSERT organization ${dinum.cached_nom_complet}`);
     const aldp = await insert_aldp(db);
-    logger.log(`🌱 INSERT organization ALDP`);
+    logger.log(`🌱 INSERT organization ${aldp.cached_nom_complet}`);
     const abracadabra = await insert_abracadabra(db);
-    logger.log(`🌱 INSERT organization Abracadabra`);
+    logger.log(`🌱 INSERT organization ${abracadabra.cached_nom_complet}`);
     const dengi = await insert_dengi(db);
-    logger.log(`🌱 INSERT organization Dengi - Leclerc`);
+    logger.log(`🌱 INSERT organization ${dengi.cached_nom_complet}`);
 
     //
 
@@ -43,7 +47,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       user_id: raphael.id,
     });
     logger.log(
-      `🌱 ${raphael_dinum.command} ${raphael_dinum.rowCount} Raphael join DINUM`,
+      `🌱 ${raphael_dinum.command} ${raphael_dinum.rowCount} ${raphael.given_name} join ${dinum.cached_libelle}`,
     );
 
     //
@@ -54,7 +58,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       user_id: jean_bon.id,
     });
     logger.log(
-      `🌱 ${jeanbon_dinum.command} ${jeanbon_dinum.rowCount} Jean wants to join DINUM`,
+      `🌱 ${jeanbon_dinum.command} ${jeanbon_dinum.rowCount} ${jean_bon.given_name} wants to join ${dinum.cached_libelle}`,
     );
 
     const jeanbon_abracadabra = await insert_moderation(db, {
@@ -63,7 +67,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       user_id: jean_bon.id,
     });
     logger.log(
-      `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} Jean wants to join Abracadabra`,
+      `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} ${jean_bon.given_name} wants to join ${abracadabra.cached_libelle}`,
     );
 
     const pierrebon_aldp = await insert_moderation(db, {
@@ -72,7 +76,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       user_id: pierre_bon.id,
     });
     logger.log(
-      `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} Pierre wants to join Aldpasso`,
+      `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} ${pierre_bon.family_name} wants to join  ${aldp.cached_libelle}`,
     );
 
     const richard_bon_dengi = await insert_moderation(db, {
@@ -82,7 +86,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       moderated_at: new Date("2023-06-22 14:34:34"),
     });
     logger.log(
-      `🌱 ${richard_bon_dengi.command} ${richard_bon_dengi.rowCount} Richard wants to join Dengi`,
+      `🌱 ${richard_bon_dengi.command} ${richard_bon_dengi.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet}`,
     );
 
     const richard_bon_dengi_bis = await insert_moderation(db, {
@@ -91,7 +95,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       user_id: richard_bon.id,
     });
     logger.log(
-      `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} Richard wants to join Dengi again...`,
+      `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
     );
   } catch (err) {
     console.error("Something went wrong...");
