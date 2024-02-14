@@ -2,11 +2,14 @@
 
 import { OpenInZammad, SearchInZammad } from ":common/zammad";
 import { schema } from ":database:moncomptepro";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { get_zammad_mail } from ":legacy/services/zammad_api";
+import { get_duplicate_moderations } from ":moderations/repository";
 import to from "await-to-js";
-import { and, asc, eq } from "drizzle-orm";
-import { use_MonComptePro_PgClient } from "../../database/moncomptepro/MonComptePro_PgClient_Provider";
+import { eq } from "drizzle-orm";
+import type { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { useRequestContext } from "hono/jsx-renderer";
 
 //
 export async function Duplicate_Warning({
@@ -16,14 +19,18 @@ export async function Duplicate_Warning({
   organization_id: number;
   user_id: number;
 }) {
-  const moderations = await get_duplicate_moderations({
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<moncomptepro_pg_Context>();
+
+  const moderations = await get_duplicate_moderations(moncomptepro_pg, {
     organization_id,
     user_id,
   });
   const moderation_count = moderations.length;
 
   if (moderation_count <= 1) return <></>;
-  const user = await get_user({ user_id });
+  const user = await get_user(moncomptepro_pg, { user_id });
   if (!user) return <p>Utilisateur introuvable</p>;
 
   const moderation_ticket = await Promise.all(
@@ -70,28 +77,10 @@ export async function Duplicate_Warning({
   );
 }
 
-async function get_duplicate_moderations({
-  organization_id,
-  user_id,
-}: {
-  organization_id: number;
-  user_id: number;
-}) {
-  const pg = use_MonComptePro_PgClient();
-  return await pg
-    .select()
-    .from(schema.moderations)
-    .where(
-      and(
-        eq(schema.moderations.organization_id, organization_id),
-        eq(schema.moderations.user_id, user_id),
-      ),
-    )
-    .orderBy(asc(schema.moderations.created_at));
-}
-
-async function get_user({ user_id }: { user_id: number }) {
-  const pg = use_MonComptePro_PgClient();
+async function get_user(
+  pg: NodePgDatabase<typeof schema>,
+  { user_id }: { user_id: number },
+) {
   return pg.query.users.findFirst({
     where: eq(schema.users.id, user_id),
   });

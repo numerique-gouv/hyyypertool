@@ -26,7 +26,7 @@ export async function _02() {
     <div class="mx-auto mt-6 !max-w-6xl" id="02">
       <h1>🗃️ 2. Je consulte les données relative au cas à l'étude</h1>
       <div
-        hx-get={api_ref("/legacy/duplicate_warning", {})}
+        hx-get={app_hc.moderations.duplicate_warning.$url().pathname}
         hx-trigger="load"
         hx-vals={JSON.stringify({
           organization_id: moderation.organization_id,

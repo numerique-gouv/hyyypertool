@@ -13,6 +13,7 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { moderation_router } from "./:id/route";
+import duplicate_warning_router from "./duplicate_warning/route";
 
 //
 
@@ -53,4 +54,5 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
 //
 export const moderations_router = new Hono()
   .route("", moderations_page_route)
+  .route("/duplicate_warning", duplicate_warning_router)
   .route("/:id", moderation_router);
