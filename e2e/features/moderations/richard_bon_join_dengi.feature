@@ -20,7 +20,7 @@ Fonctionnalité: Duplicate Moderation
 
   # Scénario:
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "Richard Bon a rejoint l'organisation de plus de 50 employés « Dengi - Leclerc »"
+    Alors je vois "Richard Bon veut rejoindre l'organisation « Dengi - Leclerc »"
 
     Alors je vois "Attention : demande multiples"
     * je vois "Il s'agit de la 2e demande pour cette organisation"
