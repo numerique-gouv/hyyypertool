@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create mocked services
-        run: docker compose -f ./mocks/docker-compose.mocks.yaml up --build --detach
+        run: docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml up --build --detach
         working-directory: "."
 
       - name: 🌭 Install bun
@@ -69,10 +69,9 @@ jobs:
 
       - name: Wait for mocked services to be ready
         run: |
-          docker compose -f ./mocks/docker-compose.mocks.yaml ps
-          docker compose -f ./mocks/docker-compose.mocks.yaml logs agentconnect
+          docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml ps
+          docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml logs agentconnect
           curl -sSf -XGET http://127.0.0.1:8888/readyz
-
         working-directory: "."
 
       - name: Cypress run
