@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  # push:
+  push:
   # pull_request:
   workflow_dispatch:
 
@@ -20,7 +20,9 @@ jobs:
         working-directory: "e2e"
 
     env:
-      DATABASE_URL_TEST: postgres://postgres:postgres@localhost:5432/postgres
+      MOCKED_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      MOCKED_AGENTCONNECT_URL: http://127.0.0.1:6100
+      MOCKED_ENTREPRISE_API_GOUV_URL: http://127.0.0.1:6200
 
     services:
       postgres:
@@ -39,6 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create mocked services
+        run: docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml up --build --detach
+        working-directory: "."
+
       - name: 🌭 Install bun
         uses: oven-sh/setup-bun@v1
       - run: bun install --frozen-lockfile
@@ -50,32 +56,51 @@ jobs:
           package_json_file: ./e2e/package.json
           run_install: false
 
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v4
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
         with:
-          cache: "pnpm"
-          cache-dependency-path: e2e
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('examples/basic-pnpm/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Wait for mocked services to be ready
+        run: |
+          docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml ps
+          echo "Fake AgentConnect"
+          curl -sSf -XGET ${{ env.MOCKED_AGENTCONNECT_URL }}/readyz
+          echo
+          echo "Fake https://entreprise.api.gouv.fr ready"
+          curl -sSf -XGET ${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}/readyz
+        working-directory: "."
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
-          AGENTCONNECT_OIDC_AUTHORIZE: "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"
           AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
-          AGENTCONNECT_OIDC_ISSUER: "https://fca.integ01.dev-agentconnect.fr/api/v2"
+          AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AGENTCONNECT_URL }}/api/v2"
           AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
           AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
           ALLOWED_USERS: "user@yopmail.com"
           API_AUTH_PASSWORD: "???"
           API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
           API_AUTH_USERNAME: "???"
+          DATABASE_URL: "${{ env.MOCKED_DATABASE_URL }}"
           DO_NOT_SEND_MAIL: "true"
           ENTREPRISE_API_GOUV_TOKEN: "???"
+          ENTREPRISE_API_GOUV_URL: "${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}"
           HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
           SENTRY_DNS: "https://123456789@errors.data.gouv.fr//XX"
           TZ: "Europe/Paris"
-          ZAMMAD_TOKEN: ""
+          ZAMMAD_TOKEN: "???"
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
           DEPLOY_ENV: "production"
+          NODE_ENV: "development"
         with:
           build: bun run build
           start: bun run start

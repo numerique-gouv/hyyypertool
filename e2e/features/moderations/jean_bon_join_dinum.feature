@@ -6,7 +6,7 @@ Fonctionnalité: Moderation blockante à refuser
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "AgentConnect"
-    * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
+    # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario: Jean Bon veut rejoindre la DINUM
     Alors je vois "Liste des moderations"

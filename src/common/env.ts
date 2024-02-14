@@ -34,7 +34,7 @@ export default z
       .default("ES256"),
     ALLOWED_USERS: z.string().trim().default(""),
     API_AUTH_PASSWORD: z.string().trim(),
-    API_AUTH_URL: z.string().trim().url().default("localhost:3001"),
+    API_AUTH_URL: z.string().trim().url(),
     API_AUTH_USERNAME: z.string().trim(),
     COOKIE_ENCRYPTION_KEY: z
       .string()
@@ -50,6 +50,7 @@ export default z
     DEPLOY_ENV: DEPLOY_ENV_SHEMA.default("preview"),
     DO_NOT_SEND_MAIL: z.coerce.boolean().default(false),
     ENTREPRISE_API_GOUV_TOKEN: z.string().trim(),
+    ENTREPRISE_API_GOUV_URL: z.string().trim().url(),
     GIT_SHA: GIT_SHA_SHEMA,
     HOST: z.string().trim().url().optional(),
     NODE_ENV: z.enum(["development", "production"]).default("development"),

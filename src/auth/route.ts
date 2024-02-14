@@ -18,7 +18,7 @@ import { agentconnect, type Oidc_Context } from "./agentconnect";
 const auth_router = new Hono<Oidc_Context & Session_Context>()
   .use("*", hyyyyyypertool_session)
   .use("*", agentconnect())
-  .post("/login", async (c) => {
+  .post("/login", async function POST(c) {
     const session = c.get("session");
     const { req, redirect, get } = c;
 
@@ -43,6 +43,28 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
     });
 
     return redirect(redirectUrl);
+  })
+  .get(`/fake/login/callback`, ({ notFound, redirect, var: { session } }) => {
+    if (env.NODE_ENV !== "development") return notFound();
+
+    session.set("userinfo", {
+      sub: "f52c691e7cc33e3116172d1115eee5e6016f0036095e9a514c86d741f364e88f",
+      uid: "1",
+      given_name: "Jean",
+      usual_name: "User",
+      email: "user@yopmail.com",
+      siret: "21440109300015",
+      phone_number: "0123456789",
+      idp_id: "71144ab3-ee1a-4401-b7b3-79b44f7daeeb",
+      idp_acr: "eidas1",
+      aud: "6925fb8143c76eded44d32b40c0cb1006065f7f003de52712b78985704f39950",
+      exp: 1707821864,
+      iat: 1707821804,
+      iss: "https://fca.integ01.dev-agentconnect.fr/api/v2",
+    });
+    session.set("idtoken", "");
+
+    return redirect(app_hc.moderations.$url().pathname);
   })
   .get(
     `/login/callback`,

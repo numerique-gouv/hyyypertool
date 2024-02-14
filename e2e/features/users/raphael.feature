@@ -6,7 +6,7 @@ Fonctionnalité: Page utilisateur
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "AgentConnect"
-    * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
+    # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario:
   # Scénario: Fiche de Raphael
