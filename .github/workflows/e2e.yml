@@ -67,6 +67,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Wait for mocked services to be ready
+        run: |
+          docker compose -f ./mocks/docker-compose.mocks.yaml ps
+          curl -sSf -XGET http://localhost:8888/api/v2/.well-known/openid-configuration
+        working-directory: "."
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
