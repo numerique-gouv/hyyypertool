@@ -7,7 +7,6 @@ import { path, type Params } from "static-path";
 type KnownPath =
   | "/"
   | "/legacy/duplicate_warning"
-  | "/legacy/leaders"
   | "/legacy/moderations/:id"
   | "/legacy/users"
   | "/legacy/users/:id"

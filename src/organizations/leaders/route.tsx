@@ -16,7 +16,7 @@ export default new Hono().get(
       siret: z.string(),
     }),
   ),
-  async function ({ html, req }) {
+  async function GET({ html, req }) {
     const { siret } = req.valid("query");
     return html(<List_Leaders siret={siret} />);
   },
@@ -37,24 +37,34 @@ async function load_leaders({ siret }: { siret: string }) {
     object: "Modération MonComptePro",
     recipient: "13002526500013",
   });
-  const response = await fetch(
-    `https://entreprise.api.gouv.fr/v4/djepva/api-association/associations/${siren}?${query_params}`,
-    {
-      headers: {
-        Authorization: `Bearer ${env.ENTREPRISE_API_GOUV_TOKEN}`,
-      },
+
+  const url = `${env.ENTREPRISE_API_GOUV_URL}/v4/djepva/api-association/associations/${siren}?${query_params}`;
+  if (env.DEPLOY_ENV === "preview") {
+    console.debug(`  <-- ${"GET"} ${url}`);
+  }
+  const response = await fetch(url, {
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${env.ENTREPRISE_API_GOUV_TOKEN}`,
     },
-  );
+  });
+  if (env.DEPLOY_ENV === "preview") {
+    console.debug(
+      `  --> ${"GET"} ${url} ${response.status} ${response.statusText}`,
+    );
+  }
+
   const { data } =
     (await response.json()) as Entreprise_API_Association_Response;
-  if (!data) return;
 
+  if (!data) return;
   const docs = data.documents_rna;
   const sortedDocs = lodash_sortby(docs, ["annee_depot", "date_depot"]);
   const doc = sortedDocs.findLast(({ sous_type: { code } }) => code === "LDC");
 
   return doc;
 }
+
 //
 
 interface Entreprise_API_Association_Response {

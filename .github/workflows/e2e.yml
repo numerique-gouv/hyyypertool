@@ -20,7 +20,9 @@ jobs:
         working-directory: "e2e"
 
     env:
-      DATABASE_URL_TEST: postgres://postgres:postgres@localhost:5432/postgres
+      MOCKED_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      MOCKED_AGENTCONNECT_URL: http://127.0.0.1:6100
+      MOCKED_ENTREPRISE_API_GOUV_URL: http://127.0.0.1:6200
 
     services:
       postgres:
@@ -70,27 +72,31 @@ jobs:
       - name: Wait for mocked services to be ready
         run: |
           docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml ps
-          docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml logs agentconnect
-          curl -sSf -XGET http://127.0.0.1:8888/readyz
+          echo "Fake AgentConnect ready"
+          curl -sSf -XGET ${{ env.MOCKED_AGENTCONNECT_URL }}/readyz
+          echo "Fake Api ready"
+          curl -sSf -XGET ${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}/readyz
         working-directory: "."
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
           AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
-          AGENTCONNECT_OIDC_ISSUER: "http://127.0.0.1:8888/api/v2"
+          AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AGENTCONNECT_URL }}/api/v2"
           AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
           AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
           ALLOWED_USERS: "user@yopmail.com"
           API_AUTH_PASSWORD: "???"
           API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
           API_AUTH_USERNAME: "???"
+          DATABASE_URL: "${{ env.MOCKED_DATABASE_URL }}"
           DO_NOT_SEND_MAIL: "true"
           ENTREPRISE_API_GOUV_TOKEN: "???"
+          ENTREPRISE_API_GOUV_URL: "${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}"
           HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
           SENTRY_DNS: "https://123456789@errors.data.gouv.fr//XX"
           TZ: "Europe/Paris"
-          ZAMMAD_TOKEN: ""
+          ZAMMAD_TOKEN: "???"
           ZAMMAD_URL: "https://support.etalab.gouv.fr"
           DEPLOY_ENV: "preview"
           NODE_ENV: "development"

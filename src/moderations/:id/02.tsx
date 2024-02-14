@@ -2,7 +2,6 @@
 
 import { api_ref } from ":api_ref";
 import { date_to_string } from ":common/date";
-import env from ":common/env.ts";
 import type { Moderation, Organization, User } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import type { MCP_Moderation } from ":moncomptepro";
@@ -12,7 +11,6 @@ import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
 import { callout } from ":ui/callout";
 import { useContext } from "hono/jsx";
-import lodash_sortby from "lodash.sortby";
 import queryString from "query-string";
 import { match } from "ts-pattern";
 import { ModerationPage_Context } from "./page";
@@ -413,7 +411,7 @@ function About_Organisation({
         </li>
 
         <div
-          hx-get={api_ref("/legacy/leaders", {})}
+          hx-get={app_hc.legacy.organizations.leaders.$url().pathname}
           hx-trigger="load"
           hx-vals={JSON.stringify({
             siret: moderation.organizations.siret,
@@ -443,48 +441,6 @@ function About_Organisation({
         `verified_email_domain` (si pas de vérification effectuée)
       </button>
     </>
-  );
-}
-
-interface Entreprise_API_Association_Response {
-  data: {
-    documents_rna: {
-      annee_depot: string;
-      date_depot: string;
-      sous_type: {
-        code: string;
-      };
-      url: string;
-    }[];
-  };
-}
-
-export async function List_Leaders({ siret }: { siret: string }) {
-  const siren = siret.substring(0, 9);
-  const query_params = new URLSearchParams({
-    context: "Modération MonComptePro",
-    object: "Modération MonComptePro",
-    recipient: "13002526500013",
-  });
-  const response = await fetch(
-    `https://entreprise.api.gouv.fr/v4/djepva/api-association/associations/${siren}?${query_params}`,
-    {
-      headers: {
-        Authorization: `Bearer ${env.ENTREPRISE_API_GOUV_TOKEN}`,
-      },
-    },
-  );
-  const { data } =
-    (await response.json()) as Entreprise_API_Association_Response;
-  if (!data) return <></>;
-  const docs = data.documents_rna;
-  const sortedDocs = lodash_sortby(docs, ["annee_depot", "date_depot"]);
-  const doc = sortedDocs.findLast(({ sous_type: { code } }) => code === "LDC");
-
-  return doc ? (
-    <a href={doc.url}>Liste des dirigeants</a>
-  ) : (
-    <>Pas de liste des dirigeants</>
   );
 }
 

@@ -8,6 +8,7 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import organization_router from "./:id/route";
+import leaders_router from "./leaders/route";
 import Organizations_Page, {
   SEARCH_SIRET_INPUT_ID,
   Search_Schema,
@@ -48,4 +49,5 @@ const page_router = new Hono<UserInfo_Context & Csp_Context>()
 
 export default new Hono()
   .route("", page_router)
+  .route("/leaders", leaders_router)
   .route("/:id", organization_router);

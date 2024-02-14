@@ -10,4 +10,15 @@ services:
     volumes:
       - ./mocks/agenconnect/mockserverInitialization.json:/config/mockserverInitialization.json
     ports:
-      - 8888:1080
+      - 6100:1080
+
+  entreprise_api_gouv_fr:
+    image: mockserver/mockserver:5.15.0
+    command: -proxyRemoteHost entreprise.api.gouv.fr -proxyRemotePort 443
+    environment:
+      MOCKSERVER_LOG_LEVEL: DEBUG
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
+    volumes:
+      - ./mocks/entreprise_api_gouv_fr/mockserverInitialization.json:/config/mockserverInitialization.json
+    ports:
+      - 6200:1080
