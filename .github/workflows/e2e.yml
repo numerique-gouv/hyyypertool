@@ -70,7 +70,7 @@ jobs:
       - name: Wait for mocked services to be ready
         run: |
           docker compose -f ./mocks/docker-compose.mocks.yaml ps
-          curl -sSf -XGET http://0.0.0.0:8888/api/v2/.well-known/openid-configuration
+          curl -sSf -XGET http://agentconnect:8888/api/v2/.well-known/openid-configuration
 
         working-directory: "."
 
@@ -78,7 +78,7 @@ jobs:
         uses: cypress-io/github-action@v6
         env:
           AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
-          AGENTCONNECT_OIDC_ISSUER: "http://0.0.0.0:8888/api/v2"
+          AGENTCONNECT_OIDC_ISSUER: "http://agentconnect:8888/api/v2"
           AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
           AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
           ALLOWED_USERS: "user@yopmail.com"
