@@ -18,10 +18,12 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
   try {
     const raphael = await insert_raphael(db);
     logger.log(`🌱 INSERT user Raphael Dubigny`);
-    const jeanbon = await insert_jeanbon(db);
+    const jean_bon = await insert_jeanbon(db);
     logger.log(`🌱 INSERT user Jean Bon`);
-    const pierrebon = await insert_pierrebon(db);
+    const pierre_bon = await insert_pierrebon(db);
     logger.log(`🌱 INSERT user Jean Bon`);
+    const richard_bon = await insert_richardbon(db);
+    logger.log(`🌱 INSERT user Paul Bon`);
 
     //
 
@@ -31,6 +33,8 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     logger.log(`🌱 INSERT organization ALDP`);
     const abracadabra = await insert_abracadabra(db);
     logger.log(`🌱 INSERT organization Abracadabra`);
+    const dengi = await insert_dengi(db);
+    logger.log(`🌱 INSERT organization Dengi - Leclerc`);
 
     //
 
@@ -47,7 +51,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     const jeanbon_dinum = await insert_moderation(db, {
       organization_id: dinum.id,
       type: "organization_join_block" as MCP_Moderation["type"],
-      user_id: jeanbon.id,
+      user_id: jean_bon.id,
     });
     logger.log(
       `🌱 ${jeanbon_dinum.command} ${jeanbon_dinum.rowCount} Jean wants to join DINUM`,
@@ -56,7 +60,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     const jeanbon_abracadabra = await insert_moderation(db, {
       organization_id: abracadabra.id,
       type: "organization_join_block" as MCP_Moderation["type"],
-      user_id: jeanbon.id,
+      user_id: jean_bon.id,
     });
     logger.log(
       `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} Jean wants to join Abracadabra`,
@@ -65,10 +69,29 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     const pierrebon_aldp = await insert_moderation(db, {
       organization_id: aldp.id,
       type: "big_organization_join" as MCP_Moderation["type"],
-      user_id: pierrebon.id,
+      user_id: pierre_bon.id,
     });
     logger.log(
       `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} Pierre wants to join Aldpasso`,
+    );
+
+    const richard_bon_dengi = await insert_moderation(db, {
+      organization_id: dengi.id,
+      type: "big_organization_join" as MCP_Moderation["type"],
+      user_id: richard_bon.id,
+      moderated_at: new Date("2023-06-22 14:34:34"),
+    });
+    logger.log(
+      `🌱 ${richard_bon_dengi.command} ${richard_bon_dengi.rowCount} Richard wants to join Dengi`,
+    );
+
+    const richard_bon_dengi_bis = await insert_moderation(db, {
+      organization_id: dengi.id,
+      type: "big_organization_join" as MCP_Moderation["type"],
+      user_id: richard_bon.id,
+    });
+    logger.log(
+      `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} Richard wants to join Dengi again...`,
     );
   } catch (err) {
     console.error("Something went wrong...");
@@ -121,6 +144,25 @@ async function insert_pierrebon(db: MonComptePro_PgDatabase) {
       family_name: "Bon",
       given_name: "Pierre",
       job: "Médiateur sociale et interculturelle",
+      email_verified: true,
+      phone_number: "0123456789",
+      updated_at: new Date("2022-02-03T11:25:06.312Z"),
+      verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z"),
+    })
+    .returning();
+
+  return insert.at(0)!;
+}
+
+async function insert_richardbon(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.users)
+    .values({
+      created_at: new Date("2022-02-03T11:23:48.375Z"),
+      email: "richardbon@leclerc.fr",
+      family_name: "Bon",
+      given_name: "Richard",
+      job: "Dirigeant",
       email_verified: true,
       phone_number: "0123456789",
       updated_at: new Date("2022-02-03T11:25:06.312Z"),
@@ -221,6 +263,30 @@ async function insert_dinum(db: MonComptePro_PgDatabase) {
       trackdechets_email_domains: [],
       updated_at: new Date("2023-06-22 14:34:34"),
       verified_email_domains: ["beta.gouv.fr", "modernisation.gouv.fr"],
+    })
+    .returning();
+  return insert.at(0)!;
+}
+
+async function insert_dengi(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.organizations)
+    .values({
+      authorized_email_domains: ["scapartois.fr"],
+      cached_activite_principale: "47.11F",
+      cached_categorie_juridique: "SAS, société par actions simplifiée",
+      cached_code_officiel_geographique: "75107",
+      cached_etat_administratif: "A",
+      cached_libelle_tranche_effectif: "50 à 99 salariés, en 2021",
+      cached_libelle: "Dengi - Leclerc",
+      cached_nom_complet: "Dengi",
+      cached_tranche_effectifs: "21",
+      created_at: new Date("2018-07-13 15:35:15"),
+      external_authorized_email_domains: [],
+      siret: "38514019900014",
+      trackdechets_email_domains: [],
+      updated_at: new Date("2023-06-22 14:34:34"),
+      verified_email_domains: ["scapartois.fr"],
     })
     .returning();
   return insert.at(0)!;

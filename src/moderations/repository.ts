@@ -79,3 +79,25 @@ export function get_moderations_list(
     return { moderations, count };
   });
 }
+
+export async function get_duplicate_moderations(
+  pg: NodePgDatabase<typeof schema>,
+  {
+    organization_id,
+    user_id,
+  }: {
+    organization_id: number;
+    user_id: number;
+  },
+) {
+  return pg
+    .select()
+    .from(schema.moderations)
+    .where(
+      and(
+        eq(schema.moderations.organization_id, organization_id),
+        eq(schema.moderations.user_id, user_id),
+      ),
+    )
+    .orderBy(asc(schema.moderations.created_at));
+}
