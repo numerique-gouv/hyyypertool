@@ -28,7 +28,7 @@ async function List_Leaders({ siret }: { siret: string }) {
   const doc = await load_leaders({ siret });
   if (!doc) return <>Pas de liste des dirigeants</>;
   return (
-    <a href={doc.url} rel="noopener noreferrer" target="_blank">
+    <a class="fr-link" href={doc.url} rel="noopener noreferrer" target="_blank">
       Liste des dirigeants
     </a>
   );

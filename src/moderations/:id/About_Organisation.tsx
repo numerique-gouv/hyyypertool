@@ -70,18 +70,17 @@ export function About_Organisation() {
         <li>
           siret : <b>{organization.siret}</b>
         </li>
-
-        <div
-          hx-get={app_hc.legacy.organizations.leaders.$url().pathname}
-          hx-trigger="load"
-          hx-vals={JSON.stringify({
-            siret: organization.siret,
-          })}
-        >
-          Recherche des dirigeants...
-        </div>
       </ul>
 
+      <div
+        hx-get={app_hc.legacy.organizations.leaders.$url().pathname}
+        hx-trigger="load"
+        hx-vals={JSON.stringify({
+          siret: organization.siret,
+        })}
+      >
+        Recherche des dirigeants...
+      </div>
       <a
         href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
         class={button({ size: "sm", type: "tertiary" })}
