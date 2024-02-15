@@ -11,7 +11,7 @@ import {
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { MODERATION_EVENTS } from ":moderations/event";
-import { button } from ":ui/button";
+import { button } from "@~/common.ui/button/index";
 import { and, eq } from "drizzle-orm";
 import { createContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";

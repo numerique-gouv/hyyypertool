@@ -3,9 +3,9 @@
 import type { Moderation } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import type { MCP_Moderation } from ":moncomptepro";
-import { button } from ":ui/button";
 import { callout } from ":ui/callout";
 import { LocalTime } from ":ui/time/LocalTime";
+import { button } from "@~/common.ui/button/index";
 import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { ModerationPage_Context } from "./page";

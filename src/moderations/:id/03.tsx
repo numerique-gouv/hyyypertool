@@ -11,8 +11,8 @@ import {
 } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import { MODERATION_EVENTS } from ":moderations/event";
-import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
+import { button } from "@~/common.ui/button/index";
 import { eq } from "drizzle-orm";
 import { ok } from "node:assert";
 import { reponse_templates } from "./reponse_templates";

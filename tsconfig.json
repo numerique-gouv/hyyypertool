@@ -28,12 +28,16 @@
       ":proxy/*": ["./src/proxy/*"],
       ":www": ["./src/www.router"],
       "hono-slotify/*": ["./src/hono-slotify/*"],
-      "@~/common.ui/*": ["./packages/~/common/ui/src/*"],
       ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"]
     },
     "plugins": [],
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true
   },
+  "references": [
+    {
+      "path": "./packages/~/common/ui/tsconfig.json"
+    }
+  ],
   "include": ["package.json", "src"]
 }

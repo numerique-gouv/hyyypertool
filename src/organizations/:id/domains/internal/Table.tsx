@@ -1,6 +1,6 @@
 import type { Organization } from ":database:moncomptepro";
 import { app_hc } from ":hc";
-import { button } from ":ui/button";
+import { button } from "@~/common.ui/button/index";
 
 //
 export function Table({

@@ -1,10 +1,12 @@
 //
 
 import { api_ref } from ":api_ref";
-import { button } from ":ui/button";
-import { CopyButton } from ":ui/button/copy";
-import { GoogleSearchButton } from ":ui/button/search";
 import { LocalTime } from ":ui/time/LocalTime";
+import {
+  CopyButton,
+  GoogleSearchButton,
+} from "@~/common.ui/button/components/index";
+import { button } from "@~/common.ui/button/index";
 import { useContext } from "hono/jsx";
 import queryString from "query-string";
 import { ModerationPage_Context } from "./page";

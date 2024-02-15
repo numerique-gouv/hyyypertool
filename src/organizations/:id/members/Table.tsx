@@ -7,9 +7,9 @@ import {
   Verification_Type_Schema,
   type Verification_Type,
 } from ":organizations/services/verification_type";
-import { button } from ":ui/button";
-import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
+import { CopyButton } from "@~/common.ui/button/components/index";
+import { button } from "@~/common.ui/button/index";
 import { createContext, useContext } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
 

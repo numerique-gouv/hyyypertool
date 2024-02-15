@@ -9,12 +9,14 @@ import { hyyyyyypertool_session } from ":common/session";
 import { schema, type User } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
-import { button } from ":ui/button";
-import { CopyButton } from ":ui/button/copy";
-import { GoogleSearchButton } from ":ui/button/search";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { LocalTime } from ":ui/time/LocalTime";
 import { zValidator } from "@hono/zod-validator";
+import {
+  CopyButton,
+  GoogleSearchButton,
+} from "@~/common.ui/button/components/index";
+import { button } from "@~/common.ui/button/index";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";

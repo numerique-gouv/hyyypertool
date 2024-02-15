@@ -1,6 +1,13 @@
 {
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM"],
-  },
+    "noEmit": false,
+    "outDir": "./node_modules/.cache/tsc"
+  }
 }
