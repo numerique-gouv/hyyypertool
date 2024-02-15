@@ -1,7 +1,6 @@
 //
 
 import env from ":common/env.ts";
-import type { User } from ":legacy/services/zammad_api";
 import type { Env } from "hono";
 import { CookieStore, Session, sessionMiddleware } from "hono-sessions";
 import type { BaseClient, TokenSet } from "openid-client";
@@ -22,7 +21,6 @@ interface Session_KeyMapping {
   oauth2token: TokenSet;
   state: string;
   nonce: string;
-  zammad_user: User;
 }
 
 export interface Session_Context extends Env {

@@ -1,0 +1,23 @@
+{
+  "name": "e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cd .. && bun x npm-run-all --serial build database:moncomptepro:migrator",
+    "open": "cypress open -b electron --e2e",
+    "start": "cd .. && bun start",
+    "test": "cypress run -e filterSpecs=true"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "20.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
+    "cypress": "13.6.4",
+    "typescript": "5.3.3"
+  },
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": "20.11.0",
+    "npm": ">=9",
+    "pnpm": ">=8"
+  }
+}

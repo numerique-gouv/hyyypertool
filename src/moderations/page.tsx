@@ -73,6 +73,7 @@ export function Moderations_Page({
         `visibilitychange[document.visibilityState === 'visible'] from:document`,
       ].join(", ")}
     >
+      <h1>Liste des moderations</h1>
       <Filter search={search} />
       <ModerationList_Table pagination={pagination} search={search} />
     </main>

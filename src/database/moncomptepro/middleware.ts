@@ -3,7 +3,7 @@
 import env from ":common/env";
 import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
 import type { Env, MiddlewareHandler } from "hono";
-import { Client } from "pg";
+import { Pool } from "pg";
 import * as schema from "./drizzle/schema";
 
 export function moncomptepro_pg_database({
@@ -12,9 +12,7 @@ export function moncomptepro_pg_database({
   connectionString: string;
 }): MiddlewareHandler<moncomptepro_pg_Context> {
   return async function moncomptepro_pg_middleware({ set }, next) {
-    const connection = new Client({ connectionString: connectionString });
-
-    await connection.connect();
+    const connection = new Pool({ connectionString: connectionString });
 
     const moncomptepro_pg = drizzle(connection, {
       schema,

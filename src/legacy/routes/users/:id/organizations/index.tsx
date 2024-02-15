@@ -1,15 +1,18 @@
 //
 
 import { api_ref } from ":api_ref";
-import { Entity_Schema, Pagination_Schema } from ":common/schema";
 import {
-  moncomptepro_pg,
-  schema,
-  type Organization,
-} from ":database:moncomptepro";
+  Entity_Schema,
+  Pagination_Schema,
+  type Pagination,
+} from ":common/schema";
+import { schema, type Organization } from ":database:moncomptepro";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
+import { app_hc } from ":hc";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
+import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
@@ -25,47 +28,57 @@ const Table_Context = createContext({
 
 //
 
-const router = new Hono();
-export default router;
+function organisations_by_user_id(
+  pg: NodePgDatabase<typeof schema>,
+  {
+    id,
+    pagination = { page: 0, page_size: 10 },
+  }: { id: number; pagination?: Pagination },
+) {
+  const { page, page_size: take } = pagination;
+
+  const where = and(eq(schema.users_organizations.user_id, id));
+
+  return pg.transaction(async function organization_with_count() {
+    const organizations = await pg
+      .select()
+      .from(schema.organizations)
+      .innerJoin(
+        schema.users_organizations,
+        eq(schema.users_organizations.organization_id, schema.organizations.id),
+      )
+      .where(where)
+      .orderBy(asc(schema.users_organizations.created_at))
+      .limit(take)
+      .offset(page * take);
+    const [{ value: count }] = await pg
+      .select({ value: drizzle_count() })
+      .from(schema.users)
+      .innerJoin(
+        schema.users_organizations,
+        eq(schema.users.id, schema.users_organizations.user_id),
+      )
+      .where(where);
+    return { organizations, count };
+  });
+}
 
 //
 
-router.get(
+export default new Hono<moncomptepro_pg_Context>().get(
   "/",
-
   zValidator("param", Entity_Schema),
   zValidator("query", Pagination_Schema),
-  async function ({ html, req, notFound }) {
+  async function ({ html, req, var: { moncomptepro_pg } }) {
     const { id } = req.valid("param");
-    const { page } = req.valid("query");
+    const { page, page_size } = req.valid("query");
     const take = 5;
 
-    const where = and(eq(schema.users_organizations.user_id, id));
-    const { organizations, count } = await moncomptepro_pg.transaction(
-      async () => {
-        const organizations = await moncomptepro_pg
-          .select()
-          .from(schema.organizations)
-          .innerJoin(
-            schema.users_organizations,
-            eq(
-              schema.users_organizations.organization_id,
-              schema.organizations.id,
-            ),
-          )
-          .where(where)
-          .orderBy(asc(schema.organizations.id))
-          .limit(take)
-          .offset(page * take);
-        const [{ value: count }] = await moncomptepro_pg
-          .select({ value: drizzle_count() })
-          .from(schema.users)
-          .innerJoin(
-            schema.users_organizations,
-            eq(schema.users.id, schema.users_organizations.user_id),
-          )
-          .where(where);
-        return { organizations, count };
+    const { organizations, count } = await organisations_by_user_id(
+      moncomptepro_pg,
+      {
+        id,
+        pagination: { page: page - 1, page_size },
       },
     );
 
@@ -99,6 +112,8 @@ function Table({
   organizations: { organizations: Organization }[];
 }) {
   const { page, take, count, user_id } = useContext(Table_Context);
+  const page_index = page - 1;
+  const last_page = Math.floor(count / take) + 1;
 
   return (
     <table>
@@ -130,9 +145,13 @@ function Table({
               <td>
                 <a
                   class="p-3"
-                  href={api_ref("/legacy/organizations/:id", {
-                    id: String(organizations.id),
-                  })}
+                  href={
+                    app_hc.legacy.organizations[":id"].$url({
+                      param: {
+                        id: String(organizations.id),
+                      },
+                    }).pathname
+                  }
                 >
                   ➡️
                 </a>
@@ -146,12 +165,14 @@ function Table({
         <tr>
           <th scope="row">Showing </th>
           <td colspan={2}>
-            {page * take}-{page * take + take} of {count}
+            {page_index * count}-{page_index * count + count} of {count}
           </td>
           <td colspan={2} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={`/legacy/users/${user_id}/organizations`}
+              hx-get={api_ref(`/legacy/users/:id/organizations`, {
+                id: user_id.toString(),
+              })}
               hx-trigger="input changed delay:2s"
               hx-target="#table-user-organisations"
               id="page"
@@ -159,7 +180,7 @@ function Table({
               type="number"
               value={String(page)}
             />
-            <span> of {Math.floor(count / take)}</span>
+            <span> of {last_page}</span>
           </td>
         </tr>
       </tfoot>

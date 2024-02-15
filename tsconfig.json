@@ -9,13 +9,14 @@
       ":assets/*": ["./src/assets/*"],
       ":auth/*": ["./src/auth/*"],
       ":database:moncomptepro": [
-        "./src/database/moncomptepro/moncomptepro_pg.ts",
+        "./src/database/moncomptepro/moncomptepro_pg.ts"
       ],
       ":database:moncomptepro/middleware": [
-        "./src/database/moncomptepro/middleware.ts",
+        "./src/database/moncomptepro/middleware.ts"
       ],
       ":api_ref": ["./src/api_ref.ts"],
       ":common/*": ["./src/common/*"],
+      ":health/*": ["./src/health/*"],
       ":hc": ["./src/client"],
       ":legacy/*": ["./src/legacy/*"],
       ":moderations/*": ["./src/moderations/*"],
@@ -23,13 +24,16 @@
       ":organizations/*": ["./src/organizations/*"],
       ":package.json": ["./package.json"],
       ":ui/*": ["./src/ui/*"],
+      ":welcome/*": ["./src/welcome/*"],
+      ":proxy/*": ["./src/proxy/*"],
       ":www": ["./src/www.router"],
       "hono-slotify/*": ["./src/hono-slotify/*"],
       "@~/common.ui/*": ["./packages/~/common/ui/src/*"],
+      ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"]
     },
     "plugins": [],
     "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
-  "include": ["package.json", "src"],
+  "include": ["package.json", "src"]
 }

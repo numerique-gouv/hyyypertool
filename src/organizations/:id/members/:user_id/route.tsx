@@ -3,7 +3,8 @@
 import type { Htmx_Header } from ":common/htmx";
 import { Entity_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
-import { moncomptepro_pg, schema } from ":database:moncomptepro";
+import { schema } from ":database:moncomptepro";
+import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { join_organization } from ":legacy/services/mcp_admin_api";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { Verification_Type_Schema } from ":organizations/services/verification_type";
@@ -14,7 +15,7 @@ import { z } from "zod";
 
 //
 
-export default new Hono()
+export default new Hono<moncomptepro_pg_Context>()
   .post(
     "/",
     zValidator(
@@ -29,7 +30,7 @@ export default new Hono()
         user_id: z.string().pipe(z.coerce.number()),
       }),
     ),
-    async function ({ text, req }) {
+    async function POST({ text, req }) {
       const { id: organization_id, user_id } = req.valid("param");
       const { is_external } = req.valid("form");
 
@@ -61,7 +62,7 @@ export default new Hono()
         is_external: z.string().pipe(z_coerce_boolean).optional(),
       }),
     ),
-    async function ({ text, req }) {
+    async function PATCH({ text, req, var: { moncomptepro_pg } }) {
       const { id: organization_id, user_id } = req.valid("param");
       const { verification_type, is_external } = req.valid("form");
 
@@ -89,7 +90,7 @@ export default new Hono()
       "param",
       Entity_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
     ),
-    async function ({ text, req }) {
+    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
       const { id: organization_id, user_id } = req.valid("param");
 
       await moncomptepro_pg

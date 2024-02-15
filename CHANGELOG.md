@@ -1,5 +1,57 @@
 
 
+## [2024.2.4](https://github.com/betagouv/hyyypertool/compare/2024.2.3...2024.2.4) (2024-02-14)
+
+
+### Bug Fixes
+
+* **moderation:** duplicate_warning not found ([#66](https://github.com/betagouv/hyyypertool/issues/66)) ([dd252d1](https://github.com/betagouv/hyyypertool/commit/dd252d182cbe9400a244a01aefab88a42a823010))
+
+## [2024.2.3](https://github.com/betagouv/hyyypertool/compare/2024.2.2...2024.2.3) (2024-02-12)
+
+
+### Bug Fixes
+
+* **database:** use new Date(0) ([1c9339f](https://github.com/betagouv/hyyypertool/commit/1c9339febc5844ca11d44d80d9193b587daef579))
+
+
+### Features
+
+* **database:** update moncomptepro schema ([#58](https://github.com/betagouv/hyyypertool/issues/58)) ([2814b0b](https://github.com/betagouv/hyyypertool/commit/2814b0bf27d0be3798040d45c456336ea0219272))
+* **moderation:** create ticket from moderation reponse ([#61](https://github.com/betagouv/hyyypertool/issues/61)) ([3812f2b](https://github.com/betagouv/hyyypertool/commit/3812f2b9b1d60b7f4f3e0d873c3a2adcd599a8d4)), closes [#45](https://github.com/betagouv/hyyypertool/issues/45)
+
+## [2024.2.2](https://github.com/betagouv/hyyypertool/compare/2024.2.1...2024.2.2) (2024-02-09)
+
+
+### Bug Fixes
+
+* **organization:** use common pagination schema ([#41](https://github.com/betagouv/hyyypertool/issues/41)) ([5799d4d](https://github.com/betagouv/hyyypertool/commit/5799d4d68b1d65feedb5c5b1f5d5d9acd56233ae))
+
+
+### Features
+
+* **moderation:** add refus prestataires response ([#50](https://github.com/betagouv/hyyypertool/issues/50)) ([ade5c49](https://github.com/betagouv/hyyypertool/commit/ade5c498a710330004b4d283c3a55af4a460b950))
+
+
+### Reverts
+
+* **deps:** hono dependency update ([9ea5638](https://github.com/betagouv/hyyypertool/commit/9ea5638534b11d5080b442b58c8a3b7468ffe538))
+
+## [2024.2.1](https://github.com/betagouv/hyyypertool/compare/2024.2.0...2024.2.1) (2024-02-01)
+
+
+### Features
+
+* **moderation:** add livreurs / mobilic response ([#37](https://github.com/betagouv/hyyypertool/issues/37)) ([be490cc](https://github.com/betagouv/hyyypertool/commit/be490cc72a834d1d91c1672d7f3261965aaa816c))
+
+# [2024.2.0](https://github.com/betagouv/hyyypertool/compare/2024.1.22...2024.2.0) (2024-02-01)
+
+
+### Features
+
+* allow case-insensitive search ([379c64f](https://github.com/betagouv/hyyypertool/commit/379c64ffb23b7cbb079f3f1b3474b2ec5c1ebdf0))
+* **users:** display iso string ([7fbbc6b](https://github.com/betagouv/hyyypertool/commit/7fbbc6b5bbc72568fc1563118f91fc486a5ca009))
+
 ## [2024.1.22](https://github.com/betagouv/hyyypertool/compare/2024.1.21...2024.1.22) (2024-01-31)
 
 
