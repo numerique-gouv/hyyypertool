@@ -81,7 +81,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
 
     const richard_bon_dengi = await insert_moderation(db, {
       organization_id: dengi.id,
-      type: "big_organization_join" as MCP_Moderation["type"],
+      type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
       moderated_at: new Date("2023-06-22 14:34:34"),
     });
@@ -91,7 +91,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
 
     const richard_bon_dengi_bis = await insert_moderation(db, {
       organization_id: dengi.id,
-      type: "big_organization_join" as MCP_Moderation["type"],
+      type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
     });
     logger.log(

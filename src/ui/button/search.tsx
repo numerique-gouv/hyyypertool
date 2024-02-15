@@ -1,7 +1,6 @@
 //
 
 import type { Child } from "hono/jsx";
-import { button } from ".";
 
 //
 
@@ -14,8 +13,8 @@ export function GoogleSearchButton({
 }) {
   return (
     <a
+      class="fr-link"
       href={google_search(query)}
-      class={button()}
       rel="noopener noreferrer"
       target="_blank"
     >

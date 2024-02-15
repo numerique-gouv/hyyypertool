@@ -17,4 +17,6 @@ Fonctionnalité: Moderation blockante à refuser
 
   # Scénario: Fiche de DINUM
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM »"
+    Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
+
+    # * je clique "🪄 Marquer comme traité"

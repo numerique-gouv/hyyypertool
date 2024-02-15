@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cd .. && bun run build && bun run db:moncomptepro:migrator",
+    "build": "cd .. && bun x npm-run-all --serial build database:moncomptepro:migrator",
     "open": "cypress open -b electron --e2e",
     "start": "cd .. && bun start",
     "test": "cypress run -e filterSpecs=true"
