@@ -4,7 +4,7 @@ import env from ":common/env.ts";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { Client } from "pg";
-import * as schema from "./drizzle/schema";
+import * as schema from "../drizzle/schema";
 
 export const connection = new Client({
   connectionString: env.DATABASE_URL,

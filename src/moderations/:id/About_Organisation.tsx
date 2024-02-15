@@ -81,6 +81,7 @@ export function About_Organisation() {
       >
         Recherche des dirigeants...
       </div>
+
       <a
         href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
         class={button({ size: "sm", type: "tertiary" })}

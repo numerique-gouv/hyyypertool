@@ -69,6 +69,7 @@ export async function Moderation_Page({
     >
       <main
         class="fr-container my-12"
+        hx-disinherit="*"
         hx-get={
           app_hc.moderations[":id"].$url({
             param: { id: moderation.id.toString() },
@@ -100,11 +101,13 @@ export async function Moderation_Page({
           <About_User />
           <About_Organisation />
         </div>
-      </main>
 
-      <_02 />
-      <hr />
-      <_03 moderation_id={active_id} />
+        <_02 />
+
+        <hr />
+
+        <_03 moderation_id={active_id} />
+      </main>
     </ModerationPage_Context.Provider>
   );
 }

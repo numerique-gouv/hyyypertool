@@ -1,6 +1,7 @@
 //
 
 import { version } from ":package.json";
+import { env } from "node:process";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
@@ -58,15 +59,15 @@ export default z
     SENTRY_DNS: z.string().trim().url().optional(),
     VERSION: z.string().default(
       match(
-        DEPLOY_ENV_SHEMA.optional().parse(Bun.env.DEPLOY_ENV, {
-          path: ["Bun.env.DEPLOY_ENV"],
+        DEPLOY_ENV_SHEMA.optional().parse(env.DEPLOY_ENV, {
+          path: ["env.DEPLOY_ENV"],
         }),
       )
         .with(DEPLOY_ENV_SHEMA.Enum.production, () => version)
         .otherwise(
           () =>
-            GIT_SHA_SHEMA.parse(Bun.env.GIT_SHA, {
-              path: ["Bun.env.GIT_SHA"],
+            GIT_SHA_SHEMA.parse(env.GIT_SHA, {
+              path: ["env.GIT_SHA"],
             }) ?? version,
         ),
     ),
@@ -74,6 +75,6 @@ export default z
     ZAMMAD_TOKEN: z.string().trim(),
     ZAMMAD_URL: z.string().trim().url(),
   })
-  .parse(Bun.env, {
-    path: ["Bun.env"],
+  .parse(env, {
+    path: ["env"],
   });
