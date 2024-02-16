@@ -2,6 +2,7 @@
 
 import type { Moderation } from ":database:moncomptepro";
 import { app_hc } from ":hc";
+import { moderation_type_to_emoji } from ":moderations/moderation_type_to_emoji";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import { callout } from ":ui/callout";
@@ -19,6 +20,7 @@ export function Header() {
       <section class="flex items-baseline space-x-5">
         <h1>
           <span>
+            {moderation_type_to_emoji(moderation.type)}{" "}
             {moderation.users.given_name} {moderation.users.family_name}
           </span>
         </h1>
