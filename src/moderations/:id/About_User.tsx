@@ -13,7 +13,11 @@ import { ModerationPage_Context } from "./page";
 
 export function About_User() {
   const {
-    moderation: { created_at: moderation_created_at, users: user },
+    moderation: {
+      created_at: moderation_created_at,
+      users: user,
+      organizations,
+    },
   } = useContext(ModerationPage_Context);
 
   const domain = user.email.split("@")[1];
@@ -88,6 +92,13 @@ export function About_User() {
         <li>
           <GoogleSearchButton query={domain}>
             Résultats Google pour ce nom de domaine
+          </GoogleSearchButton>
+        </li>
+        <li>
+          <GoogleSearchButton
+            query={`${organizations.cached_libelle} ${domain}`}
+          >
+            Résultats Google pour le nom de l'organisation et le nom de domaine
           </GoogleSearchButton>
         </li>
         <li>
