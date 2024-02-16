@@ -28,6 +28,10 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     logger.log(
       `🌱 INSERT user ${richard_bon.given_name} ${richard_bon.family_name}`,
     );
+    const marie_bon = await insert_mariebon(db);
+    logger.log(
+      `🌱 INSERT user ${marie_bon.given_name} ${marie_bon.family_name}`,
+    );
 
     //
 
@@ -39,6 +43,8 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     logger.log(`🌱 INSERT organization ${abracadabra.cached_nom_complet}`);
     const dengi = await insert_dengi(db);
     logger.log(`🌱 INSERT organization ${dengi.cached_nom_complet}`);
+    const bosch = await insert_bosch(db);
+    logger.log(`🌱 INSERT organization ${bosch.cached_nom_complet}`);
 
     //
 
@@ -96,6 +102,15 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     });
     logger.log(
       `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
+    );
+
+    const marie_bon_dengi_bis = await insert_moderation(db, {
+      organization_id: bosch.id,
+      type: "non_verified_domain" as MCP_Moderation["type"],
+      user_id: marie_bon.id,
+    });
+    logger.log(
+      `🌱 ${marie_bon_dengi_bis.command} ${marie_bon_dengi_bis.rowCount} ${marie_bon.given_name} wants to join ${bosch.cached_nom_complet} again...`,
     );
   } catch (err) {
     console.error("Something went wrong...");
@@ -171,6 +186,25 @@ async function insert_richardbon(db: MonComptePro_PgDatabase) {
       phone_number: "0123456789",
       updated_at: new Date("2022-02-03T11:25:06.312Z"),
       verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z"),
+    })
+    .returning();
+
+  return insert.at(0)!;
+}
+
+async function insert_mariebon(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.users)
+    .values({
+      created_at: new Date("2014-02-13T17:25:09.000Z"),
+      email_verified: true,
+      email: "marie.bon@fr.bosch.com",
+      family_name: "Bon",
+      given_name: "Marie",
+      job: "Gestionnaire données sociales",
+      last_sign_in_at: new Date("2024-02-15T12:48:00.106Z"),
+      sign_in_count: 3,
+      updated_at: new Date("2014-02-15T13:48:00.000Z"),
     })
     .returning();
 
@@ -291,6 +325,32 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
       trackdechets_email_domains: [],
       updated_at: new Date("2023-06-22 14:34:34"),
       verified_email_domains: ["scapartois.fr"],
+    })
+    .returning();
+  return insert.at(0)!;
+}
+
+async function insert_bosch(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.organizations)
+    .values({
+      authorized_email_domains: ["fr.bosch.com"],
+      cached_activite_principale: "29.32Z",
+      cached_categorie_juridique: "SAS, société par actions simplifiée",
+      cached_code_officiel_geographique: "75107",
+      cached_etat_administratif: "A",
+      cached_libelle_activite_principale:
+        "29.32Z - Fabrication d'autres équipements automobiles",
+      cached_libelle_tranche_effectif: "500 à 999 salariés, en 2021",
+      cached_libelle: "Robert bosch france",
+      cached_nom_complet: "Robert bosch france",
+      cached_tranche_effectifs: "41",
+      created_at: new Date("2024-01-19T21:27:42.009Z"),
+      external_authorized_email_domains: [],
+      siret: "57206768400017",
+      trackdechets_email_domains: [],
+      updated_at: new Date("2024-02-15T13:45:32.598Z"),
+      verified_email_domains: ["fr.bosch.com"],
     })
     .returning();
   return insert.at(0)!;
