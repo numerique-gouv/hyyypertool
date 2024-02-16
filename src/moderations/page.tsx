@@ -11,7 +11,10 @@ import { button } from ":ui/button";
 import { row } from ":ui/table";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
-import { moderation_type_to_emoji } from "./moderation_type_to_emoji";
+import {
+  moderation_type_to_emoji,
+  moderation_type_to_title,
+} from "./moderation_type_to_emoji";
 import { get_moderations_list } from "./repository";
 
 //
@@ -145,7 +148,8 @@ function Filter({ search }: { search: Search }) {
             type="checkbox"
           />
           <label class="fr-label" for={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}>
-            Cacher les {moderation_type_to_emoji("non_verified_domain")}
+            Cacher les {moderation_type_to_emoji("non_verified_domain")}{" "}
+            {moderation_type_to_title("non_verified_domain")}
           </label>
         </div>
       </div>
@@ -160,7 +164,9 @@ function Filter({ search }: { search: Search }) {
             type="checkbox"
           />
           <label class="fr-label" for={HIDE_JOIN_ORGANIZATION_INPUT_ID}>
-            Cacher les {moderation_type_to_emoji("organization_join_block")}
+            Cacher les
+            {moderation_type_to_emoji("organization_join_block")}{" "}
+            {moderation_type_to_title("organization_join_block")}
           </label>
         </div>
       </div>
@@ -214,7 +220,10 @@ async function ModerationList_Table({
         </thead>
         <tbody>
           {moderations.map(({ moderations, users, organizations }) => (
-            <Row moderation={{ ...moderations, users, organizations }} />
+            <Row
+              key={moderations.id.toString()}
+              moderation={{ ...moderations, users, organizations }}
+            />
           ))}
         </tbody>
         <Foot count={count} pagination={pagination} />
@@ -273,8 +282,10 @@ function Foot({
 }
 
 function Row({
+  key,
   moderation,
 }: {
+  key?: string;
   moderation: Moderation & {
     users: User;
     organizations: Organization;
@@ -283,6 +294,7 @@ function Row({
   const { users, organizations } = moderation;
   return (
     <tr
+      key={key}
       _={`on click set the window's location to '${
         app_hc.legacy.moderations[":id"].$url({
           param: { id: moderation.id.toString() },
@@ -294,6 +306,7 @@ function Row({
     >
       <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
+        {moderation_type_to_title(moderation.type)}
       </td>
       <td>{date_to_string(moderation.created_at)}</td>
       <td
