@@ -1,5 +1,12 @@
 
 
+## [2024.2.5](https://github.com/betagouv/hyyypertool/compare/2024.2.4...2024.2.5) (2024-02-16)
+
+
+### Features
+
+* **moderation:** add search organization and email domaine ([#69](https://github.com/betagouv/hyyypertool/issues/69)) ([7e2113f](https://github.com/betagouv/hyyypertool/commit/7e2113f08f1c76ae641c5d7916bf242042615d0b))
+
 ## [2024.2.4](https://github.com/betagouv/hyyypertool/compare/2024.2.3...2024.2.4) (2024-02-14)
 
 
