@@ -51,7 +51,7 @@ jobs:
         working-directory: "."
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
           package_json_file: ./e2e/package.json
           run_install: false
