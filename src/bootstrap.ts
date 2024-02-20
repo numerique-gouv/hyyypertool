@@ -23,7 +23,7 @@ import welcome_router from "./welcome/route";
 //
 
 const app = new Hono<Csp_Context>()
-  .use("*", logger(env.DEPLOY_ENV === "preview" ? console.log : () => {}))
+  .use("*", logger())
   .use("*", csp_headers())
   .use(
     "*",
