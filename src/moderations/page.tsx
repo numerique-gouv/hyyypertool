@@ -98,29 +98,31 @@ function Filter({ search }: { search: Search }) {
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 1 } as Pagination)}
     >
-      <div class="fr-input-group ">
-        <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
-          Siret
-        </label>
-        <input
-          class="fr-input"
-          id={SEARCH_SIRET_INPUT_ID}
-          name={SEARCH_SIRET_INPUT_ID}
-          placeholder="Recherche par SIRET"
-          value={search[SEARCH_SIRET_INPUT_ID]}
-        />
-      </div>
-      <div class="fr-input-group ">
-        <label class="fr-label" for={SEARCH_EMAIL_INPUT_ID}>
-          Email
-        </label>
-        <input
-          class="fr-input"
-          id={SEARCH_EMAIL_INPUT_ID}
-          name={SEARCH_EMAIL_INPUT_ID}
-          placeholder="Recherche par Email"
-          value={search[SEARCH_EMAIL_INPUT_ID]}
-        />
+      <div className="grid grid-cols-2 gap-6">
+        <div class="fr-input-group ">
+          <label class="fr-label" for={SEARCH_EMAIL_INPUT_ID}>
+            Email
+          </label>
+          <input
+            class="fr-input"
+            id={SEARCH_EMAIL_INPUT_ID}
+            name={SEARCH_EMAIL_INPUT_ID}
+            placeholder="Recherche par Email"
+            value={search[SEARCH_EMAIL_INPUT_ID]}
+          />
+        </div>
+        <div class="fr-input-group ">
+          <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
+            Siret
+          </label>
+          <input
+            class="fr-input"
+            id={SEARCH_SIRET_INPUT_ID}
+            name={SEARCH_SIRET_INPUT_ID}
+            placeholder="Recherche par SIRET"
+            value={search[SEARCH_SIRET_INPUT_ID]}
+          />
+        </div>
       </div>
       <div class="fr-fieldset__element">
         <div class="fr-checkbox-group">
