@@ -47,8 +47,13 @@ jobs:
 
       - name: 🌭 Install bun
         uses: oven-sh/setup-bun@v1
-      - run: bun install --frozen-lockfile
-        working-directory: "."
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile]
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
