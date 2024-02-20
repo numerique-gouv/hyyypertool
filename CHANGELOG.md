@@ -1,5 +1,15 @@
 
 
+## [2024.2.6](https://github.com/betagouv/hyyypertool/compare/2024.2.5...2024.2.6) (2024-02-20)
+
+
+### Features
+
+* **moderation:** add moderation type emoji in header ([#70](https://github.com/betagouv/hyyypertool/issues/70)) ([e0037a0](https://github.com/betagouv/hyyypertool/commit/e0037a04a37ccf0bc6b9e8b72aef12be3fbe4fda))
+* **moderation:** add refus comptable response ([#72](https://github.com/betagouv/hyyypertool/issues/72)) ([d20803e](https://github.com/betagouv/hyyypertool/commit/d20803ec4d6d7af8e1bfc2ed4b46d4a34fcd9f26))
+* **moderation:** inline filter form ([#74](https://github.com/betagouv/hyyypertool/issues/74)) ([49969e7](https://github.com/betagouv/hyyypertool/commit/49969e70990e32eed3a278f49a7abf2813b906a2))
+* **moderations:** show the processed moderation on search ([#75](https://github.com/betagouv/hyyypertool/issues/75)) ([9a36f74](https://github.com/betagouv/hyyypertool/commit/9a36f7404d2f2405e6c441443ab2cc492f97e124))
+
 ## [2024.2.5](https://github.com/betagouv/hyyypertool/compare/2024.2.4...2024.2.5) (2024-02-16)
 
 
