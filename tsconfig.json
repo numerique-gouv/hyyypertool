@@ -31,7 +31,7 @@
       "hono-slotify/*": ["./src/hono-slotify/*"],
       ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"]
     },
-    "types": ["bun-types", "pg"],
+    "types": ["bun-types"],
     "plugins": [],
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true
