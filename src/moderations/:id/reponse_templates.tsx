@@ -147,13 +147,28 @@ export const reponse_templates: Array<{
       return dedent`
       Bonjour,
 
-      Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur [https://app.moncomptepro.beta.gouv.fr](https://app.moncomptepro.beta.gouv.fr/).
+      Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
       Vous n'êtes pas autorisé à créer un compte au nom d'une organisation qui n'est pas la vôtre.
 
       Merci de bien vouloir demander à l'organisation d'effectuer elle-même la démarche ou de vous fournir une adresse mail dont le nom de domaine lui appartient.
 
       Excellente journée,
+      `;
+    },
+  },
+  {
+    label: "refus comptable",
+    template({ moderation }) {
+      return dedent`
+      Bonjour,
+
+      Concernant votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » faites sur https://app.moncomptepro.beta.gouv.fr.
+      La connexion à notre platforme est pour le moment restreinte aux seuls membres de l'organisation que vous souhaitez représenter.
+      Nous vous prions de bien vouloir contacter directement l'organisation que vous représentez afin qu'elle effectue la démarche elle même.
+      Nous vous remercions de votre compréhension et restons à votre disposition pour toute assistance complémentaire.
+
+      Excellente journée
       `;
     },
   },
