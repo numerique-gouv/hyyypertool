@@ -2,7 +2,6 @@
 
 import env from ":common/env.ts";
 import {
-  hyyyyyypertool_session,
   type AgentConnect_UserInfo,
   type Session_Context,
 } from ":common/session.ts";
@@ -11,13 +10,11 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { generators } from "openid-client";
 import { z } from "zod";
-import { agentconnect, type Oidc_Context } from "./agentconnect";
+import { type Oidc_Context } from "./agentconnect";
 
 //
 
 const auth_router = new Hono<Oidc_Context & Session_Context>()
-  .use("*", hyyyyyypertool_session)
-  .use("*", agentconnect())
   .post("/login", async function POST(c) {
     const session = c.get("session");
     const { req, redirect, get } = c;

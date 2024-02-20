@@ -2,6 +2,7 @@
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
     "experimentalDecorators": true,
+    "preserveSymlinks": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -9,10 +10,10 @@
       ":assets/*": ["./src/assets/*"],
       ":auth/*": ["./src/auth/*"],
       ":database:moncomptepro": [
-        "./src/database/moncomptepro/moncomptepro_pg.ts",
+        "./src/database/moncomptepro/moncomptepro_pg.ts"
       ],
       ":database:moncomptepro/middleware": [
-        "./src/database/moncomptepro/middleware.ts",
+        "./src/database/moncomptepro/middleware.ts"
       ],
       ":api_ref": ["./src/api_ref.ts"],
       ":common/*": ["./src/common/*"],
@@ -28,11 +29,11 @@
       ":proxy/*": ["./src/proxy/*"],
       ":www": ["./src/www.router"],
       "hono-slotify/*": ["./src/hono-slotify/*"],
-      ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"],
+      ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"]
     },
     "plugins": [],
     "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
-  "include": ["package.json", "src"],
+  "include": ["package.json", "src"]
 }

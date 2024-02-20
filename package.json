@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@gouvfr/dsfr": "1.11.1",
-    "@hono/sentry": "^1.0.1",
+    "@hono/sentry": "1.0.1",
     "@hono/zod-validator": "0.1.11",
     "@lit-labs/motion": "1.0.7",
     "animate.css": "4.1.1",
@@ -56,7 +56,7 @@
     "ts-pattern": "5.0.6",
     "youch": "3.3.3",
     "zod": "3.22.4",
-    "zod-validation-error": "^3.0.2"
+    "zod-validation-error": "3.0.2"
   },
   "devDependencies": {
     "@csmith/release-it-calver-plugin": "2023.12.0",
@@ -73,8 +73,11 @@
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3"
   },
-  "overrides": {
-    "hono": "4.0.2"
+  "packageManager": "pnpm@8.15.1",
+  "pnpm": {
+    "overrides": {
+      "hono": "4.0.2"
+    }
   },
   "release-it": {
     "git": {
@@ -101,6 +104,5 @@
         }
       }
     }
-  },
-  "packageManager": "pnpm@8.15.1"
+  }
 }
