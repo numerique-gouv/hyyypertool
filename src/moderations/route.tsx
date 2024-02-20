@@ -23,7 +23,7 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
     "/",
     zValidator("query", Search_Schema.merge(Pagination_Schema).partial()),
     function GET({ render, req, var: { nonce, userinfo } }) {
-      const {
+      let {
         hide_join_organization,
         hide_non_verified_domain,
         page,
@@ -31,6 +31,13 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
         search_email,
         search_siret,
       } = req.valid("query");
+
+      if (search_email || search_siret) {
+        hide_join_organization = false;
+        hide_non_verified_domain = false;
+        processed_requests = true;
+      }
+
       const username = userinfo_to_username(userinfo);
       return render(
         <Moderations_Page

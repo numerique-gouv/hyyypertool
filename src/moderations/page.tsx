@@ -321,7 +321,18 @@ function Row({
       </td>
       <td class="break-words">{organizations.siret}</td>
       <td>{moderation.id}</td>
-      <td>➡️</td>
+      <td>
+        {moderation.moderated_at ? (
+          <time
+            datetime={moderation.moderated_at.toISOString()}
+            title={moderation.moderated_at.toString()}
+          >
+            ✅
+          </time>
+        ) : (
+          "➡️"
+        )}
+      </td>
     </tr>
   );
 }

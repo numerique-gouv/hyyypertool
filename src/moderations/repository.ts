@@ -43,9 +43,7 @@ export function get_moderations_list(
   const where = and(
     ilike(schema.organizations.siret, `%${siret ?? ""}%`),
     ilike(schema.users.email, `%${email ?? ""}%`),
-    show_archived
-      ? isNotNull(schema.moderations.moderated_at)
-      : isNull(schema.moderations.moderated_at),
+    show_archived ? undefined : isNull(schema.moderations.moderated_at),
     hide_non_verified_domain
       ? not(eq(schema.moderations.type, "non_verified_domain"))
       : undefined,
