@@ -5,10 +5,10 @@ import { hx_include } from ":common/htmx";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Moderation, Organization } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { row } from ":ui/table";
 import type { Pagination } from "@~/app.core/schema";
+import { urls } from "@~/app.urls";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import {
@@ -45,7 +45,7 @@ export type Search = z.infer<typeof Search_Schema>;
 //
 
 const hx_moderations_query_props = {
-  "hx-get": app_hc.moderations.$url().pathname,
+  "hx-get": urls.moderations.$url().pathname,
   "hx-include": hx_include([
     HIDE_JOIN_ORGANIZATION_INPUT_ID,
     MODERATION_TABLE_PAGE_ID,
@@ -298,7 +298,7 @@ function Row({
     <tr
       key={key}
       _={`on click set the window's location to '${
-        app_hc.legacy.moderations[":id"].$url({
+        urls.legacy.moderations[":id"].$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }'`}

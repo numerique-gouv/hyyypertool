@@ -16,8 +16,8 @@
     "database:moncomptepro:seed": "bun src/database/moncomptepro/bin/seed.ts",
     "dev": "bun --hot bin/src/index.ts",
     "dev:api": "bun x npm-run-all --serial dev:api:tsc dev:api:cp dev:api:format",
-    "dev:api:cp": "cp './node_modules/.cache/tsc/src/api/index.d.ts' './src/urls/pattern.d.ts'",
-    "dev:api:format": "bun x prettier --write src/urls/**/*.ts",
+    "dev:api:cp": "cp './node_modules/.cache/tsc/src/api/index.d.ts' './packages/~/app/urls/src/pattern.d.ts'",
+    "dev:api:format": "bun run --cwd packages/~/app/urls format",
     "dev:api:tsc": "bun run build:tsc",
     "dev:inspect-brk": "bun --hot --inspect-brk bin/src/index.ts",
     "dev:tailwind": "bun run build:tailwind --watch",
@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@~/app.core": "workspace:*",
+    "@~/app.urls": "workspace:*",
     "@~/zammad.api": "workspace:*",
     "@gouvfr/dsfr": "1.11.1",
     "@hono/sentry": "^1.0.1",

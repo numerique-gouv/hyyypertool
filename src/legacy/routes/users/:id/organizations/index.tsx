@@ -3,7 +3,6 @@
 import { api_ref } from ":api_ref";
 import { schema, type Organization } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
 import {
@@ -11,6 +10,7 @@ import {
   Pagination_Schema,
   type Pagination,
 } from "@~/app.core/schema";
+import { urls } from "@~/app.urls";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Hono } from "hono";
@@ -146,7 +146,7 @@ function Table({
                 <a
                   class="p-3"
                   href={
-                    app_hc.legacy.organizations[":id"].$url({
+                    urls.legacy.organizations[":id"].$url({
                       param: {
                         id: String(organizations.id),
                       },

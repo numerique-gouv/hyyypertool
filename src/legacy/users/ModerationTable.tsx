@@ -1,9 +1,9 @@
 //
 
 import type { Moderation } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { moderation_type_to_emoji } from ":moderations/moderation_type_to_emoji";
 import { row } from ":ui/table";
+import { urls } from "@~/app.urls";
 import { createContext } from "hono/jsx";
 import { match } from "ts-pattern";
 
@@ -63,7 +63,7 @@ export function ModerationTable({
                 <a
                   class="p-3"
                   href={
-                    app_hc.legacy.moderations[":id"].$url({
+                    urls.legacy.moderations[":id"].$url({
                       param: { id: moderation.id.toString() },
                     }).pathname
                   }

@@ -1,8 +1,8 @@
 //
 
 import { type Organization } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { LocalTime } from ":ui/time/LocalTime";
+import { urls } from "@~/app.urls";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { ORGANIZATIONS_TABLE_ID } from "./page";
@@ -64,7 +64,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
               <a
                 class="p-3"
                 href={
-                  app_hc.legacy.organizations[":id"].$url({
+                  urls.legacy.organizations[":id"].$url({
                     param: {
                       id: organization.id.toString(),
                     },
@@ -87,7 +87,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
           <td colspan={3} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={app_hc.legacy.organizations.$url().pathname}
+              hx-get={urls.legacy.organizations.$url().pathname}
               hx-replace-url="true"
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}

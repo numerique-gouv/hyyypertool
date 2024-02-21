@@ -2,7 +2,7 @@
 
 import { api_ref } from ":api_ref";
 import type { AgentConnect_UserInfo } from ":common/session";
-import { app_hc } from ":hc";
+import { urls } from "@~/app.urls";
 import type { Child } from "hono/jsx";
 import { Root_Layout, type Root_Layout_Props } from "./root";
 
@@ -84,7 +84,7 @@ function Tools({ username }: { username?: string }) {
           <li>
             <a
               class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-fi-logout-box-r-line fr-btn--icon-left"
-              href={app_hc.auth.logout.$url().pathname}
+              href={urls.auth.logout.$url().pathname}
             >
               {username}
             </a>
@@ -107,7 +107,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={app_hc.moderations.$url().pathname}
+            href={urls.moderations.$url().pathname}
             target="_self"
           >
             Moderations
@@ -125,7 +125,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={app_hc.legacy.organizations.$url().pathname}
+            href={urls.legacy.organizations.$url().pathname}
             target="_self"
           >
             Organisations

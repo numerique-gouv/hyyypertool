@@ -9,9 +9,9 @@ import {
   type Users_Organizations,
 } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
+import { urls } from "@~/app.urls";
 import { and, eq } from "drizzle-orm";
 import { createContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -71,7 +71,7 @@ export async function Moderation_Page({
         class="fr-container my-12"
         hx-disinherit="*"
         hx-get={
-          app_hc.moderations[":id"].$url({
+          urls.moderations[":id"].$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }

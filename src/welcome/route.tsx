@@ -3,8 +3,8 @@
 import type { Csp_Context } from ":common/csp_headers";
 import env from ":common/env";
 import { type Session_Context } from ":common/session";
-import { app_hc } from ":hc";
 import { Root_Layout } from ":ui/layout/root";
+import { urls } from "@~/app.urls";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 
@@ -14,7 +14,7 @@ const router = new Hono<Session_Context & Csp_Context>()
   .use("*", jsxRenderer(Root_Layout, { docType: true }))
   .get("/", function GET({ render, redirect, var: { nonce, session } }) {
     if (session.get("userinfo")) {
-      return redirect(app_hc.moderations.$url().pathname);
+      return redirect(urls.moderations.$url().pathname);
     }
 
     return render(
@@ -30,7 +30,7 @@ const router = new Hono<Session_Context & Csp_Context>()
 
         <div class="animated delay-2s fadeInLeftBig flex flex-col items-center">
           <button class="agentconnect-button"></button>
-          <form method="post" action={app_hc.auth.login.$url().pathname}>
+          <form method="post" action={urls.auth.login.$url().pathname}>
             <div class="fr-connect-group">
               <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>

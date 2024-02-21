@@ -6,8 +6,8 @@ import {
   type AgentConnect_UserInfo,
   type Session_Context,
 } from ":common/session.ts";
-import { app_hc } from ":hc";
 import { zValidator } from "@hono/zod-validator";
+import { urls } from "@~/app.urls";
 import { Hono } from "hono";
 import { generators } from "openid-client";
 import { z } from "zod";
@@ -64,7 +64,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
     });
     session.set("idtoken", "");
 
-    return redirect(app_hc.moderations.$url().pathname);
+    return redirect(urls.moderations.$url().pathname);
   })
   .get(
     `/login/callback`,
@@ -99,7 +99,7 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
       session.set("userinfo", userinfo);
       session.set("idtoken", tokenSet.id_token ?? "");
 
-      return redirect(app_hc.moderations.$url().pathname);
+      return redirect(urls.moderations.$url().pathname);
     },
   )
   .get("/logout", async ({ req, get, redirect }) => {
@@ -126,7 +126,7 @@ export type AuthRouter_Schema = typeof router;
 
 function get_redirect_uri(url: string) {
   const _url = new URL(url);
-  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}${app_hc.auth.login.callback.$url().pathname}`;
+  const redirect_uri = `${env.HOST ? env.HOST : _url.origin}${urls.auth.login.callback.$url().pathname}`;
   return redirect_uri;
 }
 

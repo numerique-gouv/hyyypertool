@@ -1,6 +1,6 @@
 import type { Organization } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { button } from ":ui/button";
+import { urls } from "@~/app.urls";
 
 //
 export function Table({
@@ -37,7 +37,7 @@ export function Table({
                 <button
                   class={button()}
                   hx-delete={
-                    app_hc.legacy.organizations[":id"].domains.internal[
+                    urls.legacy.organizations[":id"].domains.internal[
                       ":domain"
                     ].$url({
                       param: {
@@ -53,7 +53,7 @@ export function Table({
                 <button
                   class={button()}
                   hx-patch={
-                    app_hc.legacy.organizations[":id"].domains.internal[
+                    urls.legacy.organizations[":id"].domains.internal[
                       ":domain"
                     ].$url({
                       param: {
@@ -78,7 +78,7 @@ export function Table({
             <form
               class="grid grid-cols-[1fr_min-content]"
               hx-put={
-                app_hc.legacy.organizations[":id"].domains.internal.$url({
+                urls.legacy.organizations[":id"].domains.internal.$url({
                   param: { id: organization.id.toString() },
                 }).pathname
               }

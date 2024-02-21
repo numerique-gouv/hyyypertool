@@ -1,7 +1,7 @@
 //
 
-import { app_hc } from ":hc";
 import { button } from ":ui/button";
+import { urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
 import { ModerationPage_Context } from "./page";
 
@@ -17,7 +17,7 @@ export function About_Organisation() {
       <h3>
         <a
           href={
-            app_hc.legacy.organizations[":id"].$url({
+            urls.legacy.organizations[":id"].$url({
               param: {
                 id: organization.id.toString(),
               },
@@ -73,7 +73,7 @@ export function About_Organisation() {
       </ul>
 
       <div
-        hx-get={app_hc.legacy.organizations.leaders.$url().pathname}
+        hx-get={urls.legacy.organizations.leaders.$url().pathname}
         hx-trigger="load"
         hx-vals={JSON.stringify({
           siret: organization.siret,

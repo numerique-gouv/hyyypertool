@@ -1,8 +1,8 @@
 //
 
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import type { Pagination } from "@~/app.core/schema";
+import { urls } from "@~/app.urls";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import { Table, Table_Context } from "./Table";
@@ -48,7 +48,7 @@ export default async function Page({
       </label>
       <input
         class="fr-input"
-        hx-get={app_hc.legacy.organizations.$url().pathname}
+        hx-get={urls.legacy.organizations.$url().pathname}
         hx-replace-url="true"
         hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}
         hx-target={`#${ORGANIZATIONS_TABLE_ID}`}
