@@ -44,7 +44,7 @@ async function load_leaders({ siret }: { siret: string }) {
   });
 
   const url = `${env.ENTREPRISE_API_GOUV_URL}/v4/djepva/api-association/associations/${siren}?${query_params}`;
-  consola.log(`  <<-- ${"GET"} ${url}`);
+  consola.info(`  <<-- ${"GET"} ${url}`);
 
   const response = await fetch(url, {
     headers: {
@@ -53,7 +53,7 @@ async function load_leaders({ siret }: { siret: string }) {
     },
   });
 
-  consola.log(
+  consola.info(
     `  -->> ${"GET"} ${url} ${response.status} ${response.statusText}`,
   );
 
