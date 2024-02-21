@@ -23,7 +23,7 @@
     "start": "bun bin/src/index.ts",
     "studio:moncomptepro": "bun x drizzle-kit studio --config src/database/moncomptepro/drizzle.config.ts",
     "test": "bun x npm-run-all --serial test:**",
-    "test:type-check": "bun x tsc --noEmit"
+    "test:type-check": "bun run build:tsc"
   },
   "prettier": {
     "plugins": [
