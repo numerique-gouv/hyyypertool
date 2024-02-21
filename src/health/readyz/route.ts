@@ -2,7 +2,7 @@
 
 import env from ":common/env";
 import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
-import { get_zammad_me } from ":legacy/services/zammad_api";
+import { get_zammad_me } from "@~/zammad.lib";
 import { to } from "await-to-js";
 import { sql } from "drizzle-orm";
 import { Hono } from "hono";

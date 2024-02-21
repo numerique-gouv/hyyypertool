@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "API",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "lib": ["ESNext", "DOM"]
+  }
+}
