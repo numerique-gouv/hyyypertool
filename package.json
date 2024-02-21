@@ -3,10 +3,15 @@
   "version": "2024.2.6",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "packages/~/app/*",
+    "packages/~/config/*",
+    "packages/~/infra/zammad/*"
+  ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:*",
-    "build:tsc": "bun x tsc --build",
     "build:tailwind": "bun x tailwindcss -i ./src/assets/tailwind.css -o ./public/assets/tailwind.css",
+    "build:tsc": "bun x tsc --build",
     "database:moncomptepro:migrator": "bun src/database/moncomptepro/bin/migration.ts",
     "database:moncomptepro:seed": "bun src/database/moncomptepro/bin/seed.ts",
     "dev": "bun --hot bin/src/index.ts",
@@ -34,13 +39,15 @@
     ]
   },
   "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/zammad.api": "workspace:*",
     "@gouvfr/dsfr": "1.11.1",
     "@hono/sentry": "^1.0.1",
     "@hono/zod-validator": "0.1.11",
     "@lit-labs/motion": "1.0.7",
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
-    "consola": "^3.2.3",
+    "consola": "3.2.3",
     "drizzle-orm": "0.29.3",
     "error-custom-class": "10.0.0",
     "hono": "4.0.5",

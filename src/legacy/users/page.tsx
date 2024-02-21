@@ -1,9 +1,9 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { Pagination } from ":common/schema";
 import { schema, type MonComptePro_PgDatabase } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
+import type { Pagination } from "@~/app.core/schema";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import { useRequestContext } from "hono/jsx-renderer";
 import { Table, Table_Context } from "./Table";

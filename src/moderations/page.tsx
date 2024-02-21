@@ -2,13 +2,13 @@
 
 import { date_to_string } from ":common/date";
 import { hx_include } from ":common/htmx";
-import type { Pagination } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import type { Moderation, Organization } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { row } from ":ui/table";
+import type { Pagination } from "@~/app.core/schema";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import {

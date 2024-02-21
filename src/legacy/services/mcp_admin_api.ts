@@ -1,7 +1,7 @@
 //
 
 import env from ":common/env";
-import { HTTPError } from ":common/errors";
+import { HTTPError } from "@~/app.core/error";
 
 //
 

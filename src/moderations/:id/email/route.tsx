@@ -2,21 +2,23 @@
 
 import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Htmx_Header } from ":common/htmx";
-import { Entity_Schema } from ":common/schema";
 import { schema } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
+import { MODERATION_EVENTS } from ":moderations/event";
+import { userinfo_to_username } from ":ui/layout/main";
+import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema } from "@~/app.core/schema";
+import {
+  get_full_ticket,
+  send_zammad_new_email,
+  send_zammad_response,
+} from "@~/zammad.lib";
 import {
   ARTICLE_TYPE,
   GROUP_MONCOMPTEPRO,
   GROUP_MONCOMPTEPRO_SENDER_ID,
   PRIORITY_TYPE,
-  get_full_ticket,
-  send_zammad_new_email,
-  send_zammad_response,
-} from ":legacy/services/zammad_api";
-import { MODERATION_EVENTS } from ":moderations/event";
-import { userinfo_to_username } from ":ui/layout/main";
-import { zValidator } from "@hono/zod-validator";
+} from "@~/zammad.lib/const";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";

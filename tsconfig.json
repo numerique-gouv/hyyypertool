@@ -34,11 +34,15 @@
       ":welcome/*": ["./src/welcome/*"],
       ":www": ["./src/www.router"],
       "@~/app.api": ["./src/api/index.ts"],
-      "@~/common.config": ["./src/common/env.ts"],
       "hono-slotify/*": ["./src/hono-slotify/*"]
     },
     "plugins": [],
     "resolveJsonModule": true
   },
-  "include": ["package.json", "src", "bin/src"]
+  "include": ["package.json", "src", "bin/src"],
+  "references": [
+    { "path": "packages/~/app/core/tsconfig.json" },
+    { "path": "packages/~/infra/zammad/api/tsconfig.json" },
+    { "path": "packages/~/infra/zammad/lib/tsconfig.json" }
+  ]
 }

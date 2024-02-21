@@ -1,0 +1,30 @@
+{
+  "name": "@~/app.core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./config": {
+      "default": "./src/config/index.ts"
+    },
+    "./error": {
+      "default": "./src/error/index.ts"
+    },
+    "./schema": {
+      "default": "./src/schema/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "modern-errors": "7.0.0",
+    "ts-pattern": "5.0.8",
+    "zod": "3.22.4"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*",
+    "@types/node": "20.11.19"
+  }
+}

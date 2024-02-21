@@ -2,9 +2,9 @@
 
 import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Csp_Context } from ":common/csp_headers";
-import { Entity_Schema, Pagination_Schema } from ":common/schema";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema, Pagination_Schema } from "@~/app.core/schema";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import organization_router from "./:id/route";

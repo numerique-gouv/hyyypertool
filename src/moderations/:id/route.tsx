@@ -3,7 +3,6 @@
 import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Csp_Context } from ":common/csp_headers";
 import type { Htmx_Header } from ":common/htmx";
-import { Entity_Schema } from ":common/schema";
 import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import { MODERATION_EVENTS } from ":moderations/event";
@@ -13,6 +12,7 @@ import {
   type Main_Layout_Props,
 } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema } from "@~/app.core/schema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";

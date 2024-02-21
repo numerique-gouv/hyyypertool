@@ -1,11 +1,11 @@
 //
 
 import type { Htmx_Header } from ":common/htmx";
-import { Entity_Schema } from ":common/schema";
 import { schema } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema } from "@~/app.core/schema";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
