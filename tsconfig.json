@@ -2,6 +2,10 @@
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
     "experimentalDecorators": true,
+    "composite": true,
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -34,7 +38,8 @@
     },
     "plugins": [],
     "resolveJsonModule": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "outDir": "./node_modules/.cache/tsc"
   },
   "include": ["package.json", "src", "bin/src"]
 }

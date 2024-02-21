@@ -1,7 +1,7 @@
 //
 
-import type { Router } from ":mapping";
 import { hc } from "hono/client";
+import type { Router } from "./pattern";
 
 //
 
