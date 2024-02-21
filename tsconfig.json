@@ -16,7 +16,7 @@
       ":database:moncomptepro/middleware": [
         "./src/database/moncomptepro/middleware.ts"
       ],
-      ":hc": ["./src/client"],
+      ":hc": ["./src/urls/index.ts"],
       ":health/*": ["./src/health/*"],
       ":legacy/*": ["./src/legacy/*"],
       ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"],
