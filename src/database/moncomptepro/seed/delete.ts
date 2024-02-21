@@ -7,7 +7,7 @@ import type { MonComptePro_PgDatabase } from "../moncomptepro_pg";
 //
 
 const logger =
-  env.DEPLOY_ENV === "preview"
+  env["DEPLOY_ENV"] === "preview"
     ? console
     : { log(_message?: any, ..._optionalParams: any[]) {} };
 

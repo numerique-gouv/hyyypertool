@@ -59,14 +59,14 @@ export default z
     SENTRY_DNS: z.string().trim().url().optional(),
     VERSION: z.string().default(
       match(
-        DEPLOY_ENV_SHEMA.optional().parse(env.DEPLOY_ENV, {
+        DEPLOY_ENV_SHEMA.optional().parse(env["DEPLOY_ENV"], {
           path: ["env.DEPLOY_ENV"],
         }),
       )
         .with(DEPLOY_ENV_SHEMA.Enum.production, () => version)
         .otherwise(
           () =>
-            GIT_SHA_SHEMA.parse(env.GIT_SHA, {
+            GIT_SHA_SHEMA.parse(env["GIT_SHA"], {
               path: ["env.GIT_SHA"],
             }) ?? version,
         ),

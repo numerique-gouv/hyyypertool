@@ -4,7 +4,7 @@ import type { Moderation } from ":database:moncomptepro";
 import { app_hc } from ":hc";
 import { moderation_type_to_emoji } from ":moderations/moderation_type_to_emoji";
 import { row } from ":ui/table";
-import { createContext, useContext } from "hono/jsx";
+import { createContext } from "hono/jsx";
 import { match } from "ts-pattern";
 
 //
@@ -23,14 +23,14 @@ export function ModerationTable({
 }: {
   moderations: Moderation[];
 }) {
-  const { page, take, count, user_id } = useContext(ModerationTable_Context);
+  // const { page, take, count, user_id } = useContext(ModerationTable_Context);
 
   return (
     <table>
       <thead>
         <tr>
           {fields.map((name) => (
-            <th>{name}</th>
+            <th key={name}>{name}</th>
           ))}
           <th>Lien</th>
         </tr>
@@ -39,9 +39,9 @@ export function ModerationTable({
       <tbody>
         <tr>
           {moderations.map((moderation) => (
-            <tr class={row()}>
+            <tr class={row()} key={moderation.id}>
               {fields.map((name) => (
-                <td>
+                <td key={name}>
                   {match(moderation[name])
                     .when(
                       () => name === "type",

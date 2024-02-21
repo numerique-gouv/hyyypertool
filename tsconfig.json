@@ -1,14 +1,15 @@
 {
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "experimentalDecorators": true,
     "composite": true,
-    "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
+    "experimentalDecorators": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "noEmit": false,
+    "outDir": "./node_modules/.cache/tsc",
     "paths": {
       ":api_ref": ["./src/api_ref.ts"],
       ":assets/*": ["./src/assets/*"],
@@ -37,9 +38,7 @@
       "hono-slotify/*": ["./src/hono-slotify/*"]
     },
     "plugins": [],
-    "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
-    "outDir": "./node_modules/.cache/tsc"
+    "resolveJsonModule": true
   },
   "include": ["package.json", "src", "bin/src"]
 }
