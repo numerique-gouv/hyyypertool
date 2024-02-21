@@ -220,7 +220,7 @@ async function fetch_zammad_api(options: Options) {
     Authorization: `Bearer ${env.ZAMMAD_TOKEN}`,
   });
 
-  consola.log(`  <<-- ${options.method} ${url}`);
+  consola.info(`  <<-- ${options.method} ${url}`);
 
   const response = await fetch(url, {
     method: options.method,
@@ -228,7 +228,7 @@ async function fetch_zammad_api(options: Options) {
     body: options.method === "GET" ? undefined : JSON.stringify(options.body),
   });
 
-  consola.log(
+  consola.info(
     `  -->> ${options.method} ${url} ${response.status} ${response.statusText}`,
   );
 
