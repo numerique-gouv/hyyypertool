@@ -1,5 +1,5 @@
-import { app_hc } from ":hc";
 import { Root_Layout } from ":ui/layout/root";
+import { urls } from "@~/app.urls";
 import { html } from "hono/html";
 
 //
@@ -26,7 +26,7 @@ export function NotAuthorized({ nonce }: { nonce?: string }) {
                 Si vous pensez qu’il s’agit d’une erreur, merci de contacter
                 votre administrateur.
               </p>
-              <a href=${app_hc.auth.logout.$url().pathname} class="fr-btn">
+              <a href=${urls.auth.logout.$url().pathname} class="fr-btn">
                 Retour à l’accueil
               </a>
             </div>

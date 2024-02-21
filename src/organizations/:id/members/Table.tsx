@@ -2,7 +2,6 @@
 
 import { api_ref } from ":api_ref";
 import type { Users_Organizations } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import {
   Verification_Type_Schema,
   type Verification_Type,
@@ -10,6 +9,7 @@ import {
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
+import { urls } from "@~/app.urls";
 import { createContext, useContext } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
 
@@ -72,7 +72,7 @@ export function Table({
             <input
               class="text-right"
               hx-get={
-                app_hc.legacy.organizations[":id"].members.$url({
+                urls.legacy.organizations[":id"].members.$url({
                   param: { id: organization_id.toString() },
                 }).pathname
               }
@@ -134,7 +134,7 @@ function Actions({
         <button
           class={button()}
           hx-delete={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
@@ -148,7 +148,7 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
@@ -166,7 +166,7 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
@@ -184,7 +184,7 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
@@ -203,7 +203,7 @@ function Actions({
           <button
             class={button({ intent: "danger" })}
             hx-patch={
-              app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+              urls.legacy.organizations[":id"].members[":user_id"].$url({
                 param: {
                   id: organization_id.toString(),
                   user_id: user_id.toString(),
@@ -221,7 +221,7 @@ function Actions({
         <button
           class={button()}
           hx-patch={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),

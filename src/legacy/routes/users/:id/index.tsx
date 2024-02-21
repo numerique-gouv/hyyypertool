@@ -7,7 +7,6 @@ import type { Htmx_Header } from ":common/htmx";
 import { hyyyyyypertool_session } from ":common/session";
 import { schema, type User } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
@@ -15,6 +14,7 @@ import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { LocalTime } from ":ui/time/LocalTime";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import { urls } from "@~/app.urls";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -74,7 +74,7 @@ export default new Hono<
           <div class="fr-table max-w-full overflow-x-auto">
             <div
               hx-get={
-                app_hc.legacy.users[":id"].moderations.$url({
+                urls.legacy.users[":id"].moderations.$url({
                   param: {
                     id: user.id.toString(),
                   },

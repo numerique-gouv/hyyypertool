@@ -1,8 +1,8 @@
 //
 
-import { app_hc } from ":hc";
 import type { Organization_DTO } from ":organizations/repositories/get_by_id";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
+import { urls } from "@~/app.urls";
 
 //
 
@@ -16,7 +16,7 @@ export async function Edit_Domain({
       <div
         class="fr-table"
         hx-get={
-          app_hc.legacy.organizations[":id"].domains.internal.$url({
+          urls.legacy.organizations[":id"].domains.internal.$url({
             param: {
               id: organization.id.toString(),
             },
@@ -30,7 +30,7 @@ export async function Edit_Domain({
       <div
         class="fr-table"
         hx-get={
-          app_hc.legacy.organizations[":id"].domains.external.$url({
+          urls.legacy.organizations[":id"].domains.external.$url({
             param: {
               id: organization.id.toString(),
             },

@@ -1,9 +1,9 @@
 //
 
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import { get_by_id } from ":organizations/repositories/get_by_id";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
+import { urls } from "@~/app.urls";
 import { useRequestContext } from "hono/jsx-renderer";
 import { Edit_Domain } from "./Edit_Domain";
 import { Fiche } from "./Fiche";
@@ -26,7 +26,7 @@ export default async function Page({ id }: { id: number }) {
       <h3>Membres enregistrés dans cette organisation :</h3>
       <div
         hx-get={
-          app_hc.legacy.organizations[":id"].members.$url({
+          urls.legacy.organizations[":id"].members.$url({
             param: {
               id: organization.id.toString(),
             },

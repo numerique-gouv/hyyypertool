@@ -3,8 +3,8 @@
 import { OpenInZammad, SearchInZammad } from ":common/zammad";
 import { schema } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
-import { app_hc } from ":hc";
 import { get_duplicate_moderations } from ":moderations/repository";
+import { urls } from "@~/app.urls";
 import { get_zammad_mail } from "@~/zammad.lib";
 import to from "await-to-js";
 import { eq } from "drizzle-orm";
@@ -55,7 +55,7 @@ export async function Duplicate_Warning({
           <li>
             <a
               href={
-                app_hc.legacy.moderations[":id"].$url({
+                urls.legacy.moderations[":id"].$url({
                   param: { id: moderation.id.toString() },
                 }).pathname
               }

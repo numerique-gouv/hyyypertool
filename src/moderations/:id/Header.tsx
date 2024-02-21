@@ -1,12 +1,12 @@
 //
 
 import type { Moderation } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { moderation_type_to_emoji } from ":moderations/moderation_type_to_emoji";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import { callout } from ":ui/callout";
 import { LocalTime } from ":ui/time/LocalTime";
+import { urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { ModerationPage_Context } from "./page";
@@ -40,7 +40,7 @@ export function Header() {
       <hr class="bg-none" />
 
       <div
-        hx-get={app_hc.moderations.duplicate_warning.$url().pathname}
+        hx-get={urls.moderations.duplicate_warning.$url().pathname}
         hx-trigger="load"
         hx-vals={JSON.stringify({
           organization_id: moderation.organization_id,
@@ -124,7 +124,7 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
       <button
         class={button({ size: "sm", type: "tertiary" })}
         hx-patch={
-          app_hc.legacy.moderations[":id"].reprocess.$url({
+          urls.legacy.moderations[":id"].reprocess.$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }

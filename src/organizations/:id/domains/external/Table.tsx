@@ -1,6 +1,6 @@
 import { type Organization } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { button } from ":ui/button";
+import { urls } from "@~/app.urls";
 
 //
 export function Table({ organization }: { organization: Organization }) {
@@ -25,7 +25,7 @@ export function Table({ organization }: { organization: Organization }) {
                 <button
                   class={button()}
                   hx-delete={
-                    app_hc.legacy.organizations[":id"].domains.external[
+                    urls.legacy.organizations[":id"].domains.external[
                       ":domain"
                     ].$url({
                       param: {
@@ -47,7 +47,7 @@ export function Table({ organization }: { organization: Organization }) {
             <form
               class="grid grid-cols-[1fr_min-content]"
               hx-put={
-                app_hc.legacy.organizations[":id"].domains.external.$url({
+                urls.legacy.organizations[":id"].domains.external.$url({
                   param: { id: organization.id.toString() },
                 }).pathname
               }

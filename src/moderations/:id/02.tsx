@@ -2,9 +2,9 @@
 
 import { api_ref } from ":api_ref";
 import type { Organization } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { button } from ":ui/button";
+import { urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
 import { ModerationPage_Context } from "./page";
 
@@ -21,7 +21,7 @@ export async function _02() {
         <button
           class={button({ className: "block", intent: "warning" })}
           hx-patch={
-            app_hc.legacy.organizations[":id"].verify[":domain"].$url({
+            urls.legacy.organizations[":id"].verify[":domain"].$url({
               param: {
                 id: moderation.organizations.id.toString(),
                 domain: domain,
@@ -48,7 +48,7 @@ export async function _02() {
       <h3>Membres enregistrés dans cette organisation :</h3>
       <div
         hx-get={
-          app_hc.legacy.organizations[":id"].members.$url({
+          urls.legacy.organizations[":id"].members.$url({
             param: {
               id: moderation.organization_id.toString(),
             },
@@ -63,7 +63,7 @@ export async function _02() {
         <button
           class={button({ className: "block", intent: "warning" })}
           hx-post={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: moderation.organization_id.toString(),
                 user_id: moderation.user_id.toString(),
@@ -87,7 +87,7 @@ export async function _02() {
         <button
           class={button({ className: "block", intent: "warning" })}
           hx-post={
-            app_hc.legacy.organizations[":id"].members[":user_id"].$url({
+            urls.legacy.organizations[":id"].members[":user_id"].$url({
               param: {
                 id: moderation.organization_id.toString(),
                 user_id: moderation.user_id.toString(),
@@ -143,7 +143,7 @@ export async function Edit_Domain({
       <div
         class="fr-table"
         hx-get={
-          app_hc.legacy.organizations[":id"].domains.internal.$url({
+          urls.legacy.organizations[":id"].domains.internal.$url({
             param: {
               id: organization.id.toString(),
             },
@@ -157,7 +157,7 @@ export async function Edit_Domain({
       <div
         class="fr-table"
         hx-get={
-          app_hc.legacy.organizations[":id"].domains.external.$url({
+          urls.legacy.organizations[":id"].domains.external.$url({
             param: {
               id: organization.id.toString(),
             },

@@ -9,10 +9,10 @@ import {
   type Organization,
   type User,
 } from ":database:moncomptepro";
-import { app_hc } from ":hc";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
+import { urls } from "@~/app.urls";
 import { eq } from "drizzle-orm";
 import { ok } from "node:assert";
 import { reponse_templates } from "./reponse_templates";
@@ -53,7 +53,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
 
       <div
         hx-get={
-          app_hc.legacy.moderations[":id"].email.$url({
+          urls.legacy.moderations[":id"].email.$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }
@@ -174,7 +174,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
       <form
         class="text-right"
         hx-put={
-          app_hc.legacy.moderations[":id"].email.$url({
+          urls.legacy.moderations[":id"].email.$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }
@@ -262,7 +262,7 @@ function SendModerationProcessedEmail({
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        app_hc.legacy.moderations[":id"].processed.$url({
+        urls.legacy.moderations[":id"].processed.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }
@@ -297,7 +297,7 @@ function MarkModerationProcessed({ moderation }: { moderation: Moderation }) {
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        app_hc.legacy.moderations[":id"].rejected.$url({
+        urls.legacy.moderations[":id"].rejected.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }

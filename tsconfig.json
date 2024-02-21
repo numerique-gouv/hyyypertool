@@ -21,7 +21,7 @@
       ":database:moncomptepro/middleware": [
         "./src/database/moncomptepro/middleware.ts"
       ],
-      ":hc": ["./src/urls/index.ts"],
+      ":hc": ["./packages/~/app/urls/index.ts"],
       ":health/*": ["./src/health/*"],
       ":legacy/*": ["./src/legacy/*"],
       ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"],
@@ -42,6 +42,7 @@
   "include": ["package.json", "src", "bin/src"],
   "references": [
     { "path": "packages/~/app/core/tsconfig.json" },
+    { "path": "packages/~/app/urls/tsconfig.json" },
     { "path": "packages/~/infra/zammad/api/tsconfig.json" },
     { "path": "packages/~/infra/zammad/lib/tsconfig.json" }
   ]

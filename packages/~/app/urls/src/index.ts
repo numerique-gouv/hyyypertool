@@ -5,7 +5,7 @@ import type { Router } from "./pattern";
 
 //
 
-export const app_hc = hc<Router>("http://localhost:3000", {
+export const urls = hc<Router>("http://localhost:3000", {
   fetch: (url: URL) => {
     // NOTE(douglasduteil): do not fetch
     // This is a hack to make the type system happy

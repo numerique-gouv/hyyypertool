@@ -143,11 +143,11 @@ declare const app: import("hono/hono-base").HonoBase<
                         form: {
                           verification_type?:
                             | ""
+                            | "verified_email_domain"
+                            | "official_contact_email"
+                            | "official_contact_domain"
                             | "code_sent_to_official_contact_email"
                             | "in_liste_dirigeants_rna"
-                            | "official_contact_domain"
-                            | "official_contact_email"
-                            | "verified_email_domain"
                             | undefined;
                           is_external?: string | undefined;
                         };
@@ -230,8 +230,8 @@ declare const app: import("hono/hono-base").HonoBase<
                 {
                   query: {
                     page?: string | undefined;
-                    page_size?: string | undefined;
                     "search-siret"?: string | undefined;
+                    page_size?: string | undefined;
                     id?: string | undefined;
                   };
                 },
@@ -263,8 +263,8 @@ declare const app: import("hono/hono-base").HonoBase<
                     };
                   } & {
                     form: {
-                      "mail-subject": string;
                       response: string;
+                      "mail-subject": string;
                     };
                   },
                   {}
@@ -381,8 +381,8 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 form: {
-                  "mail-subject": string;
                   response: string;
+                  "mail-subject": string;
                 };
               },
               {}
@@ -501,17 +501,20 @@ declare const app: import("hono/hono-base").HonoBase<
     > &
     import("hono/types").MergeSchemaPath<
       import("hono/types").MergeSchemaPath<
-        import("hono").ToSchema<
-          "get",
-          "/zammad/attachment/:ticket_id/:article_id/:attachment_id",
-          {
-            param: {
-              article_id: string;
-              attachment_id: string;
-              ticket_id: string;
-            };
-          },
-          {}
+        import("hono/types").MergeSchemaPath<
+          import("hono").ToSchema<
+            "get",
+            "/attachment/:ticket_id/:article_id/:attachment_id",
+            {
+              param: {
+                article_id: string;
+                attachment_id: string;
+                ticket_id: string;
+              };
+            },
+            {}
+          >,
+          "/zammad"
         > &
           import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}> &
           import("hono").ToSchema<"get", "/bundle/lit.js", unknown, {}> &

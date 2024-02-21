@@ -1,7 +1,7 @@
 //
 
 import env from ":common/env.ts";
-import { app_hc } from ":hc";
+import { urls } from "@~/app.urls";
 import type { Env, MiddlewareHandler } from "hono";
 import { BaseClient, Issuer } from "openid-client";
 
@@ -17,7 +17,7 @@ export function agentconnect(): MiddlewareHandler<Oidc_Context> {
       client_id: env.AGENTCONNECT_OIDC_CLIENT_ID,
       client_secret: env.AGENTCONNECT_OIDC_SECRET_ID,
       id_token_signed_response_alg: "ES256",
-      redirect_uris: [app_hc.auth.login.callback.$url().href],
+      redirect_uris: [urls.auth.login.callback.$url().href],
       response_types: ["code"],
       userinfo_signed_response_alg: "ES256",
     });
