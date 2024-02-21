@@ -2,6 +2,7 @@
 
 import type { Csp_Context } from ":common/csp_headers";
 import type { AgentConnect_UserInfo, Session_Context } from ":common/session";
+import "@hono/sentry";
 import type { Env, MiddlewareHandler } from "hono";
 import { NotAuthorized } from "./NotAuthorized";
 

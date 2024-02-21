@@ -86,6 +86,7 @@ jobs:
           AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AGENTCONNECT_URL }}/api/v2"
           AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
           AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
+          CONSOLA_LEVEL: "2"
           ALLOWED_USERS: "user@yopmail.com"
           API_AUTH_PASSWORD: "???"
           API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"

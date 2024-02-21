@@ -2,6 +2,7 @@
 
 import env from ":common/env";
 import { HTTPError } from ":common/errors";
+import consola from "consola";
 import { z } from "zod";
 
 //
@@ -219,9 +220,7 @@ async function fetch_zammad_api(options: Options) {
     Authorization: `Bearer ${env.ZAMMAD_TOKEN}`,
   });
 
-  if (env.DEPLOY_ENV === "preview") {
-    console.debug(`  <-- ${options.method} ${url}`);
-  }
+  consola.log(`  <<-- ${options.method} ${url}`);
 
   const response = await fetch(url, {
     method: options.method,
@@ -229,11 +228,9 @@ async function fetch_zammad_api(options: Options) {
     body: options.method === "GET" ? undefined : JSON.stringify(options.body),
   });
 
-  if (env.DEPLOY_ENV === "preview") {
-    console.debug(
-      `  --> ${options.method} ${url} ${response.status} ${response.statusText}`,
-    );
-  }
+  consola.log(
+    `  -->> ${options.method} ${url} ${response.status} ${response.statusText}`,
+  );
 
   if (!response.ok) {
     throw new HTTPError(`${url} ${response.status} ${response.statusText}`);

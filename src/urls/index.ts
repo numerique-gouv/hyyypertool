@@ -1,17 +1,9 @@
 //
 
-import env from ":common/env";
-import type { Router } from ":mapping";
-import { $ } from "bun";
 import { hc } from "hono/client";
+import type { Router } from "./pattern";
 
 //
-
-if (env.NODE_ENV === "development") {
-  console.log("> Rebuild route map");
-  await $`tsc --project src/api/tsconfig.json`;
-  console.log("< Rebuild route map");
-}
 
 export const app_hc = hc<Router>("http://localhost:3000", {
   fetch: (url: URL) => {
