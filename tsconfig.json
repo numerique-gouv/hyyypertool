@@ -34,7 +34,6 @@
       ":welcome/*": ["./src/welcome/*"],
       ":www": ["./src/www.router"],
       "@~/app.api": ["./src/api/index.ts"],
-      "@~/common.config": ["./s"],
       "hono-slotify/*": ["./src/hono-slotify/*"]
     },
     "plugins": [],

@@ -1,9 +1,9 @@
 //
 
-import { Entity_Schema } from ":common/schema";
 import { schema } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema } from "@~/app.core/schema";
 import { asc, desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { ModerationTable, ModerationTable_Context } from "./ModerationTable";

@@ -17,7 +17,7 @@
     "dev": "bun --hot bin/src/index.ts",
     "dev:api": "bun x npm-run-all --serial dev:api:tsc dev:api:cp dev:api:format",
     "dev:api:cp": "cp './node_modules/.cache/tsc/src/api/index.d.ts' './src/urls/pattern.d.ts'",
-    "dev:api:format": "bun x prettier --write srcconsola.info/urls/**/*.ts",
+    "dev:api:format": "bun x prettier --write src/urls/**/*.ts",
     "dev:api:tsc": "bun run build:tsc",
     "dev:inspect-brk": "bun --hot --inspect-brk bin/src/index.ts",
     "dev:tailwind": "bun run build:tailwind --watch",

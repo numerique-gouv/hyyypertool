@@ -1,8 +1,8 @@
 //
 
-import type { Pagination } from ":common/schema";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
+import type { Pagination } from "@~/app.core/schema";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import { Table, Table_Context } from "./Table";

@@ -1,7 +1,6 @@
 //
 
 import type { Htmx_Header } from ":common/htmx";
-import { Entity_Schema } from ":common/schema";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import { schema } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
@@ -9,6 +8,7 @@ import { join_organization } from ":legacy/services/mcp_admin_api";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { Verification_Type_Schema } from ":organizations/services/verification_type";
 import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema } from "@~/app.core/schema";
 import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";

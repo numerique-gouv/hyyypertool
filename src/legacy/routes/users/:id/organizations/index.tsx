@@ -1,16 +1,16 @@
 //
 
 import { api_ref } from ":api_ref";
-import {
-  Entity_Schema,
-  Pagination_Schema,
-  type Pagination,
-} from ":common/schema";
 import { schema, type Organization } from ":database:moncomptepro";
 import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { app_hc } from ":hc";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
+import {
+  Entity_Schema,
+  Pagination_Schema,
+  type Pagination,
+} from "@~/app.core/schema";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Hono } from "hono";
