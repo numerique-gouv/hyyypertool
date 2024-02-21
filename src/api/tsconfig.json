@@ -4,8 +4,7 @@
     "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "./node_modules/.cache/tsc",
-    "rootDir": "..",
+    "outDir": "./node_modules/.cache/tsc"
   },
-  "files": ["../bootstrap.ts"],
+  "files": ["index.ts"]
 }

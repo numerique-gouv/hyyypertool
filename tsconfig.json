@@ -6,33 +6,35 @@
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
+      ":api_ref": ["./src/api_ref.ts"],
       ":assets/*": ["./src/assets/*"],
       ":auth/*": ["./src/auth/*"],
+      ":common/*": ["./src/common/*"],
       ":database:moncomptepro": [
-        "./src/database/moncomptepro/moncomptepro_pg.ts",
+        "./src/database/moncomptepro/moncomptepro_pg.ts"
       ],
       ":database:moncomptepro/middleware": [
-        "./src/database/moncomptepro/middleware.ts",
+        "./src/database/moncomptepro/middleware.ts"
       ],
-      ":api_ref": ["./src/api_ref.ts"],
-      ":common/*": ["./src/common/*"],
-      ":health/*": ["./src/health/*"],
       ":hc": ["./src/client"],
+      ":health/*": ["./src/health/*"],
       ":legacy/*": ["./src/legacy/*"],
+      ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"],
       ":moderations/*": ["./src/moderations/*"],
       ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":organizations/*": ["./src/organizations/*"],
       ":package.json": ["./package.json"],
+      ":proxy/*": ["./src/proxy/*"],
       ":ui/*": ["./src/ui/*"],
       ":welcome/*": ["./src/welcome/*"],
-      ":proxy/*": ["./src/proxy/*"],
       ":www": ["./src/www.router"],
-      "hono-slotify/*": ["./src/hono-slotify/*"],
-      ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"],
+      "@~/app.api": ["./src/api/index.ts"],
+      "@~/common.config": ["./src/common/env.ts"],
+      "hono-slotify/*": ["./src/hono-slotify/*"]
     },
     "plugins": [],
     "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
-  "include": ["package.json", "src"],
+  "include": ["package.json", "src", "bin/src"]
 }

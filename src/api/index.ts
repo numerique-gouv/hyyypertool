@@ -1,6 +1,6 @@
 //
 
-import { csp_headers, type Csp_Context } from ":common/csp_headers";
+import { csp_headers } from ":common/csp_headers";
 import env from ":common/env";
 // import { sentry, type Sentry_Context } from ":common/sentry";
 import { vip_list_guard } from ":auth/vip_list.guard";
@@ -9,26 +9,26 @@ import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import legacy from ":legacy/route";
 import { moderations_router } from ":moderations/route";
 import { sentry } from "@hono/sentry";
+import consola, { LogLevels } from "consola";
 import { Hono } from "hono";
-import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
 import Youch from "youch";
-import asserts_router from "./assets/route";
-import auth_router from "./auth/route";
-import { readyz } from "./health/readyz/route";
-import { NotFound } from "./not-found";
-import { proxy } from "./proxy/route";
-import welcome_router from "./welcome/route";
+import asserts_router from "../assets/route";
+import auth_router from "../auth/route";
+import { readyz } from "../health/readyz/route";
+import { NotFound } from "../not-found";
+import { proxy } from "../proxy/route";
+import welcome_router from "../welcome/route";
 
 //
 
-const app = new Hono<Csp_Context>()
-  .use("*", logger())
+const app = new Hono()
+  .use("*", logger(consola.log))
   .use("*", csp_headers())
   .use(
     "*",
     sentry({
-      debug: env.DEPLOY_ENV === "preview",
+      debug: consola.level >= LogLevels.debug,
       dsn: env.SENTRY_DNS,
       environment: env.DEPLOY_ENV,
       release: env.VERSION,
@@ -59,25 +59,16 @@ const app = new Hono<Csp_Context>()
   )
   .route("/moderations", moderations_router)
   .route("", legacy)
-  .notFound(async ({ html, var: { nonce } }) => {
+  .notFound(async ({ html, get }) => {
+    const nonce: string = get("nonce" as any);
     return html(NotFound({ nonce }), 404);
   })
   .onError(async (error, { html, req, var: { sentry } }) => {
+    consola.error(error);
     sentry.captureException(error);
     const youch = new Youch(error, req.raw);
     return html(await youch.toHTML(), 500);
   });
-
-//
-
-if (env.DEPLOY_ENV === "preview") {
-  showRoutes(app);
-}
-
-console.debug("- NODE_ENV " + env.NODE_ENV);
-console.debug("- DEPLOY_ENV " + env.DEPLOY_ENV);
-console.debug("- VERSION " + env.VERSION);
-console.debug("- GIT_SHA " + env.GIT_SHA);
 
 //
 

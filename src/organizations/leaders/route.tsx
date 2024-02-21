@@ -2,6 +2,7 @@
 
 import env from ":common/env";
 import { zValidator } from "@hono/zod-validator";
+import consola from "consola";
 import { Hono } from "hono";
 import lodash_sortby from "lodash.sortby";
 import { z } from "zod";
@@ -43,20 +44,18 @@ async function load_leaders({ siret }: { siret: string }) {
   });
 
   const url = `${env.ENTREPRISE_API_GOUV_URL}/v4/djepva/api-association/associations/${siren}?${query_params}`;
-  if (env.DEPLOY_ENV === "preview") {
-    console.debug(`  <-- ${"GET"} ${url}`);
-  }
+  consola.log(`  <<-- ${"GET"} ${url}`);
+
   const response = await fetch(url, {
     headers: {
       "content-type": "application/json",
       Authorization: `Bearer ${env.ENTREPRISE_API_GOUV_TOKEN}`,
     },
   });
-  if (env.DEPLOY_ENV === "preview") {
-    console.debug(
-      `  --> ${"GET"} ${url} ${response.status} ${response.statusText}`,
-    );
-  }
+
+  consola.log(
+    `  -->> ${"GET"} ${url} ${response.status} ${response.statusText}`,
+  );
 
   const { data } =
     (await response.json()) as Entreprise_API_Association_Response;
