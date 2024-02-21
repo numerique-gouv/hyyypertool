@@ -1,7 +1,7 @@
 //
 
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import type { Pagination } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
@@ -29,7 +29,7 @@ export default async function Page({
 }) {
   const {
     var: { moncomptepro_pg },
-  } = useRequestContext<moncomptepro_pg_Context>();
+  } = useRequestContext<MonComptePro_Pg_Context>();
   const { page, page_size } = pagination;
   const { [SEARCH_SIRET_INPUT_ID]: siret } = search;
   const { count, organizations } = await get_organizations_list(

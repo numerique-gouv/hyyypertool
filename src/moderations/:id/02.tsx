@@ -1,12 +1,12 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { Organization } from ":database:moncomptepro";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { button } from ":ui/button";
 import { urls } from "@~/app.urls";
+import type { Organization } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./page";
+import { ModerationPage_Context } from "./context";
 
 //
 

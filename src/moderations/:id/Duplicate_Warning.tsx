@@ -1,10 +1,10 @@
 //
 
 import { OpenInZammad, SearchInZammad } from ":common/zammad";
-import { schema } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { get_duplicate_moderations } from ":moderations/repository";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { schema } from "@~/moncomptepro.database";
 import { get_zammad_mail } from "@~/zammad.lib";
 import to from "await-to-js";
 import { eq } from "drizzle-orm";
@@ -21,7 +21,7 @@ export async function Duplicate_Warning({
 }) {
   const {
     var: { moncomptepro_pg },
-  } = useRequestContext<moncomptepro_pg_Context>();
+  } = useRequestContext<MonComptePro_Pg_Context>();
 
   const moderations = await get_duplicate_moderations(moncomptepro_pg, {
     organization_id,

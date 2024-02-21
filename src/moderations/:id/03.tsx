@@ -2,19 +2,16 @@
 
 import { date_to_string } from ":common/date";
 import { Htmx_Events, hx_include, hx_trigger_from_body } from ":common/htmx";
-import {
-  moncomptepro_pg,
-  schema,
-  type Moderation,
-  type Organization,
-  type User,
-} from ":database:moncomptepro";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
-import { ok } from "node:assert";
+import { useContext } from "hono/jsx";
+import { useRequestContext } from "hono/jsx-renderer";
+import { ModerationPage_Context } from "./context";
 import { reponse_templates } from "./reponse_templates";
 
 //
@@ -26,16 +23,8 @@ export const EMAIL_TO_INPUT_ID = "mail-to";
 
 //
 
-export async function _03({ moderation_id }: { moderation_id: number }) {
-  const moderation = await moncomptepro_pg.query.moderations.findFirst({
-    where: eq(schema.moderations.id, moderation_id),
-    with: {
-      organizations: true,
-      users: true,
-    },
-  });
-
-  ok(moderation);
+export async function _03() {
+  const { moderation } = useContext(ModerationPage_Context);
 
   return (
     <div class="fr-container">
@@ -44,8 +33,8 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
       <hr />
 
       <h2>Valider la modération : </h2>
-      <SendModerationProcessedEmail moderation={moderation} />
-      <MarkModerationProcessed moderation={moderation} />
+      <SendModerationProcessedEmail />
+      <MarkModerationProcessed />
 
       <hr />
 
@@ -71,7 +60,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
         </div>
       </div>
 
-      <MarkModerationProcessed moderation={moderation} />
+      <MarkModerationProcessed />
 
       <hr />
 
@@ -79,7 +68,7 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
         <label class="fr-label" for={RESPONSE_MESSAGE_SELECT_ID}>
           <h6>Motif de rejet : </h6>
         </label>
-        <ResponseMessageSelector moderation={moderation} />
+        <ResponseMessageSelector />
       </div>
 
       <div class="fr-input-group">
@@ -203,12 +192,15 @@ export async function _03({ moderation_id }: { moderation_id: number }) {
   );
 }
 
-function get_organization_members({
-  organization_id,
-}: {
-  organization_id: number;
-}) {
-  return moncomptepro_pg
+function get_organization_members(
+  pg: MonComptePro_PgDatabase,
+  {
+    organization_id,
+  }: {
+    organization_id: number;
+  },
+) {
+  return pg
     .select()
     .from(schema.users)
     .innerJoin(
@@ -217,14 +209,17 @@ function get_organization_members({
     )
     .where(eq(schema.users_organizations.organization_id, organization_id));
 }
-async function ResponseMessageSelector({
-  moderation,
-}: {
-  moderation: Moderation & { organizations: Organization; users: User };
-}) {
-  const users_and_organizations = await get_organization_members({
-    organization_id: moderation.organizations.id,
-  });
+async function ResponseMessageSelector() {
+  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<MonComptePro_Pg_Context>();
+  const users_and_organizations = await get_organization_members(
+    moncomptepro_pg,
+    {
+      organization_id: moderation.organizations.id,
+    },
+  );
 
   const members_email = users_and_organizations
     .map(({ users }) => users.email)
@@ -244,17 +239,16 @@ async function ResponseMessageSelector({
         Sélectionner une response
       </option>
       {reponse_templates.map(({ label, template }) => (
-        <option value={template({ moderation, members_email })}>{label}</option>
+        <option key={label} value={template({ moderation, members_email })}>
+          {label}
+        </option>
       ))}
     </select>
   );
 }
 
-function SendModerationProcessedEmail({
-  moderation,
-}: {
-  moderation: Moderation;
-}) {
+function SendModerationProcessedEmail() {
+  const { moderation } = useContext(ModerationPage_Context);
   const disabled =
     moderation.type !== "organization_join_block" &&
     moderation.type !== "ask_for_sponsorship";
@@ -284,7 +278,8 @@ function SendModerationProcessedEmail({
   );
 }
 
-function MarkModerationProcessed({ moderation }: { moderation: Moderation }) {
+function MarkModerationProcessed() {
+  const { moderation } = useContext(ModerationPage_Context);
   if (moderation.moderated_at)
     return (
       <button class={button({ intent: "dark" })} disabled={true}>

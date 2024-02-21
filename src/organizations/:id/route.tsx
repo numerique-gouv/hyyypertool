@@ -1,13 +1,13 @@
 //
 
-import type { UserInfo_Context } from ":auth/vip_list.guard";
-import type { Csp_Context } from ":common/csp_headers";
 import type { Htmx_Header } from ":common/htmx";
 import { mark_domain_as_verified } from ":legacy/services/mcp_admin_api";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import type { Csp_Context } from "@~/app.middleware/csp_headers";
+import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";

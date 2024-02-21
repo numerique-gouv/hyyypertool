@@ -8,9 +8,9 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
-import * as schema from "../src/database/moncomptepro/drizzle/schema.js";
-import { delete_database } from "../src/database/moncomptepro/seed/delete.js";
-import { insert_database } from "../src/database/moncomptepro/seed/insert.js";
+import * as schema from "../packages/~/infra/moncomptepro/database/src/drizzle/schema.js";
+import { delete_database } from "../packages/~/infra/moncomptepro/database/src/seed/delete.js";
+import { insert_database } from "../packages/~/infra/moncomptepro/database/src/seed/insert.js";
 
 //
 

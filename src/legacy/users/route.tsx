@@ -1,16 +1,16 @@
 //
 
-import { schema } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { schema } from "@~/moncomptepro.database";
 import { asc, desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { ModerationTable, ModerationTable_Context } from "./ModerationTable";
 
 //
 
-const user_router = new Hono<moncomptepro_pg_Context>()
+const user_router = new Hono<MonComptePro_Pg_Context>()
   .basePath("/:id")
   .get(
     "/moderations",

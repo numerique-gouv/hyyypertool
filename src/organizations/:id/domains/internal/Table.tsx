@@ -1,6 +1,6 @@
-import type { Organization } from ":database:moncomptepro";
 import { button } from ":ui/button";
 import { urls } from "@~/app.urls";
+import type { Organization } from "@~/moncomptepro.database";
 
 //
 export function Table({

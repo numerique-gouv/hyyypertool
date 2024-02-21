@@ -1,12 +1,7 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { UserInfo_Context } from ":auth/vip_list.guard";
-import type { Csp_Context } from ":common/csp_headers";
 import type { Htmx_Header } from ":common/htmx";
-import { hyyyyyypertool_session } from ":common/session";
-import { schema, type User } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
@@ -14,15 +9,27 @@ import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { LocalTime } from ":ui/time/LocalTime";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import type { Csp_Context } from "@~/app.middleware/csp_headers";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { hyyyyyypertool_session } from "@~/app.middleware/session";
+import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { urls } from "@~/app.urls";
+import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
+import { createContext, useContext } from "hono/jsx";
 import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
+export const UserPage_Context = createContext({
+  user: {} as User,
+});
+
+//
+
 export default new Hono<
-  moncomptepro_pg_Context & UserInfo_Context & Csp_Context
+  MonComptePro_Pg_Context & UserInfo_Context & Csp_Context
 >()
   .use("*", jsxRenderer(Main_Layout, { docType: true }))
   .use("*", hyyyyyypertool_session)
@@ -47,46 +54,48 @@ export default new Hono<
 
       const username = userinfo_to_username(userinfo);
       return render(
-        <main class="fr-container">
-          <h1>👨‍💻 A propos de {user.given_name}</h1>
-          <Fiche user={user} />
-          <AccountInfo user={user} />
-          <hr />
-          <Actions user={user} />
-          <br />
-          <hr />
-          <b>{user.given_name}</b> est enregistré(e) dans les organisations
-          suivantes :
-          <div class="fr-table max-w-full overflow-x-auto">
-            <div
-              hx-get={api_ref("/legacy/users/:id/organizations", {
-                id: String(user.id),
-              })}
-              hx-target="this"
-              hx-trigger="load"
-              class="fr-table"
-              id="table-user-organisations"
-            ></div>
-          </div>
-          <hr />
-          <b>{user.given_name}</b> est enregistré(e) dans les modérations
-          suivantes :
-          <div class="fr-table max-w-full overflow-x-auto">
-            <div
-              hx-get={
-                urls.legacy.users[":id"].moderations.$url({
-                  param: {
-                    id: user.id.toString(),
-                  },
-                }).pathname
-              }
-              hx-target="this"
-              hx-trigger="load"
-              class="fr-table"
-              id="table-user-organisations"
-            ></div>
-          </div>
-        </main>,
+        <UserPage_Context.Provider value={{ user }}>
+          <main class="fr-container">
+            <h1>👨‍💻 A propos de {user.given_name}</h1>
+            <Fiche />
+            <AccountInfo />
+            <hr />
+            <Actions />
+            <br />
+            <hr />
+            <b>{user.given_name}</b> est enregistré(e) dans les organisations
+            suivantes :
+            <div class="fr-table max-w-full overflow-x-auto">
+              <div
+                hx-get={api_ref("/legacy/users/:id/organizations", {
+                  id: String(user.id),
+                })}
+                hx-target="this"
+                hx-trigger="load"
+                class="fr-table"
+                id="table-user-organisations"
+              ></div>
+            </div>
+            <hr />
+            <b>{user.given_name}</b> est enregistré(e) dans les modérations
+            suivantes :
+            <div class="fr-table max-w-full overflow-x-auto">
+              <div
+                hx-get={
+                  urls.legacy.users[":id"].moderations.$url({
+                    param: {
+                      id: user.id.toString(),
+                    },
+                  }).pathname
+                }
+                hx-target="this"
+                hx-trigger="load"
+                class="fr-table"
+                id="table-user-organisations"
+              ></div>
+            </div>
+          </main>
+        </UserPage_Context.Provider>,
         { nonce, username },
       );
     },
@@ -119,7 +128,8 @@ export default new Hono<
 
 //
 
-function Actions({ user }: { user: User }) {
+function Actions() {
+  const { user } = useContext(UserPage_Context);
   const { email, id } = user;
   const domain = email.split("@")[1];
   return (
@@ -147,7 +157,8 @@ function Actions({ user }: { user: User }) {
   );
 }
 
-function Fiche({ user }: { user: User }) {
+function Fiche() {
+  const { user } = useContext(UserPage_Context);
   return (
     <ul>
       <li>
@@ -172,7 +183,8 @@ function Fiche({ user }: { user: User }) {
   );
 }
 
-function AccountInfo({ user }: { user: User }) {
+function AccountInfo() {
+  const { user } = useContext(UserPage_Context);
   return (
     <ul>
       <li>

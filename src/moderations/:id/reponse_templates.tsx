@@ -2,7 +2,7 @@ import {
   type Moderation,
   type Organization,
   type User,
-} from ":database:moncomptepro";
+} from "@~/moncomptepro.database";
 import { dedent } from "ts-dedent";
 
 //

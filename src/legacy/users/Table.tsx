@@ -1,6 +1,8 @@
+//
+
 import { api_ref } from ":api_ref";
-import { type User } from ":database:moncomptepro";
 import { LocalTime } from ":ui/time/LocalTime";
+import type { schema } from "@~/moncomptepro.database";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { USER_TABLE_ID } from "./page";
@@ -21,7 +23,11 @@ export const Table_Context = createContext({
   count: 0,
 });
 
-export function Table({ users }: { users: User[] }) {
+export function Table({
+  users,
+}: {
+  users: (typeof schema.users.$inferSelect)[];
+}) {
   const { page, take, count } = useContext(Table_Context);
 
   return (

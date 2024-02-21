@@ -1,6 +1,6 @@
 //
 
-import { schema } from ":database:moncomptepro";
+import { schema } from "@~/moncomptepro.database";
 import {
   and,
   asc,

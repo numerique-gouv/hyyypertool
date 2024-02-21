@@ -2,11 +2,11 @@
 
 import type { Htmx_Header } from ":common/htmx";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
-import { schema } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { schema } from "@~/moncomptepro.database";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
@@ -14,7 +14,7 @@ import { Table } from "./Table";
 
 //
 
-export default new Hono<moncomptepro_pg_Context>()
+export default new Hono<MonComptePro_Pg_Context>()
   .get(
     "/",
     zValidator("param", Entity_Schema),

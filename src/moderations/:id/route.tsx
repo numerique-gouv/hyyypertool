@@ -1,9 +1,6 @@
 //
 
-import type { UserInfo_Context } from ":auth/vip_list.guard";
-import type { Csp_Context } from ":common/csp_headers";
 import type { Htmx_Header } from ":common/htmx";
-import { moncomptepro_pg, schema } from ":database:moncomptepro";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import { MODERATION_EVENTS } from ":moderations/event";
 import {
@@ -13,6 +10,10 @@ import {
 } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import type { Csp_Context } from "@~/app.middleware/csp_headers";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -36,13 +37,15 @@ export const moderation_page_route = new Hono<UserInfo_Context & Csp_Context>()
     },
   );
 
-export const moderation_router = new Hono<UserInfo_Context>()
+export const moderation_router = new Hono<
+  UserInfo_Context & MonComptePro_Pg_Context
+>()
   .route("", moderation_page_route)
   .route("/email", moderation_email_router)
   .patch(
     "/rejected",
     zValidator("param", Entity_Schema),
-    async ({ text, req, var: { userinfo } }) => {
+    async ({ text, req, var: { moncomptepro_pg, userinfo } }) => {
       const { id } = req.valid("param");
 
       await moncomptepro_pg
@@ -61,7 +64,7 @@ export const moderation_router = new Hono<UserInfo_Context>()
   .patch(
     "/processed",
     zValidator("param", Entity_Schema),
-    async ({ text, req, notFound, var: { userinfo } }) => {
+    async ({ text, req, notFound, var: { moncomptepro_pg, userinfo } }) => {
       const { id } = req.valid("param");
 
       const moderation = await moncomptepro_pg.query.moderations.findFirst({
@@ -92,7 +95,7 @@ export const moderation_router = new Hono<UserInfo_Context>()
   .patch(
     "/reprocess",
     zValidator("param", Entity_Schema),
-    async ({ text, req }) => {
+    async ({ text, req, var: { moncomptepro_pg } }) => {
       const { id } = req.valid("param");
 
       await moncomptepro_pg

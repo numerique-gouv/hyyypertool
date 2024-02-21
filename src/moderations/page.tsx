@@ -3,12 +3,12 @@
 import { date_to_string } from ":common/date";
 import { hx_include } from ":common/htmx";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
-import type { Moderation, Organization } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { button } from ":ui/button";
 import { row } from ":ui/table";
 import type { Pagination } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import type { Moderation, Organization } from "@~/moncomptepro.database";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import {
@@ -185,7 +185,7 @@ async function ModerationList_Table({
 }) {
   const {
     var: { moncomptepro_pg },
-  } = useRequestContext<moncomptepro_pg_Context>();
+  } = useRequestContext<MonComptePro_Pg_Context>();
   const { page, page_size } = pagination;
   const {
     hide_join_organization,

@@ -1,33 +1,19 @@
 //
 
 import { hx_trigger_from_body } from ":common/htmx";
-import {
-  schema,
-  type Moderation,
-  type Organization,
-  type User,
-  type Users_Organizations,
-} from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { schema } from "@~/moncomptepro.database";
 import { and, eq } from "drizzle-orm";
-import { createContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import { _02 } from "./02";
 import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
 import { Header } from "./Header";
-
-//
-
-export const ModerationPage_Context = createContext({
-  moderation: {} as Moderation & { users: User; organizations: Organization },
-  domain: "",
-  users_organizations: {} as Users_Organizations | undefined,
-});
+import { ModerationPage_Context } from "./context";
 
 export async function Moderation_Page({
   active_id,
@@ -36,7 +22,7 @@ export async function Moderation_Page({
 }) {
   const {
     var: { moncomptepro_pg },
-  } = useRequestContext<moncomptepro_pg_Context>();
+  } = useRequestContext<MonComptePro_Pg_Context>();
 
   if (!active_id) return <></>;
 
@@ -106,7 +92,7 @@ export async function Moderation_Page({
 
         <hr />
 
-        <_03 moderation_id={active_id} />
+        <_03 />
       </main>
     </ModerationPage_Context.Provider>
   );

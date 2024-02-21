@@ -143,11 +143,11 @@ declare const app: import("hono/hono-base").HonoBase<
                         form: {
                           verification_type?:
                             | ""
-                            | "verified_email_domain"
-                            | "official_contact_email"
-                            | "official_contact_domain"
                             | "code_sent_to_official_contact_email"
                             | "in_liste_dirigeants_rna"
+                            | "official_contact_domain"
+                            | "official_contact_email"
+                            | "verified_email_domain"
                             | undefined;
                           is_external?: string | undefined;
                         };
@@ -230,8 +230,8 @@ declare const app: import("hono/hono-base").HonoBase<
                 {
                   query: {
                     page?: string | undefined;
-                    "search-siret"?: string | undefined;
                     page_size?: string | undefined;
+                    "search-siret"?: string | undefined;
                     id?: string | undefined;
                   };
                 },
@@ -359,6 +359,22 @@ declare const app: import("hono/hono-base").HonoBase<
       >,
     ""
   > &
+    import("hono/types").MergeSchemaPath<
+      import("hono/types").MergeSchemaPath<
+        import("hono").ToSchema<"get", "/", unknown, {}>,
+        "/:id"
+      > &
+        import("hono").ToSchema<"get", "/", unknown, {}>,
+      "/organizations"
+    > &
+    import("hono/types").MergeSchemaPath<
+      import("hono/types").MergeSchemaPath<
+        import("hono").ToSchema<"get", "/", unknown, {}>,
+        "/:id"
+      > &
+        import("hono").ToSchema<"get", "/", unknown, {}>,
+      "/users"
+    > &
     import("hono/types").MergeSchemaPath<
       import("hono/types").MergeSchemaPath<
         import("hono/types").MergeSchemaPath<

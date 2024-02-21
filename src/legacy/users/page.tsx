@@ -1,9 +1,9 @@
 //
 
 import { api_ref } from ":api_ref";
-import { schema, type MonComptePro_PgDatabase } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import type { Pagination } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import { useRequestContext } from "hono/jsx-renderer";
 import { Table, Table_Context } from "./Table";
@@ -58,7 +58,7 @@ export default async function Page({
 }) {
   const {
     var: { moncomptepro_pg },
-  } = useRequestContext<moncomptepro_pg_Context>();
+  } = useRequestContext<MonComptePro_Pg_Context>();
   const { page, page_size } = pagination;
   const { count, users } = await get_users_list(moncomptepro_pg, {
     search: { email },

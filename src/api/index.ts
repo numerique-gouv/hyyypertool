@@ -1,14 +1,16 @@
 //
 
-import { csp_headers } from ":common/csp_headers";
 import env from ":common/env";
+import { csp_headers } from "@~/app.middleware/csp_headers";
 // import { sentry, type Sentry_Context } from ":common/sentry";
-import { vip_list_guard } from ":auth/vip_list.guard";
-import { hyyyyyypertool_session } from ":common/session";
-import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import legacy from ":legacy/route";
 import { moderations_router } from ":moderations/route";
 import { sentry } from "@hono/sentry";
+import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
+import { hyyyyyypertool_session } from "@~/app.middleware/session";
+import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
+import organizations_router from "@~/organizations.api";
+import users_router from "@~/users.api";
 import consola, { LogLevels } from "consola";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
@@ -22,9 +24,10 @@ import welcome_router from "../welcome/route";
 
 //
 
+const authoried = vip_list_guard({ vip_list: env.ALLOWED_USERS.split(",") });
 const app = new Hono()
   .use("*", logger(consola.info))
-  .use("*", csp_headers())
+  .use("*", csp_headers)
   .use(
     "*",
     sentry({
@@ -53,11 +56,16 @@ const app = new Hono()
   .use("*", hyyyyyypertool_session)
   .route("", welcome_router)
   .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))
-  .use(
-    "/moderations/*",
-    vip_list_guard({ vip_list: env.ALLOWED_USERS.split(",") }),
-  )
+
+  .use("/moderations/*", authoried)
   .route("/moderations", moderations_router)
+
+  .use("/users/*", authoried)
+  .route("/users", users_router)
+
+  .use("/organizations/*", authoried)
+  .route("/organizations", organizations_router)
+
   .route("", legacy)
   .notFound(async ({ html, get }) => {
     const nonce: string = get("nonce" as any);
