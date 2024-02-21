@@ -37,7 +37,7 @@ const asserts_router = new Hono()
         ticket_id: Id_Schema,
       }),
     ),
-    async ({ body, req }) => {
+    async function GET({ req }) {
       const { article_id, attachment_id, ticket_id } = req.valid("param");
       const image = await get_zammad_attachment({
         article_id,

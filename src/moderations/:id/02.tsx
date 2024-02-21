@@ -11,17 +11,12 @@ import { ModerationPage_Context } from "./page";
 //
 
 export async function _02() {
-  const { moderation, domain, users_organizations } = useContext(
-    ModerationPage_Context,
-  );
+  const { moderation, domain } = useContext(ModerationPage_Context);
 
   return (
     <div class="mx-auto mt-6 !max-w-6xl" id="02">
       <h1>🏛 A propos de l’organisation</h1>
       <hr />
-      {/* <div class="mt-5 block">
-        <Comment moderation={moderation} />
-      </div> */}
       <div class="mt-5 block">
         <button
           class={button({ className: "block", intent: "warning" })}

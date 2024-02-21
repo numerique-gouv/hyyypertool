@@ -20,7 +20,7 @@ export default new Hono().use("/", jsxRenderer()).get(
       user_id: z.string().pipe(z.coerce.number().int().nonnegative()),
     }),
   ),
-  async function ({ render, req, var: { moncomptepro_pg } }) {
+  async function ({ render, req }) {
     const { organization_id, user_id } = req.valid("query");
     return render(
       <Duplicate_Warning organization_id={organization_id} user_id={user_id} />,

@@ -29,19 +29,19 @@ export function Table({ users }: { users: User[] }) {
       <thead>
         <tr>
           {fields.map((name) => (
-            <th>{name}</th>
+            <th key={name}>{name}</th>
           ))}
           <th>Lien</th>
         </tr>
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr>
+          <tr key={user.id.toString()}>
             {fields.map((name) => (
-              <td>
+              <td key={name}>
                 {match(user[name])
                   .when(
-                    (x): x is string =>
+                    (_x): _x is string =>
                       name === "email_verified_at" ||
                       name === "last_sign_in_at" ||
                       name === "created_at",

@@ -263,18 +263,14 @@ declare const app: import("hono/hono-base").HonoBase<
                     };
                   } & {
                     form: {
-                      response: string;
                       "mail-subject": string;
+                      response: string;
                     };
                   },
                   {}
                 >,
               "/email"
             > &
-              import("hono/types").MergeSchemaPath<
-                import("hono").ToSchema<"post", "/", unknown, {}>,
-                "/comment"
-              > &
               import("hono/types").MergeSchemaPath<
                 import("hono").ToSchema<
                   "get",
@@ -385,18 +381,14 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 form: {
-                  response: string;
                   "mail-subject": string;
+                  response: string;
                 };
               },
               {}
             >,
           "/email"
         > &
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<"post", "/", unknown, {}>,
-            "/comment"
-          > &
           import("hono/types").MergeSchemaPath<
             import("hono").ToSchema<
               "get",
@@ -514,9 +506,9 @@ declare const app: import("hono/hono-base").HonoBase<
           "/zammad/attachment/:ticket_id/:article_id/:attachment_id",
           {
             param: {
-              ticket_id: string;
               article_id: string;
               attachment_id: string;
+              ticket_id: string;
             };
           },
           {}

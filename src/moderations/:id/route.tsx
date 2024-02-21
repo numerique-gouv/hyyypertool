@@ -16,7 +16,6 @@ import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { moderation_comment_router } from "./comment/route";
 import { moderation_email_router } from "./email/route";
 import { Moderation_Page } from "./page";
 
@@ -39,7 +38,6 @@ export const moderation_page_route = new Hono<UserInfo_Context & Csp_Context>()
 
 export const moderation_router = new Hono<UserInfo_Context>()
   .route("", moderation_page_route)
-  .route("/comment", moderation_comment_router)
   .route("/email", moderation_email_router)
   .patch(
     "/rejected",
