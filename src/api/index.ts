@@ -23,7 +23,7 @@ import welcome_router from "../welcome/route";
 //
 
 const app = new Hono()
-  .use("*", logger(consola.log))
+  .use("*", logger(consola.info))
   .use("*", csp_headers())
   .use(
     "*",
