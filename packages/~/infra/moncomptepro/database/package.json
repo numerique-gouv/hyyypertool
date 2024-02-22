@@ -14,13 +14,14 @@
   "scripts": {
     "introspect": "bun x drizzle introspect:pg",
     "migration": "bun run bin/migration.ts",
-    "seed": "bun run bin/seed.ts"
+    "seed": "bun run bin/seed.ts",
+    "studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "drizzle-orm": "0.29.3",
-    "hono": "4.0.2",
+    "drizzle-orm": "0.29.4",
+    "hono": "4.0.5",
     "pg": "8.11.3"
   },
   "devDependencies": {

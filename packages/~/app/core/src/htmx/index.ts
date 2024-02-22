@@ -63,3 +63,7 @@ export function hx_include(ids: string[]) {
 export function prefix_id(name: string) {
   return `#${name}`;
 }
+
+export function is_htmx_request(req: Request) {
+  return req.headers.get("hx-request") === "true";
+}

@@ -1,10 +1,10 @@
 //
 
 import { date_to_string } from ":common/date";
-import { hx_include } from ":common/htmx";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import { button } from ":ui/button";
 import { row } from ":ui/table";
+import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";

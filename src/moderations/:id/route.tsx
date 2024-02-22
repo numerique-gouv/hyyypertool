@@ -1,6 +1,5 @@
 //
 
-import type { Htmx_Header } from ":common/htmx";
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
 import { MODERATION_EVENTS } from ":moderations/event";
 import {
@@ -9,6 +8,7 @@ import {
   type Main_Layout_Props,
 } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
+import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";

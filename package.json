@@ -31,7 +31,7 @@
     "format": "bun x prettier --check .",
     "format:fix": "bun x prettier --write .",
     "start": "bun bin/src/index.ts",
-    "studio:moncomptepro": "bun x drizzle-kit studio --config src/database/moncomptepro/drizzle.config.ts",
+    "studio:moncomptepro": "bun run database:moncomptepro:run studio",
     "test": "bun x npm-run-all --serial test:**",
     "test:type-check": "bun run build:tsc"
   },
@@ -56,7 +56,7 @@
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",
     "consola": "3.2.3",
-    "drizzle-orm": "0.29.3",
+    "drizzle-orm": "0.29.4",
     "error-custom-class": "10.0.0",
     "hono": "4.0.5",
     "hono-sessions": "0.3.4",

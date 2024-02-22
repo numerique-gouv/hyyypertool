@@ -1,11 +1,11 @@
 //
 
-import type { Htmx_Header } from ":common/htmx";
 import { z_coerce_boolean } from ":common/z.coerce.boolean";
 import { join_organization } from ":legacy/services/mcp_admin_api";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { Verification_Type_Schema } from ":organizations/services/verification_type";
 import { zValidator } from "@hono/zod-validator";
+import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { schema } from "@~/moncomptepro.database";

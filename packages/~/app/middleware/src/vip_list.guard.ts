@@ -1,6 +1,7 @@
 //
 
 import "@hono/sentry";
+import { is_htmx_request, type Htmx_Header } from "@~/app.core/htmx";
 import { NotAuthorized } from "@~/app.layout/NotAuthorized";
 import type { Env } from "hono";
 import { createMiddleware } from "hono/factory";
@@ -20,12 +21,17 @@ export interface UserInfo_Context extends Env {
 export function vip_list_guard({ vip_list }: { vip_list: string[] }) {
   return createMiddleware<UserInfo_Context & Session_Context & Csp_Context>(
     async function vip_list_guard_middleware(
-      { html, redirect, req, set, var: { sentry, session, nonce } },
+      { html, text, redirect, req, set, var: { sentry, session, nonce } },
       next,
     ) {
       const userinfo = session.get("userinfo");
 
       if (!userinfo) {
+        if (is_htmx_request(req.raw)) {
+          return text("Unauthorized", 401, {
+            "HX-Location": "/",
+          } as Htmx_Header);
+        }
         return redirect("/");
       }
 
