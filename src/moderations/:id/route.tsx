@@ -1,7 +1,6 @@
 //
 
 import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
-import { MODERATION_EVENTS } from ":moderations/event";
 import {
   Main_Layout,
   userinfo_to_username,
@@ -13,6 +12,7 @@ import { Entity_Schema } from "@~/app.core/schema";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";

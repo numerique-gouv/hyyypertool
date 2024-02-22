@@ -1,7 +1,6 @@
 //
 
 import { date_to_string } from ":common/date";
-import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
 import {
@@ -11,6 +10,7 @@ import {
 } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
