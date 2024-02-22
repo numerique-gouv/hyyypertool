@@ -1,12 +1,12 @@
 //
 
-import { MODERATION_EVENTS } from ":moderations/event";
 import { userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import {
   get_full_ticket,

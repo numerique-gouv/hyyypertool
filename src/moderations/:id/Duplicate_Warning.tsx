@@ -53,7 +53,7 @@ export async function Duplicate_Warning({
       </SearchInZammad>
       <ul>
         {moderation_ticket.map(({ moderation, zammad_ticket }) => (
-          <li>
+          <li key={moderation.id.toString()}>
             <a
               href={
                 urls.legacy.moderations[":id"].$url({

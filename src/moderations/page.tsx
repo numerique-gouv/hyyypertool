@@ -8,14 +8,14 @@ import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import {
+  moderation_type_to_emoji,
+  moderation_type_to_title,
+} from "@~/moderations.lib/moderation_type.mapper";
 import { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
 import type { Moderation, Organization } from "@~/moncomptepro.database";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
-import {
-  moderation_type_to_emoji,
-  moderation_type_to_title,
-} from "./moderation_type_to_emoji";
 
 //
 
