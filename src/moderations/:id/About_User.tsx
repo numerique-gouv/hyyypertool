@@ -5,8 +5,8 @@ import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
 import { LocalTime } from ":ui/time/LocalTime";
+import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
-import queryString from "query-string";
 import { ModerationPage_Context } from "./context";
 
 //
@@ -116,15 +116,4 @@ export function About_User() {
       </ul>
     </section>
   );
-}
-
-function datapass_from_email(email: string) {
-  const query = queryString.stringify({
-    sorted: JSON.stringify([{ id: "updated_at", desc: false }]),
-    filtered: JSON.stringify([
-      { id: "team_members.email", value: email },
-      { id: "status", value: [] },
-    ]),
-  });
-  return `https://datapass.api.gouv.fr/habilitations?${query}`;
 }
