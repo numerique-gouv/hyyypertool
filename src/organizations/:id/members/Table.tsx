@@ -1,7 +1,6 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { Users_Organizations } from ":database:moncomptepro";
 import {
   Verification_Type_Schema,
   type Verification_Type,
@@ -10,6 +9,7 @@ import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { row } from ":ui/table";
 import { urls } from "@~/app.urls";
+import type { Users_Organizations } from "@~/moncomptepro.database";
 import { createContext, useContext } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
 

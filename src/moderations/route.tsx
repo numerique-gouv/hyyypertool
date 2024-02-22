@@ -1,7 +1,5 @@
 //
 
-import type { UserInfo_Context } from ":auth/vip_list.guard";
-import type { Csp_Context } from ":common/csp_headers";
 import { Moderations_Page, Search_Schema } from ":moderations/page";
 import {
   Main_Layout,
@@ -10,6 +8,8 @@ import {
 } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Pagination_Schema } from "@~/app.core/schema";
+import type { Csp_Context } from "@~/app.middleware/csp_headers";
+import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { moderation_router } from "./:id/route";

@@ -1,8 +1,8 @@
 //
 
-import { type Organization } from ":database:moncomptepro";
 import { LocalTime } from ":ui/time/LocalTime";
 import { urls } from "@~/app.urls";
+import { type Organization } from "@~/moncomptepro.database";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 import { ORGANIZATIONS_TABLE_ID } from "./page";

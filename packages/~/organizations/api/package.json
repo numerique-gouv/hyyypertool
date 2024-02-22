@@ -1,0 +1,20 @@
+{
+  "name": "@~/organizations.api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.layout": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "hono": "4.0.2"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

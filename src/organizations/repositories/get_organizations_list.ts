@@ -1,6 +1,6 @@
 //
 
-import { schema } from ":database:moncomptepro";
+import { schema } from "@~/moncomptepro.database";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 

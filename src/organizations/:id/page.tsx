@@ -1,8 +1,8 @@
 //
 
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { get_by_id } from ":organizations/repositories/get_by_id";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
 import { useRequestContext } from "hono/jsx-renderer";
 import { Edit_Domain } from "./Edit_Domain";
@@ -13,7 +13,7 @@ import { Fiche } from "./Fiche";
 export default async function Page({ id }: { id: number }) {
   const {
     var: { moncomptepro_pg },
-  } = useRequestContext<moncomptepro_pg_Context>();
+  } = useRequestContext<MonComptePro_Pg_Context>();
   const organization = await get_by_id(moncomptepro_pg, { id });
 
   return (

@@ -1,13 +1,13 @@
 //
 
-import type { UserInfo_Context } from ":auth/vip_list.guard";
 import type { Htmx_Header } from ":common/htmx";
-import { schema } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { schema } from "@~/moncomptepro.database";
 import {
   get_full_ticket,
   send_zammad_new_email,
@@ -28,7 +28,7 @@ import { ListZammadArticles } from "./ListZammadArticles";
 //
 
 export const moderation_email_router = new Hono<
-  UserInfo_Context & moncomptepro_pg_Context
+  UserInfo_Context & MonComptePro_Pg_Context
 >()
   .get(
     "/",

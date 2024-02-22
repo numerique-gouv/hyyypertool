@@ -1,8 +1,6 @@
 //
 
 import { api_ref } from ":api_ref";
-import { schema, type Organization } from ":database:moncomptepro";
-import type { moncomptepro_pg_Context } from ":database:moncomptepro/middleware";
 import { row } from ":ui/table";
 import { zValidator } from "@hono/zod-validator";
 import {
@@ -10,9 +8,11 @@ import {
   Pagination_Schema,
   type Pagination,
 } from "@~/app.core/schema";
+import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import type { MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import { schema } from "@~/moncomptepro.database";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
@@ -29,7 +29,7 @@ const Table_Context = createContext({
 //
 
 function organisations_by_user_id(
-  pg: NodePgDatabase<typeof schema>,
+  pg: MonComptePro_PgDatabase,
   {
     id,
     pagination = { page: 0, page_size: 10 },
@@ -63,9 +63,13 @@ function organisations_by_user_id(
   });
 }
 
+type Organization_DTO = Awaited<
+  ReturnType<typeof organisations_by_user_id>
+>["organizations"][number]["organizations"];
+
 //
 
-export default new Hono<moncomptepro_pg_Context>().get(
+export default new Hono<MonComptePro_Pg_Context>().get(
   "/",
   zValidator("param", Entity_Schema),
   zValidator("query", Pagination_Schema),
@@ -109,7 +113,7 @@ const fields = [
 function Table({
   organizations,
 }: {
-  organizations: { organizations: Organization }[];
+  organizations: { organizations: Organization_DTO }[];
 }) {
   const { page, take, count, user_id } = useContext(Table_Context);
   const page_index = page - 1;
@@ -120,7 +124,9 @@ function Table({
       <thead>
         <tr>
           {fields.map((name) => (
-            <th class="max-w-32 break-words">{name}</th>
+            <th key={name} class="max-w-32 break-words">
+              {name}
+            </th>
           ))}
 
           <th>Lien</th>
@@ -130,9 +136,9 @@ function Table({
       <tbody>
         <tr>
           {organizations.map(({ organizations }) => (
-            <tr class={row()}>
+            <tr key={organizations.id.toString()} class={row()}>
               {fields.map((name) => (
-                <td class="break-words">
+                <td key={name} class="break-words">
                   {match(organizations[name])
                     .when(
                       (x): x is Array<string> => x instanceof Array,

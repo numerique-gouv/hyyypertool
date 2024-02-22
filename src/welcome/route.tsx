@@ -1,8 +1,8 @@
 //
 
-import type { Csp_Context } from ":common/csp_headers";
+import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import env from ":common/env";
-import { type Session_Context } from ":common/session";
+import { type Session_Context } from "@~/app.middleware/session";
 import { Root_Layout } from ":ui/layout/root";
 import { urls } from "@~/app.urls";
 import { Hono } from "hono";

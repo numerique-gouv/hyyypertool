@@ -13,15 +13,7 @@
     "paths": {
       ":api_ref": ["./src/api_ref.ts"],
       ":assets/*": ["./src/assets/*"],
-      ":auth/*": ["./src/auth/*"],
       ":common/*": ["./src/common/*"],
-      ":database:moncomptepro": [
-        "./src/database/moncomptepro/moncomptepro_pg.ts"
-      ],
-      ":database:moncomptepro/middleware": [
-        "./src/database/moncomptepro/middleware.ts"
-      ],
-      ":hc": ["./packages/~/app/urls/index.ts"],
       ":health/*": ["./src/health/*"],
       ":legacy/*": ["./src/legacy/*"],
       ":mapping": ["./src/api/index.d.ts", "./src/api/mock.d.ts"],
@@ -43,7 +35,10 @@
   "references": [
     { "path": "packages/~/app/core/tsconfig.json" },
     { "path": "packages/~/app/urls/tsconfig.json" },
+    { "path": "packages/~/infra/moncomptepro/database/tsconfig.json" },
     { "path": "packages/~/infra/zammad/api/tsconfig.json" },
-    { "path": "packages/~/infra/zammad/lib/tsconfig.json" }
+    { "path": "packages/~/infra/zammad/lib/tsconfig.json" },
+    { "path": "packages/~/organizations/api/tsconfig.json" },
+    { "path": "packages/~/users/api/tsconfig.json" }
   ]
 }

@@ -2,8 +2,8 @@
 
 import { date_to_string } from ":common/date";
 import { OpenInZammad } from ":common/zammad";
-import { type Moderation, type User } from ":database:moncomptepro";
 import { callout } from ":ui/callout";
+import { type Moderation, type User } from "@~/moncomptepro.database";
 import { get_zammad_mail } from "@~/zammad.lib";
 import { Message } from "./Message";
 

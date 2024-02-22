@@ -1,7 +1,5 @@
 //
 
-import env from ":common/env";
-import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
 import { Duplicate_Warning } from ":moderations/:id/Duplicate_Warning";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
@@ -12,7 +10,6 @@ import { z } from "zod";
 
 export default new Hono().use("/", jsxRenderer()).get(
   "/",
-  moncomptepro_pg_database({ connectionString: env.DATABASE_URL }),
   zValidator(
     "query",
     z.object({

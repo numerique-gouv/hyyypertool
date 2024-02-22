@@ -1,7 +1,7 @@
 //
 
 import env from ":common/env";
-import { moncomptepro_pg_database } from ":database:moncomptepro/middleware";
+import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { get_zammad_me } from "@~/zammad.lib";
 import { to } from "await-to-js";
 import { sql } from "drizzle-orm";
@@ -11,9 +11,6 @@ import { Hono } from "hono";
 
 export const readyz = new Hono()
   .get("/", ({ text }) => text(`readyz check passed`))
-  .get("/sentry/error", async function sentry_error({}) {
-    throw new Error("Sentry error");
-  })
   .get("/zammad", async ({ text }) => {
     const [, user] = await to(get_zammad_me());
     const is_ok = user !== undefined;

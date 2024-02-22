@@ -1,15 +1,15 @@
 //
 
-import type { Moderation } from ":database:moncomptepro";
 import { moderation_type_to_emoji } from ":moderations/moderation_type_to_emoji";
 import type { MCP_Moderation } from ":moncomptepro";
 import { button } from ":ui/button";
 import { callout } from ":ui/callout";
 import { LocalTime } from ":ui/time/LocalTime";
 import { urls } from "@~/app.urls";
+import type { Moderation } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
-import { ModerationPage_Context } from "./page";
+import { ModerationPage_Context } from "./context";
 
 //
 
