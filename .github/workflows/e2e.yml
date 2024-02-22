@@ -65,7 +65,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('examples/basic-pnpm/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('e2e/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
@@ -111,12 +111,21 @@ jobs:
         if: failure()
         with:
           compression-level: 9
-          name: cypress-screenshots
+          name: cypress-${{ matrix.e2e_test }}-screenshots
           path: e2e/cypress/screenshots
+          spec: features/${{ matrix.e2e_test }}
 
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           compression-level: 9
-          name: cypress-videos
+          name: cypress-${{ matrix.e2e_test }}-videos
           path: e2e/cypress/videos
+
+    strategy:
+      matrix:
+        e2e_test:
+          - auth
+          - moderations
+          - organizations
+          - users
