@@ -8,6 +8,7 @@
     "packages/~/config/*",
     "packages/~/infra/moncomptepro/*",
     "packages/~/infra/zammad/*",
+    "packages/~/moderations/*",
     "packages/~/organizations/*",
     "packages/~/users/*"
   ],
@@ -47,6 +48,7 @@
     "@~/app.core": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
+    "@~/moderations.repository": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/zammad.api": "workspace:*",
     "@gouvfr/dsfr": "1.11.1",

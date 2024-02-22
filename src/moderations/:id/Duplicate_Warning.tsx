@@ -1,9 +1,9 @@
 //
 
 import { OpenInZammad, SearchInZammad } from ":common/zammad";
-import { get_duplicate_moderations } from ":moderations/repository";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { get_duplicate_moderations } from "@~/moderations.repository/get_duplicate_moderations";
 import { schema } from "@~/moncomptepro.database";
 import { get_zammad_mail } from "@~/zammad.lib";
 import to from "await-to-js";
@@ -12,6 +12,7 @@ import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { useRequestContext } from "hono/jsx-renderer";
 
 //
+
 export async function Duplicate_Warning({
   organization_id,
   user_id,
