@@ -4,11 +4,9 @@ import { OpenInZammad, SearchInZammad } from ":common/zammad";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
 import { get_duplicate_moderations } from "@~/moderations.repository/get_duplicate_moderations";
-import { schema } from "@~/moncomptepro.database";
+import { get_user_by_id } from "@~/users.repository/get_user_by_id";
 import { get_zammad_mail } from "@~/zammad.lib";
 import to from "await-to-js";
-import { eq } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { useRequestContext } from "hono/jsx-renderer";
 
 //
@@ -31,7 +29,7 @@ export async function Duplicate_Warning({
   const moderation_count = moderations.length;
 
   if (moderation_count <= 1) return <></>;
-  const user = await get_user(moncomptepro_pg, { user_id });
+  const user = await get_user_by_id(moncomptepro_pg, { id: user_id });
   if (!user) return <p>Utilisateur introuvable</p>;
 
   const moderation_ticket = await Promise.all(
@@ -76,13 +74,4 @@ export async function Duplicate_Warning({
       </ul>
     </div>
   );
-}
-
-async function get_user(
-  pg: NodePgDatabase<typeof schema>,
-  { user_id }: { user_id: number },
-) {
-  return pg.query.users.findFirst({
-    where: eq(schema.users.id, user_id),
-  });
 }

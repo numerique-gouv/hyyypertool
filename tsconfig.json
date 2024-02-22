@@ -41,6 +41,7 @@
     { "path": "packages/~/moderations/lib/tsconfig.json" },
     { "path": "packages/~/moderations/repository/tsconfig.json" },
     { "path": "packages/~/organizations/api/tsconfig.json" },
-    { "path": "packages/~/users/api/tsconfig.json" }
+    { "path": "packages/~/users/api/tsconfig.json" },
+    { "path": "packages/~/users/repository/tsconfig.json" }
   ]
 }
