@@ -51,6 +51,7 @@
     "@~/moderations.lib": "workspace:*",
     "@~/moderations.repository": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
+    "@~/users.repository": "workspace:*",
     "@~/zammad.api": "workspace:*",
     "@gouvfr/dsfr": "1.11.1",
     "@hono/sentry": "^1.0.1",
