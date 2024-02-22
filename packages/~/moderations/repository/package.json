@@ -1,0 +1,21 @@
+{
+  "name": "@~/moderations.repository",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/moncomptepro.database": "workspace:*",
+    "drizzle-orm": "0.29.4"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}
