@@ -1,10 +1,14 @@
 //
 
 import { date_to_string } from ":common/date";
-import { Htmx_Events, hx_include, hx_trigger_from_body } from ":common/htmx";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
+import {
+  Htmx_Events,
+  hx_include,
+  hx_trigger_from_body,
+} from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";

@@ -10,8 +10,8 @@ export default {
       "postgresql://postgres:postgres@localhost:5432/postgres?schema=public",
   },
   driver: "pg",
-  out: "src/database/moncomptepro/drizzle",
-  schema: "src/database/moncomptepro/drizzle/schema.ts",
+  out: "src/drizzle",
+  schema: "src/drizzle/schema.ts",
   strict: true,
   introspect: {
     casing: "preserve",

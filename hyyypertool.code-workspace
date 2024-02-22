@@ -1,0 +1,183 @@
+{
+  "folders": [
+    //
+
+    { "path": "packages/~/app", "name": "🈸 app" },
+    // { "path": "packages/~/app/core", "name": "📜 app.core" },
+    // { "path": "packages/~/app/layout", "name": "💄 app.layout" },
+    // { "path": "packages/~/app/middleware", "name": "🪝 app.middleware" },
+    // { "path": "packages/~/app/api", "name": "🫙 app.api" },
+    // { "path": "packages/~/app/urls", "name": "🔗 app.urls" },
+
+    //
+
+    { "path": "packages/~/moderations", "name": "📦 moderations" },
+    { "path": "packages/~/organizations", "name": "📦 organizations" },
+    { "path": "packages/~/users", "name": "📦 users" },
+
+    //
+
+    { "path": "packages/~/infra/moncomptepro", "name": "🏗️ moncomptepro" },
+    { "path": "packages/~/infra/zammad", "name": "🏗️ zammad" },
+
+    //
+    { "path": "packages/~/config", "name": "⚙️ config" },
+    //
+    { "path": "mocks", "name": "🎭 mocks" },
+    { "path": "bin", "name": "🚀 bin" },
+    { "path": "e2e", "name": "🧪 e2e" },
+    //
+    { "path": "src", "name": "🧐 legacy src" },
+    //
+    { "path": ".", "name": "root" },
+  ],
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+      "forbeslindesay.forbeslindesay-taskrunner",
+      "oxc.oxc-vscode",
+    ],
+  },
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.rulers": [{ "column": 80 }],
+    "editor.tabSize": 2,
+    "files.associations": {
+      "*.css": "tailwindcss",
+    },
+    "files.exclude": {
+      ".cache/": true,
+      ".swc/": true,
+      ".turbo/": true,
+      "coverage/": true,
+      "dist/": true,
+      "e2e-report/": true,
+      "e2e-results/": true,
+      "node_modules/": false,
+      "out/": true,
+    },
+    "javascript.preferences.importModuleSpecifier": "shortest",
+    "typescript.preferences.importModuleSpecifier": "shortest",
+    "typescript.tsdk": "root/node_modules/typescript/lib",
+    "workbench.editor.labelFormat": "short",
+    "editor.quickSuggestions": { "strings": "on" },
+    "tailwindCSS.experimental.classRegex": [
+      ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
+    ],
+    "autoHide.autoHidePanel": false,
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "1. 🚀 Dev",
+        "dependsOn": ["🚀 WWW Dev Server", "📦 Tailwind Dev", "📦 Types Dev"],
+        "group": "build",
+      },
+      {
+        "label": "🚀 WWW Dev Server",
+        "command": "bun",
+        "args": ["run", "dev"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+          "env": {
+            "NODE_ENV": "development",
+          },
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
+        "args": ["run", "dev:tailwind"],
+        "command": "bun",
+        "group": "build",
+        "label": "📦 Tailwind Dev",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+          "env": { "NODE_ENV": "development" },
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+        "type": "shell",
+      },
+      {
+        "args": ["run", "build:tsc", "--watch"],
+        "command": "bun",
+        "group": "build",
+        "label": "📦 Types Dev",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+          "env": { "NODE_ENV": "development" },
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+        "type": "shell",
+      },
+      {
+        "args": ["run", "dev:api"],
+        "command": "bun",
+        "group": "build",
+        "label": "📦 Api Urls Dev",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+          "env": { "NODE_ENV": "development" },
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+        "type": "shell",
+      },
+      {
+        "label": "🏗️ Database MonComptePro Migrate",
+        "command": "bun",
+        "args": ["run", "database:moncomptepro:migrator"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
+        "label": "🏗️ Database MonComptePro Seed",
+        "command": "bun",
+        "args": ["run", "database:moncomptepro:seed"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
+        "label": "🏗️ Database MonComptePro Studio",
+        "command": "bun",
+        "args": ["run", "studio:moncomptepro"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+    ],
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [],
+  },
+}

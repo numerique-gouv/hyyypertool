@@ -1,8 +1,8 @@
 //
 
-import { hx_trigger_from_body } from ":common/htmx";
 import { MODERATION_EVENTS } from ":moderations/event";
 import { button } from ":ui/button";
+import { hx_trigger_from_body } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
 import { schema } from "@~/moncomptepro.database";

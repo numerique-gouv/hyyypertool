@@ -1,8 +1,8 @@
 //
 
-import type { Htmx_Header } from ":common/htmx";
 import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { zValidator } from "@hono/zod-validator";
+import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { schema } from "@~/moncomptepro.database";

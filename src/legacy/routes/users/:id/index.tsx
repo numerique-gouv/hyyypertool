@@ -1,13 +1,13 @@
 //
 
 import { api_ref } from ":api_ref";
-import type { Htmx_Header } from ":common/htmx";
 import { button } from ":ui/button";
 import { CopyButton } from ":ui/button/copy";
 import { GoogleSearchButton } from ":ui/button/search";
 import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { LocalTime } from ":ui/time/LocalTime";
 import { zValidator } from "@hono/zod-validator";
+import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
