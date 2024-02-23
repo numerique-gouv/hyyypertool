@@ -2,7 +2,7 @@
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
-import { urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
 import type { Organization } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
@@ -21,14 +21,12 @@ export async function _02() {
       <div class="mt-5 block">
         <button
           class={button({ className: "block", intent: "warning" })}
-          hx-patch={
-            urls.legacy.organizations[":id"].verify[":domain"].$url({
-              param: {
-                id: moderation.organizations.id.toString(),
-                domain: domain,
-              },
-            }).pathname
-          }
+          {...hx_urls.legacy.organizations[":id"].verify[":domain"].$patch({
+            param: {
+              id: moderation.organizations.id.toString(),
+              domain: domain,
+            },
+          })}
           hx-swap="none"
         >
           🪄 Action en un click :<br /> - ajouter le domaine <b>{domain}</b>{" "}
@@ -48,13 +46,12 @@ export async function _02() {
       <br />
       <h3>Membres enregistrés dans cette organisation :</h3>
       <div
-        hx-get={
-          urls.legacy.organizations[":id"].members.$url({
-            param: {
-              id: moderation.organization_id.toString(),
-            },
-          }).pathname
-        }
+        {...hx_urls.legacy.organizations[":id"].members.$get({
+          param: {
+            id: moderation.organization_id.toString(),
+          },
+          query: {},
+        })}
         hx-target="this"
         hx-trigger={`load, ${ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED} from:body`}
         class="fr-table"
@@ -63,18 +60,14 @@ export async function _02() {
       <div class="grid grid-cols-2 gap-1">
         <button
           class={button({ className: "block", intent: "warning" })}
-          hx-post={
-            urls.legacy.organizations[":id"].members[":user_id"].$url({
-              param: {
-                id: moderation.organization_id.toString(),
-                user_id: moderation.user_id.toString(),
-              },
-            }).pathname
-          }
-          hx-swap="none"
-          hx-vals={JSON.stringify({
-            is_external: false,
+          {...hx_urls.legacy.organizations[":id"].members[":user_id"].$post({
+            param: {
+              id: moderation.organization_id.toString(),
+              user_id: moderation.user_id.toString(),
+            },
+            form: { is_external: "false" },
           })}
+          hx-swap="none"
         >
           🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
           l'organisation EN TANT QU'INTERNE (si pas déjà dans l'orga)
@@ -87,18 +80,14 @@ export async function _02() {
         </button>
         <button
           class={button({ className: "block", intent: "warning" })}
-          hx-post={
-            urls.legacy.organizations[":id"].members[":user_id"].$url({
-              param: {
-                id: moderation.organization_id.toString(),
-                user_id: moderation.user_id.toString(),
-              },
-            }).pathname
-          }
-          hx-swap="none"
-          hx-vals={JSON.stringify({
-            is_external: true,
+          {...hx_urls.legacy.organizations[":id"].members[":user_id"].$post({
+            param: {
+              id: moderation.organization_id.toString(),
+              user_id: moderation.user_id.toString(),
+            },
+            form: { is_external: "true" },
           })}
+          hx-swap="none"
         >
           🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
           l'organisation EN TANT QUE EXTERNE (si pas déjà dans l'orga)
@@ -143,27 +132,25 @@ export async function Edit_Domain({
     <div class="grid grid-cols-2">
       <div
         class="fr-table"
-        hx-get={
-          urls.legacy.organizations[":id"].domains.internal.$url({
-            param: {
-              id: organization.id.toString(),
-            },
-          }).pathname
-        }
+        {...hx_urls.legacy.organizations[":id"].domains.internal.$get({
+          param: {
+            id: organization.id.toString(),
+          },
+        })}
         hx-trigger={[
           "load",
-          ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED])
+          ...hx_trigger_from_body([
+            ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED,
+          ]),
         ].join(", ")}
       ></div>
       <div
         class="fr-table"
-        hx-get={
-          urls.legacy.organizations[":id"].domains.external.$url({
-            param: {
-              id: organization.id.toString(),
-            },
-          }).pathname
-        }
+        {...hx_urls.legacy.organizations[":id"].domains.external.$get({
+          param: {
+            id: organization.id.toString(),
+          },
+        })}
         hx-trigger={[
           "load",
           `${ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED} from:body`,

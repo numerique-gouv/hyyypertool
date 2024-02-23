@@ -5,16 +5,19 @@ import type { Router } from "./pattern";
 
 //
 
+export { hx_urls } from "./hx_urls";
+
+//
 export const urls = hc<Router>("http://localhost:3000", {
-  fetch: (url: URL) => {
+  fetch: (url: string) => {
     // NOTE(douglasduteil): do not fetch
     // This is a hack to make the type system happy
     // One does not simply fetch the server while servering the response
     //
     // Should be use to link internal urls with
-    // app_hc.api.posts.$url() // `/api/posts`
+    // urls.api.posts.$url() // `/api/posts`
     //
     // see https://hono.dev/guides/rpc#url
-    return url;
+    return Promise.resolve(new Response(url));
   },
-} as any);
+});
