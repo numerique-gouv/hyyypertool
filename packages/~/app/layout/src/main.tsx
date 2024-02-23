@@ -1,6 +1,7 @@
 //
 
 import { urls } from "@~/app.urls";
+import { api_ref } from "@~/app.urls/legacy";
 import type { PropsWithChildren } from "hono/jsx";
 import { Root_Layout, type Root_Layout_Props } from "./root";
 
@@ -124,7 +125,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={urls.users.$url().pathname}
+            href={api_ref("/legacy/users", {})}
             target="_self"
           >
             Utilisateurs
