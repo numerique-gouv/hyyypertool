@@ -40,7 +40,7 @@ export function Header() {
       <hr class="bg-none" />
 
       <div
-        hx-get={urls.moderations.duplicate_warning.$url().pathname}
+        hx-get={urls.moderations[":id"].duplicate_warning.$url().pathname}
         hx-trigger="load"
         hx-vals={JSON.stringify({
           organization_id: moderation.organization_id,

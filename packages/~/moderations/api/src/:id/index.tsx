@@ -19,6 +19,7 @@ import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
+import duplicate_warning_router from "./duplicate_warning/index";
 import Moderation_Page from "./page";
 
 //
@@ -43,6 +44,7 @@ export const moderation_page_route = new Hono<UserInfo_Context & Csp_Context>()
 export default new Hono<UserInfo_Context & MonComptePro_Pg_Context>()
   .route("", moderation_page_route)
   .route("/email", moderation_email_router)
+  .route("/duplicate_warning", duplicate_warning_router)
   .patch(
     "/rejected",
     zValidator("param", Entity_Schema),
