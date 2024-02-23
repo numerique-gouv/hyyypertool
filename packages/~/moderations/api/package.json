@@ -1,0 +1,24 @@
+{
+  "name": "@~/moderations.api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.layout": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "@~/moncomptepro.database": "workspace:*",
+    "hono": "4.0.5"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

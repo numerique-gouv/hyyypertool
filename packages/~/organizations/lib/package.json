@@ -1,17 +1,16 @@
 {
-  "name": "@~/organizations.ui",
+  "name": "@~/organizations.lib",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
     "./*": {
       "default": "./src/*.ts"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "zod": "3.22.4"
+  },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
   }

@@ -1,7 +1,6 @@
 //
 
 import { date_to_string } from ":common/date";
-import { button } from ":ui/button";
 import { Loader } from ":ui/loader/Loader";
 import {
   Htmx_Events,
@@ -9,13 +8,14 @@ import {
   hx_trigger_from_body,
 } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { button } from "@~/app.ui/button";
 import { urls } from "@~/app.urls";
+import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { ModerationPage_Context } from "./context";
 import { reponse_templates } from "./reponse_templates";
 
 //

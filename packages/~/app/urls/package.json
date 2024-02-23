@@ -4,13 +4,17 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./*": {
+      "default": "./src/*.ts"
+    }
   },
   "scripts": {
     "format": "prettier --write src/**/*.ts"
   },
   "dependencies": {
-    "hono": "4.0.5"
+    "hono": "4.0.5",
+    "static-path": "0.0.4"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

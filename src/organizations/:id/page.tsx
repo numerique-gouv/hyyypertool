@@ -1,9 +1,9 @@
 //
 
 import { get_by_id } from ":organizations/repositories/get_by_id";
-import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { useRequestContext } from "hono/jsx-renderer";
 import { Edit_Domain } from "./Edit_Domain";
 import { Fiche } from "./Fiche";

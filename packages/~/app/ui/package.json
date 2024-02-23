@@ -1,0 +1,23 @@
+{
+  "name": "@~/app.ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./button": {
+      "default": "./src/button/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.tsx"
+    }
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "tailwind-variants": "0.2.0",
+    "hono": "4.0.5"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

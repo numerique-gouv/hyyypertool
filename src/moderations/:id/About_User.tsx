@@ -1,13 +1,13 @@
 //
 
-import { api_ref } from ":api_ref";
-import { button } from ":ui/button";
-import { CopyButton } from ":ui/button/copy";
-import { GoogleSearchButton } from ":ui/button/search";
 import { LocalTime } from ":ui/time/LocalTime";
+import { button } from "@~/app.ui/button";
+import { CopyButton } from "@~/app.ui/button/copy";
+import { GoogleSearchButton } from "@~/app.ui/button/search";
+import { api_ref } from "@~/app.urls/legacy";
+import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
 
 //
 
