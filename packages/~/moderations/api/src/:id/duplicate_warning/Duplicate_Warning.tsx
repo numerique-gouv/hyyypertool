@@ -54,7 +54,7 @@ export async function Duplicate_Warning({
           <li key={moderation.id.toString()}>
             <a
               href={
-                urls.legacy.moderations[":id"].$url({
+                urls.moderations[":id"].$url({
                   param: { id: moderation.id.toString() },
                 }).pathname
               }

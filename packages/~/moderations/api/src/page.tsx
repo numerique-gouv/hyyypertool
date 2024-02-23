@@ -285,7 +285,7 @@ function Row({
     <tr
       key={key}
       _={`on click set the window's location to '${
-        urls.legacy.moderations[":id"].$url({
+        urls.moderations[":id"].$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }'`}

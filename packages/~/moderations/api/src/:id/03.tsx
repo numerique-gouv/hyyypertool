@@ -45,7 +45,7 @@ export async function _03() {
 
       <div
         hx-get={
-          urls.legacy.moderations[":id"].email.$url({
+          urls.moderations[":id"].email.$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }
@@ -166,7 +166,7 @@ export async function _03() {
       <form
         class="text-right"
         hx-put={
-          urls.legacy.moderations[":id"].email.$url({
+          urls.moderations[":id"].email.$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }
@@ -259,7 +259,7 @@ function SendModerationProcessedEmail() {
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        urls.legacy.moderations[":id"].processed.$url({
+        urls.moderations[":id"].processed.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }
@@ -298,7 +298,7 @@ function MarkModerationProcessed() {
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        urls.legacy.moderations[":id"].rejected.$url({
+        urls.moderations[":id"].rejected.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }

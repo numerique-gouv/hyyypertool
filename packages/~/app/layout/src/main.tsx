@@ -93,7 +93,7 @@ function Tools({ username }: { username?: string | undefined }) {
           <li>
             <a
               class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-fi-logout-box-r-line fr-btn--icon-left"
-              // href={app_hc}
+              href={urls.auth.logout.$url().pathname}
             >
               {username}
             </a>
