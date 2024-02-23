@@ -1,7 +1,5 @@
 //
 
-import { date_to_string } from ":common/date";
-import { Loader } from ":ui/loader/Loader";
 import {
   Htmx_Events,
   hx_include,
@@ -9,6 +7,8 @@ import {
 } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
+import { Loader } from "@~/app.ui/loader/Loader";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
@@ -288,7 +288,10 @@ function MarkModerationProcessed() {
     return (
       <button class={button({ intent: "dark" })} disabled={true}>
         Cette modération a été marqué comme traitée le{" "}
-        <b>{date_to_string(moderation.moderated_at)}</b>.
+        <b>
+          <LocalTime date={moderation.moderated_at} />
+        </b>
+        .
       </button>
     );
 

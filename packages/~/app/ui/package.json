@@ -7,6 +7,15 @@
     "./button": {
       "default": "./src/button/index.ts"
     },
+    "./callout": {
+      "default": "./src/callout/index.ts"
+    },
+    "./loader": {
+      "default": "./src/loader/index.ts"
+    },
+    "./zammad": {
+      "default": "./src/zammad/index.tsx"
+    },
     "./*": {
       "default": "./src/*.tsx"
     }

@@ -1,6 +1,6 @@
 //
 
-import { date_to_string } from ":common/date";
+import { date_to_string } from "@~/app.core/date/date_format";
 
 //
 

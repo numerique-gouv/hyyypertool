@@ -1,9 +1,9 @@
 //
 
 import { ASSETS_PATH } from ":assets/config";
-import { date_to_string } from ":common/date";
 import env from ":common/env";
 import { quote } from ":ui/quote";
+import { date_to_string } from "@~/app.core/date/date_format";
 import { type Moderation } from "@~/moncomptepro.database";
 import { GROUP_MONCOMPTEPRO_SENDER_ID } from "@~/zammad.lib/const";
 import type { Article } from "@~/zammad.lib/types";

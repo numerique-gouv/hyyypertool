@@ -1,7 +1,7 @@
 //
 
-import { OpenInZammad, SearchInZammad } from ":common/zammad";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad";
 import { urls } from "@~/app.urls";
 import { get_duplicate_moderations } from "@~/moderations.repository/get_duplicate_moderations";
 import { get_user_by_id } from "@~/users.repository/get_user_by_id";

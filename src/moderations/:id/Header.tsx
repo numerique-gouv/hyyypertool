@@ -1,9 +1,9 @@
 //
 
 import type { MCP_Moderation } from ":moncomptepro";
-import { callout } from ":ui/callout";
-import { LocalTime } from ":ui/time/LocalTime";
 import { button } from "@~/app.ui/button";
+import { callout } from "@~/app.ui/callout";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
