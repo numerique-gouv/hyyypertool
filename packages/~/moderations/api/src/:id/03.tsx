@@ -175,16 +175,19 @@ export async function _03() {
       >
         <button
           _={`
+          set :form to the closest parent <form/>
+          on ${Htmx_Events.enum.confirm} from :form
+            toggle @disabled until ${Htmx_Events.enum.afterOnLoad} from :form
           on click
-            wait for ${Htmx_Events.Enum["htmx:afterSwap"]} from body
-            go to the top of .last-message smoothly
+            wait for ${Htmx_Events.enum.afterOnLoad} from :form
+            go to the top of body smoothly
+            wait 1s
           `}
           type="submit"
           class={button()}
         >
           <span>Envoyer une réponse via Zammad</span>
         </button>
-        <div></div>
         <div>
           <Loader htmx_indicator={true} />
         </div>
@@ -267,8 +270,11 @@ function SendModerationProcessedEmail() {
     >
       <button
         _={`
+        set :form to the closest parent <form/>
+        on ${Htmx_Events.enum.confirm} from :form
+          toggle @disabled until ${Htmx_Events.enum.afterOnLoad} from :form
         on click
-          wait for ${Htmx_Events.Enum["htmx:afterOnLoad"]} from body
+          wait for ${Htmx_Events.enum.afterOnLoad} from :form
           go to the top of body smoothly
           wait 1s
         `}
@@ -306,8 +312,12 @@ function MarkModerationProcessed() {
     >
       <button
         _={`
+        set :form to the closest parent <form/>
+        on ${Htmx_Events.enum.confirm} from :form
+          toggle @disabled until ${Htmx_Events.enum.afterOnLoad} from :form
         on click
-          wait for ${Htmx_Events.Enum["htmx:afterOnLoad"]} from body
+          wait for ${Htmx_Events.enum.afterOnLoad} from :form
+          wait 0.33s
           go to the top of body smoothly
           wait 1s
         `}

@@ -1,24 +1,35 @@
 version: "3"
 
 services:
-  agentconnect:
+  auth.agentconnect.gouv.fr:
     image: mockserver/mockserver:5.15.0
     command: -proxyRemoteHost fca.integ01.dev-agentconnect.fr -proxyRemotePort 443
     environment:
       MOCKSERVER_LOG_LEVEL: DEBUG
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
     volumes:
-      - ./mocks/agenconnect/mockserverInitialization.json:/config/mockserverInitialization.json
+      - ./mocks/auth.agentconnect.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
     ports:
       - 6100:1080
 
-  entreprise_api_gouv_fr:
+  entreprise.api.gouv.fr:
     image: mockserver/mockserver:5.15.0
     command: -proxyRemoteHost entreprise.api.gouv.fr -proxyRemotePort 443
     environment:
       MOCKSERVER_LOG_LEVEL: DEBUG
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
     volumes:
-      - ./mocks/entreprise_api_gouv_fr/mockserverInitialization.json:/config/mockserverInitialization.json
+      - ./mocks/entreprise.api.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
     ports:
       - 6200:1080
+
+  app.moncomptepro.beta.gouv.fr:
+    image: mockserver/mockserver:5.15.0
+    command: -proxyRemoteHost app.moncomptepro.beta.gouv.fr -proxyRemotePort 443
+    environment:
+      MOCKSERVER_LOG_LEVEL: DEBUG
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
+    volumes:
+      - ./mocks/app.moncomptepro.beta.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
+    ports:
+      - 6300:1080

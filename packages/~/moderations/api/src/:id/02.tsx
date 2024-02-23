@@ -1,5 +1,6 @@
 //
 
+import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
@@ -151,7 +152,7 @@ export async function Edit_Domain({
         }
         hx-trigger={[
           "load",
-          `${ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED} from:body`,
+          ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED])
         ].join(", ")}
       ></div>
       <div
