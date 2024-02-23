@@ -11,11 +11,14 @@ import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
+import moderation_router from "./:id/index";
 import { Search_Schema } from "./context";
 import { Moderations_Page } from "./page";
 
 //
 export default new Hono<UserInfo_Context & Csp_Context>()
+
+  .route("/:id", moderation_router)
   .use("/", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
