@@ -1,6 +1,6 @@
 //
 
-import env from ":common/env";
+import env from "@~/app.core/config";
 import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { get_zammad_me } from "@~/zammad.lib";
 import { to } from "await-to-js";

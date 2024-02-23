@@ -1,7 +1,7 @@
 //
 
-import type { MCP_UserOrganizationLink } from ":moncomptepro";
 import { z } from "zod";
+import type { MCP_UserOrganizationLink } from "./moncomptepro";
 
 //
 export const Verification_Type_Schema = z.enum([

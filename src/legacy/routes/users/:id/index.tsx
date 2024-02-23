@@ -14,7 +14,7 @@ import { GoogleSearchButton } from "@~/app.ui/button/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
-import { schema } from "@~/moncomptepro.database";
+import { schema, type User } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";

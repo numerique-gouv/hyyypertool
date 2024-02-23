@@ -1,10 +1,11 @@
 //
 
-import env from ":common/env";
+import env from "@~/app.core/config";
 import { csp_headers } from "@~/app.middleware/csp_headers";
 // import { sentry, type Sentry_Context } from ":common/sentry";
 import legacy from ":legacy/route";
 import { sentry } from "@hono/sentry";
+import { NotFound } from "@~/app.layout/not-found";
 import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
@@ -18,7 +19,6 @@ import Youch from "youch";
 import asserts_router from "../assets/route";
 import auth_router from "../auth/route";
 import { readyz } from "../health/readyz/route";
-import { NotFound } from "../not-found";
 import { proxy } from "../proxy/route";
 import welcome_router from "../welcome/route";
 

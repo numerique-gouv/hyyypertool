@@ -1,15 +1,15 @@
 //
 
-import {
-  Verification_Type_Schema,
-  type Verification_Type,
-} from ":organizations/services/verification_type";
 import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/copy";
 import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
-import type { Users_Organizations } from "@~/moncomptepro.database";
+import type { User, Users_Organizations } from "@~/moncomptepro.database";
+import {
+  Verification_Type_Schema,
+  type Verification_Type,
+} from "@~/moncomptepro.lib/verification_type";
 import { createContext, useContext } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
 

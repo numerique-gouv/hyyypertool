@@ -16,7 +16,6 @@
       ":health/*": ["./src/health/*"],
       ":legacy/*": ["./src/legacy/*"],
       ":moderations/*": ["./src/moderations/*"],
-      ":moncomptepro": ["./src/moncomptepro.d.ts"],
       ":organizations/*": ["./src/organizations/*"],
       ":package.json": ["./package.json"],
       ":proxy/*": ["./src/proxy/*"],

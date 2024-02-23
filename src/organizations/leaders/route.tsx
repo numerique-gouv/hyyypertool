@@ -1,7 +1,7 @@
 //
 
-import env from ":common/env";
 import { zValidator } from "@hono/zod-validator";
+import env from "@~/app.core/config";
 import consola from "consola";
 import { Hono } from "hono";
 import lodash_sortby from "lodash.sortby";

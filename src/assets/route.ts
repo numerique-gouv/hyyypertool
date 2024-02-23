@@ -1,7 +1,7 @@
 //
 
 import { immutable } from ":common/cache";
-import env from ":common/env";
+import env from "@~/app.core/config";
 import zammad_attachment_router from "@~/zammad.api";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";

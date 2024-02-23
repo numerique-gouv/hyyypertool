@@ -17,6 +17,7 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*"
+    "@~/config.typescript": "workspace:*",
+    "moncomptepro": "betagouv/moncomptepro#0ecf952c0d1cf980604e00fda799249d5a9b372d"
   }
 }
