@@ -10,7 +10,10 @@ import { createContext } from "hono/jsx";
 
 //
 
-export { EMAIL_SUBJECT_INPUT_ID, RESPONSE_TEXTAREA_ID } from "./03";
+export const RESPONSE_MESSAGE_SELECT_ID = "response-message";
+export const RESPONSE_TEXTAREA_ID = "response";
+export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
+export const EMAIL_TO_INPUT_ID = "mail-to";
 
 type ModerationWithUsersOrganizations = Moderation & {
   users: User;

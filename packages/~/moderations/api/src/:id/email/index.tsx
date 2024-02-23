@@ -6,10 +6,6 @@ import { Entity_Schema } from "@~/app.core/schema";
 import { userinfo_to_username } from "@~/app.layout";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
-import {
-  EMAIL_SUBJECT_INPUT_ID,
-  RESPONSE_TEXTAREA_ID,
-} from "@~/moderations.api/:id/03";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import {
@@ -26,6 +22,7 @@ import {
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
+import { EMAIL_SUBJECT_INPUT_ID, RESPONSE_TEXTAREA_ID } from "../context";
 import { ListZammadArticles } from "./ListZammadArticles";
 
 //
@@ -36,7 +33,7 @@ export const moderation_email_router = new Hono<
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async ({ html, notFound, req, var: { moncomptepro_pg } }) => {
+    async function GET({ html, notFound, req, var: { moncomptepro_pg } }) {
       const { id: moderation_id } = req.valid("param");
       const moderation = await moncomptepro_pg.query.moderations.findFirst({
         where: eq(schema.moderations.id, moderation_id),
@@ -60,7 +57,12 @@ export const moderation_email_router = new Hono<
         [RESPONSE_TEXTAREA_ID]: z.string().trim(),
       }),
     ),
-    async ({ text, req, notFound, var: { userinfo, moncomptepro_pg } }) => {
+    async function PUT({
+      text,
+      req,
+      notFound,
+      var: { userinfo, moncomptepro_pg },
+    }) {
       const { id: moderation_id } = req.valid("param");
       const username = userinfo_to_username(userinfo);
       const {
