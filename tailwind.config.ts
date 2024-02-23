@@ -1,11 +1,13 @@
 //
 
-import plugin from "tailwindcss/plugin";
 import tailwindcss_typography from "@tailwindcss/typography";
+import plugin from "tailwindcss/plugin";
+
+//
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}", "./packages/~/**/*.{ts,tsx}"],
   theme: {
     extend: {},
   },

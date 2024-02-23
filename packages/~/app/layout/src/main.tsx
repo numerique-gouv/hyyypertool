@@ -29,7 +29,7 @@ export function Main_Layout({
 }: PropsWithChildren<Main_Layout_Props>) {
   return (
     <Root_Layout nonce={nonce}>
-      <div class="flex flex-grow flex-col">
+      <div class="flex min-h-full flex-grow flex-col">
         <header role="banner" class="fr-header">
           <div class="fr-header__body">
             <div class="fr-container">

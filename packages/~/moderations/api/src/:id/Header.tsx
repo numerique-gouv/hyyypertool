@@ -124,7 +124,7 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
       <button
         class={button({ size: "sm", type: "tertiary" })}
         hx-patch={
-          urls.moderations[":id"].reprocess.$url({
+          urls.moderations[":id"].$procedures.reprocess.$url({
             param: { id: moderation.id.toString() },
           }).pathname
         }

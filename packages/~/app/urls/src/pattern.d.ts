@@ -244,19 +244,61 @@ declare const app: import("hono/hono-base").HonoBase<
         import("hono/types").MergeSchemaPath<
           import("hono/types").MergeSchemaPath<
             import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "get",
-                "/",
-                {
-                  query: {
-                    user_id: string;
-                    organization_id: string;
-                  };
-                },
-                {}
-              >,
-              "/duplicate_warning"
+              import("hono/types").MergeSchemaPath<
+                import("hono").ToSchema<
+                  "patch",
+                  "/",
+                  {
+                    param: {
+                      id: string;
+                    };
+                  },
+                  {}
+                >,
+                "/reprocess"
+              > &
+                import("hono/types").MergeSchemaPath<
+                  import("hono").ToSchema<
+                    "patch",
+                    "/",
+                    {
+                      param: {
+                        id: string;
+                      };
+                    },
+                    {}
+                  >,
+                  "/rejected"
+                > &
+                import("hono/types").MergeSchemaPath<
+                  import("hono").ToSchema<
+                    "patch",
+                    "/",
+                    {
+                      param: {
+                        id: string;
+                      };
+                    },
+                    {}
+                  >,
+                  "/processed"
+                >,
+              "/$procedures"
             > &
+              import("hono/types").MergeSchemaPath<
+                import("hono").ToSchema<
+                  "get",
+                  "/",
+                  {
+                    query: {
+                      user_id: string;
+                      organization_id: string;
+                    };
+                  },
+                  {}
+                >,
+                "/duplicate_warning"
+              > &
               import("hono/types").MergeSchemaPath<
                 import("hono").ToSchema<
                   "get",
@@ -277,50 +319,17 @@ declare const app: import("hono/hono-base").HonoBase<
                       };
                     } & {
                       form: {
-                        "mail-subject": string;
                         response: string;
+                        "mail-subject": string;
                       };
                     },
                     {}
                   >,
                 "/email"
               > &
-              import("hono/types").MergeSchemaPath<
-                import("hono").ToSchema<
-                  "get",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  },
-                  {}
-                >,
-                ""
-              > &
               import("hono").ToSchema<
-                "patch",
-                "/rejected",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "patch",
-                "/processed",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "patch",
-                "/reprocess",
+                "get",
+                "/",
                 {
                   param: {
                     id: string;
@@ -335,11 +344,11 @@ declare const app: import("hono/hono-base").HonoBase<
               "/",
               {
                 query: {
-                  hide_join_organization?: string | undefined;
-                  hide_non_verified_domain?: string | undefined;
-                  processed_requests?: string | undefined;
-                  search_email?: string | undefined;
                   search_siret?: string | undefined;
+                  search_email?: string | undefined;
+                  processed_requests?: string | undefined;
+                  hide_non_verified_domain?: string | undefined;
+                  hide_join_organization?: string | undefined;
                   page?: string | undefined;
                   page_size?: string | undefined;
                 };
@@ -375,19 +384,61 @@ declare const app: import("hono/hono-base").HonoBase<
     import("hono/types").MergeSchemaPath<
       import("hono/types").MergeSchemaPath<
         import("hono/types").MergeSchemaPath<
-          import("hono").ToSchema<
-            "get",
-            "/",
-            {
-              query: {
-                user_id: string;
-                organization_id: string;
-              };
-            },
-            {}
-          >,
-          "/duplicate_warning"
+          import("hono/types").MergeSchemaPath<
+            import("hono").ToSchema<
+              "patch",
+              "/",
+              {
+                param: {
+                  id: string;
+                };
+              },
+              {}
+            >,
+            "/reprocess"
+          > &
+            import("hono/types").MergeSchemaPath<
+              import("hono").ToSchema<
+                "patch",
+                "/",
+                {
+                  param: {
+                    id: string;
+                  };
+                },
+                {}
+              >,
+              "/rejected"
+            > &
+            import("hono/types").MergeSchemaPath<
+              import("hono").ToSchema<
+                "patch",
+                "/",
+                {
+                  param: {
+                    id: string;
+                  };
+                },
+                {}
+              >,
+              "/processed"
+            >,
+          "/$procedures"
         > &
+          import("hono/types").MergeSchemaPath<
+            import("hono").ToSchema<
+              "get",
+              "/",
+              {
+                query: {
+                  user_id: string;
+                  organization_id: string;
+                };
+              },
+              {}
+            >,
+            "/duplicate_warning"
+          > &
           import("hono/types").MergeSchemaPath<
             import("hono").ToSchema<
               "get",
@@ -408,50 +459,17 @@ declare const app: import("hono/hono-base").HonoBase<
                   };
                 } & {
                   form: {
-                    "mail-subject": string;
                     response: string;
+                    "mail-subject": string;
                   };
                 },
                 {}
               >,
             "/email"
           > &
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              },
-              {}
-            >,
-            ""
-          > &
           import("hono").ToSchema<
-            "patch",
-            "/rejected",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          > &
-          import("hono").ToSchema<
-            "patch",
-            "/processed",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          > &
-          import("hono").ToSchema<
-            "patch",
-            "/reprocess",
+            "get",
+            "/",
             {
               param: {
                 id: string;
@@ -466,11 +484,11 @@ declare const app: import("hono/hono-base").HonoBase<
           "/",
           {
             query: {
-              hide_join_organization?: string | undefined;
-              hide_non_verified_domain?: string | undefined;
-              processed_requests?: string | undefined;
-              search_email?: string | undefined;
               search_siret?: string | undefined;
+              search_email?: string | undefined;
+              processed_requests?: string | undefined;
+              hide_non_verified_domain?: string | undefined;
+              hide_join_organization?: string | undefined;
               page?: string | undefined;
               page_size?: string | undefined;
             };

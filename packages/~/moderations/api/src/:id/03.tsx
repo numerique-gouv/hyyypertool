@@ -15,14 +15,14 @@ import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
+import {
+  EMAIL_SUBJECT_INPUT_ID,
+  EMAIL_TO_INPUT_ID,
+  RESPONSE_MESSAGE_SELECT_ID,
+  RESPONSE_TEXTAREA_ID,
+} from "./context";
 import { ModerationPage_Context } from "./page";
 import { reponse_templates } from "./reponse_templates";
-//
-
-export const RESPONSE_MESSAGE_SELECT_ID = "response-message";
-export const RESPONSE_TEXTAREA_ID = "response";
-export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
-export const EMAIL_TO_INPUT_ID = "mail-to";
 
 //
 
@@ -262,7 +262,7 @@ function SendModerationProcessedEmail() {
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        urls.moderations[":id"].processed.$url({
+        urls.moderations[":id"].$procedures.processed.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }
@@ -304,7 +304,7 @@ function MarkModerationProcessed() {
     <form
       class="m-auto my-12 w-fit"
       hx-patch={
-        urls.moderations[":id"].rejected.$url({
+        urls.moderations[":id"].$procedures.rejected.$url({
           param: { id: moderation.id.toString() },
         }).pathname
       }

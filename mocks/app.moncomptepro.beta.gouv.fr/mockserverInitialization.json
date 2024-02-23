@@ -4,7 +4,7 @@
       "path": "/api/admin/send-moderation-processed-email"
     },
     "httpResponse": {
-      "body": {}
+      "body": { "emailSent": true }
     }
   },
   {
