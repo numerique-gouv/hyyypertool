@@ -1,6 +1,6 @@
 //
 
-import { row } from ":ui/table";
+import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";

@@ -1,15 +1,15 @@
 //
 
-import type { MCP_Moderation } from ":moncomptepro";
 import { button } from "@~/app.ui/button";
 import { callout } from "@~/app.ui/callout";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
-import { ModerationPage_Context } from "@~/moderations.api/id/index";
+import type { Moderation_Type } from "@~/moderations.lib/Moderation_Type";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
+import { ModerationPage_Context } from "./page";
 
 //
 
@@ -71,7 +71,7 @@ function Info() {
               {moderation.users.given_name} {moderation.users.family_name}
             </b>{" "}
             <span class="text-gray-600">
-              {match(moderation.type as MCP_Moderation["type"])
+              {match(moderation.type as Moderation_Type)
                 .with("ask_for_sponsorship", () => "demande un sponsorship")
                 .with(
                   "big_organization_join",

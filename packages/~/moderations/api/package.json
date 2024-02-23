@@ -5,17 +5,19 @@
   "type": "module",
   "exports": {
     ".": {
-      "default": "./src/index.ts"
+      "default": "./src/index.tsx"
     },
     "./*": {
-      "default": "./src/*.ts"
+      "default": "./src/*.tsx"
     }
   },
   "dependencies": {
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
+    "@~/app.ui": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
+    "@~/moncomptepro.lib": "workspace:*",
     "hono": "4.0.5"
   },
   "devDependencies": {

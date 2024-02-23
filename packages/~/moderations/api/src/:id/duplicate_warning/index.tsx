@@ -1,10 +1,10 @@
 //
 
-import { Duplicate_Warning } from ":moderations/:id/Duplicate_Warning";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
+import { Duplicate_Warning } from "./Duplicate_Warning";
 
 //
 

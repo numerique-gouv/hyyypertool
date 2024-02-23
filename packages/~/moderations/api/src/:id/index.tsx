@@ -1,24 +1,27 @@
 //
 
-import { send_moderation_processed_email } from ":legacy/services/mcp_admin_api";
+import { zValidator } from "@hono/zod-validator";
+import type { Htmx_Header } from "@~/app.core/htmx";
+import { Entity_Schema } from "@~/app.core/schema";
 import {
   Main_Layout,
   userinfo_to_username,
   type Main_Layout_Props,
-} from ":ui/layout/main";
-import { zValidator } from "@hono/zod-validator";
-import type { Htmx_Header } from "@~/app.core/htmx";
-import { Entity_Schema } from "@~/app.core/schema";
+} from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { moderation_email_router } from "@~/moderations.api/:id/email/index";
+import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
+// import { Moderation_Page } from "@~/moderations.api/:id/index";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { moderation_email_router } from "./email/route";
-import { Moderation_Page } from "./page";
+import Moderation_Page from "./page";
+
+//
 
 //
 
@@ -37,9 +40,7 @@ export const moderation_page_route = new Hono<UserInfo_Context & Csp_Context>()
     },
   );
 
-export const moderation_router = new Hono<
-  UserInfo_Context & MonComptePro_Pg_Context
->()
+export default new Hono<UserInfo_Context & MonComptePro_Pg_Context>()
   .route("", moderation_page_route)
   .route("/email", moderation_email_router)
   .patch(

@@ -10,14 +10,13 @@ import { button } from "@~/app.ui/button";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
-import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
+import { ModerationPage_Context } from "./page";
 import { reponse_templates } from "./reponse_templates";
-
 //
 
 export const RESPONSE_MESSAGE_SELECT_ID = "response-message";

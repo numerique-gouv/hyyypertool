@@ -1,9 +1,9 @@
 //
 
-import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
+import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";

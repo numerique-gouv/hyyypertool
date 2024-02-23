@@ -4,9 +4,9 @@ import {
   Verification_Type_Schema,
   type Verification_Type,
 } from ":organizations/services/verification_type";
-import { row } from ":ui/table";
 import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/copy";
+import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
 import type { Users_Organizations } from "@~/moncomptepro.database";

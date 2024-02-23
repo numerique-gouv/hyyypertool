@@ -1,11 +1,15 @@
 //
 
-import { userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
+import { userinfo_to_username } from "@~/app.layout";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import {
+  EMAIL_SUBJECT_INPUT_ID,
+  RESPONSE_TEXTAREA_ID,
+} from "@~/moderations.api/:id/03";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import {
@@ -22,7 +26,6 @@ import {
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
-import { EMAIL_SUBJECT_INPUT_ID, RESPONSE_TEXTAREA_ID } from "../03";
 import { ListZammadArticles } from "./ListZammadArticles";
 
 //

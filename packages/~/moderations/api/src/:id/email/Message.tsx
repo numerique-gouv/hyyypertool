@@ -1,9 +1,8 @@
 //
 
-import { ASSETS_PATH } from ":assets/config";
-import env from ":common/env";
-import { quote } from ":ui/quote";
+import env from "@~/app.core/config";
 import { date_to_string } from "@~/app.core/date/date_format";
+import { quote } from "@~/app.ui/quote";
 import { type Moderation } from "@~/moncomptepro.database";
 import { GROUP_MONCOMPTEPRO_SENDER_ID } from "@~/zammad.lib/const";
 import type { Article } from "@~/zammad.lib/types";
@@ -31,7 +30,7 @@ export function Message({
         dangerouslySetInnerHTML={{
           __html: article.body.replace(
             `src="/api/v1/ticket_attachment`,
-            `src="${ASSETS_PATH}/zammad/attachment`,
+            `src="${env.ASSETS_PATH}/zammad/attachment`,
           ),
         }}
       ></div>

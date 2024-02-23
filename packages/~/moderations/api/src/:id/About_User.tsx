@@ -5,9 +5,9 @@ import { CopyButton } from "@~/app.ui/button/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { api_ref } from "@~/app.urls/legacy";
-import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
+import { ModerationPage_Context } from "./page";
 
 //
 

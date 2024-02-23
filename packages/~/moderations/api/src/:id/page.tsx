@@ -4,7 +4,6 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { urls } from "@~/app.urls";
-import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import { and, eq } from "drizzle-orm";
@@ -14,8 +13,12 @@ import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
 import { Header } from "./Header";
+import ModerationPage_Context from "./context";
 
-export async function Moderation_Page({
+//
+
+export { ModerationPage_Context };
+export default async function Moderation_Page({
   active_id,
 }: {
   active_id: number | undefined;

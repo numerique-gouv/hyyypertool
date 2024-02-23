@@ -2,8 +2,8 @@
 
 import { button } from "@~/app.ui/button";
 import { urls } from "@~/app.urls";
-import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import { useContext } from "hono/jsx";
+import { ModerationPage_Context } from "./page";
 
 //
 

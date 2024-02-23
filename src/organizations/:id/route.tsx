@@ -1,10 +1,10 @@
 //
 
 import { mark_domain_as_verified } from ":legacy/services/mcp_admin_api";
-import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
+import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";

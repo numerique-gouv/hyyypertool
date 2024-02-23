@@ -3,10 +3,10 @@
 import { button } from "@~/app.ui/button";
 import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
-import { ModerationPage_Context } from "@~/moderations.api/id/index";
 import type { Organization } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { useContext } from "hono/jsx";
+import { ModerationPage_Context } from "./page";
 
 //
 

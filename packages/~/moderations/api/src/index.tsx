@@ -1,23 +1,21 @@
 //
 
-import { Moderations_Page, Search_Schema } from ":moderations/page";
+import { zValidator } from "@hono/zod-validator";
+import { Pagination_Schema } from "@~/app.core/schema";
 import {
   Main_Layout,
   userinfo_to_username,
   type Main_Layout_Props,
-} from ":ui/layout/main";
-import { zValidator } from "@hono/zod-validator";
-import { Pagination_Schema } from "@~/app.core/schema";
+} from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { moderation_router } from "./:id/route";
-import duplicate_warning_router from "./duplicate_warning/route";
+import { Search_Schema } from "./context";
+import { Moderations_Page } from "./page";
 
 //
-
-const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
+export default new Hono<UserInfo_Context & Csp_Context>()
   .use("/", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
@@ -59,7 +57,3 @@ const moderations_page_route = new Hono<UserInfo_Context & Csp_Context>()
   );
 
 //
-export const moderations_router = new Hono()
-  .route("", moderations_page_route)
-  .route("/duplicate_warning", duplicate_warning_router)
-  .route("/:id", moderation_router);

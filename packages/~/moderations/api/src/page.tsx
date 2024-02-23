@@ -1,46 +1,30 @@
 //
 
-import { z_coerce_boolean } from ":common/z.coerce.boolean";
-import { row } from ":ui/table";
 import { date_to_string } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
+import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
 import {
   moderation_type_to_emoji,
   moderation_type_to_title,
 } from "@~/moderations.lib/moderation_type.mapper";
 import { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
-import type { Moderation, Organization } from "@~/moncomptepro.database";
+import type { Moderation, Organization, User } from "@~/moncomptepro.database";
+import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { z } from "zod";
-
-//
-
-export const MODERATION_TABLE_ID = "moderation_table";
-export const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
-export const SEARCH_SIRET_INPUT_ID = "search_siret";
-export const SEARCH_EMAIL_INPUT_ID = "search_email";
-export const PROCESSED_REQUESTS_INPUT_ID = "processed_requests";
-export const HIDE_NON_VERIFIED_DOMAIN_INPUT_ID = "hide_non_verified_domain";
-export const HIDE_JOIN_ORGANIZATION_INPUT_ID = "hide_join_organization";
-
-export const Search_Schema = z.object({
-  [SEARCH_SIRET_INPUT_ID]: z.string().default(""),
-  [SEARCH_EMAIL_INPUT_ID]: z.string().default(""),
-  [PROCESSED_REQUESTS_INPUT_ID]: z.string().pipe(z_coerce_boolean).default(""),
-  [HIDE_NON_VERIFIED_DOMAIN_INPUT_ID]: z
-    .string()
-    .pipe(z_coerce_boolean)
-    .default(""),
-  [HIDE_JOIN_ORGANIZATION_INPUT_ID]: z
-    .string()
-    .pipe(z_coerce_boolean)
-    .default(""),
-});
-export type Search = z.infer<typeof Search_Schema>;
+import Moderations_Context, {
+  HIDE_JOIN_ORGANIZATION_INPUT_ID,
+  HIDE_NON_VERIFIED_DOMAIN_INPUT_ID,
+  MODERATION_TABLE_ID,
+  MODERATION_TABLE_PAGE_ID,
+  PROCESSED_REQUESTS_INPUT_ID,
+  SEARCH_EMAIL_INPUT_ID,
+  SEARCH_SIRET_INPUT_ID,
+  type Search,
+} from "./context";
 
 //
 
@@ -66,20 +50,48 @@ export function Moderations_Page({
   pagination: Pagination;
   search: Search;
 }) {
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<MonComptePro_Pg_Context>();
+  const { page, page_size } = pagination;
+  const {
+    hide_join_organization,
+    hide_non_verified_domain,
+    processed_requests,
+    search_email,
+    search_siret,
+  } = search;
+  const query_moderations_list = get_moderations_list(moncomptepro_pg, {
+    search: {
+      email: search_email,
+      siret: search_siret,
+      show_archived: processed_requests,
+      hide_non_verified_domain,
+      hide_join_organization,
+    },
+    pagination: { page: page - 1, take: page_size },
+  });
   return (
-    <main
-      class="fr-container my-12"
-      {...hx_moderations_query_props}
-      hx-sync="this"
-      hx-trigger={[
-        `every 11s [document.visibilityState === 'visible']`,
-        `visibilitychange[document.visibilityState === 'visible'] from:document`,
-      ].join(", ")}
+    <Moderations_Context.Provider
+      value={{
+        pagination,
+        query_moderations_list,
+      }}
     >
-      <h1>Liste des moderations</h1>
-      <Filter search={search} />
-      <ModerationList_Table pagination={pagination} search={search} />
-    </main>
+      <main
+        class="fr-container my-12"
+        {...hx_moderations_query_props}
+        hx-sync="this"
+        hx-trigger={[
+          `every 11s [document.visibilityState === 'visible']`,
+          `visibilitychange[document.visibilityState === 'visible'] from:document`,
+        ].join(", ")}
+      >
+        <h1>Liste des moderations</h1>
+        <Filter search={search} />
+        <ModerationList_Table />
+      </main>
+    </Moderations_Context.Provider>
   );
 }
 
@@ -176,35 +188,10 @@ function Filter({ search }: { search: Search }) {
   );
 }
 
-async function ModerationList_Table({
-  pagination,
-  search,
-}: {
-  pagination: Pagination;
-  search: Search;
-}) {
-  const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-  const { page, page_size } = pagination;
-  const {
-    hide_join_organization,
-    hide_non_verified_domain,
-    processed_requests,
-    search_email,
-    search_siret,
-  } = search;
-  const { count, moderations } = await get_moderations_list(moncomptepro_pg, {
-    search: {
-      email: search_email,
-      siret: search_siret,
-      show_archived: processed_requests,
-      hide_non_verified_domain,
-      hide_join_organization,
-    },
-    pagination: { page: page - 1, take: page_size },
-  });
-
+async function ModerationList_Table() {
+  const { pagination, query_moderations_list } =
+    useContext(Moderations_Context);
+  const { count, moderations } = await query_moderations_list;
   return (
     <div class="fr-table [&>table]:table" id={MODERATION_TABLE_ID}>
       <table>

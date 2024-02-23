@@ -8,8 +8,8 @@ import {
   type Session_Context,
 } from "@~/app.middleware/session";
 import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
+import moderations_router from "@~/moderations.api";
 import { Hono } from "hono";
-import { moderations_router } from "../moderations/route";
 import { users_router } from "./users/route";
 
 //
