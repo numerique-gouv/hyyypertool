@@ -3,7 +3,7 @@
 import { button } from "@~/app.ui/button";
 import { callout } from "@~/app.ui/callout";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import type { Moderation_Type } from "@~/moderations.lib/Moderation_Type";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";
@@ -40,12 +40,16 @@ export function Header() {
       <hr class="bg-none" />
 
       <div
-        hx-get={urls.moderations[":id"].duplicate_warning.$url().pathname}
-        hx-trigger="load"
-        hx-vals={JSON.stringify({
-          organization_id: moderation.organization_id,
-          user_id: moderation.user_id,
+        {...hx_urls.moderations[":id"].duplicate_warning.$get({
+          param: {
+            id: moderation.id.toString(),
+          },
+          query: {
+            organization_id: moderation.organization_id.toString(),
+            user_id: moderation.user_id.toString(),
+          },
         })}
+        hx-trigger="load"
       >
         Demande multiples ?
       </div>
@@ -123,11 +127,9 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
       </p>
       <button
         class={button({ size: "sm", type: "tertiary" })}
-        hx-patch={
-          urls.moderations[":id"].$procedures.reprocess.$url({
-            param: { id: moderation.id.toString() },
-          }).pathname
-        }
+        {...hx_urls.moderations[":id"].$procedures.reprocess.$patch({
+          param: { id: moderation.id.toString() },
+        })}
         hx-swap="none"
       >
         Retraiter

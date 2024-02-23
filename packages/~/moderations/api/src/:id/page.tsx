@@ -3,7 +3,7 @@
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
-import { urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import { and, eq } from "drizzle-orm";
@@ -67,15 +67,14 @@ export async function ModerationPage_Provider({
 
 export default async function Moderation_Page() {
   const { moderation } = useContext(ModerationPage_Context);
+
   return (
     <main
       class="fr-container my-12"
       hx-disinherit="*"
-      hx-get={
-        urls.moderations[":id"].$url({
-          param: { id: moderation.id.toString() },
-        }).pathname
-      }
+      {...hx_urls.moderations[":id"].$get({
+        param: { id: moderation.id.toString() },
+      }, {})}
       hx-select="main"
       hx-trigger={hx_trigger_from_body([
         MODERATION_EVENTS.Enum.MODERATION_UPDATED,

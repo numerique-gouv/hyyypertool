@@ -6,7 +6,7 @@ import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { row } from "@~/app.ui/table";
-import { urls } from "@~/app.urls";
+import { hx_urls, urls } from "@~/app.urls";
 import {
   moderation_type_to_emoji,
   moderation_type_to_title,
@@ -29,7 +29,7 @@ import Moderations_Context, {
 //
 
 const hx_moderations_query_props = {
-  "hx-get": urls.moderations.$url().pathname,
+  ...hx_urls.moderations.$get({ query: {} }),
   "hx-include": hx_include([
     HIDE_JOIN_ORGANIZATION_INPUT_ID,
     MODERATION_TABLE_PAGE_ID,
