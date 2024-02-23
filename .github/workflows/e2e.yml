@@ -20,8 +20,9 @@ jobs:
         working-directory: "e2e"
 
     env:
+      MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR: http://127.0.0.1:6300
+      MOCKED_AUTH_AGENTCONNECT_GOUV_FR: http://127.0.0.1:6100
       MOCKED_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-      MOCKED_AGENTCONNECT_URL: http://127.0.0.1:6100
       MOCKED_ENTREPRISE_API_GOUV_URL: http://127.0.0.1:6200
 
     services:
@@ -72,24 +73,27 @@ jobs:
       - name: Wait for mocked services to be ready
         run: |
           docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml ps
-          echo "Fake AgentConnect"
-          curl -sSf -XGET ${{ env.MOCKED_AGENTCONNECT_URL }}/readyz
+          echo "Fake https://auth.agentconnect.gouv.fr"
+          curl -sSf -XGET ${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/readyz
           echo
           echo "Fake https://entreprise.api.gouv.fr ready"
           curl -sSf -XGET ${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}/readyz
+          echo
+          echo "Fake https://app.moncomptepro.beta.gouv.fr ready"
+          curl -sSf -XGET ${{ env.MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR }}/readyz
         working-directory: "."
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
           AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
-          AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AGENTCONNECT_URL }}/api/v2"
+          AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/api/v2"
           AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
           AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
           CONSOLA_LEVEL: "2"
           ALLOWED_USERS: "user@yopmail.com"
           API_AUTH_PASSWORD: "???"
-          API_AUTH_URL: "https://moncomptepro-preprod.osc-secnum-fr1.scalingo.io"
+          API_AUTH_URL: "${{ env.MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR }}"
           API_AUTH_USERNAME: "???"
           DATABASE_URL: "${{ env.MOCKED_DATABASE_URL }}"
           DO_NOT_SEND_MAIL: "true"

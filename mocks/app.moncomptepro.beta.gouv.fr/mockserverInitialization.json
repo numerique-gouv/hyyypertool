@@ -1,0 +1,20 @@
+[
+  {
+    "httpRequest": {
+      "path": "/api/admin/send-moderation-processed-email"
+    },
+    "httpResponse": {
+      "body": {}
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/readyz"
+    },
+    "httpResponse": {
+      "body": "readyz check passed",
+      "reasonPhrase": "OK",
+      "statusCode": 200
+    }
+  }
+]
