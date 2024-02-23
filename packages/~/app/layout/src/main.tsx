@@ -1,6 +1,7 @@
 //
 
 import { urls } from "@~/app.urls";
+import { api_ref } from "@~/app.urls/legacy";
 import type { PropsWithChildren } from "hono/jsx";
 import { Root_Layout, type Root_Layout_Props } from "./root";
 
@@ -92,7 +93,7 @@ function Tools({ username }: { username?: string | undefined }) {
           <li>
             <a
               class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-fi-logout-box-r-line fr-btn--icon-left"
-              // href={app_hc}
+              href={urls.auth.logout.$url().pathname}
             >
               {username}
             </a>
@@ -124,7 +125,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={urls.users.$url().pathname}
+            href={api_ref("/legacy/users", {})}
             target="_self"
           >
             Utilisateurs
@@ -133,7 +134,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={urls.organizations.$url().pathname}
+            href={urls.legacy.organizations.$url().pathname}
             target="_self"
           >
             Organisations

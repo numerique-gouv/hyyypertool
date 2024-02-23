@@ -1,4 +1,4 @@
-import { button } from ":ui/button";
+import { button } from "@~/app.ui/button";
 import { urls } from "@~/app.urls";
 import type { Organization } from "@~/moncomptepro.database";
 

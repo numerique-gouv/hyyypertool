@@ -1,8 +1,8 @@
 //
 
 import type { Organization_DTO } from ":organizations/repositories/get_by_id";
-import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { urls } from "@~/app.urls";
+import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 
 //
 

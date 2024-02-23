@@ -1,9 +1,9 @@
 //
 
 import UsersPage, { SEARCH_EMAIL_INPUT_ID } from ":legacy/users/page";
-import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema, Pagination_Schema } from "@~/app.core/schema";
+import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { Hono } from "hono";

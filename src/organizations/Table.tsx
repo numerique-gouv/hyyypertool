@@ -1,6 +1,6 @@
 //
 
-import { LocalTime } from ":ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { type Organization } from "@~/moncomptepro.database";
 import { createContext, useContext } from "hono/jsx";

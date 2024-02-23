@@ -1,7 +1,7 @@
 //
 
 import type { Organization_DTO } from ":organizations/repositories/get_by_id";
-import { LocalTime } from ":ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 
 //
 

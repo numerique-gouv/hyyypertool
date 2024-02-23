@@ -1,6 +1,6 @@
 //
 
-import env from ":common/env";
+import env from "@~/app.core/config";
 import type { Child } from "hono/jsx";
 
 //

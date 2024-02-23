@@ -1,20 +1,20 @@
 //
 
-import { api_ref } from ":api_ref";
-import { button } from ":ui/button";
-import { CopyButton } from ":ui/button/copy";
-import { GoogleSearchButton } from ":ui/button/search";
-import { Main_Layout, userinfo_to_username } from ":ui/layout/main";
-import { LocalTime } from ":ui/time/LocalTime";
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
+import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { button } from "@~/app.ui/button";
+import { CopyButton } from "@~/app.ui/button/copy";
+import { GoogleSearchButton } from "@~/app.ui/button/search";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
-import { schema } from "@~/moncomptepro.database";
+import { api_ref } from "@~/app.urls/legacy";
+import { schema, type User } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createContext, useContext } from "hono/jsx";

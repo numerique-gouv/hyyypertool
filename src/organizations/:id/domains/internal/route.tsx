@@ -1,12 +1,12 @@
 //
 
-import { z_coerce_boolean } from ":common/z.coerce.boolean";
-import { ORGANISATION_EVENTS } from ":organizations/services/event";
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
+import { z_coerce_boolean } from "@~/app.core/schema/z.coerce.boolean";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { schema } from "@~/moncomptepro.database";
+import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";

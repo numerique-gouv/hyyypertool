@@ -1,0 +1,23 @@
+{
+  "name": "@~/moncomptepro.lib",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "consola": "3.2.3",
+    "zod": "3.22.4"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*",
+    "moncomptepro": "betagouv/moncomptepro#0ecf952c0d1cf980604e00fda799249d5a9b372d"
+  }
+}
