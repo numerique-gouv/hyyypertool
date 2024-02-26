@@ -1,12 +1,14 @@
 //
 
 import type { Config } from "drizzle-kit";
+import { env } from "node:process";
 
 //
 
 export default {
   dbCredentials: {
     connectionString:
+      env["DATABASE_URL"] ||
       "postgresql://postgres:postgres@localhost:5432/postgres?schema=public",
   },
   driver: "pg",

@@ -143,11 +143,11 @@ declare const app: import("hono/hono-base").HonoBase<
                         form: {
                           verification_type?:
                             | ""
+                            | "verified_email_domain"
+                            | "official_contact_email"
+                            | "official_contact_domain"
                             | "code_sent_to_official_contact_email"
                             | "in_liste_dirigeants_rna"
-                            | "official_contact_domain"
-                            | "official_contact_email"
-                            | "verified_email_domain"
                             | undefined;
                           is_external?: string | undefined;
                         };
