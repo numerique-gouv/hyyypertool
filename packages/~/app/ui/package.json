@@ -30,7 +30,7 @@
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
     "tailwind-variants": "0.2.0",
-    "hono": "4.0.5"
+    "hono": "4.0.7"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

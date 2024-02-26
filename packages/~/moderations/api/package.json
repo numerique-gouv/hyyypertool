@@ -18,7 +18,7 @@
     "@~/app.ui": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
-    "hono": "4.0.5"
+    "hono": "4.0.7"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
