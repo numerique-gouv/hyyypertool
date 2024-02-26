@@ -14,6 +14,10 @@ Then("je vois {string}", function (text: string) {
   cy.contains(text);
 });
 
+Then("je ne vois pas {string}", function (text: string) {
+  cy.contains(text).should("not.exist");
+});
+
 Then("je vois la ligne de table {string}", function (text: string) {
   cy.contains(text).parent().as("row");
 });

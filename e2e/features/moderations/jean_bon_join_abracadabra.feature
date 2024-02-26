@@ -22,3 +22,7 @@ Fonctionnalité: Moderation blockante à accepter
     Quand je clique sur le bouton "🪄 Action en un click : Envoyer l'email « Votre demande a été traitée »"
     Alors je vois "Modération traitée"
     * je vois "Cette modération a été marqué comme traitée le"
+
+    Alors je vois "Liste des moderations"
+    Alors je ne vois pas "51935970700022"
+
