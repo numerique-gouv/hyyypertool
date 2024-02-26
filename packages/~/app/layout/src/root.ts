@@ -68,10 +68,15 @@ export function Root_Layout({
 
         <!--  -->
 
-        <link
-          rel="stylesheet"
-          href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-        />
+        ${config.NODE_ENV === "development"
+          ? html`<link
+              rel="stylesheet"
+              href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+            />`
+          : html`<link
+              rel="stylesheet"
+              href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
+            />`}
 
         <!--  -->
 
@@ -126,11 +131,17 @@ export function Root_Layout({
 
       <!--  -->
 
-      <script
-        nonce="${nonce ?? ""}"
-        src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
-        type="module"
-      ></script>
+      ${config.NODE_ENV === "development"
+        ? html`<script
+            nonce="${nonce ?? ""}"
+            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
+            type="module"
+          ></script>`
+        : html`<script
+            nonce="${nonce ?? ""}"
+            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
+            type="module"
+          ></script>`}
 
       <meta
         name="htmx-config"
@@ -168,10 +179,20 @@ export function Root_Layout({
 
       <!--  -->
 
-      <script
-        nonce="${nonce ?? ""}"
-        src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
-      ></script>
+      ${config.NODE_ENV === "development"
+        ? html`<script
+              nonce="${nonce ?? ""}"
+              src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.js"
+            ></script>
+
+            <script
+              nonce="${nonce ?? ""}"
+              src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/hdb.js"
+            ></script>`
+        : html`<script
+            nonce="${nonce ?? ""}"
+            src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
+          ></script> `}
 
       <!--  -->
 
