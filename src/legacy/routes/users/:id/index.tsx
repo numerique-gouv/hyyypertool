@@ -9,8 +9,8 @@ import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg"
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { button } from "@~/app.ui/button";
-import { CopyButton } from "@~/app.ui/button/copy";
-import { GoogleSearchButton } from "@~/app.ui/button/search";
+import { CopyButton } from "@~/app.ui/button/components/copy";
+import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";

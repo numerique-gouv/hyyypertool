@@ -3,7 +3,7 @@
   "display": "TSX",
   "extends": "./base.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "hono/jsx"
   }
 }

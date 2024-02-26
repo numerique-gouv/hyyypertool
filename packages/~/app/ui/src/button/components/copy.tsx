@@ -1,16 +1,17 @@
 //
 
-import type { Child } from "hono/jsx";
+import type { PropsWithChildren } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
-import { button } from ".";
+import { button } from "..";
 
 //
 
-export function CopyButton(props: {
-  text: string;
-  children?: Child;
-  variant?: VariantProps<typeof button>;
-}) {
+export function CopyButton(
+  props: PropsWithChildren<{
+    text: string;
+    variant?: VariantProps<typeof button>;
+  }>,
+) {
   const { text, children, variant } = props;
   return (
     <button

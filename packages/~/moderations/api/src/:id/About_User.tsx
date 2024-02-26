@@ -1,8 +1,8 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { CopyButton } from "@~/app.ui/button/copy";
-import { GoogleSearchButton } from "@~/app.ui/button/search";
+import { CopyButton } from "@~/app.ui/button/components/copy";
+import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { api_ref } from "@~/app.urls/legacy";
 import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";

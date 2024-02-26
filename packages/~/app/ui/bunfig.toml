@@ -1,0 +1,4 @@
+#
+
+[test]
+preload = "@~/config.happydom/register.ts"

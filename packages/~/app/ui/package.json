@@ -26,6 +26,9 @@
       "default": "./src/*.tsx"
     }
   },
+  "scripts": {
+    "test": "bun test"
+  },
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
@@ -33,6 +36,7 @@
     "hono": "4.0.7"
   },
   "devDependencies": {
+    "@~/config.happydom": "workspace:*",
     "@~/config.typescript": "workspace:*"
   }
 }

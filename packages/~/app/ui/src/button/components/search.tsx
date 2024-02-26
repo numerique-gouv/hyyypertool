@@ -1,16 +1,15 @@
 //
 
-import type { Child } from "hono/jsx";
+import type { PropsWithChildren } from "hono/jsx";
 
 //
 
 export function GoogleSearchButton({
   query,
   children,
-}: {
+}: PropsWithChildren<{
   query: string;
-  children?: Child;
-}) {
+}>) {
   return (
     <a
       class="fr-link"

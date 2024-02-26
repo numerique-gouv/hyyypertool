@@ -1,0 +1,10 @@
+{
+  "name": "@~/config.happydom",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [],
+  "dependencies": {
+    "@happy-dom/global-registrator": "^13.3.8"
+  }
+}
