@@ -277,6 +277,7 @@ function SendModerationProcessedEmail() {
           wait for ${Htmx_Events.enum.afterOnLoad} from :form
           go to the top of body smoothly
           wait 1s
+          go back
         `}
         class={button({ intent: "dark" })}
         disabled={disabled}
@@ -320,6 +321,7 @@ function MarkModerationProcessed() {
           wait 0.33s
           go to the top of body smoothly
           wait 1s
+          go back
         `}
         class={button({ intent: "dark" })}
       >
