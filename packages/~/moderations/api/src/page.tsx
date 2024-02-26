@@ -16,27 +16,25 @@ import type { Moderation, Organization, User } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import Moderations_Context, {
-  HIDE_JOIN_ORGANIZATION_INPUT_ID,
-  HIDE_NON_VERIFIED_DOMAIN_INPUT_ID,
   MODERATION_TABLE_ID,
-  MODERATION_TABLE_PAGE_ID,
-  PROCESSED_REQUESTS_INPUT_ID,
-  SEARCH_EMAIL_INPUT_ID,
-  SEARCH_SIRET_INPUT_ID,
+  Page_Query,
   type Search,
 } from "./context";
 
 //
 
+const page_query_keys = Page_Query.keyof();
+const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
+
 const hx_moderations_query_props = {
   ...hx_urls.moderations.$get({ query: {} }),
   "hx-include": hx_include([
-    HIDE_JOIN_ORGANIZATION_INPUT_ID,
+    page_query_keys.enum.hide_join_organization,
     MODERATION_TABLE_PAGE_ID,
-    HIDE_NON_VERIFIED_DOMAIN_INPUT_ID,
-    PROCESSED_REQUESTS_INPUT_ID,
-    SEARCH_EMAIL_INPUT_ID,
-    SEARCH_SIRET_INPUT_ID,
+    page_query_keys.enum.hide_non_verified_domain,
+    page_query_keys.enum.processed_requests,
+    page_query_keys.enum.search_email,
+    page_query_keys.enum.search_siret,
   ]),
   "hx-replace-url": true,
   "hx-select": `#${MODERATION_TABLE_ID} > table`,
@@ -98,41 +96,52 @@ export function Moderations_Page({
 //
 
 function Filter({ search }: { search: Search }) {
+  const on_search_show_processed_requests = `
+  on keyup
+    if no my value
+      return false
+    end
+
+    set #${page_query_keys.enum.processed_requests}.checked to "checked"
+    set #${page_query_keys.enum.processed_requests}.value to "true"
+  `;
   return (
     <form
       {...hx_moderations_query_props}
       hx-trigger={[
-        `input from:#${HIDE_JOIN_ORGANIZATION_INPUT_ID}`,
-        `input from:#${HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}`,
-        `input from:#${PROCESSED_REQUESTS_INPUT_ID}`,
-        `keyup changed delay:500ms from:#${SEARCH_EMAIL_INPUT_ID}`,
-        `keyup changed delay:500ms from:#${SEARCH_SIRET_INPUT_ID}`,
+        `input from:#${page_query_keys.enum.hide_join_organization}`,
+        `input from:#${page_query_keys.enum.hide_non_verified_domain}`,
+        `input from:#${page_query_keys.enum.processed_requests}`,
+        `keyup changed delay:500ms from:#${page_query_keys.enum.search_email}`,
+        `keyup changed delay:500ms from:#${page_query_keys.enum.search_siret}`,
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 1 } as Pagination)}
     >
       <div className="grid grid-cols-2 gap-6">
         <div class="fr-input-group ">
-          <label class="fr-label" for={SEARCH_EMAIL_INPUT_ID}>
+          <label class="fr-label" for={page_query_keys.enum.search_email}>
             Email
           </label>
           <input
+            _={on_search_show_processed_requests}
             class="fr-input"
-            id={SEARCH_EMAIL_INPUT_ID}
-            name={SEARCH_EMAIL_INPUT_ID}
+            id={page_query_keys.enum.search_email}
+            name={page_query_keys.enum.search_email}
             placeholder="Recherche par Email"
-            value={search[SEARCH_EMAIL_INPUT_ID]}
+            value={search.search_email}
           />
         </div>
         <div class="fr-input-group ">
-          <label class="fr-label" for={SEARCH_SIRET_INPUT_ID}>
+          <label class="fr-label" for={page_query_keys.enum.search_siret}>
             Siret
           </label>
           <input
+            _={on_search_show_processed_requests}
             class="fr-input"
-            id={SEARCH_SIRET_INPUT_ID}
-            name={SEARCH_SIRET_INPUT_ID}
+            id={page_query_keys.enum.search_siret}
+            name={page_query_keys.enum.search_siret}
             placeholder="Recherche par SIRET"
-            value={search[SEARCH_SIRET_INPUT_ID]}
+            value={search.search_siret}
           />
         </div>
       </div>
@@ -140,13 +149,13 @@ function Filter({ search }: { search: Search }) {
         <div class="fr-checkbox-group">
           <input
             _="on click set @value to my checked"
-            id={PROCESSED_REQUESTS_INPUT_ID}
-            name={PROCESSED_REQUESTS_INPUT_ID}
-            value={search[PROCESSED_REQUESTS_INPUT_ID] ? "true" : "false"}
-            checked={search[PROCESSED_REQUESTS_INPUT_ID]}
+            id={page_query_keys.enum.processed_requests}
+            name={page_query_keys.enum.processed_requests}
+            value={search.processed_requests ? "true" : "false"}
+            checked={search.processed_requests}
             type="checkbox"
           />
-          <label class="fr-label" for={PROCESSED_REQUESTS_INPUT_ID}>
+          <label class="fr-label" for={page_query_keys.enum.processed_requests}>
             Voir les demandes traitées
           </label>
         </div>
@@ -155,13 +164,16 @@ function Filter({ search }: { search: Search }) {
         <div class="fr-checkbox-group">
           <input
             _="on click set @value to my checked"
-            id={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}
-            name={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}
-            value={search[HIDE_NON_VERIFIED_DOMAIN_INPUT_ID] ? "true" : "false"}
-            checked={search[HIDE_NON_VERIFIED_DOMAIN_INPUT_ID]}
+            id={page_query_keys.enum.hide_non_verified_domain}
+            name={page_query_keys.enum.hide_non_verified_domain}
+            value={search.hide_non_verified_domain ? "true" : "false"}
+            checked={search.hide_non_verified_domain}
             type="checkbox"
           />
-          <label class="fr-label" for={HIDE_NON_VERIFIED_DOMAIN_INPUT_ID}>
+          <label
+            class="fr-label"
+            for={page_query_keys.enum.hide_non_verified_domain}
+          >
             Cacher les {moderation_type_to_emoji("non_verified_domain")}{" "}
             {moderation_type_to_title("non_verified_domain")}
           </label>
@@ -171,13 +183,16 @@ function Filter({ search }: { search: Search }) {
         <div class="fr-checkbox-group">
           <input
             _="on click set @value to my checked"
-            id={HIDE_JOIN_ORGANIZATION_INPUT_ID}
-            name={HIDE_JOIN_ORGANIZATION_INPUT_ID}
-            value={search[HIDE_JOIN_ORGANIZATION_INPUT_ID] ? "true" : "false"}
-            checked={search[HIDE_JOIN_ORGANIZATION_INPUT_ID]}
+            id={page_query_keys.enum.hide_join_organization}
+            name={page_query_keys.enum.hide_join_organization}
+            value={search.hide_join_organization ? "true" : "false"}
+            checked={search.hide_join_organization}
             type="checkbox"
           />
-          <label class="fr-label" for={HIDE_JOIN_ORGANIZATION_INPUT_ID}>
+          <label
+            class="fr-label"
+            for={page_query_keys.enum.hide_join_organization}
+          >
             Cacher les
             {moderation_type_to_emoji("organization_join_block")}{" "}
             {moderation_type_to_title("organization_join_block")}
@@ -252,7 +267,7 @@ function Foot({
             class="fr-input inline-block w-auto"
             {...hx_moderations_query_props}
             id={MODERATION_TABLE_PAGE_ID}
-            name={"page" as keyof Pagination}
+            name={page_query_keys.enum.page}
             value={page}
           />{" "}
           <span> of {last_page}</span>

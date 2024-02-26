@@ -1,7 +1,6 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { Pagination_Schema } from "@~/app.core/schema";
 import {
   Main_Layout,
   userinfo_to_username,
@@ -12,7 +11,7 @@ import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import moderation_router from "./:id/index";
-import { Search_Schema } from "./context";
+import { Page_Query } from "./context";
 import { Moderations_Page } from "./page";
 
 //
@@ -22,7 +21,7 @@ export default new Hono<UserInfo_Context & Csp_Context>()
   .use("/", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
-    zValidator("query", Search_Schema.merge(Pagination_Schema).partial()),
+    zValidator("query", Page_Query),
     function GET({ render, req, var: { nonce, userinfo } }) {
       let {
         hide_join_organization,
