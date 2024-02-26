@@ -19,7 +19,7 @@ Then("je ne vois pas {string}", function (text: string) {
 });
 
 Then("je vois la ligne de table {string}", function (text: string) {
-  cy.contains(text).parent().as("row");
+  cy.contains("td", text).parent().as("row");
 });
 
 Then("sur la même ligne je vois {string}", function (text: string) {
