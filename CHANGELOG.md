@@ -1,5 +1,17 @@
 
 
+## [2024.2.7](https://github.com/betagouv/hyyypertool/compare/2024.2.6...2024.2.7) (2024-02-27)
+
+
+### Features
+
+* **app:** introduce hx_urls ([#96](https://github.com/betagouv/hyyypertool/issues/96)) ([45f6461](https://github.com/betagouv/hyyypertool/commit/45f646115b7be8fc4890fb8f411994e9fe77b24f))
+* **app:** upgrade ui internal code ([88eec80](https://github.com/betagouv/hyyypertool/commit/88eec80dc3588aec8db150c5bc9836c5710d1af1))
+* **moderation:** add not found page ([#95](https://github.com/betagouv/hyyypertool/issues/95)) ([4f87e33](https://github.com/betagouv/hyyypertool/commit/4f87e3300579506cbad57892c6e82c793a67548e))
+* **moderation:** auto go back after marked as proceseed ([#98](https://github.com/betagouv/hyyypertool/issues/98)) ([62b2fd2](https://github.com/betagouv/hyyypertool/commit/62b2fd227ecf32ff5301017d4220086f6da0a999)), closes [#12](https://github.com/betagouv/hyyypertool/issues/12)
+* **moderation:** better action button behaviour ([#94](https://github.com/betagouv/hyyypertool/issues/94)) ([a05ec29](https://github.com/betagouv/hyyypertool/commit/a05ec29f678024974f797eca0a964c5138dc05e2))
+* **moderation:** force check show processed requests on search ([#97](https://github.com/betagouv/hyyypertool/issues/97)) ([af4ec3e](https://github.com/betagouv/hyyypertool/commit/af4ec3ee6ebf350702f4babe4ccc7ac8f3d56cc2))
+
 ## [2024.2.6](https://github.com/betagouv/hyyypertool/compare/2024.2.5...2024.2.6) (2024-02-20)
 
 
