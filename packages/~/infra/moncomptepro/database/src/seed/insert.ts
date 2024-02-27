@@ -10,36 +10,38 @@ import type { MCP_Moderation } from "../moncomptepro";
 export async function insert_database(db: MonComptePro_PgDatabase) {
   try {
     const raphael = await insert_raphael(db);
-    consola.info(`🌱 INSERT user ${raphael.given_name} ${raphael.family_name}`);
+    consola.verbose(
+      `🌱 INSERT user ${raphael.given_name} ${raphael.family_name}`,
+    );
     const jean_bon = await insert_jeanbon(db);
-    consola.info(
+    consola.verbose(
       `🌱 INSERT user ${jean_bon.given_name} ${jean_bon.family_name}`,
     );
     const pierre_bon = await insert_pierrebon(db);
-    consola.info(
+    consola.verbose(
       `🌱 INSERT user ${pierre_bon.given_name} ${pierre_bon.family_name}`,
     );
     const richard_bon = await insert_richardbon(db);
-    consola.info(
+    consola.verbose(
       `🌱 INSERT user ${richard_bon.given_name} ${richard_bon.family_name}`,
     );
     const marie_bon = await insert_mariebon(db);
-    consola.info(
+    consola.verbose(
       `🌱 INSERT user ${marie_bon.given_name} ${marie_bon.family_name}`,
     );
 
     //
 
     const dinum = await insert_dinum(db);
-    consola.info(`🌱 INSERT organization ${dinum.cached_nom_complet}`);
+    consola.verbose(`🌱 INSERT organization ${dinum.cached_nom_complet}`);
     const aldp = await insert_aldp(db);
-    consola.info(`🌱 INSERT organization ${aldp.cached_nom_complet}`);
+    consola.verbose(`🌱 INSERT organization ${aldp.cached_nom_complet}`);
     const abracadabra = await insert_abracadabra(db);
-    consola.info(`🌱 INSERT organization ${abracadabra.cached_nom_complet}`);
+    consola.verbose(`🌱 INSERT organization ${abracadabra.cached_nom_complet}`);
     const dengi = await insert_dengi(db);
-    consola.info(`🌱 INSERT organization ${dengi.cached_nom_complet}`);
+    consola.verbose(`🌱 INSERT organization ${dengi.cached_nom_complet}`);
     const bosch = await insert_bosch(db);
-    consola.info(`🌱 INSERT organization ${bosch.cached_nom_complet}`);
+    consola.verbose(`🌱 INSERT organization ${bosch.cached_nom_complet}`);
 
     //
 
@@ -47,7 +49,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: dinum.id,
       user_id: raphael.id,
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${raphael_dinum.command} ${raphael_dinum.rowCount} ${raphael.given_name} join ${dinum.cached_libelle}`,
     );
 
@@ -58,7 +60,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${jeanbon_dinum.command} ${jeanbon_dinum.rowCount} ${jean_bon.given_name} wants to join ${dinum.cached_libelle}`,
     );
 
@@ -67,7 +69,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} ${jean_bon.given_name} wants to join ${abracadabra.cached_libelle}`,
     );
 
@@ -76,7 +78,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "big_organization_join" as MCP_Moderation["type"],
       user_id: pierre_bon.id,
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} ${pierre_bon.family_name} wants to join  ${aldp.cached_libelle}`,
     );
 
@@ -86,7 +88,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       user_id: richard_bon.id,
       moderated_at: new Date("2023-06-22 14:34:34"),
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${richard_bon_dengi.command} ${richard_bon_dengi.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet}`,
     );
 
@@ -95,7 +97,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
     );
 
@@ -104,7 +106,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
     });
-    consola.info(
+    consola.verbose(
       `🌱 ${marie_bon_dengi_bis.command} ${marie_bon_dengi_bis.rowCount} ${marie_bon.given_name} wants to join ${bosch.cached_nom_complet} again...`,
     );
   } catch (err) {
