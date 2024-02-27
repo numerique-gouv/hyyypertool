@@ -375,7 +375,25 @@ declare const app: import("hono/hono-base").HonoBase<
     > &
     import("hono/types").MergeSchemaPath<
       import("hono/types").MergeSchemaPath<
-        import("hono").ToSchema<"get", "/", unknown, {}>,
+        import("hono/types").MergeSchemaPath<
+          import("hono").ToSchema<
+            "get",
+            "/",
+            {
+              param: {
+                id: string;
+              };
+            } & {
+              query: {
+                page?: string | undefined;
+                page_size?: string | undefined;
+              };
+            },
+            {}
+          >,
+          "/organizations"
+        > &
+          import("hono").ToSchema<"get", "/", unknown, {}>,
         "/:id"
       > &
         import("hono").ToSchema<"get", "/", unknown, {}>,

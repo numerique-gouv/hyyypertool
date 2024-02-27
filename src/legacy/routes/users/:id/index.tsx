@@ -12,7 +12,7 @@ import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
 import { schema, type User } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
@@ -67,8 +67,9 @@ export default new Hono<
             suivantes :
             <div class="fr-table max-w-full overflow-x-auto">
               <div
-                hx-get={api_ref("/legacy/users/:id/organizations", {
-                  id: String(user.id),
+                {...hx_urls.users[":id"].organizations.$get({
+                  param: { id: user.id.toString() },
+                  query: {},
                 })}
                 hx-target="this"
                 hx-trigger="load"
@@ -81,13 +82,9 @@ export default new Hono<
             suivantes :
             <div class="fr-table max-w-full overflow-x-auto">
               <div
-                hx-get={
-                  urls.legacy.users[":id"].moderations.$url({
-                    param: {
-                      id: user.id.toString(),
-                    },
-                  }).pathname
-                }
+                {...hx_urls.legacy.users[":id"].moderations.$get({
+                  param: { id: user.id.toString() },
+                })}
                 hx-target="this"
                 hx-trigger="load"
                 class="fr-table"

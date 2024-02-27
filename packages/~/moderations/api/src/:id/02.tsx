@@ -110,8 +110,9 @@ export async function _02() {
       organisations suivantes :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
-          hx-get={api_ref("/legacy/users/:id/organizations", {
-            id: String(moderation.user_id),
+          {...hx_urls.users[":id"].organizations.$get({
+            param: { id: moderation.user_id.toString() },
+            query: {},
           })}
           hx-target="this"
           hx-trigger="load"
