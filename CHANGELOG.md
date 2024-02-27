@@ -1,5 +1,12 @@
 
 
+## [2024.2.8](https://github.com/betagouv/hyyypertool/compare/2024.2.7...2024.2.8) (2024-02-27)
+
+
+### Bug Fixes
+
+* **moderation:** scroll to latest message ([#104](https://github.com/betagouv/hyyypertool/issues/104)) ([0c498e6](https://github.com/betagouv/hyyypertool/commit/0c498e6872340b7a36537b786c71d27d3ba9cb7e))
+
 ## [2024.2.7](https://github.com/betagouv/hyyypertool/compare/2024.2.6...2024.2.7) (2024-02-27)
 
 
