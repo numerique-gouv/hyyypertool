@@ -180,7 +180,7 @@ export async function _03() {
             toggle @disabled until ${Htmx_Events.enum.afterOnLoad} from :form
           on click
             wait for ${Htmx_Events.enum.afterOnLoad} from :form
-            go to the top of body smoothly
+            go to the top of .last-message smoothly
             wait 1s
           `}
           type="submit"
