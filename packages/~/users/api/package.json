@@ -12,6 +12,7 @@
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
+    "@~/organizations.repository": "workspace:*",
     "hono": "4.0.7"
   },
   "devDependencies": {
