@@ -19,8 +19,61 @@ import { Moderation_NotFound } from "./not-found";
 
 //
 
+export default async function Moderation_Page() {
+  const { moderation } = useContext(ModerationPage_Context);
+
+  return (
+    <main
+      class="fr-container my-12"
+      hx-disinherit="*"
+      {...hx_urls.moderations[":id"].$get(
+        {
+          param: { id: moderation.id.toString() },
+        },
+        {},
+      )}
+      hx-select="main"
+      hx-trigger={hx_trigger_from_body([
+        MODERATION_EVENTS.Enum.MODERATION_UPDATED,
+      ])}
+    >
+      <button
+        _="on click go back"
+        class={button({
+          class: "fr-btn--icon-left fr-icon-checkbox-circle-line",
+          type: "tertiary",
+          size: "sm",
+        })}
+      >
+        retour
+      </button>
+
+      <hr class="bg-none pt-6" />
+
+      <Header />
+
+      <hr class="my-12" />
+
+      <div class="grid grid-cols-2">
+        <About_User />
+        <About_Organisation />
+      </div>
+
+      {/* <Organization_Members_Table id={moderation.}/> */}
+      <_02 />
+
+      <hr />
+
+      <_03 />
+    </main>
+  );
+}
+
+//
+
 export { ModerationPage_Context };
 
+//
 export async function ModerationPage_Provider({
   moderation_id,
   children,
@@ -62,52 +115,5 @@ export async function ModerationPage_Provider({
     >
       {children}
     </ModerationPage_Context.Provider>
-  );
-}
-
-export default async function Moderation_Page() {
-  const { moderation } = useContext(ModerationPage_Context);
-
-  return (
-    <main
-      class="fr-container my-12"
-      hx-disinherit="*"
-      {...hx_urls.moderations[":id"].$get({
-        param: { id: moderation.id.toString() },
-      }, {})}
-      hx-select="main"
-      hx-trigger={hx_trigger_from_body([
-        MODERATION_EVENTS.Enum.MODERATION_UPDATED,
-      ])}
-    >
-      <button
-        _="on click go back"
-        class={button({
-          class: "fr-btn--icon-left fr-icon-checkbox-circle-line",
-          type: "tertiary",
-          size: "sm",
-        })}
-      >
-        retour
-      </button>
-
-      <hr class="bg-none pt-6" />
-
-      <Header />
-
-      <hr class="my-12" />
-
-      <div class="grid grid-cols-2">
-        <About_User />
-        <About_Organisation />
-      </div>
-
-      {/* <Organization_Members_Table id={moderation.}/> */}
-      <_02 />
-
-      <hr />
-
-      <_03 />
-    </main>
   );
 }
