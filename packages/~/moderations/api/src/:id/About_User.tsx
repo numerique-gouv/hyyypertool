@@ -4,7 +4,7 @@ import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { api_ref } from "@~/app.urls/legacy";
+import { urls } from "@~/app.urls";
 import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
 import { ModerationPage_Context } from "./page";
@@ -25,7 +25,12 @@ export function About_User() {
   return (
     <section>
       <h3>
-        <a href={api_ref("/legacy/users/:id", { id: user.id.toString() })}>
+        <a
+          href={
+            urls.users[":id"].$url({ param: { id: user.id.toString() } })
+              .pathname
+          }
+        >
           👨‍💻 Profile
         </a>
       </h3>

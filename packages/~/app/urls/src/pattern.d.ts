@@ -393,7 +393,36 @@ declare const app: import("hono/hono-base").HonoBase<
           >,
           "/organizations"
         > &
-          import("hono").ToSchema<"get", "/", unknown, {}>,
+          import("hono").ToSchema<
+            "get",
+            "/",
+            {
+              param: {
+                id: string;
+              };
+            },
+            {}
+          > &
+          import("hono").ToSchema<
+            "delete",
+            "/",
+            {
+              param: {
+                id: string;
+              };
+            },
+            {}
+          > &
+          import("hono").ToSchema<
+            "patch",
+            "/reset",
+            {
+              param: {
+                id: string;
+              };
+            },
+            {}
+          >,
         "/:id"
       > &
         import("hono").ToSchema<"get", "/", unknown, {}>,

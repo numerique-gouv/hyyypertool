@@ -1,6 +1,7 @@
 //
 
 import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { urls } from "@~/app.urls";
 import { api_ref } from "@~/app.urls/legacy";
 import type { User } from "@~/moncomptepro.database";
 import { createContext, useContext } from "hono/jsx";
@@ -55,9 +56,11 @@ export function Table({ users }: { users: User[] }) {
             <td>
               <a
                 class="p-3"
-                href={api_ref("/legacy/users/:id", {
-                  id: String(user.id),
-                })}
+                href={
+                  urls.users[":id"].$url({
+                    param: { id: user.id.toString() },
+                  }).pathname
+                }
               >
                 ➡️
               </a>

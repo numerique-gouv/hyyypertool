@@ -4,7 +4,6 @@ import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
-import { api_ref } from "@~/app.urls/legacy";
 import type { User, Users_Organizations } from "@~/moncomptepro.database";
 import {
   Verification_Type_Schema,
@@ -110,7 +109,10 @@ function Row({
       <td>
         <a
           class="p-3"
-          href={api_ref("/legacy/users/:id", { id: user.id.toString() })}
+          href={
+            urls.users[":id"].$url({ param: { id: user.id.toString() } })
+              .pathname
+          }
         >
           ➡️
         </a>

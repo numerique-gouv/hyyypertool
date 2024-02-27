@@ -13,3 +13,5 @@ export async function get_user_by_id(
     where: eq(schema.users.id, id),
   });
 }
+
+export type get_user_by_id_dto = ReturnType<typeof get_user_by_id>;

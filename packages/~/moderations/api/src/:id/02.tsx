@@ -2,8 +2,7 @@
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
-import { hx_urls } from "@~/app.urls";
-import { api_ref } from "@~/app.urls/legacy";
+import { hx_urls, urls } from "@~/app.urls";
 import type { Organization } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { useContext } from "hono/jsx";
@@ -99,9 +98,11 @@ export async function _02() {
       <hr />
       <h3 class="mt-2">
         <a
-          href={api_ref("/legacy/users/:id", {
-            id: moderation.user_id.toString(),
-          })}
+          href={
+            urls.users[":id"].$url({
+              param: { id: moderation.user_id.toString() },
+            }).pathname
+          }
         >
           #### 👨‍💻 A propos de <span>{moderation.users.given_name}</span>
         </a>
