@@ -1,7 +1,7 @@
 //
 
-import { immutable } from ":common/cache";
 import env from "@~/app.core/config";
+import { cache_immutable } from "@~/app.middleware/cache_immutable";
 import zammad_attachment_router from "@~/zammad.api";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
@@ -11,7 +11,7 @@ import { rewriteAssetRequestPath } from "./rewrite";
 //
 
 const asserts_router = new Hono()
-  .use("*", immutable)
+  .use("*", cache_immutable)
   .use(
     "/node_modules/*",
     serveStatic({
