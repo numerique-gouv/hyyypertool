@@ -9,7 +9,6 @@ type KnownPath =
   | "/legacy/moderations/:id"
   | "/legacy/users"
   | "/legacy/users/:id"
-  | "/legacy/users/:id/organizations"
   | "/legacy/users/:id/reset"
   | "/moderations";
 

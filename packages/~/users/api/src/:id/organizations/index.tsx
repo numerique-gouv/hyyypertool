@@ -8,8 +8,7 @@ import {
 } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { row } from "@~/app.ui/table";
-import { urls } from "@~/app.urls";
-import { api_ref } from "@~/app.urls/legacy";
+import { hx_urls, urls } from "@~/app.urls";
 import type { MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { schema } from "@~/moncomptepro.database";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
@@ -154,7 +153,7 @@ function Table({
                   href={
                     urls.legacy.organizations[":id"].$url({
                       param: {
-                        id: String(organizations.id),
+                        id: organizations.id.toString(),
                       },
                     }).pathname
                   }
@@ -176,8 +175,9 @@ function Table({
           <td colspan={2} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={api_ref(`/legacy/users/:id/organizations`, {
-                id: user_id.toString(),
+              {...hx_urls.users[":id"].organizations.$get({
+                param: { id: user_id.toString() },
+                query: {},
               })}
               hx-trigger="input changed delay:2s"
               hx-target="#table-user-organisations"
