@@ -2,7 +2,7 @@
 
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { api_ref } from "@~/app.urls/legacy";
+import { hx_urls } from "@~/app.urls";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -72,7 +72,7 @@ export default async function Page({
       </label>
       <input
         class="fr-input"
-        hx-get={api_ref("/legacy/users", {})}
+        {...hx_urls.users.$get({ query: {} })}
         hx-select={`#${USER_TABLE_ID} > table`}
         hx-target={`#${USER_TABLE_ID}`}
         hx-trigger="input changed delay:500ms, search"

@@ -1,6 +1,5 @@
 //
 
-import { hono_autoroute } from ":common/autorouter";
 import organizations_router from ":organizations/route";
 import env from "@~/app.core/config";
 import {
@@ -14,11 +13,6 @@ import { users_router } from "./users/route";
 
 //
 
-const legacy_autoroute = await hono_autoroute({
-  basePath: "/legacy",
-  dir: "src/legacy/routes",
-});
-
 export const legacy_router = new Hono()
   .basePath("/legacy")
   .route("moderations", moderations_router)
@@ -30,5 +24,4 @@ export const legacy_router = new Hono()
 export default new Hono<Session_Context>()
   .use("*", hyyyyyypertool_session)
   .use("/legacy/*", vip_list_guard({ vip_list: env.ALLOWED_USERS.split(",") }))
-  .route("", legacy_autoroute)
   .route("", legacy_router);

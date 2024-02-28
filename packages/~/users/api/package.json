@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "default": "./src/index.ts"
+      "default": "./src/index.tsx"
     }
   },
   "dependencies": {

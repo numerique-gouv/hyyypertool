@@ -7,7 +7,7 @@ import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
-import { api_ref } from "@~/app.urls/legacy";
+import { urls } from "@~/app.urls";
 import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -20,7 +20,7 @@ import User_Page, { UserPage_Provider } from "./page";
 export default new Hono<
   MonComptePro_Pg_Context & UserInfo_Context & Csp_Context
 >()
-  .use("*", jsxRenderer(Main_Layout, { docType: true }))
+  .use("/", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
     zValidator("param", Entity_Schema),
@@ -45,7 +45,7 @@ export default new Hono<
       const { id } = req.valid("param");
       await moncomptepro_pg.delete(schema.users).where(eq(schema.users.id, id));
       return text("OK", 200, {
-        "HX-Location": api_ref("/legacy/users", {}),
+        "HX-Location": urls.users.$url().pathname,
       } as Htmx_Header);
     },
   )

@@ -9,8 +9,12 @@ import { Root_Layout } from "./root";
 export function NotFound({ nonce }: { nonce?: string }) {
   return Root_Layout({
     children: html`
-      <main class="min-h-full bg-[--blue-france-975-75] ">
-        <div class="fr-container grid h-full grid-cols-2 items-center gap-6">
+      <main
+        class="flex min-h-full flex-1 items-center bg-[--blue-france-975-75] "
+      >
+        <div
+          class="fr-container grid h-full grid-cols-2 items-center justify-items-center gap-6"
+        >
           <section>
             <h1>Oups, nous n'avons pas trouvé la page que vous recherchez.</h1>
             <p class="fr-text--sm fr-mb-3w">Erreur 404</p>
