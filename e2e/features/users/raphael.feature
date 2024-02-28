@@ -11,7 +11,7 @@ Fonctionnalité: Page utilisateur
   Scénario:
   # Scénario: Fiche de Raphael
     Quand je clique sur "Utilisateurs"
-    Alors je suis redirigé sur "/legacy/users"
+    Alors je suis redirigé sur "/users"
     * je vois "Liste des utilisateurs"
     * je vois la ligne de table "Raphael"
 

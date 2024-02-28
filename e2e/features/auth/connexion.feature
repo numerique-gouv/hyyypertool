@@ -16,7 +16,7 @@ Fonctionnalité: Connexion d'un utilisateur
     Et je vois "Hyyypertool"
 
     Quand je clique sur "Utilisateurs"
-    Alors je suis redirigé sur "/legacy/users"
+    Alors je suis redirigé sur "/users"
     Et je vois "Liste des utilisateurs"
 
     Quand je clique sur "Organisations"
