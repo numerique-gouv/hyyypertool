@@ -6,7 +6,6 @@ import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { api_ref } from "@~/app.urls/legacy";
 import { schema } from "@~/moncomptepro.database";
@@ -22,7 +21,6 @@ export default new Hono<
   MonComptePro_Pg_Context & UserInfo_Context & Csp_Context
 >()
   .use("*", jsxRenderer(Main_Layout, { docType: true }))
-  .use("*", hyyyyyypertool_session)
   .get(
     "/",
     zValidator("param", Entity_Schema),
