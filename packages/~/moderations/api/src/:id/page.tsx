@@ -81,11 +81,14 @@ export async function ModerationPage_Provider({
   moderation_id: number | undefined;
 }>) {
   const {
+    status,
     var: { moncomptepro_pg },
   } = useRequestContext<MonComptePro_Pg_Context>();
 
-  // TODO(douglasduteil): return 404 status error
-  if (!moderation_id) return <Moderation_NotFound />;
+  if (!moderation_id) {
+    status(404);
+    return <Moderation_NotFound />;
+  }
 
   const moderation = await moncomptepro_pg.query.moderations.findFirst({
     where: eq(schema.moderations.id, moderation_id),
@@ -95,8 +98,10 @@ export async function ModerationPage_Provider({
     },
   });
 
-  // TODO(douglasduteil): return 404 status error
-  if (!moderation) return <Moderation_NotFound moderation_id={moderation_id} />;
+  if (!moderation) {
+    status(404);
+    return <Moderation_NotFound moderation_id={moderation_id} />;
+  }
 
   const users_organizations =
     await moncomptepro_pg.query.users_organizations.findFirst({

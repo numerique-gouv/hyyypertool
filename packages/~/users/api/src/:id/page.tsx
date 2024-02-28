@@ -167,13 +167,16 @@ export async function UserPage_Provider({
   children,
 }: PropsWithChildren<{ value: { id: number } }>) {
   const {
+    status,
     var: { moncomptepro_pg },
   } = useRequestContext<MonComptePro_Pg_Context>();
 
   const user = await get_user_by_id(moncomptepro_pg, { id });
 
-  // TODO(douglasduteil): return 404 status error
-  if (!user) return <User_NotFound user_id={id} />;
+  if (!user) {
+    status(404);
+    return <User_NotFound user_id={id} />;
+  }
 
   return (
     <UserPage_Context.Provider value={{ user }}>
