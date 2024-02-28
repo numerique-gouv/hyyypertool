@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
-    "@types/node": "20.11.20"
+    "@types/node": "20.11.21"
   }
 }

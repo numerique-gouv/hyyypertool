@@ -33,7 +33,7 @@
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
     "tailwind-variants": "0.2.0",
-    "hono": "4.0.7"
+    "hono": "4.0.8"
   },
   "devDependencies": {
     "@~/config.happydom": "workspace:*",

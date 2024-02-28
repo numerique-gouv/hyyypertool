@@ -12,7 +12,7 @@
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.0.7"
+    "hono": "4.0.8"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
