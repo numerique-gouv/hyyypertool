@@ -59,6 +59,7 @@
     "@~/moderations.repository": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/organizations.lib": "workspace:*",
+    "@~/users.api": "workspace:*",
     "@~/users.repository": "workspace:*",
     "@~/zammad.api": "workspace:*",
     "animate.css": "4.1.1",

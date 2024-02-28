@@ -358,11 +358,7 @@ declare const app: import("hono/hono-base").HonoBase<
           "/legacy/moderations"
         >,
       ""
-    > &
-      import("hono/types").MergeSchemaPath<
-        import("hono/types").BlankSchema,
-        ""
-      >,
+    >,
     ""
   > &
     import("hono/types").MergeSchemaPath<
@@ -425,7 +421,19 @@ declare const app: import("hono/hono-base").HonoBase<
           >,
         "/:id"
       > &
-        import("hono").ToSchema<"get", "/", unknown, {}>,
+        import("hono").ToSchema<
+          "get",
+          "/",
+          {
+            query: {
+              "search-email"?: string | undefined;
+              page?: string | undefined;
+              page_size?: string | undefined;
+              id?: string | undefined;
+            };
+          },
+          {}
+        >,
       "/users"
     > &
     import("hono/types").MergeSchemaPath<
@@ -478,8 +486,8 @@ declare const app: import("hono/hono-base").HonoBase<
               "/",
               {
                 query: {
-                  user_id: string;
                   organization_id: string;
+                  user_id: string;
                 };
               },
               {}

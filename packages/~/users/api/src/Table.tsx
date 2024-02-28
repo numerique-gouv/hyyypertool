@@ -1,8 +1,7 @@
 //
 
 import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { urls } from "@~/app.urls";
-import { api_ref } from "@~/app.urls/legacy";
+import { hx_urls, urls } from "@~/app.urls";
 import type { User } from "@~/moncomptepro.database";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
@@ -78,7 +77,7 @@ export function Table({ users }: { users: User[] }) {
           <td colspan={3} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={api_ref("/legacy/users", {})}
+              {...hx_urls.users.$get({ query: {} })}
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${USER_TABLE_ID} > table`}
               hx-target={`#${USER_TABLE_ID}`}
