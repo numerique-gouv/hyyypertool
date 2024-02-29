@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./node_modules/.cache/tsc"
+  },
+  "extends": "@~/config.typescript/api.json",
+  "references": [
+    // { "path": "../../app/layout/tsconfig.json" },
+    // { "path": "../../app/middleware/tsconfig.json" },
+    // { "path": "../../app/urls/tsconfig.json" },
+    // { "path": "../../infra/moncomptepro/database/tsconfig.json" },
+    // { "path": "../../infra/moncomptepro/lib/tsconfig.json" }
+  ]
+}

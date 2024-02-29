@@ -1,9 +1,8 @@
 //
 
-import env from ":common/env.ts";
 import { zValidator } from "@hono/zod-validator";
+import env from "@~/app.core/config";
 import {
-  hyyyyyypertool_session,
   type AgentConnect_UserInfo,
   type Session_Context,
 } from "@~/app.middleware/session";
@@ -16,7 +15,6 @@ import { agentconnect, type Oidc_Context } from "./agentconnect";
 //
 
 const auth_router = new Hono<Oidc_Context & Session_Context>()
-  .use("*", hyyyyyypertool_session)
   .use("*", agentconnect())
   .post("/login", async function POST(c) {
     const session = c.get("session");
@@ -120,7 +118,6 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
 
 const router = new Hono().route("/auth/", auth_router);
 export default router;
-export type AuthRouter_Schema = typeof router;
 
 //
 

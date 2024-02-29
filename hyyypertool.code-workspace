@@ -17,6 +17,7 @@
 
     //
 
+    { "path": "packages/~/auth", "name": "📦 auth" },
     { "path": "packages/~/welcome", "name": "📦 welcome" },
     { "path": "packages/~/proxy", "name": "📦 proxy" },
 
