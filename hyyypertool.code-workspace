@@ -17,6 +17,11 @@
 
     //
 
+    { "path": "packages/~/welcome", "name": "📦 welcome" },
+    { "path": "packages/~/proxy", "name": "📦 proxy" },
+
+    //
+
     { "path": "packages/~/infra/moncomptepro", "name": "🏗️ moncomptepro" },
     { "path": "packages/~/infra/zammad", "name": "🏗️ zammad" },
 

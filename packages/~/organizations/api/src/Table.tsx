@@ -87,7 +87,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
           <td colspan={3} class="inline-flex justify-center">
             <input
               class="text-right"
-              hx-get={urls.legacy.organizations.$url().pathname}
+              hx-get={urls.organizations.$url().pathname}
               hx-replace-url="true"
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}

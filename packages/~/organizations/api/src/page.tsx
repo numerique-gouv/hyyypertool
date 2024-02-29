@@ -3,10 +3,10 @@
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { urls } from "@~/app.urls";
+import { get_organizations_list } from "@~/organizations.repository/get_organizations_list";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 import { Table, Table_Context } from "./Table";
-import { get_organizations_list } from "./repositories/get_organizations_list";
 
 //
 
@@ -48,7 +48,7 @@ export default async function Page({
       </label>
       <input
         class="fr-input"
-        hx-get={urls.legacy.organizations.$url().pathname}
+        hx-get={urls.organizations.$url().pathname}
         hx-replace-url="true"
         hx-select={`#${ORGANIZATIONS_TABLE_ID} > table`}
         hx-target={`#${ORGANIZATIONS_TABLE_ID}`}

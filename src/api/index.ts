@@ -3,7 +3,6 @@
 import env from "@~/app.core/config";
 import { csp_headers } from "@~/app.middleware/csp_headers";
 // import { sentry, type Sentry_Context } from ":common/sentry";
-import legacy from ":legacy/route";
 import { sentry } from "@hono/sentry";
 import config from "@~/app.core/config";
 import { Error_Page } from "@~/app.layout/error";
@@ -72,7 +71,6 @@ const app = new Hono()
   .use("/organizations/*", authoried)
   .route("/organizations", organizations_router)
 
-  .route("", legacy)
   .notFound(async ({ html, get }) => {
     const nonce: string = get("nonce" as any);
     return html(NotFound({ nonce }), 404);

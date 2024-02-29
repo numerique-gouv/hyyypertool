@@ -133,7 +133,7 @@ function Nav() {
         <li class="fr-nav__item">
           <a
             class="fr-nav__link"
-            href={urls.legacy.organizations.$url().pathname}
+            href={urls.organizations.$url().pathname}
             target="_self"
           >
             Organisations

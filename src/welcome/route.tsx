@@ -11,7 +11,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 //
 
 const router = new Hono<Session_Context & Csp_Context>()
-  .use("*", jsxRenderer(Root_Layout, { docType: true }))
+  .use("/", jsxRenderer(Root_Layout, { docType: true }))
   .get("/", function GET({ render, redirect, var: { nonce, session } }) {
     if (session.get("userinfo")) {
       return redirect(urls.moderations.$url().pathname);
@@ -39,8 +39,8 @@ const router = new Hono<Session_Context & Csp_Context>()
               <p>
                 <a
                   href="https://agentconnect.gouv.fr/"
+                  rel="noopener noreferrer"
                   target="_blank"
-                  rel="noopener"
                   title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
                 >
                   Qu’est-ce que AgentConnect ?
