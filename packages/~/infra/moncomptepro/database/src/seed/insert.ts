@@ -56,6 +56,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     //
 
     const jeanbon_dinum = await insert_moderation(db, {
+      created_at: new Date("2011-11-11 11:11:11"),
       organization_id: dinum.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,

@@ -1,6 +1,9 @@
 //
 
-import { date_to_string } from "@~/app.core/date/date_format";
+import {
+  date_to_dom_string,
+  date_to_string,
+} from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
@@ -29,12 +32,13 @@ const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
 const hx_moderations_query_props = {
   ...hx_urls.moderations.$get({ query: {} }),
   "hx-include": hx_include([
-    page_query_keys.enum.hide_join_organization,
     MODERATION_TABLE_PAGE_ID,
+    page_query_keys.enum.hide_join_organization,
     page_query_keys.enum.hide_non_verified_domain,
     page_query_keys.enum.processed_requests,
     page_query_keys.enum.search_email,
     page_query_keys.enum.search_siret,
+    page_query_keys.enum.day,
   ]),
   "hx-replace-url": true,
   "hx-select": `#${MODERATION_TABLE_ID} > table`,
@@ -53,6 +57,7 @@ export function Moderations_Page({
   } = useRequestContext<MonComptePro_Pg_Context>();
   const { page, page_size } = pagination;
   const {
+    day: date,
     hide_join_organization,
     hide_non_verified_domain,
     processed_requests,
@@ -61,6 +66,7 @@ export function Moderations_Page({
   } = search;
   const query_moderations_list = get_moderations_list(moncomptepro_pg, {
     search: {
+      created_at: date,
       email: search_email,
       siret: search_siret,
       show_archived: processed_requests,
@@ -109,6 +115,7 @@ function Filter({ search }: { search: Search }) {
     <form
       {...hx_moderations_query_props}
       hx-trigger={[
+        `input from:#${page_query_keys.enum.day}`,
         `input from:#${page_query_keys.enum.hide_join_organization}`,
         `input from:#${page_query_keys.enum.hide_non_verified_domain}`,
         `input from:#${page_query_keys.enum.processed_requests}`,
@@ -197,6 +204,21 @@ function Filter({ search }: { search: Search }) {
             {moderation_type_to_emoji("organization_join_block")}{" "}
             {moderation_type_to_title("organization_join_block")}
           </label>
+        </div>
+      </div>
+      <div class="fr-fieldset__element">
+        <div class="fr-input-group">
+          <label class="fr-label" for={page_query_keys.enum.day}>
+            Filtrer par jours
+          </label>
+          <input
+            class="fr-input"
+            id={page_query_keys.enum.day}
+            max={date_to_dom_string(new Date())}
+            name={page_query_keys.enum.day}
+            type="date"
+            value={date_to_dom_string(search.day)}
+          />
         </div>
       </div>
     </form>

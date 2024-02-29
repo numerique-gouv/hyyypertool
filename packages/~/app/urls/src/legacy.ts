@@ -4,7 +4,7 @@ import { path, type Params } from "static-path";
 
 //
 
-type KnownPath = "/" | "/legacy/moderations/:id" | "/moderations";
+type KnownPath = "/" | "/legacy/moderations/:id";
 
 //
 

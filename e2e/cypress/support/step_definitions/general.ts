@@ -43,3 +43,13 @@ When("sur la même ligne je clique sur {string}", function (text: string) {
 When("je suis redirigé sur {string}", (path: string) => {
   cy.url().should("contain", path);
 });
+
+//
+
+When("je tape {string}", (text: string) => {
+  cy.focused().type(text);
+});
+
+When("je retire le focus", () => {
+  cy.focused().blur();
+});

@@ -9,6 +9,7 @@ import {
   ilike,
   isNull,
   not,
+  sql,
 } from "drizzle-orm";
 
 //
@@ -20,6 +21,7 @@ export function get_moderations_list(
     pagination = { page: 0, take: 10 },
   }: {
     search: {
+      created_at?: Date;
       email?: string;
       hide_join_organization?: boolean;
       hide_non_verified_domain?: boolean;
@@ -31,6 +33,7 @@ export function get_moderations_list(
 ) {
   const { page, take } = pagination;
   const {
+    created_at,
     email,
     hide_join_organization,
     hide_non_verified_domain,
@@ -47,6 +50,9 @@ export function get_moderations_list(
       : undefined,
     hide_join_organization
       ? not(eq(schema.moderations.type, "organization_join_block"))
+      : undefined,
+    created_at
+      ? sql`${schema.moderations.created_at}::date = ${created_at}`
       : undefined,
   );
 
