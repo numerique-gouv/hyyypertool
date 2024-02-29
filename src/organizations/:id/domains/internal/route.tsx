@@ -3,7 +3,7 @@
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
-import { z_coerce_boolean } from "@~/app.core/schema/z.coerce.boolean";
+import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { schema } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
