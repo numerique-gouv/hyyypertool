@@ -8,7 +8,6 @@ import { sentry } from "@hono/sentry";
 import config from "@~/app.core/config";
 import { Error_Page } from "@~/app.layout/error";
 import { NotFound } from "@~/app.layout/not-found";
-import type { App_Context } from "@~/app.middleware/context";
 import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
@@ -28,7 +27,7 @@ import welcome_router from "../welcome/route";
 //
 
 const authoried = vip_list_guard({ vip_list: env.ALLOWED_USERS.split(",") });
-const app = new Hono<App_Context>()
+const app = new Hono()
   .use("*", logger(consola.info))
   .use("*", csp_headers)
   .use(
@@ -78,7 +77,7 @@ const app = new Hono<App_Context>()
     const nonce: string = get("nonce" as any);
     return html(NotFound({ nonce }), 404);
   })
-  .onError(async (error, { html, req, var: { nonce, sentry } }) => {
+  .onError(async (error, { get, html, req, var: { sentry } }) => {
     consola.error(error);
     sentry.captureException(error);
 
@@ -86,6 +85,7 @@ const app = new Hono<App_Context>()
       const youch = new Youch(error, req.raw);
       return html(await youch.toHTML(), 500);
     } else {
+      const nonce: string = get("nonce" as any);
       return html(await Error_Page({ error, nonce }), 500);
     }
   });

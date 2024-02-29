@@ -44,7 +44,7 @@ export default function User_Page() {
       :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
-          {...hx_urls.legacy.users[":id"].moderations.$get({
+          {...hx_urls.users[":id"].moderations.$get({
             param: { id: user.id.toString() },
           })}
           hx-target="this"
