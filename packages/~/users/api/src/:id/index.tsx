@@ -12,6 +12,7 @@ import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
+import user_moderations_route from "./moderations";
 import user_organizations_page_route from "./organizations";
 import User_Page, { UserPage_Provider } from "./page";
 
@@ -63,7 +64,8 @@ export default new Hono<
       return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
     },
   )
-
-  .route("/organizations", user_organizations_page_route);
+  //
+  .route("/organizations", user_organizations_page_route)
+  .route("/moderations", user_moderations_route);
 
 //

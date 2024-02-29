@@ -3,30 +3,26 @@
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { schema } from "@~/moncomptepro.database";
-import { asc, desc, eq } from "drizzle-orm";
+import { get_moderations_by_user_id } from "@~/moderations.repository/get_moderations_by_user_id";
 import { Hono } from "hono";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { ModerationTable, ModerationTable_Context } from "./ModerationTable";
 
 //
 
-const user_router = new Hono<MonComptePro_Pg_Context>()
-  .basePath("/:id")
+export default new Hono<MonComptePro_Pg_Context>()
+  .use("/", jsxRenderer())
   .get(
-    "/moderations",
+    "/",
     zValidator("param", Entity_Schema),
-    async ({ html, req, var: { moncomptepro_pg } }) => {
+    async function GET({ render, req, var: { moncomptepro_pg } }) {
       const { id } = req.valid("param");
 
-      const moderations = await moncomptepro_pg.query.moderations.findMany({
-        orderBy: [
-          asc(schema.moderations.moderated_at),
-          desc(schema.moderations.created_at),
-        ],
-        where: eq(schema.moderations.user_id, id),
+      const moderations = await get_moderations_by_user_id(moncomptepro_pg, {
+        user_id: id,
       });
 
-      return html(
+      return render(
         <ModerationTable_Context.Provider
           value={{
             page: 0,
@@ -40,5 +36,3 @@ const user_router = new Hono<MonComptePro_Pg_Context>()
       );
     },
   );
-
-export const users_router = new Hono().route("", user_router);

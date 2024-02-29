@@ -9,7 +9,6 @@ import {
 import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
 import moderations_router from "@~/moderations.api";
 import { Hono } from "hono";
-import { users_router } from "./users/route";
 
 //
 
@@ -17,7 +16,6 @@ export const legacy_router = new Hono()
   .basePath("/legacy")
   .route("moderations", moderations_router)
   .route("organizations", organizations_router)
-  .route("users", users_router);
 
 //
 

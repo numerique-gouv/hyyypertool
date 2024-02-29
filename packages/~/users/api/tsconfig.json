@@ -7,6 +7,7 @@
     { "path": "../../app/layout/tsconfig.json" },
     { "path": "../../app/middleware/tsconfig.json" },
     { "path": "../../app/urls/tsconfig.json" },
+    { "path": "../../moderations/repository/tsconfig.json" },
     { "path": "../../organizations/repository/tsconfig.json" },
     { "path": "../../users/repository/tsconfig.json" }
   ]
