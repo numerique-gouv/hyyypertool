@@ -1,7 +1,7 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { urls } from "@~/app.urls";
+import { hx_urls, urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
 import { ModerationPage_Context } from "./page";
 
@@ -73,11 +73,10 @@ export function About_Organisation() {
       </ul>
 
       <div
-        hx-get={urls.legacy.organizations.leaders.$url().pathname}
-        hx-trigger="load"
-        hx-vals={JSON.stringify({
-          siret: organization.siret,
+        {...hx_urls.organizations.leaders.$get({
+          query: { siret: organization.siret },
         })}
+        hx-trigger="load"
       >
         Recherche des dirigeants...
       </div>

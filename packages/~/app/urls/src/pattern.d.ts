@@ -200,22 +200,9 @@ declare const app: import("hono/hono-base").HonoBase<
               "/",
               {
                 query: {
-                  siret: string;
-                };
-              },
-              {}
-            >,
-            "/leaders"
-          > &
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                query: {
+                  "search-siret"?: string | undefined;
                   page?: string | undefined;
                   page_size?: string | undefined;
-                  "search-siret"?: string | undefined;
                   id?: string | undefined;
                 };
               },
@@ -332,9 +319,22 @@ declare const app: import("hono/hono-base").HonoBase<
   > &
     import("hono/types").MergeSchemaPath<
       import("hono/types").MergeSchemaPath<
-        import("hono").ToSchema<"get", "/", unknown, {}>,
-        "/:id"
+        import("hono").ToSchema<
+          "get",
+          "/",
+          {
+            query: {
+              siret: string;
+            };
+          },
+          {}
+        >,
+        "/leaders"
       > &
+        import("hono/types").MergeSchemaPath<
+          import("hono").ToSchema<"get", "/", unknown, {}>,
+          "/:id"
+        > &
         import("hono").ToSchema<"get", "/", unknown, {}>,
       "/organizations"
     > &
