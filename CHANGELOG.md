@@ -1,5 +1,18 @@
 
 
+## [2024.2.9](https://github.com/betagouv/hyyypertool/compare/2024.2.8...2024.2.9) (2024-02-29)
+
+
+### Bug Fixes
+
+* **moderation:** typo missing e to plateforme ([#113](https://github.com/betagouv/hyyypertool/issues/113)) ([c44eb76](https://github.com/betagouv/hyyypertool/commit/c44eb76e96f65cd12425268c3425e964517700cc))
+* **scalingo:** use bun v1.0.25 ([#108](https://github.com/betagouv/hyyypertool/issues/108)) ([71fc4a4](https://github.com/betagouv/hyyypertool/commit/71fc4a4e6966a7d64387c38c8a83ee452b3ebdae))
+
+
+### Features
+
+* **moderations:** add day filter ([#109](https://github.com/betagouv/hyyypertool/issues/109)) ([81cb54e](https://github.com/betagouv/hyyypertool/commit/81cb54e3354bd0f926878bc44b2b89886d1c3014))
+
 ## [2024.2.8](https://github.com/betagouv/hyyypertool/compare/2024.2.7...2024.2.8) (2024-02-27)
 
 
