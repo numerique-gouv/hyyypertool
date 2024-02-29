@@ -164,7 +164,7 @@ export const reponse_templates: Array<{
       Bonjour,
 
       Concernant votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » faites sur https://app.moncomptepro.beta.gouv.fr.
-      La connexion à notre platforme est pour le moment restreinte aux seuls membres de l'organisation que vous souhaitez représenter.
+      La connexion à notre plateforme est pour le moment restreinte aux seuls membres de l'organisation que vous souhaitez représenter.
       Nous vous prions de bien vouloir contacter directement l'organisation que vous représentez afin qu'elle effectue la démarche elle même.
       Nous vous remercions de votre compréhension et restons à votre disposition pour toute assistance complémentaire.
 
