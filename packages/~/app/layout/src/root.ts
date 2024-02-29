@@ -10,11 +10,11 @@ export interface Root_Layout_Props {
   nonce?: string | undefined;
 }
 
-// declare module "hono" {
-//   interface ContextRenderer {
-//     (content: string | Promise<string>, props: Root_Layout_Props): Response;
-//   }
-// }
+declare module "hono" {
+  interface ContextRenderer {
+    (content: string | Promise<string>, props: Root_Layout_Props): Response;
+  }
+}
 
 export function Root_Layout({
   children,

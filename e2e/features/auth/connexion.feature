@@ -20,7 +20,7 @@ Fonctionnalité: Connexion d'un utilisateur
     Et je vois "Liste des utilisateurs"
 
     Quand je clique sur "Organisations"
-    Alors je suis redirigé sur "/legacy/organizations"
+    Alors je suis redirigé sur "/organizations"
     Et je vois "Liste des organisations"
 
     Quand je clique sur "Moderations"

@@ -8,127 +8,64 @@ declare const app: import("hono/hono-base").HonoBase<
             "get",
             "/",
             {
-              query: {
-                page?: string | undefined;
-                "search-siret"?: string | undefined;
-                page_size?: string | undefined;
-                id?: string | undefined;
+              param: {
+                id: string;
               };
             },
             {}
-          >,
-          ""
-        >,
-        "/legacy/organizations"
-      > &
-        import("hono/types").MergeSchemaPath<
-          import("hono/types").MergeSchemaPath<
-            import("hono/types").MergeSchemaPath<
-              import("hono/types").MergeSchemaPath<
-                import("hono").ToSchema<
-                  "patch",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  },
-                  {}
-                >,
-                "/reprocess"
-              > &
-                import("hono/types").MergeSchemaPath<
-                  import("hono").ToSchema<
-                    "patch",
-                    "/",
-                    {
-                      param: {
-                        id: string;
-                      };
-                    },
-                    {}
-                  >,
-                  "/rejected"
-                > &
-                import("hono/types").MergeSchemaPath<
-                  import("hono").ToSchema<
-                    "patch",
-                    "/",
-                    {
-                      param: {
-                        id: string;
-                      };
-                    },
-                    {}
-                  >,
-                  "/processed"
-                >,
-              "/$procedures"
-            > &
-              import("hono/types").MergeSchemaPath<
-                import("hono").ToSchema<
-                  "get",
-                  "/",
-                  {
-                    query: {
-                      organization_id: string;
-                      user_id: string;
-                    };
-                  },
-                  {}
-                >,
-                "/duplicate_warning"
-              > &
-              import("hono/types").MergeSchemaPath<
-                import("hono").ToSchema<
-                  "get",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  },
-                  {}
-                > &
-                  import("hono").ToSchema<
-                    "put",
-                    "/",
-                    {
-                      param: {
-                        id: string;
-                      };
-                    } & {
-                      form: {
-                        response: string;
-                        "mail-subject": string;
-                      };
-                    },
-                    {}
-                  >,
-                "/email"
-              > &
-              import("hono").ToSchema<
-                "get",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              >,
-            "/:id"
           > &
-            import("hono").ToSchema<"get", "/", unknown, {}>,
-          "/legacy/moderations"
-        >,
-      ""
-    >,
-    ""
-  > &
-    import("hono/types").MergeSchemaPath<
-      import("hono/types").MergeSchemaPath<
-        import("hono/types").MergeSchemaPath<
+            import("hono").ToSchema<
+              "put",
+              "/",
+              {
+                param: {
+                  id: string;
+                };
+              } & {
+                form: {
+                  domain: string;
+                };
+              },
+              {}
+            > &
+            import("hono").ToSchema<
+              "delete",
+              "/:domain",
+              {
+                param: {
+                  id: string;
+                  domain: string;
+                };
+              },
+              {}
+            > &
+            import("hono").ToSchema<
+              "delete",
+              "/",
+              {
+                param: {
+                  id: string;
+                };
+              },
+              {}
+            > &
+            import("hono").ToSchema<
+              "patch",
+              "/:domain",
+              {
+                param: {
+                  id: string;
+                  domain: string;
+                };
+              } & {
+                form: {
+                  is_verified?: string | undefined;
+                };
+              },
+              {}
+            >,
+          "/internal"
+        > &
           import("hono/types").MergeSchemaPath<
             import("hono").ToSchema<
               "get",
@@ -156,11 +93,65 @@ declare const app: import("hono/hono-base").HonoBase<
               > &
               import("hono").ToSchema<
                 "delete",
+                "/",
+                {
+                  param: {
+                    id: string;
+                  };
+                },
+                {}
+              > &
+              import("hono").ToSchema<
+                "delete",
                 "/:domain",
                 {
                   param: {
                     id: string;
                     domain: string;
+                  };
+                },
+                {}
+              >,
+            "/external"
+          >,
+        "domains"
+      > &
+        import("hono/types").MergeSchemaPath<
+          import("hono/types").MergeSchemaPath<
+            import("hono").ToSchema<
+              "post",
+              "/",
+              {
+                form: {
+                  is_external: string;
+                };
+              } & {
+                param: {
+                  id: string;
+                  user_id: string;
+                };
+              },
+              {}
+            > &
+              import("hono").ToSchema<
+                "patch",
+                "/",
+                {
+                  param: {
+                    id: string;
+                    user_id: string;
+                  };
+                } & {
+                  form: {
+                    verification_type?:
+                      | ""
+                      | "code_sent_to_official_contact_email"
+                      | "in_liste_dirigeants_rna"
+                      | "official_contact_domain"
+                      | "official_contact_email"
+                      | "verified_email_domain"
+                      | undefined;
+                    is_external?: string | undefined;
                   };
                 },
                 {}
@@ -171,148 +162,13 @@ declare const app: import("hono/hono-base").HonoBase<
                 {
                   param: {
                     id: string;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "patch",
-                "/:domain",
-                {
-                  param: {
-                    id: string;
-                    domain: string;
-                  };
-                } & {
-                  form: {
-                    is_verified?: string | undefined;
-                  };
-                },
-                {}
-              >,
-            "/internal"
-          > &
-            import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "get",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              > &
-                import("hono").ToSchema<
-                  "put",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  } & {
-                    form: {
-                      domain: string;
-                    };
-                  },
-                  {}
-                > &
-                import("hono").ToSchema<
-                  "delete",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  },
-                  {}
-                > &
-                import("hono").ToSchema<
-                  "delete",
-                  "/:domain",
-                  {
-                    param: {
-                      id: string;
-                      domain: string;
-                    };
-                  },
-                  {}
-                >,
-              "/external"
-            >,
-          "domains"
-        > &
-          import("hono/types").MergeSchemaPath<
-            import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "post",
-                "/",
-                {
-                  form: {
-                    is_external: string;
-                  };
-                } & {
-                  param: {
-                    id: string;
                     user_id: string;
                   };
                 },
                 {}
-              > &
-                import("hono").ToSchema<
-                  "patch",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                      user_id: string;
-                    };
-                  } & {
-                    form: {
-                      verification_type?:
-                        | ""
-                        | "verified_email_domain"
-                        | "official_contact_email"
-                        | "official_contact_domain"
-                        | "code_sent_to_official_contact_email"
-                        | "in_liste_dirigeants_rna"
-                        | undefined;
-                      is_external?: string | undefined;
-                    };
-                  },
-                  {}
-                > &
-                import("hono").ToSchema<
-                  "delete",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                      user_id: string;
-                    };
-                  },
-                  {}
-                >,
-              "/:user_id"
-            > &
-              import("hono").ToSchema<
-                "get",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                } & {
-                  query: {
-                    page?: string | undefined;
-                    page_size?: string | undefined;
-                  };
-                },
-                {}
               >,
-            "members"
+            "/:user_id"
           > &
-          import("hono/types").MergeSchemaPath<
             import("hono").ToSchema<
               "get",
               "/",
@@ -320,40 +176,70 @@ declare const app: import("hono/hono-base").HonoBase<
                 param: {
                   id: string;
                 };
+              } & {
+                query: {
+                  page?: string | undefined;
+                  page_size?: string | undefined;
+                };
               },
               {}
             >,
-            ""
-          > &
-          import("hono").ToSchema<
-            "patch",
-            "verify/:domain",
-            {
-              param: {
-                id: string;
-                domain: string;
-              };
-            },
-            {}
-          >,
-        "/:id"
-      > &
+          "members"
+        > &
         import("hono/types").MergeSchemaPath<
           import("hono").ToSchema<
             "get",
             "/",
             {
-              query: {
-                siret: string;
+              param: {
+                id: string;
               };
             },
             {}
           >,
-          "/leaders"
+          ""
         > &
-        import("hono").ToSchema<"get", "/", unknown, {}>,
-      "/organizations"
+        import("hono").ToSchema<
+          "patch",
+          "verify/:domain",
+          {
+            param: {
+              id: string;
+              domain: string;
+            };
+          },
+          {}
+        >,
+      "/:id"
     > &
+      import("hono/types").MergeSchemaPath<
+        import("hono").ToSchema<
+          "get",
+          "/",
+          {
+            query: {
+              siret: string;
+            };
+          },
+          {}
+        >,
+        "/leaders"
+      > &
+      import("hono").ToSchema<
+        "get",
+        "/",
+        {
+          query: {
+            "search-siret"?: string | undefined;
+            page?: string | undefined;
+            page_size?: string | undefined;
+            id?: string | undefined;
+          };
+        },
+        {}
+      >,
+    "/organizations"
+  > &
     import("hono/types").MergeSchemaPath<
       import("hono/types").MergeSchemaPath<
         import("hono/types").MergeSchemaPath<

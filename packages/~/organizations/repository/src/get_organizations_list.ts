@@ -1,13 +1,12 @@
 //
 
-import { schema } from "@~/moncomptepro.database";
+import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 
 //
 
 export function get_organizations_list(
-  pg: NodePgDatabase<typeof schema>,
+  pg: MonComptePro_PgDatabase,
   {
     search,
     pagination = { page: 0, take: 10 },
@@ -38,7 +37,3 @@ export function get_organizations_list(
     return { organizations, count };
   });
 }
-
-export type Organization_DTO = Awaited<
-  ReturnType<typeof get_organizations_list>
->["organizations"][number];
