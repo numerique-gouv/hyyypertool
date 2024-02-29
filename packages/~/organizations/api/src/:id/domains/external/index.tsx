@@ -34,7 +34,7 @@ export default new Hono<MonComptePro_Pg_Context>()
   .put(
     "/",
     zValidator("param", Entity_Schema),
-    zValidator("form", z.object({ domain: z.string() })),
+    zValidator("form", z.object({ domain: z.string().min(1) })),
     async function PUT({ text, req, var: { moncomptepro_pg } }) {
       const { id } = req.valid("param");
       const { domain } = req.valid("form");
@@ -43,6 +43,24 @@ export default new Hono<MonComptePro_Pg_Context>()
         .update(schema.organizations)
         .set({
           external_authorized_email_domains: sql`array_append(external_authorized_email_domains, ${domain})`,
+        })
+        .where(eq(schema.organizations.id, id));
+
+      return text("", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED,
+      } as Htmx_Header);
+    },
+  )
+  .delete(
+    "/",
+    zValidator("param", Entity_Schema),
+    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
+      const { id } = req.valid("param");
+
+      await moncomptepro_pg
+        .update(schema.organizations)
+        .set({
+          external_authorized_email_domains: sql`array_remove(external_authorized_email_domains, '')`,
         })
         .where(eq(schema.organizations.id, id));
 

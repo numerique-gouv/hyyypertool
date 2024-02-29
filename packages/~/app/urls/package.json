@@ -15,7 +15,8 @@
   "dependencies": {
     "consola": "3.2.3",
     "hono": "4.0.8",
-    "static-path": "0.0.4"
+    "static-path": "0.0.4",
+    "type-fest": "4.10.3"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

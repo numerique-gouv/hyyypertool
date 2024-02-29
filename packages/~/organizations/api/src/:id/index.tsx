@@ -11,8 +11,8 @@ import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
-import organization_domains_router from "./domains/route";
-import organization_members_router from "./members/route";
+import organization_domains_router from "./domains";
+import organization_members_router from "./members";
 import Organization_Page from "./page";
 
 //

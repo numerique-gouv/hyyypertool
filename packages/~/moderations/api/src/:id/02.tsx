@@ -20,7 +20,7 @@ export async function _02() {
       <div class="mt-5 block">
         <button
           class={button({ className: "block", intent: "warning" })}
-          {...hx_urls.legacy.organizations[":id"].verify[":domain"].$patch({
+          {...hx_urls.organizations[":id"].verify[":domain"].$patch({
             param: {
               id: moderation.organizations.id.toString(),
               domain: domain,
@@ -45,7 +45,7 @@ export async function _02() {
       <br />
       <h3>Membres enregistrés dans cette organisation :</h3>
       <div
-        {...hx_urls.legacy.organizations[":id"].members.$get({
+        {...hx_urls.organizations[":id"].members.$get({
           param: {
             id: moderation.organization_id.toString(),
           },
@@ -59,14 +59,14 @@ export async function _02() {
       <div class="grid grid-cols-2 gap-1">
         <button
           class={button({ className: "block", intent: "warning" })}
-          {...hx_urls.legacy.organizations[":id"].members[":user_id"].$post({
+          {...hx_urls.organizations[":id"].members[":user_id"].$post({
             param: {
               id: moderation.organization_id.toString(),
               user_id: moderation.user_id.toString(),
             },
-            form: { is_external: "false" },
           })}
           hx-swap="none"
+          hx-vals={JSON.stringify({ is_external: "false" })}
         >
           🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
           l'organisation EN TANT QU'INTERNE (si pas déjà dans l'orga)
@@ -79,14 +79,16 @@ export async function _02() {
         </button>
         <button
           class={button({ className: "block", intent: "warning" })}
-          {...hx_urls.legacy.organizations[":id"].members[":user_id"].$post({
+          {...hx_urls.organizations[":id"].members[":user_id"].$post({
             param: {
               id: moderation.organization_id.toString(),
               user_id: moderation.user_id.toString(),
             },
-            form: { is_external: "true" },
           })}
           hx-swap="none"
+          hx-vals={JSON.stringify({
+            is_external: true,
+          })}
         >
           🪄 Action en un click :<br />- ajouter {moderation.users.given_name} à
           l'organisation EN TANT QUE EXTERNE (si pas déjà dans l'orga)
@@ -134,7 +136,7 @@ export async function Edit_Domain({
     <div class="grid grid-cols-2">
       <div
         class="fr-table"
-        {...hx_urls.legacy.organizations[":id"].domains.internal.$get({
+        {...hx_urls.organizations[":id"].domains.internal.$get({
           param: {
             id: organization.id.toString(),
           },
@@ -148,14 +150,16 @@ export async function Edit_Domain({
       ></div>
       <div
         class="fr-table"
-        {...hx_urls.legacy.organizations[":id"].domains.external.$get({
+        {...hx_urls.organizations[":id"].domains.external.$get({
           param: {
             id: organization.id.toString(),
           },
         })}
         hx-trigger={[
           "load",
-          `${ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED} from:body`,
+          ...hx_trigger_from_body([
+            ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED,
+          ]),
         ].join(", ")}
       ></div>
     </div>

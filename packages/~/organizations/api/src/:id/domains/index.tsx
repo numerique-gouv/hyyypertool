@@ -1,8 +1,8 @@
 //
 
 import { Hono } from "hono";
-import external_router from "./external/route";
-import internal_router from "./internal/route";
+import external_router from "./external";
+import internal_router from "./internal";
 
 //
 

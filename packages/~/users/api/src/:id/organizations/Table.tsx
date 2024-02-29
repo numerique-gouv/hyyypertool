@@ -67,7 +67,7 @@ export async function UserOrganizationTable() {
                 <a
                   class="p-3"
                   href={
-                    urls.legacy.organizations[":id"].$url({
+                    urls.organizations[":id"].$url({
                       param: {
                         id: organizations.id.toString(),
                       },

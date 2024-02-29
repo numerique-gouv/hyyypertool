@@ -1,7 +1,7 @@
 //
 
-import type { Organization_DTO } from ":organizations/repositories/get_by_id";
 import { urls } from "@~/app.urls";
+import type { Organization } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 
 //
@@ -9,14 +9,14 @@ import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 export async function Edit_Domain({
   organization,
 }: {
-  organization: Organization_DTO;
+  organization: Organization;
 }) {
   return (
     <div class="grid grid-cols-2">
       <div
         class="fr-table"
         hx-get={
-          urls.legacy.organizations[":id"].domains.internal.$url({
+          urls.organizations[":id"].domains.internal.$url({
             param: {
               id: organization.id.toString(),
             },
@@ -30,7 +30,7 @@ export async function Edit_Domain({
       <div
         class="fr-table"
         hx-get={
-          urls.legacy.organizations[":id"].domains.external.$url({
+          urls.organizations[":id"].domains.external.$url({
             param: {
               id: organization.id.toString(),
             },

@@ -1,11 +1,11 @@
 //
 
-import type { Organization_DTO } from ":organizations/repositories/get_by_id";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
+import type { Organization } from "@~/moncomptepro.database";
 
 //
 
-export function Fiche({ organization }: { organization: Organization_DTO }) {
+export function Fiche({ organization }: { organization: Organization }) {
   return (
     <ul>
       <li>

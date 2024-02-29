@@ -17,7 +17,7 @@ export function About_Organisation() {
       <h3>
         <a
           href={
-            urls.legacy.organizations[":id"].$url({
+            urls.organizations[":id"].$url({
               param: {
                 id: organization.id.toString(),
               },
