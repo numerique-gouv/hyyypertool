@@ -4,8 +4,36 @@ import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 
 //
 
+let target: JQuery<HTMLElement>;
+let scope: string;
+
+//
+
 Given("je navigue sur la page", () => {
   cy.visit("/");
+});
+
+Given("la ligne contenant {string}", (text) => {
+  cy.contains("td", text)
+    .parent()
+    .then((row) => (target = row));
+});
+
+Given("la ligne précédente", () => {
+  cy.wrap(target)
+    .prev()
+    .then((row) => (target = row));
+});
+
+Given("la ligne suivante", () => {
+  cy.wrap(target)
+    .next()
+    .then((row) => (target = row));
+});
+
+Given("le tableau {string}", function (text: string) {
+  cy.contains(text).parents("table").as(text);
+  scope = `@${text}`;
 });
 
 //
@@ -26,6 +54,23 @@ Then("sur la même ligne je vois {string}", function (text: string) {
   cy.get("@row").contains(text);
 });
 
+Then("sur la ligne suivante je vois {string}", function (text: string) {
+  cy.get("@row")
+    .then((row) => cy.wrap(row).next().contains(text).parent())
+    .as("row");
+});
+
+Then(
+  "je clique sur {string} dans le tableau {string}",
+  function (text: string, context: string) {
+    cy.contains(context)
+      .parents("table")
+      .within(() => {
+        cy.contains(text).click();
+      });
+  },
+);
+
 //
 
 When("je clique sur {string}", (text: string) => {
@@ -35,6 +80,16 @@ When("je clique sur {string}", (text: string) => {
 When("je clique sur le bouton {string}", (text: string) => {
   cy.contains("button", text).click();
 });
+
+When("je clique sur le champs dans le tableau {string}", (text: string) => {
+  cy.contains(text)
+    .parents("table")
+    .within(() => {
+      cy.get("input").click();
+    });
+});
+
+//
 
 When("sur la même ligne je clique sur {string}", function (text: string) {
   cy.get("@row").contains(text).click();
