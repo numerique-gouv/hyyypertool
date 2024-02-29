@@ -1,5 +1,5 @@
 import { button } from "@~/app.ui/button";
-import { urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import type { Organization } from "@~/moncomptepro.database";
 
 //
@@ -36,36 +36,32 @@ export function Table({
               <td colspan={2}>
                 <button
                   class={button()}
-                  hx-delete={
-                    urls.legacy.organizations[":id"].domains.internal[
-                      ":domain"
-                    ].$url({
-                      param: {
-                        id: organization.id.toString(),
-                        domain,
-                      },
-                    }).pathname
-                  }
+                  {...hx_urls.organizations[":id"].domains.internal[
+                    ":domain"
+                  ].$delete({
+                    param: {
+                      id: organization.id.toString(),
+                      domain,
+                    },
+                  })}
                   hx-swap="none"
                 >
                   🗑️ Supprimer
                 </button>
                 <button
                   class={button()}
-                  hx-patch={
-                    urls.legacy.organizations[":id"].domains.internal[
-                      ":domain"
-                    ].$url({
-                      param: {
-                        id: organization.id.toString(),
-                        domain,
-                      },
-                    }).pathname
-                  }
-                  hx-vals={JSON.stringify({
-                    is_verified: !is_verified,
+                  {...hx_urls.organizations[":id"].domains.internal[
+                    ":domain"
+                  ].$patch({
+                    param: {
+                      id: organization.id.toString(),
+                      domain,
+                    },
                   })}
                   hx-swap="none"
+                  hx-vals={JSON.stringify({
+                    is_verified: String(!is_verified),
+                  })}
                 >
                   🔄 vérifié
                 </button>
@@ -77,11 +73,11 @@ export function Table({
           <td colspan={2}>
             <form
               class="grid grid-cols-[1fr_min-content]"
-              hx-put={
-                urls.legacy.organizations[":id"].domains.internal.$url({
-                  param: { id: organization.id.toString() },
-                }).pathname
-              }
+              {...hx_urls.organizations[":id"].domains.internal.$put({
+                param: {
+                  id: organization.id.toString(),
+                },
+              })}
             >
               {/* TODO(douglasduteil): Should auto complete with the current domain email */}
               <input class="fr-input" type="text" name="domain" />
@@ -89,6 +85,24 @@ export function Table({
                 Add
               </button>
             </form>
+          </td>
+        </tr>
+        <tr>
+          <td colspan={2}>
+            <details>
+              <summary>Fonctions avancées</summary>
+              <button
+                class={button({ size: "sm" })}
+                {...hx_urls.organizations[":id"].domains.internal.$delete({
+                  param: {
+                    id: organization.id.toString(),
+                  },
+                })}
+                hx-swap="none"
+              >
+                🗑️ Supprimer les entrées vides
+              </button>
+            </details>
           </td>
         </tr>
       </tbody>

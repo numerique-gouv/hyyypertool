@@ -1,5 +1,5 @@
 import { button } from "@~/app.ui/button";
-import { urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import { type Organization } from "@~/moncomptepro.database";
 
 //
@@ -24,16 +24,14 @@ export function Table({ organization }: { organization: Organization }) {
               <td colspan={2}>
                 <button
                   class={button()}
-                  hx-delete={
-                    urls.legacy.organizations[":id"].domains.external[
-                      ":domain"
-                    ].$url({
-                      param: {
-                        id: organization.id.toString(),
-                        domain,
-                      },
-                    }).pathname
-                  }
+                  {...hx_urls.organizations[":id"].domains.external[
+                    ":domain"
+                  ].$delete({
+                    param: {
+                      id: organization.id.toString(),
+                      domain,
+                    },
+                  })}
                   hx-swap="none"
                 >
                   🗑️ Supprimer
@@ -46,17 +44,35 @@ export function Table({ organization }: { organization: Organization }) {
           <td colspan={2}>
             <form
               class="grid grid-cols-[1fr_min-content]"
-              hx-put={
-                urls.legacy.organizations[":id"].domains.external.$url({
-                  param: { id: organization.id.toString() },
-                }).pathname
-              }
+              {...hx_urls.organizations[":id"].domains.external.$put({
+                param: {
+                  id: organization.id.toString(),
+                },
+              })}
             >
               <input class="fr-input" type="text" name="domain" />
               <button class="fr-btn" type="submit">
                 Add
               </button>
             </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <details>
+              <summary>Fonctions avancées</summary>
+              <button
+                class={button({ size: "sm" })}
+                {...hx_urls.organizations[":id"].domains.external.$delete({
+                  param: {
+                    id: organization.id.toString(),
+                  },
+                })}
+                hx-swap="none"
+              >
+                🗑️ Supprimer les entrées vides
+              </button>
+            </details>
           </td>
         </tr>
       </tbody>

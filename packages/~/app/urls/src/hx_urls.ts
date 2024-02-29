@@ -36,11 +36,11 @@ type HxClientRequest<S extends Schema> = {
         ? Method extends Methods
           ? HasRequiredKeys<R> extends true
             ? (
-                args: R,
+                args: Omit<R, "form">,
                 options?: HxClientRequestOptions,
               ) => HtmxSpecifiedAttributes<Method>
             : (
-                args?: R,
+                args?: Omit<R, "form">,
                 options?: HxClientRequestOptions,
               ) => HtmxSpecifiedAttributes<Method>
           : never

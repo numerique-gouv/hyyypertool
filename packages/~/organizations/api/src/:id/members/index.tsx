@@ -11,7 +11,7 @@ import { schema } from "@~/moncomptepro.database";
 import { and, desc, count as drizzle_count, eq } from "drizzle-orm";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Hono } from "hono";
-import organization_member_router from "./:user_id/route";
+import organization_member_router from "./:user_id";
 import { Table, Table_Context } from "./Table";
 
 //

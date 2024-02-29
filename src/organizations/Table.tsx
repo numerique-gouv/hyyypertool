@@ -64,7 +64,7 @@ export function Table({ organizations }: { organizations: Organization[] }) {
               <a
                 class="p-3"
                 href={
-                  urls.legacy.organizations[":id"].$url({
+                  urls.organizations[":id"].$url({
                     param: {
                       id: organization.id.toString(),
                     },
