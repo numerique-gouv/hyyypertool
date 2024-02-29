@@ -10,7 +10,7 @@ Fonctionnalité: Page organisation
 
   Scénario:
     Quand je clique sur "Organisations"
-    Alors je suis redirigé sur "/legacy/organizations"
+    Alors je suis redirigé sur "/organizations"
     * je vois "Liste des organisations"
     * je vois la ligne de table "13002526500013"
     * sur la même ligne je vois "DINUM"
