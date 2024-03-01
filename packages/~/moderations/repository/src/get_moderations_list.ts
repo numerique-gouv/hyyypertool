@@ -52,7 +52,7 @@ export function get_moderations_list(
       ? not(eq(schema.moderations.type, "organization_join_block"))
       : undefined,
     created_at
-      ? sql`${schema.moderations.created_at}::date = ${created_at}`
+      ? sql`(${schema.moderations.created_at} AT TIME ZONE 'Europe/Paris')::date = ${created_at}`
       : undefined,
   );
 

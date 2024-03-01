@@ -11,6 +11,9 @@
       "default": "./src/*.tsx"
     }
   },
+  "scripts": {
+    "test": "bun test"
+  },
   "dependencies": {
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
