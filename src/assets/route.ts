@@ -24,6 +24,16 @@ const asserts_router = new Hono()
       rewriteRequestPath: rewriteAssetRequestPath,
     }),
   )
+  .get("/bundle/config.js", async ({ text }) => {
+    const { ASSETS_PATH, VERSION } = env;
+    return text(
+      `export default ${JSON.stringify({ ASSETS_PATH, VERSION })}`,
+      200,
+      {
+        "content-type": "text/javascript",
+      },
+    );
+  })
   .get("/bundle/env.js", async ({ text }) => {
     const { VERSION } = env;
     return text(`export default ${JSON.stringify({ VERSION })}`, 200, {

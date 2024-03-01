@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "outDir": "./node_modules/.cache/tsc",
+    "types": ["bun-types"]
+  },
+  "extends": "@~/config.typescript/api.json",
+  "references": [
+    { "path": "../../app/core/tsconfig.json" },
+    { "path": "../../app/middleware/tsconfig.json" },
+    { "path": "../../app/layout/tsconfig.json" },
+    { "path": "../../app/urls/tsconfig.json" }
+  ]
+}

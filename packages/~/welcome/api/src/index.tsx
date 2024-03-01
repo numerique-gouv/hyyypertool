@@ -1,7 +1,8 @@
 //
 
-import env from "@~/app.core/config";
+import config from "@~/app.core/config";
 import { Root_Layout } from "@~/app.layout/root";
+import { cache_immutable } from "@~/app.middleware/cache_immutable";
 import type { Csp_Context } from "@~/app.middleware/csp_headers";
 import { type Session_Context } from "@~/app.middleware/session";
 import { urls } from "@~/app.urls";
@@ -10,8 +11,8 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-const router = new Hono<Session_Context & Csp_Context>()
-  .use("/", jsxRenderer(Root_Layout, { docType: true }))
+export default new Hono<Session_Context & Csp_Context>()
+  .use("/", jsxRenderer(Root_Layout))
   .get("/", function GET({ render, redirect, var: { nonce, session } }) {
     if (session.get("userinfo")) {
       return redirect(urls.moderations.$url().pathname);
@@ -23,7 +24,7 @@ const router = new Hono<Session_Context & Csp_Context>()
           <hyyyper-title>Bonjour Hyyypertool !</hyyyper-title>
           <script
             nonce={nonce}
-            src={`/assets/${env.VERSION}/_client/hyyypertitle.js`}
+            src={`${config.ASSETS_PATH}/_client/hyyypertitle.js`}
             type="module"
           ></script>
         </h1>
@@ -53,16 +54,18 @@ const router = new Hono<Session_Context & Csp_Context>()
       { nonce },
     );
   })
-  .get(`/assets/${env.VERSION}/_client/hyyypertitle.js`, async () => {
-    const {
-      outputs: [output],
-    } = await Bun.build({
-      entrypoints: ["src/welcome/_client/hyyypertitle.ts"],
-      external: ["lit", ":common/env.ts"],
-      minify: env.NODE_ENV === "production",
-    });
+  .get(
+    `${config.ASSETS_PATH}/_client/hyyypertitle.js`,
+    cache_immutable,
+    async function GET() {
+      const {
+        outputs: [output],
+      } = await Bun.build({
+        entrypoints: [`${import.meta.dir}/_client/hyyypertitle.ts`],
+        external: ["lit", "@~/app.core/config"],
+        minify: config.NODE_ENV === "production",
+      });
 
-    return new Response(output);
-  });
-
-export default router;
+      return new Response(output);
+    },
+  );

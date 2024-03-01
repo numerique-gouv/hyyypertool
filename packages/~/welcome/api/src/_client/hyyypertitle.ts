@@ -1,7 +1,7 @@
 //
 
-import env from ":common/env.ts";
 import { animate, fadeIn } from "@lit-labs/motion";
+import config from "@~/app.core/config";
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
@@ -40,26 +40,26 @@ export class Hyyyper_title extends LitElement {
     return html` <!--  -->
       <link
         rel="stylesheet"
-        href="/assets/${env.VERSION}/node_modules/animate.css/source/_vars.css"
+        href="${config.ASSETS_PATH}/node_modules/animate.css/source/_vars.css"
       />
       <link
         rel="stylesheet"
-        href="/assets/${env.VERSION}/node_modules/animate.css/source/_base.css"
+        href="${config.ASSETS_PATH}/node_modules/animate.css/source/_base.css"
       />
       <link
         rel="stylesheet"
-        href="/assets/${env.VERSION}/node_modules/animate.css/source/zooming_entrances/zoomInDown.css"
+        href="${config.ASSETS_PATH}/node_modules/animate.css/source/zooming_entrances/zoomInDown.css"
       />
       <link
         rel="stylesheet"
-        href="/assets/${env.VERSION}/node_modules/animate.css/source/attention_seekers/flash.css"
+        href="${config.ASSETS_PATH}/node_modules/animate.css/source/attention_seekers/flash.css"
       />
 
       <!--  -->
 
       <link
         rel="stylesheet"
-        href="/assets/${env.VERSION}/public/assets/tailwind.css"
+        href="${config.ASSETS_PATH}/public/assets/tailwind.css"
       />
 
       <!--  -->

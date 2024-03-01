@@ -4,7 +4,6 @@
     "composite": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "experimentalDecorators": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -39,6 +38,7 @@
     { "path": "packages/~/organizations/api/tsconfig.json" },
     { "path": "packages/~/organizations/lib/tsconfig.json" },
     { "path": "packages/~/users/api/tsconfig.json" },
-    { "path": "packages/~/users/repository/tsconfig.json" }
+    { "path": "packages/~/users/repository/tsconfig.json" },
+    { "path": "packages/~/welcome/api/tsconfig.json" }
   ]
 }
