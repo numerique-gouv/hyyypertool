@@ -13,6 +13,7 @@ import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
 import auth_router from "@~/auth.api";
 import moderations_router from "@~/moderations.api";
 import organizations_router from "@~/organizations.api";
+import proxy_router from "@~/proxy.api";
 import users_router from "@~/users.api";
 import welcome_router from "@~/welcome.api";
 import consola, { LogLevels } from "consola";
@@ -21,7 +22,6 @@ import { logger } from "hono/logger";
 import Youch from "youch";
 import asserts_router from "../assets/route";
 import { readyz } from "../health/readyz/route";
-import { proxy } from "../proxy/route";
 
 //
 
@@ -52,7 +52,7 @@ const app = new Hono()
   .get("/healthz", ({ text }) => text(`healthz check passed`))
   .get("/livez", ({ text }) => text(`livez check passed`))
   .route("/readyz", readyz)
-  .route("", proxy)
+  .route("/proxy", proxy_router)
 
   //
 
