@@ -15,8 +15,8 @@ export const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
 export const Search_Schema = z.object({
   day: z
     .string()
-    .pipe(z.coerce.date().or(z_empty_string_to_undefined))
-    .default(""),
+    .default("")
+    .pipe(z.coerce.date().or(z_empty_string_to_undefined)),
   search_siret: z.string().default(""),
   search_email: z.string().default(""),
   processed_requests: z.string().pipe(z_coerce_boolean).default("false"),
