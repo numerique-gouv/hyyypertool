@@ -58,8 +58,8 @@ const app = new Hono()
 
   .route("", asserts_router)
   .use("*", hyyyyyypertool_session)
-  .route("/auth", auth_router)
   .route("", welcome_router)
+  .route("/auth", auth_router)
   .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))
 
   .use("/moderations/*", authoried)

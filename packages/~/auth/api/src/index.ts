@@ -14,7 +14,7 @@ import { agentconnect, type Oidc_Context } from "./agentconnect";
 
 //
 
-const auth_router = new Hono<Oidc_Context & Session_Context>()
+export default new Hono<Oidc_Context & Session_Context>()
   .use("*", agentconnect())
   .post("/login", async function POST(c) {
     const session = c.get("session");
@@ -115,9 +115,6 @@ const auth_router = new Hono<Oidc_Context & Session_Context>()
 
     return redirect(logoutUrl);
   });
-
-const router = new Hono().route("/auth/", auth_router);
-export default router;
 
 //
 

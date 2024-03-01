@@ -5,13 +5,16 @@
   "type": "module",
   "exports": {
     ".": {
-      "default": "./src/index.tsx"
+      "default": "./src/index.ts"
     },
     "./*": {
-      "default": "./src/*.tsx"
+      "default": "./src/*.ts"
     }
   },
   "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.urls": "workspace:*",
     "hono": "4.0.8",
     "openid-client": "5.6.4"
   },
