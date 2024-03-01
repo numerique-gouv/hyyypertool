@@ -17,11 +17,17 @@
   "dependencies": {
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
-    "@~/app.urls": "workspace:*",
     "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
-    "hono": "4.0.8"
+    "await-to-js": "3.0.0",
+    "drizzle-orm": "0.29.4",
+    "tailwind-variants": "0.2.0",
+    "ts-dedent": "2.2.0",
+    "ts-pattern": "5.0.8",
+    "hono": "4.0.8",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

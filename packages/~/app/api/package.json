@@ -18,8 +18,13 @@
     "@~/proxy.api": "workspace:*",
     "@~/users.api": "workspace:*",
     "@~/welcome.api": "workspace:*",
+    "await-to-js": "3.0.0",
     "consola": "3.2.3",
+    "drizzle-orm": "0.29.4",
     "hono": "4.0.8",
+    "htmx.ext...chunked-transfer": "1.0.3",
+    "htmx.org": "1.9.10",
+    "hyperscript.org": "0.9.12",
     "youch": "3.3.3"
   },
   "devDependencies": {

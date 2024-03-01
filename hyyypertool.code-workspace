@@ -33,7 +33,6 @@
     { "path": "bin", "name": "🚀 bin" },
     { "path": "e2e", "name": "🧪 e2e" },
     //
-    { "path": "src", "name": "🧐 legacy src" },
     //
     { "path": ".", "name": "root" },
   ],

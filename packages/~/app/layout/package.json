@@ -14,8 +14,8 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "nprogress": "0.2.0",
-    "hono": "4.0.8"
+    "hono": "4.0.8",
+    "nprogress": "0.2.0"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
