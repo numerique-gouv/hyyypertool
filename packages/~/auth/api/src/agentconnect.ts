@@ -1,6 +1,6 @@
 //
 
-import env from ":common/env.ts";
+import env from "@~/app.core/config";
 import { urls } from "@~/app.urls";
 import type { Env, MiddlewareHandler } from "hono";
 import { BaseClient, Issuer } from "openid-client";

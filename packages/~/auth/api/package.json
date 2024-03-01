@@ -1,0 +1,24 @@
+{
+  "name": "@~/auth.api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "hono": "4.0.8",
+    "openid-client": "5.6.4"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}
