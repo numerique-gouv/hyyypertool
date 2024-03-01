@@ -9,19 +9,6 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "noEmit": false,
     "outDir": "./node_modules/.cache/tsc",
-    "paths": {
-      ":assets/*": ["./src/assets/*"],
-      ":common/*": ["./src/common/*"],
-      ":health/*": ["./src/health/*"],
-      ":legacy/*": ["./src/legacy/*"],
-      ":moderations/*": ["./src/moderations/*"],
-      ":organizations/*": ["./src/organizations/*"],
-      ":package.json": ["./package.json"],
-      ":proxy/*": ["./src/proxy/*"],
-      ":ui/*": ["./src/ui/*"],
-      ":welcome/*": ["./src/welcome/*"],
-      "hono-slotify/*": ["./src/hono-slotify/*"]
-    },
     "plugins": [],
     "resolveJsonModule": true
   },
