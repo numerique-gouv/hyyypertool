@@ -12,7 +12,7 @@
     "plugins": [],
     "resolveJsonModule": true
   },
-  "include": ["package.json", "src", "bin/src"],
+  "include": ["src", "bin/src"],
   "references": [
     { "path": "packages/~/app/core/tsconfig.json" },
     { "path": "packages/~/app/urls/tsconfig.json" },
@@ -24,6 +24,7 @@
     { "path": "packages/~/moderations/repository/tsconfig.json" },
     { "path": "packages/~/organizations/api/tsconfig.json" },
     { "path": "packages/~/organizations/lib/tsconfig.json" },
+    { "path": "packages/~/proxy/api/tsconfig.json" },
     { "path": "packages/~/users/api/tsconfig.json" },
     { "path": "packages/~/users/repository/tsconfig.json" },
     { "path": "packages/~/welcome/api/tsconfig.json" }

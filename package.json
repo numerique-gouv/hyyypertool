@@ -11,6 +11,7 @@
     "packages/~/infra/zammad/*",
     "packages/~/moderations/*",
     "packages/~/organizations/*",
+    "packages/~/proxy/*",
     "packages/~/users/*",
     "packages/~/welcome/*"
   ],
@@ -61,7 +62,9 @@
     "@~/moderations.lib": "workspace:*",
     "@~/moderations.repository": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
+    "@~/organizations.api": "workspace:*",
     "@~/organizations.lib": "workspace:*",
+    "@~/proxy.api": "workspace:*",
     "@~/users.api": "workspace:*",
     "@~/users.repository": "workspace:*",
     "@~/welcome.api": "workspace:*",
