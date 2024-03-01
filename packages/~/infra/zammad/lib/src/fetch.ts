@@ -68,7 +68,7 @@ export async function fetch_zammad_api(options: Options) {
   });
 
   consola.info(
-    `  --> ${options.method} ${url} ${response.status} ${response.statusText}`,
+    `  -->> ${options.method} ${url} ${response.status} ${response.statusText}`,
   );
 
   if (!response.ok) {
