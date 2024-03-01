@@ -449,31 +449,6 @@ declare const app: import("hono/hono-base").HonoBase<
       "/"
     > &
     import("hono/types").MergeSchemaPath<
-      import("hono/types").MergeSchemaPath<
-        import("hono/types").MergeSchemaPath<
-          import("hono").ToSchema<
-            "get",
-            "/attachment/:ticket_id/:article_id/:attachment_id",
-            {
-              param: {
-                ticket_id: string;
-                article_id: string;
-                attachment_id: string;
-              };
-            },
-            {}
-          >,
-          "/zammad"
-        > &
-          import("hono").ToSchema<"get", "/bundle/config.js", unknown, {}> &
-          import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}> &
-          import("hono").ToSchema<"get", "/bundle/lit.js", unknown, {}> &
-          import("hono").ToSchema<"get", "/bundle/lit/*", unknown, {}>,
-        `/assets/${string}`
-      >,
-      ""
-    > &
-    import("hono/types").MergeSchemaPath<
       import("hono").ToSchema<"get", "/localhost:3000/*", unknown, {}>,
       "/proxy"
     > &
@@ -482,6 +457,28 @@ declare const app: import("hono/hono-base").HonoBase<
         import("hono").ToSchema<"get", "/zammad", unknown, {}> &
         import("hono").ToSchema<"get", "/drizzle/moncomptepro", unknown, {}>,
       "/readyz"
+    > &
+    import("hono/types").MergeSchemaPath<
+      import("hono/types").MergeSchemaPath<
+        import("hono").ToSchema<
+          "get",
+          "/attachment/:ticket_id/:article_id/:attachment_id",
+          {
+            param: {
+              ticket_id: string;
+              article_id: string;
+              attachment_id: string;
+            };
+          },
+          {}
+        >,
+        "/zammad"
+      > &
+        import("hono").ToSchema<"get", "/bundle/config.js", unknown, {}> &
+        import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}> &
+        import("hono").ToSchema<"get", "/bundle/lit.js", unknown, {}> &
+        import("hono").ToSchema<"get", "/bundle/lit/*", unknown, {}>,
+      `/assets/${string}`
     > &
     import("hono").ToSchema<"get", "/healthz", unknown, {}> &
     import("hono").ToSchema<"get", "/livez", unknown, {}>,

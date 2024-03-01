@@ -5,12 +5,11 @@ import { cache_immutable } from "@~/app.middleware/cache_immutable";
 import zammad_attachment_router from "@~/zammad.api";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
-import { ASSETS_PATH } from "./config";
 import { rewriteAssetRequestPath } from "./rewrite";
 
 //
 
-const asserts_router = new Hono()
+export default new Hono()
   .use("*", cache_immutable)
   .use(
     "/node_modules/*",
@@ -66,4 +65,3 @@ const asserts_router = new Hono()
     return new Response(output);
   })
   .route("/zammad", zammad_attachment_router);
-export default new Hono().route(ASSETS_PATH, asserts_router);

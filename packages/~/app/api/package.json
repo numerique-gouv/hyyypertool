@@ -1,0 +1,28 @@
+{
+  "name": "@~/app.api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@hono/sentry": "1.0.1",
+    "@~/app.core": "workspace:*",
+    "@~/app.layout": "workspace:*",
+    "@~/auth.api": "workspace:*",
+    "@~/moderations.api": "workspace:*",
+    "@~/organizations.api": "workspace:*",
+    "@~/proxy.api": "workspace:*",
+    "@~/users.api": "workspace:*",
+    "@~/welcome.api": "workspace:*",
+    "consola": "3.2.3",
+    "hono": "4.0.8",
+    "youch": "3.3.3"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

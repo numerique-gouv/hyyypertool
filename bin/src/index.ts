@@ -1,9 +1,9 @@
 //
 
+import app from "@~/app.api";
 import config from "@~/app.core/config";
 import { LogLevels, consola } from "consola";
 import { showRoutes } from "hono/dev";
-import app from "../../src/api";
 
 //
 //
