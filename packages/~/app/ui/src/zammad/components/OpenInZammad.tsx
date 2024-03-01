@@ -1,10 +1,7 @@
-//
-
 import config from "@~/app.core/config";
 import type { Child } from "hono/jsx";
 
 //
-
 /**
  *
  * @example
@@ -14,6 +11,7 @@ import type { Child } from "hono/jsx";
  * </OpenInZammad>
  * ```
  */
+
 export function OpenInZammad({
   children,
   ticket_id,
@@ -24,24 +22,6 @@ export function OpenInZammad({
   return (
     <a
       href={`${config.ZAMMAD_URL}/#ticket/zoom/${ticket_id}`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      {children}
-    </a>
-  );
-}
-
-export function SearchInZammad({
-  children,
-  search,
-}: {
-  children: Child;
-  search: string;
-}) {
-  return (
-    <a
-      href={`${config.ZAMMAD_URL}/#search/${search}`}
       rel="noopener noreferrer"
       target="_blank"
     >

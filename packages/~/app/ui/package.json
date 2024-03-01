@@ -19,9 +19,6 @@
     "./table": {
       "default": "./src/table/index.ts"
     },
-    "./zammad": {
-      "default": "./src/zammad/index.tsx"
-    },
     "./*": {
       "default": "./src/*.tsx"
     }

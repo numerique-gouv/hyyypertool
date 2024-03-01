@@ -2,7 +2,7 @@
 
 import { date_to_string } from "@~/app.core/date/date_format";
 import { callout } from "@~/app.ui/callout";
-import { OpenInZammad } from "@~/app.ui/zammad";
+import { OpenInZammad } from "@~/app.ui/zammad/components/OpenInZammad";
 import { type Moderation, type User } from "@~/moncomptepro.database";
 import { get_zammad_mail } from "@~/zammad.lib";
 import { Message } from "./Message";

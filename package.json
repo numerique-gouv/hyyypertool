@@ -54,7 +54,6 @@
     "@lit-labs/motion": "1.0.7",
     "@~/app.core": "workspace:*",
     "@~/app.middleware": "workspace:*",
-    "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
     "@~/auth.api": "workspace:*",
     "@~/moderations.api": "workspace:*",
