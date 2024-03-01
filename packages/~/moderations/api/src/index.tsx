@@ -25,8 +25,8 @@ export default new Hono<UserInfo_Context & Csp_Context>()
 
     const search = match(Search_Schema.parse(query, { path: ["query"] }))
       .with(
-        { search_email: P.not(P.union("", P.nullish)) },
-        { search_siret: P.not(P.union("", P.nullish)) },
+        { search_email: P.not("") },
+        { search_siret: P.not("") },
         (search) => ({
           ...search,
           hide_join_organization: false,
