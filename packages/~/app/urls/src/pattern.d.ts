@@ -33,8 +33,8 @@ declare const app: import("hono/hono-base").HonoBase<
               "/:domain",
               {
                 param: {
-                  domain: string;
                   id: string;
+                  domain: string;
                 };
               },
               {}
@@ -54,8 +54,8 @@ declare const app: import("hono/hono-base").HonoBase<
               "/:domain",
               {
                 param: {
-                  domain: string;
                   id: string;
+                  domain: string;
                 };
               } & {
                 form: {
@@ -106,8 +106,8 @@ declare const app: import("hono/hono-base").HonoBase<
                 "/:domain",
                 {
                   param: {
-                    domain: string;
                     id: string;
+                    domain: string;
                   };
                 },
                 {}
@@ -127,8 +127,8 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 param: {
-                  user_id: string;
                   id: string;
+                  user_id: string;
                 };
               },
               {}
@@ -138,18 +138,18 @@ declare const app: import("hono/hono-base").HonoBase<
                 "/",
                 {
                   param: {
-                    user_id: string;
                     id: string;
+                    user_id: string;
                   };
                 } & {
                   form: {
                     verification_type?:
                       | ""
+                      | "verified_email_domain"
+                      | "official_contact_email"
+                      | "official_contact_domain"
                       | "code_sent_to_official_contact_email"
                       | "in_liste_dirigeants_rna"
-                      | "official_contact_domain"
-                      | "official_contact_email"
-                      | "verified_email_domain"
                       | undefined;
                     is_external?: string | undefined;
                   };
@@ -161,8 +161,8 @@ declare const app: import("hono/hono-base").HonoBase<
                 "/",
                 {
                   param: {
-                    user_id: string;
                     id: string;
+                    user_id: string;
                   };
                 },
                 {}
@@ -204,8 +204,8 @@ declare const app: import("hono/hono-base").HonoBase<
           "verify/:domain",
           {
             param: {
-              domain: string;
               id: string;
+              domain: string;
             };
           },
           {}
@@ -429,8 +429,8 @@ declare const app: import("hono/hono-base").HonoBase<
           "/login/callback",
           {
             query: {
-              state: string;
               code: string;
+              state: string;
             };
           },
           {}
@@ -465,6 +465,7 @@ declare const app: import("hono/hono-base").HonoBase<
           >,
           "/zammad"
         > &
+          import("hono").ToSchema<"get", "/bundle/config.js", unknown, {}> &
           import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}> &
           import("hono").ToSchema<"get", "/bundle/lit.js", unknown, {}> &
           import("hono").ToSchema<"get", "/bundle/lit/*", unknown, {}>,
@@ -473,8 +474,8 @@ declare const app: import("hono/hono-base").HonoBase<
       ""
     > &
     import("hono/types").MergeSchemaPath<
-      import("hono").ToSchema<"get", "/proxy/localhost:3000/*", unknown, {}>,
-      ""
+      import("hono").ToSchema<"get", "/localhost:3000/*", unknown, {}>,
+      "/proxy"
     > &
     import("hono/types").MergeSchemaPath<
       import("hono").ToSchema<"get", "/", unknown, {}> &
