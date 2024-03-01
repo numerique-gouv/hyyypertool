@@ -11,7 +11,8 @@
     "packages/~/infra/zammad/*",
     "packages/~/moderations/*",
     "packages/~/organizations/*",
-    "packages/~/users/*"
+    "packages/~/users/*",
+    "packages/~/welcome/*"
   ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:*",
@@ -63,6 +64,7 @@
     "@~/organizations.lib": "workspace:*",
     "@~/users.api": "workspace:*",
     "@~/users.repository": "workspace:*",
+    "@~/welcome.api": "workspace:*",
     "@~/zammad.api": "workspace:*",
     "animate.css": "4.1.1",
     "await-to-js": "3.0.0",

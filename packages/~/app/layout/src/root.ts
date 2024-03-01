@@ -94,6 +94,7 @@ export function Root_Layout({
         >
           {
             "imports": {
+              "@~/app.core/config": "${config.ASSETS_PATH}/bundle/config.js",
               ":common/env.ts": "${config.ASSETS_PATH}/bundle/env.js",
               "lit": "${config.ASSETS_PATH}/bundle/lit.js",
               "lit/": "${config.ASSETS_PATH}/bundle/lit/"

@@ -14,6 +14,7 @@ import auth_router from "@~/auth.api";
 import moderations_router from "@~/moderations.api";
 import organizations_router from "@~/organizations.api";
 import users_router from "@~/users.api";
+import welcome_router from "@~/welcome.api";
 import consola, { LogLevels } from "consola";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
@@ -21,7 +22,6 @@ import Youch from "youch";
 import asserts_router from "../assets/route";
 import { readyz } from "../health/readyz/route";
 import { proxy } from "../proxy/route";
-import welcome_router from "../welcome/route";
 
 //
 
@@ -58,7 +58,7 @@ const app = new Hono()
 
   .route("", asserts_router)
   .use("*", hyyyyyypertool_session)
-  .route("", welcome_router)
+  .route("/", welcome_router)
   .route("/auth", auth_router)
   .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))
 
