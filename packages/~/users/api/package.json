@@ -11,6 +11,7 @@
   "dependencies": {
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
+    "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
     "@~/moderations.repository": "workspace:*",
     "@~/organizations.repository": "workspace:*",

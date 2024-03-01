@@ -11,6 +11,7 @@
   "dependencies": {
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
+    "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
     "@~/organizations.repository": "workspace:*",
     "hono": "4.0.8"
