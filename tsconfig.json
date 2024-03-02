@@ -1,5 +1,9 @@
 {
   "extends": "@tsconfig/bun/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "hono/jsx"
+  },
   "include": ["bin/src"],
   "references": [
     { "path": "packages/~/app/api/tsconfig.json" },
