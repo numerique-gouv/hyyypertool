@@ -1,17 +1,5 @@
 {
   "extends": "@tsconfig/bun/tsconfig.json",
-  "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "noEmit": false,
-    "outDir": "./node_modules/.cache/tsc",
-    "plugins": [],
-    "resolveJsonModule": true
-  },
   "include": ["bin/src"],
   "references": [
     { "path": "packages/~/app/api/tsconfig.json" },

@@ -16,8 +16,8 @@
     "@~/moderations.repository": "workspace:*",
     "@~/organizations.repository": "workspace:*",
     "@~/users.repository": "workspace:*",
-    "ts-pattern": "5.0.8",
     "hono": "4.0.8",
+    "ts-pattern": "5.0.8",
     "zod": "3.22.4"
   },
   "devDependencies": {
