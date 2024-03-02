@@ -13,6 +13,7 @@ import { _02 } from "./02";
 import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
+import { Domain_Organization } from "./Domain_Organization";
 import { Header } from "./Header";
 import { Organization_Members_Table } from "./Organization_Members_Table";
 import { ModerationPage_Context } from "./context";
@@ -55,7 +56,7 @@ export default async function Moderation_Page() {
 
       <hr class="my-12" />
 
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-2 gap-6">
         <About_User />
         <About_Organisation />
       </div>
@@ -64,7 +65,9 @@ export default async function Moderation_Page() {
 
       <Organization_Members_Table />
 
-      <hr class="bg-none pt-6" />
+      <hr class="my-12" />
+
+      <Domain_Organization />
 
       <_02 />
 

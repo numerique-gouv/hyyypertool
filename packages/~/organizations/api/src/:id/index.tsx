@@ -4,8 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout, userinfo_to_username } from "@~/app.layout";
-import type { Csp_Context } from "@~/app.middleware/csp_headers";
-import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import type { App_Context } from "@~/app.middleware/context";
 import { mark_domain_as_verified } from "@~/moncomptepro.lib";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { Hono } from "hono";
@@ -17,7 +16,7 @@ import Organization_Page from "./page";
 
 //
 
-const page_router = new Hono<UserInfo_Context & Csp_Context>()
+export default new Hono<App_Context>()
   .use("/", jsxRenderer(Main_Layout, { docType: true }))
   .get(
     "/",
@@ -27,18 +26,13 @@ const page_router = new Hono<UserInfo_Context & Csp_Context>()
       const username = userinfo_to_username(userinfo);
       return render(<Organization_Page id={id} />, { nonce, username });
     },
-  );
-
-//
-
-export default new Hono()
-  .route("", page_router)
+  )
   //
-  .route("members", organization_members_router)
-  .route("domains", organization_domains_router)
+  .route("/members", organization_members_router)
+  .route("/domains", organization_domains_router)
   //
   .patch(
-    "verify/:domain",
+    "/verify/:domain",
     zValidator("param", Entity_Schema.extend({ domain: z.string() })),
     async function PATCH({ text, req }) {
       const { id, domain } = req.valid("param");
