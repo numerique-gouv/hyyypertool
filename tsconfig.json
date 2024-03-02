@@ -1,32 +1,11 @@
 {
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "noEmit": false,
-    "outDir": "./node_modules/.cache/tsc",
-    "plugins": [],
-    "resolveJsonModule": true
+    "jsxImportSource": "hono/jsx"
   },
-  "include": ["src", "bin/src"],
+  "include": ["bin/src"],
   "references": [
-    { "path": "packages/~/app/core/tsconfig.json" },
-    { "path": "packages/~/app/urls/tsconfig.json" },
-    { "path": "packages/~/infra/moncomptepro/database/tsconfig.json" },
-    { "path": "packages/~/infra/zammad/api/tsconfig.json" },
-    { "path": "packages/~/infra/zammad/lib/tsconfig.json" },
-    { "path": "packages/~/moderations/api/tsconfig.json" },
-    { "path": "packages/~/moderations/lib/tsconfig.json" },
-    { "path": "packages/~/moderations/repository/tsconfig.json" },
-    { "path": "packages/~/organizations/api/tsconfig.json" },
-    { "path": "packages/~/organizations/lib/tsconfig.json" },
-    { "path": "packages/~/proxy/api/tsconfig.json" },
-    { "path": "packages/~/users/api/tsconfig.json" },
-    { "path": "packages/~/users/repository/tsconfig.json" },
-    { "path": "packages/~/welcome/api/tsconfig.json" }
+    { "path": "packages/~/app/api/tsconfig.json" },
+    { "path": "packages/~/app/core/tsconfig.json" }
   ]
 }

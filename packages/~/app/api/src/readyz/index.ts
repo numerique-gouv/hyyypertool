@@ -9,7 +9,7 @@ import { Hono } from "hono";
 
 //
 
-export const readyz = new Hono()
+export default new Hono()
   .get("/", ({ text }) => text(`readyz check passed`))
   .get("/zammad", async ({ text }) => {
     const [, user] = await to(get_zammad_me());

@@ -1,8 +1,5 @@
 //
 
-import env from "@~/app.core/config";
-import { csp_headers } from "@~/app.middleware/csp_headers";
-// import { sentry, type Sentry_Context } from ":common/sentry";
 import { sentry } from "@hono/sentry";
 import config from "@~/app.core/config";
 import { Error_Page } from "@~/app.layout/error";
@@ -20,27 +17,26 @@ import consola, { LogLevels } from "consola";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
 import Youch from "youch";
-import asserts_router from "../assets/route";
-import { readyz } from "../health/readyz/route";
+import asserts_router from "./assets";
+import readyz_router from "./readyz";
 
 //
 
-const authoried = vip_list_guard({ vip_list: env.ALLOWED_USERS.split(",") });
+const authoried = vip_list_guard({ vip_list: config.ALLOWED_USERS.split(",") });
 const app = new Hono()
   .use("*", logger(consola.info))
-  .use("*", csp_headers)
   .use(
     "*",
     sentry({
       debug: consola.level >= LogLevels.debug,
-      dsn: env.SENTRY_DNS,
-      environment: env.DEPLOY_ENV,
-      release: env.VERSION,
+      dsn: config.SENTRY_DNS,
+      environment: config.DEPLOY_ENV,
+      release: config.VERSION,
       initialScope: {
         tags: {
-          NODE_ENV: env.NODE_ENV,
-          HOST: env.HOST,
-          GIT_SHA: env.GIT_SHA,
+          NODE_ENV: config.NODE_ENV,
+          HOST: config.HOST,
+          GIT_SHA: config.GIT_SHA,
         },
       },
     }),
@@ -51,16 +47,23 @@ const app = new Hono()
 
   .get("/healthz", ({ text }) => text(`healthz check passed`))
   .get("/livez", ({ text }) => text(`livez check passed`))
-  .route("/readyz", readyz)
+
+  .route(config.ASSETS_PATH, asserts_router)
+  .route("/readyz", readyz_router)
+
+  //
+
   .route("/proxy", proxy_router)
 
   //
 
-  .route("", asserts_router)
   .use("*", hyyyyyypertool_session)
+  //
   .route("/", welcome_router)
   .route("/auth", auth_router)
-  .use("*", moncomptepro_pg_database({ connectionString: env.DATABASE_URL }))
+  //
+  .use("*", moncomptepro_pg_database({ connectionString: config.DATABASE_URL }))
+  //
 
   .use("/moderations/*", authoried)
   .route("/moderations", moderations_router)

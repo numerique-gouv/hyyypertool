@@ -4,7 +4,7 @@
   "extends": "./base.json",
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "hono/jsx",
     "lib": ["ESNext", "DOM"]
   }
