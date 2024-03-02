@@ -2,6 +2,7 @@
 
 import { button } from "@~/app.ui/button";
 import { callout } from "@~/app.ui/callout";
+import { notice } from "@~/app.ui/notice";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
 import type { Moderation_Type } from "@~/moderations.lib/Moderation_Type";
@@ -9,7 +10,7 @@ import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.map
 import type { Moderation } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
-import { ModerationPage_Context } from "./page";
+import { ModerationPage_Context } from "./context";
 
 //
 
@@ -66,11 +67,12 @@ function State_Badge() {
 
 function Info() {
   const { moderation } = useContext(ModerationPage_Context);
+  const { base, container, body, title } = notice({ type: "info" });
   return (
-    <div class="fr-notice fr-notice--info">
-      <div class="fr-container">
-        <div class="fr-notice__body">
-          <p class="fr-notice__title">
+    <div class={base()}>
+      <div class={container()}>
+        <div class={body()}>
+          <p class={title()}>
             <b>
               {moderation.users.given_name} {moderation.users.family_name}
             </b>{" "}

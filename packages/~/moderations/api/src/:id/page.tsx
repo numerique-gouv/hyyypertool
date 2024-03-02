@@ -14,7 +14,8 @@ import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
 import { Header } from "./Header";
-import ModerationPage_Context from "./context";
+import { Organization_Members_Table } from "./Organization_Members_Table";
+import { ModerationPage_Context } from "./context";
 import { Moderation_NotFound } from "./not-found";
 
 //
@@ -59,7 +60,12 @@ export default async function Moderation_Page() {
         <About_Organisation />
       </div>
 
-      {/* <Organization_Members_Table id={moderation.}/> */}
+      <hr class="bg-none pt-6" />
+
+      <Organization_Members_Table />
+
+      <hr class="bg-none pt-6" />
+
       <_02 />
 
       <hr />
@@ -68,10 +74,6 @@ export default async function Moderation_Page() {
     </main>
   );
 }
-
-//
-
-export { ModerationPage_Context };
 
 //
 export async function ModerationPage_Provider({

@@ -20,7 +20,7 @@ type ModerationWithUsersOrganizations = Moderation & {
   organizations: Organization;
 };
 
-export default createContext({
+export const ModerationPage_Context = createContext({
   moderation: {} as ModerationWithUsersOrganizations,
   domain: "",
   users_organizations: {} as

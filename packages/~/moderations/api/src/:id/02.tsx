@@ -6,7 +6,7 @@ import { hx_urls, urls } from "@~/app.urls";
 import type { Organization } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./page";
+import { ModerationPage_Context } from "./context";
 
 //
 

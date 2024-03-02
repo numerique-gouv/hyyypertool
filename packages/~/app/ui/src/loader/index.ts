@@ -6,7 +6,6 @@ import { tv } from "tailwind-variants";
 
 export const loader = tv({
   base: `
-    mx-8
     inline-block
     h-8
     w-8

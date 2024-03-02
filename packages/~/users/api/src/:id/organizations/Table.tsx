@@ -1,120 +1,120 @@
-import type { Pagination } from "@~/app.core/schema";
+import { type Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { row } from "@~/app.ui/table";
+import { Foot } from "@~/app.ui/hx_table";
+import { notice } from "@~/app.ui/notice";
 import { hx_urls, urls } from "@~/app.urls";
+import type { Organization } from "@~/moncomptepro.database";
 import { get_organisations_by_user_id } from "@~/organizations.repository/get_organisations_by_user_id";
 import { useContext, type PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { match } from "ts-pattern";
-import UserOrganizationTable_Context from "./context";
+import { UserOrganizationTable_Context } from "./context";
 
 //
-
-const fields = [
-  "siret",
-  "cached_libelle",
-  // "Interne",
-  "verified_email_domains",
-  "authorized_email_domains",
-  "external_authorized_email_domains",
-  "cached_code_officiel_geographique",
-  // "authentication_by_peers_type",
-  // "has_been_greeted",
-  // "sponsor_id",
-  // "needs_official_contact_email_verification",
-  // "official_contact_email_verification_token",
-  // "official_contact_email_verification_sent_at",
-] as const;
 
 export async function UserOrganizationTable() {
   const { pagination, user_id, query_organizations_collection } = useContext(
     UserOrganizationTable_Context,
   );
   const { organizations, count } = await query_organizations_collection;
-  const { page, page_size } = pagination;
-  const page_index = page - 1;
-  const last_page = Math.floor(count / page_size) + 1;
+
+  const hx_organizations_query_props = hx_urls.users[":id"].organizations.$get({
+    param: { id: user_id.toString() },
+    query: {},
+  });
+
+  if (count === 0) {
+    const { base, container, body, title } = notice();
+    return (
+      <div class={base()}>
+        <div class={container()}>
+          <div class={body()}>
+            <p class={title()}>
+              🥹 Aucune organisation n'a été trouvé pour cet utilisateur.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <table>
-      <thead>
-        <tr>
-          {fields.map((name) => (
-            <th key={name} class="max-w-32 break-words">
-              {name}
-            </th>
-          ))}
+    <div class="fr-table [&>table]:table">
+      <table>
+        <thead>
+          <tr>
+            <th class="break-words">Siret</th>
+            <th class="break-words">Libellé</th>
+            <th class="max-w-32 break-words">Domain email vérifié</th>
+            <th class="max-w-32 break-words">Domain email authorizé</th>
+            <th class="max-w-32 break-words">Domain email externe authorizé</th>
+            <th class="max-w-32 break-words">Code géographique officiel</th>
 
-          <th>Lien</th>
-        </tr>
-      </thead>
+            <th>Lien</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr>
+        <tbody>
           {organizations.map(({ organizations }) => (
-            <tr key={organizations.id.toString()} class={row()}>
-              {fields.map((name) => (
-                <td key={name} class="break-words">
-                  {match(organizations[name])
-                    .when(
-                      (x): x is Array<string> => x instanceof Array,
-                      (value) => value.join(", "),
-                    )
-                    .otherwise((value) => value)}
-                </td>
-              ))}
-
-              <td>
-                <a
-                  class="p-3"
-                  href={
-                    urls.organizations[":id"].$url({
-                      param: {
-                        id: organizations.id.toString(),
-                      },
-                    }).pathname
-                  }
-                >
-                  ➡️
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tr>
-      </tbody>
-
-      <tfoot>
-        <tr>
-          <th scope="row">Showing </th>
-          <td colspan={2}>
-            {page_index * count}-{page_index * count + count} of {count}
-          </td>
-          <td colspan={2} class="inline-flex justify-center">
-            <input
-              class="text-right"
-              {...hx_urls.users[":id"].organizations.$get({
-                param: { id: user_id.toString() },
-                query: {},
-              })}
-              hx-trigger="input changed delay:2s"
-              hx-target="#table-user-organisations"
-              id="page"
-              name="page"
-              type="number"
-              value={String(page)}
+            <Row
+              key={organizations.id.toString()}
+              organization={organizations}
             />
-            <span> of {last_page}</span>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+          ))}
+        </tbody>
+
+        <Foot
+          count={count}
+          hx_query_props={hx_organizations_query_props}
+          pagination={pagination}
+        />
+      </table>
+    </div>
   );
 }
 
 //
+export function Row({
+  key,
+  organization,
+}: {
+  key: string;
+  organization: Organization;
+}) {
+  const {
+    authorized_email_domains,
+    cached_code_officiel_geographique,
+    cached_libelle,
+    external_authorized_email_domains,
+    id,
+    siret,
+    verified_email_domains,
+  } = organization;
 
-export { UserOrganizationTable_Context };
+  return (
+    <tr key={key}>
+      <td>{siret}</td>
+      <td>{cached_libelle}</td>
+      <td class="break-words">{verified_email_domains.join(", ")}</td>
+      <td class="break-words">{authorized_email_domains.join(", ")}</td>
+      <td class="break-words">
+        {external_authorized_email_domains.join(", ")}
+      </td>
+      <td>{cached_code_officiel_geographique}</td>
+      <td>
+        <a
+          class="p-3"
+          href={
+            urls.organizations[":id"].$url({ param: { id: id.toString() } })
+              .pathname
+          }
+        >
+          ➡️
+        </a>
+      </td>
+    </tr>
+  );
+}
 
-//
 export async function UserOrganizationTable_Provider({
   value: { pagination, user_id },
   children,

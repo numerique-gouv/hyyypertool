@@ -7,7 +7,7 @@ import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./page";
+import { ModerationPage_Context } from "./context";
 
 //
 
