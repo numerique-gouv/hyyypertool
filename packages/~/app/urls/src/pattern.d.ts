@@ -5,67 +5,21 @@ declare const app: import("hono/hono-base").HonoBase<
       import("hono/types").MergeSchemaPath<
         import("hono/types").MergeSchemaPath<
           import("hono").ToSchema<
-            "get",
-            "/",
+            "patch",
+            "/:domain",
             {
               param: {
                 id: string;
+                domain: string;
               };
             },
             {}
-          > &
-            import("hono").ToSchema<
-              "put",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              } & {
-                form: {
-                  domain: string;
-                };
-              },
-              {}
-            > &
-            import("hono").ToSchema<
-              "delete",
-              "/:domain",
-              {
-                param: {
-                  id: string;
-                  domain: string;
-                };
-              },
-              {}
-            > &
-            import("hono").ToSchema<
-              "delete",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              },
-              {}
-            > &
-            import("hono").ToSchema<
-              "patch",
-              "/:domain",
-              {
-                param: {
-                  id: string;
-                  domain: string;
-                };
-              } & {
-                form: {
-                  is_verified?: string | undefined;
-                };
-              },
-              {}
-            >,
-          "/internal"
-        > &
+          >,
+          "/verify"
+        >,
+        "/$procedures"
+      > &
+        import("hono/types").MergeSchemaPath<
           import("hono/types").MergeSchemaPath<
             import("hono").ToSchema<
               "get",
@@ -93,6 +47,17 @@ declare const app: import("hono/hono-base").HonoBase<
               > &
               import("hono").ToSchema<
                 "delete",
+                "/:domain",
+                {
+                  param: {
+                    id: string;
+                    domain: string;
+                  };
+                },
+                {}
+              > &
+              import("hono").ToSchema<
+                "delete",
                 "/",
                 {
                   param: {
@@ -102,20 +67,72 @@ declare const app: import("hono/hono-base").HonoBase<
                 {}
               > &
               import("hono").ToSchema<
-                "delete",
+                "patch",
                 "/:domain",
                 {
                   param: {
                     id: string;
                     domain: string;
                   };
+                } & {
+                  form: {
+                    is_verified?: string | undefined;
+                  };
                 },
                 {}
               >,
-            "/external"
-          >,
-        "domains"
-      > &
+            "/internal"
+          > &
+            import("hono/types").MergeSchemaPath<
+              import("hono").ToSchema<
+                "get",
+                "/",
+                {
+                  param: {
+                    id: string;
+                  };
+                },
+                {}
+              > &
+                import("hono").ToSchema<
+                  "put",
+                  "/",
+                  {
+                    param: {
+                      id: string;
+                    };
+                  } & {
+                    form: {
+                      domain: string;
+                    };
+                  },
+                  {}
+                > &
+                import("hono").ToSchema<
+                  "delete",
+                  "/",
+                  {
+                    param: {
+                      id: string;
+                    };
+                  },
+                  {}
+                > &
+                import("hono").ToSchema<
+                  "delete",
+                  "/:domain",
+                  {
+                    param: {
+                      id: string;
+                      domain: string;
+                    };
+                  },
+                  {}
+                >,
+              "/external"
+            >,
+          "/domains"
+        > &
         import("hono/types").MergeSchemaPath<
           import("hono/types").MergeSchemaPath<
             import("hono").ToSchema<
@@ -145,11 +162,11 @@ declare const app: import("hono/hono-base").HonoBase<
                   form: {
                     verification_type?:
                       | ""
-                      | "verified_email_domain"
-                      | "official_contact_email"
-                      | "official_contact_domain"
                       | "code_sent_to_official_contact_email"
                       | "in_liste_dirigeants_rna"
+                      | "official_contact_domain"
+                      | "official_contact_email"
+                      | "verified_email_domain"
                       | undefined;
                     is_external?: string | undefined;
                   };
@@ -184,24 +201,21 @@ declare const app: import("hono/hono-base").HonoBase<
               },
               {}
             >,
-          "members"
+          "/members"
         > &
-        import("hono/types").MergeSchemaPath<
-          import("hono").ToSchema<
-            "get",
-            "/",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          >,
-          ""
+        import("hono").ToSchema<
+          "get",
+          "/",
+          {
+            param: {
+              id: string;
+            };
+          },
+          {}
         > &
         import("hono").ToSchema<
           "patch",
-          "verify/:domain",
+          "/verify/:domain",
           {
             param: {
               id: string;
@@ -230,9 +244,9 @@ declare const app: import("hono/hono-base").HonoBase<
         "/",
         {
           query: {
-            "search-siret"?: string | undefined;
             page?: string | undefined;
             page_size?: string | undefined;
+            "search-siret"?: string | undefined;
             id?: string | undefined;
           };
         },
@@ -465,9 +479,9 @@ declare const app: import("hono/hono-base").HonoBase<
           "/attachment/:ticket_id/:article_id/:attachment_id",
           {
             param: {
-              ticket_id: string;
               article_id: string;
               attachment_id: string;
+              ticket_id: string;
             };
           },
           {}

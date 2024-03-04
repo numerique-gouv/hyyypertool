@@ -18,10 +18,10 @@ import { useRequestContext } from "hono/jsx-renderer";
 import {
   EMAIL_SUBJECT_INPUT_ID,
   EMAIL_TO_INPUT_ID,
+  ModerationPage_Context,
   RESPONSE_MESSAGE_SELECT_ID,
   RESPONSE_TEXTAREA_ID,
 } from "./context";
-import { ModerationPage_Context } from "./page";
 import { reponse_templates } from "./reponse_templates";
 
 //

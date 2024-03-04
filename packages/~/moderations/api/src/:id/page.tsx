@@ -1,6 +1,7 @@
 //
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
+import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
@@ -13,8 +14,10 @@ import { _02 } from "./02";
 import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
+import { Domain_Organization } from "./Domain_Organization";
 import { Header } from "./Header";
-import ModerationPage_Context from "./context";
+import { Organization_Members_Table } from "./Organization_Members_Table";
+import { ModerationPage_Context } from "./context";
 import { Moderation_NotFound } from "./not-found";
 
 //
@@ -54,12 +57,19 @@ export default async function Moderation_Page() {
 
       <hr class="my-12" />
 
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-2 gap-6">
         <About_User />
         <About_Organisation />
       </div>
 
-      {/* <Organization_Members_Table id={moderation.}/> */}
+      <hr class="bg-none pt-6" />
+
+      <Organization_Members_Table />
+
+      <hr class="my-12" />
+
+      <Domain_Organization />
+
       <_02 />
 
       <hr />
@@ -68,10 +78,6 @@ export default async function Moderation_Page() {
     </main>
   );
 }
-
-//
-
-export { ModerationPage_Context };
 
 //
 export async function ModerationPage_Provider({
@@ -114,7 +120,9 @@ export async function ModerationPage_Provider({
       ),
     });
 
-  const domain = moderation.users.email.split("@")[1];
+  const domain = z_email_domain.parse(moderation.users.email, {
+    path: ["moderation.users.email"],
+  });
 
   return (
     <ModerationPage_Context.Provider

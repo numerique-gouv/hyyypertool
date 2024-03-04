@@ -40,8 +40,14 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     consola.verbose(`🌱 INSERT organization ${abracadabra.cached_nom_complet}`);
     const dengi = await insert_dengi(db);
     consola.verbose(`🌱 INSERT organization ${dengi.cached_nom_complet}`);
-    const bosch = await insert_bosch(db);
-    consola.verbose(`🌱 INSERT organization ${bosch.cached_nom_complet}`);
+    const bosch_france = await insert_bosch_france(db);
+    consola.verbose(
+      `🌱 INSERT organization ${bosch_france.cached_nom_complet}`,
+    );
+    const bosch_rexroth = await insert_bosch_rexroth(db);
+    consola.verbose(
+      `🌱 INSERT organization ${bosch_france.cached_nom_complet}`,
+    );
 
     //
 
@@ -51,6 +57,14 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     });
     consola.verbose(
       `🌱 ${raphael_dinum.command} ${raphael_dinum.rowCount} ${raphael.given_name} join ${dinum.cached_libelle}`,
+    );
+
+    const marie_bon_join_bosch_rexroth = await insert_users_organizations(db, {
+      organization_id: bosch_rexroth.id,
+      user_id: marie_bon.id,
+    });
+    consola.verbose(
+      `🌱 ${marie_bon_join_bosch_rexroth.command} ${marie_bon_join_bosch_rexroth.rowCount} ${marie_bon.given_name} join ${bosch_rexroth.cached_libelle}`,
     );
 
     //
@@ -103,13 +117,23 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
     );
 
-    const marie_bon_dengi_bis = await insert_moderation(db, {
-      organization_id: bosch.id,
+    const marie_bon_bosch_france = await insert_moderation(db, {
+      organization_id: bosch_france.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
     });
     consola.verbose(
-      `🌱 ${marie_bon_dengi_bis.command} ${marie_bon_dengi_bis.rowCount} ${marie_bon.given_name} wants to join ${bosch.cached_nom_complet} again...`,
+      `🌱 ${marie_bon_bosch_france.command} ${marie_bon_bosch_france.rowCount} ${marie_bon.given_name} wants to join ${bosch_france.cached_nom_complet} again...`,
+    );
+
+    const marie_bon_bosch_rexroth = await insert_moderation(db, {
+      organization_id: bosch_rexroth.id,
+      type: "non_verified_domain" as MCP_Moderation["type"],
+      user_id: marie_bon.id,
+      moderated_at: new Date("2023-06-22 14:34:34"),
+    });
+    consola.verbose(
+      `🌱 ${marie_bon_bosch_rexroth.command} ${marie_bon_bosch_rexroth.rowCount} ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
     );
   } catch (err) {
     console.error("Something went wrong...");
@@ -329,14 +353,14 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_bosch(db: MonComptePro_PgDatabase) {
+async function insert_bosch_france(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
       authorized_email_domains: ["fr.bosch.com"],
       cached_activite_principale: "29.32Z",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
-      cached_code_officiel_geographique: "75107",
+      cached_code_officiel_geographique: "93070",
       cached_etat_administratif: "A",
       cached_libelle_activite_principale:
         "29.32Z - Fabrication d'autres équipements automobiles",
@@ -347,6 +371,32 @@ async function insert_bosch(db: MonComptePro_PgDatabase) {
       created_at: new Date("2024-01-19T21:27:42.009Z"),
       external_authorized_email_domains: [],
       siret: "57206768400017",
+      trackdechets_email_domains: [],
+      updated_at: new Date("2024-02-15T13:45:32.598Z"),
+      verified_email_domains: ["fr.bosch.com"],
+    })
+    .returning();
+  return insert.at(0)!;
+}
+
+async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.organizations)
+    .values({
+      authorized_email_domains: ["fr.bosch.com"],
+      cached_activite_principale: "28.12Z",
+      cached_categorie_juridique: "SAS, société par actions simplifiée",
+      cached_code_officiel_geographique: "69259",
+      cached_etat_administratif: "A",
+      cached_libelle_activite_principale:
+        "29.12Z - Fabrication d'autres équipements automobiles",
+      cached_libelle_tranche_effectif: "250 à 499 salariés, en 2021",
+      cached_libelle: "Bosch rexroth d.s.i.",
+      cached_nom_complet: "Bosch rexroth d.s.i.",
+      cached_tranche_effectifs: "41",
+      created_at: new Date("2024-01-19T21:27:42.009Z"),
+      external_authorized_email_domains: [],
+      siret: "44023386400014 ",
       trackdechets_email_domains: [],
       updated_at: new Date("2024-02-15T13:45:32.598Z"),
       verified_email_domains: ["fr.bosch.com"],

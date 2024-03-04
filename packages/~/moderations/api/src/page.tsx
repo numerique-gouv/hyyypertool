@@ -7,7 +7,7 @@ import {
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { button } from "@~/app.ui/button";
+import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
 import {
@@ -27,12 +27,10 @@ import Moderations_Context, {
 //
 
 const page_query_keys = Page_Query.keyof();
-const MODERATION_TABLE_PAGE_ID = "moderation_table_page";
 
 const hx_moderations_query_props = {
   ...hx_urls.moderations.$get({ query: {} }),
   "hx-include": hx_include([
-    MODERATION_TABLE_PAGE_ID,
     page_query_keys.enum.hide_join_organization,
     page_query_keys.enum.hide_non_verified_domain,
     page_query_keys.enum.processed_requests,
@@ -252,58 +250,14 @@ async function ModerationList_Table() {
             />
           ))}
         </tbody>
-        <Foot count={count} pagination={pagination} />
+        <Foot
+          count={count}
+          hx_query_props={hx_moderations_query_props}
+          name={page_query_keys.enum.page}
+          pagination={pagination}
+        />
       </table>
     </div>
-  );
-}
-
-function Foot({
-  count,
-  pagination,
-}: {
-  count: number;
-  pagination: Pagination;
-}) {
-  const { page, page_size } = pagination;
-  const last_page = Math.floor(count / page_size) + 1;
-  const page_index = page - 1;
-
-  return (
-    <tfoot>
-      <tr>
-        <th colspan={2} class="whitespace-nowrap" scope="row">
-          Showing {page_index * page_size}-{page_index * page_size + page_size}{" "}
-          of {count}
-        </th>
-        <td colspan={6}>
-          <button
-            class={button({ class: "fr-btn--tertiary-no-outline" })}
-            disabled={page <= 1}
-            {...hx_moderations_query_props}
-            hx-vals={JSON.stringify({ page: page - 1 } as Pagination)}
-          >
-            Précédent
-          </button>
-          <input
-            class="fr-input inline-block w-auto"
-            {...hx_moderations_query_props}
-            id={MODERATION_TABLE_PAGE_ID}
-            name={page_query_keys.enum.page}
-            value={page}
-          />{" "}
-          <span> of {last_page}</span>
-          <button
-            class={button({ class: "fr-btn--tertiary-no-outline" })}
-            disabled={page >= last_page}
-            {...hx_moderations_query_props}
-            hx-vals={JSON.stringify({ page: page + 1 } as Pagination)}
-          >
-            Suivant
-          </button>
-        </td>
-      </tr>
-    </tfoot>
   );
 }
 

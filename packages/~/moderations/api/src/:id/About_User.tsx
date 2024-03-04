@@ -1,5 +1,6 @@
 //
 
+import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
@@ -7,7 +8,7 @@ import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./page";
+import { ModerationPage_Context } from "./context";
 
 //
 
@@ -20,7 +21,7 @@ export function About_User() {
     },
   } = useContext(ModerationPage_Context);
 
-  const domain = user.email.split("@")[1];
+  const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
 
   return (
     <section>
