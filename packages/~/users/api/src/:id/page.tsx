@@ -1,5 +1,6 @@
 //
 
+import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
@@ -60,7 +61,7 @@ export default function User_Page() {
 function Actions() {
   const { user } = useContext(UserPage_Context);
   const { email, id } = user;
-  const domain = email.split("@")[1];
+  const domain = z_email_domain.parse(email, { path: ["email"] });
   return (
     <div class="grid grid-cols-3 justify-items-center gap-1">
       <CopyButton text={email}>Copier l'email</CopyButton>

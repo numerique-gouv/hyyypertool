@@ -1,3 +1,4 @@
+import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import {
   type Moderation,
   type Organization,
@@ -112,12 +113,17 @@ export const reponse_templates: Array<{
   {
     label: "Quel lien avec le Ministère de l'Éduc Nat",
     template({ moderation }) {
+      const domain = z_email_domain.parse(moderation.users.email, {
+        path: ["moderation.users.email"],
+      });
+
       return dedent`
       Bonjour,
 
       Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
-      Afin de donner suite à cette demande, pourriez vous nous préciser le lien que vous avez avec cette organisation ? Votre adresse mail correspond au rectorat ${moderation.users.email.split("@")[1]}. Merci de bien vouloir rejoindre ce dernier ou utiliser une adresse mail dont le nom de domaine est : education.gouv.fr
+      Afin de donner suite à cette demande, pourriez vous nous préciser le lien que vous avez avec cette organisation ? Votre adresse mail correspond au rectorat ${domain}.
+      Merci de bien vouloir rejoindre ce dernier ou utiliser une adresse mail dont le nom de domaine est : education.gouv.fr
 
       Nous vous recommandons de demander directement à l'organisation que vous représentez d'effectuer la démarche.
 

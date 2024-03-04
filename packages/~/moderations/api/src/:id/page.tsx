@@ -1,6 +1,7 @@
 //
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
+import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
@@ -119,7 +120,9 @@ export async function ModerationPage_Provider({
       ),
     });
 
-  const domain = moderation.users.email.split("@")[1];
+  const domain = z_email_domain.parse(moderation.users.email, {
+    path: ["moderation.users.email"],
+  });
 
   return (
     <ModerationPage_Context.Provider

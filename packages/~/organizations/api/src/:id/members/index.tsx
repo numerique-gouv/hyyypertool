@@ -1,64 +1,14 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import {
-  Entity_Schema,
-  Pagination_Schema,
-  type Pagination,
-} from "@~/app.core/schema";
+import { Entity_Schema, Pagination_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { schema } from "@~/moncomptepro.database";
-import { and, desc, count as drizzle_count, eq } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
 import { Hono } from "hono";
 import organization_member_router from "./:user_id";
 import { Table, Table_Context } from "./Table";
 
 //
-
-async function users_by_organization_id(
-  pg: NodePgDatabase<typeof schema>,
-  {
-    id,
-    pagination = { page: 0, page_size: 10 },
-  }: { id: number; pagination?: Pagination },
-) {
-  const { page, page_size: take } = pagination;
-
-  const where = and(eq(schema.users_organizations.organization_id, id));
-
-  const { users, count } = await pg.transaction(async () => {
-    const users = await pg
-      .select()
-      .from(schema.users)
-      .innerJoin(
-        schema.users_organizations,
-        eq(schema.users.id, schema.users_organizations.user_id),
-      )
-      .where(where)
-      .orderBy(desc(schema.users.created_at))
-      .limit(take)
-      .offset(page * take);
-    const [{ value: count }] = await pg
-      .select({ value: drizzle_count() })
-      .from(schema.users)
-      .innerJoin(
-        schema.users_organizations,
-        eq(schema.users.id, schema.users_organizations.user_id),
-      )
-      .where(where);
-
-    return { users, count };
-  });
-
-  const users_with_external = users.map((user) => ({
-    ...user.users,
-    is_external: user.users_organizations.is_external,
-    verification_type: user.users_organizations.verification_type,
-  }));
-
-  return { users: users_with_external, count };
-}
 
 export default new Hono<MonComptePro_Pg_Context>()
   //
@@ -73,10 +23,13 @@ export default new Hono<MonComptePro_Pg_Context>()
       const { page } = req.valid("query");
       const take = 5;
 
-      const { users, count } = await users_by_organization_id(moncomptepro_pg, {
-        id: organization_id,
-        pagination: { page: page - 1, page_size: take },
-      });
+      const { users, count } = await get_users_by_organization_id(
+        moncomptepro_pg,
+        {
+          organization_id: organization_id,
+          pagination: { page: page - 1, page_size: take },
+        },
+      );
 
       return html(
         <Table_Context.Provider value={{ page, take, count }}>

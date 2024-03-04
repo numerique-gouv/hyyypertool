@@ -51,12 +51,14 @@ function Edit_Internal_Domain() {
       <div class="mt-5 block">
         <button
           class={button({ className: "block", intent: "warning" })}
-          {...hx_urls.organizations[":id"].verify[":domain"].$patch({
-            param: {
-              id: organization.id.toString(),
-              domain: domain,
+          {...hx_urls.organizations[":id"].$procedures.verify[":domain"].$patch(
+            {
+              param: {
+                id: organization.id.toString(),
+                domain: domain,
+              },
             },
-          })}
+          )}
           hx-swap="none"
         >
           🪄 Action en un click :<br /> - ajouter le domaine <b>{domain}</b>{" "}
