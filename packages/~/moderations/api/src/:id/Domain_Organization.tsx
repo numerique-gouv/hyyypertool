@@ -26,7 +26,6 @@ export function Domain_Organization() {
 
 function Edit_Internal_Domain() {
   const {
-    domain,
     moderation: { organizations: organization },
   } = useContext(ModerationPage_Context);
   return (
@@ -49,28 +48,12 @@ function Edit_Internal_Domain() {
         </center>
       </div>
       <div class="mt-5 block">
-        <button
-          class={button({ className: "block", intent: "warning" })}
-          {...hx_urls.organizations[":id"].$procedures.verify[":domain"].$patch(
-            {
-              param: {
-                id: organization.id.toString(),
-                domain: domain,
-              },
-            },
-          )}
-          hx-swap="none"
-        >
-          🪄 Action en un click :<br /> - ajouter le domaine <b>{domain}</b>{" "}
-          dans les domaines internes (si pas déjà présent)
-          <br /> - marquer ce domaine comme vérifié (si pas déjà vérifié)
-          <br /> - marquer les membres existants de l'orga comme
-          `verified_email_domain` (si pas de vérification effectuée)
-        </button>
+        <Button_Add_As_Verified_Internal_Domain />
       </div>
     </div>
   );
 }
+
 function Edit_External_Domain() {
   const {
     moderation: { organizations: organization },
@@ -93,5 +76,40 @@ function Edit_External_Domain() {
         <Loader />
       </center>
     </div>
+  );
+}
+
+function Button_Add_As_Verified_Internal_Domain() {
+  const {
+    domain,
+    moderation: { organizations: organization },
+  } = useContext(ModerationPage_Context);
+  return (
+    <button
+      class={button({ className: "block", intent: "warning" })}
+      {...hx_urls.organizations[":id"].$procedures.verify[":domain"].$patch({
+        param: {
+          id: organization.id.toString(),
+          domain: domain,
+        },
+      })}
+      hx-swap="none"
+    >
+      🪄 Action en un click :
+      <ul class="text-left">
+        <li>
+          ajouter le domaine <b>{domain}</b> dans les domaines internes
+          <small> (si pas déjà présent)</small>
+        </li>
+        <li>
+          marquer ce domaine comme vérifié
+          <small> (si pas déjà présent)</small>
+        </li>
+        <li>
+          marquer les membres existants de l'orga comme `verified_email_domain`
+          <small> (si pas de vérification effectuée)</small>
+        </li>
+      </ul>
+    </button>
   );
 }
