@@ -1,12 +1,12 @@
 //
 
 import base_config from "@~/config.tailwindcss";
-import { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 //
 
 const config: Pick<Config, "content" | "presets"> = {
-  content: ["./src/**/*.{ts,tsx}", "./packages/~/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}"],
   presets: [base_config],
 };
 
