@@ -7,6 +7,7 @@ import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { schema } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
+import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
 import { add_verified_domain } from "@~/organizations.repository/add_verified_domain";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
@@ -46,7 +47,10 @@ export default new Hono<MonComptePro_Pg_Context>()
       const { id } = req.valid("param");
       const { domain } = req.valid("form");
 
-      await add_verified_domain(moncomptepro_pg, { id, domain });
+      await moncomptepro_pg.transaction(async (pg) => {
+        await add_authorized_domain(pg, { id, domain });
+        await add_verified_domain(pg, { id, domain });
+      });
 
       return text("", 200, {
         "HX-Trigger": ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED,

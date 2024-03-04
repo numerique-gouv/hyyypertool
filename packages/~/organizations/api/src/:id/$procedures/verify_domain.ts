@@ -5,6 +5,7 @@ import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema, PAGINATION_ALL_PAGES } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { mark_domain_as_verified } from "@~/moncomptepro.lib";
 import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
@@ -12,6 +13,7 @@ import { add_verified_domain } from "@~/organizations.repository/add_verified_do
 import { get_organization_by_id } from "@~/organizations.repository/get_organization_by_id";
 import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
 import { update_user_by_id_in_organization } from "@~/users.repository/update_user_by_id_in_organization";
+import consola from "consola";
 import { Hono } from "hono";
 import { z } from "zod";
 
@@ -20,7 +22,12 @@ import { z } from "zod";
 export default new Hono<MonComptePro_Pg_Context>().patch(
   "/:domain",
   zValidator("param", Entity_Schema.extend({ domain: z.string() })),
-  async function PATCH({ text, notFound, req, var: { moncomptepro_pg } }) {
+  async function PATCH({
+    text,
+    notFound,
+    req,
+    var: { moncomptepro_pg, sentry },
+  }) {
     const { id, domain } = req.valid("param");
 
     const organization = await get_organization_by_id(moncomptepro_pg, {
@@ -68,6 +75,14 @@ export default new Hono<MonComptePro_Pg_Context>().patch(
         );
       }),
     );
+
+    try {
+      // NOTE(dougladuteil): still run legacy endpoint
+      await mark_domain_as_verified({ domain, organization_id: id });
+    } catch (error) {
+      consola.error(error);
+      sentry.captureException(error, { data: { domain, organization_id: id } });
+    }
 
     return text("OK", 200, {
       "HX-Trigger": [

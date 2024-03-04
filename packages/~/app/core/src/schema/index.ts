@@ -21,5 +21,5 @@ export type Pagination = z.infer<typeof Pagination_Schema>;
 
 export const PAGINATION_ALL_PAGES: Readonly<Pagination> = {
   page: 0,
-  page_size: 10,
+  page_size: 0,
 };
