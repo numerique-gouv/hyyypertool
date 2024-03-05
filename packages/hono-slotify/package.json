@@ -1,0 +1,16 @@
+{
+  "name": "hono-slotify",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.tsx",
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "hono": "4.0.9"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

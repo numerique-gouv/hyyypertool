@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "hono/jsx",
+    "lib": ["DOM"],
+    "outDir": "./node_modules/.cache/tsc",
+    "types": ["bun-types", "hono"]
+  },
+  "extends": "@~/config.typescript/tsx.json",
+  "references": [
+    { "path": "../../config/happydom/tsconfig.json" },
+    { "path": "../core/tsconfig.json" },
+    { "path": "../urls/tsconfig.json" }
+  ]
+}

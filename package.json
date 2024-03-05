@@ -13,7 +13,8 @@
     "packages/~/organizations/*",
     "packages/~/proxy/*",
     "packages/~/users/*",
-    "packages/~/welcome/*"
+    "packages/~/welcome/*",
+    "packages/hono-slotify"
   ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:*",
