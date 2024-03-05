@@ -1,5 +1,13 @@
 
 
+## [2024.3.1](https://github.com/betagouv/hyyypertool/compare/2024.3.0...2024.3.1) (2024-03-05)
+
+
+### Features
+
+* **hono-slotify:** initialisation ([#127](https://github.com/betagouv/hyyypertool/issues/127)) ([a5a461b](https://github.com/betagouv/hyyypertool/commit/a5a461bf6bdad55363c16c05a214358a46f08a84))
+* **moderation:** add reponse for existing account ([#128](https://github.com/betagouv/hyyypertool/issues/128)) ([04b9cfd](https://github.com/betagouv/hyyypertool/commit/04b9cfddc96a5858e6f5f9e15ebdc5b63c7a60aa)), closes [#126](https://github.com/betagouv/hyyypertool/issues/126)
+
 # [2024.3.0](https://github.com/betagouv/hyyypertool/compare/2024.2.9...2024.3.0) (2024-03-05)
 
 
