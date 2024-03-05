@@ -1,5 +1,20 @@
 
 
+# [2024.3.0](https://github.com/betagouv/hyyypertool/compare/2024.2.9...2024.3.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* **moderation:** parsed search query can't be nullish ([#119](https://github.com/betagouv/hyyypertool/issues/119)) ([fb8ce3f](https://github.com/betagouv/hyyypertool/commit/fb8ce3f85c14b1f406db0a491a660861ed764d5f))
+* **moderation:** wrong day filter timezone ([4f05b6c](https://github.com/betagouv/hyyypertool/commit/4f05b6cfb078591369d263de7ccdfc54eebc239c)), closes [#120](https://github.com/betagouv/hyyypertool/issues/120) [#117](https://github.com/betagouv/hyyypertool/issues/117)
+* **scalingo:** use bun v1.0.24 ([#118](https://github.com/betagouv/hyyypertool/issues/118)) ([474e99d](https://github.com/betagouv/hyyypertool/commit/474e99d622a94a608c51498c26c6856eecb0fec3))
+
+
+### Features
+
+* **moderation:** change organization members table ([#124](https://github.com/betagouv/hyyypertool/issues/124)) ([7d9132c](https://github.com/betagouv/hyyypertool/commit/7d9132cfd9a775b012dbc98789d3a92ce0132134))
+* **moderation:** isolate action button ([#125](https://github.com/betagouv/hyyypertool/issues/125)) ([1288aeb](https://github.com/betagouv/hyyypertool/commit/1288aebe5ff8dfe57b391fa7dada2e8067918dc2))
+
 ## [2024.2.9](https://github.com/betagouv/hyyypertool/compare/2024.2.8...2024.2.9) (2024-02-29)
 
 
