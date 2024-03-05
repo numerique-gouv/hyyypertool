@@ -41,7 +41,7 @@
     "start": "bun bin/src/index.ts",
     "studio:moncomptepro": "bun run database:moncomptepro:run studio",
     "test": "bun x run-z test:type-check test:all",
-    "test:all": "bun x run-z ./packages/~/// test/=if-present",
+    "test:all": "bun x run-z ./packages// ./packages/~/// test/=if-present",
     "test:type-check": "bun run build:tsc"
   },
   "prettier": {
