@@ -11,32 +11,25 @@ import { add_authorized_domain } from "@~/organizations.repository/add_authorize
 import { add_verified_domain } from "@~/organizations.repository/add_verified_domain";
 import { eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
 import { Table } from "./Table";
 
 //
 
 export default new Hono<MonComptePro_Pg_Context>()
+  .use("/", jsxRenderer())
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async function GET({ html, req, notFound, var: { moncomptepro_pg } }) {
+    async function GET({ render, req }) {
       const { id } = req.valid("param");
 
-      const organization = await moncomptepro_pg.query.organizations.findFirst({
-        where: eq(schema.organizations.id, id),
-        columns: {
-          authorized_email_domains: true,
-          id: true,
-          verified_email_domains: true,
-        },
-      });
-
-      if (!organization) {
-        return notFound();
-      }
-
-      return html(<Table organization={organization} />);
+      return render(
+        <Table.Provider organization_id={id}>
+          <Table />
+        </Table.Provider>,
+      );
     },
   )
   .put(
