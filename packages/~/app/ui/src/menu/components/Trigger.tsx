@@ -1,5 +1,7 @@
 //
 
+import { visually_hidden } from "../../visually_hidden";
+
 export function Trigger({ for: _for }: { for: string }) {
   return (
     <button
@@ -13,14 +15,17 @@ export function Trigger({ for: _for }: { for: string }) {
       type="button"
     >
       <svg
-        class="h-5 w-5"
         aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
         fill="currentColor"
+        focusable="false"
         viewBox="0 0 16 3"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
       </svg>
+
+      <span class={visually_hidden()}>Menu</span>
     </button>
   );
 }

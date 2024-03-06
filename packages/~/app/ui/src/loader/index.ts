@@ -1,6 +1,7 @@
 //
 
 import { tv } from "tailwind-variants";
+import { visually_hidden } from "../visually_hidden";
 
 //
 
@@ -19,17 +20,7 @@ export const loader = tv({
     motion-reduce:animate-[spin_1.5s_linear_infinite]
   `,
   slots: {
-    span: `
-      !absolute
-      !-m-px
-      !h-px
-      !w-px
-      !overflow-hidden
-      !whitespace-nowrap
-      !border-0
-      !p-0
-      ![clip:rect(0,0,0,0)]
-    `,
+    span: visually_hidden(),
   },
   variants: {
     htmx_indicator: {

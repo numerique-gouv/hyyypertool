@@ -39,7 +39,7 @@ export function Table() {
 
         <tfoot>
           <tr>
-            <td colspan={2}>
+            <td colspan={3}>
               <form
                 class="grid grid-cols-[1fr_min-content]"
                 {...hx_urls.organizations[":id"].domains.internal.$put({
@@ -57,7 +57,7 @@ export function Table() {
             </td>
           </tr>
           <tr>
-            <td colspan={2}>
+            <td colspan={3}>
               <details>
                 <summary>Fonctions avancées</summary>
                 <button
