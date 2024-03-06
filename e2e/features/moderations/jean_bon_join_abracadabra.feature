@@ -22,18 +22,22 @@ Fonctionnalité: Moderation blockante à accepter
     Soit la ligne contenant "yopmail.com"
     * je vois la ligne de table "yopmail.com"
     * sur la même ligne je vois "❌"
-    * sur la ligne suivante je vois "🗑️ Supprimer"
-    * sur la même ligne je vois "🔄 vérifié"
+    * sur la même ligne je vois "Menu"
+    Quand j'ouvre le menu déroulant sur la même ligne
+    * je vois "🗑️ Supprimer"
+    * je vois "🔄 vérifié"
 
     Quand je clique sur "🔄 vérifié"
     Alors je vois la ligne de table "yopmail.com"
     Alors sur la même ligne je vois "✅"
 
-    Quand je clique sur "🔄 vérifié"
+    Quand j'ouvre le menu déroulant sur la même ligne
+    Et je clique sur "🔄 vérifié"
     Alors je vois la ligne de table "yopmail.com"
     Alors sur la même ligne je vois "❌"
 
-    Quand je clique sur "🗑️ Supprimer"
+    Quand j'ouvre le menu déroulant sur la même ligne
+    Et je clique sur "🗑️ Supprimer"
     Alors je ne vois pas "🔄 vérifié"
 
     Quand je clique sur le champs dans le tableau "Domain internes"

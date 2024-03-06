@@ -24,7 +24,7 @@ type NormalOrFunctionChildren<P> =
   | undefined
   | ((props: P & { defaultChildren: Child | undefined }) => Child | undefined);
 
-type SlotType<P> = FC<
+export type SlotType<P> = FC<
   SlotProps<P> & { children?: NormalOrFunctionChildren<P> }
 > & {
   Renderer: RendererType<P>;
