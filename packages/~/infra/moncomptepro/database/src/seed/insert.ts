@@ -357,7 +357,7 @@ async function insert_bosch_france(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: ["fr.bosch.com"],
+      authorized_email_domains: [],
       cached_activite_principale: "29.32Z",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "93070",
@@ -373,7 +373,7 @@ async function insert_bosch_france(db: MonComptePro_PgDatabase) {
       siret: "57206768400017",
       trackdechets_email_domains: [],
       updated_at: new Date("2024-02-15T13:45:32.598Z"),
-      verified_email_domains: ["fr.bosch.com"],
+      verified_email_domains: [],
     })
     .returning();
   return insert.at(0)!;

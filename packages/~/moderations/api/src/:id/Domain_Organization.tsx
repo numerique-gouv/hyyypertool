@@ -95,7 +95,7 @@ function Button_Add_As_Verified_Internal_Domain() {
       })}
       hx-swap="none"
     >
-      🪄 Action en un click :
+      🪄 Action en un click : <b>{domain}</b> est un domain intern vérifié ✅
       <ul class="text-left">
         <li>
           ajouter le domaine <b>{domain}</b> dans les domaines internes

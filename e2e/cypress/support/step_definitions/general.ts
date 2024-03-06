@@ -36,6 +36,12 @@ Given("le tableau {string}", function (text: string) {
   scope = `@${text}`;
 });
 
+Given("le tableau {string} vide", function (text: string) {
+  cy.contains(text)
+    .parents("table")
+    .within(() => cy.get("tr").eq(0));
+});
+
 //
 
 Then("je vois {string}", function (text: string) {
@@ -45,6 +51,13 @@ Then("je vois {string}", function (text: string) {
 Then("je ne vois pas {string}", function (text: string) {
   cy.contains(text).should("not.exist");
 });
+
+Then(
+  "je vois la ligne {string} dans le table {string}",
+  function (text: string, context: string) {
+    cy.contains(context).parents("table").contains("td", text);
+  },
+);
 
 Then("je vois la ligne de table {string}", function (text: string) {
   cy.contains("td", text).parent().as("row");
@@ -79,6 +92,10 @@ When("je clique sur {string}", (text: string) => {
 
 When("je clique sur le bouton {string}", (text: string) => {
   cy.contains("button", text).click();
+});
+
+When("j'ouvre le menu déroulant sur la même ligne", (text: string) => {
+  cy.contains("button", "Menu").click();
 });
 
 When("je clique sur le champs dans le tableau {string}", (text: string) => {
