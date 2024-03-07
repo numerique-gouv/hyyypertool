@@ -54,8 +54,8 @@ Fonctionnalité: Moderation blockante à accepter
     * je tape "poymail.com"
     * je clique sur "Add" dans le tableau "Domain externe"
     Alors je vois la ligne de table "poymail.com"
-    * sur la ligne suivante je vois "🗑️ Supprimer"
-    Quand je clique sur "🗑️ Supprimer" dans le tableau "Domain externe"
+    Quand j'ouvre le menu déroulant sur la même ligne
+    Et je clique sur "🗑️ Supprimer"
     Alors je ne vois pas "poymail.com"
 
   Scénario: Envoyer l'email « Votre demande a été traitée »"
