@@ -48,6 +48,13 @@ Then("je vois {string}", function (text: string) {
   cy.contains(text);
 });
 
+Then(
+  "je vois {string} dans le tableau {string}",
+  function (text: string, context: string) {
+    cy.contains(context).parents("table").contains(text);
+  },
+);
+
 Then("je ne vois pas {string}", function (text: string) {
   cy.contains(text).should("not.exist");
 });
@@ -73,17 +80,6 @@ Then("sur la ligne suivante je vois {string}", function (text: string) {
     .as("row");
 });
 
-Then(
-  "je clique sur {string} dans le tableau {string}",
-  function (text: string, context: string) {
-    cy.contains(context)
-      .parents("table")
-      .within(() => {
-        cy.contains(text).click();
-      });
-  },
-);
-
 //
 
 When("je clique sur {string}", (text: string) => {
@@ -95,8 +91,15 @@ When("je clique sur le bouton {string}", (text: string) => {
 });
 
 When("j'ouvre le menu déroulant sur la même ligne", (text: string) => {
-  cy.contains("button", "Menu").click();
+  cy.get("@row").contains("button", "Menu").click();
 });
+
+When(
+  "je clique sur {string} dans le tableau {string}",
+  function (text: string, context: string) {
+    cy.contains(context).parents("table").contains(text).click();
+  },
+);
 
 When("je clique sur le champs dans le tableau {string}", (text: string) => {
   cy.contains(text)
