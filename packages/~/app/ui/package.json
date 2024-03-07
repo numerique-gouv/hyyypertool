@@ -16,6 +16,9 @@
     "./loader": {
       "default": "./src/loader/index.ts"
     },
+    "./menu": {
+      "default": "./src/menu/index.ts"
+    },
     "./notice": {
       "default": "./src/notice/index.ts"
     },

@@ -1,4 +1,6 @@
 import { button } from "@~/app.ui/button";
+import { menu_item } from "@~/app.ui/menu";
+import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
 import { hx_urls } from "@~/app.urls";
 import { type Organization } from "@~/moncomptepro.database";
 
@@ -12,35 +14,25 @@ export function Table({ organization }: { organization: Organization }) {
         <thead>
           <tr>
             <th>Domain externe</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
           {external_authorized_email_domains.map((domain) => (
-            <>
-              <tr>
-                <td>{domain}</td>
-              </tr>
-              <tr>
-                <td colspan={2}>
-                  <button
-                    class={button()}
-                    {...hx_urls.organizations[":id"].domains.external[
-                      ":domain"
-                    ].$delete({
-                      param: {
-                        id: organization.id.toString(),
-                        domain,
-                      },
-                    })}
-                    hx-swap="none"
-                  >
-                    🗑️ Supprimer
-                  </button>
-                </td>
-              </tr>
-            </>
+            <tr key={domain}>
+              <td>{domain}</td>
+              <td class="!text-end">
+                <Row_Actions
+                  domain={domain}
+                  organization_id={organization.id}
+                />
+              </td>
+            </tr>
           ))}
+        </tbody>
+
+        <tfoot>
           <tr>
             <td colspan={2}>
               <form
@@ -76,8 +68,39 @@ export function Table({ organization }: { organization: Organization }) {
               </details>
             </td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
+  );
+}
+
+function Row_Actions({
+  domain,
+  organization_id,
+}: {
+  domain: string;
+  organization_id: number;
+}) {
+  return (
+    <Horizontal_Menu>
+      <ul class="list-none p-0">
+        <li>
+          <button
+            class={menu_item()}
+            {...hx_urls.organizations[":id"].domains.external[
+              ":domain"
+            ].$delete({
+              param: {
+                id: organization_id.toString(),
+                domain,
+              },
+            })}
+            hx-swap="none"
+          >
+            🗑️ Supprimer
+          </button>
+        </li>
+      </ul>
+    </Horizontal_Menu>
   );
 }
