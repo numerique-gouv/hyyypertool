@@ -29,7 +29,7 @@ export async function UserOrganizationTable() {
         <div class={container()}>
           <div class={body()}>
             <p class={title()}>
-              🥹 Aucune organisation n'a été trouvé pour cet utilisateur.
+              🥹 Aucune organisation n'a été trouvée pour cet utilisateur.
             </p>
           </div>
         </div>
