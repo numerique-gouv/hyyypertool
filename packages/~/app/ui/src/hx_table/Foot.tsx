@@ -8,11 +8,13 @@ import { button } from "../button";
 export function Foot({
   count,
   hx_query_props,
+  id,
   name,
   pagination,
 }: {
   count: number;
   hx_query_props: {};
+  id?: string | undefined;
   name?: string | undefined;
   pagination: Pagination;
 }) {
@@ -37,8 +39,9 @@ export function Foot({
             Précédent
           </button>
           <input
-            class="fr-input inline-block w-auto"
             {...hx_query_props}
+            id={id}
+            class="fr-input inline-block w-auto"
             name={name ?? Pagination_Schema.keyof().Enum.page}
             value={page}
           />{" "}

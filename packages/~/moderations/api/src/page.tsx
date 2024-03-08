@@ -20,6 +20,7 @@ import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import Moderations_Context, {
   MODERATION_TABLE_ID,
+  MODERATION_TABLE_PAGE_ID,
   Page_Query,
   type Search,
 } from "./context";
@@ -31,12 +32,13 @@ const page_query_keys = Page_Query.keyof();
 const hx_moderations_query_props = {
   ...hx_urls.moderations.$get({ query: {} }),
   "hx-include": hx_include([
+    MODERATION_TABLE_PAGE_ID,
     page_query_keys.enum.hide_join_organization,
     page_query_keys.enum.hide_non_verified_domain,
+    page_query_keys.enum.page,
     page_query_keys.enum.processed_requests,
     page_query_keys.enum.search_email,
     page_query_keys.enum.search_siret,
-    page_query_keys.enum.day,
   ]),
   "hx-replace-url": true,
   "hx-select": `#${MODERATION_TABLE_ID} > table`,
@@ -253,6 +255,7 @@ async function ModerationList_Table() {
         <Foot
           count={count}
           hx_query_props={hx_moderations_query_props}
+          id={MODERATION_TABLE_PAGE_ID}
           name={page_query_keys.enum.page}
           pagination={pagination}
         />
