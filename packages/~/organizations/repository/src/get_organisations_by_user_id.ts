@@ -24,7 +24,7 @@ export function get_organisations_by_user_id(
       .from(schema.organizations)
       .innerJoin(
         schema.users_organizations,
-        eq(schema.users_organizations.organization_id, schema.organizations.id),
+        eq(schema.organizations.id, schema.users_organizations.organization_id),
       )
       .where(where)
       .orderBy(asc(schema.users_organizations.created_at))
