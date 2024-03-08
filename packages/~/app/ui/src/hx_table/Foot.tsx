@@ -29,7 +29,7 @@ export function Foot({
           Showing {page_index * page_size}-{page_index * page_size + page_size}{" "}
           of {count}
         </th>
-        <td colspan={6}>
+        <td colspan={3}>
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
             disabled={page <= 1}
@@ -53,6 +53,11 @@ export function Foot({
             hx-vals={JSON.stringify({ page: page + 1 } as Pagination)}
           >
             Suivant
+          </button>
+        </td>
+        <td>
+          <button class={button({ type: "tertiary" })} {...hx_query_props}>
+            Rrafraichir
           </button>
         </td>
       </tr>
