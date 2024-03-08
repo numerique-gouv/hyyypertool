@@ -19,8 +19,8 @@ export async function get_users_by_organization_id(
     eq(schema.users_organizations.organization_id, organization_id),
   );
 
-  const { users, count } = await pg.transaction(async () => {
-    const users = await pg
+  const { users, count } = await pg.transaction(async (pg_t) => {
+    const users = await pg_t
       .select()
       .from(schema.users)
       .innerJoin(
@@ -31,7 +31,7 @@ export async function get_users_by_organization_id(
       .orderBy(desc(schema.users.created_at))
       .limit(take)
       .offset(page * take);
-    const [{ value: count }] = await pg
+    const [{ value: count }] = await pg_t
       .select({ value: drizzle_count() })
       .from(schema.users)
       .innerJoin(
@@ -52,6 +52,6 @@ export async function get_users_by_organization_id(
   return { users: users_with_external, count };
 }
 
-export type get_user_by_id_dto = ReturnType<
+export type get_users_by_organization_id_dto = ReturnType<
   typeof get_users_by_organization_id
 >;

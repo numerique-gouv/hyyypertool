@@ -34,7 +34,7 @@ const styles = tv({
     right-0
     z-10
     mt-2
-    w-44
+    w-56
     origin-top-right
     divide-y
     divide-gray-100

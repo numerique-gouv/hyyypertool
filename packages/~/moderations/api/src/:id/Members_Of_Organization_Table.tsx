@@ -15,7 +15,7 @@ export function Members_Of_Organization_Table() {
 
   return (
     <section>
-      <h3>👥 Membres connus dans l’organisationn</h3>
+      <h3>👥 Membres connus dans l’organisation</h3>
 
       <div
         class="fr-table"
