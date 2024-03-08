@@ -1,5 +1,12 @@
 
 
+## [2024.3.3](https://github.com/betagouv/hyyypertool/compare/2024.3.2...2024.3.3) (2024-03-08)
+
+
+### Bug Fixes
+
+* **moderation:** include the day in page request ([#137](https://github.com/betagouv/hyyypertool/issues/137)) ([9c217b4](https://github.com/betagouv/hyyypertool/commit/9c217b445ed8573d2198c3ae8a82ab83e5ed930c))
+
 ## [2024.3.2](https://github.com/betagouv/hyyypertool/compare/2024.3.1...2024.3.2) (2024-03-08)
 
 
