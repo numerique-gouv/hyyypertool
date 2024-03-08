@@ -25,7 +25,7 @@
     "database:moncomptepro:seed": "bun run database:moncomptepro:run seed",
     "dev": "bun --hot bin/src/index.ts",
     "dev:api": "bun x run-z dev:api:clean dev:api:tsc dev:api:cp dev:api:format",
-    "dev:api:clean": "rm -rf packages/~/app/urls/node_modules/.cache/tsc",
+    "dev:api:clean": "bun run --cwd packages/~/app/urls clean",
     "dev:api:cp": "cp './packages/~/app/api/node_modules/.cache/tsc/src/index.d.ts' './packages/~/app/urls/src/pattern.d.ts'",
     "dev:api:format": "bun run --cwd packages/~/app/urls format",
     "dev:api:tsc": "bun run build:tsc",

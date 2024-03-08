@@ -254,3 +254,17 @@ export const users_organizations = pgTable(
     };
   },
 );
+
+export const users_organizations_relations = relations(
+  users_organizations,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [users_organizations.user_id],
+      references: [users.id],
+    }),
+    organization: one(organizations, {
+      fields: [users_organizations.organization_id],
+      references: [organizations.id],
+    }),
+  }),
+);

@@ -50,7 +50,9 @@ function Button_Add_As_Internal() {
   return (
     <button
       class={button({ className: "block", intent: "warning" })}
-      {...hx_urls.organizations[":id"].members[":user_id"].$post({
+      {...hx_urls.organizations[":id"].members[
+        ":user_id"
+      ].$procedures.join.$post({
         param: {
           id: moderation.organization_id.toString(),
           user_id: moderation.user_id.toString(),
@@ -87,7 +89,9 @@ function Button_Add_As_External() {
   return (
     <button
       class={button({ className: "block", intent: "warning" })}
-      {...hx_urls.organizations[":id"].members[":user_id"].$post({
+      {...hx_urls.organizations[":id"].members[
+        ":user_id"
+      ].$procedures.join.$post({
         param: {
           id: moderation.organization_id.toString(),
           user_id: moderation.user_id.toString(),

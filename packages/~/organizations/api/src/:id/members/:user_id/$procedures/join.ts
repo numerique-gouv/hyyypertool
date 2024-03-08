@@ -5,9 +5,9 @@ import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import { schema } from "@~/moncomptepro.database";
 import { join_organization } from "@~/moncomptepro.lib/index";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
+import { add_member_to_organization } from "@~/organizations.repository/add_member_to_organization";
 import { get_user_in_organization } from "@~/users.repository/get_user_in_organization";
 import consola from "consola";
 import { Hono } from "hono";
@@ -33,19 +33,17 @@ export default new Hono<MonComptePro_Pg_Context>().post(
     const { id: organization_id, user_id } = req.valid("param");
     const { is_external } = req.valid("form");
 
-    const userOrganizationLink =
-      (await get_user_in_organization(moncomptepro_pg, {
-        organization_id,
-        user_id,
-      })) ??
-      (await moncomptepro_pg.insert(schema.users_organizations).values({
-        organization_id,
-        user_id,
+    consola.debug({ organization_id, user_id, is_external });
+    (await get_user_in_organization(moncomptepro_pg, {
+      organization_id,
+      user_id,
+    })) ??
+      (await add_member_to_organization(moncomptepro_pg, {
         is_external,
-        created_at: new Date(),
-        updated_at: new Date(),
+        organization_id,
+        user_id,
       }));
-    consola.log(userOrganizationLink);
+
     try {
       // NOTE(dougladuteil): still run legacy endpoint
       await join_organization({
