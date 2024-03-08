@@ -16,7 +16,7 @@ import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
 import { Domain_Organization } from "./Domain_Organization";
 import { Header } from "./Header";
-import { Organization_Members_Table } from "./Organization_Members_Table";
+import { User_In_Organization_Table } from "./User_In_Organization_Table";
 import { ModerationPage_Context } from "./context";
 import { Moderation_NotFound } from "./not-found";
 
@@ -64,7 +64,7 @@ export default async function Moderation_Page() {
 
       <hr class="bg-none pt-6" />
 
-      <Organization_Members_Table />
+      <User_In_Organization_Table />
 
       <hr class="my-12" />
 

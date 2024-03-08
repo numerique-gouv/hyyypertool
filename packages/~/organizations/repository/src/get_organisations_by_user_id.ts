@@ -32,14 +32,16 @@ export function get_organisations_by_user_id(
       .offset(page * take);
     const [{ value: count }] = await pg
       .select({ value: drizzle_count() })
-      .from(schema.users)
+      .from(schema.organizations)
       .innerJoin(
         schema.users_organizations,
-        eq(schema.users.id, schema.users_organizations.user_id),
+        eq(schema.organizations.id, schema.users_organizations.user_id),
       )
       .where(where);
     return { organizations, count };
   });
 }
 
-export type get_organisations_by_user_id_dto = ReturnType<typeof get_organisations_by_user_id>;
+export type get_organisations_by_user_id_dto = ReturnType<
+  typeof get_organisations_by_user_id
+>;
