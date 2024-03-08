@@ -1,5 +1,20 @@
 
 
+## [2024.3.2](https://github.com/betagouv/hyyypertool/compare/2024.3.1...2024.3.2) (2024-03-08)
+
+
+### Bug Fixes
+
+* **moderation:** ensure to use the current page on refresh ([#135](https://github.com/betagouv/hyyypertool/issues/135)) ([f7ea811](https://github.com/betagouv/hyyypertool/commit/f7ea8112632b2186d09ccbfbd558346e0f1ee89f))
+* **moderation:** organization member stays empty ([#133](https://github.com/betagouv/hyyypertool/issues/133)) ([177f8ca](https://github.com/betagouv/hyyypertool/commit/177f8ca2a6d94907a36fbe72019073adb7a245a4))
+
+
+### Features
+
+* **moderation:** popover menu ([#129](https://github.com/betagouv/hyyypertool/issues/129)) ([788f664](https://github.com/betagouv/hyyypertool/commit/788f6640fb1aa24b909b490eed5036c8e9bac610))
+* **moderation:** trigger reload user in organization ([#134](https://github.com/betagouv/hyyypertool/issues/134)) ([106e34c](https://github.com/betagouv/hyyypertool/commit/106e34cefa24a1ea8a95c9d8c1055da6ea0cd2e8))
+* **ui:** share menu item style ([#130](https://github.com/betagouv/hyyypertool/issues/130)) ([434bb29](https://github.com/betagouv/hyyypertool/commit/434bb29b97fa75726696773aa25a4946b00d1a7c))
+
 ## [2024.3.1](https://github.com/betagouv/hyyypertool/compare/2024.3.0...2024.3.1) (2024-03-05)
 
 
