@@ -33,9 +33,9 @@ const hx_moderations_query_props = {
   ...hx_urls.moderations.$get({ query: {} }),
   "hx-include": hx_include([
     MODERATION_TABLE_PAGE_ID,
+    page_query_keys.enum.day,
     page_query_keys.enum.hide_join_organization,
     page_query_keys.enum.hide_non_verified_domain,
-    page_query_keys.enum.page,
     page_query_keys.enum.processed_requests,
     page_query_keys.enum.search_email,
     page_query_keys.enum.search_siret,
