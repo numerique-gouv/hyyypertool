@@ -1,7 +1,9 @@
 //
 
+import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { hx_urls } from "@~/app.urls";
+import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { useContext } from "hono/jsx";
 import { ModerationPage_Context } from "./context";
 
@@ -23,7 +25,10 @@ export function User_In_Organization_Table() {
           query: {},
         })}
         hx-target="this"
-        hx-trigger="load"
+        hx-trigger={[
+          "load",
+          hx_trigger_from_body([ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED]),
+        ].join(", ")}
       >
         <center>
           <Loader />
