@@ -47,4 +47,7 @@ if (consola.level >= LogLevels.debug) {
 //
 //
 
-serve(app);
+serve({
+  fetch: app.fetch,
+  port: config.PORT,
+});
