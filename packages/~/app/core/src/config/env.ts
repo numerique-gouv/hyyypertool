@@ -1,11 +1,19 @@
 //
 
+import consola, { LogLevels } from "consola";
+import dotenv from "dotenv";
 import { join } from "node:path";
 import { cwd, env } from "node:process";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
 //
+
+dotenv.config({
+  debug: consola.level >= LogLevels.debug,
+  path: [`.env.local`, ".env"],
+  override: true,
+});
 
 const pkg = await import(join(cwd(), "package.json"));
 const { version } = pkg;
