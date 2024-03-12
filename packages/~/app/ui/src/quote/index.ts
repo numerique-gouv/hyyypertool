@@ -10,4 +10,5 @@ export const quote = tv({
     author: "fr-quote__author",
     source: "fr-quote__source",
   },
+  variants: {},
 });
