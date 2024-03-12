@@ -18,7 +18,7 @@ import Moderation_Page, { ModerationPage_Provider } from "./page";
 //
 
 export default new Hono<App_Context>()
-  .use("/", jsxRenderer(Main_Layout, { docType: true }))
+  .use("/", jsxRenderer(Main_Layout))
   .get(
     "/",
     zValidator("param", Entity_Schema),
