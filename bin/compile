@@ -76,6 +76,11 @@ fi
 
 #
 
+header "Installing node binary"
+curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
+
+#
+
 header "Installing bun binary"
 curl -fsSL https://bun.sh/install | bash -s "bun-v1.0.30"
 
@@ -107,3 +112,4 @@ bun install --production
 
 header "Remove package manager cache"
 bun pm cache rm
+rm -rf "$N_PREFIX"
