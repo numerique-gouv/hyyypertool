@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsxImportSource": "hono/jsx"
   },
-  "include": ["bin/src"],
+  "include": ["bin/src", "build.ts"],
   "references": [
     { "path": "packages/~/app/api/tsconfig.json" },
     { "path": "packages/~/app/core/tsconfig.json" }

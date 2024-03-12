@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hono/sentry": "1.0.1",
+    "@hono/node-server": "1.8.2",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
     "@~/auth.api": "workspace:*",
