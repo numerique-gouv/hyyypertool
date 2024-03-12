@@ -184,6 +184,44 @@
   },
   "launch": {
     "version": "0.2.0",
-    "configurations": [],
+    "configurations": [
+      {
+        "name": "🐞 WWW",
+        "type": "node",
+        "request": "launch",
+        "program": "bin/src/index.ts",
+        "cwd": "${workspaceFolder:root}",
+        "runtimeExecutable": "${workspaceFolder:root}/node_modules/.bin/tsx",
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "skipFiles": [
+          "<node_internals>/**",
+          "${workspaceFolder:root}/node_modules/**",
+        ],
+      },
+      {
+        "name": "🐞 Attach to node process",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "skipFiles": [
+          "<node_internals>/**",
+          "${workspaceFolder:root}/node_modules/**",
+        ],
+      },
+      {
+        "name": "tsx",
+        "type": "node",
+        "request": "launch",
+        "program": "${file}",
+        "runtimeExecutable": "${workspaceFolder:root}/node_modules/.bin/tsx",
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "skipFiles": [
+          "<node_internals>/**",
+          "${workspaceFolder:root}/node_modules/**",
+        ],
+      },
+    ],
   },
 }
