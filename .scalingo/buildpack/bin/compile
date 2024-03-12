@@ -112,4 +112,3 @@ bun install --production
 
 header "Remove package manager cache"
 bun pm cache rm
-rm -rf "$N_PREFIX"
