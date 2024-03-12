@@ -41,7 +41,7 @@ export default new Hono()
   })
   .get("/bundle/lit.js", async function to_lit_bundles({ req, redirect }) {
     const url = new URL("../public/assets/node_modules/lit/index.js", req.url);
-    return redirect(url.href);
+    return redirect(url.pathname);
   })
   .get("/bundle/lit/:filename{.+\\.js$}", async ({ req, redirect }) => {
     const { ASSETS_PATH } = env;
@@ -50,6 +50,6 @@ export default new Hono()
       `${ASSETS_PATH}/public/assets/node_modules/lit/${filename}`,
       req.url,
     );
-    return redirect(url.href);
+    return redirect(url.pathname);
   })
   .route("/zammad", zammad_attachment_router);
