@@ -1,6 +1,5 @@
 //
 
-import consola from "consola";
 import type { HonoRequest, Schema } from "hono";
 import { hc } from "hono/client";
 import type { HonoBase } from "hono/hono-base";
@@ -101,7 +100,7 @@ export const hx_urls = hc<Router>("http://localhost:3000", {
       options.body instanceof FormData
         ? { "hx-vals": JSON.stringify(Object.fromEntries(options.body)) }
         : {};
-    consola.trace({ raw_url, options, hx_val });
+    // consola.trace({ raw_url, options, hx_val });
     return {
       [`hx-${options.method?.toLowerCase()}`]: `${url.pathname}${url.search}`,
       ...hx_val,
