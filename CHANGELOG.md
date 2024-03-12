@@ -1,5 +1,13 @@
 
 
+## [2024.3.5](https://github.com/betagouv/hyyypertool/compare/2024.3.4...2024.3.5) (2024-03-12)
+
+
+### Bug Fixes
+
+* **moderation:** safe parse pagination ([27ee0ec](https://github.com/betagouv/hyyypertool/commit/27ee0ece52372e0c4f4095740b13ee816f2eeb73))
+* **moderation:** to is undefined for tsx ([3442486](https://github.com/betagouv/hyyypertool/commit/34424860ed17fb13894ef4a55c1f19b579312f35))
+
 ## [2024.3.4](https://github.com/betagouv/hyyypertool/compare/2024.3.3...2024.3.4) (2024-03-12)
 
 
