@@ -35,7 +35,12 @@ export default new Hono<UserInfo_Context & Csp_Context>()
         }),
       )
       .otherwise((search) => search);
-    const pagination = Pagination_Schema.parse(query, { path: ["query"] });
+
+    const pagination = match(
+      Pagination_Schema.safeParse(query, { path: ["query"] }),
+    )
+      .with({ success: true }, ({ data }) => data)
+      .otherwise(() => Pagination_Schema.parse({}));
 
     const username = userinfo_to_username(userinfo);
     return render(

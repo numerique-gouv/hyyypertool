@@ -1,6 +1,5 @@
 //
 
-import consola from "consola";
 import type { HonoRequest, Schema } from "hono";
 import { hc } from "hono/client";
 import type { HonoBase } from "hono/hono-base";
@@ -26,21 +25,24 @@ type Methods =
   | "head"
   | "options"
   | "trace";
-type HtmxSpecifiedAttributes<M extends Methods> = Record<`hx-${M}`, string>;
-type HxClientRequest<S extends Schema> = {
-  [M in keyof S]: S[M] extends {
-    input: infer R;
+type HtmxSpecifiedAttributes<Method extends Methods> = Record<
+  `hx-${Method}`,
+  string
+>;
+type HxClientRequest<TSchema extends Schema> = {
+  [$Method in keyof TSchema]: TSchema[$Method] extends {
+    input: infer $Input;
   }
-    ? R extends object
-      ? M extends `$${infer Method}`
+    ? $Input extends object
+      ? $Method extends `$${infer Method}`
         ? Method extends Methods
-          ? HasRequiredKeys<R> extends true
+          ? HasRequiredKeys<$Input> extends true
             ? (
-                args: Omit<R, "form">,
+                args: Omit<$Input, "form">,
                 options?: HxClientRequestOptions,
               ) => HtmxSpecifiedAttributes<Method>
             : (
-                args?: Omit<R, "form">,
+                args?: Omit<$Input, "form">,
                 options?: HxClientRequestOptions,
               ) => HtmxSpecifiedAttributes<Method>
           : never
@@ -49,39 +51,39 @@ type HxClientRequest<S extends Schema> = {
     : never;
 } & {
   $url: (
-    arg?: S[keyof S] extends {
-      input: infer R;
+    arg?: TSchema[keyof TSchema] extends {
+      input: infer $Input;
     }
-      ? R extends {
-          param: infer P;
+      ? $Input extends {
+          param: infer $Param;
         }
         ? {
-            param: P;
+            param: $Param;
           }
         : {}
       : {},
   ) => URL;
 };
 type PathToChain<
-  Path extends string,
-  E extends Schema,
+  TPath extends string,
+  TSchema extends Schema,
   Original extends string = "",
-> = Path extends `/${infer P}`
-  ? PathToChain<P, E, Path>
-  : Path extends `${infer P}/${infer R}`
+> = TPath extends `/${infer $Path}`
+  ? PathToChain<$Path, TSchema, TPath>
+  : TPath extends `${infer $ParentPath}/${infer $SubPath}`
     ? {
-        [K in P]: PathToChain<R, E, Original>;
+        [K in $ParentPath]: PathToChain<$SubPath, TSchema, Original>;
       }
     : {
-        [K in Path extends "" ? "index" : Path]: HxClientRequest<
-          E extends Record<string, unknown> ? E[Original] : never
+        [K in TPath extends "" ? "index" : TPath]: HxClientRequest<
+          TSchema extends Record<string, unknown> ? TSchema[Original] : never
         >;
       };
 type HxClient<T> =
-  T extends HonoBase<any, infer S, any>
-    ? S extends Record<infer K, Schema>
-      ? K extends string
-        ? PathToChain<K, S>
+  T extends HonoBase<any, infer $Schema, any>
+    ? $Schema extends Record<infer $Path, Schema>
+      ? $Path extends string
+        ? PathToChain<$Path, $Schema>
         : never
       : never
     : never;
@@ -101,7 +103,7 @@ export const hx_urls = hc<Router>("http://localhost:3000", {
       options.body instanceof FormData
         ? { "hx-vals": JSON.stringify(Object.fromEntries(options.body)) }
         : {};
-    consola.trace({ raw_url, options, hx_val });
+    // consola.trace({ raw_url, options, hx_val });
     return {
       [`hx-${options.method?.toLowerCase()}`]: `${url.pathname}${url.search}`,
       ...hx_val,

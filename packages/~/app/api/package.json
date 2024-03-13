@@ -9,6 +9,7 @@
     }
   },
   "dependencies": {
+    "@hono/node-server": "1.8.2",
     "@hono/sentry": "1.0.1",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
@@ -20,8 +21,8 @@
     "@~/welcome.api": "workspace:*",
     "await-to-js": "3.0.0",
     "consola": "3.2.3",
-    "drizzle-orm": "0.29.4",
-    "hono": "4.0.9",
+    "drizzle-orm": "0.30.1",
+    "hono": "4.1.0",
     "htmx.ext...chunked-transfer": "1.0.3",
     "htmx.org": "1.9.10",
     "hyperscript.org": "0.9.12",

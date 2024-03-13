@@ -1,6 +1,6 @@
 {
   "name": "hyyypertool",
-  "version": "2024.3.3",
+  "version": "2024.3.5",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -18,18 +18,19 @@
   ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:*",
+    "build:bun": "bun run ./build.ts",
     "build:tailwind": "bun x tailwindcss -i ./packages/~/app/ui/tailwind.css -o ./public/assets/tailwind.css",
     "build:tsc": "bun x tsc --build",
     "database:moncomptepro:migrator": "bun run database:moncomptepro:run migration",
     "database:moncomptepro:run": "bun run --cwd packages/~/infra/moncomptepro/database",
     "database:moncomptepro:seed": "bun run database:moncomptepro:run seed",
-    "dev": "bun --hot bin/src/index.ts",
+    "dev": "tsx watch bin/src/index.ts",
     "dev:api": "bun x run-z dev:api:clean dev:api:tsc dev:api:cp dev:api:format",
     "dev:api:clean": "bun run --cwd packages/~/app/urls clean",
     "dev:api:cp": "cp './packages/~/app/api/node_modules/.cache/tsc/src/index.d.ts' './packages/~/app/urls/src/pattern.d.ts'",
     "dev:api:format": "bun run --cwd packages/~/app/urls format",
     "dev:api:tsc": "bun run build:tsc",
-    "dev:inspect-brk": "bun --hot --inspect-brk bin/src/index.ts",
+    "dev:inspect-brk": "tsx --inspect-brk bin/src/index.ts",
     "dev:tailwind": "bun run build:tailwind --watch",
     "e2e:install": "cd e2e && pnpm install",
     "e2e:run": "cd e2e && bun run",
@@ -38,7 +39,7 @@
     "format:fix": "bun x prettier --write .",
     "format:pkg": "bun x sort-package-json ./package.json ./packages/~/*/*/package.json ./e2e/package.json",
     "renovate": "bun x npm-check-updates --packageManager bun --interactive --upgrade --deep",
-    "start": "bun bin/src/index.ts",
+    "start": "tsx bin/src/index.ts",
     "studio:moncomptepro": "bun run database:moncomptepro:run studio",
     "test": "bun x run-z test:type-check test:all",
     "test:all": "bun x run-z ./packages// ./packages/~/// test/=if-present",
@@ -57,22 +58,24 @@
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "hono": "4.0.9"
+    "dotenv": "16.4.5",
+    "hono": "4.1.0",
+    "tsx": "4.7.1"
   },
   "devDependencies": {
-    "@~/config.tailwindcss": "workspace:*",
     "@csmith/release-it-calver-plugin": "2023.12.0",
     "@release-it/conventional-changelog": "8.0.1",
     "@tsconfig/bun": "1.0.4",
+    "@~/config.tailwindcss": "workspace:*",
     "bun-types": "1.0.30",
     "prettier": "3.2.5",
-    "prettier-plugin-tailwindcss": "0.5.11",
+    "prettier-plugin-tailwindcss": "0.5.12",
     "release-it": "17.1.1",
     "tailwindcss": "3.4.1",
-    "typescript": "5.3.3"
+    "typescript": "5.4.2"
   },
   "overrides": {
-    "hono": "4.0.9"
+    "hono": "4.1.0"
   },
   "release-it": {
     "git": {

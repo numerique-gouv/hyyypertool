@@ -1,5 +1,33 @@
 
 
+## [2024.3.5](https://github.com/betagouv/hyyypertool/compare/2024.3.4...2024.3.5) (2024-03-12)
+
+
+### Bug Fixes
+
+* **moderation:** safe parse pagination ([27ee0ec](https://github.com/betagouv/hyyypertool/commit/27ee0ece52372e0c4f4095740b13ee816f2eeb73))
+* **moderation:** to is undefined for tsx ([3442486](https://github.com/betagouv/hyyypertool/commit/34424860ed17fb13894ef4a55c1f19b579312f35))
+
+## [2024.3.4](https://github.com/betagouv/hyyypertool/compare/2024.3.3...2024.3.4) (2024-03-12)
+
+
+### Bug Fixes
+
+* **scalingo:** use bun v1.0.21 ([5d7c875](https://github.com/betagouv/hyyypertool/commit/5d7c875f42544cea55cf8a275c3c6f25d296fc73))
+* **scalingo:** use bun v1.0.22 ([668d3db](https://github.com/betagouv/hyyypertool/commit/668d3dbdd5916ef0e3f2ba2f816a596ef6c548f9))
+* **scalingo:** use bun v1.0.23 ([56e7615](https://github.com/betagouv/hyyypertool/commit/56e7615e251a5c5d38e8d82a3a9f0cb8c32c5c2d))
+
+
+### Features
+
+* **ui:** add refresh button ([#138](https://github.com/betagouv/hyyypertool/issues/138)) ([8d1ba3d](https://github.com/betagouv/hyyypertool/commit/8d1ba3d9ce09c50dbb5f79f86f865c0763802649))
+
+
+### Reverts
+
+* **scalingo:** node id needed now ([61d714f](https://github.com/betagouv/hyyypertool/commit/61d714f70a6946cba69d473f7c81ecfaa7347011))
+* **scalingo:** use bun v1.0.30 ([1f5905d](https://github.com/betagouv/hyyypertool/commit/1f5905daa29b906f2d71a9c0f8ea2ebaed5cfb89))
+
 ## [2024.3.3](https://github.com/betagouv/hyyypertool/compare/2024.3.2...2024.3.3) (2024-03-08)
 
 

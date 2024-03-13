@@ -14,7 +14,7 @@ export async function update_user_by_id_in_organization(
   { organization_id, user_id }: { organization_id: number; user_id: number },
   values: Writable_Users_Organizations,
 ) {
-  return pg
+  await pg
     .update(schema.users_organizations)
     .set({ ...values, updated_at: new Date() })
     .where(

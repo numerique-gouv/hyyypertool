@@ -1,5 +1,6 @@
 //
 
+import { serve } from "@hono/node-server";
 import app from "@~/app.api";
 import config from "@~/app.core/config";
 import { LogLevels, consola } from "consola";
@@ -46,4 +47,7 @@ if (consola.level >= LogLevels.debug) {
 //
 //
 
-export default app;
+serve({
+  fetch: app.fetch,
+  port: config.PORT,
+});

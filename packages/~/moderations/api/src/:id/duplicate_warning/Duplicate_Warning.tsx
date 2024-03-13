@@ -7,7 +7,7 @@ import { urls } from "@~/app.urls";
 import { get_duplicate_moderations } from "@~/moderations.repository/get_duplicate_moderations";
 import { get_user_by_id } from "@~/users.repository/get_user_by_id";
 import { get_zammad_mail } from "@~/zammad.lib";
-import to from "await-to-js";
+import { to } from "await-to-js";
 import { useRequestContext } from "hono/jsx-renderer";
 
 //
