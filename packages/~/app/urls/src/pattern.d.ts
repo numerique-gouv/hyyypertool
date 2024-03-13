@@ -458,13 +458,7 @@ declare const app: import("hono/hono-base").HonoBase<
       "/auth"
     > &
     import("hono/types").MergeSchemaPath<
-      import("hono").ToSchema<"get", "/", unknown, {}> &
-        import("hono").ToSchema<
-          "get",
-          `/assets/${string}/_client/hyyypertitle.js`,
-          unknown,
-          {}
-        >,
+      import("hono").ToSchema<"get", "/", unknown, {}>,
       "/"
     > &
     import("hono/types").MergeSchemaPath<
@@ -484,9 +478,9 @@ declare const app: import("hono/hono-base").HonoBase<
           "/attachment/:ticket_id/:article_id/:attachment_id",
           {
             param: {
+              ticket_id: string;
               article_id: string;
               attachment_id: string;
-              ticket_id: string;
             };
           },
           {}
@@ -496,7 +490,12 @@ declare const app: import("hono/hono-base").HonoBase<
         import("hono").ToSchema<"get", "/bundle/config.js", unknown, {}> &
         import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}> &
         import("hono").ToSchema<"get", "/bundle/lit.js", unknown, {}> &
-        import("hono").ToSchema<"get", "/bundle/lit/*", unknown, {}>,
+        import("hono").ToSchema<
+          "get",
+          "/bundle/lit/:filename{.+\\.js$}",
+          unknown,
+          {}
+        >,
       `/assets/${string}`
     > &
     import("hono").ToSchema<"get", "/healthz", unknown, {}> &
