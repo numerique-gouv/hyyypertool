@@ -27,6 +27,6 @@ Fonctionnalité: Moderation non blockante
     Alors je vois la ligne "fr.bosch.com" dans le table "Domain internes"
 
   Scénario: Marie est un membre interne de l'organization.
-    Soit le tableau sous "Membres connus dans l’organisationn" vide
+    Soit le tableau sous "Membres connus dans l’organisation" vide
     Quand je clique sur "🪄 Action en un click : Marie est un membre interne de l'organization."
     Alors je vois la ligne "fr.bosch.com" dans le table "Domain internes"
