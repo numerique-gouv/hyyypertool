@@ -5,11 +5,12 @@ import { fieldset } from "@~/app.ui/form";
 import { useContext } from "hono/jsx";
 import { Desicison_Context } from "./Desicison_Context";
 import { RESPONSE_MESSAGE_SELECT_ID, RESPONSE_TEXTAREA_ID } from "./context";
+import * as already_signed from "./responses/already_signed";
 import * as first_last_name from "./responses/first_last_name";
 
 //
 
-const reponse_templates = [first_last_name];
+const reponse_templates = [first_last_name, already_signed];
 
 //
 
@@ -77,8 +78,8 @@ function ResponseMessageSelector() {
       <option value="" selected disabled hidden>
         Sélectionner une response
       </option>
-      {reponse_templates.map(({ label, default: template }) => (
-        <option key={label} value={template()}>
+      {reponse_templates.map(async ({ label, default: template }) => (
+        <option key={label} value={await Promise.resolve(template())}>
           {label}
         </option>
       ))}
