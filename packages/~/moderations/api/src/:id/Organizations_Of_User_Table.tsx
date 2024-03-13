@@ -9,7 +9,7 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function User_In_Organization_Table() {
+export function Organizations_Of_User_Table() {
   const { moderation } = useContext(ModerationPage_Context);
 
   return (

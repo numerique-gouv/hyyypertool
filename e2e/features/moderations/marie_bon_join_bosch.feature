@@ -21,7 +21,12 @@ Fonctionnalité: Moderation non blockante
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Robert bosch france » avec l’adresse marie.bon@fr.bosch.com"
 
-  Scénario: le nom de domaine est vérifié
+  Scénario: Le nom de domaine est vérifié
     Soit le tableau "Domain internes" vide
     Quand je clique sur "🪄 Action en un click : fr.bosch.com est un domain intern vérifié ✅"
     Alors je vois la ligne "fr.bosch.com" dans le table "Domain internes"
+
+  Scénario: Marie est un membre interne de l'organization.
+    Soit le tableau sous le title "Membres connus dans l’organisation" vide
+    Quand je clique sur "🪄 Action en un click : Marie est un membre interne de l'organization."
+    Alors je vois "fr.bosch.com" dans le tableau de "Membres connus dans l’organisation"

@@ -137,21 +137,42 @@ declare const app: import("hono/hono-base").HonoBase<
         > &
         import("hono/types").MergeSchemaPath<
           import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "post",
-              "/",
-              {
-                form: {
-                  is_external: string | File;
-                };
-              } & {
-                param: {
-                  id: string;
-                  user_id: string;
-                };
-              },
-              {}
+            import("hono/types").MergeSchemaPath<
+              import("hono/types").MergeSchemaPath<
+                import("hono").ToSchema<
+                  "post",
+                  "/",
+                  {
+                    form: {
+                      is_external: string | File;
+                    };
+                  } & {
+                    param: {
+                      id: string;
+                      user_id: string;
+                    };
+                  },
+                  {}
+                >,
+                "/join"
+              >,
+              "/$procedures"
             > &
+              import("hono").ToSchema<
+                "post",
+                "/",
+                {
+                  form: {
+                    is_external: string | File;
+                  };
+                } & {
+                  param: {
+                    id: string;
+                    user_id: string;
+                  };
+                },
+                {}
+              > &
               import("hono").ToSchema<
                 "patch",
                 "/",
@@ -190,6 +211,7 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 query: {
+                  describedby: string | string[];
                   page?: string | string[] | undefined;
                   page_size?: string | string[] | undefined;
                 };
@@ -228,9 +250,9 @@ declare const app: import("hono/hono-base").HonoBase<
         "/",
         {
           query: {
-            "search-siret"?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
+            "search-siret"?: string | string[] | undefined;
             id?: string | string[] | undefined;
           };
         },
@@ -396,8 +418,8 @@ declare const app: import("hono/hono-base").HonoBase<
                   };
                 } & {
                   form: {
-                    "mail-subject": string | File;
                     response: string | File;
+                    "mail-subject": string | File;
                   };
                 },
                 {}

@@ -11,6 +11,9 @@
     "./error": {
       "default": "./src/error/index.ts"
     },
+    "./html": {
+      "default": "./src/html/index.ts"
+    },
     "./htmx": {
       "default": "./src/htmx/index.ts"
     },

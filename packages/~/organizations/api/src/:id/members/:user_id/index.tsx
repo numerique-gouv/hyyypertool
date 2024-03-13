@@ -12,10 +12,14 @@ import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
+import procedures_router from "./$procedures";
 
 //
 
 export default new Hono<MonComptePro_Pg_Context>()
+  //
+  .route("/$procedures", procedures_router)
+  //
   .post(
     "/",
     zValidator(

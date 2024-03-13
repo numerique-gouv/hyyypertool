@@ -1,8 +1,8 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { createSlot } from "hono-slotify";
 import type { PropsWithChildren } from "hono/jsx";
-import { createHash } from "node:crypto";
 import { Popover } from "./Popover";
 
 //
@@ -13,7 +13,7 @@ export interface MenuProps {
 }
 
 export function Menu({ children, ...props }: PropsWithChildren<MenuProps>) {
-  const uuid = `hyper_${createHash("sha1").update(crypto.randomUUID()).digest("hex")}`;
+  const uuid = hyper_ref();
   const menu_props: Required<MenuProps> = {
     id: uuid,
     ...props,

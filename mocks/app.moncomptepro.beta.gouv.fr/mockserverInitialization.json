@@ -9,6 +9,19 @@
   },
   {
     "httpRequest": {
+      "path": "/api/admin/join-organization",
+      "queryStringParameters": {
+        "is_external": [{ "schema": { "type": "string" } }],
+        "organization_id": [{ "schema": { "type": "integer" } }],
+        "user_id": [{ "schema": { "type": "integer" } }]
+      }
+    },
+    "httpResponse": {
+      "body": { "emailSent": true }
+    }
+  },
+  {
+    "httpRequest": {
       "path": "/readyz"
     },
     "httpResponse": {
