@@ -10,6 +10,9 @@
     "./callout": {
       "default": "./src/callout/index.ts"
     },
+    "./form": {
+      "default": "./src/form/index.ts"
+    },
     "./hx_table": {
       "default": "./src/hx_table/index.ts"
     },
