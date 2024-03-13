@@ -25,7 +25,7 @@ import {
 //
 
 export async function Table() {
-  const { organization_id, pagination, query_members_collection } =
+  const { describedby, organization_id, pagination, query_members_collection } =
     useContext(MembersTable_Context);
 
   const { users, count } = await query_members_collection;
@@ -35,14 +35,14 @@ export async function Table() {
       param: {
         id: organization_id.toString(),
       },
-      query: {},
+      query: { describedby },
     }),
     "hx-include": hx_include([MEMBER_TABLE_PAGE_ID]),
   };
 
   return (
     <div class="fr-table [&>table]:table">
-      <table>
+      <table aria-describedby={describedby}>
         <thead>
           <tr>
             <th>Prénom</th>
@@ -221,10 +221,14 @@ function Row_Actions() {
 }
 
 export async function MembersTable_Provider({
-  value: { pagination, organization_id },
+  value: { describedby, pagination, organization_id },
   children,
 }: PropsWithChildren<{
-  value: { pagination: Pagination; organization_id: number };
+  value: {
+    describedby: string;
+    pagination: Pagination;
+    organization_id: number;
+  };
 }>) {
   const {
     var: { moncomptepro_pg },
@@ -240,7 +244,12 @@ export async function MembersTable_Provider({
 
   return (
     <MembersTable_Context.Provider
-      value={{ query_members_collection, organization_id, pagination }}
+      value={{
+        describedby,
+        query_members_collection,
+        organization_id,
+        pagination,
+      }}
     >
       {children}
     </MembersTable_Context.Provider>

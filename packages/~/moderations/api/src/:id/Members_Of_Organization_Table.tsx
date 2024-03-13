@@ -1,5 +1,6 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { Loader } from "@~/app.ui/loader/Loader";
@@ -11,11 +12,12 @@ import { ModerationPage_Context } from "./context";
 //
 
 export function Members_Of_Organization_Table() {
+  const uuid = hyper_ref();
   const { moderation } = useContext(ModerationPage_Context);
 
   return (
     <section>
-      <h3>👥 Membres connus dans l’organisation</h3>
+      <h3 id={uuid}>👥 Membres connus dans l’organisation</h3>
 
       <div
         class="fr-table"
@@ -23,7 +25,7 @@ export function Members_Of_Organization_Table() {
           param: {
             id: moderation.organization_id.toString(),
           },
-          query: {},
+          query: { describedby: uuid },
         })}
         hx-target="this"
         hx-trigger={[

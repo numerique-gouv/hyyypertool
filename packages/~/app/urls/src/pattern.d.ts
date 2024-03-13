@@ -211,6 +211,7 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 query: {
+                  describedby: string | string[];
                   page?: string | string[] | undefined;
                   page_size?: string | string[] | undefined;
                 };
@@ -249,9 +250,9 @@ declare const app: import("hono/hono-base").HonoBase<
         "/",
         {
           query: {
-            "search-siret"?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
+            "search-siret"?: string | string[] | undefined;
             id?: string | string[] | undefined;
           };
         },
@@ -478,9 +479,9 @@ declare const app: import("hono/hono-base").HonoBase<
           "/attachment/:ticket_id/:article_id/:attachment_id",
           {
             param: {
-              ticket_id: string;
               article_id: string;
               attachment_id: string;
+              ticket_id: string;
             };
           },
           {}

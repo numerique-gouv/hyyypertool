@@ -1,5 +1,6 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { hx_urls } from "@~/app.urls";
@@ -16,6 +17,7 @@ export default async function Page({ id }: { id: number }) {
   const {
     var: { moncomptepro_pg },
   } = useRequestContext<MonComptePro_Pg_Context>();
+  const uuid = hyper_ref();
   const organization = await get_organization_by_id(moncomptepro_pg, { id });
 
   if (!organization) {
@@ -29,11 +31,11 @@ export default async function Page({ id }: { id: number }) {
       <Edit_Domain organization={organization} />
       <hr />
       <br />
-      <h3>Membres enregistrés dans cette organisation :</h3>
+      <h3 id={uuid}>Membres enregistrés dans cette organisation :</h3>
       <div
         {...hx_urls.organizations[":id"].members.$get({
           param: { id: organization.id.toString() },
-          query: {},
+          query: { describedby: uuid },
         })}
         hx-target="this"
         hx-trigger={[
