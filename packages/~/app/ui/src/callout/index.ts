@@ -4,6 +4,22 @@ import { tv } from "tailwind-variants";
 
 //
 
+/**
+ * @example
+ * ```tsx
+ * function MyCallout() {
+ *   const { base, text, title } = callout();
+ *   return (
+ *     <div class={base()}>
+ *       <p class={title()}>Coucou</p>
+ *       <p class={text()}>
+ *         Jean Pierre
+ *       </p>
+ *     </div>
+ *   );
+ * }
+ * ```
+ */
 export const callout = tv({
   base: `
     fr-callout

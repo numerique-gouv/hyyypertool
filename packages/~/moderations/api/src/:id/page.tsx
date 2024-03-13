@@ -13,6 +13,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
+import { Moderation_Actions } from "./Actions";
 import { Domain_Organization } from "./Domain_Organization";
 import { Header } from "./Header";
 import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
@@ -74,7 +75,15 @@ export default async function Moderation_Page() {
 
       <Members_Of_Organization_Table />
 
+      <hr class="my-12" />
+
+      <Moderation_Actions />
+
+      <hr class="my-12" />
+
       <hr />
+
+      <hr class="my-12" />
 
       <_03 />
     </main>

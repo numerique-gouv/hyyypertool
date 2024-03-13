@@ -5,11 +5,10 @@ import { callout } from "@~/app.ui/callout";
 import { notice } from "@~/app.ui/notice";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
-import type { Moderation_Type } from "@~/moderations.lib/Moderation_Type";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
-import { match } from "ts-pattern";
+import { MessageInfo } from "./MessageInfo";
 import { ModerationPage_Context } from "./context";
 
 //
@@ -66,39 +65,13 @@ function State_Badge() {
 }
 
 function Info() {
-  const { moderation } = useContext(ModerationPage_Context);
   const { base, container, body, title } = notice({ type: "info" });
   return (
     <div class={base()}>
       <div class={container()}>
         <div class={body()}>
           <p class={title()}>
-            <b>
-              {moderation.users.given_name} {moderation.users.family_name}
-            </b>{" "}
-            <span class="text-gray-600">
-              {match(moderation.type as Moderation_Type)
-                .with("ask_for_sponsorship", () => "demande un sponsorship")
-                .with(
-                  "big_organization_join",
-                  () => "a rejoint l'organisation de plus de 50 employés",
-                )
-                .with(
-                  "non_verified_domain",
-                  () =>
-                    "a rejoint une organisation avec un domain non vérifié  ",
-                )
-                .with(
-                  "organization_join_block",
-                  () => "veut rejoindre l'organisation",
-                )
-                .otherwise(
-                  (type) => `veut effectuer une action inconnue (type ${type})`,
-                )}
-            </span>{" "}
-            « <b>{moderation.organizations.cached_libelle}</b> »{" "}
-            <span class="text-gray-600">avec l’adresse</span>{" "}
-            <b>{moderation.users.email}</b>
+            <MessageInfo />
           </p>
         </div>
       </div>
