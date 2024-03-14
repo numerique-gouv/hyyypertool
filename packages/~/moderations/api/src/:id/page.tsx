@@ -71,19 +71,19 @@ export default async function Moderation_Page() {
 
       <Domain_Organization />
 
-      <hr class="my-12" />
+      <hr class="my-12 bg-none" />
 
       <Members_Of_Organization_Table />
 
-      <hr class="my-12" />
+      <hr class="my-12 bg-none" />
 
       <Moderation_Actions />
 
-      <hr class="my-12" />
+      <hr class="my-12 bg-none" />
 
       <hr />
 
-      <hr class="my-12" />
+      <hr class="my-12 bg-none" />
 
       <_03 />
     </main>
