@@ -7,6 +7,9 @@
     "./button": {
       "default": "./src/button/index.ts"
     },
+    "./button/scripts": {
+      "default": "./src/button/scripts/index.ts"
+    },
     "./callout": {
       "default": "./src/callout/index.ts"
     },

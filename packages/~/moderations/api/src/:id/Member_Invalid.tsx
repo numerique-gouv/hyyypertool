@@ -1,6 +1,7 @@
 //
 
 import { button } from "@~/app.ui/button";
+import { copy_to_clipboard } from "@~/app.ui/button/scripts";
 import { fieldset } from "@~/app.ui/form";
 import { hx_urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
@@ -71,6 +72,13 @@ export function Member_Invalid() {
               for={$message}
             >
               Message
+              <button
+                _={copy_to_clipboard(`#${$message}`)}
+                class={button()}
+                type="button"
+              >
+                📋 Copier
+              </button>
             </label>
             <textarea
               class="fr-input"
