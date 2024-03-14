@@ -2,19 +2,44 @@
 
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
+import { hx_urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
 import { Desicison_Context } from "./Desicison_Context";
-import { RESPONSE_MESSAGE_SELECT_ID, RESPONSE_TEXTAREA_ID } from "./context";
+import {
+  ModerationPage_Context,
+  RESPONSE_MESSAGE_SELECT_ID,
+  RESPONSE_TEXTAREA_ID,
+} from "./context";
+import * as accountant from "./responses/accountant";
 import * as already_signed from "./responses/already_signed";
+import * as contractors from "./responses/contractors";
 import * as first_last_name from "./responses/first_last_name";
+import * as invalid_name_job from "./responses/invalid_name_job";
+import * as link_with_eduction_gouv_fr from "./responses/link_with_eduction_gouv_fr";
+import * as link_with_organization from "./responses/link_with_organization";
+import * as mobilic from "./responses/mobilic";
+import * as use_official_email from "./responses/use_official_email";
+import * as use_pro_email from "./responses/use_pro_email";
 
 //
 
-const reponse_templates = [first_last_name, already_signed];
+const reponse_templates = [
+  first_last_name,
+  link_with_organization,
+  use_pro_email,
+  use_official_email,
+  already_signed,
+  link_with_eduction_gouv_fr,
+  mobilic,
+  contractors,
+  accountant,
+  invalid_name_job,
+];
 
 //
 
 export function Member_Invalid() {
+  const { moderation } = useContext(ModerationPage_Context);
   const { $reject, $message, $form } = useContext(Desicison_Context);
   const { base, element } = fieldset();
 
@@ -27,6 +52,9 @@ export function Member_Invalid() {
       `}
       action="javascript:void(0);"
       hidden
+      {...hx_urls.moderations[":id"].$procedures.rejected.$patch({
+        param: { id: moderation.id.toString() },
+      })}
     >
       <fieldset class={base()}>
         <div class={element()}>
