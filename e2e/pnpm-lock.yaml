@@ -7,13 +7,13 @@ settings:
 dependencies:
   '@badeball/cypress-cucumber-preprocessor':
     specifier: 20.0.2
-    version: 20.0.2(cypress@13.6.6)(typescript@5.4.2)
+    version: 20.0.2(cypress@13.7.0)(typescript@5.4.2)
   '@bahmutov/cypress-esbuild-preprocessor':
     specifier: 2.2.0
     version: 2.2.0(esbuild@0.20.0)
   cypress:
-    specifier: 13.6.6
-    version: 13.6.6
+    specifier: 13.7.0
+    version: 13.7.0
   pg:
     specifier: 8.11.3
     version: 8.11.3
@@ -80,7 +80,7 @@ packages:
       - supports-color
     dev: false
 
-  /@badeball/cypress-cucumber-preprocessor@20.0.2(cypress@13.6.6)(typescript@5.4.2):
+  /@badeball/cypress-cucumber-preprocessor@20.0.2(cypress@13.7.0)(typescript@5.4.2):
     resolution: {integrity: sha512-Ty5CXJxtB/TVC4jbhYTfR3oUsX8QFcGCQbFhCtk+xlyfL1eI8cgF7BXEQdCa5Qa3lf44EUKeI++xsd3NI5tWTQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -106,7 +106,7 @@ packages:
       cli-table: 0.3.11
       common-ancestor-path: 1.0.1
       cosmiconfig: 8.3.6(typescript@5.4.2)
-      cypress: 13.6.6
+      cypress: 13.7.0
       debug: 4.3.4(supports-color@8.1.1)
       error-stack-parser: 2.1.4
       esbuild: 0.19.12
@@ -1233,8 +1233,8 @@ packages:
       which: 2.0.2
     dev: false
 
-  /cypress@13.6.6:
-    resolution: {integrity: sha512-S+2S9S94611hXimH9a3EAYt81QM913ZVA03pUmGDfLTFa5gyp85NJ8dJGSlEAEmyRsYkioS1TtnWtbv/Fzt11A==}
+  /cypress@13.7.0:
+    resolution: {integrity: sha512-UimjRSJJYdTlvkChcdcfywKJ6tUYuwYuk/n1uMMglrvi+ZthNhoRYcxnWgTqUtkl17fXrPAsD5XT2rcQYN1xKA==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
