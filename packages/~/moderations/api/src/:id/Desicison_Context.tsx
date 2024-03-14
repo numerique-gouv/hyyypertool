@@ -5,6 +5,7 @@ import { createContext } from "hono/jsx";
 
 //
 export const Desicison_Context = createContext({
+  $allow: hyper_ref(),
   $accept: hyper_ref(),
   $form: hyper_ref(),
   $message: hyper_ref(),

@@ -1,7 +1,10 @@
 //
 
+import { hx_include } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
+import { hx_urls, urls } from "@~/app.urls";
+import type { InferRequestType } from "hono";
 import { useContext } from "hono/jsx";
 import { Desicison_Context } from "./Desicison_Context";
 import { ModerationPage_Context } from "./context";
@@ -9,10 +12,11 @@ import { ModerationPage_Context } from "./context";
 //
 
 export function Member_Valid() {
-  const { $accept, $form } = useContext(Desicison_Context);
-  const { domain } = useContext(ModerationPage_Context);
+  const { $accept, $allow, $form } = useContext(Desicison_Context);
+  const { domain, moderation } = useContext(ModerationPage_Context);
   const { base, element } = fieldset();
-
+  const $patch = urls.moderations[":id"].$procedures.validate.$patch;
+  type FormKeys = keyof InferRequestType<typeof $patch>["form"];
   return (
     <form
       _={`
@@ -20,14 +24,24 @@ export function Member_Valid() {
       on change from #${$form}
         if #${$accept}.checked then remove @hidden else add @hidden end
       `}
-      action="javascript:void(0);"
-      hidden
+      {...hx_urls.moderations[":id"].$procedures.validate.$patch({
+        param: { id: moderation.id.toString() },
+      })}
+      hx-include={hx_include([$allow])}
     >
-      <fieldset class={base()} id="radio-inline">
+      <fieldset class={base()}>
         <div class={element()}>
           <div class="fr-checkbox-group">
-            <input type="checkbox" id="allow" name="radio-inline" />
-            <label class="fr-label" for="allow">
+            <input
+              _="
+              on click set @value to my checked
+              "
+              id={$allow}
+              name={"add_domain" as FormKeys}
+              type="checkbox"
+              value="true"
+            />
+            <label class="fr-label" for={$allow}>
               J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
               l’organisation
             </label>
