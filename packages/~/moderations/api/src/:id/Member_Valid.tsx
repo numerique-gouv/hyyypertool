@@ -24,6 +24,7 @@ export function Member_Valid() {
       on change from #${$form}
         if #${$accept}.checked then remove @hidden else add @hidden end
       `}
+      hidden
       {...hx_urls.moderations[":id"].$procedures.validate.$patch({
         param: { id: moderation.id.toString() },
       })}
