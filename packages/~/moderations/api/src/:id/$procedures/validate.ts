@@ -1,7 +1,7 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { HTTPError, NotFoundError } from "@~/app.core/error";
+import { HTTPError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
@@ -63,7 +63,6 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
       );
 
       match(error)
-        .with(P.instanceOf(NotFoundError), () => notFound())
         .with(P.instanceOf(HTTPError), () => {
           consola.error(error);
           sentry.captureException(error, {
