@@ -15,6 +15,8 @@ export const RESPONSE_TEXTAREA_ID = "response";
 export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
 export const EMAIL_TO_INPUT_ID = "mail-to";
 
+//
+
 type ModerationWithUsersOrganizations = Moderation & {
   users: User;
   organizations: Organization;

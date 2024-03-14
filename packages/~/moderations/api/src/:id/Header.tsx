@@ -100,6 +100,7 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
         )}
         .
       </p>
+      {moderation.comment ? <p>{moderation.comment}</p> : <></>}
       <button
         class={button({ size: "sm", type: "tertiary" })}
         {...hx_urls.moderations[":id"].$procedures.reprocess.$patch({

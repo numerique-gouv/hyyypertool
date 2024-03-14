@@ -23,7 +23,9 @@ Fonctionnalité: Moderation non blockante
 
   Scénario: Le nom de domaine est vérifié
     Soit le tableau "Domain internes" vide
-    Quand je clique sur "🪄 Action en un click : fr.bosch.com est un domain intern vérifié ✅"
+    Quand je clique sur "Je valide ce membre ✅"
+    Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
+    Quand je clique sur "Notifier le membre et terminer"
     Alors je vois la ligne "fr.bosch.com" dans le table "Domain internes"
 
   Scénario: Marie est un membre interne de l'organization.

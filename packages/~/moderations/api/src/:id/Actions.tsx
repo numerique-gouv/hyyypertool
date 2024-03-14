@@ -1,15 +1,18 @@
 //
 
-import { hyper_ref } from "@~/app.core/html";
+import { button } from "@~/app.ui/button";
+import { hx_urls } from "@~/app.urls";
+import { useContext } from "hono/jsx";
 import { Desicison } from "./Desicison";
-import { Desicison_Context } from "./Desicison_Context";
 import { Member_Invalid } from "./Member_Invalid";
 import { Member_Valid } from "./Member_Valid";
 import { MessageInfo } from "./MessageInfo";
+import { ModerationPage_Context } from "./context";
 
 //
 
 export function Moderation_Actions() {
+  const { moderation } = useContext(ModerationPage_Context);
   return (
     <div class="bg-[var(--background-alt-blue-france)] p-8">
       <h2>
@@ -19,20 +22,23 @@ export function Moderation_Actions() {
       <MessageInfo />
 
       <hr class="bg-none" />
-
-      <Desicison_Context.Provider
-        value={{
-          $accept: hyper_ref(),
-          $form: hyper_ref(),
-          $message: hyper_ref(),
-          $reject: hyper_ref(),
-          $select: hyper_ref(),
-        }}
-      >
-        <Desicison />
-        <Member_Valid />
-        <Member_Invalid />
-      </Desicison_Context.Provider>
+      {moderation.moderated_at ? (
+        <button
+          class={button({ size: "sm", type: "tertiary" })}
+          {...hx_urls.moderations[":id"].$procedures.reprocess.$patch({
+            param: { id: moderation.id.toString() },
+          })}
+          hx-swap="none"
+        >
+          Retraiter
+        </button>
+      ) : (
+        <>
+          <Desicison />
+          <Member_Valid />
+          <Member_Invalid />
+        </>
+      )}
     </div>
   );
 }

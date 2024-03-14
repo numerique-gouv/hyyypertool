@@ -250,9 +250,9 @@ declare const app: import("hono/hono-base").HonoBase<
         "/",
         {
           query: {
+            "search-siret"?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
-            "search-siret"?: string | string[] | undefined;
             id?: string | string[] | undefined;
           };
         },
@@ -351,11 +351,28 @@ declare const app: import("hono/hono-base").HonoBase<
                 param: {
                   id: string;
                 };
+              } & {
+                form: {
+                  add_domain: string | File;
+                };
               },
               {}
             >,
-            "/reprocess"
+            "/validate"
           > &
+            import("hono/types").MergeSchemaPath<
+              import("hono").ToSchema<
+                "patch",
+                "/",
+                {
+                  param: {
+                    id: string;
+                  };
+                },
+                {}
+              >,
+              "/reprocess"
+            > &
             import("hono/types").MergeSchemaPath<
               import("hono").ToSchema<
                 "patch",
@@ -390,8 +407,8 @@ declare const app: import("hono/hono-base").HonoBase<
               "/",
               {
                 query: {
-                  organization_id: string | string[];
                   user_id: string | string[];
+                  organization_id: string | string[];
                 };
               },
               {}
@@ -418,8 +435,8 @@ declare const app: import("hono/hono-base").HonoBase<
                   };
                 } & {
                   form: {
-                    response: string | File;
                     "mail-subject": string | File;
+                    response: string | File;
                   };
                 },
                 {}

@@ -2,6 +2,7 @@
 
 import { sentry } from "@hono/sentry";
 import config from "@~/app.core/config";
+import { NotFoundError } from "@~/app.core/error";
 import { Error_Page } from "@~/app.layout/error";
 import { NotFound } from "@~/app.layout/not-found";
 import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
@@ -16,6 +17,7 @@ import welcome_router from "@~/welcome.api";
 import consola, { LogLevels } from "consola";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
+import { match, P } from "ts-pattern";
 import Youch from "youch";
 import asserts_router from "./assets";
 import readyz_router from "./readyz";
@@ -74,21 +76,30 @@ const app = new Hono()
   .use("/organizations/*", authoried)
   .route("/organizations", organizations_router)
 
+  .onError((error, { get, html, notFound, req, var: { sentry } }) =>
+    match(error)
+      // Handle false negatives here :)
+      .with(P.instanceOf(NotFoundError), () => notFound())
+      // OK this should not happen...
+      .otherwise((error) => {
+        consola.error(error);
+        sentry.captureException(error);
+
+        return match(config)
+          .with({ NODE_ENV: "development" }, async () => {
+            const youch = new Youch(error, req.raw);
+            return html(await youch.toHTML(), 500);
+          })
+          .otherwise(async () => {
+            const nonce: string = get("nonce" as any);
+            return html(await Error_Page({ error, nonce }), 500);
+          });
+      }),
+  )
+
   .notFound(async ({ html, get }) => {
     const nonce: string = get("nonce" as any);
     return html(NotFound({ nonce }), 404);
-  })
-  .onError(async (error, { get, html, req, var: { sentry } }) => {
-    consola.error(error);
-    sentry.captureException(error);
-
-    if (config.NODE_ENV === "production") {
-      const youch = new Youch(error, req.raw);
-      return html(await youch.toHTML(), 500);
-    } else {
-      const nonce: string = get("nonce" as any);
-      return html(await Error_Page({ error, nonce }), 500);
-    }
   });
 
 //
