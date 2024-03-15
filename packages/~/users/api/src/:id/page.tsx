@@ -107,7 +107,7 @@ function Fiche() {
         téléphone : <b>{user.phone_number}</b>
       </li>
       <li>
-        poste : <b>{user.job}</b>
+        fonction : <b>{user.job}</b>
       </li>
     </ul>
   );

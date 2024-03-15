@@ -49,7 +49,7 @@ export async function Table() {
             <th>Nom</th>
             <th>Interne</th>
             <th>Email</th>
-            <th>Poste</th>
+            <th>Fonction</th>
             <th>Type de vérification</th>
             <th></th>
           </tr>

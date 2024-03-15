@@ -53,7 +53,7 @@ export function About_User() {
           téléphone : <b>{user.phone_number}</b>
         </li>
         <li>
-          poste : <b>{user.job}</b>
+          fonction : <b>{user.job}</b>
         </li>
         <li>
           nombre de connection : <b>{user.sign_in_count}</b>
