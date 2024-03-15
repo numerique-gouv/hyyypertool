@@ -90,9 +90,10 @@ jobs:
           NODE_ENV: "development"
         with:
           build: bun run build
+          install-command: bun install --frozen-lockfile
+          spec: features/${{ matrix.e2e_test }}
           start: bun run start
           working-directory: e2e
-          spec: features/${{ matrix.e2e_test }}
 
       - uses: actions/upload-artifact@v4
         if: failure()
