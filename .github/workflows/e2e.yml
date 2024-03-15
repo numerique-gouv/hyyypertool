@@ -48,7 +48,7 @@ jobs:
 
       - name: 🌭 Install bun
         uses: oven-sh/setup-bun@v1
-      - run: bun install --frozen-lockfile
+
       - run: bun install --frozen-lockfile
         working-directory: "."
 
