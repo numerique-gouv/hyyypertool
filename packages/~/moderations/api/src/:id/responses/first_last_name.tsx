@@ -4,7 +4,7 @@ import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
 import { ModerationPage_Context } from "../context";
 
-export const label = "nom et prénom et job";
+export const label = "nom et prénom et fonction";
 
 export default function template() {
   const {

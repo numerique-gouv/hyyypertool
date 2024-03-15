@@ -2,7 +2,7 @@
 
 import { dedent } from "ts-dedent";
 
-export const label = "job/nom/prénom compte déjà créé";
+export const label = "fonction/nom/prénom compte déjà créé";
 
 export default function template() {
   return dedent`

@@ -15,7 +15,7 @@ export const reponse_templates: Array<{
   }) => string;
 }> = [
   {
-    label: "nom et prénom et job",
+    label: "nom et prénom et fonction",
     template({ moderation }) {
       return dedent`
         Bonjour,
