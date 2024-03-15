@@ -57,7 +57,7 @@ export function Foot({
         </td>
         <td>
           <button class={button({ type: "tertiary" })} {...hx_query_props}>
-            Rrafraichir
+            Rafraichir
           </button>
         </td>
       </tr>
