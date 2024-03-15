@@ -15,10 +15,7 @@
     "pg": "8.11.3",
     "typescript": "5.4.2"
   },
-  "packageManager": "pnpm@8.15.1",
-  "engines": {
-    "node": "20.11.0",
-    "npm": ">=9",
-    "pnpm": ">=8"
-  }
+  "trustedDependencies": [
+    "cypress"
+  ]
 }
