@@ -82,7 +82,7 @@ export function Root_Layout({
 
         <link
           rel="stylesheet"
-          href="${config.ASSETS_PATH}/public/assets/tailwind.css"
+          href="${config.PUBLIC_ASSETS_PATH}/tailwind.css"
         />
 
         <!--  -->
@@ -95,8 +95,8 @@ export function Root_Layout({
           {
             "imports": {
               "@~/app.core/config": "${config.ASSETS_PATH}/bundle/config.js",
-              "lit": "${config.ASSETS_PATH}/bundle/lit.js",
-              "lit/": "${config.ASSETS_PATH}/bundle/lit/"
+              "lit": "${config.PUBLIC_ASSETS_PATH}/node_modules/lit/index.js",
+              "lit/": "${config.PUBLIC_ASSETS_PATH}/node_modules/lit/"
             }
           }
         </script>
@@ -128,6 +128,19 @@ export function Root_Layout({
           </a>
         </footer>
       </body>
+
+      <!--  -->
+
+      <script
+        nonce="${nonce ?? ""}"
+        src="${config.PUBLIC_ASSETS_PATH}/app/layout/src/_client/nprogress.js"
+        type="module"
+      ></script>
+
+      <link
+        rel="stylesheet"
+        href="${config.ASSETS_PATH}/node_modules/nprogress/nprogress.css"
+      />
 
       <!--  -->
 
@@ -193,20 +206,6 @@ export function Root_Layout({
             nonce="${nonce ?? ""}"
             src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
           ></script> `}
-
-      <!--  -->
-
-      <script
-        nonce="${nonce ?? ""}"
-        src="${config.ASSETS_PATH}/node_modules/nprogress/nprogress.js"
-      ></script>
-
-      <link
-        rel="stylesheet"
-        href="${config.ASSETS_PATH}/node_modules/nprogress/nprogress.css"
-      />
-
-      <!--  -->
     </html>
   `;
 }

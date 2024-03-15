@@ -39,17 +39,4 @@ export default new Hono()
       "content-type": "text/javascript",
     });
   })
-  .get("/bundle/lit.js", async function to_lit_bundles({ req, redirect }) {
-    const url = new URL("../public/assets/node_modules/lit/index.js", req.url);
-    return redirect(url.pathname);
-  })
-  .get("/bundle/lit/:filename{.+\\.js$}", async ({ req, redirect }) => {
-    const { ASSETS_PATH } = env;
-    const { filename } = req.param();
-    const url = new URL(
-      `${ASSETS_PATH}/public/assets/node_modules/lit/${filename}`,
-      req.url,
-    );
-    return redirect(url.pathname);
-  })
   .route("/zammad", zammad_attachment_router);

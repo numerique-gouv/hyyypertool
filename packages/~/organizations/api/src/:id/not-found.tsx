@@ -28,7 +28,7 @@ export function Organization_NotFound({
           </a>
         </section>
         <figure>
-          <img src={`${config.ASSETS_PATH}/public/assets/404.svg`} alt="" />
+          <img src={`${config.PUBLIC_ASSETS_PATH}/404.svg`} alt="" />
         </figure>
       </div>
     </main>
