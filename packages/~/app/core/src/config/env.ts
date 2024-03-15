@@ -11,8 +11,8 @@ import { z } from "zod";
 
 dotenv.config({
   debug: consola.level >= LogLevels.debug,
-  path: [`.env.local`, ".env"],
   override: true,
+  path: [".env", ".env.local", `.env.${env.NODE_ENV}.local`],
 });
 
 const pkg = await import(join(cwd(), "package.json"));
