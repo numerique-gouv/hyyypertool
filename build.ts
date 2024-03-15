@@ -30,7 +30,10 @@ const minify = true;
 
 {
   const { logs, outputs, success } = await Bun.build({
-    entrypoints: ["./packages/~/welcome/api/src/_client/hyyypertitle.ts"],
+    entrypoints: [
+      "./packages/~/app/layout/src/_client/nprogress.ts",
+      "./packages/~/welcome/api/src/_client/hyyypertitle.ts",
+    ],
     external: ["lit", "@~/app.core/config"],
     minify,
     outdir: "./public/assets",
@@ -38,5 +41,4 @@ const minify = true;
   console.log({ logs, outputs, success });
 }
 
-export { };
-
+export {};

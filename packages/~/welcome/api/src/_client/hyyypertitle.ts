@@ -57,10 +57,7 @@ export class Hyyyper_title extends LitElement {
 
       <!--  -->
 
-      <link
-        rel="stylesheet"
-        href="${config.ASSETS_PATH}/public/assets/tailwind.css"
-      />
+      <link rel="stylesheet" href="${config.PUBLIC_ASSETS_PATH}/tailwind.css" />
 
       <!--  -->
 

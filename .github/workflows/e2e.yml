@@ -41,36 +41,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "node"
+
       - name: Create mocked services
         run: docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml up --build --detach
         working-directory: "."
 
       - name: 🌭 Install bun
         uses: oven-sh/setup-bun@v1
+
       - run: bun install --frozen-lockfile
         working-directory: "."
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          package_json_file: ./e2e/package.json
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('e2e/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
 
       - name: Wait for mocked services to be ready
         run: |
@@ -110,9 +94,10 @@ jobs:
           NODE_ENV: "development"
         with:
           build: bun run build
+          install-command: bun install --frozen-lockfile
+          spec: features/${{ matrix.e2e_test }}
           start: bun run start
           working-directory: e2e
-          spec: features/${{ matrix.e2e_test }}
 
       - uses: actions/upload-artifact@v4
         if: failure()

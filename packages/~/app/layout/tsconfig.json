@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./node_modules/.cache/tsc",
+    "lib": ["DOM"],
     "types": ["bun-types", "hono"]
   },
   "extends": "@~/config.typescript/tsx.json",

@@ -23,7 +23,7 @@ export default new Hono<Session_Context & Csp_Context>()
           <hyyyper-title>Bonjour Hyyypertool !</hyyyper-title>
           <script
             nonce={nonce}
-            src={`${config.ASSETS_PATH}/public/assets/hyyypertitle.js`}
+            src={`${config.PUBLIC_ASSETS_PATH}/welcome/api/src/_client/hyyypertitle.js`}
             type="module"
           ></script>
         </h1>
