@@ -1,6 +1,5 @@
 //
 
-import consola, { LogLevels } from "consola";
 import dotenv from "dotenv";
 import { join } from "node:path";
 import { cwd, env } from "node:process";
@@ -10,7 +9,6 @@ import { z } from "zod";
 //
 
 dotenv.config({
-  debug: consola.level >= LogLevels.debug,
   override: true,
   path: [".env", ".env.local", `.env.${env.NODE_ENV}.local`],
 });
