@@ -3,11 +3,13 @@ import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg"
 import { Foot } from "@~/app.ui/hx_table";
 import { notice } from "@~/app.ui/notice";
 import { hx_urls, urls } from "@~/app.urls";
-import type { Organization } from "@~/moncomptepro.database";
 import { get_organisations_by_user_id } from "@~/organizations.repository/get_organisations_by_user_id";
 import { useContext, type PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { UserOrganizationTable_Context } from "./context";
+import {
+  UserOrganizationRow_Context,
+  UserOrganizationTable_Context,
+} from "./context";
 
 //
 
@@ -54,11 +56,10 @@ export async function UserOrganizationTable() {
         </thead>
 
         <tbody>
-          {organizations.map(({ organizations }) => (
-            <Row
-              key={organizations.id.toString()}
-              organization={organizations}
-            />
+          {organizations.map((organization) => (
+            <UserOrganizationRow_Context.Provider value={organization}>
+              <Row />
+            </UserOrganizationRow_Context.Provider>
           ))}
         </tbody>
 
@@ -73,13 +74,8 @@ export async function UserOrganizationTable() {
 }
 
 //
-export function Row({
-  key,
-  organization,
-}: {
-  key: string;
-  organization: Organization;
-}) {
+
+export function Row() {
   const {
     authorized_email_domains,
     cached_code_officiel_geographique,
@@ -88,10 +84,10 @@ export function Row({
     id,
     siret,
     verified_email_domains,
-  } = organization;
+  } = useContext(UserOrganizationRow_Context);
 
   return (
-    <tr key={key}>
+    <tr>
       <td>{siret}</td>
       <td>{cached_libelle}</td>
       <td class="break-words">{verified_email_domains.join(", ")}</td>
