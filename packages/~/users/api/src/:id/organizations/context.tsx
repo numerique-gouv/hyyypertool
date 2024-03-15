@@ -11,3 +11,7 @@ export const UserOrganizationTable_Context = createContext({
   query_organizations_collection: {} as get_organisations_by_user_id_dto,
   user_id: NaN,
 });
+
+export const UserOrganizationRow_Context = createContext(
+  {} as Awaited<get_organisations_by_user_id_dto>["organizations"][number],
+);

@@ -20,7 +20,17 @@ export function get_organisations_by_user_id(
 
   return pg.transaction(async function organization_with_count() {
     const organizations = await pg
-      .select()
+      .select({
+        authorized_email_domains: schema.organizations.authorized_email_domains,
+        cached_code_officiel_geographique:
+          schema.organizations.cached_code_officiel_geographique,
+        cached_libelle: schema.organizations.cached_libelle,
+        external_authorized_email_domains:
+          schema.organizations.external_authorized_email_domains,
+        id: schema.organizations.id,
+        siret: schema.organizations.siret,
+        verified_email_domains: schema.organizations.verified_email_domains,
+      })
       .from(schema.organizations)
       .innerJoin(
         schema.users_organizations,
@@ -35,7 +45,7 @@ export function get_organisations_by_user_id(
       .from(schema.organizations)
       .innerJoin(
         schema.users_organizations,
-        eq(schema.organizations.id, schema.users_organizations.user_id),
+        eq(schema.organizations.id, schema.users_organizations.organization_id),
       )
       .where(where);
     return { organizations, count };
