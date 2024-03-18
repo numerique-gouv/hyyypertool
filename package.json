@@ -59,7 +59,7 @@
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
     "dotenv": "16.4.5",
-    "hono": "4.1.0",
+    "hono": "4.1.1",
     "tsx": "4.7.1"
   },
   "devDependencies": {
@@ -67,7 +67,7 @@
     "@release-it/conventional-changelog": "8.0.1",
     "@tsconfig/bun": "1.0.4",
     "@~/config.tailwindcss": "workspace:*",
-    "bun-types": "1.0.30",
+    "bun-types": "1.0.33",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.12",
     "release-it": "17.1.1",
@@ -75,7 +75,7 @@
     "typescript": "5.4.2"
   },
   "overrides": {
-    "hono": "4.1.0"
+    "hono": "4.1.1"
   },
   "release-it": {
     "git": {
