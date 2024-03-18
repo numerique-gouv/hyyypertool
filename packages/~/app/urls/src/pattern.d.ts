@@ -330,9 +330,9 @@ declare const app: import("hono/hono-base").HonoBase<
           "/",
           {
             query: {
+              "search-email"?: string | string[] | undefined;
               page?: string | string[] | undefined;
               page_size?: string | string[] | undefined;
-              "search-email"?: string | string[] | undefined;
               id?: string | string[] | undefined;
             };
           },
@@ -430,22 +430,7 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               },
               {}
-            > &
-              import("hono").ToSchema<
-                "put",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                } & {
-                  form: {
-                    "mail-subject": string | File;
-                    response: string | File;
-                  };
-                },
-                {}
-              >,
+            >,
             "/email"
           > &
           import("hono").ToSchema<

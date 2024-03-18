@@ -10,13 +10,13 @@ import { schema } from "@~/moncomptepro.database";
 import { and, eq } from "drizzle-orm";
 import { useContext, type PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { _03 } from "./03";
 import { About_Organisation } from "./About_Organisation";
 import { About_User } from "./About_User";
 import { Moderation_Actions } from "./Actions";
 import { Domain_Organization } from "./Domain_Organization";
 import { Header } from "./Header";
 import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
+import { Moderation_Exchanges } from "./Moderation_Exchanges";
 import { Organizations_Of_User_Table } from "./Organizations_Of_User_Table";
 import { ModerationPage_Context } from "./context";
 import { Moderation_NotFound } from "./not-found";
@@ -85,7 +85,7 @@ export default async function Moderation_Page() {
 
       <hr class="my-12 bg-none" />
 
-      <_03 />
+      <Moderation_Exchanges />
     </main>
   );
 }

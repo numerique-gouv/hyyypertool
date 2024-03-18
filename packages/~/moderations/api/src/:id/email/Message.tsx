@@ -1,27 +1,22 @@
 //
 
 import env from "@~/app.core/config";
-import { date_to_string } from "@~/app.core/date/date_format";
 import { quote } from "@~/app.ui/quote";
-import { type Moderation } from "@~/moncomptepro.database";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { GROUP_MONCOMPTEPRO_SENDER_ID } from "@~/zammad.lib/const";
 import type { Article } from "@~/zammad.lib/types";
+import { useContext } from "hono/jsx";
 import { tv } from "tailwind-variants";
+import { List_Context } from "./context";
 
 //
 
-export function Message({
-  article,
-  moderation,
-}: {
-  article: Article;
-  moderation: Moderation;
-}) {
+export function Message({ article }: { article: Article }) {
+  const { ticket_id } = useContext(List_Context);
   const is_family = article.sender_id === GROUP_MONCOMPTEPRO_SENDER_ID;
   const { author, base, body, caption, source } = message_variants({
     is_family,
   });
-  const created_at = new Date(article.created_at);
 
   return (
     <figure class={base()}>
@@ -39,18 +34,12 @@ export function Message({
         <p class={author()}>{article.from}</p>
         <ul class={source()}>
           <li>
-            Créé le{" "}
-            <time
-              datetime={date_to_string(created_at)}
-              title={article.created_at}
-            >
-              {date_to_string(created_at)}
-            </time>
+            Créé le <LocalTime date={article.created_at} />
           </li>
           <li>par {article.created_by}</li>
           <li>
             <a
-              href={`${env.ZAMMAD_URL}/#ticket/zoom/${moderation.ticket_id}/${article.id}`}
+              href={`${env.ZAMMAD_URL}/#ticket/zoom/${ticket_id}/${article.id}`}
               rel="noopener noreferrer"
               target="_blank"
               title="Ouvrir le ticket dans Zammad - nouvelle fenêtre"

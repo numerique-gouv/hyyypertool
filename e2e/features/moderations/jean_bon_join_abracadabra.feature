@@ -60,8 +60,8 @@ Fonctionnalité: Moderation blockante à accepter
     Alors je ne vois pas "poymail.com"
 
   Scénario: Envoyer l'email « Votre demande a été traitée »"
-    Quand je clique sur le bouton "🪄 Action en un click : Envoyer l'email « Votre demande a été traitée »"
-    Alors je vois "Modération traitée"
+    Quand je clique sur "Je valide ce membre ✅"
+    Et je clique sur "Notifier le membre et terminer"
     * je vois "Cette modération a été marqué comme traitée le"
 
     Alors je vois "Liste des moderations"
