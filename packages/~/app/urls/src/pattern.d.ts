@@ -330,9 +330,9 @@ declare const app: import("hono/hono-base").HonoBase<
           "/",
           {
             query: {
-              "search-email"?: string | string[] | undefined;
               page?: string | string[] | undefined;
               page_size?: string | string[] | undefined;
+              "search-email"?: string | string[] | undefined;
               id?: string | string[] | undefined;
             };
           },
@@ -353,7 +353,7 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 form: {
-                  add_domain: string | File;
+                  add_domain?: string | File | undefined;
                 };
               },
               {}
@@ -380,6 +380,11 @@ declare const app: import("hono/hono-base").HonoBase<
                 {
                   param: {
                     id: string;
+                  };
+                } & {
+                  form: {
+                    message: string | File;
+                    subject: string | File;
                   };
                 },
                 {}
@@ -506,14 +511,7 @@ declare const app: import("hono/hono-base").HonoBase<
         "/zammad"
       > &
         import("hono").ToSchema<"get", "/bundle/config.js", unknown, {}> &
-        import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}> &
-        import("hono").ToSchema<"get", "/bundle/lit.js", unknown, {}> &
-        import("hono").ToSchema<
-          "get",
-          "/bundle/lit/:filename{.+\\.js$}",
-          unknown,
-          {}
-        >,
+        import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}>,
       `/assets/${string}`
     > &
     import("hono").ToSchema<"get", "/healthz", unknown, {}> &
