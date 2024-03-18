@@ -16,7 +16,7 @@ export function Member_Valid() {
   const { domain, moderation } = useContext(ModerationPage_Context);
   const { base, element } = fieldset();
   const $patch = urls.moderations[":id"].$procedures.validate.$patch;
-  type FormKeys = keyof InferRequestType<typeof $patch>["form"];
+  type FormNames = keyof InferRequestType<typeof $patch>["form"];
   return (
     <form
       _={`
@@ -38,7 +38,7 @@ export function Member_Valid() {
               on click set @value to my checked
               "
               id={$allow}
-              name={"add_domain" as FormKeys}
+              name={"add_domain" as FormNames}
               type="checkbox"
               value="true"
             />

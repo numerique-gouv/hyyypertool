@@ -3,15 +3,11 @@
 import { button } from "@~/app.ui/button";
 import { copy_to_clipboard } from "@~/app.ui/button/scripts";
 import { fieldset } from "@~/app.ui/form";
-import { hx_urls } from "@~/app.urls";
+import { hx_urls, urls } from "@~/app.urls";
+import type { InferRequestType } from "hono";
 import { useContext } from "hono/jsx";
 import { Desicison_Context } from "./Desicison_Context";
-import {
-  EMAIL_TO_INPUT_ID,
-  ModerationPage_Context,
-  RESPONSE_MESSAGE_SELECT_ID,
-  RESPONSE_TEXTAREA_ID,
-} from "./context";
+import { ModerationPage_Context } from "./context";
 import * as accountant from "./responses/accountant";
 import * as already_signed from "./responses/already_signed";
 import * as contractors from "./responses/contractors";
@@ -45,6 +41,8 @@ export function Member_Invalid() {
   const { $destination, $reject, $message, $object, $form } =
     useContext(Desicison_Context);
   const { base, element } = fieldset();
+  const $patch = urls.moderations[":id"].$procedures.rejected.$patch;
+  type FormNames = keyof InferRequestType<typeof $patch>["form"];
 
   return (
     <form
@@ -85,7 +83,7 @@ export function Member_Invalid() {
               class="fr-input"
               rows={20}
               id={$message}
-              name={RESPONSE_TEXTAREA_ID}
+              name={"message" as FormNames}
             ></textarea>
           </div>
         </div>
@@ -117,7 +115,7 @@ export function Member_Invalid() {
               class="fr-input"
               type="text"
               id={$object}
-              name={$object}
+              name={"subject" as FormNames}
               value={`[MonComptePro] Demande pour rejoindre « ${moderation.organizations.cached_libelle} »`}
             />
           </div>
@@ -151,11 +149,11 @@ export function Member_Invalid() {
               type="text"
               readonly={true}
               id={$destination}
-              name={EMAIL_TO_INPUT_ID}
               value={moderation.users.email}
             />
           </div>
         </div>
+
         <div class={element({ class: "mt-8" })}>
           <button class={button()} type="submit">
             Notifier le membre et terminer
@@ -176,7 +174,6 @@ function ResponseMessageSelector() {
       `}
       class="fr-select"
       id={$select}
-      name={RESPONSE_MESSAGE_SELECT_ID}
     >
       <option value="" selected disabled hidden>
         Sélectionner une response
