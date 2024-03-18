@@ -1,28 +1,13 @@
 //
 
-import {
-  Htmx_Events,
-  hx_include,
-  hx_trigger_from_body,
-} from "@~/app.core/htmx";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { Htmx_Events, hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import { eq } from "drizzle-orm";
 import { useContext } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
-import {
-  EMAIL_SUBJECT_INPUT_ID,
-  EMAIL_TO_INPUT_ID,
-  ModerationPage_Context,
-  RESPONSE_MESSAGE_SELECT_ID,
-  RESPONSE_TEXTAREA_ID,
-} from "./context";
-import { reponse_templates } from "./reponse_templates";
+import { ModerationPage_Context } from "./context";
 
 //
 
@@ -41,7 +26,7 @@ export async function _03() {
 
       <hr />
 
-      <h2>Rejeter la modération : </h2>
+      <h2>Échanges entre {moderation.users.given_name} et nous : </h2>
 
       <div
         hx-get={
@@ -64,192 +49,7 @@ export async function _03() {
       </div>
 
       <MarkModerationProcessed />
-
-      <hr />
-
-      <div class="fr-select-group">
-        <label class="fr-label" for={RESPONSE_MESSAGE_SELECT_ID}>
-          <h6>Motif de rejet : </h6>
-        </label>
-        <ResponseMessageSelector />
-      </div>
-
-      <div class="fr-input-group">
-        <label
-          class="fr-label flex flex-row justify-between"
-          for={RESPONSE_TEXTAREA_ID}
-        >
-          Texte
-          <button
-            _={`
-            on click
-              set text to #${RESPONSE_TEXTAREA_ID}.value
-              js(me, text)
-                if ('clipboard' in window.navigator) {
-                  navigator.clipboard.writeText(text)
-                }
-              end
-            `}
-            class={button()}
-          >
-            📋 Copier
-          </button>
-        </label>
-        <textarea
-          class="fr-input"
-          rows={20}
-          id={RESPONSE_TEXTAREA_ID}
-          name={RESPONSE_TEXTAREA_ID}
-        ></textarea>
-      </div>
-
-      <div class="fr-input-group">
-        <label
-          class="fr-label flex flex-row justify-between"
-          for={EMAIL_SUBJECT_INPUT_ID}
-        >
-          Object
-          <button
-            _={`
-            on click
-              set text to #${EMAIL_SUBJECT_INPUT_ID}.value
-              js(me, text)
-                if ('clipboard' in window.navigator) {
-                  navigator.clipboard.writeText(text)
-                }
-              end
-            `}
-            class={button()}
-          >
-            📋 Copier
-          </button>
-        </label>
-        <input
-          class="fr-input"
-          type="text"
-          id={EMAIL_SUBJECT_INPUT_ID}
-          name={EMAIL_SUBJECT_INPUT_ID}
-          value={`[MonComptePro] Demande pour rejoindre « ${moderation.organizations.cached_libelle} »`}
-        />
-      </div>
-
-      <div class="fr-input-group">
-        <label
-          class="fr-label flex flex-row justify-between"
-          for={EMAIL_TO_INPUT_ID}
-        >
-          Destinataire
-          <button
-            _={`
-            on click
-              set text to #${EMAIL_TO_INPUT_ID}.value
-              js(me, text)
-                if ('clipboard' in window.navigator) {
-                  navigator.clipboard.writeText(text)
-                }
-              end
-            `}
-            class={button()}
-          >
-            📋 Copier
-          </button>
-        </label>
-        <input
-          class="fr-input"
-          type="text"
-          readonly={true}
-          id={EMAIL_TO_INPUT_ID}
-          name={EMAIL_TO_INPUT_ID}
-          value={moderation.users.email}
-        />
-      </div>
-      <form
-        class="text-right"
-        hx-put={
-          urls.moderations[":id"].email.$url({
-            param: { id: moderation.id.toString() },
-          }).pathname
-        }
-        hx-include={hx_include([EMAIL_SUBJECT_INPUT_ID, RESPONSE_TEXTAREA_ID])}
-        hx-swap="none"
-      >
-        <button
-          _={`
-          set :form to the closest parent <form/>
-          on ${Htmx_Events.enum.confirm} from :form
-            toggle @disabled until ${Htmx_Events.enum.afterOnLoad} from :form
-          on click
-            wait for ${Htmx_Events.enum.afterOnLoad} from :form
-            go to the top of .last-message smoothly
-            wait 1s
-          `}
-          type="submit"
-          class={button()}
-        >
-          <span>Envoyer une réponse via Zammad</span>
-        </button>
-        <div>
-          <Loader htmx_indicator={true} />
-        </div>
-      </form>
-
-      <hr />
     </div>
-  );
-}
-
-function get_organization_members(
-  pg: MonComptePro_PgDatabase,
-  {
-    organization_id,
-  }: {
-    organization_id: number;
-  },
-) {
-  return pg
-    .select()
-    .from(schema.users)
-    .innerJoin(
-      schema.users_organizations,
-      eq(schema.users.id, schema.users_organizations.user_id),
-    )
-    .where(eq(schema.users_organizations.organization_id, organization_id));
-}
-async function ResponseMessageSelector() {
-  const { moderation } = useContext(ModerationPage_Context);
-  const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-  const users_and_organizations = await get_organization_members(
-    moncomptepro_pg,
-    {
-      organization_id: moderation.organizations.id,
-    },
-  );
-
-  const members_email = users_and_organizations
-    .map(({ users }) => users.email)
-    .toSorted();
-
-  return (
-    <select
-      _={`
-      on change
-        set #${RESPONSE_TEXTAREA_ID}.value to my value
-      `}
-      class="fr-select"
-      id={RESPONSE_MESSAGE_SELECT_ID}
-      name={RESPONSE_MESSAGE_SELECT_ID}
-    >
-      <option value="" selected disabled hidden>
-        Sélectionner une response
-      </option>
-      {reponse_templates.map(({ label, template }) => (
-        <option key={label} value={template({ moderation, members_email })}>
-          {label}
-        </option>
-      ))}
-    </select>
   );
 }
 
