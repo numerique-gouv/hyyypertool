@@ -7,6 +7,7 @@ import { hx_urls } from "@~/app.urls";
 import { useContext } from "hono/jsx";
 import { Desicison_Context } from "./Desicison_Context";
 import {
+  EMAIL_TO_INPUT_ID,
   ModerationPage_Context,
   RESPONSE_MESSAGE_SELECT_ID,
   RESPONSE_TEXTAREA_ID,
@@ -41,7 +42,8 @@ const reponse_templates = [
 
 export function Member_Invalid() {
   const { moderation } = useContext(ModerationPage_Context);
-  const { $reject, $message, $form } = useContext(Desicison_Context);
+  const { $destination, $reject, $message, $object, $form } =
+    useContext(Desicison_Context);
   const { base, element } = fieldset();
 
   return (
@@ -64,11 +66,10 @@ export function Member_Invalid() {
           </label>
           <ResponseMessageSelector />
         </div>
-
         <div class={element()}>
           <div class="fr-input-group">
             <label
-              class="fr-label flex flex-row justify-between"
+              class="fr-label flex flex-row items-center justify-between"
               for={$message}
             >
               Message
@@ -89,6 +90,72 @@ export function Member_Invalid() {
           </div>
         </div>
 
+        <div class={element()}>
+          <div class="fr-input-group">
+            <label
+              class="fr-label flex flex-row items-center justify-between"
+              for={$object}
+            >
+              Object
+              <button
+                _={`
+                on click
+                  set text to #${$object}.value
+                  js(me, text)
+                    if ('clipboard' in window.navigator) {
+                      navigator.clipboard.writeText(text)
+                    }
+                  end
+                `}
+                class={button()}
+                type="button"
+              >
+                📋 Copier
+              </button>
+            </label>
+            <input
+              class="fr-input"
+              type="text"
+              id={$object}
+              name={$object}
+              value={`[MonComptePro] Demande pour rejoindre « ${moderation.organizations.cached_libelle} »`}
+            />
+          </div>
+        </div>
+
+        <div class={element()}>
+          <div class="fr-input-group">
+            <label
+              class="fr-label flex flex-row items-center justify-between"
+              for={$destination}
+            >
+              Destinataire
+              <button
+                _={`
+            on click
+              set text to #${$destination}.value
+              js(me, text)
+                if ('clipboard' in window.navigator) {
+                  navigator.clipboard.writeText(text)
+                }
+              end
+            `}
+                class={button()}
+                type="button"
+              >
+                📋 Copier
+              </button>
+            </label>
+            <input
+              class="fr-input"
+              type="text"
+              readonly={true}
+              id={$destination}
+              name={EMAIL_TO_INPUT_ID}
+              value={moderation.users.email}
+            />
+          </div>
+        </div>
         <div class={element({ class: "mt-8" })}>
           <button class={button()} type="submit">
             Notifier le membre et terminer
