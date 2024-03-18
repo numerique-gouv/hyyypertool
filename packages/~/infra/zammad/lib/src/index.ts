@@ -46,6 +46,7 @@ export async function get_zammad_mail({ ticket_id }: { ticket_id: number }) {
 
   return response.json() as Promise<Article[]>;
 }
+export type get_zammad_mail_dto = Awaited<ReturnType<typeof get_zammad_mail>>;
 
 export async function get_zammad_attachment({
   article_id,
