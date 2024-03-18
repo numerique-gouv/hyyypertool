@@ -14,16 +14,6 @@ export const MAX_ARTICLE_COUNT = 3;
 //
 
 export default async function Page() {
-  const { moderation } = useContext(Moderation_Context);
-
-  if (!moderation.ticket_id) {
-    return <FindCorrespondingEmail />;
-  }
-
-  const articles = await get_zammad_mail({ ticket_id: moderation.ticket_id });
-  const show_more = articles.length > MAX_ARTICLE_COUNT;
-  const displayed_articles = articles.slice(-MAX_ARTICLE_COUNT);
-
   return (
     <ListProvider>
       <section>
