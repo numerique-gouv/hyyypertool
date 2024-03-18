@@ -1,6 +1,6 @@
 //
 
-import { hx_include } from "@~/app.core/htmx";
+import { Htmx_Events, hx_include } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { hx_urls, urls } from "@~/app.urls";
@@ -23,6 +23,11 @@ export function Member_Valid() {
       on load if #${$accept}.checked then remove @hidden end
       on change from #${$form}
         if #${$accept}.checked then remove @hidden else add @hidden end
+      on submit
+        wait for ${Htmx_Events.enum.afterOnLoad}
+        go to the top of body smoothly
+        wait 2s
+        go back
       `}
       hidden
       {...hx_urls.moderations[":id"].$procedures.validate.$patch({

@@ -1,5 +1,6 @@
 //
 
+import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { copy_to_clipboard } from "@~/app.ui/button/scripts";
 import { fieldset } from "@~/app.ui/form";
@@ -50,8 +51,13 @@ export function Member_Invalid() {
       on load if #${$reject}.checked then remove @hidden end
       on change from #${$form}
         if #${$reject}.checked then remove @hidden else add @hidden end
+      on submit
+        wait for ${Htmx_Events.enum.afterOnLoad}
+        wait 1s
+        go to the top of .last-message smoothly
+        wait 2s
+        go back
       `}
-      action="javascript:void(0);"
       hidden
       {...hx_urls.moderations[":id"].$procedures.rejected.$patch({
         param: { id: moderation.id.toString() },
