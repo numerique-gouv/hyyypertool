@@ -24,7 +24,7 @@ import { z } from "zod";
 
 export const FORM_SCHEMA = z.object({
   add_domain: z.string().default("false").pipe(z_coerce_boolean),
-  add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL", "NOPE"]),
+  add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL", "NOPE"]).default("NOPE"),
 });
 
 //
@@ -115,10 +115,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
       .where(eq(schema.moderations.id, id));
 
     return text("OK", 200, {
-      "HX-Trigger": [
-        MODERATION_EVENTS.Enum.MODERATION_EMAIL_UPDATED,
-        MODERATION_EVENTS.Enum.MODERATION_UPDATED,
-      ].join(", "),
+      "HX-Trigger": [MODERATION_EVENTS.Enum.MODERATION_UPDATED].join(", "),
     } as Htmx_Header);
   },
 );

@@ -39,8 +39,13 @@ const reponse_templates = [
 
 export function Member_Invalid() {
   const { moderation } = useContext(ModerationPage_Context);
-  const { $destination, $reject, $message, $object, $form } =
-    useContext(Desicison_Context);
+  const {
+    $destination,
+    $reject,
+    $message,
+    $object,
+    $decision_form: $form,
+  } = useContext(Desicison_Context);
   const { base, element } = fieldset();
   const $patch = urls.moderations[":id"].$procedures.rejected.$patch;
   type FormNames = keyof InferRequestType<typeof $patch>["form"];
@@ -55,13 +60,14 @@ export function Member_Invalid() {
         wait for ${Htmx_Events.enum.afterOnLoad}
         wait 1s
         go to the top of .last-message smoothly
-        wait 2s
+        wait 1s
         go back
       `}
       hidden
       {...hx_urls.moderations[":id"].$procedures.rejected.$patch({
         param: { id: moderation.id.toString() },
       })}
+      hx-swap="none"
     >
       <fieldset class={base()}>
         <div class={element()}>
