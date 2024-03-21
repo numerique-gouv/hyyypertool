@@ -12,14 +12,7 @@ import { ModerationPage_Context } from "./context";
 //
 
 export function Member_Valid() {
-  const {
-    $accept,
-    $add_domain,
-    $add_as_external_member,
-    $add_as_internal_member,
-    $do_not_add_member,
-    $form,
-  } = useContext(Desicison_Context);
+  const { $accept, $add_domain, $form } = useContext(Desicison_Context);
   const { moderation } = useContext(ModerationPage_Context);
   const { base, element } = fieldset();
 
