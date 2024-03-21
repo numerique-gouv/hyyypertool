@@ -353,6 +353,7 @@ declare const app: import("hono/hono-base").HonoBase<
                 };
               } & {
                 form: {
+                  add_member: string | File;
                   add_domain?: string | File | undefined;
                 };
               },
