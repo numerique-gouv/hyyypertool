@@ -44,10 +44,7 @@ export function Member_Valid() {
           <DoNotAddMember />
         </div>
         <div class={element()}>
-          <AddAsInternalMember />
-        </div>
-        <div class={element()}>
-          <AddAsExternallMember />
+          <AddAsMember />
         </div>
         <div class={element({ class: "mt-8" })}>
           <button class={button()} type="submit">
@@ -81,7 +78,7 @@ function AddDomain() {
 }
 
 function DoNotAddMember() {
-  const { $do_not_add_member } = useContext(Desicison_Context);
+  const { $add_as_internal_member } = useContext(Desicison_Context);
   const {
     moderation: {
       users: { given_name },
@@ -92,19 +89,19 @@ function DoNotAddMember() {
     <div class="fr-radio-group">
       <input
         _="on click set @value to my checked"
-        id={$do_not_add_member}
+        id={$add_as_internal_member}
         name={"add_domain" as Validation_MutationInputKeys}
         type="radio"
         value="false"
       />
-      <label class="fr-label !flex-row" for={$do_not_add_member}>
+      <label class="fr-label !flex-row" for={$add_as_internal_member}>
         Ne pas ajouter <b class="mx-1">{given_name}</b> à l'organisation
       </label>
     </div>
   );
 }
 
-function AddAsInternalMember() {
+function AddAsMember() {
   const { $add_as_internal_member } = useContext(Desicison_Context);
   const {
     moderation: {
@@ -124,31 +121,6 @@ function AddAsInternalMember() {
       <label class="fr-label !flex-row" for={$add_as_internal_member}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
         QU'INTERNE
-      </label>
-    </div>
-  );
-}
-
-function AddAsExternallMember() {
-  const { $add_as_external_member } = useContext(Desicison_Context);
-  const {
-    moderation: {
-      users: { given_name },
-    },
-  } = useContext(ModerationPage_Context);
-
-  return (
-    <div class="fr-radio-group">
-      <input
-        _="on click set @value to my checked"
-        id={$add_as_external_member}
-        name={"add_domain" as Validation_MutationInputKeys}
-        type="radio"
-        value="true"
-      />
-      <label class="fr-label !flex-row" for={$add_as_external_member}>
-        Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
-        QU'EXTERNE
       </label>
     </div>
   );
