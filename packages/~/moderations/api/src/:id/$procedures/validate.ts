@@ -9,11 +9,9 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { member_join_organization } from "@~/moderations.lib/usecase/member_join_organization";
 import { schema } from "@~/moncomptepro.database";
-import {
-  join_organization,
-  send_moderation_processed_email,
-} from "@~/moncomptepro.lib/index";
+import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
 import { add_verified_domain } from "@~/organizations.lib/usecase/add_verified_domain";
 import { to } from "await-to-js";
 import consola from "consola";
@@ -74,7 +72,8 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
             data: { domain, organization_id: id },
           });
         })
-        .otherwise(() => {
+        .with(P.instanceOf(Error), () => {
+          consola.error(error);
           throw error;
         });
     }
@@ -86,11 +85,10 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
         .exhaustive();
 
       const [error] = await to(
-        join_organization({
-          is_external,
-          organization_id,
-          user_id,
-        }),
+        member_join_organization(
+          { pg: moncomptepro_pg },
+          { is_external, moderation_id: id },
+        ),
       );
 
       match(error)
@@ -100,7 +98,8 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
             data: { domain, organization_id: id },
           });
         })
-        .otherwise(() => {
+        .with(P.instanceOf(Error), () => {
+          consola.error(error);
           throw error;
         });
     }

@@ -12,7 +12,14 @@ import { ModerationPage_Context } from "./context";
 //
 
 export function Member_Valid() {
-  const { $accept, $add_domain, $form } = useContext(Desicison_Context);
+  const {
+    $accept,
+    $add_domain,
+    $add_as_external_member,
+    $add_as_internal_member,
+    $do_not_add_member,
+    $form,
+  } = useContext(Desicison_Context);
   const { moderation } = useContext(ModerationPage_Context);
   const { base, element } = fieldset();
 
@@ -64,7 +71,6 @@ function AddDomain() {
   return (
     <div class="fr-checkbox-group">
       <input
-        _="on click set @value to my checked"
         id={$add_domain}
         name={FORM_SCHEMA.keyof().Enum.add_domain}
         type="checkbox"
@@ -89,7 +95,6 @@ function DoNotAddMember() {
   return (
     <div class="fr-radio-group">
       <input
-        _="on click set @value to my checked"
         id={$do_not_add_member}
         name={FORM_SCHEMA.keyof().Enum.add_member}
         type="radio"
@@ -113,7 +118,6 @@ function AddAsMemberInternal() {
   return (
     <div class="fr-radio-group">
       <input
-        _="on click set @value to my checked"
         id={$add_as_internal_member}
         name={FORM_SCHEMA.keyof().Enum.add_member}
         type="radio"
@@ -138,7 +142,6 @@ function AddAsMemberExternal() {
   return (
     <div class="fr-radio-group">
       <input
-        _="on click set @value to my checked"
         id={$add_as_external_member}
         name={FORM_SCHEMA.keyof().Enum.add_member}
         type="radio"
