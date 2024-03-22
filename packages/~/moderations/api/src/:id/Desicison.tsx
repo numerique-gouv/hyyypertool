@@ -6,11 +6,11 @@ import { Desicison_Context } from "./Desicison_Context";
 
 //
 export function Desicison() {
-  const { $accept, $form, $reject } = useContext(Desicison_Context);
+  const { $accept, $decision_form, $reject } = useContext(Desicison_Context);
   const { base, element, legend } = fieldset();
 
   return (
-    <form action="javascript:void(0);" id={$form}>
+    <form action="javascript:void(0);" id={$decision_form}>
       <fieldset class={base()}>
         <legend class={legend({ className: "font-bold" })}>
           Voulez-vous autoriser ce membre ?

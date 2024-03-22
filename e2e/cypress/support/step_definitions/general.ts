@@ -42,6 +42,14 @@ Given("le tableau {string} vide", function (text: string) {
     .within(() => cy.get("tr").eq(0));
 });
 
+Given("le tableau sous le title {string}", function (text: string) {
+  cy.contains(text)
+    .invoke("attr", "id")
+    .then((id) => {
+      cy.get(`[aria-describedby="${id}"]`).as(`${text}-table`);
+    });
+});
+
 Given("le tableau sous le title {string} vide", function (text: string) {
   cy.contains(text)
     .invoke("attr", "id")

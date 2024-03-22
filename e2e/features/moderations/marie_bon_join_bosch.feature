@@ -30,5 +30,30 @@ Fonctionnalité: Moderation non blockante
 
   Scénario: Marie est un membre interne de l'organization.
     Soit le tableau sous le title "Membres connus dans l’organisation" vide
-    Quand je clique sur "🪄 Action en un click : Marie est un membre interne de l'organization."
+    Quand je clique sur "Je valide ce membre ✅"
+    Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
+    Quand je clique sur "Notifier le membre et terminer"
+
+    Alors je vois "Liste des moderations"
+    Quand je clique sur "Voir les demandes traitées"
+    * je vois la ligne de table "57206768400017"
+    Quand sur la même ligne je clique sur "✅"
+
+    Soit le tableau sous le title "Membres connus dans l’organisation"
     Alors je vois "fr.bosch.com" dans le tableau de "Membres connus dans l’organisation"
+    Et je vois "✅" dans le tableau de "Membres connus dans l’organisation"
+
+  Scénario: Marie est un membre externe de l'organization.
+    Soit le tableau sous le title "Membres connus dans l’organisation" vide
+    Quand je clique sur "Je valide ce membre ✅"
+    Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
+    Quand je clique sur "Notifier le membre et terminer"
+
+    Alors je vois "Liste des moderations"
+    Quand je clique sur "Voir les demandes traitées"
+    * je vois la ligne de table "57206768400017"
+    Quand sur la même ligne je clique sur "✅"
+
+    Soit le tableau sous le title "Membres connus dans l’organisation"
+    Alors je vois "fr.bosch.com" dans le tableau de "Membres connus dans l’organisation"
+    Et je vois "❌" dans le tableau de "Membres connus dans l’organisation"

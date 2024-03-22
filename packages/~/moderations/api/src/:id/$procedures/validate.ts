@@ -9,6 +9,7 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { member_join_organization } from "@~/moderations.lib/usecase/member_join_organization";
 import { schema } from "@~/moncomptepro.database";
 import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
 import { add_verified_domain } from "@~/organizations.lib/usecase/add_verified_domain";
@@ -21,15 +22,17 @@ import { z } from "zod";
 
 //
 
+export const FORM_SCHEMA = z.object({
+  add_domain: z.string().default("false").pipe(z_coerce_boolean),
+  add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL", "NOPE"]).default("NOPE"),
+});
+
+//
+
 export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
-  zValidator(
-    "form",
-    z.object({
-      add_domain: z.string().default("false").pipe(z_coerce_boolean),
-    }),
-  ),
+  zValidator("form", FORM_SCHEMA),
   async ({
     text,
     req,
@@ -37,7 +40,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
     var: { moncomptepro_pg, userinfo, sentry },
   }) => {
     const { id } = req.valid("param");
-    const { add_domain } = req.valid("form");
+    const { add_domain, add_member } = req.valid("form");
 
     const moderation = await moncomptepro_pg.query.moderations.findFirst({
       columns: { organization_id: true, user_id: true },
@@ -69,7 +72,34 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
             data: { domain, organization_id: id },
           });
         })
-        .otherwise(() => {
+        .with(P.instanceOf(Error), () => {
+          consola.error(error);
+          throw error;
+        });
+    }
+
+    if (add_member !== "NOPE") {
+      const is_external = match(add_member)
+        .with("AS_INTERNAL", () => false)
+        .with("AS_EXTERNAL", () => true)
+        .exhaustive();
+
+      const [error] = await to(
+        member_join_organization(
+          { pg: moncomptepro_pg },
+          { is_external, moderation_id: id },
+        ),
+      );
+
+      match(error)
+        .with(P.instanceOf(HTTPError), () => {
+          consola.error(error);
+          sentry.captureException(error, {
+            data: { domain, organization_id: id },
+          });
+        })
+        .with(P.instanceOf(Error), () => {
+          consola.error(error);
           throw error;
         });
     }
@@ -85,10 +115,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
       .where(eq(schema.moderations.id, id));
 
     return text("OK", 200, {
-      "HX-Trigger": [
-        MODERATION_EVENTS.Enum.MODERATION_EMAIL_UPDATED,
-        MODERATION_EVENTS.Enum.MODERATION_UPDATED,
-      ].join(", "),
+      "HX-Trigger": [MODERATION_EVENTS.Enum.MODERATION_UPDATED].join(", "),
     } as Htmx_Header);
   },
 );

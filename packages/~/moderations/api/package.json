@@ -19,6 +19,7 @@
     "@~/app.middleware": "workspace:*",
     "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
+    "@~/moderations.lib": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "await-to-js": "3.0.0",
