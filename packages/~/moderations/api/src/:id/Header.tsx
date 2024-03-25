@@ -7,6 +7,7 @@ import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";
+import { raw } from "hono/html";
 import { useContext } from "hono/jsx";
 import { MessageInfo } from "./MessageInfo";
 import { ModerationPage_Context } from "./context";
@@ -36,6 +37,10 @@ export function Header() {
       <hr class="bg-none" />
 
       <Info />
+
+      <hr class="bg-none" />
+
+      <Comments />
 
       <hr class="bg-none" />
 
@@ -80,7 +85,8 @@ function Info() {
 }
 
 function ModerationCallout({ moderation }: { moderation: Moderation }) {
-  if (!moderation.moderated_at) return <></>;
+  if (!moderation.moderated_at) return raw``;
+
   const { base, text, title } = callout({ intent: "success" });
   return (
     <div class={base()}>
@@ -96,11 +102,11 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
             par <b>{moderation.moderated_by}</b>
           </>
         ) : (
-          <></>
+          raw``
         )}
         .
       </p>
-      {moderation.comment ? <p>{moderation.comment}</p> : <></>}
+      <LastComment />
       <button
         class={button({ size: "sm", type: "tertiary" })}
         {...hx_urls.moderations[":id"].$procedures.reprocess.$patch({
@@ -112,4 +118,50 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
       </button>
     </div>
   );
+}
+
+function LastComment() {
+  const {
+    moderation: { comment },
+  } = useContext(ModerationPage_Context);
+  if (!comment) {
+    return raw``;
+  }
+  const parsed_comment = parse_comment(comment);
+  const last_comment = parsed_comment.at(-1);
+  return <p>{last_comment?.value}</p>;
+  // {moderation.comment ? <p>{moderation.comment}</p> : raw``}
+}
+
+function Comments() {
+  const {
+    moderation: { comment },
+  } = useContext(ModerationPage_Context);
+  const parsed_comment = parse_comment(comment);
+  return (
+    <details>
+      <summary>Commentaires</summary>
+
+      <ul>
+        {parsed_comment.map(({ created_at, created_by, value }) => (
+          <li key={created_at}>
+            <b>{created_by}</b>{" "}
+            <small>
+              <LocalTime date={created_at} />
+            </small>
+            <br /> {value}
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+function parse_comment(comment: string | null) {
+  if (!comment) return [];
+  return comment.split("\n").map((line) => {
+    const [when_and_by, value] = line.split(" | ");
+    const [created_at, created_by] = when_and_by.split(" ");
+    return { created_at: new Date(Number(created_at)), created_by, value };
+  });
 }

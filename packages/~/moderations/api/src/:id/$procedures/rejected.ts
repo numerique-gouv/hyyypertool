@@ -25,6 +25,7 @@ import { to as await_to } from "await-to-js";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
+import { comment_message } from "./comment_message";
 
 //
 
@@ -52,6 +53,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
       { message, subject },
     );
     await mark_moderatio_as_rejected(moncomptepro_pg, {
+      comment: moderation.comment,
       moderation_id,
       moderated_by: userinfo_to_username(userinfo),
     });
@@ -151,6 +153,7 @@ async function get_moderation(
   const moderation = await pg.query.moderations.findFirst({
     columns: {
       id: true,
+      comment: true,
       organization_id: true,
       user_id: true,
       ticket_id: true,
@@ -168,13 +171,21 @@ type get_moderation_dto = Awaited<ReturnType<typeof get_moderation>>;
 function mark_moderatio_as_rejected(
   pg: MonComptePro_PgDatabase,
   {
+    comment,
     moderation_id,
     moderated_by,
-  }: { moderation_id: number; moderated_by: string },
+  }: { comment: string | null; moderation_id: number; moderated_by: string },
 ) {
   return pg
     .update(schema.moderations)
     .set({
+      comment: [
+        ...(comment ? [comment] : []),
+        comment_message({
+          type: "REJECTED",
+          created_by: moderated_by,
+        }),
+      ].join("\n"),
       moderated_at: new Date(),
       moderated_by,
     })

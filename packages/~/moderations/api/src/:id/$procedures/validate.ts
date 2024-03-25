@@ -19,6 +19,7 @@ import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
+import { comment_message } from "./comment_message";
 
 //
 
@@ -43,7 +44,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
     const { add_domain, add_member } = req.valid("form");
 
     const moderation = await moncomptepro_pg.query.moderations.findFirst({
-      columns: { organization_id: true, user_id: true },
+      columns: { comment: true, organization_id: true, user_id: true },
       with: { users: { columns: { email: true } } },
       where: eq(schema.moderations.id, id),
     });
@@ -51,6 +52,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
     if (!moderation) return notFound();
 
     const {
+      comment,
       organization_id,
       user_id,
       users: { email },
@@ -105,10 +107,17 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
     }
 
     await send_moderation_processed_email({ organization_id, user_id });
+
     await moncomptepro_pg
       .update(schema.moderations)
       .set({
-        // comment: "Validaté ap " + userinfo.email,
+        comment: [
+          ...(comment ? [comment] : []),
+          comment_message({
+            type: "VALIDATED",
+            created_by: userinfo.email,
+          }),
+        ].join("\n"),
         moderated_at: new Date(),
         moderated_by: userinfo.email,
       })
