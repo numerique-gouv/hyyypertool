@@ -32,7 +32,7 @@
     "dev:api:tsc": "bun run build:tsc",
     "dev:inspect-brk": "tsx --inspect-brk bin/src/index.ts",
     "dev:tailwind": "bun run build:tailwind --watch",
-    "e2e:install": "cd e2e && pnpm install",
+    "e2e:install": "cd e2e && bun install",
     "e2e:run": "cd e2e && bun run",
     "fixtures:load": "bun x run-z database:moncomptepro:migrator database:moncomptepro:seed",
     "format": "bun x prettier --check .",

@@ -4,11 +4,11 @@
 
 ```sh
 # Because [Bun](https://github.com/oven-sh/bun/releases/tag/bun-v1.0.26) does not support cypress.
-$ pnpm install
+$ bun install
 # Run all the test in headless mode
-$ pnpm test
+$ bun run test
 # Open cypress in electron
-$ pnpm open
+$ bun run open
 ```
 
 ## Test configuration
