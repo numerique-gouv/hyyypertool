@@ -58,9 +58,8 @@ export function Member_Invalid() {
         if #${$reject}.checked then remove @hidden else add @hidden end
       on submit
         wait for ${Htmx_Events.enum.afterOnLoad}
-        wait 1s
         go to the top of .last-message smoothly
-        wait 1s
+        wait 2s
         go back
       `}
       hidden

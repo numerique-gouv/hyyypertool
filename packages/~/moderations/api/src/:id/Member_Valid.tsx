@@ -25,9 +25,8 @@ export function Member_Valid() {
         if #${$accept}.checked then remove @hidden else add @hidden end
       on submit
         wait for ${Htmx_Events.enum.afterOnLoad}
-        wait 1s
         go to the top of body smoothly
-        wait 1s
+        wait 2s
         go back
       `}
       hidden
