@@ -1,5 +1,35 @@
 
 
+## [2024.3.6](https://github.com/betagouv/hyyypertool/compare/2024.3.5...2024.3.6) (2024-03-25)
+
+
+### Bug Fixes
+
+* **app:** do not change header of finalized context ([f303930](https://github.com/betagouv/hyyypertool/commit/f30393099a8f46f5e79df316774642b92b06eeb6))
+* **app:** type error immutable header ([1f1f8ad](https://github.com/betagouv/hyyypertool/commit/1f1f8ada8f4a4ce4115e93b52179403ec34d73f3))
+* **ui:** Rrrr typo ([831bd46](https://github.com/betagouv/hyyypertool/commit/831bd460acb9e51db389e94a949e2456d8f39c56))
+* **users:** false empty organization ([#146](https://github.com/betagouv/hyyypertool/issues/146)) ([1ed11c2](https://github.com/betagouv/hyyypertool/commit/1ed11c2df5357936916e0e45cb9a8ef934d14b5b))
+
+
+### Features
+
+* **infra:** use join to concat path ([41262fa](https://github.com/betagouv/hyyypertool/commit/41262fa99ca3728fe4962591e799ed727f925d2a))
+* **moderation:** add domain through the action panel ([#142](https://github.com/betagouv/hyyypertool/issues/142)) ([a4ffcdc](https://github.com/betagouv/hyyypertool/commit/a4ffcdc96c4d00ea6123b9fad5e9f44774b5b150))
+* **moderation:** add extra reject fields ([3e92517](https://github.com/betagouv/hyyypertool/commit/3e925172249128062799d376469b6738ead1ab2c))
+* **moderation:** desicison section first iteration ([#141](https://github.com/betagouv/hyyypertool/issues/141)) ([5d43bba](https://github.com/betagouv/hyyypertool/commit/5d43bba2b604bae36293cfa73e6fadeb580a3786))
+* **moderation:** each response is a file ([8dcd263](https://github.com/betagouv/hyyypertool/commit/8dcd26388aab90326c9c1decf6fa9e202f787136))
+* **moderation:** refresh user oganization table ([#136](https://github.com/betagouv/hyyypertool/issues/136)) ([11767b6](https://github.com/betagouv/hyyypertool/commit/11767b6947059596bdcf214f7b4533b915c5ac25))
+* **moderation:** rejected behavior ([#148](https://github.com/betagouv/hyyypertool/issues/148)) ([f114e92](https://github.com/betagouv/hyyypertool/commit/f114e92d90c09104c817fce740e2999e6e60b892))
+* **moderation:** use checkbox too add member ([#153](https://github.com/betagouv/hyyypertool/issues/153)) ([b8b6606](https://github.com/betagouv/hyyypertool/commit/b8b66067a4b4ac19689ea0770d7cddc73019518a))
+* **ui:** add copy_to_clipboard script ([#143](https://github.com/betagouv/hyyypertool/issues/143)) ([f325046](https://github.com/betagouv/hyyypertool/commit/f3250467f2fe7cb80bbd795b7b1f416879ad2464))
+* **user:** change job label ([384ac9c](https://github.com/betagouv/hyyypertool/commit/384ac9cf9838bbc991de12b6dfdad831954cf176))
+* **user:** change job label (2) ([04c444c](https://github.com/betagouv/hyyypertool/commit/04c444c9b627bed0e928121c885d850b9a642277))
+
+
+### Reverts
+
+* Revert "chore(deps): update dependencies" ([5148feb](https://github.com/betagouv/hyyypertool/commit/5148febe00ba47faecdf3531899b2f9cdda88768))
+
 ## [2024.3.5](https://github.com/betagouv/hyyypertool/compare/2024.3.4...2024.3.5) (2024-03-12)
 
 
