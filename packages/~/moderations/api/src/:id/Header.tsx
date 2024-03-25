@@ -130,7 +130,6 @@ function LastComment() {
   const parsed_comment = parse_comment(comment);
   const last_comment = parsed_comment.at(-1);
   return <p>{last_comment?.value}</p>;
-  // {moderation.comment ? <p>{moderation.comment}</p> : raw``}
 }
 
 function Comments() {
@@ -142,7 +141,7 @@ function Comments() {
     <details>
       <summary>Commentaires</summary>
 
-      <ul>
+      <ul class="ml-4">
         {parsed_comment.map(({ created_at, created_by, value }) => (
           <li key={created_at}>
             <b>{created_by}</b>{" "}
