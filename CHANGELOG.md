@@ -1,5 +1,12 @@
 
 
+## [2024.3.7](https://github.com/betagouv/hyyypertool/compare/2024.3.6...2024.3.7) (2024-03-25)
+
+
+### Features
+
+* **moderation:** use comment field as history ([#154](https://github.com/betagouv/hyyypertool/issues/154)) ([5136473](https://github.com/betagouv/hyyypertool/commit/5136473060fe0db957b5d7ef3e18e57540ef230a))
+
 ## [2024.3.6](https://github.com/betagouv/hyyypertool/compare/2024.3.5...2024.3.6) (2024-03-25)
 
 
