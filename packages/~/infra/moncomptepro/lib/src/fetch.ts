@@ -3,6 +3,7 @@
 import env from "@~/app.core/config";
 import { HTTPError } from "@~/app.core/error";
 import consola from "consola";
+import { join } from "node:path";
 
 //
 
@@ -29,7 +30,7 @@ type Options =
 
 export async function fetch_mcp_admin_api(options: Options) {
   const searchParams = new URLSearchParams(options.searchParams);
-  const url = `${env.API_AUTH_URL}${options.endpoint}?${searchParams}`;
+  const url = `${join(env.API_AUTH_URL, options.endpoint)}?${searchParams}`;
   const headers = new Headers({
     Authorization: `Basic ${Buffer.from(`${env.API_AUTH_USERNAME}:${env.API_AUTH_PASSWORD}`).toString("base64")}`,
   });
