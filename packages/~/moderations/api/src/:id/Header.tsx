@@ -162,7 +162,6 @@ function parse_comment(comment: string | null) {
   return comment.split("\n").map((line) => {
     const [when_and_by, value] = line.split(" | ");
     const [created_at, created_by] = when_and_by.split(" ");
-    console.log({ created_at, created_by, value, when_and_by });
     return { created_at: new Date(Number(created_at)), created_by, value };
   });
 }
