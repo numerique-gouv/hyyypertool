@@ -14,7 +14,7 @@ export function LocalTime({
   const date = new Date(date_like);
 
   return (
-    <time datetime={date?.toISOString()} title={date?.toString()}>
+    <time datetime={date.toISOString()} title={date.toString()}>
       {date_to_string(date)}
     </time>
   );

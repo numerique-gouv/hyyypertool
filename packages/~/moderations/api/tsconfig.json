@@ -3,6 +3,7 @@
     "outDir": "./node_modules/.cache/tsc"
   },
   "extends": "@~/config.typescript/api.json",
+  "include": ["src"],
   "references": [
     { "path": "../../app/layout/tsconfig.json" },
     { "path": "../../app/middleware/tsconfig.json" },
