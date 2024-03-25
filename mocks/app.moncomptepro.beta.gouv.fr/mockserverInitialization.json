@@ -1,6 +1,14 @@
 [
   {
     "httpRequest": {
+      "path": "/api/admin/mark-domain-as-verified"
+    },
+    "httpResponse": {
+      "body": {}
+    }
+  },
+  {
+    "httpRequest": {
       "path": "/api/admin/send-moderation-processed-email"
     },
     "httpResponse": {
