@@ -43,6 +43,17 @@
   },
   {
     "httpRequest": {
+      "path": "/api/v2/session/end"
+    },
+    "httpResponse": {
+      "statusCode": 302,
+      "headers": {
+        "Location": ["http://localhost:3000"]
+      }
+    }
+  },
+  {
+    "httpRequest": {
       "path": "/api/v2/.well-known/openid-configuration"
     },
     "httpResponse": {

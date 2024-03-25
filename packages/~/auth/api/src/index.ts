@@ -2,10 +2,9 @@
 
 import { zValidator } from "@hono/zod-validator";
 import env from "@~/app.core/config";
-import {
-  type AgentConnect_UserInfo,
-  type Session_Context,
-} from "@~/app.middleware/session";
+import { AuthError } from "@~/app.core/error";
+import type { App_Context } from "@~/app.middleware/context";
+import { type AgentConnect_UserInfo } from "@~/app.middleware/session";
 import { urls } from "@~/app.urls";
 import { Hono } from "hono";
 import { generators } from "openid-client";
@@ -14,7 +13,20 @@ import { agentconnect, type Oidc_Context } from "./agentconnect";
 
 //
 
-export default new Hono<Oidc_Context & Session_Context>()
+export default new Hono<Oidc_Context & App_Context>()
+  .onError((error, c) => {
+    try {
+      const session = c.get("session");
+      session.deleteSession();
+    } catch {
+      // do not break with missing session
+    }
+
+    throw new AuthError("AgentConnect OIDC Error", { cause: error });
+  })
+
+  //
+
   .use("*", agentconnect())
   .post("/login", async function POST(c) {
     const session = c.get("session");
@@ -100,14 +112,13 @@ export default new Hono<Oidc_Context & Session_Context>()
       return redirect(urls.moderations.$url().pathname);
     },
   )
-  .get("/logout", async ({ req, get, redirect }) => {
-    const session = get("session");
-    const client = get("oidc");
+  .get("/logout", ({ req, redirect, var: { oidc, session } }) => {
+    const id_token_hint = session.get("idtoken");
 
     const post_logout_redirect_uri = get_logout_redirect_uri(req.url);
 
-    const logoutUrl = client.endSessionUrl({
-      id_token_hint: session.get("idtoken"),
+    const logoutUrl = oidc.endSessionUrl({
+      id_token_hint,
       post_logout_redirect_uri,
     });
 

@@ -24,9 +24,9 @@ export default new Hono()
     }),
   )
   .get("/bundle/config.js", async ({ text }) => {
-    const { ASSETS_PATH, VERSION } = env;
+    const { ASSETS_PATH, PUBLIC_ASSETS_PATH, VERSION } = env;
     return text(
-      `export default ${JSON.stringify({ ASSETS_PATH, VERSION })}`,
+      `export default ${JSON.stringify({ ASSETS_PATH, PUBLIC_ASSETS_PATH, VERSION })}`,
       200,
       {
         "content-type": "text/javascript",
