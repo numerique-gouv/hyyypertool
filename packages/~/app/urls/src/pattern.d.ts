@@ -1,507 +1,533 @@
 /// <reference types="node" />
 /// <reference types="bun-types" />
 declare const app: import("hono/hono-base").HonoBase<
-  import("hono").Env,
-  import("hono/types").MergeSchemaPath<
-    import("hono/types").MergeSchemaPath<
-      import("hono/types").MergeSchemaPath<
-        import("hono/types").MergeSchemaPath<
-          import("hono").ToSchema<
-            "patch",
-            "/:domain",
-            {
-              param: {
-                id: string;
-                domain: string;
-              };
-            },
-            {}
-          >,
-          "/verify"
-        >,
-        "/$procedures"
-      > &
-        import("hono/types").MergeSchemaPath<
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              },
-              {}
-            > &
-              import("hono").ToSchema<
-                "put",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                } & {
-                  form: {
-                    domain: string | File;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "delete",
-                "/:domain",
-                {
-                  param: {
-                    id: string;
-                    domain: string;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "delete",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "patch",
-                "/:domain",
-                {
-                  param: {
-                    id: string;
-                    domain: string;
-                  };
-                } & {
-                  form: {
-                    is_verified?: string | File | undefined;
-                  };
-                },
-                {}
-              >,
-            "/internal"
-          > &
-            import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "get",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              > &
-                import("hono").ToSchema<
-                  "put",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  } & {
-                    form: {
-                      domain: string | File;
-                    };
-                  },
-                  {}
-                > &
-                import("hono").ToSchema<
-                  "delete",
-                  "/",
-                  {
-                    param: {
-                      id: string;
-                    };
-                  },
-                  {}
-                > &
-                import("hono").ToSchema<
-                  "delete",
-                  "/:domain",
-                  {
-                    param: {
-                      id: string;
-                      domain: string;
-                    };
-                  },
-                  {}
-                >,
-              "/external"
-            >,
-          "/domains"
-        > &
-        import("hono/types").MergeSchemaPath<
-          import("hono/types").MergeSchemaPath<
-            import("hono/types").MergeSchemaPath<
-              import("hono/types").MergeSchemaPath<
-                import("hono").ToSchema<
-                  "post",
-                  "/",
-                  {
-                    form: {
-                      is_external: string | File;
-                    };
-                  } & {
-                    param: {
-                      id: string;
-                      user_id: string;
-                    };
-                  },
-                  {}
-                >,
-                "/join"
-              >,
-              "/$procedures"
-            > &
-              import("hono").ToSchema<
-                "post",
-                "/",
-                {
-                  form: {
-                    is_external: string | File;
-                  };
-                } & {
-                  param: {
-                    id: string;
-                    user_id: string;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "patch",
-                "/",
-                {
-                  param: {
-                    id: string;
-                    user_id: string;
-                  };
-                } & {
-                  form: {
-                    verification_type?: string | File | undefined;
-                    is_external?: string | File | undefined;
-                  };
-                },
-                {}
-              > &
-              import("hono").ToSchema<
-                "delete",
-                "/",
-                {
-                  param: {
-                    id: string;
-                    user_id: string;
-                  };
-                },
-                {}
-              >,
-            "/:user_id"
-          > &
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              } & {
-                query: {
-                  describedby: string | string[];
-                  page?: string | string[] | undefined;
-                  page_size?: string | string[] | undefined;
-                };
-              },
-              {}
-            >,
-          "/members"
-        > &
-        import("hono").ToSchema<
-          "get",
-          "/",
-          {
-            param: {
-              id: string;
-            };
-          },
-          {}
-        >,
-      "/:id"
-    > &
-      import("hono/types").MergeSchemaPath<
-        import("hono").ToSchema<
-          "get",
-          "/",
-          {
-            query: {
-              siret: string | string[];
-            };
-          },
-          {}
-        >,
-        "/leaders"
-      > &
-      import("hono").ToSchema<
-        "get",
-        "/",
-        {
+  {},
+  {
+    "/organizations/:id/$procedures/verify/:domain": {
+      $patch: {
+        input: {
+          param: {
+            id: string;
+            domain: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/domains/internal": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+      $put: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+          form: {
+            domain: string | File;
+          };
+        };
+        output: {};
+      };
+      $delete: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/domains/internal/:domain": {
+      $delete: {
+        input: {
+          param: {
+            id: string;
+            domain: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+      $patch: {
+        input: {
+          param: {
+            id: string;
+            domain: string;
+          } & {
+            id: string;
+          };
+          form: {
+            is_verified?: string | File | undefined;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/domains/external": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+      $put: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+          form: {
+            domain: string | File;
+          };
+        };
+        output: {};
+      };
+      $delete: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/domains/external/:domain": {
+      $delete: {
+        input: {
+          param: {
+            id: string;
+            domain: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/members/:user_id/$procedures/join": {
+      $post: {
+        input: {
+          form: {
+            is_external: string | File;
+          };
+          param: {
+            id: string;
+            user_id: string;
+          } & {
+            user_id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/members/:user_id": {
+      $post: {
+        input: {
+          form: {
+            is_external: string | File;
+          };
+          param: {
+            id: string;
+            user_id: string;
+          } & {
+            user_id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+      $patch: {
+        input: {
+          param: {
+            id: string;
+            user_id: string;
+          } & {
+            user_id: string;
+          } & {
+            id: string;
+          };
+          form: {
+            verification_type?: string | File | undefined;
+            is_external?: string | File | undefined;
+          };
+        };
+        output: {};
+      };
+      $delete: {
+        input: {
+          param: {
+            id: string;
+            user_id: string;
+          } & {
+            user_id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id/members": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+          query: {
+            describedby: string | string[];
+            page?: string | string[] | undefined;
+            page_size?: string | string[] | undefined;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/:id": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations/leaders": {
+      $get: {
+        input: {
+          query: {
+            siret: string | string[];
+          };
+        };
+        output: {};
+      };
+    };
+    "/organizations": {
+      $get: {
+        input: {
           query: {
             "search-siret"?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
             id?: string | string[] | undefined;
           };
-        },
-        {}
-      >,
-    "/organizations"
-  > &
-    import("hono/types").MergeSchemaPath<
-      import("hono/types").MergeSchemaPath<
-        import("hono/types").MergeSchemaPath<
-          import("hono").ToSchema<
-            "get",
-            "/",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          >,
-          "/moderations"
-        > &
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              } & {
-                query: {
-                  page?: string | string[] | undefined;
-                  page_size?: string | string[] | undefined;
-                };
-              },
-              {}
-            >,
-            "/organizations"
-          > &
-          import("hono").ToSchema<
-            "get",
-            "/",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          > &
-          import("hono").ToSchema<
-            "delete",
-            "/",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          > &
-          import("hono").ToSchema<
-            "patch",
-            "/reset",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          >,
-        "/:id"
-      > &
-        import("hono").ToSchema<
-          "get",
-          "/",
-          {
-            query: {
-              "search-email"?: string | string[] | undefined;
-              page?: string | string[] | undefined;
-              page_size?: string | string[] | undefined;
-              id?: string | string[] | undefined;
-            };
-          },
-          {}
-        >,
-      "/users"
-    > &
-    import("hono/types").MergeSchemaPath<
-      import("hono/types").MergeSchemaPath<
-        import("hono/types").MergeSchemaPath<
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "patch",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              } & {
-                form: {
-                  add_member: string | File;
-                  add_domain?: string | File | undefined;
-                };
-              },
-              {}
-            >,
-            "/validate"
-          > &
-            import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "patch",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              >,
-              "/reprocess"
-            > &
-            import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "patch",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                } & {
-                  form: {
-                    message: string | File;
-                    subject: string | File;
-                  };
-                },
-                {}
-              >,
-              "/rejected"
-            > &
-            import("hono/types").MergeSchemaPath<
-              import("hono").ToSchema<
-                "patch",
-                "/",
-                {
-                  param: {
-                    id: string;
-                  };
-                },
-                {}
-              >,
-              "/processed"
-            >,
-          "/$procedures"
-        > &
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                query: {
-                  user_id: string | string[];
-                  organization_id: string | string[];
-                };
-              },
-              {}
-            >,
-            "/duplicate_warning"
-          > &
-          import("hono/types").MergeSchemaPath<
-            import("hono").ToSchema<
-              "get",
-              "/",
-              {
-                param: {
-                  id: string;
-                };
-              },
-              {}
-            >,
-            "/email"
-          > &
-          import("hono").ToSchema<
-            "get",
-            "/",
-            {
-              param: {
-                id: string;
-              };
-            },
-            {}
-          >,
-        "/:id"
-      > &
-        import("hono").ToSchema<"get", "/", unknown, {}>,
-      "/moderations"
-    > &
-    import("hono/types").MergeSchemaPath<
-      import("hono").ToSchema<"post", "/login", unknown, {}> &
-        import("hono").ToSchema<"get", "/fake/login/callback", unknown, {}> &
-        import("hono").ToSchema<
-          "get",
-          "/login/callback",
-          {
-            query: {
-              code: string | string[];
-              state: string | string[];
-            };
-          },
-          {}
-        > &
-        import("hono").ToSchema<"get", "/logout", unknown, {}>,
-      "/auth"
-    > &
-    import("hono/types").MergeSchemaPath<
-      import("hono").ToSchema<"get", "/", unknown, {}>,
-      "/"
-    > &
-    import("hono/types").MergeSchemaPath<
-      import("hono").ToSchema<"get", "/localhost:3000/*", unknown, {}>,
-      "/proxy"
-    > &
-    import("hono/types").MergeSchemaPath<
-      import("hono").ToSchema<"get", "/", unknown, {}> &
-        import("hono").ToSchema<"get", "/zammad", unknown, {}> &
-        import("hono").ToSchema<"get", "/drizzle/moncomptepro", unknown, {}>,
-      "/readyz"
-    > &
-    import("hono/types").MergeSchemaPath<
-      import("hono/types").MergeSchemaPath<
-        import("hono").ToSchema<
-          "get",
-          "/attachment/:ticket_id/:article_id/:attachment_id",
-          {
-            param: {
-              article_id: string;
-              attachment_id: string;
-              ticket_id: string;
-            };
-          },
-          {}
-        >,
-        "/zammad"
-      > &
-        import("hono").ToSchema<"get", "/bundle/config.js", unknown, {}> &
-        import("hono").ToSchema<"get", "/bundle/env.js", unknown, {}>,
-      `/assets/${string}`
-    > &
-    import("hono").ToSchema<"get", "/healthz", unknown, {}> &
-    import("hono").ToSchema<"get", "/livez", unknown, {}>,
+        };
+        output: {};
+      };
+    };
+  } & {
+    "/users/:id/moderations": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/users/:id/organizations": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+          query: {
+            page?: string | string[] | undefined;
+            page_size?: string | string[] | undefined;
+          };
+        };
+        output: {};
+      };
+    };
+    "/users/:id": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+      $delete: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/users/:id/reset": {
+      $patch: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/users": {
+      $get: {
+        input: {
+          query: {
+            "search-email"?: string | string[] | undefined;
+            page?: string | string[] | undefined;
+            page_size?: string | string[] | undefined;
+            id?: string | string[] | undefined;
+          };
+        };
+        output: {};
+      };
+    };
+  } & {
+    "/moderations/:id/$procedures/validate": {
+      $patch: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+          form: {
+            add_domain?: string | File | undefined;
+            add_member?: string | File | undefined;
+            send_notitfication?: string | File | undefined;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations/:id/$procedures/reprocess": {
+      $patch: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations/:id/$procedures/rejected": {
+      $patch: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+          form: {
+            message: string | File;
+            subject: string | File;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations/:id/$procedures/processed": {
+      $patch: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations/:id/duplicate_warning": {
+      $get: {
+        input: {
+          query: {
+            user_id: string | string[];
+            organization_id: string | string[];
+          };
+        } & {
+          param: {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations/:id/email": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations/:id": {
+      $get: {
+        input: {
+          param: {
+            id: string;
+          } & {
+            id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    "/moderations": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    "/auth/login": {
+      $post: {
+        input: {};
+        output: {};
+      };
+    };
+    "/auth/fake/login/callback": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+    "/auth/login/callback": {
+      $get: {
+        input: {
+          query: {
+            code: string | string[];
+            state: string | string[];
+          };
+        };
+        output: {};
+      };
+    };
+    "/auth/logout": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    "/": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    "/proxy/localhost:3000/*": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    "/readyz": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+    "/readyz/zammad": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+    "/readyz/drizzle/moncomptepro": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    [
+      x: `/assets/${string}/zammad/attachment/:ticket_id/:article_id/:attachment_id`
+    ]: {
+      $get: {
+        input: {
+          param: {
+            article_id: string;
+            attachment_id: string;
+            ticket_id: string;
+          };
+        };
+        output: {};
+      };
+    };
+    [x: `/assets/${string}/bundle/config.js`]: {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+    [x: `/assets/${string}/bundle/env.js`]: {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    "/healthz": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  } & {
+    "/livez": {
+      $get: {
+        input: {};
+        output: {};
+      };
+    };
+  },
   "/"
 >;
 export type Router = typeof app;
