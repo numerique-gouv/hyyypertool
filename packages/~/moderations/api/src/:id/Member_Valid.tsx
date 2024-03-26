@@ -115,7 +115,7 @@ function AddAsMemberInternal() {
     },
     organization_member,
   } = useContext(ModerationPage_Context);
-  const is_alreafy_internal_member = organization_member?.is_external === false;
+  const is_already_internal_member = organization_member?.is_external === false;
   return (
     <div class="fr-radio-group">
       <input
@@ -124,7 +124,7 @@ function AddAsMemberInternal() {
         required
         type="radio"
         value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_INTERNAL}
-        checked={is_alreafy_internal_member}
+        checked={is_already_internal_member}
       />
       <label class="fr-label !flex-row" for={$add_as_internal_member}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
@@ -140,8 +140,10 @@ function AddAsMemberExternal() {
     moderation: {
       users: { given_name },
     },
+    organization_member,
   } = useContext(ModerationPage_Context);
 
+  const is_already_external_member = organization_member?.is_external === true;
   return (
     <div class="fr-radio-group">
       <input
@@ -150,6 +152,7 @@ function AddAsMemberExternal() {
         required
         type="radio"
         value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_EXTERNAL}
+        checked={is_already_external_member}
       />
       <label class="fr-label !flex-row" for={$add_as_external_member}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
