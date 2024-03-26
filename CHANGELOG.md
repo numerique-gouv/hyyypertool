@@ -1,5 +1,13 @@
 
 
+## [2024.3.8](https://github.com/betagouv/hyyypertool/compare/2024.3.7...2024.3.8) (2024-03-26)
+
+
+### Features
+
+* **app:** update api pattern ([#155](https://github.com/betagouv/hyyypertool/issues/155)) ([169eab8](https://github.com/betagouv/hyyypertool/commit/169eab806cd49b7c85abfdc516af26bce0cd1300))
+* **moderation:** send notification with a checkbox ([#156](https://github.com/betagouv/hyyypertool/issues/156)) ([5ff96da](https://github.com/betagouv/hyyypertool/commit/5ff96da77a7b0383f8deea1bafa2641bd7f66525))
+
 ## [2024.3.7](https://github.com/betagouv/hyyypertool/compare/2024.3.6...2024.3.7) (2024-03-25)
 
 
