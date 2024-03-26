@@ -42,9 +42,6 @@ export function Member_Valid() {
           <AddDomain />
         </div>
         <div class={element()}>
-          <DoNotAddMember />
-        </div>
-        <div class={element()}>
           <AddAsMemberInternal />
         </div>
         <div class={element()}>
@@ -110,45 +107,24 @@ function AddDomain() {
   );
 }
 
-function DoNotAddMember() {
-  const { $do_not_add_member } = useContext(Desicison_Context);
-  const {
-    moderation: {
-      users: { given_name },
-    },
-  } = useContext(ModerationPage_Context);
-
-  return (
-    <div class="fr-radio-group">
-      <input
-        id={$do_not_add_member}
-        name={FORM_SCHEMA.keyof().Enum.add_member}
-        type="radio"
-        value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.NOPE}
-        checked
-      />
-      <label class="fr-label !flex-row" for={$do_not_add_member}>
-        Ne pas ajouter <b class="mx-1">{given_name}</b> à l'organisation
-      </label>
-    </div>
-  );
-}
-
 function AddAsMemberInternal() {
   const { $add_as_internal_member } = useContext(Desicison_Context);
   const {
     moderation: {
       users: { given_name },
     },
+    organization_member,
   } = useContext(ModerationPage_Context);
-
+  const is_alreafy_internal_member = organization_member?.is_external === false;
   return (
     <div class="fr-radio-group">
       <input
         id={$add_as_internal_member}
         name={FORM_SCHEMA.keyof().Enum.add_member}
+        required
         type="radio"
         value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_INTERNAL}
+        checked={is_alreafy_internal_member}
       />
       <label class="fr-label !flex-row" for={$add_as_internal_member}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
@@ -171,6 +147,7 @@ function AddAsMemberExternal() {
       <input
         id={$add_as_external_member}
         name={FORM_SCHEMA.keyof().Enum.add_member}
+        required
         type="radio"
         value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_EXTERNAL}
       />
