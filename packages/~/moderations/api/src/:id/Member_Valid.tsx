@@ -55,7 +55,7 @@ export function Member_Valid() {
         </div>
         <div class={element({ class: "mt-8" })}>
           <button class={button()} type="submit">
-            Notifier le membre et terminer
+            Terminer
           </button>
         </div>
       </fieldset>
@@ -65,7 +65,10 @@ export function Member_Valid() {
 
 function SendNotification() {
   const { $send_notification } = useContext(Desicison_Context);
-  const { domain, moderation } = useContext(ModerationPage_Context);
+  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    users: { email },
+  } = moderation;
 
   return (
     <div class="fr-checkbox-group">
@@ -81,8 +84,7 @@ function SendNotification() {
         }
       />
       <label class="fr-label !flex-row" for={$send_notification}>
-        J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
-        l’organisation
+        Notifier <b class="mx-1">{email}</b> du traitement de la modération.
       </label>
     </div>
   );
