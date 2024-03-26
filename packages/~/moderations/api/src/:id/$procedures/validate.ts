@@ -26,6 +26,7 @@ import { comment_message } from "./comment_message";
 export const FORM_SCHEMA = z.object({
   add_domain: z.string().default("false").pipe(z_coerce_boolean),
   add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL", "NOPE"]).default("NOPE"),
+  send_notitfication: z.string().default("false").pipe(z_coerce_boolean),
 });
 
 //
@@ -41,7 +42,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
     var: { moncomptepro_pg, userinfo, sentry },
   }) => {
     const { id } = req.valid("param");
-    const { add_domain, add_member } = req.valid("form");
+    const { add_domain, add_member, send_notitfication } = req.valid("form");
 
     const moderation = await moncomptepro_pg.query.moderations.findFirst({
       columns: { comment: true, organization_id: true, user_id: true },
@@ -106,7 +107,9 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
         });
     }
 
-    await send_moderation_processed_email({ organization_id, user_id });
+    if (send_notitfication) {
+      await send_moderation_processed_email({ organization_id, user_id });
+    }
 
     await moncomptepro_pg
       .update(schema.moderations)

@@ -25,14 +25,14 @@ Fonctionnalité: Moderation non blockante
     Soit le tableau "Domain internes" vide
     Quand je clique sur "Je valide ce membre ✅"
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Terminer"
     Alors je vois la ligne "fr.bosch.com" dans le table "Domain internes"
 
   Scénario: Marie est un membre interne de l'organization.
     Soit le tableau sous le title "Membres connus dans l’organisation" vide
     Quand je clique sur "Je valide ce membre ✅"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -47,7 +47,7 @@ Fonctionnalité: Moderation non blockante
     Soit le tableau sous le title "Membres connus dans l’organisation" vide
     Quand je clique sur "Je valide ce membre ✅"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"

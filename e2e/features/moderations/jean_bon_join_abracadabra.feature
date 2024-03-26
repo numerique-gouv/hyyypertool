@@ -61,7 +61,7 @@ Fonctionnalité: Moderation blockante à accepter
 
   Scénario: Envoyer l'email « Votre demande a été traitée »"
     Quand je clique sur "Je valide ce membre ✅"
-    Et je clique sur "Notifier le membre et terminer"
+    Et je clique sur "Terminer"
     * je vois "Cette modération a été marqué comme traitée le"
 
     Alors je vois "Liste des moderations"
