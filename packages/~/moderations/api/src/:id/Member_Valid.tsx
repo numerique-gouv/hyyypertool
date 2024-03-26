@@ -4,6 +4,7 @@ import { Htmx_Events, hx_include } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { hx_urls } from "@~/app.urls";
+import { Moderation_Type_Schema } from "@~/moderations.lib/Moderation_Type";
 import { useContext } from "hono/jsx";
 import { FORM_SCHEMA } from "./$procedures/validate";
 import { Desicison_Context } from "./Desicison_Context";
@@ -49,6 +50,9 @@ export function Member_Valid() {
         <div class={element()}>
           <AddAsMemberExternal />
         </div>
+        <div class={element()}>
+          <SendNotification />
+        </div>
         <div class={element({ class: "mt-8" })}>
           <button class={button()} type="submit">
             Notifier le membre et terminer
@@ -56,6 +60,31 @@ export function Member_Valid() {
         </div>
       </fieldset>
     </form>
+  );
+}
+
+function SendNotification() {
+  const { $send_notification } = useContext(Desicison_Context);
+  const { domain, moderation } = useContext(ModerationPage_Context);
+
+  return (
+    <div class="fr-checkbox-group">
+      <input
+        id={$send_notification}
+        name={FORM_SCHEMA.keyof().Enum.send_notitfication}
+        type="checkbox"
+        value="true"
+        checked={
+          Moderation_Type_Schema.parse(moderation.type, {
+            path: ["moderation", "type"],
+          }) !== Moderation_Type_Schema.Enum.non_verified_domain
+        }
+      />
+      <label class="fr-label !flex-row" for={$send_notification}>
+        J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
+        l’organisation
+      </label>
+    </div>
   );
 }
 
