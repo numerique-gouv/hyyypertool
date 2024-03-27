@@ -1,6 +1,7 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
+import { Htmx_Events } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
@@ -119,6 +120,12 @@ async function MarkModerationAsProcessed() {
 
   return (
     <form
+      _={`
+      on submit
+        wait for ${Htmx_Events.enum.afterOnLoad}
+        wait 2s
+        go back
+      `}
       {...hx_urls.moderations[":id"].$procedures.processed.$patch({
         param: { id: moderation_id.toString() },
       })}
