@@ -115,7 +115,9 @@ function AddAsMemberInternal() {
     },
     organization_member,
   } = useContext(ModerationPage_Context);
-  const is_already_internal_member = organization_member?.is_external === false;
+  const is_already_internal_member = organization_member
+    ? organization_member.is_external === false
+    : true;
   return (
     <div class="fr-radio-group">
       <input
