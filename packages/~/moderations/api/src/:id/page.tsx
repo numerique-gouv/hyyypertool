@@ -1,13 +1,13 @@
 //
 
+import { NotFoundError } from "@~/app.core/error";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
-import { schema } from "@~/moncomptepro.database";
-import { and, eq } from "drizzle-orm";
+import { to } from "await-to-js";
 import { useContext, type PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import { About_Organisation } from "./About_Organisation";
@@ -18,7 +18,11 @@ import { Header } from "./Header";
 import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
 import { Moderation_Exchanges } from "./Moderation_Exchanges";
 import { Organizations_Of_User_Table } from "./Organizations_Of_User_Table";
-import { ModerationPage_Context } from "./context";
+import {
+  ModerationPage_Context,
+  get_moderation,
+  get_organization_member,
+} from "./context";
 import { Moderation_NotFound } from "./not-found";
 
 //
@@ -108,29 +112,24 @@ export async function ModerationPage_Provider({
     return <Moderation_NotFound />;
   }
 
-  const moderation = await moncomptepro_pg.query.moderations.findFirst({
-    where: eq(schema.moderations.id, moderation_id),
-    with: {
-      organizations: true,
-      users: true,
-    },
-  });
+  const [moderation_error, moderation] = await to(
+    get_moderation({ pg: moncomptepro_pg }, { moderation_id }),
+  );
 
-  if (!moderation) {
+  if (moderation_error instanceof NotFoundError) {
     status(404);
     return <Moderation_NotFound moderation_id={moderation_id} />;
+  } else if (moderation_error) {
+    throw moderation_error;
   }
 
-  const users_organizations =
-    await moncomptepro_pg.query.users_organizations.findFirst({
-      where: and(
-        eq(schema.users_organizations.user_id, moderation.user_id),
-        eq(
-          schema.users_organizations.organization_id,
-          moderation.organization_id,
-        ),
-      ),
-    });
+  const organization_member = await get_organization_member(
+    { pg: moncomptepro_pg },
+    {
+      organization_id: moderation.organizations.id,
+      user_id: moderation.users.id,
+    },
+  );
 
   const domain = z_email_domain.parse(moderation.users.email, {
     path: ["moderation.users.email"],
@@ -138,7 +137,7 @@ export async function ModerationPage_Provider({
 
   return (
     <ModerationPage_Context.Provider
-      value={{ moderation, domain, users_organizations }}
+      value={{ moderation, domain, organization_member }}
     >
       {children}
     </ModerationPage_Context.Provider>

@@ -12,7 +12,6 @@ export const Desicison_Context = createContext({
   $add_domain: hyper_ref(),
   $decision_form: hyper_ref(),
   $destination: hyper_ref(),
-  $do_not_add_member: hyper_ref(),
   $message: hyper_ref(),
   $object: hyper_ref(),
   $reject: hyper_ref(),
