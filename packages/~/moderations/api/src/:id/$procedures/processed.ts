@@ -7,9 +7,9 @@ import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg"
 import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
-import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
+import { comment_message } from "./comment_message";
 
 //
 
@@ -25,14 +25,21 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
 
     if (!moderation) return notFound();
 
-    const { organization_id, user_id } = moderation;
+    const { comment } = moderation;
+    const moderated_by = userinfo.email;
 
-    await send_moderation_processed_email({ organization_id, user_id });
     await moncomptepro_pg
       .update(schema.moderations)
       .set({
+        comment: [
+          ...(comment ? [comment] : []),
+          comment_message({
+            type: "REJECTED",
+            created_by: moderated_by,
+          }),
+        ].join("\n"),
         moderated_at: new Date(),
-        moderated_by: userinfo.email,
+        moderated_by,
       })
       .where(eq(schema.moderations.id, id));
 
