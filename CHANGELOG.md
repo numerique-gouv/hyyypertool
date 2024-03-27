@@ -1,5 +1,12 @@
 
 
+## [2024.3.9](https://github.com/betagouv/hyyypertool/compare/2024.3.8...2024.3.9) (2024-03-27)
+
+
+### Features
+
+* **moderation:** guess if already member ([#157](https://github.com/betagouv/hyyypertool/issues/157)) ([a1a7a72](https://github.com/betagouv/hyyypertool/commit/a1a7a72b49852877fb599d748fb31da1712f2022))
+
 ## [2024.3.8](https://github.com/betagouv/hyyypertool/compare/2024.3.7...2024.3.8) (2024-03-26)
 
 
