@@ -14,7 +14,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
-    "drizzle-orm": "0.30.4",
+    "drizzle-orm": "0.30.5",
     "query-string": "9.0.0",
     "ts-pattern": "5.0.8",
     "zod": "3.22.4"
