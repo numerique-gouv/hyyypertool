@@ -1,5 +1,12 @@
 
 
+## [2024.3.10](https://github.com/betagouv/hyyypertool/compare/2024.3.9...2024.3.10) (2024-03-27)
+
+
+### Bug Fixes
+
+* **moderation:** allow to refuse without notifying the user ([#162](https://github.com/betagouv/hyyypertool/issues/162)) ([dda6df2](https://github.com/betagouv/hyyypertool/commit/dda6df2ecf4f6bb16fbe56568b46ae5f4913cc9b))
+
 ## [2024.3.9](https://github.com/betagouv/hyyypertool/compare/2024.3.8...2024.3.9) (2024-03-27)
 
 
