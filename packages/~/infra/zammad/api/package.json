@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "@hono/zod-validator": "0.2.0",
+    "@hono/zod-validator": "0.2.1",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "hono": "4.1.4",

@@ -9,7 +9,7 @@
     "test": "cypress run -e filterSpecs=true"
   },
   "dependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "20.0.2",
+    "@badeball/cypress-cucumber-preprocessor": "20.0.3",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
     "cypress": "13.7.1",
     "pg": "8.11.3",
