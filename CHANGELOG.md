@@ -1,5 +1,13 @@
 
 
+## [2024.3.11](https://github.com/betagouv/hyyypertool/compare/2024.3.10...2024.3.11) (2024-03-27)
+
+
+### Bug Fixes
+
+* **moderation:** go back after mark as processed ([#164](https://github.com/betagouv/hyyypertool/issues/164)) ([8cacecd](https://github.com/betagouv/hyyypertool/commit/8cacecdda3c15b7ff1e6c1bd8ea260e8118bdd15)), closes [#161](https://github.com/betagouv/hyyypertool/issues/161)
+* **moderations:** force autoreload on load ([#165](https://github.com/betagouv/hyyypertool/issues/165)) ([431b3dc](https://github.com/betagouv/hyyypertool/commit/431b3dc23636bcd2aefc0aab3ff3e9554b7bbdb0))
+
 ## [2024.3.10](https://github.com/betagouv/hyyypertool/compare/2024.3.9...2024.3.10) (2024-03-27)
 
 
