@@ -1,5 +1,12 @@
 
 
+## [2024.3.12](https://github.com/betagouv/hyyypertool/compare/2024.3.11...2024.3.12) (2024-03-28)
+
+
+### Features
+
+* **moderation:** detect same user name ([#167](https://github.com/betagouv/hyyypertool/issues/167)) ([fe49d69](https://github.com/betagouv/hyyypertool/commit/fe49d690677362bffefcd91c7c328a96ea4af61a))
+
 ## [2024.3.11](https://github.com/betagouv/hyyypertool/compare/2024.3.10...2024.3.11) (2024-03-27)
 
 
