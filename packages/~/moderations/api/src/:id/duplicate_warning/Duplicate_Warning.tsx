@@ -175,9 +175,6 @@ function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
     }),
   );
 }
-type get_moderation_tickets_dto = Awaited<
-  ReturnType<typeof get_moderation_tickets>
->;
 
 //
 
@@ -226,4 +223,3 @@ async function get_duplicate_users(moderation_id: number) {
       ),
     );
 }
-type get_duplicate_users_dto = Awaited<ReturnType<typeof get_duplicate_users>>;
