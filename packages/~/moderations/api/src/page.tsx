@@ -87,6 +87,7 @@ export function Moderations_Page({
         {...hx_moderations_query_props}
         hx-sync="this"
         hx-trigger={[
+          `load delay:1s`,
           `every 11s [document.visibilityState === 'visible']`,
           `visibilitychange[document.visibilityState === 'visible'] from:document`,
         ].join(", ")}

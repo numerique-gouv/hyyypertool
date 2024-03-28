@@ -1,6 +1,7 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
+import { Entity_Schema } from "@~/app.core/schema";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
@@ -10,6 +11,7 @@ import { Duplicate_Warning } from "./Duplicate_Warning";
 
 export default new Hono().use("/", jsxRenderer()).get(
   "/",
+  zValidator("param", Entity_Schema),
   zValidator(
     "query",
     z.object({
@@ -18,9 +20,10 @@ export default new Hono().use("/", jsxRenderer()).get(
     }),
   ),
   async function ({ render, req }) {
+    const { id } = req.valid("param");
     const { organization_id, user_id } = req.valid("query");
     return render(
-      <Duplicate_Warning organization_id={organization_id} user_id={user_id} />,
+      <Duplicate_Warning moderation_id={id} organization_id={organization_id} user_id={user_id} />,
     );
   },
 );

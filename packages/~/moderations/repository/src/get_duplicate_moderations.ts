@@ -26,3 +26,7 @@ export async function get_duplicate_moderations(
     )
     .orderBy(asc(schema.moderations.created_at));
 }
+
+export type get_duplicate_moderations_dto = Awaited<
+  ReturnType<typeof get_duplicate_moderations>
+>;

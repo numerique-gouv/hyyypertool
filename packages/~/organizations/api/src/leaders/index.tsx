@@ -61,8 +61,10 @@ async function load_leaders({ siret }: { siret: string }) {
     (await response.json()) as Entreprise_API_Association_Response;
 
   if (!data) return;
-  const docs = data.documents_rna;
-  const sortedDocs = lodash_sortby(docs, ["annee_depot", "date_depot"]);
+  const docs = data.documents_rna.filter(({ date_depot }) =>
+    Boolean(date_depot),
+  );
+  const sortedDocs = lodash_sortby(docs, ["date_depot"]);
   const doc = sortedDocs.findLast(({ sous_type: { code } }) => code === "LDC");
 
   return doc;

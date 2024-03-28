@@ -13,6 +13,10 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     consola.verbose(
       `🌱 INSERT user ${raphael.given_name} ${raphael.family_name}`,
     );
+    const raphael_alpha = await insert_raphael_alpha(db);
+    consola.verbose(
+      `🌱 INSERT user ${raphael_alpha.given_name} ${raphael_alpha.family_name}`,
+    );
     const jean_bon = await insert_jeanbon(db);
     consola.verbose(
       `🌱 INSERT user ${jean_bon.given_name} ${jean_bon.family_name}`,
@@ -135,6 +139,15 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     consola.verbose(
       `🌱 ${marie_bon_bosch_rexroth.command} ${marie_bon_bosch_rexroth.rowCount} ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
     );
+    const raphael_alpha_dinum = await insert_moderation(db, {
+      organization_id: dinum.id,
+      type: "non_verified_domain" as MCP_Moderation["type"],
+      user_id: raphael_alpha.id,
+      moderated_at: new Date("2023-06-22 14:34:34"),
+    });
+    consola.verbose(
+      `🌱 ${raphael_alpha_dinum.command} ${raphael_alpha_dinum.rowCount} ${raphael_alpha.given_name} wants to join ${dinum.cached_nom_complet} again...`,
+    );
   } catch (err) {
     console.error("Something went wrong...");
     console.error(err);
@@ -240,6 +253,24 @@ async function insert_raphael(db: MonComptePro_PgDatabase) {
     .values({
       created_at: new Date("2018-07-13 15:35:15"),
       email: "rdubigny@beta.gouv.fr",
+      family_name: "Dubigny",
+      given_name: "Raphael",
+      job: "Chef",
+      phone_number: "0123456789",
+      updated_at: new Date("2023-06-22 14:34:34"),
+      verify_email_sent_at: new Date("2023-06-22 14:34:34"),
+    })
+    .returning();
+
+  return insert.at(0)!;
+}
+
+async function insert_raphael_alpha(db: MonComptePro_PgDatabase) {
+  const insert = await db
+    .insert(schema.users)
+    .values({
+      created_at: new Date("2018-07-13 15:35:15"),
+      email: "rdubigny@alpha.gouv.fr",
       family_name: "Dubigny",
       given_name: "Raphael",
       job: "Chef",

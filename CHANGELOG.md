@@ -1,5 +1,41 @@
 
 
+## [2024.3.13](https://github.com/betagouv/hyyypertool/compare/2024.3.12...2024.3.13) (2024-03-28)
+
+
+### Bug Fixes
+
+* **organization:** ensure to remove unknow depot date form the document list ([#169](https://github.com/betagouv/hyyypertool/issues/169)) ([590b88a](https://github.com/betagouv/hyyypertool/commit/590b88a4cd86715904624b9c535b8338b7053255))
+
+## [2024.3.12](https://github.com/betagouv/hyyypertool/compare/2024.3.11...2024.3.12) (2024-03-28)
+
+
+### Features
+
+* **moderation:** detect same user name ([#167](https://github.com/betagouv/hyyypertool/issues/167)) ([fe49d69](https://github.com/betagouv/hyyypertool/commit/fe49d690677362bffefcd91c7c328a96ea4af61a))
+
+## [2024.3.11](https://github.com/betagouv/hyyypertool/compare/2024.3.10...2024.3.11) (2024-03-27)
+
+
+### Bug Fixes
+
+* **moderation:** go back after mark as processed ([#164](https://github.com/betagouv/hyyypertool/issues/164)) ([8cacecd](https://github.com/betagouv/hyyypertool/commit/8cacecdda3c15b7ff1e6c1bd8ea260e8118bdd15)), closes [#161](https://github.com/betagouv/hyyypertool/issues/161)
+* **moderations:** force autoreload on load ([#165](https://github.com/betagouv/hyyypertool/issues/165)) ([431b3dc](https://github.com/betagouv/hyyypertool/commit/431b3dc23636bcd2aefc0aab3ff3e9554b7bbdb0))
+
+## [2024.3.10](https://github.com/betagouv/hyyypertool/compare/2024.3.9...2024.3.10) (2024-03-27)
+
+
+### Bug Fixes
+
+* **moderation:** allow to refuse without notifying the user ([#162](https://github.com/betagouv/hyyypertool/issues/162)) ([dda6df2](https://github.com/betagouv/hyyypertool/commit/dda6df2ecf4f6bb16fbe56568b46ae5f4913cc9b))
+
+## [2024.3.9](https://github.com/betagouv/hyyypertool/compare/2024.3.8...2024.3.9) (2024-03-27)
+
+
+### Features
+
+* **moderation:** guess if already member ([#157](https://github.com/betagouv/hyyypertool/issues/157)) ([a1a7a72](https://github.com/betagouv/hyyypertool/commit/a1a7a72b49852877fb599d748fb31da1712f2022))
+
 ## [2024.3.8](https://github.com/betagouv/hyyypertool/compare/2024.3.7...2024.3.8) (2024-03-26)
 
 
