@@ -1,5 +1,6 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { Htmx_Events, hx_include } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
@@ -43,6 +44,7 @@ export function Member_Valid() {
     >
       <LinkWithOrganization />
       <OrganizationDomain />
+      <VerificationType />
       <fieldset class={base()}>
         <div class={element()}>
           <SendNotification />
@@ -109,14 +111,75 @@ function LinkWithOrganization() {
   );
 }
 
+function VerificationType() {
+  const $nope = hyper_ref();
+  const $in_liste_dirigeants_rna = hyper_ref();
+  const { base, element, legend } = fieldset();
+  const {
+    moderation: {
+      users: { given_name },
+    },
+    organization_member,
+  } = useContext(ModerationPage_Context);
+
+  const is_already_verified = Boolean(organization_member?.verification_type);
+
+  return match({
+    is_already_verified,
+  })
+    .with({ is_already_verified: true }, () => (
+      <fieldset class={base()}>
+        <b class="mx-1">{given_name}</b> est déjà vérifié
+      </fieldset>
+    ))
+    .otherwise(() => {
+      return (
+        <fieldset class={base()}>
+          <legend class={legend({ className: "font-bold" })}>
+            Comment avez-vous verifié le lien avec l'organisation ?
+          </legend>
+          <div class={element({ inline: true })}>
+            <div class="fr-radio-group">
+              <input
+                id={$nope}
+                name={FORM_SCHEMA.keyof().Enum.verification_type}
+                type="radio"
+              />
+              <label class="fr-label !flex-row" for={$nope}>
+                Je ne sais pas 🌱
+              </label>
+            </div>
+          </div>
+          <div class={element({ inline: true })}>
+            <div class="fr-radio-group">
+              <input
+                id={$in_liste_dirigeants_rna}
+                name={FORM_SCHEMA.keyof().Enum.verification_type}
+                type="radio"
+                value={
+                  FORM_SCHEMA.shape.verification_type.unwrap().Enum
+                    .in_liste_dirigeants_rna
+                }
+              />
+              <label class="fr-label !flex-row" for={$in_liste_dirigeants_rna}>
+                <b class="mx-1">{given_name}</b> apparait dans la liste des
+                dirigeants de l'organisation 🧑‍✈️
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      );
+    });
+}
+
 function OrganizationDomain() {
-  const { $add_as_internal_member, $add_as_external_member } =
-    useContext(Desicison_Context);
+  const $internal = hyper_ref();
+  const $external = hyper_ref();
+  const $nope = hyper_ref();
   const { base, element, legend } = fieldset();
   const {
     domain,
     moderation: {
-      users: { given_name },
       organizations: {
         authorized_email_domains,
         external_authorized_email_domains,
@@ -137,12 +200,12 @@ function OrganizationDomain() {
   })
     .with({ is_already_internal_domain: true }, () => (
       <fieldset class={base()}>
-        <b class="mx-1">{domain}</b> est un domaine interne à l'organisation 🏢
+        <b class="mx-1">{domain}</b> est un domaine interne à l'organisation 🪴
       </fieldset>
     ))
     .with({ is_already_external_domain: true }, () => (
       <fieldset class={base()}>
-        <b class="mx-1">{domain}</b> est un domaine externe à l'organisation 🏗️
+        <b class="mx-1">{domain}</b> est un domaine externe à l'organisation 🌳
       </fieldset>
     ))
     .otherwise(() => {
@@ -154,16 +217,28 @@ function OrganizationDomain() {
           <div class={element({ inline: true })}>
             <div class="fr-radio-group">
               <input
-                id={"$add_as_internal_member"}
-                name={"FORM_SCHEMA.keyof().Enum.add_member"}
-                required
+                id={$nope}
+                name={FORM_SCHEMA.keyof().Enum.add_domain}
+                type="radio"
+                value=""
+              />
+              <label class="fr-label !flex-row" for={$nope}>
+                Je ne sais pas 🌱
+              </label>
+            </div>
+          </div>
+          <div class={element({ inline: true })}>
+            <div class="fr-radio-group">
+              <input
+                id={$internal}
+                name={FORM_SCHEMA.keyof().Enum.add_domain}
                 type="radio"
                 value={
-                  FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_INTERNAL
+                  FORM_SCHEMA.shape.add_domain.removeDefault().Enum.AS_INTERNAL
                 }
               />
-              <label class="fr-label !flex-row" for={"$add_as_internal_member"}>
-                <span class="mx-1 capitalize">{domain}</span> est{" "}
+              <label class="fr-label !flex-row" for={$internal}>
+                <span class="mx-1">{domain}</span> est{" "}
                 <b class="mx-1">interne</b> à l'organisation 🧑‍💼
               </label>
             </div>
@@ -171,16 +246,15 @@ function OrganizationDomain() {
           <div class={element({ inline: true })}>
             <div class="fr-radio-group">
               <input
-                id={"$add_as_external_member"}
-                name={"FORM_SCHEMA.keyof().Enum.add_member"}
-                required
+                id={$external}
+                name={FORM_SCHEMA.keyof().Enum.add_domain}
                 type="radio"
                 value={
-                  FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_EXTERNAL
+                  FORM_SCHEMA.shape.add_domain.removeDefault().Enum.AS_EXTERNAL
                 }
               />
-              <label class="fr-label !flex-row" for={"$add_as_external_member"}>
-                <span class="mx-1 capitalize">{domain}</span> est{" "}
+              <label class="fr-label !flex-row" for={$external}>
+                <span class="mx-1">{domain}</span> est{" "}
                 <b class="mx-1">externe</b> à l'organisation 👷
               </label>
             </div>

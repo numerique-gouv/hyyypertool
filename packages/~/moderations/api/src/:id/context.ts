@@ -26,7 +26,7 @@ export async function get_organization_member(
   { user_id, organization_id }: { user_id: number; organization_id: number },
 ) {
   return pg.query.users_organizations.findFirst({
-    columns: { is_external: true },
+    columns: { is_external: true, verification_type: true },
     where: and(
       eq(schema.users_organizations.user_id, user_id),
       eq(schema.users_organizations.organization_id, organization_id),
