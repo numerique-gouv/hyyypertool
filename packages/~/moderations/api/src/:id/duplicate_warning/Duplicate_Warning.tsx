@@ -19,7 +19,7 @@ import {
 } from "@~/users.repository/get_user_by_id";
 import { get_zammad_mail } from "@~/zammad.lib";
 import { to } from "await-to-js";
-import { eq } from "drizzle-orm";
+import { and, eq, ilike, not, or } from "drizzle-orm";
 import { raw } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -43,37 +43,57 @@ export async function Duplicate_Warning({
     user_id,
   });
 
-  const moderation_count = moderations.length;
-
-  if (moderation_count <= 1) return <></>;
   const user = await get_user_by_id(moncomptepro_pg, { id: user_id });
   if (!user) return <p>Utilisateur introuvable</p>;
 
-  const moderation_tickets = await get_moderation_tickets(moderations);
-
   return (
     <Duplicate_Warning.Context.Provider
-      value={{ moderation_id, moderations, moderation_tickets, user }}
+      value={{
+        moderation_id,
+        moderations,
+        user,
+      }}
     >
-      <Alert />
+      <Alert_Duplicate_Moderation />
+      <Alert_Duplicate_User />
     </Duplicate_Warning.Context.Provider>
   );
 }
 
 Duplicate_Warning.Context = createContext({
   moderation_id: NaN,
-  moderation_tickets: {} as get_moderation_tickets_dto,
   moderations: {} as get_duplicate_moderations_dto,
   user: {} as NonNullable<Awaited<get_user_by_id_dto>>,
 });
 
 //
 
-async function Alert() {
-  const { moderations, moderation_tickets, user } = useContext(
-    Duplicate_Warning.Context,
+async function Alert_Duplicate_User() {
+  const { moderation_id } = useContext(Duplicate_Warning.Context);
+  const duplicate_users = await get_duplicate_users(moderation_id);
+
+  const duplicate_users_count = duplicate_users.length;
+
+  if (duplicate_users_count === 0) return raw``;
+
+  return (
+    <div class="fr-alert fr-alert--warning">
+      <h3 class="fr-alert__title">
+        Attention : {duplicate_users_count} utilisateur
+        {duplicate_users_count > 1 ? "s" : ""}{" "}
+        {duplicate_users_count > 1 ? "ont" : "a"} ce nom de famille au sein de
+        cette organisation.
+      </h3>
+    </div>
   );
+}
+async function Alert_Duplicate_Moderation() {
+  const { moderations, user } = useContext(Duplicate_Warning.Context);
   const moderation_count = moderations.length;
+
+  if (moderation_count <= 1) return raw``;
+
+  const moderation_tickets = await get_moderation_tickets(moderations);
 
   return (
     <div class="fr-alert fr-alert--warning">
@@ -155,9 +175,6 @@ function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
     }),
   );
 }
-type get_moderation_tickets_dto = Awaited<
-  ReturnType<typeof get_moderation_tickets>
->;
 
 //
 
@@ -172,4 +189,37 @@ async function get_moderation(moderation_id: number) {
   });
   if (!moderation) throw new NotFoundError("Moderation not found.");
   return moderation;
+}
+
+async function get_duplicate_users(moderation_id: number) {
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<MonComptePro_Pg_Context>();
+
+  const moderation = await moncomptepro_pg.query.moderations.findFirst({
+    columns: { organization_id: true },
+    with: {
+      users: { columns: { id: true, given_name: true, family_name: true } },
+    },
+    where: eq(schema.moderations.id, moderation_id),
+  });
+  if (!moderation) throw new NotFoundError("Moderation not found.");
+  const {
+    organization_id,
+    users: { family_name, id: user_id },
+  } = moderation;
+  return await moncomptepro_pg
+    .select({ user_id: schema.users_organizations.user_id })
+    .from(schema.users_organizations)
+    .leftJoin(
+      schema.users,
+      eq(schema.users_organizations.user_id, schema.users.id),
+    )
+    .where(
+      and(
+        or(ilike(schema.users.family_name, family_name ?? "")),
+        not(eq(schema.users.id, user_id)),
+        eq(schema.users_organizations.organization_id, organization_id),
+      ),
+    );
 }
