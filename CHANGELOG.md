@@ -1,5 +1,12 @@
 
 
+## [2024.3.13](https://github.com/betagouv/hyyypertool/compare/2024.3.12...2024.3.13) (2024-03-28)
+
+
+### Bug Fixes
+
+* **organization:** ensure to remove unknow depot date form the document list ([#169](https://github.com/betagouv/hyyypertool/issues/169)) ([590b88a](https://github.com/betagouv/hyyypertool/commit/590b88a4cd86715904624b9c535b8338b7053255))
+
 ## [2024.3.12](https://github.com/betagouv/hyyypertool/compare/2024.3.11...2024.3.12) (2024-03-28)
 
 
