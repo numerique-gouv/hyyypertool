@@ -1,5 +1,12 @@
 
 
+## [2024.3.14](https://github.com/betagouv/hyyypertool/compare/2024.3.13...2024.3.14) (2024-03-28)
+
+
+### Features
+
+* **moderation:** list the family similar user ([#171](https://github.com/betagouv/hyyypertool/issues/171)) ([b0cccf9](https://github.com/betagouv/hyyypertool/commit/b0cccf9594f776b7089d3a050773df1516ce9af8))
+
 ## [2024.3.13](https://github.com/betagouv/hyyypertool/compare/2024.3.12...2024.3.13) (2024-03-28)
 
 
