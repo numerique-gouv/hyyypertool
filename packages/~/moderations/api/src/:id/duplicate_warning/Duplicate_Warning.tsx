@@ -19,7 +19,7 @@ import {
 } from "@~/users.repository/get_user_by_id";
 import { get_zammad_mail } from "@~/zammad.lib";
 import { to } from "await-to-js";
-import { eq } from "drizzle-orm";
+import { and, eq, ilike, not, or } from "drizzle-orm";
 import { raw } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -42,10 +42,12 @@ export async function Duplicate_Warning({
     organization_id,
     user_id,
   });
+  const duplicate_users = await get_duplicate_users(moderation_id);
+  console.log("duplicate_users", duplicate_users);
 
   const moderation_count = moderations.length;
 
-  if (moderation_count <= 1) return <></>;
+  if (moderation_count <= 1 || duplicate_users.length <= 1) return <></>;
   const user = await get_user_by_id(moncomptepro_pg, { id: user_id });
   if (!user) return <p>Utilisateur introuvable</p>;
 
@@ -53,7 +55,13 @@ export async function Duplicate_Warning({
 
   return (
     <Duplicate_Warning.Context.Provider
-      value={{ moderation_id, moderations, moderation_tickets, user }}
+      value={{
+        duplicate_users,
+        moderation_id,
+        moderations,
+        moderation_tickets,
+        user,
+      }}
     >
       <Alert />
     </Duplicate_Warning.Context.Provider>
@@ -61,6 +69,7 @@ export async function Duplicate_Warning({
 }
 
 Duplicate_Warning.Context = createContext({
+  duplicate_users: {} as get_duplicate_users_dto,
   moderation_id: NaN,
   moderation_tickets: {} as get_moderation_tickets_dto,
   moderations: {} as get_duplicate_moderations_dto,
@@ -70,7 +79,7 @@ Duplicate_Warning.Context = createContext({
 //
 
 async function Alert() {
-  const { moderations, moderation_tickets, user } = useContext(
+  const { duplicate_users, moderations, moderation_tickets, user } = useContext(
     Duplicate_Warning.Context,
   );
   const moderation_count = moderations.length;
@@ -173,3 +182,33 @@ async function get_moderation(moderation_id: number) {
   if (!moderation) throw new NotFoundError("Moderation not found.");
   return moderation;
 }
+
+async function get_duplicate_users(moderation_id: number) {
+  const {
+    var: { moncomptepro_pg },
+  } = useRequestContext<MonComptePro_Pg_Context>();
+
+  const moderation = await moncomptepro_pg.query.moderations.findFirst({
+    columns: {},
+    with: {
+      users: { columns: { id: true, given_name: true, family_name: true } },
+    },
+    where: eq(schema.moderations.id, moderation_id),
+  });
+  if (!moderation) throw new NotFoundError("Moderation not found.");
+  const {
+    users: { family_name, given_name, id: user_id },
+  } = moderation;
+  return await moncomptepro_pg.query.users.findMany({
+    columns: {},
+    with: {},
+    where: and(
+      or(
+        ilike(schema.users.family_name, family_name ?? ""),
+        ilike(schema.users.given_name, given_name ?? ""),
+      ),
+      not(eq(schema.users.id, user_id)),
+    ),
+  });
+}
+type get_duplicate_users_dto = Awaited<ReturnType<typeof get_duplicate_users>>;
