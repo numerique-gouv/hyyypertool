@@ -19,7 +19,7 @@ import {
 } from "@~/users.repository/get_user_by_id";
 import { get_zammad_mail } from "@~/zammad.lib";
 import { to } from "await-to-js";
-import { and, eq, ilike, not, or } from "drizzle-orm";
+import { and, asc, eq, ilike, not, or } from "drizzle-orm";
 import { raw } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -79,11 +79,27 @@ async function Alert_Duplicate_User() {
   return (
     <div class="fr-alert fr-alert--warning">
       <h3 class="fr-alert__title">
-        Attention : {duplicate_users_count} utilisateur
+        Attention : {duplicate_users_count > 1 ? duplicate_users_count : "un"}{" "}
+        utilisateur
         {duplicate_users_count > 1 ? "s" : ""}{" "}
         {duplicate_users_count > 1 ? "ont" : "a"} ce nom de famille au sein de
         cette organisation.
       </h3>
+
+      <ul>
+        {duplicate_users.map(({ user_id, email, family_name, given_name }) => (
+          <li key={user_id}>
+            <a
+              href={
+                urls.users[":id"].$url({ param: { id: user_id.toString() } })
+                  .pathname
+              }
+            >
+              {given_name} {family_name} {`<${email}>`}
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -203,13 +219,21 @@ async function get_duplicate_users(moderation_id: number) {
     },
     where: eq(schema.moderations.id, moderation_id),
   });
+
   if (!moderation) throw new NotFoundError("Moderation not found.");
+
   const {
     organization_id,
     users: { family_name, id: user_id },
   } = moderation;
+
   return await moncomptepro_pg
-    .select({ user_id: schema.users_organizations.user_id })
+    .select({
+      email: schema.users.email,
+      family_name: schema.users.family_name,
+      given_name: schema.users.given_name,
+      user_id: schema.users_organizations.user_id,
+    })
     .from(schema.users_organizations)
     .leftJoin(
       schema.users,
@@ -221,5 +245,6 @@ async function get_duplicate_users(moderation_id: number) {
         not(eq(schema.users.id, user_id)),
         eq(schema.users_organizations.organization_id, organization_id),
       ),
-    );
+    )
+    .orderBy(asc(schema.users.created_at));
 }
