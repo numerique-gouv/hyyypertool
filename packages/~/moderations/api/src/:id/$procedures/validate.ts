@@ -25,7 +25,7 @@ import { comment_message } from "./comment_message";
 //
 
 export const FORM_SCHEMA = z.object({
-  add_domain: z.enum(["AS_INTERNAL", "AS_EXTERNAL", ""]).default(""),
+  add_domain: z.enum(["AS_INTERNAL", "AS_EXTERNAL"]).optional(),
   add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL", "NOPE"]).default("NOPE"),
   send_notitfication: z.string().default("false").pipe(z_coerce_boolean),
   verification_type: Verification_Type_Schema.optional(),
@@ -58,6 +58,8 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
       send_notitfication,
       verification_type,
     });
+
+    if (1) return text("OK", 200);
     if (!moderation) return notFound();
 
     const {

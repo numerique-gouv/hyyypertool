@@ -18,10 +18,7 @@ export function Member_Valid() {
   const { $accept, $add_domain, $decision_form } =
     useContext(Desicison_Context);
   const { moderation } = useContext(ModerationPage_Context);
-  const { base, element, legend } = fieldset();
-  const {
-    users: { given_name },
-  } = moderation;
+  const { base, element } = fieldset();
 
   return (
     <form
@@ -233,13 +230,11 @@ function OrganizationDomain() {
                 id={$internal}
                 name={FORM_SCHEMA.keyof().Enum.add_domain}
                 type="radio"
-                value={
-                  FORM_SCHEMA.shape.add_domain.removeDefault().Enum.AS_INTERNAL
-                }
+                value={FORM_SCHEMA.shape.add_domain.unwrap().Enum.AS_INTERNAL}
               />
               <label class="fr-label !flex-row" for={$internal}>
                 <span class="mx-1">{domain}</span> est{" "}
-                <b class="mx-1">interne</b> à l'organisation 🧑‍💼
+                <b class="mx-1">interne</b> à l'organisation 🪴
               </label>
             </div>
           </div>
@@ -249,13 +244,11 @@ function OrganizationDomain() {
                 id={$external}
                 name={FORM_SCHEMA.keyof().Enum.add_domain}
                 type="radio"
-                value={
-                  FORM_SCHEMA.shape.add_domain.removeDefault().Enum.AS_EXTERNAL
-                }
+                value={FORM_SCHEMA.shape.add_domain.unwrap().Enum.AS_EXTERNAL}
               />
               <label class="fr-label !flex-row" for={$external}>
                 <span class="mx-1">{domain}</span> est{" "}
-                <b class="mx-1">externe</b> à l'organisation 👷
+                <b class="mx-1">externe</b> à l'organisation 🌳
               </label>
             </div>
           </div>
@@ -291,77 +284,77 @@ function SendNotification() {
   );
 }
 
-function AddDomain() {
-  const { $add_domain } = useContext(Desicison_Context);
-  const { domain } = useContext(ModerationPage_Context);
+// function AddDomain() {
+//   const { $add_domain } = useContext(Desicison_Context);
+//   const { domain } = useContext(ModerationPage_Context);
 
-  return (
-    <div class="fr-checkbox-group">
-      <input
-        id={$add_domain}
-        name={FORM_SCHEMA.keyof().Enum.add_domain}
-        type="checkbox"
-        value="true"
-      />
-      <label class="fr-label !flex-row" for={$add_domain}>
-        J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
-        l’organisation
-      </label>
-    </div>
-  );
-}
+//   return (
+//     <div class="fr-checkbox-group">
+//       <input
+//         id={$add_domain}
+//         name={FORM_SCHEMA.keyof().Enum.add_domain}
+//         type="checkbox"
+//         value="true"
+//       />
+//       <label class="fr-label !flex-row" for={$add_domain}>
+//         J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
+//         l’organisation
+//       </label>
+//     </div>
+//   );
+// }
 
-function AddAsMemberInternal() {
-  const { $add_as_internal_member } = useContext(Desicison_Context);
-  const {
-    moderation: {
-      users: { given_name },
-    },
-    organization_member,
-  } = useContext(ModerationPage_Context);
-  const is_already_internal_member = organization_member?.is_external === false;
-  return (
-    <div class="fr-radio-group">
-      <input
-        id={$add_as_internal_member}
-        name={FORM_SCHEMA.keyof().Enum.add_member}
-        required
-        type="radio"
-        value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_INTERNAL}
-        checked={is_already_internal_member}
-      />
-      <label class="fr-label !flex-row" for={$add_as_internal_member}>
-        Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
-        QU'INTERNE
-      </label>
-    </div>
-  );
-}
+// function AddAsMemberInternal() {
+//   const { $add_as_internal_member } = useContext(Desicison_Context);
+//   const {
+//     moderation: {
+//       users: { given_name },
+//     },
+//     organization_member,
+//   } = useContext(ModerationPage_Context);
+//   const is_already_internal_member = organization_member?.is_external === false;
+//   return (
+//     <div class="fr-radio-group">
+//       <input
+//         id={$add_as_internal_member}
+//         name={FORM_SCHEMA.keyof().Enum.add_member}
+//         required
+//         type="radio"
+//         value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_INTERNAL}
+//         checked={is_already_internal_member}
+//       />
+//       <label class="fr-label !flex-row" for={$add_as_internal_member}>
+//         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
+//         QU'INTERNE
+//       </label>
+//     </div>
+//   );
+// }
 
-function AddAsMemberExternal() {
-  const { $add_as_external_member } = useContext(Desicison_Context);
-  const {
-    moderation: {
-      users: { given_name },
-    },
-    organization_member,
-  } = useContext(ModerationPage_Context);
+// function AddAsMemberExternal() {
+//   const { $add_as_external_member } = useContext(Desicison_Context);
+//   const {
+//     moderation: {
+//       users: { given_name },
+//     },
+//     organization_member,
+//   } = useContext(ModerationPage_Context);
 
-  const is_already_external_member = organization_member?.is_external === true;
-  return (
-    <div class="fr-radio-group">
-      <input
-        id={$add_as_external_member}
-        name={FORM_SCHEMA.keyof().Enum.add_member}
-        required
-        type="radio"
-        value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_EXTERNAL}
-        checked={is_already_external_member}
-      />
-      <label class="fr-label !flex-row" for={$add_as_external_member}>
-        Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
-        QU'EXTERNE
-      </label>
-    </div>
-  );
-}
+//   const is_already_external_member = organization_member?.is_external === true;
+//   return (
+//     <div class="fr-radio-group">
+//       <input
+//         id={$add_as_external_member}
+//         name={FORM_SCHEMA.keyof().Enum.add_member}
+//         required
+//         type="radio"
+//         value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_EXTERNAL}
+//         checked={is_already_external_member}
+//       />
+//       <label class="fr-label !flex-row" for={$add_as_external_member}>
+//         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
+//         QU'EXTERNE
+//       </label>
+//     </div>
+//   );
+// }
