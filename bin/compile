@@ -82,7 +82,7 @@ curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
 #
 
 header "Installing bun binary"
-curl -fsSL https://bun.sh/install | bash -s "bun-v1.0.35"
+curl -fsSL https://bun.sh/install | bash -s "bun-v1.0.36"
 
 #
 
