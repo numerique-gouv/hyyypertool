@@ -20,9 +20,9 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "drizzle-orm": "0.30.5",
-    "hono": "4.1.5",
-    "pg": "8.11.3"
+    "drizzle-orm": "0.30.6",
+    "hono": "4.1.7",
+    "pg": "8.11.4"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
