@@ -40,9 +40,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4.0.2
         with:
           node-version: "node"
 
@@ -51,7 +51,7 @@ jobs:
         working-directory: "."
 
       - name: 🌭 Install bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v1.2.1
 
       - run: bun install --frozen-lockfile
         working-directory: "."
@@ -70,7 +70,7 @@ jobs:
         working-directory: "."
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v6.6.1
         env:
           AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
           AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/api/v2"
@@ -99,7 +99,7 @@ jobs:
           start: bun run start
           working-directory: e2e
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4.3.1
         if: failure()
         with:
           compression-level: 9
@@ -107,7 +107,7 @@ jobs:
           path: e2e/cypress/screenshots
           spec: features/${{ matrix.e2e_test }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4.3.1
         if: failure()
         with:
           compression-level: 9
