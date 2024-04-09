@@ -14,7 +14,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.2.1",
+    "hono": "4.2.3",
     "nprogress": "0.2.0"
   },
   "devDependencies": {
