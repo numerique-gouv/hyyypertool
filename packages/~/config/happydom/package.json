@@ -5,6 +5,6 @@
   "type": "module",
   "files": [],
   "dependencies": {
-    "@happy-dom/global-registrator": "14.3.10"
+    "@happy-dom/global-registrator": "14.7.1"
   }
 }
