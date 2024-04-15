@@ -1,5 +1,12 @@
 
 
+# [2024.4.0](https://github.com/betagouv/hyyypertool/compare/2024.3.14...2024.4.0) (2024-04-15)
+
+
+### Features
+
+* **moderation:** add reponse for Chorus Pro ([#190](https://github.com/betagouv/hyyypertool/issues/190)) ([4c532f9](https://github.com/betagouv/hyyypertool/commit/4c532f90eb3ee247a3ebd527fba7290de4ede839))
+
 ## [2024.3.14](https://github.com/betagouv/hyyypertool/compare/2024.3.13...2024.3.14) (2024-03-28)
 
 
