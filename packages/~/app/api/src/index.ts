@@ -14,6 +14,7 @@ import users_router from "@~/users.api";
 import welcome_router from "@~/welcome.api";
 import consola, { LogLevels } from "consola";
 import { Hono } from "hono";
+import { compress } from "hono/compress";
 import { logger } from "hono/logger";
 import asserts_router from "./assets";
 import { error_handler } from "./error";
@@ -24,6 +25,7 @@ import readyz_router from "./readyz";
 const authoried = vip_list_guard({ vip_list: config.ALLOWED_USERS.split(",") });
 const app = new Hono()
   .use("*", logger(consola.info))
+  .use("*", compress())
   .use(
     "*",
     sentry({
@@ -40,9 +42,6 @@ const app = new Hono()
       },
     }),
   )
-
-  // import { compress } from 'hono/compress'
-  // app.use("*", compress());  `CompressionStream` is not yet supported in bun.
 
   .get("/healthz", ({ text }) => text(`healthz check passed`))
   .get("/livez", ({ text }) => text(`livez check passed`))
