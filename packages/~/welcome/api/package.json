@@ -16,7 +16,7 @@
     "@~/app.urls": "workspace:*",
     "animate.css": "4.1.1",
     "hono": "4.2.4",
-    "lit": "3.1.2",
+    "lit": "3.1.3",
     "openid-client": "5.6.5"
   },
   "devDependencies": {
