@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "@hono/node-server": "1.10.0",
+    "@hono/node-server": "1.10.1",
     "@hono/sentry": "1.0.1",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
