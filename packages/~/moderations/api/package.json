@@ -23,7 +23,7 @@
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "await-to-js": "3.0.0",
-    "drizzle-orm": "0.30.8",
+    "drizzle-orm": "0.30.9",
     "hono": "4.2.5",
     "tailwind-variants": "0.2.1",
     "ts-dedent": "2.2.0",
