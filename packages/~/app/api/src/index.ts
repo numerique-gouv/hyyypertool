@@ -29,6 +29,7 @@ const app = new Hono()
   .use(
     "*",
     sentry({
+      attachStacktrace: true,
       debug: consola.level >= LogLevels.debug,
       dsn: config.SENTRY_DNS,
       environment: config.DEPLOY_ENV,
