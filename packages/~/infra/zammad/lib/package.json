@@ -14,7 +14,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "zod": "3.22.5"
+    "zod": "3.23.0"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
