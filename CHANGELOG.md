@@ -1,5 +1,13 @@
 
 
+## [2024.4.1](https://github.com/betagouv/hyyypertool/compare/2024.4.0...2024.4.1) (2024-04-22)
+
+
+### Features
+
+* **app:** try attachStacktrace on sentry ([e932238](https://github.com/betagouv/hyyypertool/commit/e9322382fb568cae9a242445f240d9f4c6007f65))
+* **app:** use hono/compress ([#191](https://github.com/betagouv/hyyypertool/issues/191)) ([16e3013](https://github.com/betagouv/hyyypertool/commit/16e301397abe84e3f5dede129a51f8817076d7b7))
+
 # [2024.4.0](https://github.com/betagouv/hyyypertool/compare/2024.3.14...2024.4.0) (2024-04-15)
 
 
