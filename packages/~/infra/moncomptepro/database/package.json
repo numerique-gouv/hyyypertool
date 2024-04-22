@@ -27,6 +27,6 @@
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
     "@types/pg": "8.11.5",
-    "drizzle-kit": "0.20.14"
+    "drizzle-kit": "0.20.17"
   }
 }
