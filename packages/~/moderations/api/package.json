@@ -24,7 +24,7 @@
     "@~/moncomptepro.lib": "workspace:*",
     "await-to-js": "3.0.0",
     "drizzle-orm": "0.30.9",
-    "hono": "4.2.6",
+    "hono": "4.2.7",
     "tailwind-variants": "0.2.1",
     "ts-dedent": "2.2.0",
     "ts-pattern": "5.1.1",
