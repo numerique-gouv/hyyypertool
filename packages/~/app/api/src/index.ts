@@ -41,6 +41,7 @@ const app = new Hono()
           GIT_SHA: config.GIT_SHA,
         },
       },
+      tracesSampleRate: 1,
     }),
   )
 
