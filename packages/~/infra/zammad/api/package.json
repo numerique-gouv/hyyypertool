@@ -13,7 +13,7 @@
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "hono": "4.2.7",
-    "zod": "3.22.5"
+    "zod": "3.23.4"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
