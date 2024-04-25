@@ -50,9 +50,10 @@ export function sentry() {
         ? c.req.header("sentry-trace")
         : undefined;
       const baggage = c.req.header("baggage");
-      const { url, method } = c.req;
+      const { url, method, path } = c.req;
       const headers = Object.fromEntries(c.res.headers);
 
+      scope.setTransactionName(`${method} ${path}`);
       scope.setSDKProcessingMetadata({
         request: {
           url,
