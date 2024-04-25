@@ -8,7 +8,6 @@ import consola from "consola";
 import { type Context } from "hono";
 import { P, match } from "ts-pattern";
 import Youch from "youch";
-
 //
 
 export function error_handler(error: Error, c: Context) {

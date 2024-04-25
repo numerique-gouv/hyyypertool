@@ -1,0 +1,26 @@
+{
+  "name": "@~/app.sentry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf node_modules/.cache/tsc",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@sentry/node": "7.112.2",
+    "@sentry/profiling-node": "7.112.2",
+    "consola": "3.2.3",
+    "hono": "4.2.7"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

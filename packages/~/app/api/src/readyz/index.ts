@@ -12,7 +12,7 @@ import { Hono } from "hono";
 export default new Hono()
   .get("/", ({ text }) => text(`readyz check passed`))
   .get("/sentry", () => {
-    throw new Error("Sentry Check");
+    throw new Error("Sentry Check " + new Date().toISOString());
   })
   .get("/zammad", async ({ text }) => {
     const [, user] = await to(get_zammad_me());
