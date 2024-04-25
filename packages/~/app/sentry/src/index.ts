@@ -28,6 +28,7 @@ export function sentry() {
       },
     },
     integrations: [
+      new Integrations.Postgres(),
       new Integrations.Http({ tracing: true }),
       nodeProfilingIntegration(),
     ],
