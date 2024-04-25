@@ -1,5 +1,12 @@
 
 
+## [2024.4.2](https://github.com/betagouv/hyyypertool/compare/2024.4.1...2024.4.2) (2024-04-25)
+
+
+### Features
+
+* **app:** allow sentry tracing ([#233](https://github.com/betagouv/hyyypertool/issues/233)) ([184f9a3](https://github.com/betagouv/hyyypertool/commit/184f9a326805cd4b4ca7f7c882ee984a6bd7abe3))
+
 ## [2024.4.1](https://github.com/betagouv/hyyypertool/compare/2024.4.0...2024.4.1) (2024-04-22)
 
 
