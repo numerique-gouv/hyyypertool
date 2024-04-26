@@ -16,7 +16,7 @@ updates:
       - dependencies
 
   - package-ecosystem: "npm"
-    directory: "/e2e/"
+    directory: "/e2e"
     schedule:
       interval: "daily"
     labels:
