@@ -13,7 +13,7 @@
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
     "cypress": "13.8.1",
     "pg": "8.11.5",
-    "typescript": "5.4.3"
+    "typescript": "5.4.5"
   },
   "trustedDependencies": [
     "cypress"
