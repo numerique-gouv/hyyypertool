@@ -69,6 +69,10 @@ jobs:
           curl -sSf -XGET ${{ env.MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR }}/readyz
         working-directory: "."
 
+      - name: cypress-io/github-action needs package-lock.json
+        run: |
+          touch package-lock.json
+
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.1
         env:
