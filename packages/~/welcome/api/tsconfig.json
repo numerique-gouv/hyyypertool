@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
+    "jsxImportSource": "hono/jsx",
     "outDir": "./node_modules/.cache/tsc",
     "types": ["bun-types"]
   },

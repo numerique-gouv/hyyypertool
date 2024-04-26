@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsxImportSource": "hono/jsx",
     "outDir": "./node_modules/.cache/tsc",
     "lib": ["DOM"],
     "types": ["bun-types", "hono"]
