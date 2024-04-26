@@ -12,7 +12,7 @@
     "@hono/zod-validator": "0.2.1",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
-    "hono": "4.2.7",
+    "hono": "4.2.8",
     "zod": "3.23.4"
   },
   "devDependencies": {
