@@ -23,7 +23,7 @@
     "await-to-js": "3.0.0",
     "consola": "3.2.3",
     "drizzle-orm": "0.30.9",
-    "hono": "4.2.8",
+    "hono": "4.2.9",
     "htmx.ext...chunked-transfer": "1.0.4",
     "htmx.org": "1.9.12",
     "hyperscript.org": "0.9.12",
