@@ -60,7 +60,7 @@
     "consola": "3.2.3",
     "dotenv": "16.4.5",
     "hono": "4.2.9",
-    "tsx": "4.7.3"
+    "tsx": "4.8.2"
   },
   "devDependencies": {
     "@csmith/release-it-calver-plugin": "2023.12.0",
