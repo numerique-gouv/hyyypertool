@@ -12,7 +12,7 @@ export function Error_Page({ error, nonce }: { error: Error; nonce?: string }) {
       <main class="flex h-full flex-grow flex-col items-center justify-center">
         <div class="card-container not-found-error">
           <img src="${config.PUBLIC_ASSETS_PATH}/404.svg" alt="" />
-          <h3>Oups, une error c'est produit.</h3>
+          <h3>Oups, une erreur s'est produite.</h3>
           <pre>${error.message}</pre>
           <a href="/" class="fr-btn"> Retour à l’accueil </a>
         </div>
