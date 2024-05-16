@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "hono": "4.3.2"
+    "hono": "4.3.7"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
