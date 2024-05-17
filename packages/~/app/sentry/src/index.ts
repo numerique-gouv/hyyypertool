@@ -1,10 +1,11 @@
 import {
-  Integrations,
   SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN,
   SEMANTIC_ATTRIBUTE_SENTRY_SOURCE,
   addRequestDataToEvent,
   continueTrace,
+  httpIntegration,
   init,
+  postgresIntegration,
   setHttpStatus,
   startSpan,
   withScope,
@@ -28,8 +29,8 @@ export function sentry() {
       },
     },
     integrations: [
-      new Integrations.Postgres(),
-      new Integrations.Http({ tracing: true }),
+      postgresIntegration(),
+      httpIntegration(),
       nodeProfilingIntegration(),
     ],
     profilesSampleRate: 1,
@@ -104,79 +105,5 @@ export function sentry() {
         ),
       );
     });
-    // const scope = getCurrentScope();
-    // scope.addEventProcessor((event) =>
-    //   addRequestDataToEvent(
-    //     event,
-    //     {
-    //       method: c.req.method,
-    //       url: c.req.url,
-    //     },
-    //     {
-    //       include: {
-    //         user: false,
-    //       },
-    //     },
-    //   ),
-    // );
-    // c.set("sentry", scope);
-    // await next();
-    // const scope = getCurrentScope();
-    // c.set("sentry", scope);
-
-    // const sentryTrace = c.req.header("sentry-trace")
-    //   ? c.req.header("sentry-trace")
-    //   : undefined;
-    // const baggage = c.req.header("baggage");
-    // const url = c.req.url;
-    // await continueTrace({ sentryTrace, baggage }, (ctx) =>
-    //   startSpan(
-    //     {
-    //       op: "http.server",
-    //       name: `${c.req.method} ${c.req.path || "/"}`,
-    //       origin: "auto.http.node.tracingHandler",
-    //       // ...ctx,
-    //       // metadata: {
-    //       //   ...ctx.metadata,
-    //       //   request: c.req.raw as any,
-    //       //   source,
-    //       // }
-    //       // data,
-    //       // metadata: {
-    //       //   source: "url",
-    //       //   request: {
-    //       //     url,
-    //       //     method: c.req.method,
-    //       //     headers: c.req.header(),
-    //       //   },
-    //       // },
-    //     },
-    //     async (span) => {
-    //       // getCurrentScope().setSDKProcessingMetadata({
-    //       //   request: c.req.raw,
-    //       // });
-    //       scope.addEventProcessor((event) =>
-    //         addRequestDataToEvent(
-    //           event,
-    //           {
-    //             method: c.req.method,
-    //             url: c.req.url,
-    //           },
-    //           {
-    //             include: {
-    //               user: false,
-    //             },
-    //           },
-    //         ),
-    //       );
-
-    //       await next();
-
-    //       if (span) {
-    //         setHttpStatus(span, c.res.status);
-    //       }
-    //     },
-    //   ),
-    // );
   });
 }
