@@ -19,7 +19,7 @@
     "@~/app.layout": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "hono": "4.3.7",
-    "hono-sessions": "0.3.8",
+    "hono-sessions": "0.5.4",
     "openid-client": "5.6.5"
   },
   "devDependencies": {
