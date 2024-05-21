@@ -21,12 +21,12 @@
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
     "drizzle-orm": "0.30.10",
-    "hono": "4.3.7",
+    "hono": "4.3.9",
     "pg": "8.11.5"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
     "@types/pg": "8.11.6",
-    "drizzle-kit": "0.20.17"
+    "drizzle-kit": "0.21.2"
   }
 }

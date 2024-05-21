@@ -12,8 +12,8 @@
     "@hono/zod-validator": "0.2.1",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
-    "hono": "4.3.7",
-    "zod": "3.23.6"
+    "hono": "4.3.9",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
