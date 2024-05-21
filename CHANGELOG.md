@@ -1,5 +1,23 @@
 
 
+# [2024.5.0](https://github.com/betagouv/hyyypertool/compare/2024.4.3...2024.5.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **app:** typo on error page ([5397afa](https://github.com/betagouv/hyyypertool/commit/5397afaea10fe936c3bcfdbf8bda07cf3bcdeed3))
+* **pkg:** update dependencies ([#276](https://github.com/betagouv/hyyypertool/issues/276)) ([fb35235](https://github.com/betagouv/hyyypertool/commit/fb352355feedbe62470f6da4a5acd7b257b31dff))
+
+
+### Features
+
+* **moncomptepro:** update database schema ([#284](https://github.com/betagouv/hyyypertool/issues/284)) ([4f1fea1](https://github.com/betagouv/hyyypertool/commit/4f1fea1e33eb3fa76500121902c62e0c69f17629))
+
+
+### Reverts
+
+* Revert "chore(deps-dev): bump drizzle-kit from 0.20.17 to 0.21.1 (#270)" ([5054e51](https://github.com/betagouv/hyyypertool/commit/5054e5184f130680ee4e1fc23e61a8a89082a522)), closes [#270](https://github.com/betagouv/hyyypertool/issues/270)
+
 ## [2024.4.3](https://github.com/betagouv/hyyypertool/compare/2024.4.2...2024.4.3) (2024-04-26)
 
 ## [2024.4.2](https://github.com/betagouv/hyyypertool/compare/2024.4.1...2024.4.2) (2024-04-25)
