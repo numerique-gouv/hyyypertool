@@ -1,4 +1,7 @@
-version: "3"
+#
+
+include:
+  - path: ./mocks/docker-compose.mocks.yaml
 
 services:
   postgres-moncomptepro:
