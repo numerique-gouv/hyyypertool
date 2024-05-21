@@ -2,9 +2,9 @@
 
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls, urls } from "@~/app.urls";
-import type { User } from "@~/moncomptepro.database";
-import { createContext, useContext } from "hono/jsx";
+import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
+import { Table_Context, type get_users_list_dto } from "./context";
 import { USER_TABLE_ID } from "./page";
 
 const fields = [
@@ -17,13 +17,7 @@ const fields = [
   "email_verified_at",
 ] as const;
 
-export const Table_Context = createContext({
-  page: 0,
-  take: 10,
-  count: 0,
-});
-
-export function Table({ users }: { users: User[] }) {
+export function Table({ users }: { users: get_users_list_dto["users"] }) {
   const { page, take, count } = useContext(Table_Context);
 
   return (

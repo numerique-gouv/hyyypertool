@@ -1,6 +1,5 @@
 //
 
-import config from "@~/app.core/config";
 import consola, { LogLevels } from "consola";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
@@ -13,7 +12,7 @@ import { insert_database } from "./insert";
 export async function seed() {
   const client = new pg.Client({
     connectionString:
-      config.DATABASE_URL ??
+      process.env["DATABASE_URL"] ??
       "postgresql://postgres:postgres@localhost:5432/postgres",
   });
   await client.connect();

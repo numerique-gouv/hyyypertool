@@ -3,10 +3,9 @@
 import type { Pagination } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { hx_urls } from "@~/app.urls";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
 import { useRequestContext } from "hono/jsx-renderer";
-import { Table, Table_Context } from "./Table";
+import { Table } from "./Table";
+import { Table_Context, get_users_list } from "./context";
 
 //
 
@@ -15,38 +14,6 @@ export const USER_TABLE_ID = "user-table";
 
 //
 
-function get_users_list(
-  pg: MonComptePro_PgDatabase,
-  {
-    search,
-    pagination = { page: 0, take: 10 },
-  }: {
-    search: {
-      email?: string;
-    };
-    pagination?: { page: number; take: number };
-  },
-) {
-  const { page, take } = pagination;
-  const { email } = search;
-
-  const where = and(ilike(schema.users.email, `%${email ?? ""}%`));
-
-  return pg.transaction(async function users_with_count() {
-    const users = await pg
-      .select()
-      .from(schema.users)
-      .where(where)
-      .orderBy(desc(schema.users.created_at))
-      .limit(take)
-      .offset(page * take);
-    const [{ value: count }] = await pg
-      .select({ value: drizzle_count() })
-      .from(schema.users)
-      .where(where);
-    return { users, count };
-  });
-}
 //
 
 export default async function Page({
