@@ -9,7 +9,7 @@ import { ModerationPage_Context } from "./context";
 
 export function About_Organisation() {
   const {
-    moderation: { organizations: organization },
+    moderation: { organization },
   } = useContext(ModerationPage_Context);
 
   return (

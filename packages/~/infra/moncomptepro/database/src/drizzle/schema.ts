@@ -1,18 +1,15 @@
-//
-
-import { relations } from "drizzle-orm";
 import {
-  boolean,
-  integer,
   pgTable,
-  primaryKey,
+  foreignKey,
   serial,
+  integer,
+  varchar,
   timestamp,
   uniqueIndex,
-  varchar,
+  boolean,
+  primaryKey,
 } from "drizzle-orm/pg-core";
-
-//
+import { sql } from "drizzle-orm";
 
 export const moderations = pgTable("moderations", {
   id: serial("id").primaryKey().notNull(),
@@ -23,24 +20,17 @@ export const moderations = pgTable("moderations", {
     .notNull()
     .references(() => organizations.id, { onDelete: "cascade" }),
   type: varchar("type").notNull(),
-  created_at: timestamp("created_at", { withTimezone: true })
+  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
   moderated_at: timestamp("moderated_at", {
     withTimezone: true,
+    mode: "string",
   }),
   comment: varchar("comment"),
   ticket_id: integer("ticket_id"),
   moderated_by: varchar("moderated_by"),
 });
-
-export const moderations_relations = relations(moderations, ({ one }) => ({
-  users: one(users, { fields: [moderations.user_id], references: [users.id] }),
-  organizations: one(organizations, {
-    fields: [moderations.organization_id],
-    references: [organizations.id],
-  }),
-}));
 
 export const oidc_clients = pgTable("oidc_clients", {
   id: serial("id").primaryKey().notNull(),
@@ -48,10 +38,10 @@ export const oidc_clients = pgTable("oidc_clients", {
   client_id: varchar("client_id").notNull(),
   client_secret: varchar("client_secret").notNull(),
   redirect_uris: varchar("redirect_uris").default("{}").array().notNull(),
-  created_at: timestamp("created_at", { withTimezone: true })
+  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  updated_at: timestamp("updated_at", { withTimezone: true })
+  updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
   post_logout_redirect_uris: varchar("post_logout_redirect_uris")
@@ -86,11 +76,11 @@ export const organizations = pgTable(
       .default("{}")
       .array()
       .notNull(),
-    created_at: timestamp("created_at", { withTimezone: false })
-      .default(new Date(0))
+    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
       .notNull(),
-    updated_at: timestamp("updated_at", { withTimezone: false })
-      .default(new Date(0))
+    updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
       .notNull(),
     cached_libelle: varchar("cached_libelle"),
     cached_nom_complet: varchar("cached_nom_complet"),
@@ -116,6 +106,7 @@ export const organizations = pgTable(
     ),
     organization_info_fetched_at: timestamp("organization_info_fetched_at", {
       withTimezone: true,
+      mode: "string",
     }),
     verified_email_domains: varchar("verified_email_domains")
       .default("{}")
@@ -147,22 +138,26 @@ export const users = pgTable(
     reset_password_token: varchar("reset_password_token"),
     reset_password_sent_at: timestamp("reset_password_sent_at", {
       withTimezone: true,
+      mode: "string",
     }),
     sign_in_count: integer("sign_in_count").default(0).notNull(),
     last_sign_in_at: timestamp("last_sign_in_at", {
       withTimezone: true,
+      mode: "string",
     }),
     created_at: timestamp("created_at", {
       withTimezone: true,
+      mode: "string",
     }).notNull(),
     updated_at: timestamp("updated_at", {
       withTimezone: true,
+      mode: "string",
     }).notNull(),
-    legacy_user: boolean("legacy_user").default(false).notNull(),
     email_verified: boolean("email_verified").default(false).notNull(),
     verify_email_token: varchar("verify_email_token"),
     verify_email_sent_at: timestamp("verify_email_sent_at", {
       withTimezone: true,
+      mode: "string",
     }),
     given_name: varchar("given_name"),
     family_name: varchar("family_name"),
@@ -171,11 +166,23 @@ export const users = pgTable(
     magic_link_token: varchar("magic_link_token"),
     magic_link_sent_at: timestamp("magic_link_sent_at", {
       withTimezone: true,
+      mode: "string",
     }),
     email_verified_at: timestamp("email_verified_at", {
       withTimezone: true,
+      mode: "string",
     }),
     current_challenge: varchar("current_challenge"),
+    needs_inclusionconnect_welcome_page: boolean(
+      "needs_inclusionconnect_welcome_page",
+    )
+      .default(false)
+      .notNull(),
+    needs_inclusionconnect_onboarding_help: boolean(
+      "needs_inclusionconnect_onboarding_help",
+    )
+      .default(false)
+      .notNull(),
   },
   (table) => {
     return {
@@ -199,9 +206,11 @@ export const users_oidc_clients = pgTable("users_oidc_clients", {
     }),
   created_at: timestamp("created_at", {
     withTimezone: true,
+    mode: "string",
   }).notNull(),
   updated_at: timestamp("updated_at", {
     withTimezone: true,
+    mode: "string",
   }).notNull(),
   id: serial("id").primaryKey().notNull(),
   organization_id: integer("organization_id").references(
@@ -220,11 +229,11 @@ export const users_organizations = pgTable(
       .notNull()
       .references(() => organizations.id, { onUpdate: "cascade" }),
     is_external: boolean("is_external").default(false).notNull(),
-    created_at: timestamp("created_at", { withTimezone: false })
-      .default(new Date(0))
+    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
       .notNull(),
-    updated_at: timestamp("updated_at", { withTimezone: true })
-      .default(new Date(0))
+    updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
       .notNull(),
     verification_type: varchar("verification_type"),
     authentication_by_peers_type: varchar("authentication_by_peers_type"),
@@ -242,7 +251,7 @@ export const users_organizations = pgTable(
     ),
     official_contact_email_verification_sent_at: timestamp(
       "official_contact_email_verification_sent_at",
-      { withTimezone: true },
+      { withTimezone: true, mode: "string" },
     ),
   },
   (table) => {
@@ -253,18 +262,4 @@ export const users_organizations = pgTable(
       }),
     };
   },
-);
-
-export const users_organizations_relations = relations(
-  users_organizations,
-  ({ one }) => ({
-    user: one(users, {
-      fields: [users_organizations.user_id],
-      references: [users.id],
-    }),
-    organization: one(organizations, {
-      fields: [users_organizations.organization_id],
-      references: [organizations.id],
-    }),
-  }),
 );

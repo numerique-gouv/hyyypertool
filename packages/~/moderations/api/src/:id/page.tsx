@@ -126,12 +126,12 @@ export async function ModerationPage_Provider({
   const organization_member = await get_organization_member(
     { pg: moncomptepro_pg },
     {
-      organization_id: moderation.organizations.id,
-      user_id: moderation.users.id,
+      organization_id: moderation.organization_id,
+      user_id: moderation.user.id,
     },
   );
 
-  const domain = z_email_domain.parse(moderation.users.email, {
+  const domain = z_email_domain.parse(moderation.user.email, {
     path: ["moderation.users.email"],
   });
 

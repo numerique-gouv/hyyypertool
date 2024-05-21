@@ -1,6 +1,6 @@
 -- Current sql file was generated after introspecting the database
 -- If you want to run this migration please uncomment this code before executing migrations
-
+/*
 CREATE TABLE IF NOT EXISTS "moderations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"last_sign_in_at" timestamp with time zone,
 	"created_at" timestamp with time zone NOT NULL,
 	"updated_at" timestamp with time zone NOT NULL,
-	"legacy_user" boolean DEFAULT false NOT NULL,
 	"email_verified" boolean DEFAULT false NOT NULL,
 	"verify_email_token" varchar,
 	"verify_email_sent_at" timestamp with time zone,
@@ -81,7 +80,9 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"magic_link_token" varchar,
 	"magic_link_sent_at" timestamp with time zone,
 	"email_verified_at" timestamp with time zone,
-	"current_challenge" varchar
+	"current_challenge" varchar,
+	"needs_inclusionconnect_welcome_page" boolean DEFAULT false NOT NULL,
+	"needs_inclusionconnect_onboarding_help" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users_oidc_clients" (
@@ -109,9 +110,6 @@ CREATE TABLE IF NOT EXISTS "users_organizations" (
 	CONSTRAINT "users_organizations_pkey" PRIMARY KEY("user_id","organization_id")
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" ("siret");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" ("email");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" ("reset_password_token");--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "moderations" ADD CONSTRAINT "moderations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
@@ -159,3 +157,8 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
+--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" ("siret");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" ("email");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" ("reset_password_token");
+*/

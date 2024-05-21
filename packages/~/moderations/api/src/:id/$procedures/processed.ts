@@ -38,7 +38,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
             created_by: moderated_by,
           }),
         ].join("\n"),
-        moderated_at: new Date(),
+        moderated_at: new Date().toISOString(),
         moderated_by,
       })
       .where(eq(schema.moderations.id, id));

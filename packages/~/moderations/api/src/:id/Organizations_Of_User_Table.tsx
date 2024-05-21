@@ -15,8 +15,8 @@ export function Organizations_Of_User_Table() {
   return (
     <section>
       <h3>
-        Organisations de {moderation.users.given_name}{" "}
-        {moderation.users.family_name}
+        Organisations de {moderation.user.given_name}{" "}
+        {moderation.user.family_name}
       </h3>
 
       <div

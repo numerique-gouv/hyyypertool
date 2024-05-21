@@ -58,7 +58,18 @@ export function get_moderations_list(
 
   return pg.transaction(async function moderation_count() {
     const moderations = await pg
-      .select()
+      .select({
+        created_at: schema.moderations.created_at,
+        id: schema.moderations.id,
+        moderated_at: schema.moderations.moderated_at,
+        organization: { siret: schema.organizations.siret },
+        type: schema.moderations.type,
+        user: {
+          email: schema.users.email,
+          family_name: schema.users.family_name,
+          given_name: schema.users.given_name,
+        },
+      })
       .from(schema.moderations)
       .innerJoin(schema.users, eq(schema.moderations.user_id, schema.users.id))
       .innerJoin(

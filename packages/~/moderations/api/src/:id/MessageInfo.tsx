@@ -4,14 +4,20 @@ import { match } from "ts-pattern";
 import { ModerationPage_Context } from "./context";
 
 export function MessageInfo() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    moderation: {
+      organization: { cached_libelle },
+      type,
+      user: { email, family_name, given_name },
+    },
+  } = useContext(ModerationPage_Context);
   return (
     <p>
       <b>
-        {moderation.users.given_name} {moderation.users.family_name}
+        {given_name} {family_name}
       </b>{" "}
       <span class="text-gray-600">
-        {match(moderation.type as Moderation_Type)
+        {match(type as Moderation_Type)
           .with("ask_for_sponsorship", () => "demande un sponsorship")
           .with(
             "big_organization_join",
@@ -29,9 +35,8 @@ export function MessageInfo() {
             (type) => `veut effectuer une action inconnue (type ${type})`,
           )}
       </span>{" "}
-      « <b>{moderation.organizations.cached_libelle}</b> »{" "}
-      <span class="text-gray-600">avec l’adresse</span>{" "}
-      <b>{moderation.users.email}</b>
+      « <b>{cached_libelle}</b> »{" "}
+      <span class="text-gray-600">avec l’adresse</span> <b>{email}</b>
     </p>
   );
 }

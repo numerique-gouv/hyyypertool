@@ -52,9 +52,11 @@ export function ModerationTable({
                       ),
                     )
                     .when(
-                      (x): x is Date => x instanceof Date,
-                      (value) =>
-                        `${value.toLocaleDateString()} ${value.toLocaleTimeString()}`,
+                      () => name === "created_at",
+                      (value: string): string => {
+                        const date = new Date(value);
+                        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                      },
                     )
                     .otherwise((value) => value)}
                 </td>

@@ -15,7 +15,6 @@ import {
   moderation_type_to_title,
 } from "@~/moderations.lib/moderation_type.mapper";
 import { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
-import type { Moderation, Organization, User } from "@~/moncomptepro.database";
 import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import Moderations_Context, {
@@ -23,6 +22,7 @@ import Moderations_Context, {
   MODERATION_TABLE_PAGE_ID,
   Page_Query,
   type Search,
+  type get_moderations_list_dto,
 } from "./context";
 
 //
@@ -246,11 +246,8 @@ async function ModerationList_Table() {
           </tr>
         </thead>
         <tbody>
-          {moderations.map(({ moderations, users, organizations }) => (
-            <Row
-              key={moderations.id.toString()}
-              moderation={{ ...moderations, users, organizations }}
-            />
+          {moderations.map((moderation) => (
+            <Row key={`${moderation.id}`} moderation={moderation} />
           ))}
         </tbody>
         <Foot
@@ -270,12 +267,9 @@ function Row({
   moderation,
 }: {
   key?: string;
-  moderation: Moderation & {
-    users: User;
-    organizations: Organization;
-  };
+  moderation: get_moderations_list_dto["moderations"][number];
 }) {
-  const { users, organizations } = moderation;
+  const { user, organization } = moderation;
   return (
     <tr
       key={key}
@@ -286,30 +280,30 @@ function Row({
       }'`}
       class={row({ is_clickable: true })}
       aria-selected="false"
-      style={text_color(moderation.created_at)}
+      style={text_color(new Date(moderation.created_at))}
     >
       <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
         {moderation_type_to_title(moderation.type)}
       </td>
-      <td>{date_to_string(moderation.created_at)}</td>
+      <td>{date_to_string(new Date(moderation.created_at))}</td>
       <td
         class="max-w-32 overflow-hidden text-ellipsis"
-        title={users.family_name ?? ""}
+        title={user.family_name ?? ""}
       >
-        {users.family_name}
+        {user.family_name}
       </td>
-      <td class="break-words">{users.given_name}</td>
-      <td class="max-w-48 overflow-hidden text-ellipsis" title={users.email}>
-        {users.email}
+      <td class="break-words">{user.given_name}</td>
+      <td class="max-w-48 overflow-hidden text-ellipsis" title={user.email}>
+        {user.email}
       </td>
-      <td class="break-words">{organizations.siret}</td>
+      <td class="break-words">{organization.siret}</td>
       <td>{moderation.id}</td>
       <td>
         {moderation.moderated_at ? (
           <time
-            datetime={moderation.moderated_at.toISOString()}
-            title={moderation.moderated_at.toString()}
+            datetime={moderation.moderated_at}
+            title={moderation.moderated_at}
           >
             ✅
           </time>

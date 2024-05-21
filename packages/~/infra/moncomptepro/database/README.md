@@ -1,5 +1,43 @@
 # Drizzle introspect schema for [moncomptepro](https://moncomptepro.beta.gouv.fr/)
 
+## Usage
+
+```sh
+# Change the DATABASE_URL to match the moncomptepro sandbox or a local moncomptepro database.
+
+# One can use a scalingo tunnel to pull from an existing running database
+$ scalingo --app moncomptepro-preprod --region osc-secnum-fr1 db-tunnel --identity ~/.ssh/scalingo SCALINGO_POSTGRESQL_URL
+
+# Test database connection with the studio
+$ bun x drizzle-kit studio
+drizzle-kit: v0.21.2
+drizzle-orm: v0.30.10
+
+No config path provided, using default path
+Reading config file '/home/x/zzz/github/betagouv/hyyypertool/packages/~/infra/moncomptepro/database/drizzle.config.ts'
+Using 'pg' driver for database querying
+
+# [...]
+
+Drizzle Studio is up and running on https://local.drizzle.studio
+
+# Pull the new schema
+$ bun x drizzle-kit introspect
+
+# Format the generated code
+$ bun x prettier -w .
+
+# Fixing varchar("xxxxxx", { length:  }) error : remove ", { length:  }"
+$ sed -i 's/, { length:  }//g' src/drizzle/schema.ts
+$ bun x prettier -w .
+
+# Fixing timestamp("xxxxxx").default('1970-01-01 00:00:00'::timestamp without time zone) error : replace by .defaultNow()
+$ sed -i "s/.default('1970-01-01 00:00:00'::timestamp without time zone)/.defaultNow()/g" src/drizzle/schema.ts
+$ bun x prettier -w .
+
+
+```
+
 ## Initialization Log
 
 ```sh

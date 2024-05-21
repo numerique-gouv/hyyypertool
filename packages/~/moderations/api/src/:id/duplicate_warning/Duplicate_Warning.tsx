@@ -215,7 +215,7 @@ async function get_duplicate_users(moderation_id: number) {
   const moderation = await moncomptepro_pg.query.moderations.findFirst({
     columns: { organization_id: true },
     with: {
-      users: { columns: { id: true, given_name: true, family_name: true } },
+      user: { columns: { id: true, given_name: true, family_name: true } },
     },
     where: eq(schema.moderations.id, moderation_id),
   });
@@ -224,7 +224,7 @@ async function get_duplicate_users(moderation_id: number) {
 
   const {
     organization_id,
-    users: { family_name, id: user_id },
+    user: { family_name, id: user_id },
   } = moderation;
 
   return await moncomptepro_pg

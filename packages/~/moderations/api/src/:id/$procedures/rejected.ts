@@ -77,7 +77,7 @@ async function send_rejected_message_to_user(
   const { moderation, userinfo } = context;
   const username = userinfo_to_username(userinfo);
   const body = text_body.concat(`\n${username}`).replace(/\n/g, "<br />");
-  const to = moderation.users.email;
+  const to = moderation.user.email;
   const message = { message: body, subject, to };
 
   const [error] = await await_to(respond_to_ticket(context, message));
@@ -96,7 +96,7 @@ async function create_and_send_email_to_user(
     article: {
       body: message,
       sender_id: GROUP_MONCOMPTEPRO_SENDER_ID,
-      to: moderation.users.email,
+      to: moderation.user.email,
       content_type: "text/html",
       subject,
       type_id: ARTICLE_TYPE.enum.EMAIL,
@@ -158,7 +158,7 @@ async function get_moderation(
       user_id: true,
       ticket_id: true,
     },
-    with: { users: { columns: { email: true } } },
+    with: { user: { columns: { email: true } } },
     where: eq(schema.moderations.id, moderation_id),
   });
 
@@ -186,7 +186,7 @@ function mark_moderatio_as_rejected(
           created_by: moderated_by,
         }),
       ].join("\n"),
-      moderated_at: new Date(),
+      moderated_at: new Date().toISOString(),
       moderated_by,
     })
     .where(eq(schema.moderations.id, moderation_id));

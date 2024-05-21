@@ -64,7 +64,7 @@ function SendNotification() {
   const { $send_notification } = useContext(Desicison_Context);
   const { moderation } = useContext(ModerationPage_Context);
   const {
-    users: { email },
+    user: { email },
   } = moderation;
 
   return (
@@ -111,7 +111,7 @@ function AddAsMemberInternal() {
   const { $add_as_internal_member } = useContext(Desicison_Context);
   const {
     moderation: {
-      users: { given_name },
+      user: { given_name },
     },
     organization_member,
   } = useContext(ModerationPage_Context);
@@ -140,7 +140,7 @@ function AddAsMemberExternal() {
   const { $add_as_external_member } = useContext(Desicison_Context);
   const {
     moderation: {
-      users: { given_name },
+      user: { given_name },
     },
     organization_member,
   } = useContext(ModerationPage_Context);

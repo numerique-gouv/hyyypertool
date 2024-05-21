@@ -17,13 +17,13 @@ export default async function template() {
   } = useRequestContext<MonComptePro_Pg_Context>();
 
   const members_email = await get_emails_by_organization_id(moncomptepro_pg, {
-    organization_id: moderation.organizations.id,
+    organization_id: moderation.organization.id,
   });
 
   return dedent`
     Bonjour,
 
-    Votre demande pour rejoindre l'organisation « ${moderation.organizations.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
+    Votre demande pour rejoindre l'organisation « ${moderation.organization.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
     Vous possédez déjà un compte MonComptePro :
 

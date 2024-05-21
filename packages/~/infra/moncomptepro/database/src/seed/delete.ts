@@ -2,8 +2,8 @@
 
 import consola from "consola";
 import { sql } from "drizzle-orm";
-import * as schema from "../drizzle/schema";
 import type { MonComptePro_PgDatabase } from "../index";
+import { schema } from "../index";
 
 //
 

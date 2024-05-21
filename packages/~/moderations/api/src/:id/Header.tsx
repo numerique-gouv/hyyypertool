@@ -22,7 +22,7 @@ export function Header() {
         <h1>
           <span>
             {moderation_type_to_emoji(moderation.type)}{" "}
-            {moderation.users.given_name} {moderation.users.family_name}
+            {moderation.user.given_name} {moderation.user.family_name}
           </span>
         </h1>
         <div>

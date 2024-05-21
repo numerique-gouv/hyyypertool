@@ -2,14 +2,13 @@
 
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import Pg from "pg";
-import * as schema from "./drizzle/schema";
+import * as schema from "./drizzle/relations";
 
 //
 
-export type MonComptePro_PgDatabase = NodePgDatabase<typeof schema>;
 export { drizzle } from "drizzle-orm/node-postgres";
-export * as schema from "./drizzle/schema";
-
+export { schema };
+export type MonComptePro_PgDatabase = NodePgDatabase<typeof schema>;
 export const Pool = Pg.Pool;
 
 //

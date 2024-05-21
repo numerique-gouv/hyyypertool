@@ -74,7 +74,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     //
 
     const jeanbon_dinum = await insert_moderation(db, {
-      created_at: new Date("2011-11-11 11:11:11"),
+      created_at: new Date("2011-11-11 11:11:11").toISOString(),
       organization_id: dinum.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
@@ -84,7 +84,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     );
 
     const jeanbon_abracadabra = await insert_moderation(db, {
-      created_at: new Date("2011-11-11 00:02:59"),
+      created_at: new Date("2011-11-11 00:02:59").toISOString(),
       organization_id: abracadabra.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
@@ -106,7 +106,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: dengi.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
-      moderated_at: new Date("2023-06-22 14:34:34"),
+      moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
     });
     consola.verbose(
       `🌱 ${richard_bon_dengi.command} ${richard_bon_dengi.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet}`,
@@ -134,7 +134,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: bosch_rexroth.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
-      moderated_at: new Date("2023-06-22 14:34:34"),
+      moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
     });
     consola.verbose(
       `🌱 ${marie_bon_bosch_rexroth.command} ${marie_bon_bosch_rexroth.rowCount} ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
@@ -143,7 +143,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: dinum.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: raphael_alpha.id,
-      moderated_at: new Date("2023-06-22 14:34:34"),
+      moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
     });
     consola.verbose(
       `🌱 ${raphael_alpha_dinum.command} ${raphael_alpha_dinum.rowCount} ${raphael_alpha.given_name} wants to join ${dinum.cached_nom_complet} again...`,
@@ -176,14 +176,14 @@ async function insert_jeanbon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2018-07-13 15:35:15"),
+      created_at: new Date("2018-07-13 15:35:15").toISOString(),
       email: "jeanbon@yopmail.com",
       family_name: "Bon",
       given_name: "Jean",
       job: "Boucher",
       phone_number: "0123456789",
-      updated_at: new Date("2023-06-22 14:34:34"),
-      verify_email_sent_at: new Date("2023-06-22 14:34:34"),
+      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      verify_email_sent_at: new Date("2023-06-22 14:34:34").toISOString(),
     })
     .returning();
 
@@ -194,15 +194,15 @@ async function insert_pierrebon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2022-02-03T11:23:48.375Z"),
+      created_at: new Date("2022-02-03T11:23:48.375Z").toISOString(),
       email: "pierrebon@aldp-asso.fr",
       family_name: "Bon",
       given_name: "Pierre",
       job: "Médiateur sociale et interculturelle",
       email_verified: true,
       phone_number: "0123456789",
-      updated_at: new Date("2022-02-03T11:25:06.312Z"),
-      verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z"),
+      updated_at: new Date("2022-02-03T11:25:06.312Z").toISOString(),
+      verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z").toISOString(),
     })
     .returning();
 
@@ -213,15 +213,15 @@ async function insert_richardbon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2022-02-03T11:23:48.375Z"),
+      created_at: new Date("2022-02-03T11:23:48.375Z").toISOString(),
       email: "richardbon@leclerc.fr",
       family_name: "Bon",
       given_name: "Richard",
       job: "Dirigeant",
       email_verified: true,
       phone_number: "0123456789",
-      updated_at: new Date("2022-02-03T11:25:06.312Z"),
-      verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z"),
+      updated_at: new Date("2022-02-03T11:25:06.312Z").toISOString(),
+      verify_email_sent_at: new Date("2022-02-03T11:25:06.312Z").toISOString(),
     })
     .returning();
 
@@ -232,15 +232,15 @@ async function insert_mariebon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2014-02-13T17:25:09.000Z"),
+      created_at: new Date("2014-02-13T17:25:09.000Z").toISOString(),
       email_verified: true,
       email: "marie.bon@fr.bosch.com",
       family_name: "Bon",
       given_name: "Marie",
       job: "Gestionnaire données sociales",
-      last_sign_in_at: new Date("2024-02-15T12:48:00.106Z"),
+      last_sign_in_at: new Date("2024-02-15T12:48:00.106Z").toISOString(),
       sign_in_count: 3,
-      updated_at: new Date("2014-02-15T13:48:00.000Z"),
+      updated_at: new Date("2014-02-15T13:48:00.000Z").toISOString(),
     })
     .returning();
 
@@ -251,14 +251,14 @@ async function insert_raphael(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2018-07-13 15:35:15"),
+      created_at: new Date("2018-07-13 15:35:15").toISOString(),
       email: "rdubigny@beta.gouv.fr",
       family_name: "Dubigny",
       given_name: "Raphael",
       job: "Chef",
       phone_number: "0123456789",
-      updated_at: new Date("2023-06-22 14:34:34"),
-      verify_email_sent_at: new Date("2023-06-22 14:34:34"),
+      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      verify_email_sent_at: new Date("2023-06-22 14:34:34").toISOString(),
     })
     .returning();
 
@@ -269,14 +269,14 @@ async function insert_raphael_alpha(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2018-07-13 15:35:15"),
+      created_at: new Date("2018-07-13 15:35:15").toISOString(),
       email: "rdubigny@alpha.gouv.fr",
       family_name: "Dubigny",
       given_name: "Raphael",
       job: "Chef",
       phone_number: "0123456789",
-      updated_at: new Date("2023-06-22 14:34:34"),
-      verify_email_sent_at: new Date("2023-06-22 14:34:34"),
+      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      verify_email_sent_at: new Date("2023-06-22 14:34:34").toISOString(),
     })
     .returning();
 
@@ -299,12 +299,14 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
       cached_libelle: "Abracadabra",
       cached_nom_complet: "Abracadabra (ABRACADABRA)",
       cached_tranche_effectifs: "11",
-      created_at: new Date("2022-08-08T15:43:15.501Z"),
+      created_at: new Date("2022-08-08T15:43:15.501Z").toISOString(),
       external_authorized_email_domains: [],
+      organization_info_fetched_at: new Date(
+        "2022-08-08T15:43:15.501Z",
+      ).toISOString(),
       siret: "51935970700022",
       trackdechets_email_domains: [],
-      updated_at: new Date("2022-08-08T15:43:15.501Z"),
-      organization_info_fetched_at: new Date("2022-08-08T15:43:15.501Z"),
+      updated_at: new Date("2022-08-08T15:43:15.501Z").toISOString(),
       verified_email_domains: [],
     })
     .returning();
@@ -325,11 +327,11 @@ async function insert_aldp(db: MonComptePro_PgDatabase) {
       cached_nom_complet:
         "Association des loisirs de la diversite et du partage (ALDP)",
       cached_tranche_effectifs: "21",
-      created_at: new Date("2022-02-03T12:27:30.000Z"),
+      created_at: new Date("2022-02-03T12:27:30.000Z").toISOString(),
       external_authorized_email_domains: [],
       siret: "81797266400038",
       trackdechets_email_domains: [],
-      updated_at: new Date("2022-02-03T12:27:30.000Z"),
+      updated_at: new Date("2022-02-03T12:27:30.000Z").toISOString(),
       verified_email_domains: [],
     })
     .returning();
@@ -349,11 +351,11 @@ async function insert_dinum(db: MonComptePro_PgDatabase) {
       cached_libelle: "DINUM",
       cached_nom_complet: "Direction interministerielle du numerique (DINUM)",
       cached_tranche_effectifs: "22",
-      created_at: new Date("2018-07-13 15:35:15"),
+      created_at: new Date("2018-07-13 15:35:15").toISOString(),
       external_authorized_email_domains: ["prestataire.modernisation.gouv.fr"],
       siret: "13002526500013",
       trackdechets_email_domains: [],
-      updated_at: new Date("2023-06-22 14:34:34"),
+      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
       verified_email_domains: ["beta.gouv.fr", "modernisation.gouv.fr"],
     })
     .returning();
@@ -373,11 +375,11 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
       cached_libelle: "Dengi - Leclerc",
       cached_nom_complet: "Dengi",
       cached_tranche_effectifs: "21",
-      created_at: new Date("2018-07-13 15:35:15"),
+      created_at: new Date("2018-07-13 15:35:15").toISOString(),
       external_authorized_email_domains: [],
       siret: "38514019900014",
       trackdechets_email_domains: [],
-      updated_at: new Date("2023-06-22 14:34:34"),
+      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
       verified_email_domains: ["scapartois.fr"],
     })
     .returning();
@@ -399,11 +401,11 @@ async function insert_bosch_france(db: MonComptePro_PgDatabase) {
       cached_libelle: "Robert bosch france",
       cached_nom_complet: "Robert bosch france",
       cached_tranche_effectifs: "41",
-      created_at: new Date("2024-01-19T21:27:42.009Z"),
+      created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
       external_authorized_email_domains: [],
       siret: "57206768400017",
       trackdechets_email_domains: [],
-      updated_at: new Date("2024-02-15T13:45:32.598Z"),
+      updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
       verified_email_domains: [],
     })
     .returning();
@@ -425,11 +427,11 @@ async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
       cached_libelle: "Bosch rexroth d.s.i.",
       cached_nom_complet: "Bosch rexroth d.s.i.",
       cached_tranche_effectifs: "41",
-      created_at: new Date("2024-01-19T21:27:42.009Z"),
+      created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
       external_authorized_email_domains: [],
       siret: "44023386400014 ",
       trackdechets_email_domains: [],
-      updated_at: new Date("2024-02-15T13:45:32.598Z"),
+      updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
       verified_email_domains: ["fr.bosch.com"],
     })
     .returning();

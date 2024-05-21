@@ -14,7 +14,7 @@ export function Moderation_Exchanges() {
 
   return (
     <section>
-      <h2>Échanges entre {moderation.users.given_name} et nous : </h2>
+      <h2>Échanges entre {moderation.user.given_name} et nous : </h2>
 
       <div
         hx-get={
@@ -30,7 +30,7 @@ export function Moderation_Exchanges() {
         ].join(", ")}
       >
         <div class="my-24 flex flex-col items-center justify-center">
-          Chargement des échanges avec {moderation.users.given_name}
+          Chargement des échanges avec {moderation.user.given_name}
           <br />
           <Loader />
         </div>
