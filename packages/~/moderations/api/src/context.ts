@@ -29,8 +29,10 @@ export type Search = z.infer<typeof Search_Schema>;
 //
 
 export default createContext({
-  query_moderations_list: {} as Promise<
-    Awaited<ReturnType<typeof get_moderations_list>>
-  >,
+  query_moderations_list: {} as Promise<get_moderations_list_dto>,
   pagination: {} as Pagination,
 });
+
+export type get_moderations_list_dto = Awaited<
+  ReturnType<typeof get_moderations_list>
+>;

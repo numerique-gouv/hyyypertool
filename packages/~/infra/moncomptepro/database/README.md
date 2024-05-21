@@ -26,9 +26,14 @@ $ bun x drizzle-kit introspect
 
 # Format the generated code
 $ bun x prettier -w .
+
 # Fixing varchar("xxxxxx", { length:  }) error : remove ", { length:  }"
+$ sed -i 's/, { length:  }//g' src/drizzle/schema.ts
+$ bun x prettier -w .
+
 # Fixing timestamp("xxxxxx").default('1970-01-01 00:00:00'::timestamp without time zone) error : replace by .defaultNow()
-# Fixing unknown("credential_public_key") : replace by text()"credential_public_key")
+$ sed -i "s/.default('1970-01-01 00:00:00'::timestamp without time zone)/.defaultNow()/g" src/drizzle/schema.ts
+$ bun x prettier -w .
 
 
 ```
