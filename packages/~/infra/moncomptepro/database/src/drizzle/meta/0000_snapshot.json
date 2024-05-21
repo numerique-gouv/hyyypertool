@@ -1,10 +1,10 @@
 {
   "id": "00000000-0000-0000-0000-000000000000",
   "prevId": "",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "moderations": {
+    "public.moderations": {
       "name": "moderations",
       "schema": "",
       "columns": {
@@ -90,7 +90,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "oidc_clients": {
+    "public.oidc_clients": {
       "name": "oidc_clients",
       "schema": "",
       "columns": {
@@ -195,7 +195,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "organizations": {
+    "public.organizations": {
       "name": "organizations",
       "schema": "",
       "columns": {
@@ -373,7 +373,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users": {
+    "public.users": {
       "name": "users",
       "schema": "",
       "columns": {
@@ -433,13 +433,6 @@
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
-        },
-        "legacy_user": {
-          "name": "legacy_user",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
         },
         "email_verified": {
           "name": "email_verified",
@@ -507,6 +500,20 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "needs_inclusionconnect_welcome_page": {
+          "name": "needs_inclusionconnect_welcome_page",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "needs_inclusionconnect_onboarding_help": {
+          "name": "needs_inclusionconnect_onboarding_help",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
       "indexes": {
@@ -525,7 +532,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users_oidc_clients": {
+    "public.users_oidc_clients": {
       "name": "users_oidc_clients",
       "schema": "",
       "columns": {
@@ -602,7 +609,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users_organizations": {
+    "public.users_organizations": {
       "name": "users_organizations",
       "schema": "",
       "columns": {
@@ -732,5 +739,47 @@
     "schemas": {},
     "tables": {},
     "columns": {}
+  },
+  "internal": {
+    "tables": {
+      "oidc_clients": {
+        "columns": {
+          "redirect_uris": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          },
+          "post_logout_redirect_uris": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          }
+        }
+      },
+      "organizations": {
+        "columns": {
+          "authorized_email_domains": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          },
+          "external_authorized_email_domains": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          },
+          "verified_email_domains": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          },
+          "trackdechets_email_domains": {
+            "isArray": true,
+            "dimensions": 1,
+            "rawType": "character varying"
+          }
+        }
+      }
+    }
   }
 }

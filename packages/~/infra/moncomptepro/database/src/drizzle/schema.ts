@@ -1,13 +1,15 @@
 import {
-  boolean,
-  integer,
   pgTable,
-  primaryKey,
+  foreignKey,
   serial,
+  integer,
+  varchar,
   timestamp,
   uniqueIndex,
-  varchar,
+  boolean,
+  primaryKey,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const moderations = pgTable("moderations", {
   id: serial("id").primaryKey().notNull(),

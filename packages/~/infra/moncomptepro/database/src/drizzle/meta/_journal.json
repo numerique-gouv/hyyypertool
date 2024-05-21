@@ -1,12 +1,12 @@
 {
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1707476835958,
-      "tag": "0000_sharp_azazel",
+      "version": "6",
+      "when": 1716307849916,
+      "tag": "0000_fat_jetstream",
       "breakpoints": true
     }
   ]
