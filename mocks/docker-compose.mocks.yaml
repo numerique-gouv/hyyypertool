@@ -1,4 +1,4 @@
-version: "3"
+#
 
 services:
   auth.agentconnect.gouv.fr:
@@ -8,7 +8,7 @@ services:
       MOCKSERVER_LOG_LEVEL: DEBUG
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
     volumes:
-      - ./mocks/auth.agentconnect.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
+      - ./auth.agentconnect.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
     ports:
       - 6100:1080
 
@@ -19,7 +19,7 @@ services:
       MOCKSERVER_LOG_LEVEL: DEBUG
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
     volumes:
-      - ./mocks/entreprise.api.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
+      - ./entreprise.api.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
     ports:
       - 6200:1080
 
@@ -30,6 +30,6 @@ services:
       MOCKSERVER_LOG_LEVEL: DEBUG
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserverInitialization.json
     volumes:
-      - ./mocks/app.moncomptepro.beta.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
+      - ./app.moncomptepro.beta.gouv.fr/mockserverInitialization.json:/config/mockserverInitialization.json
     ports:
       - 6300:1080

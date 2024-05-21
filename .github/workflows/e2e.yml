@@ -47,7 +47,7 @@ jobs:
           node-version: "node"
 
       - name: Create mocked services
-        run: docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml up --build --detach
+        run: docker compose up --build --detach
         working-directory: "."
 
       - name: 🌭 Install bun
@@ -58,7 +58,7 @@ jobs:
 
       - name: Wait for mocked services to be ready
         run: |
-          docker compose --project-directory . -f ./mocks/docker-compose.mocks.yaml ps
+          docker compose ps
           echo "Fake https://auth.agentconnect.gouv.fr"
           curl -sSf -XGET ${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/readyz
           echo
