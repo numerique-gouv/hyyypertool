@@ -5,7 +5,7 @@
     "jsxImportSource": "hono/jsx",
     "types": ["bun-types"]
   },
-  "include": ["bin/src", "build.ts"],
+  "include": ["bin/src", "build.ts", "packages/~/*/*/src/**/*.tsx"],
   "references": [
     { "path": "packages/~/app/api/tsconfig.json" },
     { "path": "packages/~/app/core/tsconfig.json" }
