@@ -4,7 +4,7 @@ import config from "@~/app.core/config";
 import consola, { LogLevels } from "consola";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
-import * as schema from "../drizzle/schema";
+import { schema } from "../index";
 import { delete_database } from "./delete";
 import { insert_database } from "./insert";
 

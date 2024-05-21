@@ -70,8 +70,8 @@ export async function add_member_to_organization(
     .insert(schema.users_organizations)
     .values({
       ...values,
-      created_at: new Date(),
-      updated_at: new Date(),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
       verification_type,
     })
     .returning();

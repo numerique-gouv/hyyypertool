@@ -129,7 +129,7 @@ export function Member_Invalid() {
               type="text"
               id={$object}
               name={"subject" as FormNames}
-              value={`[MonComptePro] Demande pour rejoindre « ${moderation.organizations.cached_libelle} »`}
+              value={`[MonComptePro] Demande pour rejoindre « ${moderation.organization.cached_libelle} »`}
             />
           </div>
         </div>
@@ -162,7 +162,7 @@ export function Member_Invalid() {
               type="text"
               readonly={true}
               id={$destination}
-              value={moderation.users.email}
+              value={moderation.user.email}
             />
           </div>
         </div>

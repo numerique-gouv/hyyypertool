@@ -10,14 +10,13 @@ import { ModerationPage_Context } from "./context";
 //
 
 export function Domain_Organization() {
-  const { moderation } = useContext(ModerationPage_Context);
   return (
     <section>
       <h3>🌐 Domaines de l'organisation</h3>
 
       <div class="grid grid-cols-2 gap-6">
-        <Edit_Internal_Domain organization={moderation.organizations} />
-        <Edit_External_Domain organization={moderation.organizations} />
+        <Edit_Internal_Domain />
+        <Edit_External_Domain />
       </div>
     </section>
   );
@@ -25,7 +24,7 @@ export function Domain_Organization() {
 
 function Edit_Internal_Domain() {
   const {
-    moderation: { organizations: organization },
+    moderation: { organization },
   } = useContext(ModerationPage_Context);
   return (
     <div
@@ -50,7 +49,7 @@ function Edit_Internal_Domain() {
 
 function Edit_External_Domain() {
   const {
-    moderation: { organizations: organization },
+    moderation: { organization },
   } = useContext(ModerationPage_Context);
   return (
     <div

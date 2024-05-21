@@ -286,13 +286,13 @@ function Row({
       }'`}
       class={row({ is_clickable: true })}
       aria-selected="false"
-      style={text_color(moderation.created_at)}
+      style={text_color(new Date(moderation.created_at))}
     >
       <td title={moderation.type}>
         {moderation_type_to_emoji(moderation.type)}
         {moderation_type_to_title(moderation.type)}
       </td>
-      <td>{date_to_string(moderation.created_at)}</td>
+      <td>{date_to_string(new Date(moderation.created_at))}</td>
       <td
         class="max-w-32 overflow-hidden text-ellipsis"
         title={users.family_name ?? ""}
@@ -308,8 +308,8 @@ function Row({
       <td>
         {moderation.moderated_at ? (
           <time
-            datetime={moderation.moderated_at.toISOString()}
-            title={moderation.moderated_at.toString()}
+            datetime={moderation.moderated_at}
+            title={moderation.moderated_at}
           >
             ✅
           </time>

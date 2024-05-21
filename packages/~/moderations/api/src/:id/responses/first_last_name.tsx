@@ -9,7 +9,7 @@ export const label = "nom et prénom et fonction";
 export default function template() {
   const {
     moderation: {
-      organizations: { cached_libelle: organization_name, siret },
+      organization: { cached_libelle: organization_name, siret },
     },
   } = useContext(ModerationPage_Context);
 

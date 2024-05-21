@@ -1,9 +1,9 @@
 import { relations } from "drizzle-orm/relations";
 import {
-  organizations,
   moderations,
-  users,
   oidc_clients,
+  organizations,
+  users,
   users_oidc_clients,
   users_organizations,
 } from "./schema";
@@ -77,3 +77,12 @@ export const users_organizationsRelations = relations(
     }),
   }),
 );
+
+export {
+  moderations,
+  oidc_clients,
+  organizations,
+  users,
+  users_oidc_clients,
+  users_organizations,
+};

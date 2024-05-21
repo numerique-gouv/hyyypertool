@@ -94,7 +94,7 @@ function FindCorrespondingEmail() {
   return (
     <div class="m-auto my-12 w-fit">
       <a
-        href={`https://support.etalab.gouv.fr/#search/${moderation.users.email}`}
+        href={`https://support.etalab.gouv.fr/#search/${moderation.user.email}`}
         rel="noopener noreferrer"
         target="_blank"
       >

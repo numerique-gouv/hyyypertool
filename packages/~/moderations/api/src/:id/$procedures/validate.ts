@@ -46,7 +46,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
 
     const moderation = await moncomptepro_pg.query.moderations.findFirst({
       columns: { comment: true, organization_id: true, user_id: true },
-      with: { users: { columns: { email: true } } },
+      with: { user: { columns: { email: true } } },
       where: eq(schema.moderations.id, id),
     });
 
@@ -56,7 +56,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
       comment,
       organization_id,
       user_id,
-      users: { email },
+      user: { email },
     } = moderation;
     const domain = z_email_domain.parse(email, { path: ["data.email"] });
 
@@ -121,7 +121,7 @@ export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
             created_by: userinfo.email,
           }),
         ].join("\n"),
-        moderated_at: new Date(),
+        moderated_at: new Date().toISOString(),
         moderated_by: userinfo.email,
       })
       .where(eq(schema.moderations.id, id));

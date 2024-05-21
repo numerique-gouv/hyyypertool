@@ -9,7 +9,7 @@ export const label = "refus comptable";
 export default function template() {
   const {
     moderation: {
-      organizations: { cached_libelle: organization_name },
+      organization: { cached_libelle: organization_name },
     },
   } = useContext(ModerationPage_Context);
 

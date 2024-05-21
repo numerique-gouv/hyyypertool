@@ -16,7 +16,7 @@ export async function update_user_by_id_in_organization(
 ) {
   await pg
     .update(schema.users_organizations)
-    .set({ ...values, updated_at: new Date() })
+    .set({ ...values, updated_at: new Date().toISOString() })
     .where(
       and(
         eq(schema.users_organizations.organization_id, organization_id),
