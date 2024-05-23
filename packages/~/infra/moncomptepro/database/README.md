@@ -5,6 +5,9 @@
 ```sh
 # Change the DATABASE_URL to match the moncomptepro sandbox or a local moncomptepro database.
 
+# Remove the existing drizzle folder to ignore migration between models.
+$ rm -rf database/src/drizzle
+
 # One can use a scalingo tunnel to pull from an existing running database
 $ scalingo --app moncomptepro-preprod --region osc-secnum-fr1 db-tunnel --identity ~/.ssh/scalingo SCALINGO_POSTGRESQL_URL
 
@@ -34,6 +37,16 @@ $ bun x prettier -w .
 # Fixing timestamp("xxxxxx").default('1970-01-01 00:00:00'::timestamp without time zone) error : replace by .defaultNow()
 $ sed -i "s/.default('1970-01-01 00:00:00'::timestamp without time zone)/.defaultNow()/g" src/drizzle/schema.ts
 $ bun x prettier -w .
+
+# You might want to use an empty database to
+$ docker volume rm moncomptepro_postgres
+
+# Uncomment the generated database/src/drizzle/0000_xxxxxxx.sql snapshot
+# And run the migration on your local empty database
+$ bun run migration
+
+# Run and update the seed if neccessary
+$ bun run seed
 
 
 ```

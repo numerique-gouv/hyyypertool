@@ -25,19 +25,6 @@ jobs:
       MOCKED_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       MOCKED_ENTREPRISE_API_GOUV_URL: http://127.0.0.1:6200
 
-    services:
-      postgres:
-        image: postgres:14-alpine
-        env:
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
       - name: Checkout
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
