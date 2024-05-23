@@ -29,11 +29,11 @@
   },
   "dependencies": {
     "modern-errors": "7.0.1",
-    "ts-pattern": "5.1.1",
+    "ts-pattern": "5.1.2",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
-    "bun-types": "1.1.8"
+    "bun-types": "1.1.9"
   }
 }

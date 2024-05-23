@@ -23,11 +23,11 @@
     "await-to-js": "3.0.0",
     "consola": "3.2.3",
     "drizzle-orm": "0.30.10",
-    "hono": "4.3.9",
+    "hono": "4.3.10",
     "htmx.ext...chunked-transfer": "1.0.4",
     "htmx.org": "1.9.12",
     "hyperscript.org": "0.9.12",
-    "ts-pattern": "5.1.1",
+    "ts-pattern": "5.1.2",
     "youch": "3.3.3"
   },
   "devDependencies": {

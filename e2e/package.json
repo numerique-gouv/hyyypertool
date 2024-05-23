@@ -11,7 +11,7 @@
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "20.0.5",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
-    "cypress": "13.9.0",
+    "cypress": "13.10.0",
     "pg": "8.11.5",
     "typescript": "5.4.5"
   },
