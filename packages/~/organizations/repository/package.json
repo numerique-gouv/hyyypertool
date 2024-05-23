@@ -14,7 +14,7 @@
   "dependencies": {
     "@~/moncomptepro.database": "workspace:*",
     "drizzle-orm": "0.30.10",
-    "ts-pattern": "5.1.1"
+    "ts-pattern": "5.1.2"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
