@@ -8,14 +8,19 @@
       "default": "./src/index.ts"
     }
   },
+  "scripts": {
+    "test": "bun test"
+  },
   "dependencies": {
     "@hono/zod-validator": "0.2.1",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "hono": "4.4.0",
+    "ts-pattern": "5.1.2",
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*"
+    "@~/config.typescript": "workspace:*",
+    "bun-types": "1.1.10"
   }
 }
