@@ -20,7 +20,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "drizzle-orm": "0.30.10",
+    "drizzle-orm": "0.31.0",
     "hono": "4.4.0",
     "pg": "8.11.5"
   },
