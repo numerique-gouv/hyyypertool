@@ -61,7 +61,7 @@ jobs:
           touch package-lock.json
 
       - name: Cypress run
-        uses: cypress-io/github-action@f88a151c986cab2e339cdbede6a5c4468bb62c17 # v6.7.0
+        uses: cypress-io/github-action@8d3918616d8ac34caa2b49afc8b408b6a872a6f5 # v6.7.1
         env:
           AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
           AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/api/v2"
