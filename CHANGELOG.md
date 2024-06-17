@@ -1,5 +1,12 @@
 
 
+# [2024.6.0](https://github.com/betagouv/hyyypertool/compare/2024.5.0...2024.6.0) (2024-06-17)
+
+
+### Bug Fixes
+
+* **zammad:** no more immutable errors ([#294](https://github.com/betagouv/hyyypertool/issues/294)) ([1b4f5f3](https://github.com/betagouv/hyyypertool/commit/1b4f5f3847eea0aa639e11e655e81b2a375c6efe))
+
 # [2024.5.0](https://github.com/betagouv/hyyypertool/compare/2024.4.3...2024.5.0) (2024-05-21)
 
 
