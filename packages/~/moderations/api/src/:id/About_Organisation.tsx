@@ -91,7 +91,7 @@ export function About_Organisation() {
       </a>
 
       <a
-        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret}`}
+        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
         class={button({ size: "sm", type: "tertiary" })}
         rel="noopener noreferrer"
         target="_blank"
