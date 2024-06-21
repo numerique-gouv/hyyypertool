@@ -92,7 +92,7 @@ export function About_Organisation() {
 
       <hr class="bg-none" />
 
-      <h4>🕵️ Enquête sur cette organization</h4>
+      <h4>🕵️ Enquête sur cette organisation</h4>
 
       <ul class="list-none pl-0">
         <li>
