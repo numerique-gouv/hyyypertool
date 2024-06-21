@@ -11,7 +11,6 @@ import { Desicison_Context } from "./Desicison_Context";
 import { ModerationPage_Context } from "./context";
 import * as accountant from "./responses/accountant";
 import * as already_signed from "./responses/already_signed";
-import * as test_signed from "./responses/test_signed";
 import * as chorus_pro from "./responses/chorus_pro";
 import * as contractors from "./responses/contractors";
 import * as first_last_name from "./responses/first_last_name";
@@ -25,7 +24,6 @@ import * as use_pro_email from "./responses/use_pro_email";
 //
 
 const reponse_templates = [
-  test_signed,
   first_last_name,
   link_with_organization,
   use_pro_email,
