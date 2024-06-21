@@ -90,6 +90,15 @@ export function About_Organisation() {
         Fiche sur l’Annuaire des Entreprises
       </a>
 
+      <a
+        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret}`}
+        class={button({ size: "sm", type: "tertiary" })}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Liste des Dirigeants - Annuaire des Entreprises
+      </a>
+
       <hr class="bg-none" />
 
       <h4>🕵️ Enquête sur cette organisation</h4>
