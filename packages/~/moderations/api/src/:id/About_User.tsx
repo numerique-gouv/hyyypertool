@@ -83,7 +83,7 @@ export function About_User() {
 
       <hr class="bg-none" />
 
-      <h4>🕵️ Enquête sur ce profil</h4>
+      <h4>🕵️ Enquête sur ce profile</h4>
 
       <ul class="list-none pl-0">
         <li>
