@@ -1,6 +1,7 @@
 //
 
 import { PGlite } from "@electric-sql/pglite";
+import type { PgInsertValue } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/pglite";
 import { migrate as pglite_migrate } from "drizzle-orm/pglite/migrator";
 import path from "node:path";
@@ -25,4 +26,10 @@ export function migrate() {
   return pglite_migrate(pg, {
     migrationsFolder: path.resolve(import.meta.dirname, "../drizzle"),
   });
+}
+
+export async function add_user_to_organization(
+  value: PgInsertValue<typeof schema.users_organizations>,
+) {
+  return pg.insert(schema.users_organizations).values(value);
 }

@@ -31,7 +31,7 @@ test("render basic slot", () => {
   ).toMatchSnapshot();
 });
 
-test("eender undefined childs", () => {
+test("render undefined childs", () => {
   const TestSlot = createSlot();
   const Component: FC<PropsWithChildren> = ({ children }) => {
     return (

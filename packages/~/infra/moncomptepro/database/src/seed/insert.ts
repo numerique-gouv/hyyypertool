@@ -1,13 +1,13 @@
 //
 
 import consola from "consola";
-import type { MonComptePro_NodePgDatabase } from "../index";
+import type { MonComptePro_PgDatabase } from "../index";
 import { schema } from "../index";
 import type { MCP_Moderation } from "../moncomptepro";
 
 //
 
-export async function insert_database(db: MonComptePro_NodePgDatabase) {
+export async function insert_database(db: MonComptePro_PgDatabase) {
   try {
     const raphael = await insert_raphael(db);
     consola.verbose(
@@ -55,98 +55,98 @@ export async function insert_database(db: MonComptePro_NodePgDatabase) {
 
     //
 
-    const raphael_dinum = await insert_users_organizations(db, {
+    await insert_users_organizations(db, {
       organization_id: dinum.id,
       user_id: raphael.id,
     });
     consola.verbose(
-      `🌱 ${raphael_dinum.command} ${raphael_dinum.rowCount} ${raphael.given_name} join ${dinum.cached_libelle}`,
+      `🌱 INSERT ${raphael.given_name} join ${dinum.cached_libelle} `,
     );
 
-    const marie_bon_join_bosch_rexroth = await insert_users_organizations(db, {
+    await insert_users_organizations(db, {
       organization_id: bosch_rexroth.id,
       user_id: marie_bon.id,
     });
     consola.verbose(
-      `🌱 ${marie_bon_join_bosch_rexroth.command} ${marie_bon_join_bosch_rexroth.rowCount} ${marie_bon.given_name} join ${bosch_rexroth.cached_libelle}`,
+      `🌱 INSERT ${marie_bon.given_name} join ${bosch_rexroth.cached_libelle}`,
     );
 
     //
 
-    const jeanbon_dinum = await insert_moderation(db, {
+    await insert_moderation(db, {
       created_at: new Date("2011-11-11 11:11:11").toISOString(),
       organization_id: dinum.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
     });
     consola.verbose(
-      `🌱 ${jeanbon_dinum.command} ${jeanbon_dinum.rowCount} ${jean_bon.given_name} wants to join ${dinum.cached_libelle}`,
+      `🌱 INSERT ${jean_bon.given_name} wants to join ${dinum.cached_libelle}`,
     );
 
-    const jeanbon_abracadabra = await insert_moderation(db, {
+    await insert_moderation(db, {
       created_at: new Date("2011-11-11 00:02:59").toISOString(),
       organization_id: abracadabra.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
     });
     consola.verbose(
-      `🌱 ${jeanbon_abracadabra.command} ${jeanbon_abracadabra.rowCount} ${jean_bon.given_name} wants to join ${abracadabra.cached_libelle}`,
+      `🌱 INSERT ${jean_bon.given_name} wants to join ${abracadabra.cached_libelle}`,
     );
 
-    const pierrebon_aldp = await insert_moderation(db, {
+    await insert_moderation(db, {
       organization_id: aldp.id,
       type: "big_organization_join" as MCP_Moderation["type"],
       user_id: pierre_bon.id,
     });
     consola.verbose(
-      `🌱 ${pierrebon_aldp.command} ${pierrebon_aldp.rowCount} ${pierre_bon.family_name} wants to join  ${aldp.cached_libelle}`,
+      `🌱 INSERT ${pierre_bon.family_name} wants to join  ${aldp.cached_libelle}`,
     );
 
-    const richard_bon_dengi = await insert_moderation(db, {
+    await insert_moderation(db, {
       organization_id: dengi.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
     });
     consola.verbose(
-      `🌱 ${richard_bon_dengi.command} ${richard_bon_dengi.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet}`,
+      `🌱 INSERT ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet}`,
     );
 
-    const richard_bon_dengi_bis = await insert_moderation(db, {
+    await insert_moderation(db, {
       organization_id: dengi.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
     });
     consola.verbose(
-      `🌱 ${richard_bon_dengi_bis.command} ${richard_bon_dengi_bis.rowCount} ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
+      `🌱 INSERT ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
     );
 
-    const marie_bon_bosch_france = await insert_moderation(db, {
+    await insert_moderation(db, {
       organization_id: bosch_france.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
     });
     consola.verbose(
-      `🌱 ${marie_bon_bosch_france.command} ${marie_bon_bosch_france.rowCount} ${marie_bon.given_name} wants to join ${bosch_france.cached_nom_complet} again...`,
+      `🌱 INSERT ${marie_bon.given_name} wants to join ${bosch_france.cached_nom_complet} again...`,
     );
 
-    const marie_bon_bosch_rexroth = await insert_moderation(db, {
+    await insert_moderation(db, {
       organization_id: bosch_rexroth.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
     });
     consola.verbose(
-      `🌱 ${marie_bon_bosch_rexroth.command} ${marie_bon_bosch_rexroth.rowCount} ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
+      `🌱 INSERT ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
     );
-    const raphael_alpha_dinum = await insert_moderation(db, {
+    await insert_moderation(db, {
       organization_id: dinum.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: raphael_alpha.id,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
     });
     consola.verbose(
-      `🌱 ${raphael_alpha_dinum.command} ${raphael_alpha_dinum.rowCount} ${raphael_alpha.given_name} wants to join ${dinum.cached_nom_complet} again...`,
+      `🌱 INSERT ${raphael_alpha.given_name} wants to join ${dinum.cached_nom_complet} again...`,
     );
   } catch (err) {
     console.error("Something went wrong...");
@@ -157,14 +157,14 @@ export async function insert_database(db: MonComptePro_NodePgDatabase) {
 //
 
 function insert_moderation(
-  db: MonComptePro_NodePgDatabase,
+  db: MonComptePro_PgDatabase,
   insert_moderation: typeof schema.moderations.$inferInsert,
 ) {
   return db.insert(schema.moderations).values(insert_moderation);
 }
 
 function insert_users_organizations(
-  db: MonComptePro_NodePgDatabase,
+  db: MonComptePro_PgDatabase,
   insert_users_organizations: typeof schema.users_organizations.$inferInsert,
 ) {
   return db
@@ -172,7 +172,7 @@ function insert_users_organizations(
     .values(insert_users_organizations);
 }
 
-async function insert_jeanbon(db: MonComptePro_NodePgDatabase) {
+async function insert_jeanbon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -190,7 +190,7 @@ async function insert_jeanbon(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_pierrebon(db: MonComptePro_NodePgDatabase) {
+async function insert_pierrebon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -209,7 +209,7 @@ async function insert_pierrebon(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_richardbon(db: MonComptePro_NodePgDatabase) {
+async function insert_richardbon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -228,7 +228,7 @@ async function insert_richardbon(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_mariebon(db: MonComptePro_NodePgDatabase) {
+async function insert_mariebon(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -247,7 +247,7 @@ async function insert_mariebon(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_raphael(db: MonComptePro_NodePgDatabase) {
+async function insert_raphael(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -265,7 +265,7 @@ async function insert_raphael(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_raphael_alpha(db: MonComptePro_NodePgDatabase) {
+async function insert_raphael_alpha(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -285,7 +285,7 @@ async function insert_raphael_alpha(db: MonComptePro_NodePgDatabase) {
 
 //
 
-async function insert_abracadabra(db: MonComptePro_NodePgDatabase) {
+async function insert_abracadabra(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -313,7 +313,7 @@ async function insert_abracadabra(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_aldp(db: MonComptePro_NodePgDatabase) {
+async function insert_aldp(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -338,7 +338,7 @@ async function insert_aldp(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_dinum(db: MonComptePro_NodePgDatabase) {
+async function insert_dinum(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -362,7 +362,7 @@ async function insert_dinum(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_dengi(db: MonComptePro_NodePgDatabase) {
+async function insert_dengi(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -386,7 +386,7 @@ async function insert_dengi(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_bosch_france(db: MonComptePro_NodePgDatabase) {
+async function insert_bosch_france(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -412,7 +412,7 @@ async function insert_bosch_france(db: MonComptePro_NodePgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_bosch_rexroth(db: MonComptePro_NodePgDatabase) {
+async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
