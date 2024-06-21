@@ -1,5 +1,18 @@
 
 
+## [2024.6.1](https://github.com/betagouv/hyyypertool/compare/2024.6.0...2024.6.1) (2024-06-21)
+
+
+### Bug Fixes
+
+* **moderations:** leader list link use siren ([#344](https://github.com/betagouv/hyyypertool/issues/344)) ([9e84b1e](https://github.com/betagouv/hyyypertool/commit/9e84b1ec36ee550562294baba27046320499df39))
+
+
+### Features
+
+* **moderation:** replace id by adresse ([#341](https://github.com/betagouv/hyyypertool/issues/341)) ([7cdad68](https://github.com/betagouv/hyyypertool/commit/7cdad685c3b0881e521c2c0cc6cb8aa76ee11803))
+* **moderations:** add see leader list link ([#343](https://github.com/betagouv/hyyypertool/issues/343)) ([78c486e](https://github.com/betagouv/hyyypertool/commit/78c486e66d90fecb1c8f65b68f64a57879618068))
+
 # [2024.6.0](https://github.com/betagouv/hyyypertool/compare/2024.5.0...2024.6.0) (2024-06-17)
 
 
