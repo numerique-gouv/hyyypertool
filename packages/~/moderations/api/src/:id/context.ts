@@ -48,6 +48,7 @@ export async function get_moderation(
     with: {
       organization: {
         columns: {
+          cached_adresse: true,
           cached_code_postal: true,
           cached_etat_administratif: true,
           cached_libelle_categorie_juridique: true,

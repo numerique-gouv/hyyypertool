@@ -65,10 +65,10 @@ export function About_Organisation() {
           )
         </li>
         <li>
-          id : <b>{organization.id}</b>
+          Adresse : <b>{organization.cached_adresse}</b>
         </li>
         <li>
-          siret : <b>{organization.siret}</b>
+          Siret : <b>{organization.siret}</b>
         </li>
       </ul>
 
