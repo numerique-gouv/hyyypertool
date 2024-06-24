@@ -1,13 +1,13 @@
 //
 
 import consola from "consola";
-import * as schema from "../drizzle/schema";
-import type { MonComptePro_PgDatabase } from "../index";
+import type { MonComptePro_NodePgDatabase } from "../index";
+import { schema } from "../index";
 import type { MCP_Moderation } from "../moncomptepro";
 
 //
 
-export async function insert_database(db: MonComptePro_PgDatabase) {
+export async function insert_database(db: MonComptePro_NodePgDatabase) {
   try {
     const raphael = await insert_raphael(db);
     consola.verbose(
@@ -157,14 +157,14 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
 //
 
 function insert_moderation(
-  db: MonComptePro_PgDatabase,
+  db: MonComptePro_NodePgDatabase,
   insert_moderation: typeof schema.moderations.$inferInsert,
 ) {
   return db.insert(schema.moderations).values(insert_moderation);
 }
 
 function insert_users_organizations(
-  db: MonComptePro_PgDatabase,
+  db: MonComptePro_NodePgDatabase,
   insert_users_organizations: typeof schema.users_organizations.$inferInsert,
 ) {
   return db
@@ -172,7 +172,7 @@ function insert_users_organizations(
     .values(insert_users_organizations);
 }
 
-async function insert_jeanbon(db: MonComptePro_PgDatabase) {
+async function insert_jeanbon(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -190,7 +190,7 @@ async function insert_jeanbon(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_pierrebon(db: MonComptePro_PgDatabase) {
+async function insert_pierrebon(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -209,7 +209,7 @@ async function insert_pierrebon(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_richardbon(db: MonComptePro_PgDatabase) {
+async function insert_richardbon(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -228,7 +228,7 @@ async function insert_richardbon(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_mariebon(db: MonComptePro_PgDatabase) {
+async function insert_mariebon(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -247,7 +247,7 @@ async function insert_mariebon(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_raphael(db: MonComptePro_PgDatabase) {
+async function insert_raphael(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -265,7 +265,7 @@ async function insert_raphael(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_raphael_alpha(db: MonComptePro_PgDatabase) {
+async function insert_raphael_alpha(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
@@ -285,7 +285,7 @@ async function insert_raphael_alpha(db: MonComptePro_PgDatabase) {
 
 //
 
-async function insert_abracadabra(db: MonComptePro_PgDatabase) {
+async function insert_abracadabra(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -313,7 +313,7 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_aldp(db: MonComptePro_PgDatabase) {
+async function insert_aldp(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -338,7 +338,7 @@ async function insert_aldp(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_dinum(db: MonComptePro_PgDatabase) {
+async function insert_dinum(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -362,7 +362,7 @@ async function insert_dinum(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_dengi(db: MonComptePro_PgDatabase) {
+async function insert_dengi(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -386,7 +386,7 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_bosch_france(db: MonComptePro_PgDatabase) {
+async function insert_bosch_france(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
@@ -412,7 +412,7 @@ async function insert_bosch_france(db: MonComptePro_PgDatabase) {
   return insert.at(0)!;
 }
 
-async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
+async function insert_bosch_rexroth(db: MonComptePro_NodePgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({

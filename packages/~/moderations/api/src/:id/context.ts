@@ -14,8 +14,8 @@ export const EMAIL_TO_INPUT_ID = "mail-to";
 
 //
 export const ModerationPage_Context = createContext({
-  moderation: {} as get_moderation_dto,
   domain: "",
+  moderation: {} as get_moderation_dto,
   organization_member: {} as get_organization_member_dto,
 });
 
@@ -33,7 +33,7 @@ export async function get_organization_member(
     ),
   });
 }
-type get_organization_member_dto = Awaited<
+export type get_organization_member_dto = Awaited<
   ReturnType<typeof get_organization_member>
 >;
 
@@ -79,4 +79,4 @@ export async function get_moderation(
   if (!moderation) throw new NotFoundError("Moderation not found.");
   return moderation;
 }
-type get_moderation_dto = Awaited<ReturnType<typeof get_moderation>>;
+export type get_moderation_dto = Awaited<ReturnType<typeof get_moderation>>;

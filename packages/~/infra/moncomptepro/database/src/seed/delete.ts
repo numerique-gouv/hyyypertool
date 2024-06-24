@@ -2,12 +2,12 @@
 
 import consola from "consola";
 import { sql } from "drizzle-orm";
-import type { MonComptePro_PgDatabase } from "../index";
+import type { MonComptePro_NodePgDatabase } from "../index";
 import { schema } from "../index";
 
 //
 
-export async function delete_database(db: MonComptePro_PgDatabase) {
+export async function delete_database(db: MonComptePro_NodePgDatabase) {
   try {
     const users_organizations = await db.delete(schema.users_organizations);
     consola.verbose(
