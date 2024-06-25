@@ -1,0 +1,19 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns signed member emails 1`] = `
+"<!DOCTYPE html>Bonjour,
+
+Votre demande pour rejoindre l&#39;organisation « 🦄 » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
+
+Vous possédez déjà un compte MonComptePro :
+
+- adora@uni.corn
+- bella@uni.corn
+
+Merci de bien vouloir vous connecter avec le compte déjà existant.
+
+Je reste à votre disposition pour tout complément d&#39;information.
+
+Excellente journée,
+L’équipe MonComptePro."
+`;
