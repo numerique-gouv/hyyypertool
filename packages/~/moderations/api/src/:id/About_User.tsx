@@ -1,12 +1,10 @@
 //
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
-import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
-import { datapass_from_email } from "@~/moderations.lib/datapass_from_email";
 import { useContext } from "hono/jsx";
 import { ModerationPage_Context } from "./context";
 
@@ -102,18 +100,6 @@ export function About_User() {
           >
             Résultats Google pour le nom de l'organisation et le nom de domaine
           </GoogleSearchButton>
-        </li>
-        <li>
-          <a
-            class={button({ size: "sm", type: "tertiary" })}
-            href={datapass_from_email(user.email)}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <span>
-              Voir les demandes DataPass déposées par {user.given_name}
-            </span>
-          </a>
         </li>
       </ul>
     </section>
