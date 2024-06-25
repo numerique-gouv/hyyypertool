@@ -27,7 +27,7 @@
     "hono": "4.4.8",
     "tailwind-variants": "0.2.1",
     "ts-dedent": "2.2.0",
-    "ts-pattern": "5.1.2",
+    "ts-pattern": "5.2.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
