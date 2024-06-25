@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@~/moncomptepro.database": "workspace:*",
-    "drizzle-orm": "0.31.1",
+    "drizzle-orm": "0.31.2",
     "ts-pattern": "5.1.2"
   },
   "devDependencies": {
