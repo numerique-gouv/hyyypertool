@@ -14,3 +14,6 @@ tsconfig.tsbuildinfo
 
 # Webstorm
 .idea
+
+# bun test --coverage
+coverage
