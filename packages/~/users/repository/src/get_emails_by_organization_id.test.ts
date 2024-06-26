@@ -1,7 +1,16 @@
 //
 
-import { schema } from "@~/moncomptepro.database";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+import {
+  create_pink_diamond_user,
+  create_red_diamond_user,
+  create_unicorn_organization,
+} from "@~/moncomptepro.database/seed/unicorn";
+import {
+  add_user_to_organization,
+  empty_database,
+  migrate,
+  pg,
+} from "@~/moncomptepro.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { get_emails_by_organization_id } from "./get_emails_by_organization_id";
 
@@ -10,37 +19,26 @@ import { get_emails_by_organization_id } from "./get_emails_by_organization_id";
 beforeAll(migrate);
 beforeEach(empty_database);
 
-test("returns test@example.com", async () => {
-  const [{ id: user_id }] = await pg
-    .insert(schema.users)
-    .values({
-      created_at: new Date().toISOString(),
-      email: "test@example.com",
-      updated_at: new Date().toISOString(),
-    })
-    .returning({ id: schema.users.id });
-  const [{ id: organization_id }] = await pg
-    .insert(schema.organizations)
-    .values({
-      authorized_email_domains: [],
-      external_authorized_email_domains: [],
-      siret: "",
-      trackdechets_email_domains: [],
-      verified_email_domains: [],
-    })
-    .returning({ id: schema.organizations.id });
-  await pg.insert(schema.users_organizations).values({
-    organization_id,
-    user_id,
+test("returns pink diamond", async () => {
+  const unicorn_organization_id = await create_unicorn_organization(pg);
+  const pink_diamond_user_id = await create_pink_diamond_user(pg);
+  await add_user_to_organization({
+    organization_id: unicorn_organization_id,
+    user_id: pink_diamond_user_id,
+  });
+  const red_diamond_user_id = await create_red_diamond_user(pg);
+  await add_user_to_organization({
+    organization_id: unicorn_organization_id,
+    user_id: red_diamond_user_id,
   });
 
   const emails = await get_emails_by_organization_id(pg, {
-    organization_id,
+    organization_id: unicorn_organization_id,
+    family_name: "Diamond",
   });
 
   expect(emails).toEqual([
-    {
-      email: "test@example.com",
-    },
+    { email: "pink.diamond@uni.corn" },
+    { email: "red.diamond@uni.corn" },
   ]);
 });

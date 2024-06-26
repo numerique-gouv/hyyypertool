@@ -18,6 +18,7 @@ export default async function template() {
 
   const members_email = await get_emails_by_organization_id(moncomptepro_pg, {
     organization_id: moderation.organization.id,
+    family_name: moderation.user.family_name ?? "",
   });
 
   return dedent`

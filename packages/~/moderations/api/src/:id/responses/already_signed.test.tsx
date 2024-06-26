@@ -1,8 +1,18 @@
 //
 
 import { set_moncomptepro_pg } from "@~/app.middleware/set_moncomptepro_pg";
-import { schema } from "@~/moncomptepro.database";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+import {
+  create_adora_pony_user,
+  create_pink_diamond_user,
+  create_red_diamond_user,
+  create_unicorn_organization,
+} from "@~/moncomptepro.database/seed/unicorn";
+import {
+  add_user_to_organization,
+  empty_database,
+  migrate,
+  pg,
+} from "@~/moncomptepro.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -15,60 +25,12 @@ import already_signed from "./already_signed";
 
 //
 
-let unicorn_organization_id: number;
-
-//
-
 beforeAll(migrate);
 beforeEach(empty_database);
-beforeEach(async function create_unicorn_organization() {
-  const [{ id: organization_id }] = await pg
-    .insert(schema.organizations)
-    .values({
-      authorized_email_domains: [],
-      external_authorized_email_domains: [],
-      siret: "",
-      trackdechets_email_domains: [],
-      verified_email_domains: [],
-    })
-    .returning({ id: schema.organizations.id });
 
-  unicorn_organization_id = organization_id;
-});
+test("returns all members", async () => {
+  const unicorn_organization_id = await given_unicorn_organization();
 
-beforeEach(async function create_adora_user() {
-  const [{ id: user_id }] = await pg
-    .insert(schema.users)
-    .values({
-      created_at: new Date().toISOString(),
-      email: "adora@uni.corn",
-      updated_at: new Date().toISOString(),
-    })
-    .returning({ id: schema.users.id });
-
-  await pg.insert(schema.users_organizations).values({
-    organization_id: unicorn_organization_id,
-    user_id,
-  });
-});
-
-beforeEach(async function create_bella_user() {
-  const [{ id: user_id }] = await pg
-    .insert(schema.users)
-    .values({
-      created_at: new Date().toISOString(),
-      email: "bella@uni.corn",
-      updated_at: new Date().toISOString(),
-    })
-    .returning({ id: schema.users.id });
-
-  await pg.insert(schema.users_organizations).values({
-    organization_id: unicorn_organization_id,
-    user_id,
-  });
-});
-
-test("returns signed member emails", async () => {
   const app = new Hono()
     .use("*", jsxRenderer())
     .use("*", set_moncomptepro_pg(pg))
@@ -76,6 +38,7 @@ test("returns signed member emails", async () => {
       const domain = "uni.corn";
       const moderation = {
         organization: { cached_libelle: "🦄", id: unicorn_organization_id },
+        user: { family_name: "🧟" },
       } as get_moderation_dto;
       const organization_member = {} as get_organization_member_dto;
 
@@ -87,12 +50,62 @@ test("returns signed member emails", async () => {
         </ModerationPage_Context.Provider>,
       );
     });
+
   const res = await app.fetch(
     new Request("http://localhost:3000/already_signed"),
   );
   expect(res.status).toBe(200);
   expect(await res.text()).toMatchSnapshot();
 });
+test("returns Diamond members", async () => {
+  const unicorn_organization_id = await given_unicorn_organization();
+
+  const app = new Hono()
+    .use("*", jsxRenderer())
+    .use("*", set_moncomptepro_pg(pg))
+    .get("/already_signed", ({ render }) => {
+      const domain = "uni.corn";
+      const moderation = {
+        organization: { cached_libelle: "🦄", id: unicorn_organization_id },
+        user: { family_name: "Diamond" },
+      } as get_moderation_dto;
+      const organization_member = {} as get_organization_member_dto;
+
+      return render(
+        <ModerationPage_Context.Provider
+          value={{ domain, moderation, organization_member }}
+        >
+          <AlreadySigned />
+        </ModerationPage_Context.Provider>,
+      );
+    });
+
+  const res = await app.fetch(
+    new Request("http://localhost:3000/already_signed"),
+  );
+  expect(res.status).toBe(200);
+  expect(await res.text()).toMatchSnapshot();
+});
+
+async function given_unicorn_organization() {
+  const unicorn_organization_id = await create_unicorn_organization(pg);
+  const adora_pony_user_id = await create_adora_pony_user(pg);
+  await add_user_to_organization({
+    organization_id: unicorn_organization_id,
+    user_id: adora_pony_user_id,
+  });
+  const pink_diamond_user_id = await create_pink_diamond_user(pg);
+  await add_user_to_organization({
+    organization_id: unicorn_organization_id,
+    user_id: pink_diamond_user_id,
+  });
+  const red_diamond_user_id = await create_red_diamond_user(pg);
+  await add_user_to_organization({
+    organization_id: unicorn_organization_id,
+    user_id: red_diamond_user_id,
+  });
+  return unicorn_organization_id;
+}
 
 async function AlreadySigned() {
   return <>{await already_signed()}</>;
