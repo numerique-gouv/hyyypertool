@@ -122,7 +122,7 @@ export const organizations = pgTable(
     return {
       index_organizations_on_siret: uniqueIndex(
         "index_organizations_on_siret",
-      ).on(table.siret),
+      ).using("btree", table.siret),
     };
   },
 );
@@ -181,13 +181,22 @@ export const users = pgTable(
     )
       .default(false)
       .notNull(),
+    encrypted_totp_key: varchar("encrypted_totp_key"),
+    totp_key_verified_at: timestamp("totp_key_verified_at", {
+      withTimezone: true,
+      mode: "string",
+    }),
+    force_2fa: boolean("force_2fa").default(false).notNull(),
   },
   (table) => {
     return {
-      index_users_on_email: uniqueIndex("index_users_on_email").on(table.email),
+      index_users_on_email: uniqueIndex("index_users_on_email").using(
+        "btree",
+        table.email,
+      ),
       index_users_on_reset_password_token: uniqueIndex(
         "index_users_on_reset_password_token",
-      ).on(table.reset_password_token),
+      ).using("btree", table.reset_password_token),
     };
   },
 );

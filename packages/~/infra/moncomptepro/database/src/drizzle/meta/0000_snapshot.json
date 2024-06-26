@@ -1,7 +1,7 @@
 {
   "id": "00000000-0000-0000-0000-000000000000",
   "prevId": "",
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "tables": {
     "public.moderations": {
@@ -365,8 +365,19 @@
       "indexes": {
         "index_organizations_on_siret": {
           "name": "index_organizations_on_siret",
-          "columns": ["siret"],
-          "isUnique": true
+          "columns": [
+            {
+              "expression": "siret",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {},
@@ -514,18 +525,59 @@
           "primaryKey": false,
           "notNull": true,
           "default": false
+        },
+        "encrypted_totp_key": {
+          "name": "encrypted_totp_key",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "totp_key_verified_at": {
+          "name": "totp_key_verified_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "force_2fa": {
+          "name": "force_2fa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
       "indexes": {
         "index_users_on_email": {
           "name": "index_users_on_email",
-          "columns": ["email"],
-          "isUnique": true
+          "columns": [
+            {
+              "expression": "email",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "index_users_on_reset_password_token": {
           "name": "index_users_on_reset_password_token",
-          "columns": ["reset_password_token"],
-          "isUnique": true
+          "columns": [
+            {
+              "expression": "reset_password_token",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {},

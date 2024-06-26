@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
-    "moncomptepro": "betagouv/moncomptepro#539729e6544b787b94060e96c4a457ef6c7227af"
+    "moncomptepro": "betagouv/moncomptepro#78370f0e27b34323c83ee460a39ddeef401ce10a"
   }
 }
