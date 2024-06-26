@@ -1,5 +1,13 @@
 
 
+## [2024.6.2](https://github.com/betagouv/hyyypertool/compare/2024.6.1...2024.6.2) (2024-06-26)
+
+
+### Features
+
+* **moderation:** only list email of user with the same family name ([#342](https://github.com/betagouv/hyyypertool/issues/342)) ([84c9e15](https://github.com/betagouv/hyyypertool/commit/84c9e15e490ca37ff8c195c127ce47100e62da8b))
+* **moderations:** remoe datapass link ([#361](https://github.com/betagouv/hyyypertool/issues/361)) ([ed30786](https://github.com/betagouv/hyyypertool/commit/ed30786cbd2ca9f3e146e451fe13e7c63c54f564))
+
 ## [2024.6.1](https://github.com/betagouv/hyyypertool/compare/2024.6.0...2024.6.1) (2024-06-21)
 
 
