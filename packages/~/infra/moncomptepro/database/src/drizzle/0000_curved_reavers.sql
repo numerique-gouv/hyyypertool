@@ -82,7 +82,10 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"email_verified_at" timestamp with time zone,
 	"current_challenge" varchar,
 	"needs_inclusionconnect_welcome_page" boolean DEFAULT false NOT NULL,
-	"needs_inclusionconnect_onboarding_help" boolean DEFAULT false NOT NULL
+	"needs_inclusionconnect_onboarding_help" boolean DEFAULT false NOT NULL,
+	"encrypted_totp_key" varchar,
+	"totp_key_verified_at" timestamp with time zone,
+	"force_2fa" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users_oidc_clients" (
@@ -158,6 +161,6 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" ("siret");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" ("email");--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" ("reset_password_token");
+CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" USING btree ("siret" text_ops);--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" USING btree ("email" text_ops);--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token" text_ops);

@@ -18,7 +18,7 @@ export async function seed() {
   await client.connect();
 
   const db = drizzle(client, {
-    logger: consola.level >= LogLevels.verbose,
+    logger: consola.level >= LogLevels.debug,
     schema,
   });
 

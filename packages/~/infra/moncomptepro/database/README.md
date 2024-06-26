@@ -6,10 +6,13 @@
 # Change the DATABASE_URL to match the moncomptepro sandbox or a local moncomptepro database.
 
 # Remove the existing drizzle folder to ignore migration between models.
-$ rm -rf database/src/drizzle
+$ rm -rf src/drizzle
 
 # One can use a scalingo tunnel to pull from an existing running database
 $ scalingo --app moncomptepro-preprod --region osc-secnum-fr1 db-tunnel --identity ~/.ssh/scalingo SCALINGO_POSTGRESQL_URL
+
+# Pull the new schema
+$ bun x drizzle-kit introspect
 
 # Test database connection with the studio
 $ bun x drizzle-kit studio
@@ -24,8 +27,6 @@ Using 'pg' driver for database querying
 
 Drizzle Studio is up and running on https://local.drizzle.studio
 
-# Pull the new schema
-$ bun x drizzle-kit introspect
 
 # Format the generated code
 $ bun x prettier -w .
@@ -39,7 +40,9 @@ $ sed -i "s/.default('1970-01-01 00:00:00'::timestamp without time zone)/.defaul
 $ bun x prettier -w .
 
 # You might want to use an empty database to
+$ docker compose stop
 $ docker volume rm moncomptepro_postgres
+$ docker compose up --build --detach
 
 # Uncomment the generated database/src/drizzle/0000_xxxxxxx.sql snapshot
 # And run the migration on your local empty database

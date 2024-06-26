@@ -22,35 +22,11 @@ import readyz_router from "./readyz";
 
 //
 
-// const OpenTelemetry = new NodeSDK({
-//   traceExporter: new OTLPTraceExporter(),
-//   instrumentations: [getNodeAutoInstrumentations()],
-//   // // Sentry config
-//   spanProcessor: new SentrySpanProcessor(),
-//   textMapPropagator: new SentryPropagator(),
-//   // contextManager: new SentryContextManager(),
-//   // sampler: new SentrySampler(client),
-// });
-// setOpenTelemetryContextAsyncContextStrategy();
-// OpenTelemetry.start();
-
 const authoried = vip_list_guard({ vip_list: config.ALLOWED_USERS.split(",") });
 const app = new Hono()
   .use("*", logger(consola.info))
   .use("*", compress())
   .use("*", sentry())
-  // .use("*", async function ({ req, res, var: { sentry } }, next) {
-  //   const transaction = sentry.startTransaction({
-  //     name: `${req.method} ${req.url}`,
-  //     op: "http.server",
-  //   });
-
-  //   await next();
-
-  //   transaction.setName(`${req.method} ${req.routePath}`);
-  //   transaction.setHttpStatus(res.status);
-  //   transaction.finish();
-  // })
 
   .get("/healthz", ({ text }) => text(`healthz check passed`))
   .get("/livez", ({ text }) => text(`livez check passed`))
