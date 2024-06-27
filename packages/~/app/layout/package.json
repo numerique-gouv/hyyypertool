@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@~/app.core": "workspace:*",
+    "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
     "hono": "4.4.10",
     "nprogress": "0.2.0"

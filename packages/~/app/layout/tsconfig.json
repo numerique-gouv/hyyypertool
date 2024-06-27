@@ -8,6 +8,7 @@
   "extends": "@~/config.typescript/tsx.json",
   "references": [
     { "path": "../core/tsconfig.json" },
+    { "path": "../middleware/tsconfig.json" },
     { "path": "../urls/tsconfig.json" }
   ]
 }

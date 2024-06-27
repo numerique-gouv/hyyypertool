@@ -2,24 +2,24 @@
 
 import config from "@~/app.core/config";
 import { Root_Layout } from "@~/app.layout/root";
-import type { Csp_Context } from "@~/app.middleware/csp_headers";
-import { type Session_Context } from "@~/app.middleware/session";
+import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-export default new Hono<Session_Context & Csp_Context>()
+export default new Hono<App_Context>()
   .use("/", jsxRenderer(Root_Layout))
-  .get("/", function GET({ render, redirect, var: { nonce, session } }) {
-    if (session.get("userinfo")) {
+  .get("/", function GET({ render, redirect, var: { nonce, userinfo } }) {
+    console.log(userinfo);
+    if (userinfo) {
       return redirect(urls.moderations.$url().pathname);
     }
 
     return render(
       <main class="flex h-full flex-grow flex-col items-center justify-center">
-        <h1 class="fr-display--xl drop-shadow-lg ">
+        <h1 class="fr-display--xl drop-shadow-lg">
           <hyyyper-title>Bonjour Hyyypertool !</hyyyper-title>
           <script
             nonce={nonce}
@@ -50,6 +50,5 @@ export default new Hono<Session_Context & Csp_Context>()
           </form>
         </div>
       </main>,
-      { nonce },
     );
   });

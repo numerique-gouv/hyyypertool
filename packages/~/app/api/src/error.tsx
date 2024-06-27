@@ -2,20 +2,22 @@
 
 import config from "@~/app.core/config";
 import { NotFoundError } from "@~/app.core/error";
-import { Error_Page } from "@~/app.layout/error";
 import type { App_Context } from "@~/app.middleware/context";
 import consola from "consola";
 import { type Context } from "hono";
+import { useRequestContext } from "hono/jsx-renderer";
 import { P, match } from "ts-pattern";
 import Youch from "youch";
+
 //
 
 export function error_handler(error: Error, c: Context) {
   const {
-    get,
     html,
     notFound,
+    render,
     req,
+    status,
     var: { sentry },
   } = c as Context<App_Context>;
 
@@ -30,15 +32,37 @@ export function error_handler(error: Error, c: Context) {
 
         //
 
+        status(500);
         return match(config)
           .with({ NODE_ENV: "development" }, async () => {
             const youch = new Youch(error, req.raw);
-            return html(await youch.toHTML(), 500);
+            return html(await youch.toHTML());
           })
           .otherwise(async () => {
-            const nonce = get("nonce");
-            return html(await Error_Page({ error, nonce }), 500);
+            return render(<Error_Page error={error} />);
           });
       })
+  );
+}
+
+//
+
+export function Error_Page({ error }: { error: Error }) {
+  const {
+    var: { config },
+  } = useRequestContext<App_Context>();
+
+  return (
+    <main class="flex h-full flex-grow flex-col items-center justify-center">
+      <div class="card-container not-found-error">
+        <img src={`${config.PUBLIC_ASSETS_PATH}/404.svg`} alt="" />
+        <h3>Oups, une erreur s'est produite.</h3>
+        <pre>{error.message}</pre>
+        <a href="/" class="fr-btn">
+          {" "}
+          Retour à l’accueil{" "}
+        </a>
+      </div>
+    </main>
   );
 }

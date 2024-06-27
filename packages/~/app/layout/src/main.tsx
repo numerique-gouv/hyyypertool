@@ -1,33 +1,19 @@
 //
 
+import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
 import { urls } from "@~/app.urls";
 import type { PropsWithChildren } from "hono/jsx";
-import { Root_Layout, type Root_Layout_Props } from "./root";
+import { useRequestContext } from "hono/jsx-renderer";
+import { Root_Layout } from "./root";
 
 //
-
-export interface Main_Layout_Props extends Root_Layout_Props {
-  username?: string;
-}
-
-declare module "hono" {
-  interface ContextRenderer {
-    (
-      content: string | Promise<string>,
-      props?: Main_Layout_Props | undefined,
-    ): Response;
-  }
-}
-
-//
-
-export function Main_Layout({
-  children,
-  nonce,
-  username,
-}: PropsWithChildren<Main_Layout_Props>) {
+export function Main_Layout({ children }: PropsWithChildren) {
+  const {
+    var: { userinfo },
+  } = useRequestContext<UserInfoVariables_Context>();
+  const username = userinfo_to_username(userinfo);
   return (
-    <Root_Layout nonce={nonce}>
+    <Root_Layout>
       <div class="flex min-h-full flex-grow flex-col">
         <header role="banner" class="fr-header">
           <div class="fr-header__body">

@@ -4,7 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema } from "@~/moncomptepro.database";
 import { eq } from "drizzle-orm";
@@ -13,7 +13,9 @@ import { comment_message } from "./comment_message";
 
 //
 
-export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
+export default new Hono<
+  MonComptePro_Pg_Context & UserInfoVariables_Context
+>().patch(
   "/",
   zValidator("param", Entity_Schema),
   async ({ text, req, notFound, var: { moncomptepro_pg, userinfo } }) => {
