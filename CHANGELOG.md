@@ -1,5 +1,13 @@
 
 
+## [2024.6.4](https://github.com/betagouv/hyyypertool/compare/2024.6.3...2024.6.4) (2024-06-27)
+
+
+### Features
+
+* **moderation:** add chorus pro error response ([#365](https://github.com/betagouv/hyyypertool/issues/365)) ([4b65294](https://github.com/betagouv/hyyypertool/commit/4b652947fcb39580df4343fd4289ec37e726a609))
+* **moderation:** remove chorus pro response ([#364](https://github.com/betagouv/hyyypertool/issues/364)) ([56afda6](https://github.com/betagouv/hyyypertool/commit/56afda6c6540071998746fb25ca2206a3a488eb1))
+
 ## [2024.6.3](https://github.com/betagouv/hyyypertool/compare/2024.6.2...2024.6.3) (2024-06-27)
 
 ## [2024.6.2](https://github.com/betagouv/hyyypertool/compare/2024.6.1...2024.6.2) (2024-06-26)
