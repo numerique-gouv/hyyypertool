@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@~/app.core": "workspace:*",
+    "@~/app.sentry": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "hono": "4.4.10",
     "hono-sessions": "0.5.8",

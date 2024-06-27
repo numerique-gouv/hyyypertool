@@ -32,8 +32,8 @@ export default async function Page({ id }: { id: number }) {
   });
 
   return (
-    <main class="fr-container">
-      <h1>👨‍💻 A propos de {organization.cached_libelle}</h1>
+    <main class="fr-container my-12">
+      <h1>🏛 A propos de « {organization.cached_libelle} » </h1>
       <Fiche organization={organization} />
       <Edit_Domain organization={organization} />
       <hr />

@@ -1,7 +1,7 @@
 //
 
-import type { getSentry } from "@hono/sentry";
 import type { AppVariables_Context } from "@~/app.core/config";
+import type { SentryVariables_Context } from "@~/app.sentry";
 import type { Csp_Context } from "./csp_headers";
 import type { MonComptePro_Pg_Context } from "./moncomptepro_pg";
 import type { Session_Context } from "./session";
@@ -13,8 +13,5 @@ export type App_Context = AppVariables_Context &
   MonComptePro_Pg_Context &
   NonceVariables_Context &
   Session_Context &
-  UserInfoVariables_Context & {
-    Variables: {
-      sentry: ReturnType<typeof getSentry>;
-    };
-  };
+  UserInfoVariables_Context &
+  SentryVariables_Context;

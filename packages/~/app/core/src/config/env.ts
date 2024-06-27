@@ -10,7 +10,7 @@ import { z } from "zod";
 
 dotenv.config({
   override: true,
-  path: [".env", ".env.local", `.env.${env.NODE_ENV}.local`],
+  path: [".env", ".env.local", `.env.${env["NODE_ENV"]}.local`],
 });
 
 const pkg = await import(join(cwd(), "package.json"));

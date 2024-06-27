@@ -1,5 +1,7 @@
 declare const app: import("hono/hono-base").HonoBase<
-  import("hono/types").BlankEnv,
+  import("@~/app.middleware/set_nonce").NonceVariables_Context &
+    import("@~/app.middleware/set_config").ConfigVariables_Context &
+    import("@~/app.middleware/set_userinfo").UserInfoVariables_Context,
   {
     "/organizations/:id/$procedures/verify/:domain": {
       $patch: {
@@ -251,6 +253,20 @@ declare const app: import("hono/hono-base").HonoBase<
         status: import("hono/utils/http-status").StatusCode;
       };
     };
+    "/organizations/domains": {
+      $get: {
+        input: {
+          query: {
+            page?: string | string[] | undefined;
+            page_size?: string | string[] | undefined;
+            q?: string | string[] | undefined;
+          };
+        };
+        output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
+      };
+    };
     "/organizations/leaders": {
       $get: {
         input: {
@@ -267,9 +283,9 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           query: {
-            "search-siret"?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
+            "search-siret"?: string | string[] | undefined;
             id?: string | string[] | undefined;
           };
         };

@@ -2,6 +2,7 @@
 
 import { Pagination_Schema, type Pagination } from "@~/app.core/schema";
 import { button } from "../button";
+import { FrNumberConverter } from "../number";
 
 //
 
@@ -19,15 +20,16 @@ export function Foot({
   pagination: Pagination;
 }) {
   const { page, page_size } = pagination;
-  const last_page = Math.floor(count / page_size) + 1;
+  const last_page = Math.ceil(count / page_size);
   const page_index = page - 1;
 
   return (
     <tfoot>
       <tr>
         <th colspan={2} class="whitespace-nowrap" scope="row">
-          Showing {page_index * page_size}-{page_index * page_size + page_size}{" "}
-          of {count}
+          Affiche de {FrNumberConverter.format(page_index * page_size)}-
+          {FrNumberConverter.format(page_index * page_size + page_size)} sur{" "}
+          {FrNumberConverter.format(count)}
         </th>
         <td colspan={3}>
           <button
@@ -45,7 +47,7 @@ export function Foot({
             name={name ?? Pagination_Schema.keyof().Enum.page}
             value={page}
           />{" "}
-          <span> of {last_page}</span>
+          <span> of {FrNumberConverter.format(last_page)}</span>
           <button
             class={button({ class: "fr-btn--tertiary-no-outline" })}
             disabled={page >= last_page}
