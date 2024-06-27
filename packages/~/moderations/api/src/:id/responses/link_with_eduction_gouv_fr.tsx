@@ -4,7 +4,7 @@ import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
 import { ModerationPage_Context } from "../context";
 
-export const label = "Quel lien avec le Ministère de l'Éduc Nat";
+export const label = "Pas de légitimité - Ministère de l'Éducation";
 
 export default function template() {
   const {
@@ -19,11 +19,14 @@ export default function template() {
 
     Votre demande pour rejoindre l'organisation « ${organization_name} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
-    Afin de donner suite à cette demande, pourriez vous nous préciser le lien que vous avez avec cette organisation ? Votre adresse mail correspond au rectorat ${domain}.
-    Merci de bien vouloir rejoindre ce dernier ou utiliser une adresse mail dont le nom de domaine est : education.gouv.fr
+    Vous disposez d’une adresse mail académique (${domain}), à ce titre, vous n’êtes pas autorisé à rattacher votre compte au Ministère de l’Éducation Nationale et de la Jeunesse.
+    En fonction de votre profession et de votre périmètre d’intervention, merci de bien vouloir renouveler votre inscription en rattachant votre compte à l’une des organisations suivantes :
 
-    Nous vous recommandons de demander directement à l'organisation que vous représentez d'effectuer la démarche.
+    - L’établissement dans lequel vous exercez,
+    - La Direction des services départementaux de l'Éducation nationale de laquelle vous dépendez,
+    - Le rectorat de votre Académie.
 
-    Excellente journée,
+    Bien cordialement,
+    L’équipe MonComptePro.
   `;
 }
