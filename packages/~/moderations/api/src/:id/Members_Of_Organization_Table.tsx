@@ -10,7 +10,7 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function Members_Of_Organization_Table() {
+export async function Members_Of_Organization_Table() {
   const uuid = hyper_ref();
   const { moderation } = useContext(ModerationPage_Context);
 
@@ -20,7 +20,7 @@ export function Members_Of_Organization_Table() {
 
       <div
         class="fr-table"
-        {...hx_urls.organizations[":id"].members.$get({
+        {...await hx_urls.organizations[":id"].members.$get({
           param: {
             id: moderation.organization_id.toString(),
           },

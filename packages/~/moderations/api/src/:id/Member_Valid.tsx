@@ -12,7 +12,7 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function Member_Valid() {
+export async function Member_Valid() {
   const { $accept, $add_domain, $decision_form } =
     useContext(Desicison_Context);
   const { moderation } = useContext(ModerationPage_Context);
@@ -31,7 +31,7 @@ export function Member_Valid() {
         go back
       `}
       hidden
-      {...hx_urls.moderations[":id"].$procedures.validate.$patch({
+      {...await hx_urls.moderations[":id"].$procedures.validate.$patch({
         param: { id: moderation.id.toString() },
       })}
       hx-include={hx_include([$add_domain])}

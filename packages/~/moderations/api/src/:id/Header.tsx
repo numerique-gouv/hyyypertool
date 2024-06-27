@@ -14,7 +14,7 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function Header() {
+export async function Header() {
   const { moderation } = useContext(ModerationPage_Context);
   return (
     <header>
@@ -45,7 +45,7 @@ export function Header() {
       <hr class="bg-none" />
 
       <div
-        {...hx_urls.moderations[":id"].duplicate_warning.$get({
+        {...await hx_urls.moderations[":id"].duplicate_warning.$get({
           param: {
             id: moderation.id.toString(),
           },
@@ -84,7 +84,7 @@ function Info() {
   );
 }
 
-function ModerationCallout({ moderation }: { moderation: Moderation }) {
+async function ModerationCallout({ moderation }: { moderation: Moderation }) {
   if (!moderation.moderated_at) return raw``;
 
   const { base, text, title } = callout({ intent: "success" });
@@ -109,7 +109,7 @@ function ModerationCallout({ moderation }: { moderation: Moderation }) {
       <LastComment />
       <button
         class={button({ size: "sm", type: "tertiary" })}
-        {...hx_urls.moderations[":id"].$procedures.reprocess.$patch({
+        {...await hx_urls.moderations[":id"].$procedures.reprocess.$patch({
           param: { id: moderation.id.toString() },
         })}
         hx-swap="none"

@@ -34,7 +34,7 @@ export default async function Moderation_Page() {
     <main
       class="fr-container my-12"
       hx-disinherit="*"
-      {...hx_urls.moderations[":id"].$get(
+      {...await hx_urls.moderations[":id"].$get(
         {
           param: { id: moderation.id.toString() },
         },

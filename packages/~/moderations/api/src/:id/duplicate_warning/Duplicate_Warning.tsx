@@ -162,7 +162,7 @@ async function MarkModerationAsProcessed() {
         wait 2s
         go back
       `}
-      {...hx_urls.moderations[":id"].$procedures.processed.$patch({
+      {...await hx_urls.moderations[":id"].$procedures.processed.$patch({
         param: { id: moderation_id.toString() },
       })}
       hx-swap="none"

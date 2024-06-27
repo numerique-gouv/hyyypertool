@@ -24,6 +24,13 @@ export default async function Page({ id }: { id: number }) {
     return <Organization_NotFound organization_id={id} />;
   }
 
+  const hx_get_members_query_props = await hx_urls.organizations[
+    ":id"
+  ].members.$get({
+    param: { id: organization.id.toString() },
+    query: { describedby: uuid },
+  });
+
   return (
     <main class="fr-container">
       <h1>👨‍💻 A propos de {organization.cached_libelle}</h1>
@@ -33,10 +40,7 @@ export default async function Page({ id }: { id: number }) {
       <br />
       <h3 id={uuid}>Membres enregistrés dans cette organisation :</h3>
       <div
-        {...hx_urls.organizations[":id"].members.$get({
-          param: { id: organization.id.toString() },
-          query: { describedby: uuid },
-        })}
+        {...hx_get_members_query_props}
         hx-target="this"
         hx-trigger={[
           "load",

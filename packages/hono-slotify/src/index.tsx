@@ -1,6 +1,12 @@
 //
 
-import { cloneElement, isValidElement, type Child, type FC } from "hono/jsx";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type Child,
+  type FC,
+} from "hono/jsx";
 import { raw } from "hono/utils/html";
 
 //
@@ -19,10 +25,10 @@ type SlotProps<P> = {
   restProps?: P & { defaultChildren: Child };
 };
 
-type NormalOrFunctionChildren<P> =
-  | Child
-  | undefined
-  | ((props: P & { defaultChildren: Child | undefined }) => Child | undefined);
+type FunctionChild<P> = (
+  props: P & { defaultChildren: Child | undefined },
+) => Child | undefined;
+type NormalOrFunctionChildren<P> = FunctionChild<P> | Child | undefined;
 
 export type SlotType<P> = FC<
   SlotProps<P> & { children?: NormalOrFunctionChildren<P> }
@@ -34,9 +40,19 @@ export function createSlot<P extends {}>() {
     if (!showChildren) {
       return <></>;
     }
-    if (typeof children === "function" && restProps) {
-      return children(restProps);
+
+    const children_array = Children.toArray(children as Child[]) as
+      | Child[]
+      | [FunctionChild<P>];
+
+    if (
+      restProps &&
+      children_array[0] &&
+      typeof children_array[0] === "function"
+    ) {
+      return children_array[0](restProps);
     }
+
     return <>{children}</>;
   }) as SlotType<P>;
 
@@ -44,21 +60,23 @@ export function createSlot<P extends {}>() {
     if (childs === undefined) {
       return raw(children);
     }
-    if (!Array.isArray(childs)) {
-      childs = [childs];
-    }
-    const slotted = Array.from(childs).find((child) => {
+    const slotted = Children.toArray(childs).find((child) => {
       return isValidElement(child) && child.tag === Slot;
     });
 
     if (!slotted || !isValidElement(slotted)) {
       return raw(children);
     }
+
     return raw(
-      cloneElement(slotted, {
-        restProps: { ...restProps, defaultChildren: children },
-        showChildren: true,
-      } as unknown as SlotProps<P>),
+      cloneElement(
+        slotted,
+        {
+          restProps: { ...restProps, defaultChildren: children },
+          showChildren: true,
+        } satisfies SlotProps<unknown>,
+        slotted.children,
+      ),
     );
   };
   Slot.Renderer = Renderer;

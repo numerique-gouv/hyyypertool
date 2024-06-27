@@ -39,7 +39,7 @@ const reponse_templates = [
 
 //
 
-export function Member_Invalid() {
+export async function Member_Invalid() {
   const { moderation } = useContext(ModerationPage_Context);
   const {
     $destination,
@@ -65,7 +65,7 @@ export function Member_Invalid() {
         go back
       `}
       hidden
-      {...hx_urls.moderations[":id"].$procedures.rejected.$patch({
+      {...await hx_urls.moderations[":id"].$procedures.rejected.$patch({
         param: { id: moderation.id.toString() },
       })}
       hx-swap="none"

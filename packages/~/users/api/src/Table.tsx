@@ -17,7 +17,7 @@ const fields = [
   "email_verified_at",
 ] as const;
 
-export function Table({ users }: { users: get_users_list_dto["users"] }) {
+export async function Table({ users }: { users: get_users_list_dto["users"] }) {
   const { page, take, count } = useContext(Table_Context);
 
   return (
@@ -71,7 +71,7 @@ export function Table({ users }: { users: get_users_list_dto["users"] }) {
           <td colspan={3} class="inline-flex justify-center">
             <input
               class="text-right"
-              {...hx_urls.users.$get({ query: {} })}
+              {...await hx_urls.users.$get({ query: {} })}
               // hx-include={`#${SEARCH_EMAIL_INPUT_ID}`}
               hx-select={`#${USER_TABLE_ID} > table`}
               hx-target={`#${USER_TABLE_ID}`}

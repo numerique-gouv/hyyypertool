@@ -30,7 +30,7 @@ import Moderations_Context, {
 const page_query_keys = Page_Query.keyof();
 
 const hx_moderations_query_props = {
-  ...hx_urls.moderations.$get({ query: {} }),
+  ...(await hx_urls.moderations.$get()),
   "hx-include": hx_include([
     MODERATION_TABLE_PAGE_ID,
     page_query_keys.enum.day,
@@ -126,7 +126,7 @@ function Filter({ search }: { search: Search }) {
       hx-vals={JSON.stringify({ page: 1 } as Pagination)}
     >
       <div className="grid grid-cols-2 gap-6">
-        <div class="fr-input-group ">
+        <div class="fr-input-group">
           <label class="fr-label" for={page_query_keys.enum.search_email}>
             Email
           </label>
@@ -139,7 +139,7 @@ function Filter({ search }: { search: Search }) {
             value={search.search_email}
           />
         </div>
-        <div class="fr-input-group ">
+        <div class="fr-input-group">
           <label class="fr-label" for={page_query_keys.enum.search_siret}>
             Siret
           </label>

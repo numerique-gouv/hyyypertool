@@ -22,13 +22,13 @@ export function Domain_Organization() {
   );
 }
 
-function Edit_Internal_Domain() {
+async function Edit_Internal_Domain() {
   const {
     moderation: { organization },
   } = useContext(ModerationPage_Context);
   return (
     <div
-      {...hx_urls.organizations[":id"].domains.internal.$get({
+      {...await hx_urls.organizations[":id"].domains.internal.$get({
         param: {
           id: organization.id.toString(),
         },
@@ -47,13 +47,13 @@ function Edit_Internal_Domain() {
   );
 }
 
-function Edit_External_Domain() {
+async function Edit_External_Domain() {
   const {
     moderation: { organization },
   } = useContext(ModerationPage_Context);
   return (
     <div
-      {...hx_urls.organizations[":id"].domains.external.$get({
+      {...await hx_urls.organizations[":id"].domains.external.$get({
         param: {
           id: organization.id.toString(),
         },

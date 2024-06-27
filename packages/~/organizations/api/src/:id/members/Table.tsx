@@ -31,12 +31,12 @@ export async function Table() {
   const { users, count } = await query_members_collection;
 
   const hx_member_query_props = {
-    ...hx_urls.organizations[":id"].members.$get({
+    ...(await hx_urls.organizations[":id"].members.$get({
       param: {
         id: organization_id.toString(),
       },
       query: { describedby },
-    }),
+    })),
     "hx-include": hx_include([MEMBER_TABLE_PAGE_ID]),
   };
 
@@ -92,7 +92,7 @@ function Row({ variants }: { variants?: VariantProps<typeof row> }) {
   );
 }
 
-function Row_Actions() {
+async function Row_Actions() {
   const { organization_id } = useContext(MembersTable_Context);
   const { user } = useContext(Member_Context);
   const { id: user_id, is_external, verification_type } = user;
@@ -114,7 +114,7 @@ function Row_Actions() {
         <li>
           <button
             class={menu_item()}
-            {...hx_urls.organizations[":id"].members[":user_id"].$delete({
+            {...await hx_urls.organizations[":id"].members[":user_id"].$delete({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
@@ -128,17 +128,17 @@ function Row_Actions() {
         <li>
           <button
             class={menu_item()}
-            {...hx_urls.organizations[":id"].members[":user_id"].$patch({
+            {...await hx_urls.organizations[":id"].members[":user_id"].$patch({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
+              form: {
+                verification_type:
+                  Verification_Type_Schema.Enum.in_liste_dirigeants_rna,
+              },
             })}
             hx-swap="none"
-            hx-vals={JSON.stringify({
-              verification_type:
-                Verification_Type_Schema.Enum.in_liste_dirigeants_rna,
-            })}
           >
             🔄 vérif: liste dirigeants
           </button>
@@ -146,17 +146,17 @@ function Row_Actions() {
         <li>
           <button
             class={menu_item()}
-            {...hx_urls.organizations[":id"].members[":user_id"].$patch({
+            {...await hx_urls.organizations[":id"].members[":user_id"].$patch({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
+              form: {
+                verification_type:
+                  Verification_Type_Schema.Enum.verified_email_domain,
+              },
             })}
             hx-swap="none"
-            hx-vals={JSON.stringify({
-              verification_type:
-                Verification_Type_Schema.Enum.verified_email_domain,
-            })}
           >
             🔄 vérif: domaine email
           </button>
@@ -164,17 +164,17 @@ function Row_Actions() {
         <li>
           <button
             class={menu_item()}
-            {...hx_urls.organizations[":id"].members[":user_id"].$patch({
+            {...await hx_urls.organizations[":id"].members[":user_id"].$patch({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
+              form: {
+                verification_type:
+                  Verification_Type_Schema.Enum.official_contact_email,
+              },
             })}
             hx-swap="none"
-            hx-vals={JSON.stringify({
-              verification_type:
-                Verification_Type_Schema.Enum.official_contact_email,
-            })}
           >
             🔄 vérif: mail officiel
           </button>
@@ -183,14 +183,18 @@ function Row_Actions() {
           {verification_type ? (
             <button
               class={menu_item()}
-              {...hx_urls.organizations[":id"].members[":user_id"].$patch({
-                param: {
-                  id: organization_id.toString(),
-                  user_id: user_id.toString(),
+              {...await hx_urls.organizations[":id"].members[":user_id"].$patch(
+                {
+                  param: {
+                    id: organization_id.toString(),
+                    user_id: user_id.toString(),
+                  },
+                  form: {
+                    verification_type: "",
+                  },
                 },
-              })}
+              )}
               hx-swap="none"
-              hx-vals={JSON.stringify({ verification_type: "" })}
             >
               🚫 non vérifié
             </button>
@@ -201,16 +205,16 @@ function Row_Actions() {
         <li>
           <button
             class={menu_item()}
-            {...hx_urls.organizations[":id"].members[":user_id"].$patch({
+            {...await hx_urls.organizations[":id"].members[":user_id"].$patch({
               param: {
                 id: organization_id.toString(),
                 user_id: user_id.toString(),
               },
+              form: {
+                is_external: String(!is_external),
+              },
             })}
             hx-swap="none"
-            hx-vals={JSON.stringify({
-              is_external: !is_external,
-            })}
           >
             🔄 interne/externe
           </button>
