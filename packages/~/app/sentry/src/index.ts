@@ -18,7 +18,7 @@ import { createMiddleware } from "hono/factory";
 export function sentry() {
   init({
     attachStacktrace: true,
-    debug: consola.level >= LogLevels.debug,
+    debug: consola.level < LogLevels.trace,
     dsn: config.SENTRY_DNS,
     environment: config.DEPLOY_ENV,
     initialScope: {
