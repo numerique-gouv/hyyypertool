@@ -54,7 +54,7 @@
     ]
   },
   "dependencies": {
-    "@gouvfr/dsfr": "1.11.2",
+    "@gouvfr/dsfr": "1.12.1",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
