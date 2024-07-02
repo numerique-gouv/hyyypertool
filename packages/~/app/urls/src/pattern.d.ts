@@ -355,10 +355,10 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           query: {
-            id?: string | string[] | undefined;
+            "search-email"?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
-            "search-email"?: string | string[] | undefined;
+            id?: string | string[] | undefined;
           };
         };
         output: {};
