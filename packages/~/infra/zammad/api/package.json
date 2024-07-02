@@ -15,7 +15,7 @@
     "@hono/zod-validator": "0.2.2",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
-    "hono": "4.4.9",
+    "hono": "4.4.10",
     "ts-pattern": "5.2.0",
     "zod": "3.23.8"
   },
