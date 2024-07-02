@@ -1,13 +1,7 @@
 //
 
 import { Pagination_Schema } from "@~/app.core/schema";
-import {
-  Main_Layout,
-  userinfo_to_username,
-  type Main_Layout_Props,
-} from "@~/app.layout/index";
-import type { Csp_Context } from "@~/app.middleware/csp_headers";
-import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { Main_Layout } from "@~/app.layout/index";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { P, match } from "ts-pattern";
@@ -16,11 +10,11 @@ import { Search_Schema } from "./context";
 import { Moderations_Page } from "./page";
 
 //
-export default new Hono<UserInfo_Context & Csp_Context>()
+export default new Hono()
 
   .route("/:id", moderation_router)
-  .use("/", jsxRenderer(Main_Layout, { docType: true }))
-  .get("/", function GET({ render, req, var: { nonce, userinfo } }) {
+  .use("/", jsxRenderer(Main_Layout))
+  .get("/", function GET({ render, req }) {
     const query = req.query();
 
     const search = match(Search_Schema.parse(query, { path: ["query"] }))
@@ -42,11 +36,7 @@ export default new Hono<UserInfo_Context & Csp_Context>()
       .with({ success: true }, ({ data }) => data)
       .otherwise(() => Pagination_Schema.parse({}));
 
-    const username = userinfo_to_username(userinfo);
-    return render(
-      <Moderations_Page pagination={pagination} search={search} />,
-      { nonce, username } as Main_Layout_Props,
-    );
+    return render(<Moderations_Page pagination={pagination} search={search} />);
   });
 
 //

@@ -2,9 +2,8 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema, Pagination_Schema } from "@~/app.core/schema";
-import { Main_Layout, userinfo_to_username } from "@~/app.layout/index";
-import type { Csp_Context } from "@~/app.middleware/csp_headers";
-import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import { Main_Layout } from "@~/app.layout/index";
+import type { App_Context } from "@~/app.middleware/context";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
@@ -13,10 +12,10 @@ import UsersPage, { SEARCH_EMAIL_INPUT_ID } from "./page";
 
 //
 
-export default new Hono<UserInfo_Context & Csp_Context>()
+export default new Hono<App_Context>()
   .route("/:id", user_id_router)
   //
-  .use("/", jsxRenderer(Main_Layout, { docType: true }))
+  .use("/", jsxRenderer(Main_Layout))
   .get(
     "/",
     zValidator(
@@ -25,10 +24,8 @@ export default new Hono<UserInfo_Context & Csp_Context>()
         [SEARCH_EMAIL_INPUT_ID]: z.string().optional(),
       }).merge(Entity_Schema.partial()),
     ),
-    function ({ render, req, var: { nonce, userinfo } }) {
+    function ({ render, req }) {
       const { page, [SEARCH_EMAIL_INPUT_ID]: email } = req.valid("query");
-
-      const username = userinfo_to_username(userinfo);
 
       return render(
         <UsersPage
@@ -38,10 +35,6 @@ export default new Hono<UserInfo_Context & Csp_Context>()
           }}
           email={email}
         />,
-        {
-          nonce,
-          username,
-        },
       );
     },
   );

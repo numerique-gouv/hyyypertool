@@ -1,25 +1,17 @@
 //
 
-import config from "@~/app.core/config";
+import type { App_Context } from "@~/app.middleware/context";
 import { html } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
+import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export interface Root_Layout_Props {
-  nonce?: string | undefined;
-}
+export function Root_Layout({ children }: PropsWithChildren) {
+  const {
+    var: { config, nonce },
+  } = useRequestContext<App_Context>();
 
-declare module "hono" {
-  interface ContextRenderer {
-    (content: string | Promise<string>, props: Root_Layout_Props): Response;
-  }
-}
-
-export function Root_Layout({
-  children,
-  nonce,
-}: PropsWithChildren<Root_Layout_Props>) {
   return html`
     <html
       lang="fr"
@@ -28,7 +20,9 @@ export function Root_Layout({
         config.NODE_ENV === "production" ? "" : "debug",
         "chunked-transfer",
         "include-vals",
-      ].join(", ")}"
+      ]
+        .filter(Boolean)
+        .join(", ")}"
     >
       <head>
         <meta charset="utf-8" />
@@ -89,7 +83,7 @@ export function Root_Layout({
 
         <script
           hash="sha256-ZtVO4euNrRnx0KrqoCatLuOIaHv1Z7zi++KgINh8SqM="
-          nonce="${nonce ?? ""}"
+          nonce="${nonce}"
           type="importmap"
         >
           {
@@ -102,7 +96,7 @@ export function Root_Layout({
         </script>
 
         <title>
-          H${Array.from({ length: Math.max(3, Math.random() * 5) })
+          H${Array.from({ length: Math.max(3, nonce.length) })
             .fill("y")
             .join("") + "pertool"}
         </title>
@@ -119,7 +113,7 @@ export function Root_Layout({
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© ${new Date().getFullYear()} 🇫🇷</div>
           <a
-            href=${`https://github.com/betagouv/hyyypertool/tree/${config.VERSION}`}
+            href="https://github.com/betagouv/hyyypertool/tree/${config.VERSION}"
             rel="noopener noreferrer"
             target="_blank"
             safe
@@ -132,7 +126,7 @@ export function Root_Layout({
       <!--  -->
 
       <script
-        nonce="${nonce ?? ""}"
+        nonce="${nonce}"
         src="${config.PUBLIC_ASSETS_PATH}/app/layout/src/_client/nprogress.js"
         type="module"
       ></script>
@@ -146,46 +140,46 @@ export function Root_Layout({
 
       ${config.NODE_ENV === "development"
         ? html`<script
-            nonce="${nonce ?? ""}"
+            nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
             type="module"
           ></script>`
         : html`<script
-            nonce="${nonce ?? ""}"
+            nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
             type="module"
           ></script>`}
 
       <meta
-        name="htmx-config"
+        name="htmx-env"
         content="${JSON.stringify({
           defaultSettleDelay: 0,
           globalViewTransitions: true,
           historyEnabled: true,
-          inlineScriptNonce: nonce ?? "",
+          inlineScriptNonce: nonce,
         })}"
       />
 
       ${config.DEPLOY_ENV === "preview"
         ? html`<script
-            nonce="${nonce ?? ""}"
+            nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/debug.js"
             type="module"
           ></script>`
         : ""}
 
       <script
-        nonce="${nonce ?? ""}"
+        nonce="${nonce}"
         src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/include-vals.js"
         type="module"
       ></script>
       <script
-        nonce="${nonce ?? ""}"
+        nonce="${nonce}"
         src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/sse.js"
         type="module"
       ></script>
       <script
-        nonce="${nonce ?? ""}"
+        nonce="${nonce}"
         src="${config.ASSETS_PATH}/node_modules/htmx.ext...chunked-transfer/dist/index.js"
         type="module"
       ></script>
@@ -194,16 +188,16 @@ export function Root_Layout({
 
       ${config.NODE_ENV === "development"
         ? html`<script
-              nonce="${nonce ?? ""}"
+              nonce="${nonce}"
               src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.js"
             ></script>
 
             <script
-              nonce="${nonce ?? ""}"
+              nonce="${nonce}"
               src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/hdb.js"
             ></script>`
         : html`<script
-            nonce="${nonce ?? ""}"
+            nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
           ></script> `}
     </html>

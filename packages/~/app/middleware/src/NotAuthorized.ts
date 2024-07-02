@@ -1,11 +1,16 @@
 //
 
+import type { AppEnv_Context } from "@~/app.core/config";
+import { Root_Layout } from "@~/app.layout/root";
 import { html } from "hono/html";
-import { Root_Layout, type Root_Layout_Props } from "./root";
+import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export function NotAuthorized({ nonce }: Root_Layout_Props) {
+export function NotAuthorized() {
+  const {
+    var: { nonce },
+  } = useRequestContext<AppEnv_Context>();
   return Root_Layout({
     children: html`
       <main class="flex h-full flex-grow flex-col items-center justify-center">
@@ -16,7 +21,7 @@ export function NotAuthorized({ nonce }: Root_Layout_Props) {
               <p class="fr-text--xl">
                 Le service
                 <span class="break-words">
-                  H${Array.from({ length: Math.max(3, Math.random() * 33) })
+                  H${Array.from({ length: Math.max(3, nonce.length) })
                     .fill("y")
                     .join("") + "pertool"}</span
                 >
@@ -76,6 +81,5 @@ export function NotAuthorized({ nonce }: Root_Layout_Props) {
         </div>
       </main>
     `,
-    nonce,
   });
 }

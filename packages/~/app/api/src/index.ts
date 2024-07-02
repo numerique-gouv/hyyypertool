@@ -1,9 +1,12 @@
 //
 
 import config from "@~/app.core/config";
-import { NotFound } from "@~/app.layout/not-found";
+import { Root_Layout } from "@~/app.layout/root";
 import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
+import { set_config } from "@~/app.middleware/set_config";
+import { set_nonce } from "@~/app.middleware/set_nonce";
+import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
 import { sentry } from "@~/app.sentry";
 import auth_router from "@~/auth.api";
@@ -15,9 +18,11 @@ import welcome_router from "@~/welcome.api";
 import consola from "consola";
 import { Hono } from "hono";
 import { compress } from "hono/compress";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { logger } from "hono/logger";
 import asserts_router from "./assets";
 import { error_handler } from "./error";
+import { not_found_handler } from "./not-found";
 import readyz_router from "./readyz";
 
 //
@@ -27,6 +32,8 @@ const app = new Hono()
   .use("*", logger(consola.info))
   .use("*", compress())
   .use("*", sentry())
+  .use(set_nonce())
+  .use(set_config())
 
   .get("/healthz", ({ text }) => text(`healthz check passed`))
   .get("/livez", ({ text }) => text(`livez check passed`))
@@ -41,6 +48,7 @@ const app = new Hono()
   //
 
   .use("*", hyyyyyypertool_session)
+  .use(set_userinfo())
   //
   .route("/", welcome_router)
   .route("/auth", auth_router)
@@ -57,12 +65,9 @@ const app = new Hono()
   .use("/organizations/*", authoried)
   .route("/organizations", organizations_router)
 
+  .use(jsxRenderer(Root_Layout))
   .onError(error_handler)
-
-  .notFound(async ({ html, get }) => {
-    const nonce: string = get("nonce" as any);
-    return html(NotFound({ nonce }), 404);
-  });
+  .notFound(not_found_handler);
 
 //
 

@@ -5,7 +5,6 @@
   "extends": "@~/config.typescript/base.json",
   "references": [
     { "path": "../core/tsconfig.json" },
-    { "path": "../layout/tsconfig.json" },
     { "path": "../../infra/moncomptepro/database/tsconfig.json" }
   ]
 }

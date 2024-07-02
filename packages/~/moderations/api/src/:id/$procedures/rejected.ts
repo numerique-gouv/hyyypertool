@@ -5,9 +5,8 @@ import { NotFoundError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { userinfo_to_username } from "@~/app.layout";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { App_Context } from "@~/app.middleware/context";
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
-import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import {
@@ -38,7 +37,7 @@ type RejectedMessage = z.TypeOf<typeof RejectedMessage_Schema>;
 
 //
 
-export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
+export default new Hono<App_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
   zValidator("form", RejectedMessage_Schema),

@@ -8,7 +8,7 @@ import type { AgentConnect_UserInfo } from "./AgentConnect_UserInfo";
 interface Session_KeyMapping {
   verifier: string;
   oidc: BaseClient;
-  userinfo: AgentConnect_UserInfo;
+  userinfo?: AgentConnect_UserInfo;
   idtoken: string;
   oauth2token: TokenSet;
   state: string;

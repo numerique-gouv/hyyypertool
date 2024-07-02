@@ -6,8 +6,7 @@ import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
-import type { UserInfo_Context } from "@~/app.middleware/vip_list.guard";
+import type { App_Context } from "@~/app.middleware/context";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { member_join_organization } from "@~/moderations.lib/usecase/member_join_organization";
 import { schema } from "@~/moncomptepro.database";
@@ -31,7 +30,7 @@ export const FORM_SCHEMA = z.object({
 
 //
 
-export default new Hono<MonComptePro_Pg_Context & UserInfo_Context>().patch(
+export default new Hono<App_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
   zValidator("form", FORM_SCHEMA),

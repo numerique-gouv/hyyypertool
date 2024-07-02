@@ -2,7 +2,7 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
-import { Main_Layout, userinfo_to_username } from "@~/app.layout";
+import { Main_Layout } from "@~/app.layout";
 import type { App_Context } from "@~/app.middleware/context";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -14,14 +14,13 @@ import Organization_Page from "./page";
 //
 
 export default new Hono<App_Context>()
-  .use("/", jsxRenderer(Main_Layout, { docType: true }))
+  .use("/", jsxRenderer(Main_Layout))
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async function GET({ req, render, var: { nonce, userinfo } }) {
+    async function GET({ req, render }) {
       const { id } = req.valid("param");
-      const username = userinfo_to_username(userinfo);
-      return render(<Organization_Page id={id} />, { nonce, username });
+      return render(<Organization_Page id={id} />);
     },
   )
   //
