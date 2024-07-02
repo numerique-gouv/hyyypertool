@@ -15,7 +15,7 @@ import { User_NotFound } from "./not-found";
 
 //
 
-export default function User_Page() {
+export default async function User_Page() {
   const { user } = useContext(UserPage_Context);
   return (
     <main class="fr-container">
@@ -30,7 +30,7 @@ export default function User_Page() {
       suivantes :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
-          {...hx_urls.users[":id"].organizations.$get({
+          {...await hx_urls.users[":id"].organizations.$get({
             param: { id: user.id.toString() },
             query: {},
           })}
@@ -45,7 +45,7 @@ export default function User_Page() {
       :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
-          {...hx_urls.users[":id"].moderations.$get({
+          {...await hx_urls.users[":id"].moderations.$get({
             param: { id: user.id.toString() },
           })}
           hx-target="this"
@@ -58,7 +58,7 @@ export default function User_Page() {
   );
 }
 
-function Actions() {
+async function Actions() {
   const { user } = useContext(UserPage_Context);
   const { email, id } = user;
   const domain = z_email_domain.parse(email, { path: ["email"] });
@@ -71,14 +71,18 @@ function Actions() {
       </GoogleSearchButton>
       <button
         class={button({ intent: "danger" })}
-        {...hx_urls.users[":id"].reset.$patch({ param: { id: id.toString() } })}
+        {...await hx_urls.users[":id"].reset.$patch({
+          param: { id: id.toString() },
+        })}
         hx-swap="none"
       >
         🚫 réinitialiser la vérification de l’email (bloquer)
       </button>
       <button
         class={button({ intent: "dark" })}
-        {...hx_urls.users[":id"].$delete({ param: { id: id.toString() } })}
+        {...await hx_urls.users[":id"].$delete({
+          param: { id: id.toString() },
+        })}
         hx-swap="none"
       >
         🗑️ supprimer définitivement ce compte

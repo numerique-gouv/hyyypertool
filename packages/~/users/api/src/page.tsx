@@ -39,7 +39,7 @@ export default async function Page({
       </label>
       <input
         class="fr-input"
-        {...hx_urls.users.$get({ query: {} })}
+        {...await hx_urls.users.$get({ query: {} })}
         hx-select={`#${USER_TABLE_ID} > table`}
         hx-target={`#${USER_TABLE_ID}`}
         hx-trigger="input changed delay:500ms, search"

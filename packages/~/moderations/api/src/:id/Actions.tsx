@@ -11,8 +11,15 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function Moderation_Actions() {
+export async function Moderation_Actions() {
   const { moderation } = useContext(ModerationPage_Context);
+
+  const hx_moderation_reprocess_props = await hx_urls.moderations[
+    ":id"
+  ].$procedures.reprocess.$patch({
+    param: { id: moderation.id.toString() },
+  });
+
   return (
     <div class="bg-[var(--background-alt-blue-france)] p-8">
       <h2>
@@ -25,9 +32,7 @@ export function Moderation_Actions() {
       {moderation.moderated_at ? (
         <button
           class={button({ size: "sm", type: "tertiary" })}
-          {...hx_urls.moderations[":id"].$procedures.reprocess.$patch({
-            param: { id: moderation.id.toString() },
-          })}
+          {...hx_moderation_reprocess_props}
           hx-swap="none"
         >
           Retraiter

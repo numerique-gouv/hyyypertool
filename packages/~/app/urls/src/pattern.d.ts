@@ -1,36 +1,38 @@
-/// <reference types="node" />
-/// <reference types="bun-types" />
 declare const app: import("hono/hono-base").HonoBase<
-  {},
+  import("hono/types").BlankEnv,
   {
     "/organizations/:id/$procedures/verify/:domain": {
       $patch: {
         input: {
           param: {
-            id: string;
-            domain: string;
+            id: string | undefined;
+            domain: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/organizations/:id/domains/internal": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
       $put: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
@@ -38,36 +40,42 @@ declare const app: import("hono/hono-base").HonoBase<
             domain: string | File;
           };
         };
-        output: {};
+        output: "";
+        outputFormat: "text";
+        status: 200;
       };
       $delete: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/domains/internal/:domain": {
       $delete: {
         input: {
           param: {
-            id: string;
-            domain: string;
+            id: string | undefined;
+            domain: string | undefined;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
       $patch: {
         input: {
           param: {
-            id: string;
-            domain: string;
+            id: string | undefined;
+            domain: string | undefined;
           } & {
             id: string;
           };
@@ -75,24 +83,28 @@ declare const app: import("hono/hono-base").HonoBase<
             is_verified?: string | File | undefined;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/domains/external": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
       $put: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
@@ -100,30 +112,36 @@ declare const app: import("hono/hono-base").HonoBase<
             domain: string | File;
           };
         };
-        output: {};
+        output: "";
+        outputFormat: "text";
+        status: 200;
       };
       $delete: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/domains/external/:domain": {
       $delete: {
         input: {
           param: {
-            id: string;
-            domain: string;
+            id: string | undefined;
+            domain: string | undefined;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/members/:user_id/$procedures/join": {
@@ -133,15 +151,17 @@ declare const app: import("hono/hono-base").HonoBase<
             is_external: string | File;
           };
           param: {
-            id: string;
-            user_id: string;
+            id: string | undefined;
+            user_id: string | undefined;
           } & {
             user_id: string;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/members/:user_id": {
@@ -151,52 +171,58 @@ declare const app: import("hono/hono-base").HonoBase<
             is_external: string | File;
           };
           param: {
-            id: string;
-            user_id: string;
+            id: string | undefined;
+            user_id: string | undefined;
           } & {
             user_id: string;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
       $patch: {
         input: {
           param: {
-            id: string;
-            user_id: string;
+            id: string | undefined;
+            user_id: string | undefined;
           } & {
             user_id: string;
           } & {
             id: string;
           };
           form: {
-            verification_type?: string | File | undefined;
             is_external?: string | File | undefined;
+            verification_type?: string | File | undefined;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
       $delete: {
         input: {
           param: {
-            id: string;
-            user_id: string;
+            id: string | undefined;
+            user_id: string | undefined;
           } & {
             user_id: string;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/members": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
@@ -207,18 +233,22 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/organizations/:id": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/organizations/leaders": {
@@ -229,6 +259,8 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/organizations": {
@@ -242,6 +274,8 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   } & {
@@ -249,19 +283,21 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/users/:id/organizations": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
@@ -271,53 +307,63 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/users/:id": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
       $delete: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/users/:id/reset": {
       $patch: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/users": {
       $get: {
         input: {
           query: {
-            "search-email"?: string | string[] | undefined;
+            id?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
-            id?: string | string[] | undefined;
+            "search-email"?: string | string[] | undefined;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   } & {
@@ -325,7 +371,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
@@ -336,25 +382,29 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/moderations/:id/$procedures/reprocess": {
       $patch: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/moderations/:id/$procedures/rejected": {
       $patch: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
@@ -363,77 +413,94 @@ declare const app: import("hono/hono-base").HonoBase<
             subject: string | File;
           };
         };
-        output: {};
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/moderations/:id/$procedures/processed": {
       $patch: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/moderations/:id/duplicate_warning": {
       $get: {
         input: {
+          param: {
+            id: string | undefined;
+          } & {
+            id: string;
+          };
           query: {
             user_id: string | string[];
             organization_id: string | string[];
           };
-        } & {
-          param: {
-            id: string;
-          };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/moderations/:id/email": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/moderations/:id": {
       $get: {
         input: {
           param: {
-            id: string;
+            id: string | undefined;
           } & {
             id: string;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/moderations": {
       $get: {
         input: {};
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   } & {
     "/auth/login": {
       $post: {
         input: {};
-        output: {};
+        output: undefined;
+        outputFormat: "redirect";
+        status: 302;
       };
     };
     "/auth/fake/login/callback": {
       $get: {
         input: {};
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/auth/login/callback": {
@@ -444,13 +511,17 @@ declare const app: import("hono/hono-base").HonoBase<
             state: string | string[];
           };
         };
-        output: {};
+        output: undefined;
+        outputFormat: "redirect";
+        status: 302;
       };
     };
     "/auth/logout": {
       $get: {
         input: {};
-        output: {};
+        output: undefined;
+        outputFormat: "redirect";
+        status: 302;
       };
     };
   } & {
@@ -458,32 +529,45 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {};
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   } & {
     "/proxy/localhost:3000/*": {
       $get: {
         input: {};
-        output: {};
+        output: undefined;
+        outputFormat: "redirect";
+        status: 302;
       };
     };
   } & {
     "/readyz": {
       $get: {
         input: {};
-        output: {};
+        output: "readyz check passed";
+        outputFormat: "text";
+        status: import("hono/utils/http-status").StatusCode;
       };
+    };
+    "/readyz/sentry": {
+      $get: never;
     };
     "/readyz/zammad": {
       $get: {
         input: {};
-        output: {};
+        output: string;
+        outputFormat: "text";
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     "/readyz/drizzle/moncomptepro": {
       $get: {
         input: {};
-        output: {};
+        output: string;
+        outputFormat: "text";
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   } & {
@@ -493,38 +577,48 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            article_id: string;
-            attachment_id: string;
-            ticket_id: string;
+            article_id: string | undefined;
+            attachment_id: string | undefined;
+            ticket_id: string | undefined;
           };
         };
         output: {};
+        outputFormat: string;
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
     [x: `/assets/${string}/bundle/config.js`]: {
       $get: {
         input: {};
-        output: {};
+        output: `export default ${string}`;
+        outputFormat: "text";
+        status: 200;
       };
     };
     [x: `/assets/${string}/bundle/env.js`]: {
       $get: {
         input: {};
-        output: {};
+        output: `export default ${string}`;
+        outputFormat: "text";
+        status: 200;
       };
     };
   } & {
     "/healthz": {
       $get: {
         input: {};
-        output: {};
+        output: "healthz check passed";
+        outputFormat: "text";
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   } & {
     "/livez": {
       $get: {
         input: {};
-        output: {};
+        output: "livez check passed";
+        outputFormat: "text";
+        status: import("hono/utils/http-status").StatusCode;
       };
     };
   },

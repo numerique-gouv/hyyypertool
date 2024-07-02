@@ -11,7 +11,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export function Table() {
+export async function Table() {
   const { domain_and_state, organization } = useContext(Table.Context);
 
   return (
@@ -42,7 +42,7 @@ export function Table() {
             <td colspan={3}>
               <form
                 class="grid grid-cols-[1fr_min-content]"
-                {...hx_urls.organizations[":id"].domains.internal.$put({
+                {...await hx_urls.organizations[":id"].domains.internal.$put({
                   param: {
                     id: organization.id.toString(),
                   },
@@ -62,7 +62,9 @@ export function Table() {
                 <summary>Fonctions avancées</summary>
                 <button
                   class={button({ size: "sm" })}
-                  {...hx_urls.organizations[":id"].domains.internal.$delete({
+                  {...await hx_urls.organizations[
+                    ":id"
+                  ].domains.internal.$delete({
                     param: {
                       id: organization.id.toString(),
                     },
@@ -80,7 +82,7 @@ export function Table() {
   );
 }
 
-function Row_Actions({
+async function Row_Actions({
   domain,
   is_verified,
 }: {
@@ -96,7 +98,7 @@ function Row_Actions({
             class="block w-full px-4 py-2 text-left text-sm text-gray-700"
             role="menuitem"
             tabindex={-1}
-            {...hx_urls.organizations[":id"].domains.internal[
+            {...await hx_urls.organizations[":id"].domains.internal[
               ":domain"
             ].$delete({
               param: {
@@ -114,18 +116,16 @@ function Row_Actions({
             class="block w-full px-4 py-2 text-left text-sm text-gray-700"
             role="menuitem"
             tabindex={-1}
-            {...hx_urls.organizations[":id"].domains.internal[":domain"].$patch(
-              {
-                param: {
-                  id: organization.id.toString(),
-                  domain,
-                },
+            {...await hx_urls.organizations[":id"].domains.internal[
+              ":domain"
+            ].$patch({
+              param: {
+                id: organization.id.toString(),
+                domain,
               },
-            )}
-            hx-swap="none"
-            hx-vals={JSON.stringify({
-              is_verified: String(!is_verified),
+              form: { is_verified: String(!is_verified) },
             })}
+            hx-swap="none"
           >
             🔄 vérifié
           </button>

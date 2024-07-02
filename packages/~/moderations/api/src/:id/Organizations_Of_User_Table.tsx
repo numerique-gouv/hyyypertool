@@ -9,7 +9,7 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function Organizations_Of_User_Table() {
+export async function Organizations_Of_User_Table() {
   const { moderation } = useContext(ModerationPage_Context);
 
   return (
@@ -20,7 +20,7 @@ export function Organizations_Of_User_Table() {
       </h3>
 
       <div
-        {...hx_urls.users[":id"].organizations.$get({
+        {...await hx_urls.users[":id"].organizations.$get({
           param: { id: moderation.user_id.toString() },
           query: {},
         })}

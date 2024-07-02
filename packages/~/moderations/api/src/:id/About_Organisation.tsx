@@ -7,10 +7,15 @@ import { ModerationPage_Context } from "./context";
 
 //
 
-export function About_Organisation() {
+export async function About_Organisation() {
   const {
     moderation: { organization },
   } = useContext(ModerationPage_Context);
+
+  const hx_organizations_leaders_props =
+    await hx_urls.organizations.leaders.$get({
+      query: { siret: organization.siret },
+    });
 
   return (
     <section>
@@ -72,12 +77,7 @@ export function About_Organisation() {
         </li>
       </ul>
 
-      <div
-        {...hx_urls.organizations.leaders.$get({
-          query: { siret: organization.siret },
-        })}
-        hx-trigger="load"
-      >
+      <div {...hx_organizations_leaders_props} hx-trigger="load">
         Recherche des dirigeants...
       </div>
 

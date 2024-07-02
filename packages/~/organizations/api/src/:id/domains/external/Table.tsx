@@ -5,7 +5,7 @@ import { hx_urls } from "@~/app.urls";
 import { type Organization } from "@~/moncomptepro.database";
 
 //
-export function Table({ organization }: { organization: Organization }) {
+export async function Table({ organization }: { organization: Organization }) {
   const { external_authorized_email_domains } = organization;
 
   return (
@@ -37,7 +37,7 @@ export function Table({ organization }: { organization: Organization }) {
             <td colspan={2}>
               <form
                 class="grid grid-cols-[1fr_min-content]"
-                {...hx_urls.organizations[":id"].domains.external.$put({
+                {...await hx_urls.organizations[":id"].domains.external.$put({
                   param: {
                     id: organization.id.toString(),
                   },
@@ -56,7 +56,9 @@ export function Table({ organization }: { organization: Organization }) {
                 <summary>Fonctions avancées</summary>
                 <button
                   class={button({ size: "sm" })}
-                  {...hx_urls.organizations[":id"].domains.external.$delete({
+                  {...await hx_urls.organizations[
+                    ":id"
+                  ].domains.external.$delete({
                     param: {
                       id: organization.id.toString(),
                     },
@@ -74,7 +76,7 @@ export function Table({ organization }: { organization: Organization }) {
   );
 }
 
-function Row_Actions({
+async function Row_Actions({
   domain,
   organization_id,
 }: {
@@ -87,7 +89,7 @@ function Row_Actions({
         <li>
           <button
             class={menu_item()}
-            {...hx_urls.organizations[":id"].domains.external[
+            {...await hx_urls.organizations[":id"].domains.external[
               ":domain"
             ].$delete({
               param: {
