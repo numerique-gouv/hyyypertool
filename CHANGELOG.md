@@ -1,5 +1,12 @@
 
 
+## [2024.7.1](https://github.com/betagouv/hyyypertool/compare/2024.7.0...2024.7.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* **organization:** wrong moderated member calc ([#379](https://github.com/betagouv/hyyypertool/issues/379)) ([b00b804](https://github.com/betagouv/hyyypertool/commit/b00b804ecb5175daf78f39e72a510bfcbf57ea3c))
+
 # [2024.7.0](https://github.com/betagouv/hyyypertool/compare/2024.6.4...2024.7.0) (2024-07-03)
 
 
