@@ -1,5 +1,12 @@
 
 
+# [2024.7.0](https://github.com/betagouv/hyyypertool/compare/2024.6.4...2024.7.0) (2024-07-03)
+
+
+### Features
+
+* **organizations:** new /organizations/domaines page ([#366](https://github.com/betagouv/hyyypertool/issues/366)) ([a9e3c9a](https://github.com/betagouv/hyyypertool/commit/a9e3c9a64f467d9e9eb207825b6996fd526523a4))
+
 ## [2024.6.4](https://github.com/betagouv/hyyypertool/compare/2024.6.3...2024.6.4) (2024-06-27)
 
 
