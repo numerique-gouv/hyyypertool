@@ -4,7 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { App_Context } from "@~/app.middleware/context";
 import { join_organization } from "@~/moncomptepro.lib/index";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { add_member_to_organization } from "@~/organizations.repository/add_member_to_organization";
@@ -15,7 +15,7 @@ import { z } from "zod";
 
 //
 
-export default new Hono<MonComptePro_Pg_Context>().post(
+export default new Hono<App_Context>().post(
   "/",
   zValidator(
     "form",

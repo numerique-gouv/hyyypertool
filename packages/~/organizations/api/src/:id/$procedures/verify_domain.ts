@@ -4,7 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema, PAGINATION_ALL_PAGES } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { App_Context } from "@~/app.middleware/context";
 import { mark_domain_as_verified } from "@~/moncomptepro.lib";
 import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
@@ -19,7 +19,7 @@ import { z } from "zod";
 
 //
 
-export default new Hono<MonComptePro_Pg_Context>().patch(
+export default new Hono<App_Context>().patch(
   "/:domain",
   zValidator("param", Entity_Schema.extend({ domain: z.string() })),
   async function PATCH({

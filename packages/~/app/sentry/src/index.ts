@@ -1,6 +1,7 @@
 import {
   SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN,
   SEMANTIC_ATTRIBUTE_SENTRY_SOURCE,
+  Scope,
   addRequestDataToEvent,
   continueTrace,
   httpIntegration,
@@ -13,7 +14,18 @@ import {
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
 import config from "@~/app.core/config";
 import consola, { LogLevels } from "consola";
+import type { Env } from "hono";
 import { createMiddleware } from "hono/factory";
+
+//
+
+export interface SentryVariables_Context extends Env {
+  Variables: {
+    sentry: Scope;
+  };
+}
+
+//
 
 export function sentry() {
   init({

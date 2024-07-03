@@ -2,7 +2,8 @@
 
 import type { Context, Env } from "hono";
 import { createMiddleware } from "hono/factory";
-import type { AgentConnect_UserInfo, Session_Context } from "./session";
+import type { App_Context } from "./context";
+import type { AgentConnect_UserInfo } from "./session";
 
 //
 export function set_userinfo(value?: Partial<AgentConnect_UserInfo>) {
@@ -14,15 +15,11 @@ export function set_userinfo(value?: Partial<AgentConnect_UserInfo>) {
 
   return createMiddleware<UserInfoVariables_Context>(
     async function set_userinfo_middleware(c, next) {
-      const {
-        req,
-        set,
-        var: { sentry },
-      } = c;
+      const { req, set } = c;
 
       const {
-        var: { session },
-      } = c as Context as Context<Session_Context>;
+        var: { session, sentry },
+      } = c as Context as Context<App_Context>;
       const userinfo = session.get("userinfo");
 
       if (userinfo) {
