@@ -195,10 +195,10 @@ function Row({
       <td>{organization.siret}</td>
       <td>{organization.cached_libelle}</td>
       <td>
+        {FrNumberConverter.format(organization.member_count)} /{" "}
         {FrNumberConverter.format(
-          organization.member_count - organization.moderation_to_process_count,
-        )}{" "}
-        / {FrNumberConverter.format(organization.member_count)}
+          organization.member_count + organization.moderation_to_process_count,
+        )}
       </td>
       <td>{organization.id}</td>
       <td class="!text-right">➡️</td>
