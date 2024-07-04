@@ -14,6 +14,6 @@ export async function get_organization_by_id(
   });
 }
 
-export type get_organization_by_id_dto = ReturnType<
-  typeof get_organization_by_id
+export type get_organization_by_id_dto = Awaited<
+  ReturnType<typeof get_organization_by_id>
 >;

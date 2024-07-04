@@ -3,18 +3,21 @@
 import { button } from "@~/app.ui/button";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
-import type { Organization } from "@~/moncomptepro.database";
+import { usePageRequestContext } from "./context";
 
 //
 
-export async function Fiche({ organization }: { organization: Organization }) {
+export async function Fiche() {
+  const {
+    var: { organization },
+  } = usePageRequestContext();
   const hx_organizations_leaders_props =
     await hx_urls.organizations.leaders.$get({
       query: { siret: organization.siret },
     });
 
   return (
-    <section>
+    <section class="grid grid-cols-2">
       <ul>
         <li>
           ID : <b>{organization.id}</b>
@@ -83,65 +86,59 @@ export async function Fiche({ organization }: { organization: Organization }) {
           )
         </li>
       </ul>
+      <article class="flex flex-col gap-4">
+        <div {...hx_organizations_leaders_props} hx-trigger="load">
+          Recherche des dirigeants...
+        </div>
 
-      <div {...hx_organizations_leaders_props} hx-trigger="load">
-        Recherche des dirigeants...
-      </div>
+        <a
+          href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+          class={button({ size: "sm", type: "tertiary" })}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Fiche sur l’Annuaire des Entreprises
+        </a>
 
-      <a
-        href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
-        class={button({ size: "sm", type: "tertiary" })}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Fiche sur l’Annuaire des Entreprises
-      </a>
+        <a
+          href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
+          class={button({ size: "sm", type: "tertiary" })}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Liste des Dirigeants - Annuaire des Entreprises
+        </a>
 
-      <a
-        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
-        class={button({ size: "sm", type: "tertiary" })}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Liste des Dirigeants - Annuaire des Entreprises
-      </a>
+        <hr class="bg-none" />
 
-      <hr class="bg-none" />
+        <h4>🕵️ Enquête sur cette organisation</h4>
+        <a
+          href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
+          class={button({ size: "sm", type: "tertiary" })}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Mairie sur Annuaire Service Public
+        </a>
 
-      <h4>🕵️ Enquête sur cette organisation</h4>
+        <a
+          href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
+          class={button({ size: "sm", type: "tertiary" })}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Service sur Annuaire Service Public
+        </a>
 
-      <ul class="list-none pl-0">
-        <li>
-          <a
-            href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Mairie sur Annuaire Service Public
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Service sur Annuaire Service Public
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D${organization.siret}`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Établissement sur l'annuaire Éducation Nationale
-          </a>
-        </li>
-      </ul>
+        <a
+          href={`https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D${organization.siret}`}
+          class={button({ size: "sm", type: "tertiary" })}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Établissement sur l'annuaire Éducation Nationale
+        </a>
+      </article>
     </section>
   );
 }
