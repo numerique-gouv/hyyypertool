@@ -1,5 +1,17 @@
 
 
+## [2024.7.2](https://github.com/betagouv/hyyypertool/compare/2024.7.1...2024.7.2) (2024-07-04)
+
+
+### Bug Fixes
+
+* **sentry:** use global scope on HEAD and OPTIONS requests ([#386](https://github.com/betagouv/hyyypertool/issues/386)) ([4c58d0b](https://github.com/betagouv/hyyypertool/commit/4c58d0b13546caa9520215acf7aca716af843b24))
+
+
+### Features
+
+* **organizations:** preview unverified domaines in the table ([#385](https://github.com/betagouv/hyyypertool/issues/385)) ([9249283](https://github.com/betagouv/hyyypertool/commit/92492830299ef313956d73bd8dd98a92071ef567))
+
 ## [2024.7.1](https://github.com/betagouv/hyyypertool/compare/2024.7.0...2024.7.1) (2024-07-03)
 
 
