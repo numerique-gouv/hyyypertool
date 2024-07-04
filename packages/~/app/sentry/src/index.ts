@@ -4,6 +4,7 @@ import {
   Scope,
   addRequestDataToEvent,
   continueTrace,
+  getGlobalScope,
   httpIntegration,
   init,
   postgresIntegration,
@@ -56,6 +57,7 @@ export function sentry() {
       c.req.method.toUpperCase() === "OPTIONS" ||
       c.req.method.toUpperCase() === "HEAD"
     ) {
+      c.set("sentry", getGlobalScope());
       return next();
     }
 
