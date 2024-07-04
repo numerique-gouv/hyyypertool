@@ -6,7 +6,6 @@ import { hyper_ref } from "@~/app.core/html";
 import { hx_include } from "@~/app.core/htmx";
 import { Pagination_Schema, Search_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
-import type { App_Context } from "@~/app.middleware/context";
 import { Foot } from "@~/app.ui/hx_table";
 import { FrNumberConverter } from "@~/app.ui/number/index";
 import { row } from "@~/app.ui/table";
@@ -17,26 +16,12 @@ import {
   type get_unverified_organizations_dto,
 } from "@~/organizations.repository/get_unverified_organizations";
 import consola from "consola";
-import { Hono, type Env, type InferRequestType } from "hono";
-import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
+import { Hono } from "hono";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { match } from "ts-pattern";
+import { usePageRequestContext, type ContextType } from "./context";
 
 //
-
-type RequestType = InferRequestType<typeof urls.organizations.domains.$get>;
-
-interface ContextVariablesType extends Env {
-  Variables: {
-    query_organizations: typeof get_unverified_organizations;
-  };
-}
-type ContextType = App_Context & ContextVariablesType;
-
-type InputType = {
-  out: RequestType;
-};
-
-const usePageRequestContext = useRequestContext<ContextType, any, InputType>;
 
 const PageInput_Schema = Pagination_Schema.merge(Search_Schema);
 const $table = hyper_ref();

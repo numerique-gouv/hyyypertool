@@ -2,27 +2,19 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { get_organization_by_id } from "@~/organizations.repository/get_organization_by_id";
-import { useRequestContext } from "hono/jsx-renderer";
+import { usePageRequestContext } from "./context";
 import { Edit_Domain } from "./Edit_Domain";
 import { Fiche } from "./Fiche";
-import { Organization_NotFound } from "./not-found";
 
 //
 
-export default async function Page({ id }: { id: number }) {
+export default async function Page() {
   const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
+    var: { organization },
+  } = usePageRequestContext();
   const uuid = hyper_ref();
-  const organization = await get_organization_by_id(moncomptepro_pg, { id });
-
-  if (!organization) {
-    return <Organization_NotFound organization_id={id} />;
-  }
 
   const hx_get_members_query_props = await hx_urls.organizations[
     ":id"
@@ -34,8 +26,8 @@ export default async function Page({ id }: { id: number }) {
   return (
     <main class="fr-container my-12">
       <h1>🏛 A propos de « {organization.cached_libelle} » </h1>
-      <Fiche organization={organization} />
-      <Edit_Domain organization={organization} />
+      <Fiche />
+      <Edit_Domain />
       <hr />
       <br />
       <h3 id={uuid}>Membres enregistrés dans cette organisation :</h3>

@@ -1,16 +1,16 @@
 //
 
 import { urls } from "@~/app.urls";
-import type { Organization } from "@~/moncomptepro.database";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
+import { usePageRequestContext } from "./context";
 
 //
 
-export async function Edit_Domain({
-  organization,
-}: {
-  organization: Organization;
-}) {
+export async function Edit_Domain() {
+  const {
+    var: { organization },
+  } = usePageRequestContext();
+
   return (
     <div class="grid grid-cols-2">
       <div

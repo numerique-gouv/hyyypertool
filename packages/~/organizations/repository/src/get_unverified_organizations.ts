@@ -88,7 +88,6 @@ export async function get_unverified_organizations(
         siret: schema.organizations.siret,
         trackdechets_email_domains:
           schema.organizations.trackdechets_email_domains,
-        unverified_domains: schema.organizations.siret,
         verified_email_domains: schema.organizations.verified_email_domains,
       })
       .from(schema.organizations)
