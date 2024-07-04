@@ -35,6 +35,7 @@ type ContextType = App_Context & ContextVariablesType;
 type InputType = {
   out: RequestType;
 };
+
 const usePageRequestContext = useRequestContext<ContextType, any, InputType>;
 
 const PageInput_Schema = Pagination_Schema.merge(Search_Schema);
@@ -146,6 +147,7 @@ async function Table() {
             <th>Siret</th>
             <th>Dénomination</th>
             <th>Nombre de membres modérés</th>
+            <th>Domains non vérifiés</th>
             <th>ID</th>
             <th></th>
           </tr>
@@ -174,6 +176,15 @@ function Row({
   key?: string;
   organization: get_unverified_organizations_dto["organizations"][number];
 }) {
+  const unverified_domains = organization.authorized_email_domains
+    .filter((domain) => !organization.verified_email_domains.includes(domain))
+    .filter(
+      (domain) => !organization.trackdechets_email_domains.includes(domain),
+    );
+  const unverified_domains_and_more =
+    unverified_domains.length > 2
+      ? `${unverified_domains.slice(0, 2).join(", ")} et ${unverified_domains.length - 2} autre${unverified_domains.length > 3 ? "s" : ""}`
+      : unverified_domains.join(", ");
   return (
     <tr
       _={`on click set the window's location to '${
@@ -200,6 +211,7 @@ function Row({
           organization.member_count + organization.moderation_to_process_count,
         )}
       </td>
+      <td>{unverified_domains_and_more}</td>
       <td>{organization.id}</td>
       <td class="!text-right">➡️</td>
     </tr>

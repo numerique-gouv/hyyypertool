@@ -30,8 +30,7 @@ export async function get_unverified_organizations(
         ilike(schema.organizations.siret, `%${search}%`),
       )
     : undefined;
-  const where = and(
-    search_where,
+  const where_authorized_email_domains = and(
     not(
       sql`${schema.organizations.authorized_email_domains} <@ ${schema.organizations.verified_email_domains}`,
     ),
@@ -39,6 +38,7 @@ export async function get_unverified_organizations(
       sql`${schema.organizations.authorized_email_domains} <@ ${schema.organizations.trackdechets_email_domains}`,
     ),
   );
+  const where = and(search_where, where_authorized_email_domains);
 
   return pg.transaction(async function moderation_count(tx) {
     const member_count_by_organization = tx
@@ -77,6 +77,7 @@ export async function get_unverified_organizations(
 
     const organizations = await tx
       .select({
+        authorized_email_domains: schema.organizations.authorized_email_domains,
         cached_libelle: schema.organizations.cached_libelle,
         created_at: schema.organizations.created_at,
         id: schema.organizations.id,
@@ -85,6 +86,10 @@ export async function get_unverified_organizations(
         moderation_to_process_count:
           moderation_to_process_by_organization.moderation_to_process_count,
         siret: schema.organizations.siret,
+        trackdechets_email_domains:
+          schema.organizations.trackdechets_email_domains,
+        unverified_domains: schema.organizations.siret,
+        verified_email_domains: schema.organizations.verified_email_domains,
       })
       .from(schema.organizations)
       .leftJoin(
@@ -123,6 +128,7 @@ export async function get_unverified_organizations(
       .select({ value: drizzle_count() })
       .from(schema.organizations)
       .where(where);
+
     return { organizations, count };
   });
 }
