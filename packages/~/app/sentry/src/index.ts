@@ -28,7 +28,7 @@ export interface SentryVariables_Context extends Env {
 
 //
 
-export function sentry() {
+export function set_sentry() {
   init({
     enabled: config.NODE_ENV === "production",
     attachStacktrace: true,

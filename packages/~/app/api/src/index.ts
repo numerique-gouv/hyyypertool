@@ -8,7 +8,7 @@ import { set_config } from "@~/app.middleware/set_config";
 import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
-import { sentry } from "@~/app.sentry";
+import { set_sentry } from "@~/app.sentry";
 import auth_router from "@~/auth.api";
 import moderations_router from "@~/moderations.api";
 import organizations_router from "@~/organizations.api";
@@ -31,7 +31,7 @@ const authoried = vip_list_guard({ vip_list: config.ALLOWED_USERS.split(",") });
 const app = new Hono()
   .use("*", logger(consola.info))
   .use("*", compress())
-  .use("*", sentry())
+  .use(set_sentry())
   .use(set_nonce())
   .use(set_config())
 
