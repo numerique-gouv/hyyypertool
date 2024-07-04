@@ -24,7 +24,7 @@
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
     "drizzle-orm": "0.31.2",
-    "hono": "4.4.10",
+    "hono": "4.4.11",
     "pg": "8.12.0"
   },
   "devDependencies": {
