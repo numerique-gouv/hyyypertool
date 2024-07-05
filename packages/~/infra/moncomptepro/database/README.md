@@ -20,7 +20,7 @@ drizzle-kit: v0.21.2
 drizzle-orm: v0.30.10
 
 No config path provided, using default path
-Reading config file '/home/x/zzz/github/betagouv/hyyypertool/packages/~/infra/moncomptepro/database/drizzle.config.ts'
+Reading config file '/home/x/zzz/github/numerique-gouv/hyyypertool/packages/~/infra/moncomptepro/database/drizzle.config.ts'
 Using 'pg' driver for database querying
 
 # [...]
@@ -67,7 +67,7 @@ drizzle-kit: v0.20.7
 drizzle-orm: v0.29.1
 
 Custom config path was provided, using 'src/database/moncomptepro/drizzle.config.ts'
-Reading config file '/home/x/zzz/github/betagouv/hyyypertool/src/database/moncomptepro/drizzle.config.ts'
+Reading config file '/home/x/zzz/github/numerique-gouv/hyyypertool/src/database/moncomptepro/drizzle.config.ts'
 [✓] 7  tables fetched
 [✓] 88 columns fetched
 [✓] 0  enums fetched

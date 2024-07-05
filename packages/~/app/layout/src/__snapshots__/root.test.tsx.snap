@@ -89,7 +89,7 @@ exports[`development 1`] = `
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© 2222 🇫🇷</div>
           <a
-            href="https://github.com/betagouv/hyyypertool/tree/__VERSION__"
+            href="https://github.com/numerique-gouv/hyyypertool/tree/__VERSION__"
             rel="noopener noreferrer"
             target="_blank"
             safe
@@ -247,7 +247,7 @@ exports[`production 1`] = `
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© 2222 🇫🇷</div>
           <a
-            href="https://github.com/betagouv/hyyypertool/tree/__VERSION__"
+            href="https://github.com/numerique-gouv/hyyypertool/tree/__VERSION__"
             rel="noopener noreferrer"
             target="_blank"
             safe

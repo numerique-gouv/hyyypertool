@@ -113,7 +113,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© ${new Date().getFullYear()} 🇫🇷</div>
           <a
-            href="https://github.com/betagouv/hyyypertool/tree/${config.VERSION}"
+            href="https://github.com/numerique-gouv/hyyypertool/tree/${config.VERSION}"
             rel="noopener noreferrer"
             target="_blank"
             safe
