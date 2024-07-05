@@ -89,7 +89,7 @@ exports[`Main Layout 1`] = `
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© 2222 🇫🇷</div>
           <a
-            href="https://github.com/betagouv/hyyypertool/tree/"
+            href="https://github.com/numerique-gouv/hyyypertool/tree/"
             rel="noopener noreferrer"
             target="_blank"
             safe
