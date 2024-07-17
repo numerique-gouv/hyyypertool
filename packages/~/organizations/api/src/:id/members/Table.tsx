@@ -180,6 +180,24 @@ async function Row_Actions() {
           </button>
         </li>
         <li>
+          <button
+            class={menu_item()}
+            {...await hx_urls.organizations[":id"].members[":user_id"].$patch({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+              form: {
+                verification_type:
+                  Verification_Type_Schema.Enum.no_validation_means_available,
+              },
+            })}
+            hx-swap="none"
+          >
+            🔄 vérif: no validation means available
+          </button>
+        </li>
+        <li>
           {verification_type ? (
             <button
               class={menu_item()}
