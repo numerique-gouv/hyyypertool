@@ -10,6 +10,9 @@
     "./session": {
       "default": "./src/session/index.ts"
     },
+    "./vip_list.guard": {
+      "default": "./src/vip_list.guard.tsx"
+    },
     "./*": {
       "default": "./src/*.ts"
     }
@@ -20,8 +23,10 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.sentry": "workspace:*",
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
-    "hono": "4.4.11",
+    "hono": "4.5.0",
     "hono-sessions": "0.5.8",
     "openid-client": "5.6.5"
   },

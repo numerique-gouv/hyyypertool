@@ -57,7 +57,6 @@ export const app_env = z.object({
       "postgresql://postgres:postgres@localhost:5432/postgres?schema=public",
     ),
   DEPLOY_ENV: DEPLOY_ENV_SHEMA.default("preview"),
-  DO_NOT_SEND_MAIL: z.coerce.boolean().default(false),
   ENTREPRISE_API_GOUV_TOKEN: z.string().trim(),
   ENTREPRISE_API_GOUV_URL: z.string().trim().url(),
   GIT_SHA: GIT_SHA_SHEMA,

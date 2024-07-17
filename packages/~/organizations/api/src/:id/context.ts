@@ -9,7 +9,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-interface ContextVariablesType extends Env {
+export interface ContextVariablesType extends Env {
   Variables: {
     organization: NonNullable<get_organization_by_id_dto>;
   };

@@ -15,12 +15,12 @@
     "@hono/zod-validator": "0.2.2",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
-    "hono": "4.4.11",
+    "hono": "4.5.0",
     "ts-pattern": "5.2.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
-    "bun-types": "1.1.18"
+    "bun-types": "1.1.20"
   }
 }

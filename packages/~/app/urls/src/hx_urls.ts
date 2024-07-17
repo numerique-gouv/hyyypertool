@@ -106,9 +106,15 @@ export function hono_hx_attibute<
   T extends Hono<any, any, any>,
 >(): UnionToIntersection<HxClient<T>> {
   return hc<T>("http://localhost:3000", {
-    fetch(input: string, options: any) {
+    fetch(input: string | URL | Request, options: any) {
       const init: RequestInit = options;
-      const url = new URL(input);
+      const url =
+        input instanceof URL
+          ? input
+          : input instanceof Request
+            ? new URL(input.url)
+            : new URL(input);
+
       const attribute = `hx-${init.method?.toLowerCase()}`;
       const hx_val =
         options.body instanceof FormData
@@ -120,34 +126,3 @@ export function hono_hx_attibute<
 }
 
 export const hx_urls = hono_hx_attibute<Router>();
-//   fetch: function hx_props(raw_url: string, options: RequestInit) {
-//     // NOTE(douglasduteil): do not fetch
-//     // This is a hack to make the type system happy
-//     // One does not simply fetch the server while servering the response
-//     //
-//     // Should be use to link internal urls with
-//     // app_hc.api.posts.$get() // { "hx-get": "/api/posts" }
-//     //
-//     // see https://hono.dev/guides/rpc#url
-//     const url = new URL(raw_url);
-//     const hx_val =
-//       options.body instanceof FormData
-//         ? { "hx-vals": JSON.stringify(Object.fromEntries(options.body)) }
-//         : {};
-//     const attribute = `hx-${options.method?.toLowerCase()}`;
-//     // console.log("@~/app.urls/src/hx_urls.ts:hx_props", {
-//     //   attribute,
-//     //   value: `${url.pathname}${url.search}`,
-//     //   raw_url,
-//     //   options,
-//     //   url,
-//     //   hx_val,
-//     // });
-//     // consola.trace({ raw_url, options, hx_val });
-//     // return {
-//     // [attribute]: `${url.pathname}${url.search}`,
-//     // ...hx_val,
-//     // };
-//     return url;
-//   },
-// } as any) as any as UnionToIntersection<HxClient<Router>>;

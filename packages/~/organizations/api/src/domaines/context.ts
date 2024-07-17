@@ -9,7 +9,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-interface ContextVariablesType extends Env {
+export interface ContextVariablesType extends Env {
   Variables: {
     query_organizations: typeof get_unverified_organizations;
   };
