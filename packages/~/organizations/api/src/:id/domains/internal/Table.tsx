@@ -1,5 +1,6 @@
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
+import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
 import { hx_urls } from "@~/app.urls";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
@@ -112,6 +113,26 @@ async function Row_Actions({
           </button>
         </li>
         <li>
+          <GoogleSearchButton
+            class="block w-full px-4 py-2 text-left text-sm text-gray-700"
+            role="menuitem"
+            tabindex={-1}
+            query={domain}
+          >
+            Résultats Google pour ce nom de domaine
+          </GoogleSearchButton>
+        </li>
+        <li>
+          <GoogleSearchButton
+            class="block w-full px-4 py-2 text-left text-sm text-gray-700"
+            role="menuitem"
+            tabindex={-1}
+            query={`${organization.cached_libelle} ${domain}`}
+          >
+            Résultats Google pour le nom de l'organisation et le nom de domaine
+          </GoogleSearchButton>
+        </li>
+        <li>
           <button
             class="block w-full px-4 py-2 text-left text-sm text-gray-700"
             role="menuitem"
@@ -176,6 +197,7 @@ function get_organization_domains(
     where: eq(schema.organizations.id, id),
     columns: {
       authorized_email_domains: true,
+      cached_libelle: true,
       id: true,
       verified_email_domains: true,
     },
