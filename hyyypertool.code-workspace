@@ -40,7 +40,6 @@
     "recommendations": [
       "bradlc.vscode-tailwindcss",
       "esbenp.prettier-vscode",
-      "forbeslindesay.forbeslindesay-taskrunner",
       "oxc.oxc-vscode",
       "dz4k.vscode-hyperscript-org",
     ],

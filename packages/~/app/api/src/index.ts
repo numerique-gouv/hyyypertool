@@ -48,6 +48,7 @@ const app = new Hono()
   //
 
   .use("*", hyyyyyypertool_session)
+  .use(jsxRenderer(Root_Layout))
   .use(set_userinfo())
   //
   .route("/", welcome_router)
@@ -65,7 +66,6 @@ const app = new Hono()
   .use("/organizations/*", authoried)
   .route("/organizations", organizations_router)
 
-  .use(jsxRenderer(Root_Layout))
   .onError(error_handler)
   .notFound(not_found_handler);
 

@@ -9,7 +9,7 @@ import { NotAuthorized } from "./NotAuthorized";
 
 export function vip_list_guard({ vip_list }: { vip_list: string[] }) {
   return createMiddleware<App_Context>(async function vip_list_guard_middleware(
-    { text, html, redirect, req, var: { userinfo } },
+    { redirect, render, req, text, var: { userinfo } },
     next,
   ) {
     if (!userinfo) {
@@ -23,7 +23,7 @@ export function vip_list_guard({ vip_list }: { vip_list: string[] }) {
     }
     const is_allowed = vip_list.includes(userinfo.email);
     if (!is_allowed) {
-      return html(NotAuthorized());
+      return render(<NotAuthorized />);
     }
     return next();
   });

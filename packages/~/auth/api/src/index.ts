@@ -112,7 +112,7 @@ export default new Hono<Oidc_Context & App_Context>()
       return redirect(urls.moderations.$url().pathname);
     },
   )
-  .get("/logout", ({ req, redirect, var: { oidc, session } }) => {
+  .get("/logout", ({ redirect, req, set, var: { oidc, session } }) => {
     const id_token_hint = session.get("idtoken");
 
     const post_logout_redirect_uri = get_logout_redirect_uri(req.url);
@@ -123,6 +123,7 @@ export default new Hono<Oidc_Context & App_Context>()
     });
 
     session.deleteSession();
+    set("userinfo", undefined as any);
 
     return redirect(logoutUrl);
   });

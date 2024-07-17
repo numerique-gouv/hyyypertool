@@ -1,6 +1,6 @@
 //
 
-import type { PgDatabase, QueryResultHKT } from "drizzle-orm/pg-core";
+import type { PgDatabase, PgQueryResultHKT } from "drizzle-orm/pg-core";
 import Pg from "pg";
 import * as schema from "./drizzle/relations";
 
@@ -9,7 +9,10 @@ import * as schema from "./drizzle/relations";
 export { drizzle } from "drizzle-orm/node-postgres";
 export { schema };
 
-export type MonComptePro_PgDatabase = PgDatabase<QueryResultHKT, typeof schema>;
+export type MonComptePro_PgDatabase = PgDatabase<
+  PgQueryResultHKT,
+  typeof schema
+>;
 export const Pool = Pg.Pool;
 
 //

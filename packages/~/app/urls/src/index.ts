@@ -9,7 +9,7 @@ export { hx_urls } from "./hx_urls";
 
 //
 export const urls = hc<Router>("http://localhost:3000", {
-  fetch: (url: string) => {
+  fetch(input: string | URL | Request) {
     // NOTE(douglasduteil): do not fetch
     // This is a hack to make the type system happy
     // One does not simply fetch the server while servering the response
@@ -18,6 +18,12 @@ export const urls = hc<Router>("http://localhost:3000", {
     // urls.api.posts.$url() // `/api/posts`
     //
     // see https://hono.dev/guides/rpc#url
-    return Promise.resolve(new Response(url));
+    const url =
+      input instanceof URL
+        ? input
+        : input instanceof Request
+          ? new URL(input.url)
+          : new URL(input);
+    return Promise.resolve(new Response(url.href));
   },
 });
