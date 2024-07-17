@@ -1,21 +1,23 @@
 //
 
-import type { PropsWithChildren } from "hono/jsx";
+import type { JSX, PropsWithChildren } from "hono/jsx";
 
 //
 
-export function GoogleSearchButton({
-  query,
-  children,
-}: PropsWithChildren<{
-  query: string;
-}>) {
+export function GoogleSearchButton(
+  props: JSX.IntrinsicElements["a"] &
+    PropsWithChildren<{
+      query: string;
+    }>,
+) {
+  const { children, query, ...other_props } = props;
   return (
     <a
       class="fr-link"
       href={google_search(query)}
       rel="noopener noreferrer"
       target="_blank"
+      {...other_props}
     >
       🔍 {children}
     </a>
