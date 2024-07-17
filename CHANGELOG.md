@@ -1,3 +1,13 @@
+
+
+## [2024.7.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.2...2024.7.3) (2024-07-17)
+
+
+### Features
+
+* **organisations:** add google search per domain ([#401](https://github.com/numerique-gouv/hyyypertool/issues/401)) ([1142674](https://github.com/numerique-gouv/hyyypertool/commit/1142674b8e877b9e75acb5a75676ffe2266402f0)), closes [#377](https://github.com/numerique-gouv/hyyypertool/issues/377)
+* **organisations:** add no_validation_means_available ([#400](https://github.com/numerique-gouv/hyyypertool/issues/400)) ([99c9605](https://github.com/numerique-gouv/hyyypertool/commit/99c9605eb0b062dd3ec2163160575d7de159c277)), closes [#21](https://github.com/numerique-gouv/hyyypertool/issues/21) [#378](https://github.com/numerique-gouv/hyyypertool/issues/378)
+
 ## [2024.7.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.1...2024.7.2) (2024-07-04)
 
 ### Bug Fixes
