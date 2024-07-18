@@ -2,7 +2,7 @@
 
 import { button } from "@~/app.ui/button";
 import { hx_urls, urls } from "@~/app.urls";
-import { useContext } from "hono/jsx";
+import { useContext, type JSX } from "hono/jsx";
 import { ModerationPage_Context } from "./context";
 
 //
@@ -98,9 +98,19 @@ export async function About_Organisation() {
       >
         Liste des Dirigeants - Annuaire des Entreprises
       </a>
+    </section>
+  );
+}
 
-      <hr class="bg-none" />
+export function Investigation_Organisation(
+  props: JSX.IntrinsicElements["section"],
+) {
+  const {
+    moderation: { organization },
+  } = useContext(ModerationPage_Context);
 
+  return (
+    <section {...props}>
       <h4>🕵️ Enquête sur cette organisation</h4>
 
       <ul class="list-none pl-0">

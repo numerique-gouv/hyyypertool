@@ -1,18 +1,19 @@
 //
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
+import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
-import { useContext } from "hono/jsx";
+import { useContext, type JSX } from "hono/jsx";
 import { ModerationPage_Context } from "./context";
 
 //
 
 export function About_User() {
   const {
-    moderation: { created_at: moderation_created_at, user, organization },
+    moderation: { created_at: moderation_created_at, user },
   } = useContext(ModerationPage_Context);
 
   const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
@@ -78,24 +79,41 @@ export function About_User() {
       <CopyButton text={domain} variant={{ size: "sm", type: "tertiary" }}>
         Copier le domaine
       </CopyButton>
+    </section>
+  );
+}
 
-      <hr class="bg-none" />
+export function Investigation_User(props: JSX.IntrinsicElements["section"]) {
+  const {
+    moderation: { user, organization },
+  } = useContext(ModerationPage_Context);
 
+  const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
+
+  return (
+    <section {...props}>
       <h4>🕵️ Enquête sur ce profile</h4>
 
       <ul class="list-none pl-0">
         <li>
-          <GoogleSearchButton query={user.email}>
+          <GoogleSearchButton
+            class={button({ size: "sm", type: "tertiary" })}
+            query={user.email}
+          >
             Résultats Google pour cet email
           </GoogleSearchButton>
         </li>
         <li>
-          <GoogleSearchButton query={domain}>
+          <GoogleSearchButton
+            class={button({ size: "sm", type: "tertiary" })}
+            query={domain}
+          >
             Résultats Google pour ce nom de domaine
           </GoogleSearchButton>
         </li>
         <li>
           <GoogleSearchButton
+            class={button({ size: "sm", type: "tertiary" })}
             query={`${organization.cached_libelle} ${domain}`}
           >
             Résultats Google pour le nom de l'organisation et le nom de domaine

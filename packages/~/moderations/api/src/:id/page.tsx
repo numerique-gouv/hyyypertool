@@ -10,8 +10,11 @@ import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { to } from "await-to-js";
 import { useContext, type PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
-import { About_Organisation } from "./About_Organisation";
-import { About_User } from "./About_User";
+import {
+  About_Organisation,
+  Investigation_Organisation,
+} from "./About_Organisation";
+import { About_User, Investigation_User } from "./About_User";
 import { Moderation_Actions } from "./Actions";
 import { Domain_Organization } from "./Domain_Organization";
 import { Header } from "./Header";
@@ -65,6 +68,13 @@ export default async function Moderation_Page() {
       <div class="grid grid-cols-2 gap-6">
         <About_User />
         <About_Organisation />
+      </div>
+
+      <hr class="bg-none pt-6" />
+
+      <div class="grid grid-cols-2 gap-6">
+        <Investigation_User />
+        <Investigation_Organisation />
       </div>
 
       <hr class="bg-none pt-6" />
