@@ -1,22 +1,20 @@
 //
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
-import { get_user_by_id } from "@~/users.repository/get_user_by_id";
-import { useContext, type PropsWithChildren } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
-import UserPage_Context from "./context";
-import { User_NotFound } from "./not-found";
+import { usePageRequestContext } from "./context";
 
 //
 
 export default async function User_Page() {
-  const { user } = useContext(UserPage_Context);
+  const {
+    var: { user },
+  } = usePageRequestContext();
+
   return (
     <main class="fr-container">
       <h1>👨‍💻 A propos de {user.given_name}</h1>
@@ -59,7 +57,10 @@ export default async function User_Page() {
 }
 
 async function Actions() {
-  const { user } = useContext(UserPage_Context);
+  const {
+    var: { user },
+  } = usePageRequestContext();
+
   const { email, id } = user;
   const domain = z_email_domain.parse(email, { path: ["email"] });
   return (
@@ -92,7 +93,10 @@ async function Actions() {
 }
 
 function Fiche() {
-  const { user } = useContext(UserPage_Context);
+  const {
+    var: { user },
+  } = usePageRequestContext();
+
   return (
     <ul>
       <li>
@@ -118,7 +122,10 @@ function Fiche() {
 }
 
 function AccountInfo() {
-  const { user } = useContext(UserPage_Context);
+  const {
+    var: { user },
+  } = usePageRequestContext();
+
   return (
     <ul>
       <li>
@@ -158,34 +165,5 @@ function AccountInfo() {
         </b>
       </li>
     </ul>
-  );
-}
-
-//
-
-export { UserPage_Context };
-
-//
-
-export async function UserPage_Provider({
-  value: { id },
-  children,
-}: PropsWithChildren<{ value: { id: number } }>) {
-  const {
-    status,
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-
-  const user = await get_user_by_id(moncomptepro_pg, { id });
-
-  if (!user) {
-    status(404);
-    return <User_NotFound user_id={id} />;
-  }
-
-  return (
-    <UserPage_Context.Provider value={{ user }}>
-      {children}
-    </UserPage_Context.Provider>
   );
 }
