@@ -19,12 +19,6 @@ jobs:
       run:
         working-directory: "e2e"
 
-    env:
-      MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR: http://127.0.0.1:6300
-      MOCKED_AUTH_AGENTCONNECT_GOUV_FR: http://127.0.0.1:6100
-      MOCKED_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-      MOCKED_ENTREPRISE_API_GOUV_URL: http://127.0.0.1:6200
-
     steps:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -47,13 +41,13 @@ jobs:
         run: |
           docker compose ps
           echo "Fake https://auth.agentconnect.gouv.fr"
-          curl -sSf -XGET ${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/readyz
+          curl -sSf -XGET http://127.0.0.1:6100/readyz
           echo
           echo "Fake https://entreprise.api.gouv.fr ready"
-          curl -sSf -XGET ${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}/readyz
+          curl -sSf -XGET http://127.0.0.1:6200/readyz
           echo
           echo "Fake https://app.moncomptepro.beta.gouv.fr ready"
-          curl -sSf -XGET ${{ env.MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR }}/readyz
+          curl -sSf -XGET http://127.0.0.1:6300/readyz
         working-directory: "."
 
       - name: cypress-io/github-action needs package-lock.json
@@ -63,24 +57,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@8d3918616d8ac34caa2b49afc8b408b6a872a6f5 # v6.7.1
         env:
-          AGENTCONNECT_OIDC_CLIENT_ID: ${{ secrets.AGENTCONNECT_OIDC_CLIENT_ID }}
-          AGENTCONNECT_OIDC_ISSUER: "${{ env.MOCKED_AUTH_AGENTCONNECT_GOUV_FR }}/api/v2"
-          AGENTCONNECT_OIDC_SCOPE: "openid given_name usual_name email"
-          AGENTCONNECT_OIDC_SECRET_ID: ${{ secrets.AGENTCONNECT_OIDC_SECRET_ID }}
           CONSOLA_LEVEL: "2"
-          ALLOWED_USERS: "user@yopmail.com"
-          API_AUTH_PASSWORD: "???"
-          API_AUTH_URL: "${{ env.MOCKED_APP_MONCOMPTEPRO_BETA_GOUV_FR }}"
-          API_AUTH_USERNAME: "???"
-          DATABASE_URL: "${{ env.MOCKED_DATABASE_URL }}"
-          DO_NOT_SEND_MAIL: "true"
-          ENTREPRISE_API_GOUV_TOKEN: "???"
-          ENTREPRISE_API_GOUV_URL: "${{ env.MOCKED_ENTREPRISE_API_GOUV_URL }}"
-          HOST: "https://hyyypertool-preprod.moncomptepro.beta.gouv.fr/proxy/localhost:3000"
-          SENTRY_DNS: "https://123456789@errors.data.gouv.fr//XX"
-          TZ: "Europe/Paris"
-          ZAMMAD_TOKEN: "???"
-          ZAMMAD_URL: "https://support.etalab.gouv.fr"
           DEPLOY_ENV: "production"
           NODE_ENV: "development"
         with:

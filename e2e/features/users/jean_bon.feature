@@ -27,4 +27,4 @@ Fonctionnalité: Page utilisateur with moderations
 
   # Scénario: Organisations de Raphael
     Alors je vois "Jean est enregistré(e) dans les modérations suivantes :"
-    * je vois la ligne de table "11/11/2011 11:11:11 AM"
+    * je vois la ligne de table "11/11/2011 11:11:11"

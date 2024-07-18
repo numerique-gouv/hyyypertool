@@ -9,8 +9,7 @@ import { z } from "zod";
 //
 
 dotenv.config({
-  override: true,
-  path: [".env", ".env.local", `.env.${env["NODE_ENV"]}.local`],
+  path: [`.env.${process.env.NODE_ENV}.local`, ".env.local", ".env"],
 });
 
 const pkg = await import(join(cwd(), "package.json"));
@@ -61,7 +60,9 @@ export const app_env = z.object({
   ENTREPRISE_API_GOUV_URL: z.string().trim().url(),
   GIT_SHA: GIT_SHA_SHEMA,
   HOST: z.string().trim().url().optional(),
-  NODE_ENV: z.enum(["development", "production"]).default("development"),
+  NODE_ENV: z
+    .enum(["development", "production", "test"])
+    .default("development"),
   PORT: z.coerce.number().default(3000),
   SENTRY_DNS: z.string().trim().url().optional(),
   VERSION: z.string().default(
