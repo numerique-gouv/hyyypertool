@@ -1,5 +1,6 @@
 //
 
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
@@ -53,9 +54,8 @@ export function ModerationTable({
                     )
                     .when(
                       () => name === "created_at",
-                      (value: string): string => {
-                        const date = new Date(value);
-                        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                      (value: string) => {
+                        return <LocalTime date={value}></LocalTime>;
                       },
                     )
                     .otherwise((value) => value)}

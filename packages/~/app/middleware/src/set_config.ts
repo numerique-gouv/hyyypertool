@@ -1,9 +1,9 @@
 //
 
 import type { App_Config } from "@~/app.core/config";
-import dotenv from "dotenv";
+import { app_env } from "@~/app.core/config/env";
 import type { Env, MiddlewareHandler } from "hono";
-import { env } from "node:process";
+import { env } from "hono/adapter";
 
 //
 
@@ -17,14 +17,9 @@ export function set_config(
     };
   }
 
-  dotenv.config({
-    override: true,
-    path: [".env", ".env.local", `.env.${env.NODE_ENV}.local`],
-  });
-
-  return async function set_config_middleware({ set }, next) {
-    const { app_env } = await import("@~/app.core/config/env");
-    const app_config = app_env.parse(env, {
+  return async function set_config_middleware(c, next) {
+    const { set } = c;
+    const app_config = app_env.parse(env(c), {
       path: ["env"],
     });
     const ASSETS_PATH = `/assets/${app_config.VERSION}` as const;
