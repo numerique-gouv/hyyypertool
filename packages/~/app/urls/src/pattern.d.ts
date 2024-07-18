@@ -230,6 +230,7 @@ declare const app: import("hono/hono-base").HonoBase<
           };
           query: {
             describedby: string | string[];
+            page_ref: string | string[];
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
           };
