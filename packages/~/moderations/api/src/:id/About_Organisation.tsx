@@ -2,15 +2,17 @@
 
 import { button } from "@~/app.ui/button";
 import { hx_urls, urls } from "@~/app.urls";
-import { useContext, type JSX } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
+import { type JSX } from "hono/jsx";
+import { usePageRequestContext } from "./context";
 
 //
 
 export async function About_Organisation() {
   const {
-    moderation: { organization },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { organization },
+    },
+  } = usePageRequestContext();
 
   const hx_organizations_leaders_props =
     await hx_urls.organizations.leaders.$get({
@@ -106,8 +108,10 @@ export function Investigation_Organisation(
   props: JSX.IntrinsicElements["section"],
 ) {
   const {
-    moderation: { organization },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { organization },
+    },
+  } = usePageRequestContext();
 
   return (
     <section {...props}>

@@ -1,18 +1,19 @@
 //
 
-import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
-import { ModerationPage_Context } from "../context";
+import { usePageRequestContext } from "../context";
 
 export const label = "Pas de légitimité - Ministère de l'Éducation";
 
 export default function template() {
   const {
-    domain,
-    moderation: {
-      organization: { cached_libelle: organization_name },
+    var: {
+      domain,
+      moderation: {
+        organization: { cached_libelle: organization_name },
+      },
     },
-  } = useContext(ModerationPage_Context);
+  } = usePageRequestContext();
 
   return dedent`
     Bonjour,

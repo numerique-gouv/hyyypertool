@@ -1,9 +1,12 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
+import type { App_Context } from "@~/app.middleware/context";
+import { urls } from "@~/app.urls";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { and, eq } from "drizzle-orm";
-import { createContext } from "hono/jsx";
+import type { Env, InferRequestType } from "hono";
+import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
@@ -13,11 +16,29 @@ export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
 export const EMAIL_TO_INPUT_ID = "mail-to";
 
 //
-export const ModerationPage_Context = createContext({
-  domain: "",
-  moderation: {} as get_moderation_dto,
-  organization_member: {} as get_organization_member_dto,
-});
+
+export interface ContextVariablesType extends Env {
+  Variables: {
+    domain: string;
+    moderation: get_moderation_dto;
+    organization_member: get_organization_member_dto;
+  };
+}
+export type ContextType = App_Context & ContextVariablesType;
+
+//
+
+const $get = typeof urls.moderations[":id"].$get;
+
+type PageInputType = {
+  out: InferRequestType<typeof $get>;
+};
+
+export const usePageRequestContext = useRequestContext<
+  ContextType,
+  any,
+  PageInputType
+>;
 
 //
 

@@ -17,7 +17,7 @@ import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import {
-  ModerationPage_Context,
+  type ContextType,
   type get_moderation_dto,
   type get_organization_member_dto,
 } from "../context";
@@ -31,25 +31,24 @@ beforeEach(empty_database);
 test("returns all members", async () => {
   const unicorn_organization_id = await given_unicorn_organization();
 
-  const app = new Hono()
+  const app = new Hono<ContextType>()
     .use("*", jsxRenderer())
     .use("*", set_moncomptepro_pg(pg))
-    .get("/already_signed", ({ render }) => {
-      const domain = "uni.corn";
-      const moderation = {
-        organization: { cached_libelle: "🦄", id: unicorn_organization_id },
-        user: { family_name: "🧟" },
-      } as get_moderation_dto;
-      const organization_member = {} as get_organization_member_dto;
-
-      return render(
-        <ModerationPage_Context.Provider
-          value={{ domain, moderation, organization_member }}
-        >
-          <AlreadySigned />
-        </ModerationPage_Context.Provider>,
-      );
-    });
+    .get(
+      "/already_signed",
+      ({ set }, next) => {
+        set("domain", "uni.corn");
+        set("moderation", {
+          organization: { cached_libelle: "🦄", id: unicorn_organization_id },
+          user: { family_name: "🧟" },
+        } as get_moderation_dto);
+        set("organization_member", {} as get_organization_member_dto);
+        return next();
+      },
+      ({ render }) => {
+        return render(<AlreadySigned />);
+      },
+    );
 
   const res = await app.fetch(
     new Request("http://localhost:3000/already_signed"),
@@ -60,25 +59,24 @@ test("returns all members", async () => {
 test("returns Diamond members", async () => {
   const unicorn_organization_id = await given_unicorn_organization();
 
-  const app = new Hono()
+  const app = new Hono<ContextType>()
     .use("*", jsxRenderer())
     .use("*", set_moncomptepro_pg(pg))
-    .get("/already_signed", ({ render }) => {
-      const domain = "uni.corn";
-      const moderation = {
-        organization: { cached_libelle: "🦄", id: unicorn_organization_id },
-        user: { family_name: "Diamond" },
-      } as get_moderation_dto;
-      const organization_member = {} as get_organization_member_dto;
-
-      return render(
-        <ModerationPage_Context.Provider
-          value={{ domain, moderation, organization_member }}
-        >
-          <AlreadySigned />
-        </ModerationPage_Context.Provider>,
-      );
-    });
+    .get(
+      "/already_signed",
+      ({ set }, next) => {
+        set("domain", "uni.corn");
+        set("moderation", {
+          organization: { cached_libelle: "🦄", id: unicorn_organization_id },
+          user: { family_name: "Diamond" },
+        } as get_moderation_dto);
+        set("organization_member", {} as get_organization_member_dto);
+        return next();
+      },
+      ({ render }) => {
+        return render(<AlreadySigned />);
+      },
+    );
 
   const res = await app.fetch(
     new Request("http://localhost:3000/already_signed"),

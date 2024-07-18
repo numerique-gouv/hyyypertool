@@ -2,17 +2,18 @@
 
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
-import { useContext } from "hono/jsx";
 import { Desicison } from "./Desicison";
 import { Member_Invalid } from "./Member_Invalid";
 import { Member_Valid } from "./Member_Valid";
 import { MessageInfo } from "./MessageInfo";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export async function Moderation_Actions() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
 
   const hx_moderation_reprocess_props = await hx_urls.moderations[
     ":id"

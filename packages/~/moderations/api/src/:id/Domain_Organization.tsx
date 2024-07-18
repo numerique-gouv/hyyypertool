@@ -4,8 +4,7 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
@@ -24,8 +23,10 @@ export function Domain_Organization() {
 
 async function Edit_Internal_Domain() {
   const {
-    moderation: { organization },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { organization },
+    },
+  } = usePageRequestContext();
   return (
     <div
       {...await hx_urls.organizations[":id"].domains.internal.$get({
@@ -49,8 +50,10 @@ async function Edit_Internal_Domain() {
 
 async function Edit_External_Domain() {
   const {
-    moderation: { organization },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { organization },
+    },
+  } = usePageRequestContext();
   return (
     <div
       {...await hx_urls.organizations[":id"].domains.external.$get({

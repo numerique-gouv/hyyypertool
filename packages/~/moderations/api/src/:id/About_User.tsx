@@ -6,15 +6,17 @@ import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
-import { useContext, type JSX } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
+import { type JSX } from "hono/jsx";
+import { usePageRequestContext } from "./context";
 
 //
 
 export function About_User() {
   const {
-    moderation: { created_at: moderation_created_at, user },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { created_at: moderation_created_at, user },
+    },
+  } = usePageRequestContext();
 
   const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
 
@@ -91,8 +93,10 @@ export function About_User() {
 
 export function Investigation_User(props: JSX.IntrinsicElements["section"]) {
   const {
-    moderation: { user, organization },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { user, organization },
+    },
+  } = usePageRequestContext();
 
   const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
 

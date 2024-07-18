@@ -4,13 +4,14 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
-import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export function Moderation_Exchanges() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
 
   return (
     <section>
