@@ -1,5 +1,12 @@
 
 
+## [2024.7.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.3...2024.7.4) (2024-07-18)
+
+
+### Bug Fixes
+
+* **app:** do not overwrite existing env variables ([#402](https://github.com/numerique-gouv/hyyypertool/issues/402)) ([cc404f6](https://github.com/numerique-gouv/hyyypertool/commit/cc404f6613e9d47f0622caa54d0182658ea3555f))
+
 ## [2024.7.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.2...2024.7.3) (2024-07-17)
 
 
