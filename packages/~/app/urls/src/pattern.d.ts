@@ -371,10 +371,10 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           query: {
-            "search-email"?: string | string[] | undefined;
-            page?: string | string[] | undefined;
-            page_size?: string | string[] | undefined;
             id?: string | string[] | undefined;
+            page_size?: string | string[] | undefined;
+            page?: string | string[] | undefined;
+            q?: string | string[] | undefined;
           };
         };
         output: {};
