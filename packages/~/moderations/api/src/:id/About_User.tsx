@@ -33,43 +33,19 @@ export function About_User() {
 
       <ul class="list-none pl-0">
         <li>
-          id : <b>{user.id}</b>
+          Email : <b>{user.email}</b>
         </li>
         <li>
-          email : <b>{user.email}</b>
+          Prénom : <b>{user.given_name}</b>
         </li>
         <li>
-          prénom : <b>{user.given_name}</b>
+          Nom : <b>{user.family_name}</b>
         </li>
         <li>
-          nom : <b>{user.family_name}</b>
+          Téléphone : <b>{user.phone_number}</b>
         </li>
         <li>
-          téléphone : <b>{user.phone_number}</b>
-        </li>
-        <li>
-          fonction : <b>{user.job}</b>
-        </li>
-        <li>
-          nombre de connection : <b>{user.sign_in_count}</b>
-        </li>
-        <li>
-          Dernière connexion :{" "}
-          <b>
-            <LocalTime date={user.last_sign_in_at} />
-          </b>
-        </li>
-        <li>
-          Creation de compte :{" "}
-          <b>
-            <LocalTime date={user.created_at} />
-          </b>
-        </li>
-        <li>
-          Demande de création :{" "}
-          <b>
-            <LocalTime date={moderation_created_at} />
-          </b>
+          Profession : <b>{user.job}</b>
         </li>
       </ul>
 
@@ -79,6 +55,36 @@ export function About_User() {
       <CopyButton text={domain} variant={{ size: "sm", type: "tertiary" }}>
         Copier le domaine
       </CopyButton>
+
+      <details class="my-6">
+        <summary>Détails du profile</summary>
+        <ul>
+          <li>
+            id : <b>{user.id}</b>
+          </li>
+          <li>
+            Dernière connexion :{" "}
+            <b>
+              <LocalTime date={user.last_sign_in_at} />
+            </b>
+          </li>
+          <li>
+            Creation de compte :{" "}
+            <b>
+              <LocalTime date={user.created_at} />
+            </b>
+          </li>
+          <li>
+            Demande de création :{" "}
+            <b>
+              <LocalTime date={moderation_created_at} />
+            </b>
+          </li>
+          <li>
+            Nombre de connection : <b>{user.sign_in_count}</b>
+          </li>
+        </ul>
+      </details>
     </section>
   );
 }
