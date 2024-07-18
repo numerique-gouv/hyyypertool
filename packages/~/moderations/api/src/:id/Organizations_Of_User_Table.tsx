@@ -4,13 +4,14 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export async function Organizations_Of_User_Table() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
 
   return (
     <section>

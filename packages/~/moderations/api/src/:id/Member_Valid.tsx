@@ -8,14 +8,16 @@ import { Moderation_Type_Schema } from "@~/moderations.lib/Moderation_Type";
 import { useContext } from "hono/jsx";
 import { FORM_SCHEMA } from "./$procedures/validate";
 import { Desicison_Context } from "./Desicison_Context";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export async function Member_Valid() {
   const { $accept, $add_domain, $decision_form } =
     useContext(Desicison_Context);
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
   const { base, element } = fieldset();
 
   return (
@@ -62,7 +64,9 @@ export async function Member_Valid() {
 
 function SendNotification() {
   const { $send_notification } = useContext(Desicison_Context);
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
   const {
     user: { email },
   } = moderation;
@@ -89,7 +93,9 @@ function SendNotification() {
 
 function AddDomain() {
   const { $add_domain } = useContext(Desicison_Context);
-  const { domain } = useContext(ModerationPage_Context);
+  const {
+    var: { domain },
+  } = usePageRequestContext();
 
   return (
     <div class="fr-checkbox-group">
@@ -110,11 +116,13 @@ function AddDomain() {
 function AddAsMemberInternal() {
   const { $add_as_internal_member } = useContext(Desicison_Context);
   const {
-    moderation: {
-      user: { given_name },
+    var: {
+      moderation: {
+        user: { given_name },
+      },
+      organization_member,
     },
-    organization_member,
-  } = useContext(ModerationPage_Context);
+  } = usePageRequestContext();
   const is_already_internal_member = organization_member
     ? organization_member.is_external === false
     : true;
@@ -139,12 +147,13 @@ function AddAsMemberInternal() {
 function AddAsMemberExternal() {
   const { $add_as_external_member } = useContext(Desicison_Context);
   const {
-    moderation: {
-      user: { given_name },
+    var: {
+      moderation: {
+        user: { given_name },
+      },
+      organization_member,
     },
-    organization_member,
-  } = useContext(ModerationPage_Context);
-
+  } = usePageRequestContext();
   const is_already_external_member = organization_member?.is_external === true;
   return (
     <div class="fr-radio-group">

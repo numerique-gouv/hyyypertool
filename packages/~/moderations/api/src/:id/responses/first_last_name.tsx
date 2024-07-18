@@ -1,17 +1,18 @@
 //
 
-import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
-import { ModerationPage_Context } from "../context";
+import { usePageRequestContext } from "../context";
 
 export const label = "nom et prénom et fonction";
 
 export default function template() {
   const {
-    moderation: {
-      organization: { cached_libelle: organization_name, siret },
+    var: {
+      moderation: {
+        organization: { cached_libelle: organization_name, siret },
+      },
     },
-  } = useContext(ModerationPage_Context);
+  } = usePageRequestContext();
 
   return dedent`
     Bonjour,

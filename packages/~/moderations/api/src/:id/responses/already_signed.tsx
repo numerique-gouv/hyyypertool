@@ -2,15 +2,16 @@
 
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { get_emails_by_organization_id } from "@~/users.repository/get_emails_by_organization_id";
-import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import { dedent } from "ts-dedent";
-import { ModerationPage_Context } from "../context";
+import { usePageRequestContext } from "../context";
 
 export const label = "Vous possédez déjà un compte MonComptePro";
 
 export default async function template() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
 
   const {
     var: { moncomptepro_pg },

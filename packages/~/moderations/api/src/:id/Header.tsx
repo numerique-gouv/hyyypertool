@@ -8,14 +8,16 @@ import { hx_urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";
 import { raw } from "hono/html";
-import { useContext } from "hono/jsx";
 import { MessageInfo } from "./MessageInfo";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export async function Header() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
+
   return (
     <header>
       <section class="flex items-baseline space-x-5">
@@ -63,7 +65,9 @@ export async function Header() {
 }
 
 function State_Badge() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
   const is_treated = moderation.moderated_at !== null;
   if (is_treated) return <p class="fr-badge fr-badge--success">Traité</p>;
   return <p class="fr-badge fr-badge--new">A traiter</p>;
@@ -122,8 +126,10 @@ async function ModerationCallout({ moderation }: { moderation: Moderation }) {
 
 function LastComment() {
   const {
-    moderation: { comment },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { comment },
+    },
+  } = usePageRequestContext();
   if (!comment) {
     return raw``;
   }
@@ -134,8 +140,10 @@ function LastComment() {
 
 function Comments() {
   const {
-    moderation: { comment },
-  } = useContext(ModerationPage_Context);
+    var: {
+      moderation: { comment },
+    },
+  } = usePageRequestContext();
   const parsed_comment = parse_comment(comment);
   return (
     <details>

@@ -1,16 +1,18 @@
 import type { Moderation_Type } from "@~/moderations.lib/Moderation_Type";
-import { useContext } from "hono/jsx";
 import { match } from "ts-pattern";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 export function MessageInfo() {
   const {
-    moderation: {
-      organization: { cached_libelle },
-      type,
-      user: { email, family_name, given_name },
+    var: {
+      moderation: {
+        organization: { cached_libelle },
+        type,
+        user: { email, family_name, given_name },
+      },
     },
-  } = useContext(ModerationPage_Context);
+  } = usePageRequestContext();
+
   return (
     <p>
       <b>

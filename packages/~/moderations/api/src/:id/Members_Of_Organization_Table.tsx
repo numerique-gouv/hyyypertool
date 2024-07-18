@@ -5,14 +5,15 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { useContext } from "hono/jsx";
-import { ModerationPage_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export async function Members_Of_Organization_Table() {
   const uuid = hyper_ref();
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
 
   return (
     <section>

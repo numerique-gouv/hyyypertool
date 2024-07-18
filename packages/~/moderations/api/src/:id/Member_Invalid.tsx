@@ -7,8 +7,8 @@ import { fieldset } from "@~/app.ui/form";
 import { hx_urls, urls } from "@~/app.urls";
 import type { InferRequestType } from "hono";
 import { useContext } from "hono/jsx";
+import { usePageRequestContext } from "./context";
 import { Desicison_Context } from "./Desicison_Context";
-import { ModerationPage_Context } from "./context";
 import * as accountant from "./responses/accountant";
 import * as already_signed from "./responses/already_signed";
 import * as chorus_pro_error from "./responses/chorus_pro_error";
@@ -40,7 +40,10 @@ const reponse_templates = [
 //
 
 export async function Member_Invalid() {
-  const { moderation } = useContext(ModerationPage_Context);
+  const {
+    var: { moderation },
+  } = usePageRequestContext();
+
   const {
     $destination,
     $reject,
