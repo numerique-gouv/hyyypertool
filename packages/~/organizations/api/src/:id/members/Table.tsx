@@ -1,8 +1,6 @@
 //
 
 import { hx_include } from "@~/app.core/htmx";
-import type { Pagination } from "@~/app.core/schema";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { Foot } from "@~/app.ui/hx_table";
 import { menu_item } from "@~/app.ui/menu";
 import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
@@ -12,22 +10,18 @@ import {
   Verification_Type_Schema,
   type Verification_Type,
 } from "@~/moncomptepro.lib/verification_type";
-import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
-import { useContext, type PropsWithChildren } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
+import { useContext } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
-import {
-  MEMBER_TABLE_PAGE_ID,
-  Member_Context,
-  MembersTable_Context,
-} from "./context";
+import { Member_Context, usePageRequestContext } from "./context";
 
 //
 
 export async function Table() {
-  const { describedby, organization_id, pagination, query_members_collection } =
-    useContext(MembersTable_Context);
-
+  const {
+    req,
+    var: { pagination, query_members_collection, organization_id },
+  } = usePageRequestContext();
+  const { describedby, page_ref } = req.valid("query");
   const { users, count } = await query_members_collection;
 
   const hx_member_query_props = {
@@ -35,9 +29,9 @@ export async function Table() {
       param: {
         id: organization_id.toString(),
       },
-      query: { describedby },
+      query: { describedby, page_ref },
     })),
-    "hx-include": hx_include([MEMBER_TABLE_PAGE_ID]),
+    "hx-include": hx_include([page_ref]),
   };
 
   return (
@@ -66,7 +60,7 @@ export async function Table() {
         <Foot
           count={count}
           hx_query_props={hx_member_query_props}
-          id={MEMBER_TABLE_PAGE_ID}
+          id={page_ref}
           pagination={pagination}
         />
       </table>
@@ -93,7 +87,9 @@ function Row({ variants }: { variants?: VariantProps<typeof row> }) {
 }
 
 async function Row_Actions() {
-  const { organization_id } = useContext(MembersTable_Context);
+  const {
+    var: { organization_id },
+  } = usePageRequestContext();
   const { user } = useContext(Member_Context);
   const { id: user_id, is_external, verification_type } = user;
 
@@ -239,41 +235,5 @@ async function Row_Actions() {
         </li>
       </ul>
     </Horizontal_Menu>
-  );
-}
-
-export async function MembersTable_Provider({
-  value: { describedby, pagination, organization_id },
-  children,
-}: PropsWithChildren<{
-  value: {
-    describedby: string;
-    pagination: Pagination;
-    organization_id: number;
-  };
-}>) {
-  const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-
-  const query_members_collection = get_users_by_organization_id(
-    moncomptepro_pg,
-    {
-      organization_id,
-      pagination: { ...pagination, page: pagination.page - 1 },
-    },
-  );
-
-  return (
-    <MembersTable_Context.Provider
-      value={{
-        describedby,
-        query_members_collection,
-        organization_id,
-        pagination,
-      }}
-    >
-      {children}
-    </MembersTable_Context.Provider>
   );
 }
