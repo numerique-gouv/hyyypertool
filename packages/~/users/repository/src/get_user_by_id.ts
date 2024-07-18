@@ -14,4 +14,4 @@ export async function get_user_by_id(
   });
 }
 
-export type get_user_by_id_dto = ReturnType<typeof get_user_by_id>;
+export type get_user_by_id_dto = Awaited<ReturnType<typeof get_user_by_id>>;
