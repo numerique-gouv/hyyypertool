@@ -1,5 +1,22 @@
 
 
+## [2024.7.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.4...2024.7.5) (2024-07-19)
+
+
+### Bug Fixes
+
+* **organization:** keep page after row action ([#409](https://github.com/numerique-gouv/hyyypertool/issues/409)) ([47c2008](https://github.com/numerique-gouv/hyyypertool/commit/47c20081981b56be8e751a36503c896279083c6a)), closes [#347](https://github.com/numerique-gouv/hyyypertool/issues/347)
+
+
+### Features
+
+* **moderations:** add profile detail section ([#407](https://github.com/numerique-gouv/hyyypertool/issues/407)) ([445c84e](https://github.com/numerique-gouv/hyyypertool/commit/445c84ef94a41110fe609eb8d711c0cc11f93769)), closes [#330](https://github.com/numerique-gouv/hyyypertool/issues/330) [#84](https://github.com/numerique-gouv/hyyypertool/issues/84)
+
+
+### Performance Improvements
+
+* **user:** exact column user query ([#405](https://github.com/numerique-gouv/hyyypertool/issues/405)) ([a8b5f23](https://github.com/numerique-gouv/hyyypertool/commit/a8b5f23c7377a7d932b3d51c4829a5fbf193b76e))
+
 ## [2024.7.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.3...2024.7.4) (2024-07-18)
 
 
