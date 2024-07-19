@@ -13,6 +13,7 @@ export function add_verified_domain(
     .update(schema.organizations)
     .set({
       verified_email_domains: sql`array_append(verified_email_domains , ${domain})`,
+      updated_at: new Date().toISOString(),
     })
     .where(eq(schema.organizations.id, id));
 }
