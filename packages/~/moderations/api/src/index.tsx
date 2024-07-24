@@ -13,8 +13,7 @@ import { Moderations_Page } from "./page";
 export default new Hono()
 
   .route("/:id", moderation_router)
-  .use("/", jsxRenderer(Main_Layout))
-  .get("/", function GET({ render, req }) {
+  .get("/", jsxRenderer(Main_Layout), function GET({ render, req }) {
     const query = req.query();
 
     const search = match(Search_Schema.parse(query, { path: ["query"] }))

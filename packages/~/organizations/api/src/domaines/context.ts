@@ -2,16 +2,15 @@
 
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
-import type { get_unverified_organizations } from "@~/organizations.repository/get_unverified_organizations";
-import type { Env } from "bun";
-import type { InferRequestType } from "hono";
+import type { get_unverified_domains } from "@~/organizations.repository/get_unverified_domains";
+import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
 export interface ContextVariablesType extends Env {
   Variables: {
-    query_organizations: typeof get_unverified_organizations;
+    query_unverified_domains: typeof get_unverified_domains;
   };
 }
 export type ContextType = App_Context & ContextVariablesType;

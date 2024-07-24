@@ -38,7 +38,7 @@ test("returns pink diamond", async () => {
   });
 
   expect(emails).toEqual([
-    { email: "pink.diamond@uni.corn" },
-    { email: "red.diamond@uni.corn" },
+    { email: "pink.diamond@unicorn.xyz" },
+    { email: "red.diamond@unicorn.xyz" },
   ]);
 });

@@ -31,9 +31,9 @@ export async function add_member_to_organization(
 
     const organization = await pg_.query.organizations.findFirst({
       columns: {
-        external_authorized_email_domains: true,
-        trackdechets_email_domains: true,
-        verified_email_domains: true,
+        // external_authorized_email_domains: true,
+        // trackdechets_email_domains: true,
+        // verified_email_domains: true,
       },
       where: eq(schema.organizations.id, values.organization_id),
     });
@@ -48,22 +48,22 @@ export async function add_member_to_organization(
   });
 
   const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
-
+  domain;
   const verification_type = match(organization)
-    .when(
-      ({ external_authorized_email_domains }) =>
-        external_authorized_email_domains.includes(domain),
-      () => "verified_email_domain",
-    )
-    .when(
-      ({ trackdechets_email_domains }) =>
-        trackdechets_email_domains.includes(domain),
-      () => "trackdechets_email_domain",
-    )
-    .when(
-      ({ verified_email_domains }) => verified_email_domains.includes(domain),
-      () => "verified_email_domain",
-    )
+    // .when(
+    //   ({ external_authorized_email_domains }) =>
+    //     external_authorized_email_domains.includes(domain),
+    //   () => "verified_email_domain",
+    // )
+    // .when(
+    //   ({ trackdechets_email_domains }) =>
+    //     trackdechets_email_domains.includes(domain),
+    //   () => "trackdechets_email_domain",
+    // )
+    // .when(
+    //   ({ verified_email_domains }) => verified_email_domains.includes(domain),
+    //   () => "verified_email_domain",
+    // )
     .otherwise(() => null);
 
   const user_organization = await pg

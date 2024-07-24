@@ -1,18 +1,19 @@
 //
 
-import type { PropsWithChildren } from "hono/jsx";
-import type { VariantProps } from "tailwind-variants";
+import type { JSX, PropsWithChildren } from "hono/jsx";
+import type { ClassProp, VariantProps } from "tailwind-variants";
 import { button } from "..";
 
 //
 
 export function CopyButton(
-  props: PropsWithChildren<{
-    text: string;
-    variant?: VariantProps<typeof button>;
-  }>,
+  props: JSX.IntrinsicElements["button"] &
+    PropsWithChildren<{
+      text: string;
+      variant?: VariantProps<typeof button> & ClassProp;
+    }>,
 ) {
-  const { text, children, variant } = props;
+  const { text, class: className, children, variant, ...other_props } = props;
   return (
     <button
       _="
@@ -25,6 +26,7 @@ export function CopyButton(
         end"
       class={button(variant)}
       data-text={text}
+      {...other_props}
     >
       📋 {children}
     </button>

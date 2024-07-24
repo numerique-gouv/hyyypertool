@@ -7,17 +7,21 @@
     ".": {
       "default": "./src/index.ts"
     },
+    "./types": {
+      "default": "./src/moncomptepro.d.ts"
+    },
     "./*": {
       "default": "./src/*.ts"
     }
   },
   "dependencies": {
+    "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#13282ac6e50506fd6161ea271d3a88be612362c5",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
-    "moncomptepro": "numerique-gouv/moncomptepro#78370f0e27b34323c83ee460a39ddeef401ce10a"
+    "pg": "8.12.0"
   }
 }

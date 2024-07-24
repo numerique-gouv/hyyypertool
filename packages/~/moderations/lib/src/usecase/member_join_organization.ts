@@ -4,9 +4,8 @@ import { NotFoundError } from "@~/app.core/error";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { join_organization } from "@~/moncomptepro.lib";
-import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { and, eq } from "drizzle-orm";
-import { P, match } from "ts-pattern";
+import { match } from "ts-pattern";
 
 //
 
@@ -64,34 +63,36 @@ async function link_user_to_organization(
   if (!user) throw new NotFoundError("User not found.");
 
   const domain = z_email_domain.parse(user.email, { path: ["data.email"] });
-
+  domain;
   const organization = await pg.query.organizations.findFirst({
-    columns: {
-      external_authorized_email_domains: true,
-      trackdechets_email_domains: true,
-      verified_email_domains: true,
-    },
+    // columns: {
+    //   external_authorized_email_domains: true,
+    //   trackdechets_email_domains: true,
+    //   verified_email_domains: true,
+    // },
     where: eq(schema.organizations.id, organization_id),
   });
 
   if (!organization) throw new NotFoundError("Organization not found.");
 
   const verification_type = match(organization)
-    .with(
-      {
-        external_authorized_email_domains: P.when((value) =>
-          value.includes(domain),
-        ),
-      },
-      { verified_email_domains: P.when((value) => value.includes(domain)) },
-      () => Verification_Type_Schema.Enum.verified_email_domain,
-    )
-    .when(
-      ({ trackdechets_email_domains }) =>
-        trackdechets_email_domains.includes(domain),
-      () => Verification_Type_Schema.Enum.trackdechets_email_domain,
-    )
+    // .with(
+    //   {
+    //     external_authorized_email_domains: P.when((value) =>
+    //       value.includes(domain),
+    //     ),
+    //   },
+    //   { verified_email_domains: P.when((value) => value.includes(domain)) },
+    //   () => Verification_Type_Schema.Enum.verified_email_domain,
+    // )
+    // .when(
+    //   ({ trackdechets_email_domains }) =>
+    //     trackdechets_email_domains.includes(domain),
+    //   () => Verification_Type_Schema.Enum.trackdechets_email_domain,
+    // )
     .otherwise(() => null);
+
+  // TODO(douglasduteil): use moncomptepro sdk setDatabaseConnection
 
   return pg.insert(schema.users_organizations).values({
     is_external,

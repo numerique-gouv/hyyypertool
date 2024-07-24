@@ -37,7 +37,7 @@ test("returns all members", async () => {
     .get(
       "/already_signed",
       ({ set }, next) => {
-        set("domain", "uni.corn");
+        set("domain", "unicorn.xyz");
         set("moderation", {
           organization: { cached_libelle: "🦄", id: unicorn_organization_id },
           user: { family_name: "🧟" },
@@ -56,6 +56,7 @@ test("returns all members", async () => {
   expect(res.status).toBe(200);
   expect(await res.text()).toMatchSnapshot();
 });
+
 test("returns Diamond members", async () => {
   const unicorn_organization_id = await given_unicorn_organization();
 
@@ -65,7 +66,7 @@ test("returns Diamond members", async () => {
     .get(
       "/already_signed",
       ({ set }, next) => {
-        set("domain", "uni.corn");
+        set("domain", "unicorn.xyz");
         set("moderation", {
           organization: { cached_libelle: "🦄", id: unicorn_organization_id },
           user: { family_name: "Diamond" },

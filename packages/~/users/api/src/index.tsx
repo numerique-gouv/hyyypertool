@@ -15,9 +15,9 @@ import Page from "./page";
 export default new Hono<ContextType>()
   .route("/:id", user_id_router)
   //
-  .use("/", jsxRenderer(Main_Layout))
   .get(
     "/",
+    jsxRenderer(Main_Layout),
     ({ set }, next) => {
       set("query_users", get_users_list);
       return next();

@@ -1,9 +1,9 @@
 //
 
+import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
 import consola from "consola";
 import type { MonComptePro_PgDatabase } from "../index";
 import { schema } from "../index";
-import type { MCP_Moderation } from "../moncomptepro";
 
 //
 
@@ -289,7 +289,6 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: ["yopmail.com"],
       cached_activite_principale:
         "90.02Z - Activités de soutien au spectacle vivant",
       cached_categorie_juridique:
@@ -300,24 +299,27 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
       cached_nom_complet: "Abracadabra (ABRACADABRA)",
       cached_tranche_effectifs: "11",
       created_at: new Date("2022-08-08T15:43:15.501Z").toISOString(),
-      external_authorized_email_domains: [],
       organization_info_fetched_at: new Date(
         "2022-08-08T15:43:15.501Z",
       ).toISOString(),
       siret: "51935970700022",
-      trackdechets_email_domains: [],
       updated_at: new Date("2022-08-08T15:43:15.501Z").toISOString(),
-      verified_email_domains: [],
     })
     .returning();
-  return insert.at(0)!;
+
+  const organization = insert.at(0)!;
+  await db.insert(schema.email_domains).values({
+    domain: "yopmail.com",
+    organization_id: organization.id,
+    verification_type: "authorized",
+  });
+  return organization;
 }
 
 async function insert_aldp(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: ["aldp-asso.fr"],
       cached_activite_principale:
         "94.99Z - Autres organisations fonctionnant par adhésion volontaire",
       cached_categorie_juridique: "Association déclarée",
@@ -328,21 +330,23 @@ async function insert_aldp(db: MonComptePro_PgDatabase) {
         "Association des loisirs de la diversite et du partage (ALDP)",
       cached_tranche_effectifs: "21",
       created_at: new Date("2022-02-03T12:27:30.000Z").toISOString(),
-      external_authorized_email_domains: [],
       siret: "81797266400038",
-      trackdechets_email_domains: [],
       updated_at: new Date("2022-02-03T12:27:30.000Z").toISOString(),
-      verified_email_domains: [],
     })
     .returning();
-  return insert.at(0)!;
+  const organization = insert.at(0)!;
+  await db.insert(schema.email_domains).values({
+    domain: "aldp-asso.fr",
+    organization_id: organization.id,
+    verification_type: "authorized",
+  });
+  return organization;
 }
 
 async function insert_dinum(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: ["beta.gouv.fr", "modernisation.gouv.fr"],
       cached_activite_principale: "84.11Z - Administration publique générale",
       cached_categorie_juridique: "Service central d'un ministère",
       cached_code_officiel_geographique: "75107",
@@ -352,21 +356,34 @@ async function insert_dinum(db: MonComptePro_PgDatabase) {
       cached_nom_complet: "Direction interministerielle du numerique (DINUM)",
       cached_tranche_effectifs: "22",
       created_at: new Date("2018-07-13 15:35:15").toISOString(),
-      external_authorized_email_domains: ["prestataire.modernisation.gouv.fr"],
       siret: "13002526500013",
-      trackdechets_email_domains: [],
       updated_at: new Date("2023-06-22 14:34:34").toISOString(),
-      verified_email_domains: ["beta.gouv.fr", "modernisation.gouv.fr"],
     })
     .returning();
-  return insert.at(0)!;
+
+  const organization = insert.at(0)!;
+  await db.insert(schema.email_domains).values({
+    domain: "beta.gouv.fr",
+    organization_id: organization.id,
+    verification_type: "verified",
+  });
+  await db.insert(schema.email_domains).values({
+    domain: "modernisation.gouv.fr",
+    organization_id: organization.id,
+    verification_type: "verified",
+  });
+  await db.insert(schema.email_domains).values({
+    domain: "prestataire.modernisation.gouv.fr",
+    organization_id: organization.id,
+    verification_type: "external",
+  });
+  return organization;
 }
 
 async function insert_dengi(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: ["scapartois.fr"],
       cached_activite_principale: "47.11F",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "75107",
@@ -376,21 +393,24 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
       cached_nom_complet: "Dengi",
       cached_tranche_effectifs: "21",
       created_at: new Date("2018-07-13 15:35:15").toISOString(),
-      external_authorized_email_domains: [],
       siret: "38514019900014",
-      trackdechets_email_domains: [],
       updated_at: new Date("2023-06-22 14:34:34").toISOString(),
-      verified_email_domains: ["scapartois.fr"],
     })
     .returning();
-  return insert.at(0)!;
+
+  const organization = insert.at(0)!;
+  await db.insert(schema.email_domains).values({
+    domain: "scapartois.fr",
+    organization_id: organization.id,
+    verification_type: "verified",
+  });
+  return organization;
 }
 
 async function insert_bosch_france(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: [],
       cached_activite_principale: "29.32Z",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "93070",
@@ -402,11 +422,8 @@ async function insert_bosch_france(db: MonComptePro_PgDatabase) {
       cached_nom_complet: "Robert bosch france",
       cached_tranche_effectifs: "41",
       created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
-      external_authorized_email_domains: [],
       siret: "57206768400017",
-      trackdechets_email_domains: [],
       updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
-      verified_email_domains: [],
     })
     .returning();
   return insert.at(0)!;
@@ -416,7 +433,6 @@ async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.organizations)
     .values({
-      authorized_email_domains: ["fr.bosch.com"],
       cached_activite_principale: "28.12Z",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "69259",
@@ -428,12 +444,15 @@ async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
       cached_nom_complet: "Bosch rexroth d.s.i.",
       cached_tranche_effectifs: "41",
       created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
-      external_authorized_email_domains: [],
       siret: "44023386400014 ",
-      trackdechets_email_domains: [],
       updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
-      verified_email_domains: ["fr.bosch.com"],
     })
     .returning();
-  return insert.at(0)!;
+  const organization = insert.at(0)!;
+  await db.insert(schema.email_domains).values({
+    domain: "fr.bosch.com",
+    organization_id: organization.id,
+    verification_type: "verified",
+  });
+  return organization;
 }

@@ -9,8 +9,9 @@ import { Duplicate_Warning } from "./Duplicate_Warning";
 
 //
 
-export default new Hono().use("/", jsxRenderer()).get(
+export default new Hono().get(
   "/",
+  jsxRenderer(),
   zValidator("param", Entity_Schema),
   zValidator(
     "query",
@@ -19,11 +20,15 @@ export default new Hono().use("/", jsxRenderer()).get(
       user_id: z.string().pipe(z.coerce.number().int().nonnegative()),
     }),
   ),
-  async function ({ render, req }) {
+  async function GET({ render, req }) {
     const { id } = req.valid("param");
     const { organization_id, user_id } = req.valid("query");
     return render(
-      <Duplicate_Warning moderation_id={id} organization_id={organization_id} user_id={user_id} />,
+      <Duplicate_Warning
+        moderation_id={id}
+        organization_id={organization_id}
+        user_id={user_id}
+      />,
     );
   },
 );

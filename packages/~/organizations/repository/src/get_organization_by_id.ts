@@ -1,7 +1,6 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import { eq } from "drizzle-orm";
+import { type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 
 //
 
@@ -10,7 +9,7 @@ export async function get_organization_by_id(
   { id }: { id: number },
 ) {
   return pg.query.organizations.findFirst({
-    where: eq(schema.organizations.id, id),
+    where: (organizations, { eq }) => eq(organizations.id, id),
   });
 }
 

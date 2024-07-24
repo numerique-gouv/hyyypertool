@@ -8,69 +8,31 @@ import { usePageRequestContext } from "./context";
 
 //
 
-export function Domain_Organization() {
+export async function Domain_Organization() {
+  const {
+    var: {
+      moderation: { organization },
+    },
+  } = usePageRequestContext();
   return (
     <section>
       <h3>🌐 Domaines de l'organisation</h3>
 
-      <div class="grid grid-cols-2 gap-6">
-        <Edit_Internal_Domain />
-        <Edit_External_Domain />
+      <div
+        {...await hx_urls.organizations[":id"].domains.$get({
+          param: {
+            id: organization.id.toString(),
+          },
+        })}
+        hx-trigger={[
+          "load",
+          ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED]),
+        ].join(", ")}
+      >
+        <center>
+          <Loader />
+        </center>
       </div>
     </section>
-  );
-}
-
-async function Edit_Internal_Domain() {
-  const {
-    var: {
-      moderation: { organization },
-    },
-  } = usePageRequestContext();
-  return (
-    <div
-      {...await hx_urls.organizations[":id"].domains.internal.$get({
-        param: {
-          id: organization.id.toString(),
-        },
-      })}
-      hx-trigger={[
-        "load",
-        ...hx_trigger_from_body([
-          ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED,
-        ]),
-      ].join(", ")}
-    >
-      <center>
-        <Loader />
-      </center>
-    </div>
-  );
-}
-
-async function Edit_External_Domain() {
-  const {
-    var: {
-      moderation: { organization },
-    },
-  } = usePageRequestContext();
-  return (
-    <div
-      {...await hx_urls.organizations[":id"].domains.external.$get({
-        param: {
-          id: organization.id.toString(),
-        },
-      })}
-      hx-trigger={[
-        "load",
-        ...hx_trigger_from_body([
-          ORGANISATION_EVENTS.Enum.EXTERNAL_DOMAIN_UPDATED,
-        ]),
-      ].join(", ")}
-    >
-      <center>
-        <Loader />
-      </center>
-    </div>
   );
 }
