@@ -13,6 +13,7 @@ export function add_authorized_domain(
     .update(schema.organizations)
     .set({
       authorized_email_domains: sql`array_append(authorized_email_domains, ${domain})`,
+      updated_at: new Date().toISOString(),
     })
     .where(eq(schema.organizations.id, id));
 }
