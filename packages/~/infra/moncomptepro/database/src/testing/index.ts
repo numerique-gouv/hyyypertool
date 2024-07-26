@@ -9,7 +9,7 @@ import { schema } from "..";
 
 //
 
-export const client = new PGlite();
+export const client = new PGlite(undefined, { debug: 0 });
 export type { PgliteClient } from "drizzle-orm/pglite";
 
 export const pg = drizzle(client, { schema });
@@ -18,6 +18,7 @@ export async function empty_database() {
   await pg.transaction(async (tx) => {
     await tx.delete(schema.users_organizations);
     //
+    await tx.delete(schema.email_domains);
     await tx.delete(schema.organizations);
     await tx.delete(schema.users);
   });

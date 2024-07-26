@@ -10,6 +10,7 @@ export async function get_user_in_organization(
   { organization_id, user_id }: { organization_id: number; user_id: number },
 ) {
   return pg.query.users_organizations.findFirst({
+    columns: { organization_id: true, user_id: true },
     where: and(
       eq(schema.users_organizations.organization_id, organization_id),
       eq(schema.users_organizations.user_id, user_id),

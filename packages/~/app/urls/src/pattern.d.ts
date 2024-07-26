@@ -1,7 +1,8 @@
 declare const app: import("hono/hono-base").HonoBase<
   import("@~/app.middleware/set_nonce").NonceVariables_Context &
     import("@~/app.middleware/set_config").ConfigVariables_Context &
-    import("@~/app.middleware/set_userinfo").UserInfoVariables_Context,
+    import("@~/app.middleware/set_userinfo").UserInfoVariables_Context &
+    import("@~/app.middleware/moncomptepro_pg").MonComptePro_Pg_Context,
   {
     "/organizations/:id/$procedures/verify/:domain": {
       $patch: {
@@ -18,7 +19,7 @@ declare const app: import("hono/hono-base").HonoBase<
         status: import("hono/utils/http-status").StatusCode;
       };
     };
-    "/organizations/:id/domains/internal": {
+    "/organizations/:id/domains": {
       $get: {
         input: {
           param: {
@@ -39,19 +40,9 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            domain: string | File;
-          };
-        };
-        output: "";
-        outputFormat: "text";
-        status: 200;
-      };
-      $delete: {
-        input: {
-          param: {
-            id: string | undefined;
-          } & {
-            id: string;
+            domain:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[];
           };
         };
         output: "OK";
@@ -59,12 +50,12 @@ declare const app: import("hono/hono-base").HonoBase<
         status: 200;
       };
     };
-    "/organizations/:id/domains/internal/:domain": {
+    "/organizations/:id/domains/:domain_id": {
       $delete: {
         input: {
           param: {
             id: string | undefined;
-            domain: string | undefined;
+            domain_id: string | undefined;
           } & {
             id: string;
           };
@@ -77,71 +68,15 @@ declare const app: import("hono/hono-base").HonoBase<
         input: {
           param: {
             id: string | undefined;
-            domain: string | undefined;
+            domain_id: string | undefined;
           } & {
             id: string;
           };
-          form: {
-            is_verified?: string | File | undefined;
+          query: {
+            type: string | string[];
           };
         };
         output: "OK";
-        outputFormat: "text";
-        status: 200;
-      };
-    };
-    "/organizations/:id/domains/external": {
-      $get: {
-        input: {
-          param: {
-            id: string | undefined;
-          } & {
-            id: string;
-          };
-        };
-        output: {};
-        outputFormat: string;
-        status: import("hono/utils/http-status").StatusCode;
-      };
-      $put: {
-        input: {
-          param: {
-            id: string | undefined;
-          } & {
-            id: string;
-          };
-          form: {
-            domain: string | File;
-          };
-        };
-        output: "";
-        outputFormat: "text";
-        status: 200;
-      };
-      $delete: {
-        input: {
-          param: {
-            id: string | undefined;
-          } & {
-            id: string;
-          };
-        };
-        output: "";
-        outputFormat: "text";
-        status: 200;
-      };
-    };
-    "/organizations/:id/domains/external/:domain": {
-      $delete: {
-        input: {
-          param: {
-            id: string | undefined;
-            domain: string | undefined;
-          } & {
-            id: string;
-          };
-        };
-        output: "";
         outputFormat: "text";
         status: 200;
       };
@@ -150,7 +85,9 @@ declare const app: import("hono/hono-base").HonoBase<
       $post: {
         input: {
           form: {
-            is_external: string | File;
+            is_external:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[];
           };
           param: {
             id: string | undefined;
@@ -170,7 +107,9 @@ declare const app: import("hono/hono-base").HonoBase<
       $post: {
         input: {
           form: {
-            is_external: string | File;
+            is_external:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[];
           };
           param: {
             id: string | undefined;
@@ -196,8 +135,14 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            is_external?: string | File | undefined;
-            verification_type?: string | File | undefined;
+            is_external?:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[]
+              | undefined;
+            verification_type?:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[]
+              | undefined;
           };
         };
         output: "OK";
@@ -286,7 +231,7 @@ declare const app: import("hono/hono-base").HonoBase<
           query: {
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
-            "search-siret"?: string | string[] | undefined;
+            q?: string | string[] | undefined;
             id?: string | string[] | undefined;
           };
         };
@@ -372,9 +317,8 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           query: {
-            id?: string | string[] | undefined;
-            page_size?: string | string[] | undefined;
             page?: string | string[] | undefined;
+            page_size?: string | string[] | undefined;
             q?: string | string[] | undefined;
           };
         };
@@ -393,9 +337,18 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            add_domain?: string | File | undefined;
-            add_member?: string | File | undefined;
-            send_notitfication?: string | File | undefined;
+            add_domain?:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[]
+              | undefined;
+            add_member?:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[]
+              | undefined;
+            send_notitfication?:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[]
+              | undefined;
           };
         };
         output: {};
@@ -426,8 +379,12 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            message: string | File;
-            subject: string | File;
+            message:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[];
+            subject:
+              | import("hono/types").ParsedFormValue
+              | import("hono/types").ParsedFormValue[];
           };
         };
         output: "OK";
@@ -504,6 +461,7 @@ declare const app: import("hono/hono-base").HonoBase<
       };
     };
   } & {
+    "/auth/*": {};
     "/auth/login": {
       $post: {
         input: {};
@@ -604,6 +562,7 @@ declare const app: import("hono/hono-base").HonoBase<
         status: import("hono/utils/http-status").StatusCode;
       };
     };
+    [x: `/assets/${string}/public/*`]: {};
     [x: `/assets/${string}/bundle/config.js`]: {
       $get: {
         input: {};

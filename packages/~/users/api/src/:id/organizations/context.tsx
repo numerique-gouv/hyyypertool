@@ -1,17 +1,33 @@
 //
 
-import { type Pagination } from "@~/app.core/schema";
-import type { get_organisations_by_user_id_dto } from "@~/organizations.repository/get_organisations_by_user_id";
-import { createContext } from "hono/jsx";
+import type { Entity_Schema, Pagination_Schema } from "@~/app.core/schema";
+import type { App_Context } from "@~/app.middleware/context";
+import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
+import type { Env } from "hono";
+import { useRequestContext } from "hono/jsx-renderer";
+import type { z } from "zod";
 
 //
 
-export const UserOrganizationTable_Context = createContext({
-  pagination: {} as Pagination,
-  query_organizations_collection: {} as get_organisations_by_user_id_dto,
-  user_id: NaN,
-});
+export interface ContextVariablesType extends Env {
+  Variables: {
+    organizations: Awaited<get_organizations_by_user_id_dto>["organizations"];
+    count: Awaited<get_organizations_by_user_id_dto>["count"];
+  };
+}
+export type ContextType = App_Context & ContextVariablesType;
 
-export const UserOrganizationRow_Context = createContext(
-  {} as Awaited<get_organisations_by_user_id_dto>["organizations"][number],
-);
+//
+
+type PageInputType = {
+  out: {
+    param: z.input<typeof Entity_Schema>;
+    query: z.input<typeof Pagination_Schema>;
+  };
+};
+
+export const usePageRequestContext = useRequestContext<
+  ContextType,
+  any,
+  PageInputType
+>;

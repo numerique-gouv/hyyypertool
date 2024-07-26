@@ -34,12 +34,12 @@ export default new Hono<App_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
   zValidator("form", FORM_SCHEMA),
-  async ({
+  async function PATCH({
     text,
     req,
     notFound,
     var: { moncomptepro_pg, userinfo, sentry },
-  }) => {
+  }) {
     const { id } = req.valid("param");
     const { add_domain, add_member, send_notitfication } = req.valid("form");
 

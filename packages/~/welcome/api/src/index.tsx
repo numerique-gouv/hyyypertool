@@ -10,9 +10,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 //
 
 export default new Hono<App_Context>()
-  .use("/", jsxRenderer(Root_Layout))
-  .get("/", function GET({ render, redirect, var: { nonce, userinfo } }) {
-    console.log(userinfo);
+  .get("/", jsxRenderer(Root_Layout), function GET({ render, redirect, var: { nonce, userinfo } }) {
     if (userinfo) {
       return redirect(urls.moderations.$url().pathname);
     }

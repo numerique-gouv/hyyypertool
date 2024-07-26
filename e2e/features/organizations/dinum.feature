@@ -28,15 +28,15 @@ Fonctionnalité: Page organisation
 
   # @only
   # Scénario: Domain internes de DINUM
-    Alors je vois "Domain internes"
+    Alors je vois "Domain"
     * je vois la ligne de table "beta.gouv.fr"
-    * sur la même ligne je vois "✅"
+    * sur la même ligne je vois "verified"
     * je vois la ligne de table "modernisation.gouv.fr"
-    * sur la même ligne je vois "✅"
+    * sur la même ligne je vois "verified"
 
   # Scénario: Domain externe de DINUM
-    Alors je vois "Domain internes"
-    * je vois "prestataire.modernisation.gouv.fr"
+    * je vois la ligne de table "prestataire.modernisation.gouv.fr"
+    * sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM
     Alors je vois "Membres enregistrés dans cette organisation :"

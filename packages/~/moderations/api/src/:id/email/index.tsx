@@ -10,20 +10,19 @@ import Page from "./page";
 
 //
 
-export const moderation_email_router = new Hono<App_Context>()
-  .use(jsxRenderer())
-  .get(
-    "/",
-    zValidator("param", Entity_Schema),
-    async function GET({ render, req, var: { moncomptepro_pg } }) {
-      const { id: moderation_id } = req.valid("param");
-      const moderation = await get_moderation(moncomptepro_pg, {
-        moderation_id,
-      });
-      return render(
-        <Moderation_Context.Provider value={{ moderation }}>
-          <Page />
-        </Moderation_Context.Provider>,
-      );
-    },
-  );
+export const moderation_email_router = new Hono<App_Context>().get(
+  "/",
+  jsxRenderer(),
+  zValidator("param", Entity_Schema),
+  async function GET({ render, req, var: { moncomptepro_pg } }) {
+    const { id: moderation_id } = req.valid("param");
+    const moderation = await get_moderation(moncomptepro_pg, {
+      moderation_id,
+    });
+    return render(
+      <Moderation_Context.Provider value={{ moderation }}>
+        <Page />
+      </Moderation_Context.Provider>,
+    );
+  },
+);

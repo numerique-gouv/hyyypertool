@@ -28,9 +28,10 @@ import readyz_router from "./readyz";
 //
 
 const authoried = vip_list_guard({ vip_list: config.ALLOWED_USERS.split(",") });
+
 const app = new Hono()
-  .use("*", logger(consola.info))
-  .use("*", compress())
+  .use(logger(consola.info))
+  .use(compress())
   .use(set_sentry())
   .use(set_nonce())
   .use(set_config())
@@ -47,14 +48,14 @@ const app = new Hono()
 
   //
 
-  .use("*", hyyyyyypertool_session)
+  .use(hyyyyyypertool_session)
   .use(jsxRenderer(Root_Layout))
   .use(set_userinfo())
   //
   .route("/", welcome_router)
   .route("/auth", auth_router)
   //
-  .use("*", moncomptepro_pg_database({ connectionString: config.DATABASE_URL }))
+  .use(moncomptepro_pg_database({ connectionString: config.DATABASE_URL }))
   //
 
   .use("/moderations/*", authoried)

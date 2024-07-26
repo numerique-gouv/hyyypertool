@@ -7,6 +7,7 @@ import {
   schema,
   type MonComptePro_PgDatabase,
 } from "@~/moncomptepro.database";
+import { setDatabaseConnection } from "@~/moncomptepro.lib/sdk";
 import type { Env, MiddlewareHandler } from "hono";
 
 //
@@ -17,6 +18,7 @@ export function moncomptepro_pg_database({
   connectionString: string;
 }): MiddlewareHandler<MonComptePro_Pg_Context> {
   const connection = new Pool({ connectionString: connectionString });
+  setDatabaseConnection(connection);
   return async function moncomptepro_pg_middleware({ set }, next) {
     const moncomptepro_pg = drizzle(connection, {
       schema,

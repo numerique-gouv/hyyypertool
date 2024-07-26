@@ -14,7 +14,7 @@ import {
   get_organization_member,
   type ContextType,
 } from "./context";
-import duplicate_warning_router from "./duplicate_warning/index";
+import duplicate_warning_router from "./duplicate_warning";
 import { moderation_email_router } from "./email/index";
 import { Moderation_NotFound } from "./not-found";
 import Page from "./page";
@@ -22,9 +22,9 @@ import Page from "./page";
 //
 
 export default new Hono<ContextType>()
-  .use("/", jsxRenderer(Main_Layout))
   .get(
     "/",
+    jsxRenderer(Main_Layout),
     zValidator("param", Entity_Schema),
     async function set_moderation(
       { render, req, set, status, var: { moncomptepro_pg } },

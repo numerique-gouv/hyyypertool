@@ -1,6 +1,33 @@
 -- Current sql file was generated after introspecting the database
 -- If you want to run this migration please uncomment this code before executing migrations
 
+CREATE TABLE IF NOT EXISTS "oidc_clients" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"client_name" varchar NOT NULL,
+	"client_id" varchar NOT NULL,
+	"client_secret" varchar NOT NULL,
+	"redirect_uris" varchar[] DEFAULT '{}' NOT NULL,
+	"created_at" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"post_logout_redirect_uris" varchar[] DEFAULT '{}' NOT NULL,
+	"scope" varchar DEFAULT 'openid email' NOT NULL,
+	"client_uri" varchar,
+	"client_description" varchar,
+	"userinfo_signed_response_alg" varchar,
+	"id_token_signed_response_alg" varchar,
+	"authorization_signed_response_alg" varchar,
+	"introspection_signed_response_alg" varchar
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "users_oidc_clients" (
+	"user_id" integer NOT NULL,
+	"oidc_client_id" integer NOT NULL,
+	"created_at" timestamp with time zone NOT NULL,
+	"updated_at" timestamp with time zone NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
+	"organization_id" integer
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "moderations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
@@ -13,29 +40,9 @@ CREATE TABLE IF NOT EXISTS "moderations" (
 	"moderated_by" varchar
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "oidc_clients" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"client_name" varchar NOT NULL,
-	"client_id" varchar NOT NULL,
-	"client_secret" varchar NOT NULL,
-	"redirect_uris" varchar[] DEFAULT '{}' NOT NULL,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"post_logout_redirect_uris" varchar[] DEFAULT '{}' NOT NULL,
-	"scope" varchar DEFAULT 'openid email' NOT NULL,
-	"client_uri" varchar,
-	"client_description" varchar,
-	"userinfo_signed_response_alg" varchar,
-	"id_token_signed_response_alg" varchar,
-	"authorization_signed_response_alg" varchar,
-	"introspection_signed_response_alg" varchar
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "organizations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"siret" varchar NOT NULL,
-	"authorized_email_domains" varchar[] DEFAULT '{}' NOT NULL,
-	"external_authorized_email_domains" varchar[] DEFAULT '{}' NOT NULL,
 	"created_at" timestamp with time zone DEFAULT '1970-01-01 00:00:00'::timestamp without time zone NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT '1970-01-01 00:00:00'::timestamp without time zone NOT NULL,
 	"cached_libelle" varchar,
@@ -55,9 +62,7 @@ CREATE TABLE IF NOT EXISTS "organizations" (
 	"cached_categorie_juridique" varchar,
 	"cached_libelle_categorie_juridique" varchar,
 	"organization_info_fetched_at" timestamp with time zone,
-	"verified_email_domains" varchar[] DEFAULT '{}' NOT NULL,
-	"cached_code_officiel_geographique" varchar,
-	"trackdechets_email_domains" varchar[] DEFAULT '{}' NOT NULL
+	"cached_code_officiel_geographique" varchar
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
@@ -88,13 +93,16 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"force_2fa" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "users_oidc_clients" (
-	"user_id" integer NOT NULL,
-	"oidc_client_id" integer NOT NULL,
-	"created_at" timestamp with time zone NOT NULL,
-	"updated_at" timestamp with time zone NOT NULL,
+CREATE TABLE IF NOT EXISTS "email_domains" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"organization_id" integer
+	"organization_id" integer NOT NULL,
+	"domain" varchar(255) NOT NULL,
+	"verification_type" varchar(255),
+	"can_be_suggested" boolean DEFAULT true NOT NULL,
+	"verified_at" timestamp with time zone,
+	"created_at" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	CONSTRAINT "unique_organization_domain" UNIQUE("organization_id","domain","verification_type")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users_organizations" (
@@ -110,17 +118,12 @@ CREATE TABLE IF NOT EXISTS "users_organizations" (
 	"needs_official_contact_email_verification" boolean DEFAULT false NOT NULL,
 	"official_contact_email_verification_token" varchar,
 	"official_contact_email_verification_sent_at" timestamp with time zone,
+	"verified_at" timestamp with time zone,
 	CONSTRAINT "users_organizations_pkey" PRIMARY KEY("user_id","organization_id")
 );
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "moderations" ADD CONSTRAINT "moderations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "moderations" ADD CONSTRAINT "moderations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -138,7 +141,25 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;
+ ALTER TABLE "moderations" ADD CONSTRAINT "moderations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "moderations" ADD CONSTRAINT "moderations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "email_domains" ADD CONSTRAINT "email_domains_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "users_organizations" ADD CONSTRAINT "users_organizations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -155,12 +176,6 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "users_organizations" ADD CONSTRAINT "users_organizations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" USING btree ("siret" text_ops);--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" USING btree ("email" text_ops);--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token" text_ops);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" ("siret");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" ("email");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" ("reset_password_token");

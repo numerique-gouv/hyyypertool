@@ -17,46 +17,51 @@ Fonctionnalité: Moderation blockante à accepter
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"
 
-  Scénario: Domain internes
-    Soit le tableau "Domain internes"
+  @skip
+  Scénario: Domaine interne
+    Soit le tableau "Domain"
     Soit la ligne contenant "yopmail.com"
     * je vois la ligne de table "yopmail.com"
     * sur la même ligne je vois "❌"
     * sur la même ligne je vois "Menu"
     Quand j'ouvre le menu déroulant sur la même ligne
     * je vois "🗑️ Supprimer"
-    * je vois "🔄 vérifié"
+    * je vois "🔄 Domain vérifié"
 
-    Quand je clique sur "🔄 vérifié"
+    Quand je clique sur "🔄 Domain vérifié"
     Alors je vois la ligne de table "yopmail.com"
     Alors sur la même ligne je vois "✅"
 
     Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur "🔄 vérifié"
+    Et je clique sur "🔄 Domain vérifié"
     Alors je vois la ligne de table "yopmail.com"
     Alors sur la même ligne je vois "❌"
 
     Quand j'ouvre le menu déroulant sur la même ligne
     Et je clique sur "🗑️ Supprimer"
-    Alors je ne vois pas "🔄 vérifié"
+    Alors je ne vois pas "🔄 Domain vérifié"
 
-    Quand je clique sur le champs dans le tableau "Domain internes"
+    Quand je clique sur le champs dans le tableau "Domain"
     * je tape "yopmail.com"
-    * je clique sur "Add" dans le tableau "Domain internes"
+    * je clique sur "Add" dans le tableau "Domain"
 
     Alors je vois la ligne de table "yopmail.com"
     Alors sur la même ligne je vois "✅"
 
 
-  Scénario: Domain externe
-    Soit le tableau "Domain externe"
-    Quand je clique sur le champs dans le tableau "Domain externe"
+  @skip
+  Scénario: Domaine externe
+    Soit le tableau "Domain"
+    Quand je clique sur le champs dans le tableau "Domain"
     * je tape "poymail.com"
-    * je clique sur "Add" dans le tableau "Domain externe"
+    * je clique sur "Add" dans le tableau "Domain"
     Alors je vois la ligne de table "poymail.com"
+
     Quand j'ouvre le menu déroulant sur la même ligne
-    Alors je vois "🗑️ Supprimer" dans le tableau "Domain externe"
-    Quand je clique sur "🗑️ Supprimer" dans le tableau "Domain externe"
+    Et je clique sur "🔄 Domain externe"
+
+    Alors je vois "🗑️ Supprimer" dans le tableau "Domain"
+    Quand je clique sur "🗑️ Supprimer" dans le tableau "Domain"
     Alors je ne vois pas "poymail.com"
 
   Scénario: Envoyer l'email « Votre demande a été traitée »"

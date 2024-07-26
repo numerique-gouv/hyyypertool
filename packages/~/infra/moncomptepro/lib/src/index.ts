@@ -3,6 +3,7 @@
 import { fetch_mcp_admin_api } from "./fetch";
 
 //
+
 export async function join_organization({
   is_external,
   organization_id,

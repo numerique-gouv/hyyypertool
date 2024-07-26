@@ -1,65 +1,55 @@
-import { type Pagination } from "@~/app.core/schema";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+//
+
+import { date_to_dom_string } from "@~/app.core/date/date_format";
+import { Pagination_Schema } from "@~/app.core/schema";
 import { Foot } from "@~/app.ui/hx_table";
 import { notice } from "@~/app.ui/notice";
+import { Time } from "@~/app.ui/time/LocalTime";
 import { hx_urls, urls } from "@~/app.urls";
-import { get_organisations_by_user_id } from "@~/organizations.repository/get_organisations_by_user_id";
-import { useContext, type PropsWithChildren } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
-import {
-  UserOrganizationRow_Context,
-  UserOrganizationTable_Context,
-} from "./context";
+import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
+import { match } from "ts-pattern";
+import { usePageRequestContext } from "./context";
 
 //
 
-export async function UserOrganizationTable() {
-  const { pagination, user_id, query_organizations_collection } = useContext(
-    UserOrganizationTable_Context,
-  );
-  const { organizations, count } = await query_organizations_collection;
+export async function Table() {
+  const {
+    req,
+    var: { count, organizations },
+  } = usePageRequestContext();
+  const { id: user_id } = req.valid("param");
+
+  const pagination = match(
+    Pagination_Schema.safeParse(req.query(), { path: ["req.query()"] }),
+  )
+    .with({ success: true }, ({ data }) => data)
+    .otherwise(() => Pagination_Schema.parse({}));
 
   const hx_organizations_query_props = hx_urls.users[":id"].organizations.$get({
-    param: { id: user_id.toString() },
+    param: {
+      id: user_id.toString(),
+    },
     query: {},
   });
-
-  if (count === 0) {
-    const { base, container, body, title } = notice();
-    return (
-      <div class={base()}>
-        <div class={container()}>
-          <div class={body()}>
-            <p class={title()}>
-              🥹 Aucune organisation n'a été trouvée pour cet utilisateur.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div class="fr-table [&>table]:table">
       <table>
         <thead>
           <tr>
+            <th>Date de création</th>
             <th class="break-words">Siret</th>
             <th class="break-words">Libellé</th>
-            <th class="max-w-32 break-words">Domain email vérifié</th>
-            <th class="max-w-32 break-words">Domain email authorizé</th>
-            <th class="max-w-32 break-words">Domain email externe authorizé</th>
+            <th class="break-words">Domains</th>
             <th class="max-w-32 break-words">Code géographique officiel</th>
 
-            <th>Lien</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
           {organizations.map((organization) => (
-            <UserOrganizationRow_Context.Provider value={organization}>
-              <Row />
-            </UserOrganizationRow_Context.Provider>
+            <Row key={organization.id.toString()} organization={organization} />
           ))}
         </tbody>
 
@@ -75,28 +65,34 @@ export async function UserOrganizationTable() {
 
 //
 
-export function Row() {
+export function Row({
+  key,
+  organization,
+}: {
+  key?: string;
+  organization: Awaited<get_organizations_by_user_id_dto>["organizations"][number];
+}) {
   const {
-    authorized_email_domains,
     cached_code_officiel_geographique,
     cached_libelle,
-    external_authorized_email_domains,
+    created_at,
+    email_domains,
     id,
     siret,
-    verified_email_domains,
-  } = useContext(UserOrganizationRow_Context);
+  } = organization;
 
   return (
-    <tr>
+    <tr key={key}>
+      <td>
+        <Time date={created_at}>
+          {date_to_dom_string(new Date(created_at))}
+        </Time>
+      </td>
       <td>{siret}</td>
       <td>{cached_libelle}</td>
-      <td class="break-words">{verified_email_domains.join(", ")}</td>
-      <td class="break-words">{authorized_email_domains.join(", ")}</td>
-      <td class="break-words">
-        {external_authorized_email_domains.join(", ")}
-      </td>
+      <td>{email_domains.map(({ domain }) => domain).join(", ")}</td>
       <td>{cached_code_officiel_geographique}</td>
-      <td>
+      <td class="!text-right">
         <a
           class="p-3"
           href={
@@ -111,26 +107,17 @@ export function Row() {
   );
 }
 
-export async function UserOrganizationTable_Provider({
-  value: { pagination, user_id },
-  children,
-}: PropsWithChildren<{
-  value: { pagination: Pagination; user_id: number };
-}>) {
-  const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-
-  const query_organizations_collection = get_organisations_by_user_id(
-    moncomptepro_pg,
-    { user_id, pagination: { ...pagination, page: pagination.page - 1 } },
-  );
-
+export function EmptyTable() {
+  const { base, container, body, title } = notice();
   return (
-    <UserOrganizationTable_Context.Provider
-      value={{ query_organizations_collection, user_id, pagination }}
-    >
-      {children}
-    </UserOrganizationTable_Context.Provider>
+    <div class={base()}>
+      <div class={container()}>
+        <div class={body()}>
+          <p class={title()}>
+            🥹 Aucune organisation n'a été trouvée pour cet utilisateur.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

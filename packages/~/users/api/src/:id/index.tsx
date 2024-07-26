@@ -19,9 +19,9 @@ import Page from "./page";
 //
 
 export default new Hono<ContextType>()
-  .use("/", jsxRenderer(Main_Layout))
   .get(
     "/",
+    jsxRenderer(Main_Layout),
     zValidator("param", Entity_Schema),
     async function set_user(
       { render, req, set, status, var: { moncomptepro_pg } },

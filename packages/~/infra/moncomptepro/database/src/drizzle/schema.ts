@@ -5,30 +5,10 @@ import {
   primaryKey,
   serial,
   timestamp,
+  unique,
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
-
-export const moderations = pgTable("moderations", {
-  id: serial("id").primaryKey().notNull(),
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  organization_id: integer("organization_id")
-    .notNull()
-    .references(() => organizations.id, { onDelete: "cascade" }),
-  type: varchar("type").notNull(),
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  moderated_at: timestamp("moderated_at", {
-    withTimezone: true,
-    mode: "string",
-  }),
-  comment: varchar("comment"),
-  ticket_id: integer("ticket_id"),
-  moderated_by: varchar("moderated_by"),
-});
 
 export const oidc_clients = pgTable("oidc_clients", {
   id: serial("id").primaryKey().notNull(),
@@ -59,21 +39,57 @@ export const oidc_clients = pgTable("oidc_clients", {
   ),
 });
 
+export const users_oidc_clients = pgTable("users_oidc_clients", {
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  oidc_client_id: integer("oidc_client_id")
+    .notNull()
+    .references(() => oidc_clients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  created_at: timestamp("created_at", {
+    withTimezone: true,
+    mode: "string",
+  }).notNull(),
+  updated_at: timestamp("updated_at", {
+    withTimezone: true,
+    mode: "string",
+  }).notNull(),
+  id: serial("id").primaryKey().notNull(),
+  organization_id: integer("organization_id").references(
+    () => organizations.id,
+    { onDelete: "set null", onUpdate: "cascade" },
+  ),
+});
+
+export const moderations = pgTable("moderations", {
+  id: serial("id").primaryKey().notNull(),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  organization_id: integer("organization_id")
+    .notNull()
+    .references(() => organizations.id, { onDelete: "cascade" }),
+  type: varchar("type").notNull(),
+  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  moderated_at: timestamp("moderated_at", {
+    withTimezone: true,
+    mode: "string",
+  }),
+  comment: varchar("comment"),
+  ticket_id: integer("ticket_id"),
+  moderated_by: varchar("moderated_by"),
+});
+
 export const organizations = pgTable(
   "organizations",
   {
     id: serial("id").primaryKey().notNull(),
     siret: varchar("siret").notNull(),
-    authorized_email_domains: varchar("authorized_email_domains")
-      .default("{}")
-      .array()
-      .notNull(),
-    external_authorized_email_domains: varchar(
-      "external_authorized_email_domains",
-    )
-      .default("{}")
-      .array()
-      .notNull(),
     created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
       .defaultNow()
       .notNull(),
@@ -106,23 +122,15 @@ export const organizations = pgTable(
       withTimezone: true,
       mode: "string",
     }),
-    verified_email_domains: varchar("verified_email_domains")
-      .default("{}")
-      .array()
-      .notNull(),
     cached_code_officiel_geographique: varchar(
       "cached_code_officiel_geographique",
     ),
-    trackdechets_email_domains: varchar("trackdechets_email_domains")
-      .default("{}")
-      .array()
-      .notNull(),
   },
   (table) => {
     return {
       index_organizations_on_siret: uniqueIndex(
         "index_organizations_on_siret",
-      ).using("btree", table.siret),
+      ).on(table.siret),
     };
   },
 );
@@ -190,41 +198,45 @@ export const users = pgTable(
   },
   (table) => {
     return {
-      index_users_on_email: uniqueIndex("index_users_on_email").using(
-        "btree",
-        table.email,
-      ),
+      index_users_on_email: uniqueIndex("index_users_on_email").on(table.email),
       index_users_on_reset_password_token: uniqueIndex(
         "index_users_on_reset_password_token",
-      ).using("btree", table.reset_password_token),
+      ).on(table.reset_password_token),
     };
   },
 );
 
-export const users_oidc_clients = pgTable("users_oidc_clients", {
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  oidc_client_id: integer("oidc_client_id")
-    .notNull()
-    .references(() => oidc_clients.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
+export const email_domains = pgTable(
+  "email_domains",
+  {
+    id: serial("id").primaryKey().notNull(),
+    organization_id: integer("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    domain: varchar("domain", { length: 255 }).notNull(),
+    verification_type: varchar("verification_type", { length: 255 }),
+    can_be_suggested: boolean("can_be_suggested").default(true).notNull(),
+    verified_at: timestamp("verified_at", {
+      withTimezone: true,
+      mode: "string",
     }),
-  created_at: timestamp("created_at", {
-    withTimezone: true,
-    mode: "string",
-  }).notNull(),
-  updated_at: timestamp("updated_at", {
-    withTimezone: true,
-    mode: "string",
-  }).notNull(),
-  id: serial("id").primaryKey().notNull(),
-  organization_id: integer("organization_id").references(
-    () => organizations.id,
-    { onDelete: "set null", onUpdate: "cascade" },
-  ),
-});
+    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
+      .notNull(),
+    updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => {
+    return {
+      unique_organization_domain: unique("unique_organization_domain").on(
+        table.organization_id,
+        table.domain,
+        table.verification_type,
+      ),
+    };
+  },
+);
 
 export const users_organizations = pgTable(
   "users_organizations",
@@ -260,6 +272,10 @@ export const users_organizations = pgTable(
       "official_contact_email_verification_sent_at",
       { withTimezone: true, mode: "string" },
     ),
+    verified_at: timestamp("verified_at", {
+      withTimezone: true,
+      mode: "string",
+    }),
   },
   (table) => {
     return {

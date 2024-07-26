@@ -8,8 +8,6 @@ import type { App_Context } from "@~/app.middleware/context";
 import { mark_domain_as_verified } from "@~/moncomptepro.lib";
 import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
-import { add_verified_domain } from "@~/organizations.repository/add_verified_domain";
 import { get_organization_by_id } from "@~/organizations.repository/get_organization_by_id";
 import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
 import { update_user_by_id_in_organization } from "@~/users.repository/update_user_by_id_in_organization";
@@ -37,17 +35,17 @@ export default new Hono<App_Context>().patch(
       return notFound();
     }
 
-    const { verified_email_domains, authorized_email_domains } = organization;
+    // const { verified_email_domains, authorized_email_domains } = organization;
 
-    await moncomptepro_pg.transaction(async (pg) => {
-      if (!verified_email_domains.includes(domain)) {
-        await add_verified_domain(pg, { domain, id });
-      }
+    // await moncomptepro_pg.transaction(async (pg) => {
+    //   if (!verified_email_domains.includes(domain)) {
+    //     await add_verified_domain(pg, { domain, id });
+    //   }
 
-      if (!authorized_email_domains.includes(domain)) {
-        await add_authorized_domain(pg, { domain, id });
-      }
-    });
+    //   if (!authorized_email_domains.includes(domain)) {
+    //     await add_authorized_domain(pg, { domain, id });
+    //   }
+    // });
 
     const { users: users_in_organization } = await get_users_by_organization_id(
       moncomptepro_pg,
@@ -86,7 +84,7 @@ export default new Hono<App_Context>().patch(
 
     return text("OK", 200, {
       "HX-Trigger": [
-        ORGANISATION_EVENTS.Enum.INTERNAL_DOMAIN_UPDATED,
+        ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED,
         ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED,
       ].join(", "),
     } as Htmx_Header);

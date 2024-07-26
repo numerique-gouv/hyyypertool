@@ -7,7 +7,7 @@ import { usePageRequestContext } from "./context";
 
 //
 
-export async function About_Organisation() {
+export async function About_Organization() {
   const {
     var: {
       moderation: { organization },
@@ -104,7 +104,7 @@ export async function About_Organisation() {
   );
 }
 
-export function Investigation_Organisation(
+export function Investigation_Organization(
   props: JSX.IntrinsicElements["section"],
 ) {
   const {

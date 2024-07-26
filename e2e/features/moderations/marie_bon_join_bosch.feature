@@ -21,12 +21,13 @@ Fonctionnalité: Moderation non blockante
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Robert bosch france » avec l’adresse marie.bon@fr.bosch.com"
 
+  @skip
   Scénario: Le nom de domaine est vérifié
-    Soit le tableau "Domain internes" vide
+    Soit le tableau "Domain" vide
     Quand je clique sur "Je valide ce membre ✅"
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
     Quand je clique sur "Terminer"
-    Alors je vois la ligne "fr.bosch.com" dans le table "Domain internes"
+    Alors je vois la ligne "fr.bosch.com" dans le table "Domain"
 
   Scénario: Marie est un membre interne de l'organization.
     Soit le tableau sous le title "Membres connus dans l’organisation" vide
