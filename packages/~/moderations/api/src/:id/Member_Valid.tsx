@@ -133,7 +133,7 @@ function AddAsMemberInternal() {
         name={FORM_SCHEMA.keyof().Enum.add_member}
         required
         type="radio"
-        value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_INTERNAL}
+        value={FORM_SCHEMA.shape.add_member.Enum.AS_INTERNAL}
         checked={is_already_internal_member}
       />
       <label class="fr-label !flex-row" for={$add_as_internal_member}>
@@ -162,7 +162,7 @@ function AddAsMemberExternal() {
         name={FORM_SCHEMA.keyof().Enum.add_member}
         required
         type="radio"
-        value={FORM_SCHEMA.shape.add_member.removeDefault().Enum.AS_EXTERNAL}
+        value={FORM_SCHEMA.shape.add_member.Enum.AS_EXTERNAL}
         checked={is_already_external_member}
       />
       <label class="fr-label !flex-row" for={$add_as_external_member}>

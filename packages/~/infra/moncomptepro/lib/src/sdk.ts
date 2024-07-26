@@ -21,13 +21,22 @@ const POSTGRES_CONNECTOR_MODULE: {
 } = await import(`${MONCOMPTEPRO_MODULE}/src/connectors/postgres`);
 
 // import "@numerique-gouv/moncomptepro/src/managers/organization/main";
-const ORGANIZATION_MANAGER_MODULE: {
+const MAIN_ORGANIZATION_MANAGER_MODULE: {
   markDomainAsVerified(options: {
     organization_id: number;
     domain: string;
     domain_verification_type: MCP_EmailDomain_Type;
   }): Promise<void>;
 } = await import(`${MONCOMPTEPRO_MODULE}/src/managers/organization/main`);
+
+// import "@numerique-gouv/moncomptepro/src/managers/organization/join";
+const JOIN_ORGANIZATION_MANAGER_MODULE: {
+  forceJoinOrganization(options: {
+    organization_id: number;
+    user_id: number;
+    is_external?: boolean;
+  }): Promise<UserOrganizationLink>;
+} = await import(`${MONCOMPTEPRO_MODULE}/src/managers/organization/join`);
 
 //
 //
@@ -36,4 +45,6 @@ const ORGANIZATION_MANAGER_MODULE: {
 export const setDatabaseConnection =
   POSTGRES_CONNECTOR_MODULE.setDatabaseConnection;
 export const markDomainAsVerified =
-  ORGANIZATION_MANAGER_MODULE.markDomainAsVerified;
+  MAIN_ORGANIZATION_MANAGER_MODULE.markDomainAsVerified;
+export const forceJoinOrganization =
+  JOIN_ORGANIZATION_MANAGER_MODULE.forceJoinOrganization;

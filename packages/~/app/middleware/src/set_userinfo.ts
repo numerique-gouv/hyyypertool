@@ -6,6 +6,7 @@ import type { App_Context } from "./context";
 import type { AgentConnect_UserInfo } from "./session";
 
 //
+
 export function set_userinfo(value?: Partial<AgentConnect_UserInfo>) {
   if (value)
     return createMiddleware<UserInfoVariables_Context>(({ set }, next) => {

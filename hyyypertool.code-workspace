@@ -209,6 +209,14 @@
         ],
       },
       {
+        "name": "🐞 Attach to bun process",
+        "type": "bun",
+        "internalConsoleOptions": "neverOpen",
+        "request": "attach",
+        "url": "ws://localhost:6499/",
+        "stopOnEntry": false,
+      },
+      {
         "name": "tsx",
         "type": "node",
         "request": "launch",

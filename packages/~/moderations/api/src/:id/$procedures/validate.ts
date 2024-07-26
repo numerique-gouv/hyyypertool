@@ -24,7 +24,7 @@ import { comment_message } from "./comment_message";
 
 export const FORM_SCHEMA = z.object({
   add_domain: z.string().default("false").pipe(z_coerce_boolean),
-  add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL", "NOPE"]).default("NOPE"),
+  add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL"]),
   send_notitfication: z.string().default("false").pipe(z_coerce_boolean),
 });
 
@@ -57,7 +57,9 @@ export default new Hono<App_Context>().patch(
       user_id,
       user: { email },
     } = moderation;
-    const domain = z_email_domain.parse(email, { path: ["data.email"] });
+    const domain = z_email_domain.parse(email, {
+      path: ["moderation.user.email"],
+    });
 
     if (add_domain) {
       const [error] = await to(
@@ -80,31 +82,29 @@ export default new Hono<App_Context>().patch(
         });
     }
 
-    if (add_member !== "NOPE") {
-      const is_external = match(add_member)
-        .with("AS_INTERNAL", () => false)
-        .with("AS_EXTERNAL", () => true)
-        .exhaustive();
+    const is_external = match(add_member)
+      .with("AS_INTERNAL", () => false)
+      .with("AS_EXTERNAL", () => true)
+      .exhaustive();
 
-      const [error] = await to(
-        member_join_organization(
-          { pg: moncomptepro_pg },
-          { is_external, moderation_id: id },
-        ),
-      );
+    const [error] = await to(
+      member_join_organization(
+        { pg: moncomptepro_pg },
+        { is_external, moderation_id: id },
+      ),
+    );
 
-      match(error)
-        .with(P.instanceOf(HTTPError), () => {
-          consola.error(error);
-          sentry.captureException(error, {
-            data: { domain, organization_id: id },
-          });
-        })
-        .with(P.instanceOf(Error), () => {
-          consola.error(error);
-          throw error;
+    match(error)
+      .with(P.instanceOf(HTTPError), () => {
+        consola.error(error);
+        sentry.captureException(error, {
+          data: { domain, organization_id: id },
         });
-    }
+      })
+      .with(P.instanceOf(Error), () => {
+        consola.error(error);
+        throw error;
+      });
 
     if (send_notitfication) {
       await send_moderation_processed_email({ organization_id, user_id });
