@@ -26,16 +26,16 @@ Fonctionnalité: Page organisation
     * je vois "État administratif : A (liste état administratif INSEE)"
     * je vois "Siret : 13002526500013 (Voir la fiche annuaire entreprise de cette organisation)"
 
-  # @only
-  # Scénario: Domain internes de DINUM
-    Alors je vois "Domain"
-    * je vois la ligne de table "beta.gouv.fr"
+  # Scénario: Domaines de l'organisation DINUM
+    Soit le tableau sous le title "Domaines de l'organisation"
+    * je vois la ligne "beta.gouv.fr" dans le tableau
+    * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"
-    * je vois la ligne de table "modernisation.gouv.fr"
+    * je vois la ligne "modernisation.gouv.fr" dans le tableau
+    * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"
-
-  # Scénario: Domain externe de DINUM
-    * je vois la ligne de table "prestataire.modernisation.gouv.fr"
+    * je vois la ligne "prestataire.modernisation.gouv.fr" dans le tableau
+    * sur la même ligne je vois "❌"
     * sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM

@@ -69,7 +69,7 @@
     "workbench.editor.labelFormat": "short",
     "editor.quickSuggestions": { "strings": "on" },
     "tailwindCSS.experimental.classRegex": [
-      ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
+      ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"], // tv(`...`)
     ],
     "autoHide.autoHidePanel": false,
   },

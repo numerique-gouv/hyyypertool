@@ -1,11 +1,15 @@
 //
 
+import type { JSX } from "hono/jsx";
 import { visually_hidden } from "../../visually_hidden";
 
-export function Trigger({ for: _for }: { for: string }) {
+type TriggerProps = JSX.IntrinsicElements["button"] & {
+  target_id: string;
+};
+export function Trigger({ target_id, ...other_props }: TriggerProps) {
   return (
     <button
-      _={`on click toggle @hidden on #${_for}`}
+      _={`on click toggle @hidden on #${target_id}`}
       class="
       inline-flex items-center rounded-lg
       bg-white p-2 text-center text-sm font-medium text-gray-900
@@ -13,6 +17,7 @@ export function Trigger({ for: _for }: { for: string }) {
       focus:outline-none focus:ring-4 focus:ring-gray-50
       "
       type="button"
+      {...other_props}
     >
       <svg
         aria-hidden="true"

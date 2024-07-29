@@ -52,7 +52,8 @@
     ],
     "tailwindFunctions": [
       "tv"
-    ]
+    ],
+    "tailwindPreserveWhitespace": true
   },
   "dependencies": {
     "@gouvfr/dsfr": "1.12.1",

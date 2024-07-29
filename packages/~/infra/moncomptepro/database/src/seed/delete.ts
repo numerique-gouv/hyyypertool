@@ -37,6 +37,10 @@ export async function delete_database(db: MonComptePro_PgDatabase) {
     const moderations = await db.delete(schema.moderations).returning();
     await db.execute(sql`ALTER SEQUENCE moderations_id_seq RESTART WITH 1`);
     consola.info(`🚮 DELETE ${moderations.length} moderations`);
+
+    const email_domains = await db.delete(schema.email_domains).returning();
+    await db.execute(sql`ALTER SEQUENCE email_domains_id_seq RESTART WITH 1`);
+    consola.info(`🚮 DELETE ${email_domains.length} moderations`);
   } catch (err) {
     console.error("Something went wrong...");
     console.error(err);

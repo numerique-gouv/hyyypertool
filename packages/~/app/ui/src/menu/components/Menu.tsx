@@ -2,28 +2,32 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { createSlot } from "hono-slotify";
-import type { PropsWithChildren } from "hono/jsx";
+import type { JSX, PropsWithChildren } from "hono/jsx";
 import { Popover } from "./Popover";
 
 //
 
 export interface MenuProps {
-  id?: string;
   is_open?: boolean;
 }
 
 export function Menu({ children, ...props }: PropsWithChildren<MenuProps>) {
-  const uuid = hyper_ref();
-  const menu_props: Required<MenuProps> = {
-    id: uuid,
-    ...props,
-    is_open: props.is_open ?? false,
-  };
+  const $trigger = hyper_ref();
+  const $popover = hyper_ref();
+
   return (
     <div class="relative inline-block">
-      <Menu.Trigger.Renderer childs={children} {...menu_props} />
-      <Popover.Context.Provider value={{ is_open: menu_props.is_open }}>
-        <Menu.Popover.Renderer childs={children} {...menu_props} />
+      <Menu.Trigger.Renderer
+        childs={children}
+        target_id={$popover}
+        id={$trigger}
+      />
+      <Popover.Context.Provider value={{ is_open: props.is_open ?? false }}>
+        <Menu.Popover.Renderer
+          aria-labelledby={$trigger}
+          childs={children}
+          id={$popover}
+        />
       </Popover.Context.Provider>
     </div>
   );
@@ -31,5 +35,5 @@ export function Menu({ children, ...props }: PropsWithChildren<MenuProps>) {
 
 //
 
-Menu.Trigger = createSlot<Required<MenuProps>>();
-Menu.Popover = createSlot<Required<MenuProps>>();
+Menu.Trigger = createSlot<{ id?: string; target_id: string }>();
+Menu.Popover = createSlot<JSX.IntrinsicElements["div"]>();

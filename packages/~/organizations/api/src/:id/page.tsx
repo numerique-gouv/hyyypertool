@@ -13,26 +13,30 @@ export default async function Page() {
   const {
     var: { organization },
   } = usePageRequestContext();
-  const $describedby = hyper_ref();
+  const $domains_describedby = hyper_ref();
+  const $members_describedby = hyper_ref();
   const $page_ref = hyper_ref();
 
   const hx_get_members_query_props = await hx_urls.organizations[
     ":id"
   ].members.$get({
     param: { id: organization.id.toString() },
-    query: { describedby: $describedby, page_ref: $page_ref },
+    query: { describedby: $members_describedby, page_ref: $page_ref },
   });
 
   const hx_get_domains_query_props = await hx_urls.organizations[
     ":id"
   ].domains.$get({
     param: { id: organization.id.toString() },
+    query: { describedby: $domains_describedby },
   });
 
   return (
     <main class="fr-container my-12">
       <h1>🏛 A propos de « {organization.cached_libelle} » </h1>
       <Fiche />
+
+      <h3 id={$domains_describedby}>🌐 Domaines de l'organisation</h3>
       <div
         {...hx_get_domains_query_props}
         hx-trigger={[
@@ -42,7 +46,9 @@ export default async function Page() {
       ></div>
       <hr />
       <br />
-      <h3 id={$describedby}>Membres enregistrés dans cette organisation :</h3>
+      <h3 id={$members_describedby}>
+        Membres enregistrés dans cette organisation :
+      </h3>
       <div
         {...hx_get_members_query_props}
         class="fr-table"

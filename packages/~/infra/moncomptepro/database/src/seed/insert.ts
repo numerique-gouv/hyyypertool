@@ -308,11 +308,40 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
     .returning();
 
   const organization = insert.at(0)!;
-  await db.insert(schema.email_domains).values({
-    domain: "yopmail.com",
-    organization_id: organization.id,
-    verification_type: "authorized",
-  });
+  await db.insert(schema.email_domains).values([
+    // TODO(douglasduteil): add more domains
+    // {
+    //   domain: "abracadabra.com",
+    //   organization_id: organization.id,
+    //   verification_type: "verified",
+    // },
+    {
+      domain: "yopmail.com",
+      organization_id: organization.id,
+      verification_type: "authorized",
+    },
+    // {
+    //   domain: "mailslurp.com",
+    //   organization_id: organization.id,
+    //   verification_type: "external",
+    // },
+    // {
+    //   domain: "gmail.com",
+    //   organization_id: organization.id,
+    //   verification_type: "blacklisted",
+    // },
+    // {
+    //   domain: "shazam.com",
+    //   organization_id: organization.id,
+    //   verification_type: "official_contact",
+    // },
+    // {
+    //   domain: "flipendo.com",
+    //   organization_id: organization.id,
+    //   verification_type: "trackdechets_postal_mail",
+    // },
+  ]);
+
   return organization;
 }
 

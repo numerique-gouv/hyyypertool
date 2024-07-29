@@ -1,22 +1,29 @@
 //
 
-import { createContext, useContext, type PropsWithChildren } from "hono/jsx";
+import {
+  createContext,
+  useContext,
+  type JSX,
+  type PropsWithChildren,
+} from "hono/jsx";
 import { tv } from "tailwind-variants";
 
 //
 
-export function Popover({ children, id }: PropsWithChildren<{ id: string }>) {
+export function Popover({
+  children,
+  ...other_props
+}: PropsWithChildren<JSX.IntrinsicElements["div"]>) {
   const { is_open } = useContext(Popover.Context);
   const base = styles();
   return (
     <div
+      aria-orientation="vertical"
       class={base}
-      id={id}
       hidden={!is_open}
       role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="menu-button"
       tabindex={-1}
+      {...other_props}
     >
       <div class="py-1" role="none">
         {children}

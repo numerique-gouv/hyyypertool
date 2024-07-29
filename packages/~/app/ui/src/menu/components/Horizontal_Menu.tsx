@@ -13,9 +13,13 @@ export function Horizontal_Menu({
 }: PropsWithChildren<MenuProps>) {
   return (
     <Menu {...menu_props}>
-      <Menu.Trigger>{({ id }) => <Trigger for={id} />}</Menu.Trigger>
+      <Menu.Trigger>
+        {({ target_id, ...props }) => (
+          <Trigger target_id={target_id} {...props} />
+        )}
+      </Menu.Trigger>
       <Menu.Popover>
-        {({ id }) => <Popover id={id}>{children}</Popover>}
+        {(props) => <Popover {...props}>{children}</Popover>}
       </Menu.Popover>
     </Menu>
   );

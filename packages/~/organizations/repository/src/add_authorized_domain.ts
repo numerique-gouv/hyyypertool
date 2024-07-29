@@ -12,6 +12,6 @@ export function add_authorized_domain(
   return pg.insert(schema.email_domains).values({
     domain,
     organization_id,
-    verification_type: EmailDomain_Type_Schema.Enum.authorized,
+    verification_type: EmailDomain_Type_Schema.Enum.verified,
   });
 }

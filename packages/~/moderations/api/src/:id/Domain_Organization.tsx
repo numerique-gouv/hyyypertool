@@ -1,5 +1,6 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { Loader } from "@~/app.ui/loader/Loader";
 import { hx_urls } from "@~/app.urls";
@@ -9,6 +10,7 @@ import { usePageRequestContext } from "./context";
 //
 
 export async function Domain_Organization() {
+  const $describedby = hyper_ref();
   const {
     var: {
       moderation: { organization },
@@ -16,13 +18,14 @@ export async function Domain_Organization() {
   } = usePageRequestContext();
   return (
     <section>
-      <h3>🌐 Domaines de l'organisation</h3>
+      <h3 id={$describedby}>🌐 Domaines de l'organisation</h3>
 
       <div
         {...await hx_urls.organizations[":id"].domains.$get({
           param: {
             id: organization.id.toString(),
           },
+          query: { describedby: $describedby },
         })}
         hx-trigger={[
           "load",

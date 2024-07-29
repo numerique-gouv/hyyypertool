@@ -15,12 +15,14 @@ import { AddDomainParams_Schema, usePageRequestContext } from "./context";
 
 export function Table() {
   const {
+    req,
     var: { domains },
   } = usePageRequestContext();
+  const { describedby } = req.valid("query");
 
   return (
     <div class="fr-table [&>table]:table">
-      <table>
+      <table aria-describedby={describedby}>
         <thead>
           <tr>
             <th>Status</th>
@@ -68,7 +70,7 @@ async function Add_Domain() {
         name={AddDomainParams_Schema.keyof().Enum.domain}
       />
       <button class="fr-btn" type="submit">
-        Add
+        Ajouter
       </button>
     </form>
   );
@@ -186,26 +188,6 @@ async function Row_Actions({
           </button>
         </li>
         <li>
-          <GoogleSearchButton
-            class={menu_item({ class: "bg-none" })}
-            query={domain}
-            role="menuitem"
-            tabindex={-1}
-          >
-            Résultats Google pour ce nom de domaine
-          </GoogleSearchButton>
-        </li>
-        <li>
-          <GoogleSearchButton
-            class={menu_item({ class: "bg-none" })}
-            query={`${organization.cached_libelle} ${domain}`}
-            role="menuitem"
-            tabindex={-1}
-          >
-            Résultats Google pour le nom de l'organisation et le nom de domaine
-          </GoogleSearchButton>
-        </li>
-        <li>
           <button
             {...await hx_change_type_props("verified")}
             class={menu_item()}
@@ -234,6 +216,26 @@ async function Row_Actions({
           >
             🔄 Domain externe
           </button>
+        </li>
+        <li>
+          <GoogleSearchButton
+            class={menu_item({ class: "bg-none" })}
+            query={domain}
+            role="menuitem"
+            tabindex={-1}
+          >
+            Résultats Google pour ce nom de domaine
+          </GoogleSearchButton>
+        </li>
+        <li>
+          <GoogleSearchButton
+            class={menu_item({ class: "bg-none" })}
+            query={`${organization.cached_libelle} ${domain}`}
+            role="menuitem"
+            tabindex={-1}
+          >
+            Résultats Google pour le nom de l'organisation et le nom de domaine
+          </GoogleSearchButton>
         </li>
       </ul>
     </Horizontal_Menu>

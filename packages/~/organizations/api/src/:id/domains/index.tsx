@@ -18,6 +18,7 @@ import { Table } from "./Table";
 //
 
 const DomainParams_Schema = z.object({ domain_id: Id_Schema });
+const Query_Schema = z.object({ describedby: z.string() });
 
 //
 
@@ -26,6 +27,7 @@ export default new Hono<ContextType>()
     "/",
     jsxRenderer(),
     zValidator("param", Entity_Schema),
+    zValidator("query", Query_Schema),
     async function set_domains({ req, set, var: { moncomptepro_pg } }, next) {
       const { id: organization_id } = req.valid("param");
       const domains = await get_orginization_domains(

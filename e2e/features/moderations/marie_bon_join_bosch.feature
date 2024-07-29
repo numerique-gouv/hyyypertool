@@ -1,7 +1,4 @@
 #language: fr
-
-#
-
 Fonctionnalité: Moderation non blockante
 
   Contexte: Marie Bon veut rejoindre l'organisation Dengi - Leclerc
@@ -21,16 +18,25 @@ Fonctionnalité: Moderation non blockante
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Robert bosch france » avec l’adresse marie.bon@fr.bosch.com"
 
-  @skip
   Scénario: Le nom de domaine est vérifié
-    Soit le tableau "Domain" vide
+    Soit le tableau sous le title "Domaines de l'organisation"
+    * le tableau est vide
     Quand je clique sur "Je valide ce membre ✅"
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
     Quand je clique sur "Terminer"
-    Alors je vois la ligne "fr.bosch.com" dans le table "Domain"
+
+    Alors je vois "Liste des moderations"
+    Quand je clique sur "Voir les demandes traitées"
+    * je vois la ligne de table "57206768400017"
+    Quand sur la même ligne je clique sur "✅"
+
+    Soit le tableau sous le title "Domaines de l'organisation"
+    * je vois la ligne "fr.bosch.com" dans le tableau
+    * sur la même ligne je vois "✅"
 
   Scénario: Marie est un membre interne de l'organization.
-    Soit le tableau sous le title "Membres connus dans l’organisation" vide
+    Soit le tableau sous le title "Membres connus dans l’organisation"
+    * le tableau est vide
     Quand je clique sur "Je valide ce membre ✅"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
     Quand je clique sur "Terminer"
@@ -41,20 +47,22 @@ Fonctionnalité: Moderation non blockante
     Quand sur la même ligne je clique sur "✅"
 
     Soit le tableau sous le title "Membres connus dans l’organisation"
-    Alors je vois "fr.bosch.com" dans le tableau de "Membres connus dans l’organisation"
-    Et je vois "✅" dans le tableau de "Membres connus dans l’organisation"
+    Alors je vois "fr.bosch.com" dans le tableau
+    Et je vois "✅" dans le tableau
 
   Scénario: Marie est un membre externe de l'organization.
-    Soit le tableau sous le title "Membres connus dans l’organisation" vide
+    Soit le tableau sous le title "Membres connus dans l’organisation"
+    * le tableau est vide
+
     Quand je clique sur "Je valide ce membre ✅"
-    Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
-    Quand je clique sur "Terminer"
+    * je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
+    * je clique sur "Terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
     * je vois la ligne de table "57206768400017"
-    Quand sur la même ligne je clique sur "✅"
+    * sur la même ligne je clique sur "✅"
 
     Soit le tableau sous le title "Membres connus dans l’organisation"
-    Alors je vois "fr.bosch.com" dans le tableau de "Membres connus dans l’organisation"
-    Et je vois "❌" dans le tableau de "Membres connus dans l’organisation"
+    Alors je vois "fr.bosch.com" dans le tableau
+    Et je vois "❌" dans le tableau
