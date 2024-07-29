@@ -25,7 +25,7 @@
     "drizzle-orm": "0.32.1",
     "hono": "4.5.2",
     "htmx.ext...chunked-transfer": "1.0.4",
-    "htmx.org": "1.9.12",
+    "htmx.org": "2.0.1",
     "hyperscript.org": "0.9.12",
     "ts-pattern": "5.2.0",
     "youch": "3.3.3"
