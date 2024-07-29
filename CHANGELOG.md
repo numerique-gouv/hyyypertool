@@ -1,5 +1,19 @@
 
 
+## [2024.7.6](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.5...2024.7.6) (2024-07-29)
+
+
+### Bug Fixes
+
+* **database:** uncomment migration script ([02719b6](https://github.com/numerique-gouv/hyyypertool/commit/02719b6cbd8aedf9b19e801097ebbc74fa29a742))
+* **organization:** update the updated_at ([#410](https://github.com/numerique-gouv/hyyypertool/issues/410)) ([dd4e95d](https://github.com/numerique-gouv/hyyypertool/commit/dd4e95d56f728851dd6c257373fa5b1f8a115776))
+
+
+### Features
+
+* **moderation:** use moncomptepro sdk ([2ccca91](https://github.com/numerique-gouv/hyyypertool/commit/2ccca9102a74f8f33f66310b0b940794affd3b0a))
+* **moncomptepro:** refactor moderations ([#411](https://github.com/numerique-gouv/hyyypertool/issues/411)) ([f193b79](https://github.com/numerique-gouv/hyyypertool/commit/f193b7934690d79e884c16477995e66d34300d53))
+
 ## [2024.7.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.4...2024.7.5) (2024-07-19)
 
 
