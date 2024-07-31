@@ -81,10 +81,11 @@ async function Actions() {
       </button>
       <button
         class={button({ intent: "dark" })}
+        hx-confirm={"Confirmez-vous la suppression de ce compte ?"}
+        hx-swap="none"
         {...await hx_urls.users[":id"].$delete({
           param: { id: id.toString() },
         })}
-        hx-swap="none"
       >
         🗑️ supprimer définitivement ce compte
       </button>
