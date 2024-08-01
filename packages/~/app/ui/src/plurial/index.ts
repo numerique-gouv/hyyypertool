@@ -1,6 +1,6 @@
 //
 
-export const FrCardinalRules = new Intl.PluralRules("en-US");
+export const FrCardinalRules = new Intl.PluralRules("fr-FR");
 
 //
 

@@ -35,7 +35,7 @@ Fonctionnalité: Moderation non blockante
     * sur la même ligne je vois "✅"
 
   Scénario: Marie est un membre interne de l'organization.
-    Soit le tableau sous le title "0 membres connus dans l’organisation"
+    Soit le tableau sous le title "0 membre connu dans l’organisation"
     * le tableau est vide
     Quand je clique sur "Je valide ce membre ✅"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
@@ -51,7 +51,7 @@ Fonctionnalité: Moderation non blockante
     Et je vois "✅" dans le tableau
 
   Scénario: Marie est un membre externe de l'organization.
-    Soit le tableau sous le title "0 membres connus dans l’organisation"
+    Soit le tableau sous le title "0 membre connu dans l’organisation"
     * le tableau est vide
 
     Quand je clique sur "Je valide ce membre ✅"
