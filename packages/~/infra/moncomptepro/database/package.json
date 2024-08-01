@@ -32,6 +32,6 @@
     "@electric-sql/pglite": "0.1.5",
     "@types/pg": "8.11.6",
     "@~/config.typescript": "workspace:*",
-    "drizzle-kit": "0.23.0"
+    "drizzle-kit": "0.23.1"
   }
 }
