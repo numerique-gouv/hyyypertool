@@ -28,6 +28,9 @@
     "./notice": {
       "default": "./src/notice/index.ts"
     },
+    "./plurial": {
+      "default": "./src/plurial/index.ts"
+    },
     "./quote": {
       "default": "./src/quote/index.ts"
     },

@@ -5,6 +5,7 @@ import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { Main_Layout } from "@~/app.layout/index";
+import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to } from "await-to-js";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -65,6 +66,18 @@ export default new Hono<ContextType>()
         },
       );
       set("organization_member", organization_member);
+      return next();
+    },
+    async function set_query_organization_members_count(
+      { set, var: { moderation, moncomptepro_pg } },
+      next,
+    ) {
+      set(
+        "query_organization_members_count",
+        get_organization_members_count(moncomptepro_pg, {
+          organization_id: moderation.organization_id,
+        }),
+      );
       return next();
     },
     function GET({ render }) {
