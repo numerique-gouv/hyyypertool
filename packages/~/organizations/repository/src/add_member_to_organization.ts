@@ -19,8 +19,8 @@ export async function add_member_to_organization(
     user_id: number;
   },
 ) {
-  const { organization, user } = await pg.transaction(async (pg_) => {
-    const user = await pg_.query.users.findFirst({
+  const { organization, user } = await pg.transaction(async (tx) => {
+    const user = await tx.query.users.findFirst({
       columns: { email: true },
       where: eq(schema.users.id, values.user_id),
     });
@@ -29,7 +29,7 @@ export async function add_member_to_organization(
       throw new NotFoundError(`User ${values.user_id} not found.`);
     }
 
-    const organization = await pg_.query.organizations.findFirst({
+    const organization = await tx.query.organizations.findFirst({
       columns: {
         // external_authorized_email_domains: true,
         // trackdechets_email_domains: true,

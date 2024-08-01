@@ -1,6 +1,8 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import { schema } from "@~/moncomptepro.database";
+import { create_cactus_organization } from "@~/moncomptepro.database/seed/captus";
+import { create_troll_organization } from "@~/moncomptepro.database/seed/troll";
 import {
   create_adora_pony_user,
   create_unicorn_organization,
@@ -68,35 +70,3 @@ test("returns no organizations", async () => {
   const result = await get_unverified_domains(pg, {});
   expect(result).toEqual({ count: 0, domains: [] });
 });
-
-//
-
-async function create_cactus_organization(pg: MonComptePro_PgDatabase) {
-  const [{ id: organization_id }] = await pg
-    .insert(schema.organizations)
-    .values({
-      cached_libelle: "🌵 libelle",
-      siret: "🌵 siret",
-    })
-    .returning({ id: schema.organizations.id });
-
-  await pg.insert(schema.email_domains).values({
-    domain: "cactus.corn",
-    organization_id,
-    verification_type: "verified" as MCP_EmailDomain_Type,
-  });
-
-  return organization_id;
-}
-
-async function create_troll_organization(pg: MonComptePro_PgDatabase) {
-  const [{ id: organization_id }] = await pg
-    .insert(schema.organizations)
-    .values({
-      cached_libelle: "🧌 libelle",
-      siret: "🧌 siret",
-    })
-    .returning({ id: schema.organizations.id });
-
-  return organization_id;
-}
