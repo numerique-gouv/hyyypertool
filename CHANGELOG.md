@@ -1,5 +1,18 @@
 
 
+# [2024.8.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.6...2024.8.0) (2024-08-01)
+
+
+### Bug Fixes
+
+* **ui:** use fr-FR rules ([#429](https://github.com/numerique-gouv/hyyypertool/issues/429)) ([6a57496](https://github.com/numerique-gouv/hyyypertool/commit/6a574968cc7eb8d50c9726a527b57a1d54307dfd))
+
+
+### Features
+
+* **moderation:** use details on organization members ([#424](https://github.com/numerique-gouv/hyyypertool/issues/424)) ([a0dbaec](https://github.com/numerique-gouv/hyyypertool/commit/a0dbaecafc725b573f7f0294d96ace6741ded3e7))
+* **users:** add confirm before deleting a user account ([#423](https://github.com/numerique-gouv/hyyypertool/issues/423)) ([72177da](https://github.com/numerique-gouv/hyyypertool/commit/72177dac4c010a876d7694f03d4aefa3dc0e733e))
+
 ## [2024.7.6](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.5...2024.7.6) (2024-07-29)
 
 
