@@ -2,16 +2,19 @@
 
 import type { Pagination } from "@~/app.core/schema";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/moncomptepro.d";
-import { and, asc, count as drizzle_count, eq, ilike, or } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count as drizzle_count,
+  ilike,
+  isNull,
+  or,
+} from "drizzle-orm";
 
 //
 
 const where_authorized_email_domains = and(
-  eq(
-    schema.email_domains.verification_type,
-    "authorized" as MCP_EmailDomain_Type,
-  ),
+  isNull(schema.email_domains.verification_type),
 );
 export async function get_unverified_domains(
   pg: MonComptePro_PgDatabase,

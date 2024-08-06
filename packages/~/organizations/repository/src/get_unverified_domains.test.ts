@@ -42,7 +42,6 @@ test("returns bi.corn organization", async () => {
   await pg.insert(schema.email_domains).values({
     domain: "bi.corn",
     organization_id: unicorn_organization_id,
-    verification_type: "authorized" as MCP_EmailDomain_Type,
   });
 
   const result = await get_unverified_domains(pg, {});
