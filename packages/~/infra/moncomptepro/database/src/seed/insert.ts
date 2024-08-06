@@ -318,7 +318,7 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
     {
       domain: "yopmail.com",
       organization_id: organization.id,
-      verification_type: "authorized",
+      verification_type: null,
     },
     // {
     //   domain: "mailslurp.com",

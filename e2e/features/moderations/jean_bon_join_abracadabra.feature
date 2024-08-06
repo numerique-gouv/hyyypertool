@@ -19,7 +19,7 @@ Fonctionnalité: Moderation blockante à accepter
   Scénario: Domaine interne
     Soit le tableau sous le title "Domaines de l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
-    * sur la même ligne je vois "🔓"
+    * sur la même ligne je vois "❓"
     * sur la même ligne je vois "Menu"
     Quand j'ouvre le menu déroulant sur la même ligne
     * je vois "🗑️ Supprimer"
@@ -32,7 +32,7 @@ Fonctionnalité: Moderation blockante à accepter
     Quand j'ouvre le menu déroulant sur la même ligne
     Et je clique sur "🔄 Domain autorisé"
     Alors je vois la ligne "yopmail.com" dans le tableau
-    Alors sur la même ligne je vois "🔓"
+    Alors sur la même ligne je vois "❓"
 
     Quand j'ouvre le menu déroulant sur la même ligne
     Et je clique sur le bouton "🗑️ Supprimer"

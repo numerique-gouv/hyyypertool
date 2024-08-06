@@ -77,13 +77,17 @@ export default new Hono<ContextType>()
   .patch(
     "/:domain_id",
     zValidator("param", Entity_Schema.merge(DomainParams_Schema)),
-    zValidator("query", z.object({ type: EmailDomain_Type_Schema })),
+    zValidator(
+      "query",
+      z.object({ type: EmailDomain_Type_Schema.or(z.literal("null")) }),
+    ),
     async function PATCH({ text, req, var: { moncomptepro_pg } }) {
       const { domain_id } = req.valid("param");
       const { type: verification_type } = req.valid("query");
 
       await update_domain_by_id(moncomptepro_pg, domain_id, {
-        verification_type,
+        verification_type:
+          verification_type === "null" ? null : verification_type,
         verified_at:
           verification_type === "verified"
             ? new Date().toISOString()
