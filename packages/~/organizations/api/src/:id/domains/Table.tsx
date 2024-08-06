@@ -199,7 +199,7 @@ async function Row_Actions({
         </li>
         <li>
           <button
-            {...await hx_change_type_props("authorized")}
+            {...await hx_change_type_props(null)}
             class={menu_item()}
             hx-swap="none"
             role="menuitem"

@@ -5,12 +5,11 @@ import { z } from "zod";
 //
 
 export const EmailDomain_Type_Schema = z.enum([
-  "verified",
   "blacklisted",
-  "official_contact",
-  "authorized",
   "external",
+  "official_contact",
   "trackdechet_postal_mail",
+  "verified",
 ]);
 
 export type EmailDomain_Type = z.infer<typeof EmailDomain_Type_Schema>;

@@ -84,28 +84,6 @@ declare const app: import("hono/hono-base").HonoBase<
         status: 200;
       };
     };
-    "/organizations/:id/members/:user_id/$procedures/join": {
-      $post: {
-        input: {
-          form: {
-            is_external:
-              | import("hono/types").ParsedFormValue
-              | import("hono/types").ParsedFormValue[];
-          };
-          param: {
-            id: string | undefined;
-            user_id: string | undefined;
-          } & {
-            user_id: string;
-          } & {
-            id: string;
-          };
-        };
-        output: "OK";
-        outputFormat: "text";
-        status: 200;
-      };
-    };
     "/organizations/:id/members/:user_id": {
       $post: {
         input: {
@@ -138,11 +116,11 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            is_external?:
+            verification_type?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
-            verification_type?:
+            is_external?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
@@ -340,11 +318,10 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            add_domain?:
+            add_member:
               | import("hono/types").ParsedFormValue
-              | import("hono/types").ParsedFormValue[]
-              | undefined;
-            add_member?:
+              | import("hono/types").ParsedFormValue[];
+            add_domain?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;

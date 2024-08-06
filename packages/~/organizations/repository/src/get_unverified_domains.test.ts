@@ -8,10 +8,7 @@ import {
   create_unicorn_organization,
 } from "@~/moncomptepro.database/seed/unicorn";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
-import type {
-  MCP_EmailDomain_Type,
-  MCP_Moderation,
-} from "@~/moncomptepro.lib/moncomptepro.d";
+import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { get_unverified_domains } from "./get_unverified_domains";
 
