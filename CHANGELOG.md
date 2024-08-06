@@ -1,5 +1,17 @@
 
 
+## [2024.8.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.0...2024.8.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* **domains:** list null verification_type ([7556c83](https://github.com/numerique-gouv/hyyypertool/commit/7556c83b9140343d5f1b7223bada6f0fd4a68e93))
+
+
+### Features
+
+* **domains:** autorized if null ([ed417e0](https://github.com/numerique-gouv/hyyypertool/commit/ed417e067fba4871f8e6fab82ce20fe48095b3b6))
+
 # [2024.8.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.6...2024.8.0) (2024-08-01)
 
 
