@@ -18,10 +18,10 @@ beforeEach(empty_database);
 
 test("GET /users", async () => {
   const response = await new Hono()
-    .use(set_config({}))
+    .use(set_config({ ALLOWED_USERS: "good@captain.yargs" }))
     .use(set_moncomptepro_pg(pg))
     .use(set_nonce("nonce"))
-    .use(set_userinfo({}))
+    .use(set_userinfo({ email: "good@captain.yargs" }))
     .route("/", app)
     .request("/");
   expect(response.status).toBe(200);

@@ -8,12 +8,15 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import user_page_route from "./:id/index";
 import { PageQuery_Schema, type ContextType } from "./context";
 import domains_router from "./domaines";
+import { authorized } from "@~/app.middleware/authorized";
 import leaders_router from "./leaders";
 import Page from "./page";
 
 //
 
 export default new Hono<ContextType>()
+  .use(authorized())
+  //
   .route("/leaders", leaders_router)
   .route("/domains", domains_router)
   .route("/:id", user_page_route)

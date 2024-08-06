@@ -7,7 +7,6 @@ import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import { set_config } from "@~/app.middleware/set_config";
 import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
-import { vip_list_guard } from "@~/app.middleware/vip_list.guard";
 import { set_sentry } from "@~/app.sentry";
 import auth_router from "@~/auth.api";
 import moderations_router from "@~/moderations.api";
@@ -26,8 +25,6 @@ import { not_found_handler } from "./not-found";
 import readyz_router from "./readyz";
 
 //
-
-const authoried = vip_list_guard({ vip_list: config.ALLOWED_USERS.split(",") });
 
 const app = new Hono()
   .use(logger(consola.info))
@@ -58,13 +55,10 @@ const app = new Hono()
   .use(moncomptepro_pg_database({ connectionString: config.DATABASE_URL }))
   //
 
-  .use("/moderations/*", authoried)
   .route("/moderations", moderations_router)
 
-  .use("/users/*", authoried)
   .route("/users", users_router)
 
-  .use("/organizations/*", authoried)
   .route("/organizations", organizations_router)
 
   .onError(error_handler)

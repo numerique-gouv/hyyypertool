@@ -4,6 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import { Main_Layout } from "@~/app.layout/index";
 import { urls } from "@~/app.urls";
 import consola from "consola";
+import { authorized } from "@~/app.middleware/authorized";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import user_id_router from "./:id";
@@ -13,6 +14,8 @@ import Page from "./page";
 //
 
 export default new Hono<ContextType>()
+  .use(authorized())
+  //
   .route("/:id", user_id_router)
   //
   .get(

@@ -2,11 +2,11 @@
 
 import { expect, test } from "bun:test";
 import { Hono } from "hono";
-import { vip_list_guard } from "./vip_list.guard";
 import { set_userinfo } from "./set_userinfo";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { set_nonce } from "./set_nonce";
 import { set_config } from "./set_config";
+import { authorized } from "./authorized";
 
 //
 
@@ -14,10 +14,10 @@ test("should let good captains pass", async () => {
   const app = new Hono().get(
     "/",
     jsxRenderer(),
-    set_config({}),
+    set_config({ ALLOWED_USERS: "good@captain.yargs" }),
     set_nonce("nonce"),
     set_userinfo({ email: "good@captain.yargs" }),
-    vip_list_guard({ vip_list: ["good@captain.yargs"] }),
+    authorized(),
     async ({ text }) => {
       return text("✅");
     },
@@ -34,9 +34,9 @@ test("should stop any anonymous user", async () => {
   const app = new Hono().get(
     "/",
     jsxRenderer(),
-    set_config({}),
+    set_config({ ALLOWED_USERS: "good@captain.yargs" }),
     set_nonce("nonce"),
-    vip_list_guard({ vip_list: [] }),
+    authorized(),
     async ({ text }) => {
       return text("✅");
     },
@@ -52,9 +52,9 @@ test("should redirect hx-request", async () => {
   const app = new Hono().get(
     "/",
     jsxRenderer(),
-    set_config({}),
+    set_config({ ALLOWED_USERS: "good@captain.yargs" }),
     set_nonce("nonce"),
-    vip_list_guard({ vip_list: [] }),
+    authorized(),
     async ({ text }) => {
       return text("✅");
     },
@@ -72,10 +72,10 @@ test("should stop pirates", async () => {
   const app = new Hono().get(
     "/",
     jsxRenderer(),
-    set_config({}),
+    set_config({ ALLOWED_USERS: "good@captain.yargs" }),
     set_nonce("nonce"),
     set_userinfo({ email: "verybad@pirate.yargs" }),
-    vip_list_guard({ vip_list: [] }),
+    authorized(),
     async ({ text }) => {
       return text("✅");
     },
