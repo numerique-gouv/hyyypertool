@@ -9,8 +9,10 @@ import { jsxRenderer } from "hono/jsx-renderer";
 
 //
 
-export default new Hono<App_Context>()
-  .get("/", jsxRenderer(Root_Layout), function GET({ render, redirect, var: { nonce, userinfo } }) {
+export default new Hono<App_Context>().get(
+  "/",
+  jsxRenderer(Root_Layout),
+  function GET({ render, redirect, var: { nonce, userinfo } }) {
     if (userinfo) {
       return redirect(urls.moderations.$url().pathname);
     }
@@ -49,4 +51,5 @@ export default new Hono<App_Context>()
         </div>
       </main>,
     );
-  });
+  },
+);

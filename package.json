@@ -42,12 +42,13 @@
     "start": "tsx bin/src/index.ts",
     "studio:moncomptepro": "bun run database:moncomptepro:run studio",
     "test": "bun run test:type-check && bun run test:all",
-    "test:inspect": "bun test --inspect-wait=localhost:6499/",
     "test:all": "bun test",
+    "test:inspect": "bun test --inspect-wait=localhost:6499/",
     "test:type-check": "bun run build:tsc"
   },
   "prettier": {
     "plugins": [
+      "prettier-plugin-organize-imports",
       "prettier-plugin-tailwindcss"
     ],
     "tailwindFunctions": [

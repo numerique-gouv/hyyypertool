@@ -2,11 +2,11 @@
 
 import { expect, test } from "bun:test";
 import { Hono } from "hono";
-import { set_userinfo } from "./set_userinfo";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { set_nonce } from "./set_nonce";
-import { set_config } from "./set_config";
 import { authorized } from "./authorized";
+import { set_config } from "./set_config";
+import { set_nonce } from "./set_nonce";
+import { set_userinfo } from "./set_userinfo";
 
 //
 

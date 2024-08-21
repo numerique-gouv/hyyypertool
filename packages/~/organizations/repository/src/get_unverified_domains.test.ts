@@ -9,9 +9,9 @@ import {
 } from "@~/moncomptepro.database/seed/unicorn";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
 import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
+import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { get_unverified_domains } from "./get_unverified_domains";
-import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 
 //
 

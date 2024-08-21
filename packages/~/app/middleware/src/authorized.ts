@@ -1,8 +1,8 @@
 //
 
 import { createMiddleware } from "hono/factory";
-import { vip_list_guard } from "./vip_list.guard";
 import type { App_Context } from "./context";
+import { vip_list_guard } from "./vip_list.guard";
 
 //
 

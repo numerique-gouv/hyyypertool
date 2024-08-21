@@ -5,6 +5,8 @@ import { hyper_ref } from "@~/app.core/html";
 import { hx_include } from "@~/app.core/htmx";
 import { Pagination_Schema, Search_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
+import { button } from "@~/app.ui/button";
+import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
@@ -17,8 +19,6 @@ import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { match } from "ts-pattern";
 import { usePageRequestContext, type ContextType } from "./context";
-import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
-import { button } from "@~/app.ui/button";
 
 //
 

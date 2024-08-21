@@ -19,7 +19,7 @@
     "nprogress": "0.2.0"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*",
-    "@types/nprogress": "0.2.3"
+    "@types/nprogress": "0.2.3",
+    "@~/config.typescript": "workspace:*"
   }
 }
