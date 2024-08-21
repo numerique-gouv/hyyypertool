@@ -11,6 +11,7 @@ import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
 import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { get_unverified_domains } from "./get_unverified_domains";
+import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 
 //
 
@@ -167,6 +168,12 @@ test("search for 🦄 siret organization", async () => {
 
 test("returns no organizations", async () => {
   await create_unicorn_organization(pg);
+  const troll_organization_id = await create_troll_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "troll.corn",
+    organization_id: troll_organization_id,
+    verification_type: Verification_Type_Schema.Enum.trackdechets_email_domain,
+  });
   const result = await get_unverified_domains(pg, {});
   expect(result).toEqual({ count: 0, domains: [] });
 });
