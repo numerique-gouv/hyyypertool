@@ -63,7 +63,7 @@ async function Page() {
       hx-sync="this"
       hx-trigger={[
         `load delay:1s`,
-        `every 11s [document.visibilityState === 'visible']`,
+        `every 22s [document.visibilityState === 'visible']`,
         `visibilitychange[document.visibilityState === 'visible'] from:document`,
       ].join(", ")}
     >

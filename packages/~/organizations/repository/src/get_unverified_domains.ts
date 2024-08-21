@@ -55,7 +55,7 @@ export async function get_unverified_domains(
       .where(where)
       .offset(page * take)
       .limit(take)
-      .orderBy(asc(schema.email_domains.domain));
+      .orderBy(asc(schema.email_domains.domain), asc(schema.organizations.id));
 
     const [{ value: count }] = await tx
       .select({ value: drizzle_count() })
