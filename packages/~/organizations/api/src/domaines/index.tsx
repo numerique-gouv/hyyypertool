@@ -17,6 +17,8 @@ import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { match } from "ts-pattern";
 import { usePageRequestContext, type ContextType } from "./context";
+import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
+import { button } from "@~/app.ui/button";
 
 //
 
@@ -156,6 +158,7 @@ function Row({
   key?: string;
   domains: get_unverified_domains_dto["domains"][number];
 }) {
+  const $domain = hyper_ref();
   return (
     <tr
       _={`on click set the window's location to '${
@@ -167,7 +170,15 @@ function Row({
       key={key}
     >
       <td></td>
-      <td>{domain}</td>
+      <td>
+        <span id={$domain}> {domain} </span>
+        <button
+          class={button({ intent: "ghost" })}
+          _={copy_text_content_to_clipboard(`#${$domain}`)}
+        >
+          📋
+        </button>
+      </td>
       <td>{organization.siret}</td>
       <td>{organization.cached_libelle}</td>
       <td>{organization.id}</td>
