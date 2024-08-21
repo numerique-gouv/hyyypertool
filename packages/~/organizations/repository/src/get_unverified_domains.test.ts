@@ -49,10 +49,114 @@ test("returns bi.corn organization", async () => {
       {
         domain: "bi.corn",
         id: expect.any(Number),
-        organization_id: unicorn_organization_id,
         organization: {
           cached_libelle: "🦄 libelle",
-          created_at: "1970-01-01T00:00:00+00:00",
+          created_at: "1970-01-01 00:00:00+00",
+          id: unicorn_organization_id,
+          siret: "🦄 siret",
+        },
+      },
+    ],
+  });
+});
+
+test("search for bi.corn organization", async () => {
+  await create_cactus_organization(pg);
+  const troll_organization_id = await create_troll_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "troll.corn",
+    organization_id: troll_organization_id,
+  });
+
+  const unicorn_organization_id = await create_unicorn_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "bi.corn",
+    organization_id: unicorn_organization_id,
+  });
+
+  const result = await get_unverified_domains(pg, {
+    search: "bi.corn",
+  });
+
+  expect(result).toEqual({
+    count: 1,
+    domains: [
+      {
+        domain: "bi.corn",
+        id: expect.any(Number),
+        organization: {
+          cached_libelle: "🦄 libelle",
+          created_at: "1970-01-01 00:00:00+00",
+          id: unicorn_organization_id,
+          siret: "🦄 siret",
+        },
+      },
+    ],
+  });
+});
+
+test("search for 🦄 libelle organization", async () => {
+  await create_cactus_organization(pg);
+  const troll_organization_id = await create_troll_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "troll.corn",
+    organization_id: troll_organization_id,
+  });
+
+  const unicorn_organization_id = await create_unicorn_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "bi.corn",
+    organization_id: unicorn_organization_id,
+  });
+
+  const result = await get_unverified_domains(pg, {
+    search: "🦄 libelle",
+  });
+
+  expect(result).toEqual({
+    count: 1,
+    domains: [
+      {
+        domain: "bi.corn",
+        id: expect.any(Number),
+        organization: {
+          cached_libelle: "🦄 libelle",
+          created_at: "1970-01-01 00:00:00+00",
+          id: unicorn_organization_id,
+          siret: "🦄 siret",
+        },
+      },
+    ],
+  });
+});
+
+test("search for 🦄 siret organization", async () => {
+  await create_cactus_organization(pg);
+  const troll_organization_id = await create_troll_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "troll.corn",
+    organization_id: troll_organization_id,
+  });
+
+  const unicorn_organization_id = await create_unicorn_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "bi.corn",
+    organization_id: unicorn_organization_id,
+  });
+
+  const result = await get_unverified_domains(pg, {
+    search: "🦄 siret",
+  });
+
+  expect(result).toEqual({
+    count: 1,
+    domains: [
+      {
+        domain: "bi.corn",
+        id: expect.any(Number),
+        organization: {
+          cached_libelle: "🦄 libelle",
+          created_at: "1970-01-01 00:00:00+00",
           id: unicorn_organization_id,
           siret: "🦄 siret",
         },
