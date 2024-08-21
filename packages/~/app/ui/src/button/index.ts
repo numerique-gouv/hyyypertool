@@ -12,7 +12,10 @@ export const button = tv({
       dark: "bg-[--grey-0-1000] hover:!bg-[--grey-200-850]",
       success:
         "bg-[--background-action-high-green-bourgeon] hover:enabled:!bg-[--background-action-high-green-bourgeon-hover]",
-      warning: "bg-[--warning-425-625] hover:!bg-[--warning-425-625-hover]",
+      warning:
+        "bg-[--background-action-high-warning] hover:!bg-[--background-action-high-warning-hover]",
+      ghost:
+        "bg-transparent text-black hover:!bg-[--background-default-grey-hover]",
     },
     size: {
       sm: "fr-btn--sm",

@@ -2,7 +2,7 @@
 
 import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
-import { copy_to_clipboard } from "@~/app.ui/button/scripts";
+import { copy_value_to_clipboard } from "@~/app.ui/button/scripts";
 import { fieldset } from "@~/app.ui/form";
 import { hx_urls, urls } from "@~/app.urls";
 import type { InferRequestType } from "hono";
@@ -88,7 +88,7 @@ export async function Member_Invalid() {
             >
               Message
               <button
-                _={copy_to_clipboard(`#${$message}`)}
+                _={copy_value_to_clipboard(`#${$message}`)}
                 class={button()}
                 type="button"
               >
