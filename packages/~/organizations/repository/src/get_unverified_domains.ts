@@ -8,7 +8,10 @@ import {
   count as drizzle_count,
   eq,
   ilike,
+  inArray,
+  isNotNull,
   isNull,
+  not,
   or,
 } from "drizzle-orm";
 
@@ -16,7 +19,22 @@ import {
 
 const where_authorized_email_domains = and(
   isNull(schema.email_domains.verification_type),
-);
+)!;
+
+// Inspired by https://github.com/numerique-gouv/moncomptepro/blob/f56812b300edcb6ef444ac07f91c1e8dbf411967/src/services/organization.ts#L9-L26
+const where_unipersonnelle = and(
+  isNotNull(schema.organizations.cached_libelle_categorie_juridique),
+  inArray(schema.organizations.cached_libelle_categorie_juridique, [
+    "Entrepreneur individuel",
+    "SAS, société par actions simplifiée",
+    "Société à responsabilité limitée (sans autre indication)",
+  ]),
+  or(
+    isNull(schema.organizations.cached_tranche_effectifs),
+    inArray(schema.organizations.cached_tranche_effectifs, ["NN", "00", "01"]),
+  ),
+)!;
+
 export async function get_unverified_domains(
   pg: MonComptePro_PgDatabase,
   {
@@ -33,7 +51,11 @@ export async function get_unverified_domains(
       )
     : undefined;
 
-  const where = and(search_where, where_authorized_email_domains);
+  const where = and(
+    search_where,
+    where_authorized_email_domains,
+    not(where_unipersonnelle),
+  );
 
   return pg.transaction(async function moderation_count(tx) {
     const member_count = tx
@@ -44,6 +66,7 @@ export async function get_unverified_domains(
       .from(schema.users_organizations)
       .groupBy(schema.users_organizations.organization_id)
       .as("member_count");
+
     const domains = await tx
       .select({
         domain: schema.email_domains.domain,
