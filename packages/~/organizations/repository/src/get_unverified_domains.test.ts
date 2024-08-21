@@ -20,9 +20,14 @@ beforeEach(empty_database);
 
 //
 
-test("returns bi.corn organization", async () => {
+test("returns bi.corn then troll.corn organizations", async () => {
   await create_cactus_organization(pg);
-  await create_troll_organization(pg);
+
+  const troll_organization_id = await create_troll_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "troll.corn",
+    organization_id: troll_organization_id,
+  });
 
   const unicorn_organization_id = await create_unicorn_organization(pg);
   const adora_pony_user_id = await create_adora_pony_user(pg);
@@ -45,7 +50,7 @@ test("returns bi.corn organization", async () => {
   const result = await get_unverified_domains(pg, {});
 
   expect(result).toEqual({
-    count: 1,
+    count: 2,
     domains: [
       {
         domain: "bi.corn",
@@ -55,6 +60,16 @@ test("returns bi.corn organization", async () => {
           created_at: "1970-01-01 00:00:00+00",
           id: unicorn_organization_id,
           siret: "🦄 siret",
+        },
+      },
+      {
+        domain: "troll.corn",
+        id: expect.any(Number),
+        organization: {
+          cached_libelle: "🧌 libelle",
+          created_at: "1970-01-01 00:00:00+00",
+          id: troll_organization_id,
+          siret: "🧌 siret",
         },
       },
     ],
