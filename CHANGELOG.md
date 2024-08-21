@@ -1,5 +1,18 @@
 
 
+## [2024.8.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.1...2024.8.2) (2024-08-21)
+
+
+### Bug Fixes
+
+* **domain:** line order and crazy refresh ([#470](https://github.com/numerique-gouv/hyyypertool/issues/470)) ([cf0b10c](https://github.com/numerique-gouv/hyyypertool/commit/cf0b10c89a71218a3e3c32f6f8ea8501b3494c7b)), closes [#465](https://github.com/numerique-gouv/hyyypertool/issues/465)
+* **domains:** search not working due to query typo ([#468](https://github.com/numerique-gouv/hyyypertool/issues/468)) ([e5a0f1f](https://github.com/numerique-gouv/hyyypertool/commit/e5a0f1fafbf85f82c00f8005ff3c88de1676d480)), closes [#461](https://github.com/numerique-gouv/hyyypertool/issues/461)
+
+
+### Features
+
+* **domains:** add verification link on the row ([#471](https://github.com/numerique-gouv/hyyypertool/issues/471)) ([9505c44](https://github.com/numerique-gouv/hyyypertool/commit/9505c4430132304dc0a5ef3304ca324fb6a82e37)), closes [#464](https://github.com/numerique-gouv/hyyypertool/issues/464)
+
 ## [2024.8.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.0...2024.8.1) (2024-08-06)
 
 
