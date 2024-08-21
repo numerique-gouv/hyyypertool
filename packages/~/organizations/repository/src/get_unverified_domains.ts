@@ -6,6 +6,7 @@ import {
   and,
   asc,
   count as drizzle_count,
+  eq,
   ilike,
   isNull,
   or,
@@ -34,31 +35,34 @@ export async function get_unverified_domains(
   const where = and(search_where, where_authorized_email_domains);
 
   return pg.transaction(async function moderation_count(tx) {
-    const domains = await tx.query.email_domains.findMany({
-      columns: {
-        domain: true,
-        id: true,
-        organization_id: true,
-      },
-      limit: take,
-      offset: page * take,
-      orderBy: asc(schema.email_domains.domain),
-      where,
-      with: {
+    const domains = await tx
+      .select({
+        domain: schema.email_domains.domain,
+        id: schema.email_domains.id,
         organization: {
-          columns: {
-            cached_libelle: true,
-            created_at: true,
-            id: true,
-            siret: true,
-          },
+          cached_libelle: schema.organizations.cached_libelle,
+          created_at: schema.organizations.created_at,
+          id: schema.organizations.id,
+          siret: schema.organizations.siret,
         },
-      },
-    });
+      })
+      .from(schema.email_domains)
+      .innerJoin(
+        schema.organizations,
+        eq(schema.email_domains.organization_id, schema.organizations.id),
+      )
+      .where(where)
+      .offset(page * take)
+      .limit(take)
+      .orderBy(asc(schema.email_domains.domain));
 
     const [{ value: count }] = await tx
       .select({ value: drizzle_count() })
       .from(schema.email_domains)
+      .innerJoin(
+        schema.organizations,
+        eq(schema.email_domains.organization_id, schema.organizations.id),
+      )
       .where(where);
     return { domains, count };
   });
