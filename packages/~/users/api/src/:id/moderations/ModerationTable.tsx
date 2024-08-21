@@ -1,7 +1,7 @@
 //
 
-import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { row } from "@~/app.ui/table";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { Moderation } from "@~/moncomptepro.database";

@@ -2,13 +2,13 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Main_Layout } from "@~/app.layout";
+import { authorized } from "@~/app.middleware/authorized";
 import { get_organizations_list } from "@~/organizations.repository/get_organizations_list";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import user_page_route from "./:id/index";
 import { PageQuery_Schema, type ContextType } from "./context";
 import domains_router from "./domaines";
-import { authorized } from "@~/app.middleware/authorized";
 import leaders_router from "./leaders";
 import Page from "./page";
 

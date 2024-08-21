@@ -2,9 +2,9 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Main_Layout } from "@~/app.layout/index";
+import { authorized } from "@~/app.middleware/authorized";
 import { urls } from "@~/app.urls";
 import consola from "consola";
-import { authorized } from "@~/app.middleware/authorized";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import user_id_router from "./:id";
