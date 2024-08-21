@@ -36,6 +36,14 @@ export async function get_unverified_domains(
   const where = and(search_where, where_authorized_email_domains);
 
   return pg.transaction(async function moderation_count(tx) {
+    const member_count = tx
+      .select({
+        count: drizzle_count(schema.users_organizations.user_id).as("count"),
+        organization_id: schema.users_organizations.organization_id,
+      })
+      .from(schema.users_organizations)
+      .groupBy(schema.users_organizations.organization_id)
+      .as("member_count");
     const domains = await tx
       .select({
         domain: schema.email_domains.domain,
@@ -52,10 +60,18 @@ export async function get_unverified_domains(
         schema.organizations,
         eq(schema.email_domains.organization_id, schema.organizations.id),
       )
+      .leftJoin(
+        member_count,
+        eq(schema.email_domains.organization_id, member_count.organization_id),
+      )
       .where(where)
       .offset(page * take)
       .limit(take)
-      .orderBy(asc(schema.email_domains.domain), asc(schema.organizations.id));
+      .orderBy(
+        asc(member_count.count),
+        asc(schema.email_domains.domain),
+        asc(schema.organizations.id),
+      );
 
     const [{ value: count }] = await tx
       .select({ value: drizzle_count() })
