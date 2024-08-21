@@ -32,6 +32,7 @@ export async function get_unverified_domains(
         ilike(schema.organizations.siret, `%${search}%`),
       )
     : undefined;
+
   const where = and(search_where, where_authorized_email_domains);
 
   return pg.transaction(async function moderation_count(tx) {
