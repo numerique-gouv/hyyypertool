@@ -133,6 +133,12 @@ function Row({
       <td class="!text-end">
         <GoogleSearchButton
           class={button({ class: "align-bottom", size: "sm" })}
+          query={domain}
+        >
+          Vérifier le nom de domaine
+        </GoogleSearchButton>
+        <GoogleSearchButton
+          class={button({ class: "align-bottom", size: "sm" })}
           query={`${organization.cached_libelle} ${domain}`}
         >
           Vérifier le matching
@@ -216,26 +222,6 @@ async function Row_Actions({
           >
             🔄 Domain externe
           </button>
-        </li>
-        <li>
-          <GoogleSearchButton
-            class={menu_item({ class: "bg-none" })}
-            query={domain}
-            role="menuitem"
-            tabindex={-1}
-          >
-            Résultats Google pour ce nom de domaine
-          </GoogleSearchButton>
-        </li>
-        <li>
-          <GoogleSearchButton
-            class={menu_item({ class: "bg-none" })}
-            query={`${organization.cached_libelle} ${domain}`}
-            role="menuitem"
-            tabindex={-1}
-          >
-            Résultats Google pour le nom de l'organisation et le nom de domaine
-          </GoogleSearchButton>
         </li>
       </ul>
     </Horizontal_Menu>
