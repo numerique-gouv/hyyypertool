@@ -8,8 +8,8 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
-            domain: string | undefined;
+            id: string;
+            domain: string;
           } & {
             id: string;
           };
@@ -23,7 +23,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -38,7 +38,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $put: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -57,8 +57,8 @@ declare const app: import("hono/hono-base").HonoBase<
       $delete: {
         input: {
           param: {
-            id: string | undefined;
-            domain_id: string | undefined;
+            id: string;
+            domain_id: string;
           } & {
             id: string;
           };
@@ -70,8 +70,8 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
-            domain_id: string | undefined;
+            id: string;
+            domain_id: string;
           } & {
             id: string;
           };
@@ -93,8 +93,8 @@ declare const app: import("hono/hono-base").HonoBase<
               | import("hono/types").ParsedFormValue[];
           };
           param: {
-            id: string | undefined;
-            user_id: string | undefined;
+            id: string;
+            user_id: string;
           } & {
             user_id: string;
           } & {
@@ -108,19 +108,19 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
-            user_id: string | undefined;
+            id: string;
+            user_id: string;
           } & {
             user_id: string;
           } & {
             id: string;
           };
           form: {
-            verification_type?:
+            is_external?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
-            is_external?:
+            verification_type?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
@@ -133,8 +133,8 @@ declare const app: import("hono/hono-base").HonoBase<
       $delete: {
         input: {
           param: {
-            id: string | undefined;
-            user_id: string | undefined;
+            id: string;
+            user_id: string;
           } & {
             user_id: string;
           } & {
@@ -150,7 +150,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -170,7 +170,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -226,7 +226,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -240,7 +240,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -258,7 +258,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -270,7 +270,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $delete: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -284,7 +284,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -313,7 +313,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -340,7 +340,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -354,7 +354,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -376,7 +376,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $patch: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -390,7 +390,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -408,7 +408,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -422,7 +422,7 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            id: string | undefined;
+            id: string;
           } & {
             id: string;
           };
@@ -532,9 +532,9 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            article_id: string | undefined;
-            attachment_id: string | undefined;
-            ticket_id: string | undefined;
+            ticket_id: string;
+            article_id: string;
+            attachment_id: string;
           };
         };
         output: {};
