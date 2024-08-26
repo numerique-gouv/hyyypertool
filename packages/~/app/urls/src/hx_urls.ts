@@ -50,11 +50,11 @@ type HxClientRequest<TSchema extends Schema> = {
       ? Method extends Methods
         ? $Input extends Endpoint["input"]
           ? HasRequiredKeys<Omit<$Input, "form">> extends true
-            ? <$Args extends SetOptional<$Input, "form">>(
+            ? <$Args extends SetOptional<$Input, any>>(
                 args: $Args,
                 options?: HxClientRequestOptions,
               ) => HtmxSpecifiedAttributes<Method, $Args>
-            : <$Args extends SetOptional<$Input, "form">>(
+            : <$Args extends SetOptional<$Input, any>>(
                 args?: $Args,
                 options?: HxClientRequestOptions,
               ) => HtmxSpecifiedAttributes<Method, $Args>
