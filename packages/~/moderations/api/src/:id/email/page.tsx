@@ -69,13 +69,14 @@ function Header() {
 }
 
 async function ListProvider({ children }: PropsWithChildren) {
-  const {
-    moderation: { ticket_id },
+  let {
+    moderation: { ticket_id: _ticket_id },
   } = useContext(Moderation_Context);
-  if (!ticket_id) {
+  if (!_ticket_id) {
     return <FindCorrespondingEmail />;
   }
 
+  const ticket_id = Number(_ticket_id);
   const zammad_articles = await get_zammad_mail({
     ticket_id,
   });

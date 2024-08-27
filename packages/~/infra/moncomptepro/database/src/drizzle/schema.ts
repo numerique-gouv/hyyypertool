@@ -81,7 +81,7 @@ export const moderations = pgTable("moderations", {
     mode: "string",
   }),
   comment: varchar("comment"),
-  ticket_id: integer("ticket_id"),
+  ticket_id: varchar("ticket_id"),
   moderated_by: varchar("moderated_by"),
 });
 
