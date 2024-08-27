@@ -111,7 +111,7 @@ async function create_and_send_email_to_user(
 
   await pg
     .update(schema.moderations)
-    .set({ ticket_id: ticket.id })
+    .set({ ticket_id: String(ticket.id) })
     .where(eq(schema.moderations.id, moderation.id));
 }
 
@@ -121,15 +121,17 @@ async function respond_to_ticket(
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
 
+  const ticket_id = Number(moderation.ticket_id);
+
   const result = await get_full_ticket({
-    ticket_id: moderation.ticket_id,
+    ticket_id,
   });
 
   const user = Object.values(result.assets.User || {}).find((user) => {
     return user.email === userinfo.email;
   });
 
-  await send_zammad_response(moderation.ticket_id, {
+  await send_zammad_response(ticket_id, {
     article: {
       body: message,
       content_type: "text/html",

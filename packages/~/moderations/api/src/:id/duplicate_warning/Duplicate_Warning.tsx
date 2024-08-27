@@ -132,7 +132,7 @@ async function Alert_Duplicate_Moderation() {
             </a>{" "}
             {moderation.moderated_at ? "✔️" : "❌"}:{" "}
             {moderation.ticket_id && zammad_ticket ? (
-              <OpenInZammad ticket_id={moderation.ticket_id}>
+              <OpenInZammad ticket_id={Number(moderation.ticket_id)}>
                 Ouvrir Ticket#{moderation.ticket_id} dans Zammad
               </OpenInZammad>
             ) : (
@@ -184,9 +184,8 @@ function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
   return Promise.all(
     moderations.map(async (moderation) => {
       if (!moderation.ticket_id) return { moderation };
-      const [, zammad_ticket] = await to(
-        get_zammad_mail({ ticket_id: moderation.ticket_id }),
-      );
+      const ticket_id = Number(moderation.ticket_id);
+      const [, zammad_ticket] = await to(get_zammad_mail({ ticket_id }));
       return { moderation, zammad_ticket };
     }),
   );
