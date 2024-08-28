@@ -62,7 +62,7 @@
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
     "dotenv": "16.4.5",
-    "hono": "4.5.8",
+    "hono": "4.5.9",
     "tsx": "4.16.5"
   },
   "devDependencies": {
@@ -78,7 +78,7 @@
     "typescript": "5.5.4"
   },
   "overrides": {
-    "hono": "4.5.8"
+    "hono": "4.5.9"
   },
   "release-it": {
     "git": {
