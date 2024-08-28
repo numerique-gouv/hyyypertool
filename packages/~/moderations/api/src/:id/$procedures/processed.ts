@@ -6,10 +6,9 @@ import { Entity_Schema } from "@~/app.core/schema";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
-import { schema } from "@~/moncomptepro.database";
-import { eq } from "drizzle-orm";
+import { mark_moderatio_as_rejected } from "@~/moderations.lib/usecase/mark_moderatio_as_rejected";
+import { get_moderation } from "@~/moderations.repository/get_moderation";
 import { Hono } from "hono";
-import { comment_message } from "./comment_message";
 
 //
 
@@ -21,29 +20,17 @@ export default new Hono<
   async ({ text, req, notFound, var: { moncomptepro_pg, userinfo } }) => {
     const { id } = req.valid("param");
 
-    const moderation = await moncomptepro_pg.query.moderations.findFirst({
-      where: eq(schema.moderations.id, id),
+    const moderation = await get_moderation(moncomptepro_pg, {
+      moderation_id: id,
     });
 
     if (!moderation) return notFound();
 
-    const { comment } = moderation;
-    const moderated_by = userinfo.email;
-
-    await moncomptepro_pg
-      .update(schema.moderations)
-      .set({
-        comment: [
-          ...(comment ? [comment] : []),
-          comment_message({
-            type: "REJECTED",
-            created_by: moderated_by,
-          }),
-        ].join("\n"),
-        moderated_at: new Date().toISOString(),
-        moderated_by,
-      })
-      .where(eq(schema.moderations.id, id));
+    await mark_moderatio_as_rejected({
+      pg: moncomptepro_pg,
+      moderation,
+      userinfo,
+    });
 
     return text("OK", 200, {
       "HX-Trigger": [

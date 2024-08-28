@@ -67,3 +67,7 @@ export function prefix_id(name: string) {
 export function is_htmx_request(req: Request) {
   return req.headers.get("hx-request") === "true";
 }
+
+export const hx_disabled_form_elements = {
+  "hx-disabled-elt": ["button", "input", "textarea"].join(", "),
+};

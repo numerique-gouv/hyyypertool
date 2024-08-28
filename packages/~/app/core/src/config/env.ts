@@ -9,7 +9,11 @@ import { z } from "zod";
 //
 
 dotenv.config({
-  path: [`.env.${process.env.NODE_ENV}.local`, ".env.local", ".env"],
+  path: [
+    `.env.${process.env.NODE_ENV ?? "development"}.local`,
+    ".env.local",
+    ".env",
+  ],
 });
 
 const pkg = await import(join(cwd(), "package.json"));
@@ -48,6 +52,12 @@ export const app_env = z.object({
     .string()
     .trim()
     .default("password_at_least_32_characters_long"),
+  CRISP_BASE_URL: z.string().url().default("https://api.crisp.chat"),
+  CRISP_IDENTIFIER: z.string().trim(),
+  CRISP_KEY: z.string().trim(),
+  CRISP_PLUGIN_URN: z.string().trim(),
+  CRISP_USER_NICKNAME: z.string().trim(),
+  CRISP_WEBSITE_ID: z.string().trim(),
   DATABASE_URL: z
     .string()
     .trim()

@@ -6,7 +6,7 @@
     "outDir": "./node_modules/.cache/tsc",
     "types": ["bun-types"]
   },
-  "extends": "@~/config.typescript/api.json",
+  "extends": "@~/config.typescript/api/tsconfig.json",
   "references": [
     { "path": "../../app/core/tsconfig.json" },
     { "path": "../../app/middleware/tsconfig.json" },

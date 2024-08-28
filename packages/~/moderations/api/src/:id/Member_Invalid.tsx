@@ -1,6 +1,6 @@
 //
 
-import { Htmx_Events } from "@~/app.core/htmx";
+import { Htmx_Events, hx_disabled_form_elements } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { copy_value_to_clipboard } from "@~/app.ui/button/scripts";
 import { fieldset } from "@~/app.ui/form";
@@ -71,6 +71,7 @@ export async function Member_Invalid() {
       {...await hx_urls.moderations[":id"].$procedures.rejected.$patch({
         param: { id: moderation.id.toString() },
       })}
+      {...hx_disabled_form_elements}
       hx-swap="none"
     >
       <fieldset class={base()}>

@@ -16,7 +16,7 @@ import {
   type ContextType,
 } from "./context";
 import duplicate_warning_router from "./duplicate_warning";
-import { moderation_email_router } from "./email/index";
+import moderation_email_router from "./email/index";
 import { Moderation_NotFound } from "./not-found";
 import Page from "./page";
 

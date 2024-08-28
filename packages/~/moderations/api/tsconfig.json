@@ -3,14 +3,19 @@
     "jsxImportSource": "hono/jsx",
     "outDir": "./node_modules/.cache/tsc"
   },
-  "extends": "@~/config.typescript/api.json",
+  "extends": "@~/config.typescript/api/tsconfig.json",
   "include": ["src"],
   "references": [
     { "path": "../../app/layout/tsconfig.json" },
     { "path": "../../app/middleware/tsconfig.json" },
     { "path": "../../app/ui/tsconfig.json" },
     { "path": "../../app/urls/tsconfig.json" },
+    { "path": "../../infra/crisp/lib/tsconfig.json" },
+    { "path": "../../infra/crisp/middleware/tsconfig.json" },
+    { "path": "../../infra/crisp/ui/tsconfig.json" },
     { "path": "../../infra/moncomptepro/database/tsconfig.json" },
-    { "path": "../../infra/moncomptepro/lib/tsconfig.json" }
+    { "path": "../../infra/moncomptepro/lib/tsconfig.json" },
+    { "path": "../../infra/zammad/lib/tsconfig.json" },
+    { "path": "../../organizations/repository/tsconfig.json" }
   ]
 }

@@ -3,7 +3,7 @@
 import { zValidator } from "@hono/zod-validator";
 import { HTTPError } from "@~/app.core/error";
 import { Id_Schema } from "@~/app.core/schema";
-import { get_zammad_attachment } from "@~/zammad.lib";
+import { get_zammad_attachment } from "@~/zammad.lib/get_zammad_attachment";
 import { Hono } from "hono";
 import { P, match } from "ts-pattern";
 import { z } from "zod";

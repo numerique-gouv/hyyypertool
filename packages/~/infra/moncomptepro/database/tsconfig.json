@@ -3,6 +3,6 @@
     "outDir": "./node_modules/.cache/tsc",
     "types": ["pg"]
   },
-  "extends": "@~/config.typescript/base.json",
+  "extends": "@~/config.typescript/base/tsconfig.json",
   "references": [{ "path": "../../../app/core/tsconfig.json" }]
 }

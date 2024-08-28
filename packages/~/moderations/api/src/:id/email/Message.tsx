@@ -5,14 +5,16 @@ import { quote } from "@~/app.ui/quote";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { GROUP_MONCOMPTEPRO_SENDER_ID } from "@~/zammad.lib/const";
 import type { Article } from "@~/zammad.lib/types";
-import { useContext } from "hono/jsx";
 import { tv } from "tailwind-variants";
-import { List_Context } from "./context";
+import { usePageRequestContext } from "./context";
 
 //
 
 export function Message({ article }: { article: Article }) {
-  const { ticket_id } = useContext(List_Context);
+  const {
+    var: { zammad },
+  } = usePageRequestContext();
+  const { ticket_id } = zammad!;
   const is_family = article.sender_id === GROUP_MONCOMPTEPRO_SENDER_ID;
   const { author, base, body, caption, source } = message_variants({
     is_family,
@@ -52,6 +54,7 @@ export function Message({ article }: { article: Article }) {
     </figure>
   );
 }
+
 //
 
 const message_variants = tv({

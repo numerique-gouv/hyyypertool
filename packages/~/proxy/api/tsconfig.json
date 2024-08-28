@@ -2,6 +2,6 @@
   "compilerOptions": {
     "outDir": "./node_modules/.cache/tsc"
   },
-  "extends": "@~/config.typescript/api.json",
+  "extends": "@~/config.typescript/api/tsconfig.json",
   "references": []
 }

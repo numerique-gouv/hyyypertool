@@ -17,7 +17,7 @@ import {
   get_user_by_id,
   type get_user_by_id_dto,
 } from "@~/users.repository/get_user_by_id";
-import { get_zammad_mail } from "@~/zammad.lib";
+import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
 import { to } from "await-to-js";
 import { and, asc, eq, ilike, not, or } from "drizzle-orm";
 import { raw } from "hono/html";

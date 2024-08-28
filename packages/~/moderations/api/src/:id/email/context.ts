@@ -1,23 +1,58 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
+import type { App_Context } from "@~/app.middleware/context";
+import { urls } from "@~/app.urls";
+import type { get_crisp_mail_dto } from "@~/crisp.lib";
+import type { Crisp_Context } from "@~/crisp.middleware";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import { type get_zammad_mail_dto } from "@~/zammad.lib";
+import { type get_zammad_mail_dto } from "@~/zammad.lib/get_zammad_mail";
 import { eq } from "drizzle-orm";
-import { createContext } from "hono/jsx";
+import type { Env, InferRequestType } from "hono";
+import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export const Moderation_Context = createContext({
-  moderation: {} as get_moderation_dto,
-});
+export interface ContextVariablesType extends Env {
+  Variables: {
+    MAX_ARTICLE_COUNT: number;
+    //
+    crisp:
+      | undefined
+      | {
+          conversation: get_crisp_mail_dto["conversation"];
+          messages: get_crisp_mail_dto["messages"];
+          session_id: string;
+          show_more: boolean;
+          subject: string;
+        };
+    moderation: get_moderation_dto;
+    zammad:
+      | undefined
+      | {
+          articles: get_zammad_mail_dto;
+          show_more: boolean;
+          subject: string;
+          ticket_id: string;
+        };
+  };
+}
+export type ContextType = App_Context & Crisp_Context & ContextVariablesType;
 
-export const List_Context = createContext({
-  articles: [] as get_zammad_mail_dto,
-  show_more: false,
-  subject: "",
-  ticket_id: NaN,
-});
+//
+
+const $get = typeof urls.moderations[":id"].email.$get;
+type PageInputType = {
+  out: InferRequestType<typeof $get>;
+};
+
+export const usePageRequestContext = useRequestContext<
+  ContextType,
+  any,
+  PageInputType
+>;
+
+//
 
 export async function get_moderation(
   pg: MonComptePro_PgDatabase,
