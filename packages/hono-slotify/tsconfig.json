@@ -6,6 +6,6 @@
     "outDir": "./node_modules/.cache/tsc",
     "types": ["bun-types", "hono"]
   },
-  "extends": "@~/config.typescript/tsx.json",
+  "extends": "@~/config.typescript/tsx/tsconfig.json",
   "references": []
 }

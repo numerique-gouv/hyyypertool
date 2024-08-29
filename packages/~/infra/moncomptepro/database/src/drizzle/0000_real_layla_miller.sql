@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS "moderations" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"moderated_at" timestamp with time zone,
 	"comment" varchar,
-	"ticket_id" integer,
+	"ticket_id" varchar,
 	"moderated_by" varchar
 );
 --> statement-breakpoint

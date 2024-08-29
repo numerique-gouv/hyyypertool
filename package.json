@@ -8,6 +8,7 @@
     "packages/~/auth/*",
     "packages/~/config/*",
     "packages/~/infra/moncomptepro/*",
+    "packages/~/infra/crisp/*",
     "packages/~/infra/zammad/*",
     "packages/~/moderations/*",
     "packages/~/organizations/*",
@@ -63,7 +64,7 @@
     "consola": "3.2.3",
     "dotenv": "16.4.5",
     "hono": "4.5.9",
-    "tsx": "4.16.5"
+    "tsx": "4.19.0"
   },
   "devDependencies": {
     "@csmith/release-it-calver-plugin": "2023.12.0",

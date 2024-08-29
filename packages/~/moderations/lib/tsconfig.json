@@ -2,5 +2,12 @@
   "compilerOptions": {
     "outDir": "./node_modules/.cache/tsc"
   },
-  "extends": "@~/config.typescript/base.json"
+  "extends": "@~/config.typescript/base/tsconfig.json",
+  "include": ["src"],
+  "references": [
+    { "path": "../../app/core/tsconfig.json" },
+    { "path": "../../infra/crisp/lib/tsconfig.json" },
+    { "path": "../../infra/moncomptepro/database/tsconfig.json" },
+    { "path": "../repository/tsconfig.json" }
+  ]
 }

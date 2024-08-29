@@ -23,6 +23,12 @@ test("GET /users", async () => {
     .use(set_nonce("nonce"))
     .use(set_userinfo({ email: "good@captain.yargs" }))
     .route("/", app)
+    .onError((error) => {
+      throw error;
+    })
     .request("/");
+
+  if (response.status >= 400) throw await response.text();
+
   expect(response.status).toBe(200);
 });

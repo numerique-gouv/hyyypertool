@@ -1,6 +1,7 @@
 //
 
 import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/moncomptepro.d";
+import { eq } from "drizzle-orm";
 import { schema, type MonComptePro_PgDatabase } from "..";
 
 //
@@ -27,6 +28,7 @@ export async function create_unicorn_organization(pg: MonComptePro_PgDatabase) {
 }
 
 //
+
 export async function create_adora_pony_user(pg: MonComptePro_PgDatabase) {
   const [{ id: user_id }] = await pg
     .insert(schema.users)
@@ -40,6 +42,32 @@ export async function create_adora_pony_user(pg: MonComptePro_PgDatabase) {
     .returning({ id: schema.users.id });
 
   return user_id;
+}
+
+export async function create_adora_pony_moderation(
+  pg: MonComptePro_PgDatabase,
+  moderation: Omit<
+    typeof schema.moderations.$inferInsert,
+    "organization_id" | "user_id"
+  >,
+) {
+  const unicorn_organization = await pg.query.organizations.findFirst({
+    columns: { id: true },
+    where: eq(schema.organizations.siret, "🦄 siret"),
+  });
+  const adora_pony_user = await pg.query.users.findFirst({
+    columns: { id: true },
+    where: eq(schema.users.email, "adora.pony@unicorn.xyz"),
+  });
+  const [{ id: moderation_id }] = await pg
+    .insert(schema.moderations)
+    .values({
+      ...moderation,
+      organization_id: unicorn_organization!.id,
+      user_id: adora_pony_user!.id,
+    })
+    .returning({ id: schema.moderations.id });
+  return moderation_id;
 }
 
 //

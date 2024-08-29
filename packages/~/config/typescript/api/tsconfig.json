@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "API",
-  "extends": "./base.json",
+  "extends": "../base/tsconfig.json",
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "jsx": "preserve",

@@ -5,8 +5,8 @@ import { set_moncomptepro_pg } from "@~/app.middleware/set_moncomptepro_pg";
 import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { anais_tailhade } from "@~/app.middleware/set_userinfo#fixture";
-import { schema } from "@~/moncomptepro.database";
 import {
+  create_adora_pony_moderation,
   create_adora_pony_user,
   create_unicorn_organization,
 } from "@~/moncomptepro.database/seed/unicorn";
@@ -70,9 +70,9 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
     type: "",
     ticket_id: null,
     moderated_at: "2222-01-02 00:00:00+00",
-    moderated_by: "anais.tailhade@omage.gouv.fr",
+    moderated_by: "Anais Tailhade <anais.tailhade@omage.gouv.fr>",
     comment:
-      "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr ",
+      "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr",
     created_at: "2222-01-01 00:00:00+00",
   });
 
@@ -132,9 +132,9 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
     type: "",
     ticket_id: null,
     moderated_at: "2222-01-02 00:00:00+00",
-    moderated_by: "anais.tailhade@omage.gouv.fr",
+    moderated_by: "Anais Tailhade <anais.tailhade@omage.gouv.fr>",
     comment:
-      "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr ",
+      "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr",
     created_at: "2222-01-01 00:00:00+00",
   });
 
@@ -167,15 +167,7 @@ async function given_moderation_42() {
   const unicorn_organization_id = await create_unicorn_organization(pg);
   const adora_pony_user_id = await create_adora_pony_user(pg);
 
-  const [{ id: moderation_id }] = await pg
-    .insert(schema.moderations)
-    .values({
-      organization_id: unicorn_organization_id,
-      user_id: adora_pony_user_id,
-      type: "",
-    })
-    .returning({ id: schema.moderations.id });
-
+  const moderation_id = await create_adora_pony_moderation(pg, { type: "" });
   setSystemTime(new Date("2222-01-02T00:00:00.000Z"));
 
   return {

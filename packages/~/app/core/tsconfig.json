@@ -3,5 +3,5 @@
     "types": ["bun-types"],
     "outDir": "./node_modules/.cache/tsc"
   },
-  "extends": "@~/config.typescript/base.json"
+  "extends": "@~/config.typescript/base/tsconfig.json"
 }

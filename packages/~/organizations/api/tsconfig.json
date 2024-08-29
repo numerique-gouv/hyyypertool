@@ -3,7 +3,7 @@
     "jsxImportSource": "hono/jsx",
     "outDir": "./node_modules/.cache/tsc"
   },
-  "extends": "@~/config.typescript/api.json",
+  "extends": "@~/config.typescript/api/tsconfig.json",
   "references": [
     { "path": "../../app/layout/tsconfig.json" },
     { "path": "../../app/middleware/tsconfig.json" },

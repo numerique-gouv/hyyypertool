@@ -8,6 +8,7 @@ import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { App_Context } from "@~/app.middleware/context";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
 import { member_join_organization } from "@~/moderations.lib/usecase/member_join_organization";
 import { schema } from "@~/moncomptepro.database";
 import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
@@ -18,7 +19,6 @@ import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
-import { comment_message } from "./comment_message";
 
 //
 
@@ -44,7 +44,12 @@ export default new Hono<App_Context>().patch(
     const { add_domain, add_member, send_notitfication } = req.valid("form");
 
     const moderation = await moncomptepro_pg.query.moderations.findFirst({
-      columns: { comment: true, organization_id: true, user_id: true },
+      columns: {
+        comment: true,
+        id: true,
+        organization_id: true,
+        user_id: true,
+      },
       with: { user: { columns: { email: true } } },
       where: eq(schema.moderations.id, id),
     });
@@ -52,7 +57,6 @@ export default new Hono<App_Context>().patch(
     if (!moderation) return notFound();
 
     const {
-      comment,
       organization_id,
       user_id,
       user: { email },
@@ -110,20 +114,14 @@ export default new Hono<App_Context>().patch(
       await send_moderation_processed_email({ organization_id, user_id });
     }
 
-    await moncomptepro_pg
-      .update(schema.moderations)
-      .set({
-        comment: [
-          ...(comment ? [comment] : []),
-          comment_message({
-            type: "VALIDATED",
-            created_by: userinfo.email,
-          }),
-        ].join("\n"),
-        moderated_at: new Date().toISOString(),
-        moderated_by: userinfo.email,
-      })
-      .where(eq(schema.moderations.id, id));
+    await mark_moderation_as(
+      {
+        pg: moncomptepro_pg,
+        moderation,
+        userinfo,
+      },
+      "VALIDATED",
+    );
 
     return text("OK", 200, {
       "HX-Trigger": [MODERATION_EVENTS.Enum.MODERATION_UPDATED].join(", "),
