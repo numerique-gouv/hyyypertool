@@ -25,7 +25,7 @@ export async function respond_to_ticket(
 ) {
   return match(context.moderation.ticket_id)
     .with(null, () => {
-      throw new NotFoundError("Ticket not found.");
+      throw new NotFoundError("No existing ticket.");
     })
     .when(is_crisp_ticket, () => respond_in_conversation(context, full_message))
     .when(is_zammad_ticket, () =>

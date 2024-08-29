@@ -38,6 +38,9 @@ export function Main_Layout({ children }: PropsWithChildren) {
   );
 }
 
+/**
+ * @todo(dougalsduteil) Move this to another package
+ */
 export function userinfo_to_username(userinfo: {
   given_name: string;
   usual_name: string;

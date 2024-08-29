@@ -84,7 +84,11 @@ export async function get_user(config: Config, { email }: { email: string }) {
 
 export async function create_conversation(
   config: Config,
-  { email, subject }: Pick<ConversationMeta, "email" | "subject">,
+  {
+    email,
+    nickname,
+    subject,
+  }: Pick<ConversationMeta, "email" | "nickname" | "subject">,
 ) {
   const { session_id } = await fetch_crisp<CreateConversationRoute>(config, {
     endpoint: `/v1/website/${config.website_id}/conversation`,
@@ -98,6 +102,7 @@ export async function create_conversation(
     searchParams: {},
     body: {
       email,
+      nickname,
       segments: ["email", "moderation"],
       subject,
     },
