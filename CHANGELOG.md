@@ -1,3 +1,15 @@
+
+
+## [2024.8.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.2...2024.8.3) (2024-08-29)
+
+
+### Features
+
+* **domains:** add copy button next the domain name ([#472](https://github.com/numerique-gouv/hyyypertool/issues/472)) ([f9bb9bb](https://github.com/numerique-gouv/hyyypertool/commit/f9bb9bb40cf8d3be2bd1adb08a9b6900cba58473)), closes [#463](https://github.com/numerique-gouv/hyyypertool/issues/463)
+* **domains:** exclude unipersonnelle organizations ([#475](https://github.com/numerique-gouv/hyyypertool/issues/475)) ([f50c6f2](https://github.com/numerique-gouv/hyyypertool/commit/f50c6f2eecaba640b121ffbdec19f226eeb72c76)), closes [#457](https://github.com/numerique-gouv/hyyypertool/issues/457)
+* **domains:** order by member_count ([#474](https://github.com/numerique-gouv/hyyypertool/issues/474)) ([08d7f8b](https://github.com/numerique-gouv/hyyypertool/commit/08d7f8b905ab225f51fdb1c26a4ef5654ee97946))
+* **moderation:** support crisp tickets ([#485](https://github.com/numerique-gouv/hyyypertool/issues/485)) ([9dfd604](https://github.com/numerique-gouv/hyyypertool/commit/9dfd604a4b6e9a4042316ee10ce5d2fdcedf20fe))
+
 ## [2024.8.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.1...2024.8.2) (2024-08-21)
 
 ### Bug Fixes
