@@ -1,5 +1,12 @@
 
 
+## [2024.8.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.3...2024.8.4) (2024-08-29)
+
+
+### Bug Fixes
+
+* **moderation:** add nickname to new conversatino ([a5337f4](https://github.com/numerique-gouv/hyyypertool/commit/a5337f43f786aed9282f7815ff652ff72c4ce794))
+
 ## [2024.8.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.2...2024.8.3) (2024-08-29)
 
 
