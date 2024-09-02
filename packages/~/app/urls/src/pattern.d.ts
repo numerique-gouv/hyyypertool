@@ -116,11 +116,11 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            is_external?:
+            verification_type?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
-            verification_type?:
+            is_external?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
@@ -532,9 +532,9 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           param: {
-            ticket_id: string;
             article_id: string;
             attachment_id: string;
+            ticket_id: string;
           };
         };
         output: {};
