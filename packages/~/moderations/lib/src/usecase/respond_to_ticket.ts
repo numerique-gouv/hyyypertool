@@ -1,7 +1,7 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import { userinfo_to_username } from "@~/app.layout";
+import { z_username } from "@~/app.core/schema/z_username";
 import { get_user, is_crisp_ticket, send_message } from "@~/crisp.lib";
 import { get_full_ticket, send_zammad_response } from "@~/zammad.lib";
 import {
@@ -48,7 +48,7 @@ async function respond_in_conversation(
     get_user(crisp_config, { email: userinfo.email }),
   );
   const user = found_user ?? {
-    nickname: userinfo_to_username(userinfo),
+    nickname: z_username.parse(userinfo),
     email: userinfo.email,
   };
 

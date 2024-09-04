@@ -1,6 +1,6 @@
 //
 
-import { userinfo_to_username } from "@~/app.layout";
+import { z_username } from "@~/app.core/schema/z_username";
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
 import type { get_moderation_dto } from "@~/moderations.repository/get_moderation";
 import { update_moderation_by_id } from "@~/moderations.repository/update_moderation_by_id";
@@ -19,7 +19,7 @@ export async function mark_moderatio_as_rejected({
   pg: MonComptePro_PgDatabase;
 }) {
   const { comment, id: moderation_id } = moderation;
-  const moderated_by = userinfo_to_username(userinfo);
+  const moderated_by = z_username.parse(userinfo);
 
   await update_moderation_by_id(pg, {
     comment: append_comment(comment, {
