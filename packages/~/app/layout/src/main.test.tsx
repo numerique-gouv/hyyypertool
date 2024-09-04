@@ -17,7 +17,7 @@ beforeAll(() => {
 test("Main Layout", async () => {
   const app = new Hono()
     .use(set_config({}))
-    .use(set_userinfo({}))
+    .use(set_userinfo({ given_name: "Lara", usual_name: "Croft" }))
     .use(set_nonce("nonce"))
     .use(jsxRenderer(Main_Layout))
     .get("/", (c) => {

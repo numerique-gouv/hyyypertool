@@ -1,5 +1,6 @@
 //
 
+import { z_username } from "@~/app.core/schema/z_username";
 import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
 import { urls } from "@~/app.urls";
 import type { PropsWithChildren } from "hono/jsx";
@@ -11,7 +12,7 @@ export function Main_Layout({ children }: PropsWithChildren) {
   const {
     var: { userinfo },
   } = useRequestContext<UserInfoVariables_Context>();
-  const username = userinfo_to_username(userinfo);
+  const username = z_username.parse(userinfo);
   return (
     <Root_Layout>
       <div class="flex min-h-full flex-grow flex-col">
@@ -36,17 +37,6 @@ export function Main_Layout({ children }: PropsWithChildren) {
       </div>
     </Root_Layout>
   );
-}
-
-/**
- * @todo(dougalsduteil) Move this to another package
- */
-export function userinfo_to_username(userinfo: {
-  given_name: string;
-  usual_name: string;
-}) {
-  const { given_name, usual_name } = userinfo;
-  return `${given_name} ${usual_name}`;
 }
 
 //

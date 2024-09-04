@@ -1,7 +1,7 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import { userinfo_to_username } from "@~/app.layout";
+import { z_username } from "@~/app.core/schema/z_username";
 import { create_conversation } from "@~/crisp.lib";
 import { update_moderation_by_id } from "@~/moderations.repository/update_moderation_by_id";
 import type {
@@ -22,9 +22,9 @@ export async function create_and_send_email_to_user(
     where: (table, { eq }) => eq(table.id, moderation.user_id),
   });
   if (!user) throw new NotFoundError(`User not found`);
-  const nickname = userinfo_to_username({
-    given_name: user.given_name ?? "",
-    usual_name: user.family_name ?? "",
+  const nickname = z_username.parse({
+    given_name: user.given_name,
+    usual_name: user.family_name,
   });
   const { session_id } = await create_conversation(crisp_config, {
     email: to,
