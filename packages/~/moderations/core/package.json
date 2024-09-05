@@ -1,8 +1,11 @@
 {
-  "name": "@~/moderations.lib",
+  "name": "@~/moderations.core",
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "imports": {
+    "#src/*": "./src/*.ts"
+  },
   "exports": {
     ".": {
       "default": "./src/index.ts"
@@ -13,12 +16,6 @@
   },
   "dependencies": {
     "@~/app.core": "workspace:*",
-    "@~/crisp.lib": "workspace:*",
-    "@~/moderations.core": "workspace:*",
-    "@~/moderations.repository": "workspace:*",
-    "@~/moncomptepro.database": "workspace:*",
-    "drizzle-orm": "0.33.0",
-    "ts-pattern": "5.3.1",
     "zod": "3.23.8"
   },
   "devDependencies": {

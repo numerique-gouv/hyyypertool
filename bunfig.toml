@@ -1,4 +1,6 @@
 #
 
 [test]
-preload = "@~/config.happydom/register.ts"
+preload = [
+  "@~/config.happydom/register.ts"
+]

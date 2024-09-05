@@ -14,7 +14,7 @@ import {
   pg,
 } from "@~/moncomptepro.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
-import { get_organization_members_count } from "./get_organization_members_count";
+import { GetOrganizationMembersCount } from "./get_organization_members_count";
 
 //
 
@@ -23,10 +23,14 @@ beforeEach(empty_database);
 
 //
 
+const get_organization_members_count = GetOrganizationMembersCount({
+  pg,
+});
+
 test("returns no member", async () => {
   const unicorn_organization_id = await create_unicorn_organization(pg);
 
-  const domain_unicorn = await get_organization_members_count(pg, {
+  const domain_unicorn = await get_organization_members_count({
     organization_id: unicorn_organization_id,
   });
 
@@ -41,7 +45,7 @@ test("returns 1 member", async () => {
     user_id: await create_pink_diamond_user(pg),
   });
 
-  const domain_unicorn = await get_organization_members_count(pg, {
+  const domain_unicorn = await get_organization_members_count({
     organization_id: unicorn_organization_id,
   });
 
@@ -64,7 +68,7 @@ test("returns 3 member", async () => {
     user_id: await create_red_diamond_user(pg),
   });
 
-  const domain_unicorn = await get_organization_members_count(pg, {
+  const domain_unicorn = await get_organization_members_count({
     organization_id: unicorn_organization_id,
   });
 

@@ -5,29 +5,25 @@ import {
   date_to_string,
 } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
-import type { Pagination } from "@~/app.core/schema";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import { Pagination_Schema, type Pagination } from "@~/app.core/schema";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
+import type { Moderation } from "@~/moderations.core/queries/get_moderations_list/schema";
 import {
   moderation_type_to_emoji,
   moderation_type_to_title,
 } from "@~/moderations.lib/moderation_type.mapper";
-import { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
-import { useContext } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
-import Moderations_Context, {
+import {
   MODERATION_TABLE_ID,
   MODERATION_TABLE_PAGE_ID,
-  Page_Query,
-  type Search,
-  type get_moderations_list_dto,
+  usePageRequestContext,
+  z_query,
 } from "./context";
 
 //
 
-const page_query_keys = Page_Query.keyof();
+const page_query_keys = z_query.merge(Pagination_Schema).keyof();
 
 const hx_moderations_query_props = {
   ...(await hx_urls.moderations.$get()),
@@ -37,72 +33,40 @@ const hx_moderations_query_props = {
     page_query_keys.enum.hide_join_organization,
     page_query_keys.enum.hide_non_verified_domain,
     page_query_keys.enum.processed_requests,
-    page_query_keys.enum.search_email,
-    page_query_keys.enum.search_siret,
+    page_query_keys.enum.email,
+    page_query_keys.enum.siret,
   ]),
   "hx-replace-url": true,
   "hx-select": `#${MODERATION_TABLE_ID} > table`,
   "hx-target": `#${MODERATION_TABLE_ID}`,
 };
 
-export function Moderations_Page({
-  pagination,
-  search,
-}: {
-  pagination: Pagination;
-  search: Search;
-}) {
-  const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-  const { page, page_size } = pagination;
-  const {
-    day: date,
-    hide_join_organization,
-    hide_non_verified_domain,
-    processed_requests,
-    search_email,
-    search_siret,
-  } = search;
-  const query_moderations_list = get_moderations_list(moncomptepro_pg, {
-    search: {
-      created_at: date,
-      email: search_email,
-      siret: search_siret,
-      show_archived: processed_requests,
-      hide_non_verified_domain,
-      hide_join_organization,
-    },
-    pagination: { page: page - 1, take: page_size },
-  });
+export function Moderations_Page() {
   return (
-    <Moderations_Context.Provider
-      value={{
-        pagination,
-        query_moderations_list,
-      }}
+    <main
+      class="fr-container my-12"
+      {...hx_moderations_query_props}
+      hx-sync="this"
+      hx-trigger={[
+        `load delay:1s`,
+        `every 11s [document.visibilityState === 'visible']`,
+        `visibilitychange[document.visibilityState === 'visible'] from:document`,
+      ].join(", ")}
     >
-      <main
-        class="fr-container my-12"
-        {...hx_moderations_query_props}
-        hx-sync="this"
-        hx-trigger={[
-          `load delay:1s`,
-          `every 11s [document.visibilityState === 'visible']`,
-          `visibilitychange[document.visibilityState === 'visible'] from:document`,
-        ].join(", ")}
-      >
-        <h1>Liste des moderations</h1>
-        <Filter search={search} />
-        <ModerationList_Table />
-      </main>
-    </Moderations_Context.Provider>
+      <h1>Liste des moderations</h1>
+      <Filter />
+      <ModerationList_Table />
+    </main>
   );
 }
 
 //
 
-function Filter({ search }: { search: Search }) {
+function Filter() {
+  const {
+    var: { search },
+  } = usePageRequestContext();
+
   const on_search_show_processed_requests = `
   on keyup
     if no my value
@@ -120,36 +84,36 @@ function Filter({ search }: { search: Search }) {
         `input from:#${page_query_keys.enum.hide_join_organization}`,
         `input from:#${page_query_keys.enum.hide_non_verified_domain}`,
         `input from:#${page_query_keys.enum.processed_requests}`,
-        `keyup changed delay:500ms from:#${page_query_keys.enum.search_email}`,
-        `keyup changed delay:500ms from:#${page_query_keys.enum.search_siret}`,
+        `keyup changed delay:500ms from:#${page_query_keys.enum.email}`,
+        `keyup changed delay:500ms from:#${page_query_keys.enum.siret}`,
       ].join(", ")}
       hx-vals={JSON.stringify({ page: 1 } as Pagination)}
     >
       <div className="grid grid-cols-2 gap-6">
         <div class="fr-input-group">
-          <label class="fr-label" for={page_query_keys.enum.search_email}>
+          <label class="fr-label" for={page_query_keys.enum.email}>
             Email
           </label>
           <input
             _={on_search_show_processed_requests}
             class="fr-input"
-            id={page_query_keys.enum.search_email}
-            name={page_query_keys.enum.search_email}
+            id={page_query_keys.enum.email}
+            name={page_query_keys.enum.email}
             placeholder="Recherche par Email"
-            value={search.search_email}
+            value={search.email}
           />
         </div>
         <div class="fr-input-group">
-          <label class="fr-label" for={page_query_keys.enum.search_siret}>
+          <label class="fr-label" for={page_query_keys.enum.siret}>
             Siret
           </label>
           <input
             _={on_search_show_processed_requests}
             class="fr-input"
-            id={page_query_keys.enum.search_siret}
-            name={page_query_keys.enum.search_siret}
+            id={page_query_keys.enum.siret}
+            name={page_query_keys.enum.siret}
             placeholder="Recherche par SIRET"
-            value={search.search_siret}
+            value={search.siret}
           />
         </div>
       </div>
@@ -227,9 +191,11 @@ function Filter({ search }: { search: Search }) {
 }
 
 async function ModerationList_Table() {
-  const { pagination, query_moderations_list } =
-    useContext(Moderations_Context);
+  const {
+    var: { pagination, query_moderations_list },
+  } = usePageRequestContext();
   const { count, moderations } = await query_moderations_list;
+
   return (
     <div class="fr-table [&>table]:table" id={MODERATION_TABLE_ID}>
       <table>
@@ -262,14 +228,9 @@ async function ModerationList_Table() {
   );
 }
 
-function Row({
-  key,
-  moderation,
-}: {
-  key?: string;
-  moderation: get_moderations_list_dto["moderations"][number];
-}) {
+function Row({ key, moderation }: { key?: string; moderation: Moderation }) {
   const { user, organization } = moderation;
+
   return (
     <tr
       key={key}

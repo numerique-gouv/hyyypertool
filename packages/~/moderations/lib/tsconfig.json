@@ -8,6 +8,7 @@
     { "path": "../../app/core/tsconfig.json" },
     { "path": "../../infra/crisp/lib/tsconfig.json" },
     { "path": "../../infra/moncomptepro/database/tsconfig.json" },
+    { "path": "../core/tsconfig.json" },
     { "path": "../repository/tsconfig.json" }
   ]
 }

@@ -13,6 +13,7 @@ export type MonComptePro_PgDatabase = PgDatabase<
   PgQueryResultHKT,
   typeof schema
 >;
+export type PgCradle = { pg: MonComptePro_PgDatabase };
 export const Pool = Pg.Pool;
 
 //

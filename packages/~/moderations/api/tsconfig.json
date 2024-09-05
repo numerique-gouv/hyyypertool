@@ -6,6 +6,7 @@
   "extends": "@~/config.typescript/api/tsconfig.json",
   "include": ["src"],
   "references": [
+    { "path": "../../app/di/tsconfig.json" },
     { "path": "../../app/layout/tsconfig.json" },
     { "path": "../../app/middleware/tsconfig.json" },
     { "path": "../../app/ui/tsconfig.json" },

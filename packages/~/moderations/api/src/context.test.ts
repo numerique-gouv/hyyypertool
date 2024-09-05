@@ -1,31 +1,31 @@
 //
 
 import { expect, test } from "bun:test";
-import { Search_Schema } from "./context";
+import { z_query } from "./context";
 
 //
 
-test("Search_Schema > empty object", () => {
-  const search = Search_Schema.parse({});
+test("z_query > empty object", () => {
+  const search = z_query.parse({});
 
   expect(search).toEqual({
-    search_siret: "",
-    search_email: "",
-    processed_requests: false,
-    hide_non_verified_domain: false,
+    email: "",
     hide_join_organization: false,
+    hide_non_verified_domain: false,
+    processed_requests: false,
+    siret: "",
   });
 });
 
-test("Search_Schema > day 2011-01-11", () => {
-  const search = Search_Schema.parse({ day: "2011-01-11" });
+test("z_query > day 2011-01-11", () => {
+  const search = z_query.parse({ day: "2011-01-11" });
 
   expect(search).toEqual({
     day: new Date("2011-01-11"),
-    search_siret: "",
-    search_email: "",
-    processed_requests: false,
-    hide_non_verified_domain: false,
+    email: "",
     hide_join_organization: false,
+    hide_non_verified_domain: false,
+    processed_requests: false,
+    siret: "",
   });
 });

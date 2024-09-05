@@ -13,6 +13,7 @@
     { "path": "../../users/api/tsconfig.json" },
     { "path": "../../welcome/api/tsconfig.json" },
     { "path": "../core/tsconfig.json" },
+    { "path": "../di/tsconfig.json" },
     { "path": "../layout/tsconfig.json" },
     { "path": "../middleware/tsconfig.json" }
   ]

@@ -16,11 +16,8 @@ import {
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import {
-  type ContextType,
-  type get_moderation_dto,
-  type get_organization_member_dto,
-} from "../context";
+import { type ContextType } from "../context";
+import type { GetModeration } from "../repository";
 import already_signed from "./already_signed";
 
 //
@@ -41,8 +38,8 @@ test("returns all members", async () => {
         set("moderation", {
           organization: { cached_libelle: "🦄", id: unicorn_organization_id },
           user: { family_name: "🧟" },
-        } as get_moderation_dto);
-        set("organization_member", {} as get_organization_member_dto);
+        } as Awaited<ReturnType<GetModeration>>);
+        set("organization_member", { is_external: false });
         return next();
       },
       ({ render }) => {
@@ -69,9 +66,9 @@ test("returns Diamond members", async () => {
         set("domain", "unicorn.xyz");
         set("moderation", {
           organization: { cached_libelle: "🦄", id: unicorn_organization_id },
-          user: { family_name: "Diamond" },
-        } as get_moderation_dto);
-        set("organization_member", {} as get_organization_member_dto);
+          user: { family_name: "🧟" },
+        } as Awaited<ReturnType<GetModeration>>);
+        set("organization_member", { is_external: false });
         return next();
       },
       ({ render }) => {

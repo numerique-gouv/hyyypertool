@@ -6,7 +6,9 @@
   "extends": "@~/config.typescript/base/tsconfig.json",
   "references": [
     { "path": "../../infra/moncomptepro/database/tsconfig.json" },
+    { "path": "../../infra/moncomptepro/lib/tsconfig.json" },
     { "path": "../core/tsconfig.json" },
+    { "path": "../di/tsconfig.json" },
     { "path": "../sentry/tsconfig.json" },
     { "path": "../ui/tsconfig.json" },
     { "path": "../urls/tsconfig.json" }

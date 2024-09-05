@@ -1,6 +1,7 @@
 //
 
 import config from "@~/app.core/config";
+import { asValue, set_injector } from "@~/app.di";
 import { Root_Layout } from "@~/app.layout/root";
 import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
@@ -27,6 +28,7 @@ import readyz_router from "./readyz";
 //
 
 const app = new Hono()
+  .use(set_injector())
   .use(logger(consola.info))
   .use(compress())
   .use(set_sentry())
@@ -53,6 +55,12 @@ const app = new Hono()
   .route("/auth", auth_router)
   //
   .use(moncomptepro_pg_database({ connectionString: config.DATABASE_URL }))
+  .use(({ var: { moncomptepro_pg, injector } }, next) => {
+    injector.register({
+      pg: asValue(moncomptepro_pg),
+    });
+    return next();
+  })
   //
 
   .route("/moderations", moderations_router)

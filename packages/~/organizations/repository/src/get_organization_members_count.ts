@@ -1,22 +1,25 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import { schema, type PgCradle } from "@~/moncomptepro.database";
 import { count as drizzle_count, eq } from "drizzle-orm";
 
 //
 
-export async function get_organization_members_count(
-  pg: MonComptePro_PgDatabase,
-  { organization_id }: { organization_id: number },
-) {
-  const [{ value: count }] = await pg
-    .select({ value: drizzle_count() })
-    .from(schema.users_organizations)
-    .where(eq(schema.users_organizations.organization_id, organization_id));
+export function GetOrganizationMembersCount({ pg }: PgCradle) {
+  return async function get_organization_members_count({
+    organization_id,
+  }: {
+    organization_id: number;
+  }) {
+    const [{ value: count }] = await pg
+      .select({ value: drizzle_count() })
+      .from(schema.users_organizations)
+      .where(eq(schema.users_organizations.organization_id, organization_id));
 
-  return count;
+    return count;
+  };
 }
 
-export type get_organization_members_count_dto = Awaited<
-  ReturnType<typeof get_organization_members_count>
+export type GetOrganizationMembersCount = ReturnType<
+  typeof GetOrganizationMembersCount
 >;

@@ -2,18 +2,29 @@
 
 import { button } from "@~/app.ui/button";
 import { hx_urls, urls } from "@~/app.urls";
+import { type Organization } from "@~/moncomptepro.database";
 import { type JSX } from "hono/jsx";
-import { usePageRequestContext } from "./context";
 
 //
 
-export async function About_Organization() {
-  const {
-    var: {
-      moderation: { organization },
-    },
-  } = usePageRequestContext();
+type AboutOrganizationProps = {
+  organization: Pick<
+    Organization,
+    | "cached_adresse"
+    // | "cached_code_postal"
+    | "cached_etat_administratif"
+    | "cached_libelle_activite_principale"
+    | "cached_libelle_categorie_juridique"
+    | "cached_libelle_tranche_effectif"
+    | "cached_libelle"
+    | "cached_tranche_effectifs"
+    | "id"
+    | "siret"
+  >;
+};
 
+export async function AboutOrganization(props: AboutOrganizationProps) {
+  const { organization } = props;
   const hx_organizations_leaders_props =
     await hx_urls.organizations.leaders.$get({
       query: { siret: organization.siret },
@@ -104,17 +115,18 @@ export async function About_Organization() {
   );
 }
 
-export function Investigation_Organization(
-  props: JSX.IntrinsicElements["section"],
+//
+
+type InvestigationOrganizationProps = JSX.IntrinsicElements["section"] & {
+  organization: Pick<Organization, "cached_code_postal" | "siret">;
+};
+export function InvestigationOrganization(
+  props: InvestigationOrganizationProps,
 ) {
-  const {
-    var: {
-      moderation: { organization },
-    },
-  } = usePageRequestContext();
+  const { organization, ...section_props } = props;
 
   return (
-    <section {...props}>
+    <section {...section_props}>
       <h4>🕵️ Enquête sur cette organisation</h4>
 
       <ul class="list-none pl-0">

@@ -14,4 +14,5 @@ export type App_Context = AppVariables_Context &
   NonceVariables_Context &
   Session_Context &
   UserInfoVariables_Context &
+  // CradleVariablesType<object> &
   SentryVariables_Context;

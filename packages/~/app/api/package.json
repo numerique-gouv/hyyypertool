@@ -12,6 +12,7 @@
     "@hono/node-server": "1.12.2",
     "@hono/sentry": "1.2.0",
     "@~/app.core": "workspace:*",
+    "@~/app.di": "workspace:*",
     "@~/app.layout": "workspace:*",
     "@~/app.sentry": "workspace:*",
     "@~/auth.api": "workspace:*",

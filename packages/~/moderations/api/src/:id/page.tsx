@@ -5,8 +5,8 @@ import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import {
-  About_Organization,
-  Investigation_Organization,
+  AboutOrganization,
+  InvestigationOrganization,
 } from "./About_Organization";
 import { About_User, Investigation_User } from "./About_User";
 import { Moderation_Actions } from "./Actions";
@@ -58,14 +58,14 @@ export default async function Moderation_Page() {
 
       <div class="grid grid-cols-2 gap-6">
         <About_User />
-        <About_Organization />
+        <AboutOrganization organization={moderation.organization} />
       </div>
 
       <hr class="bg-none pt-6" />
 
       <div class="grid grid-cols-2 gap-6">
         <Investigation_User />
-        <Investigation_Organization />
+        <InvestigationOrganization organization={moderation.organization} />
       </div>
 
       <hr class="bg-none pt-6" />
