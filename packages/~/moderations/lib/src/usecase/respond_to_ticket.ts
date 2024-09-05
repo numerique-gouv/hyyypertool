@@ -1,94 +1,31 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import { z_username } from "@~/app.core/schema/z_username";
-import { get_user, is_crisp_ticket, send_message } from "@~/crisp.lib";
-import { get_full_ticket, send_zammad_response } from "@~/zammad.lib";
-import {
-  ARTICLE_TYPE,
-  GROUP_MONCOMPTEPRO,
-  GROUP_MONCOMPTEPRO_SENDER_ID,
-} from "@~/zammad.lib/const";
+import { is_crisp_ticket } from "@~/crisp.lib";
 import { is_zammad_ticket } from "@~/zammad.lib/is_zammad_ticket";
-import { to as await_to } from "await-to-js";
 import { match } from "ts-pattern";
-import type {
-  RejectedFullMessage,
-  RejectedModeration_Context,
-} from "../context/rejected";
+import type { RejectedFullMessage } from "../context/rejected";
+import type { respond_in_conversation_fn } from "./respond_in_conversation";
+import type { respond_to_zammad_ticket_fn } from "./respond_to_zammad_ticket";
 
 //
 
-export async function respond_to_ticket(
-  context: RejectedModeration_Context,
-  full_message: RejectedFullMessage,
+export function respond_to_ticket_usecase(
+  respond_in_conversation: respond_in_conversation_fn,
+  respond_to_zammad_ticket: respond_to_zammad_ticket_fn,
+  ticket_id: string | null,
 ) {
-  return match(context.moderation.ticket_id)
-    .with(null, () => {
-      throw new NotFoundError("No existing ticket.");
-    })
-    .when(is_crisp_ticket, () => respond_in_conversation(context, full_message))
-    .when(is_zammad_ticket, () =>
-      respond_to_zammad_ticket(context, full_message),
-    )
-    .otherwise(() => {
-      throw new NotFoundError(
-        `Unknown provider for "${context.moderation.id}"`,
-      );
-    });
-}
-
-async function respond_in_conversation(
-  { crisp_config, moderation, userinfo }: RejectedModeration_Context,
-  { message }: RejectedFullMessage,
-) {
-  if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
-
-  const [, found_user] = await await_to(
-    get_user(crisp_config, { email: userinfo.email }),
-  );
-  const user = found_user ?? {
-    nickname: z_username.parse(userinfo),
-    email: userinfo.email,
+  return async function respond_to_ticket(full_message: RejectedFullMessage) {
+    return match(ticket_id)
+      .with(null, () => {
+        throw new NotFoundError("No existing ticket.");
+      })
+      .when(is_crisp_ticket, () => respond_in_conversation(full_message))
+      .when(is_zammad_ticket, () => respond_to_zammad_ticket(full_message))
+      .otherwise(() => {
+        throw new NotFoundError(`Unknown provider for "${ticket_id}"`);
+      });
   };
-
-  await send_message(crisp_config, {
-    content: message,
-    user,
-    session_id: moderation.ticket_id,
-  });
 }
 
-async function respond_to_zammad_ticket(
-  { moderation, userinfo }: RejectedModeration_Context,
-  { message, subject, to }: RejectedFullMessage,
-) {
-  if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
-
-  const ticket_id = Number(moderation.ticket_id);
-
-  const result = await get_full_ticket({
-    ticket_id,
-  });
-
-  const user = Object.values(result.assets.User || {}).find((user) => {
-    return user.email === userinfo.email;
-  });
-
-  const body = message.replace(/\n/g, "<br />");
-
-  await send_zammad_response(ticket_id, {
-    article: {
-      body,
-      content_type: "text/html",
-      sender_id: GROUP_MONCOMPTEPRO_SENDER_ID,
-      subject,
-      subtype: "reply",
-      to,
-      type_id: ARTICLE_TYPE.enum.EMAIL,
-    },
-    group: GROUP_MONCOMPTEPRO,
-    owner_id: user?.id,
-    state: "closed",
-  });
-}
+export type respond_to_ticket_fn = ReturnType<typeof respond_to_ticket_usecase>;
