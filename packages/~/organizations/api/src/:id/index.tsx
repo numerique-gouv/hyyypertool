@@ -36,6 +36,7 @@ export default new Hono<ContextType>()
             cached_activite_principale: true,
             cached_adresse: true,
             cached_code_postal: true,
+            cached_est_active: true,
             cached_etat_administratif: true,
             cached_libelle_categorie_juridique: true,
             cached_libelle_tranche_effectif: true,

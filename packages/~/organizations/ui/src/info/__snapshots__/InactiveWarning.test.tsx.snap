@@ -1,0 +1,19 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render inactive warning 1`] = `
+"<!doctype html>
+"
+`;
+
+exports[`render nothing 1`] = `
+"<!doctype html>
+<section>
+  <div class="fr-alert fr-alert--warning">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <h3 class="fr-alert__title">
+      Attention : cette organisation a cessé son activité.
+    </h3>
+  </div>
+</section>
+"
+`;

@@ -2,7 +2,7 @@
 
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
-import type { Organization } from "@~/moncomptepro.database";
+import type { Organization } from "@~/organizations.lib/entities/Organization";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 //
@@ -12,6 +12,7 @@ type FicheOrganization = Pick<
   | "cached_activite_principale"
   | "cached_adresse"
   | "cached_code_postal"
+  | "cached_est_active"
   | "cached_etat_administratif"
   | "cached_libelle_categorie_juridique"
   | "cached_libelle_tranche_effectif"

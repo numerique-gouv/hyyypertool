@@ -2,12 +2,10 @@
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
-import { hx_urls } from "@~/app.urls";
+import { hx_urls, urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
-import {
-  About_Organization,
-  Investigation_Organization,
-} from "./About_Organization";
+import { About as About_Organization } from "@~/organizations.ui/info/About";
+import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
 import { About_User, Investigation_User } from "./About_User";
 import { Moderation_Actions } from "./Actions";
 import { Domain_Organization } from "./Domain_Organization";
@@ -58,14 +56,29 @@ export default async function Moderation_Page() {
 
       <div class="grid grid-cols-2 gap-6">
         <About_User />
-        <About_Organization />
+        <div>
+          <h3>
+            <a
+              href={
+                urls.organizations[":id"].$url({
+                  param: {
+                    id: moderation.organization.id.toString(),
+                  },
+                }).pathname
+              }
+            >
+              🏛 Organisation
+            </a>
+          </h3>
+          <About_Organization organization={moderation.organization} />
+        </div>
       </div>
 
       <hr class="bg-none pt-6" />
 
       <div class="grid grid-cols-2 gap-6">
         <Investigation_User />
-        <Investigation_Organization />
+        <Investigation_Organization organization={moderation.organization} />
       </div>
 
       <hr class="bg-none pt-6" />

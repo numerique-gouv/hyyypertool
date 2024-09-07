@@ -16,6 +16,7 @@
     { "path": "../../infra/moncomptepro/database/tsconfig.json" },
     { "path": "../../infra/moncomptepro/lib/tsconfig.json" },
     { "path": "../../infra/zammad/lib/tsconfig.json" },
-    { "path": "../../organizations/repository/tsconfig.json" }
+    { "path": "../../organizations/repository/tsconfig.json" },
+    { "path": "../../organizations/ui/tsconfig.json" }
   ]
 }

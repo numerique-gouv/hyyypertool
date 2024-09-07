@@ -293,6 +293,7 @@ async function insert_abracadabra(db: MonComptePro_PgDatabase) {
         "90.02Z - Activités de soutien au spectacle vivant",
       cached_categorie_juridique:
         "Société à responsabilité limitée (sans autre indication)",
+      cached_est_active: false,
       cached_etat_administratif: "A",
       cached_libelle_tranche_effectif: "10 à 19 salariés, en 2019",
       cached_libelle: "Abracadabra",
@@ -352,6 +353,7 @@ async function insert_aldp(db: MonComptePro_PgDatabase) {
       cached_activite_principale:
         "94.99Z - Autres organisations fonctionnant par adhésion volontaire",
       cached_categorie_juridique: "Association déclarée",
+      cached_est_active: true,
       cached_etat_administratif: "A",
       cached_libelle_tranche_effectif: "50 à 99 salariés, en 2019",
       cached_libelle: "ALDP",
@@ -377,9 +379,16 @@ async function insert_dinum(db: MonComptePro_PgDatabase) {
     .insert(schema.organizations)
     .values({
       cached_activite_principale: "84.11Z - Administration publique générale",
+      cached_adresse: "20 avenue de segur, 75007 Paris",
       cached_categorie_juridique: "Service central d'un ministère",
       cached_code_officiel_geographique: "75107",
+      cached_code_postal: "75015",
+      cached_est_active: true,
       cached_etat_administratif: "A",
+      cached_libelle_activite_principale:
+        "84.11Z - Administration publique générale",
+      cached_libelle_categorie_juridique:
+        "SA nationale à conseil d'administration",
       cached_libelle_tranche_effectif: "100 à 199 salariés, en 2021",
       cached_libelle: "DINUM",
       cached_nom_complet: "Direction interministerielle du numerique (DINUM)",
@@ -416,6 +425,7 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
       cached_activite_principale: "47.11F",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "75107",
+      cached_est_active: true,
       cached_etat_administratif: "A",
       cached_libelle_tranche_effectif: "50 à 99 salariés, en 2021",
       cached_libelle: "Dengi - Leclerc",
@@ -443,6 +453,7 @@ async function insert_bosch_france(db: MonComptePro_PgDatabase) {
       cached_activite_principale: "29.32Z",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "93070",
+      cached_est_active: true,
       cached_etat_administratif: "A",
       cached_libelle_activite_principale:
         "29.32Z - Fabrication d'autres équipements automobiles",
@@ -465,6 +476,7 @@ async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
       cached_activite_principale: "28.12Z",
       cached_categorie_juridique: "SAS, société par actions simplifiée",
       cached_code_officiel_geographique: "69259",
+      cached_est_active: true,
       cached_etat_administratif: "A",
       cached_libelle_activite_principale:
         "29.12Z - Fabrication d'autres équipements automobiles",

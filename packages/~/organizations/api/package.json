@@ -14,6 +14,7 @@
     "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
     "@~/organizations.repository": "workspace:*",
+    "@~/organizations.ui": "workspace:*",
     "@~/users.repository": "workspace:*",
     "hono": "4.6.3",
     "lodash.sortby": "4.7.0",
