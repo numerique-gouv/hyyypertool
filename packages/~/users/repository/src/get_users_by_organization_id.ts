@@ -21,7 +21,15 @@ export async function get_users_by_organization_id(
 
   const { users, count } = await pg.transaction(async (pg_t) => {
     const users = await pg_t
-      .select()
+      .select({
+        email: schema.users.email,
+        family_name: schema.users.family_name,
+        given_name: schema.users.given_name,
+        id: schema.users.id,
+        is_external: schema.users_organizations.is_external,
+        job: schema.users.job,
+        verification_type: schema.users_organizations.verification_type,
+      })
       .from(schema.users)
       .innerJoin(
         schema.users_organizations,
@@ -43,13 +51,7 @@ export async function get_users_by_organization_id(
     return { users, count };
   });
 
-  const users_with_external = users.map((user) => ({
-    ...user.users,
-    is_external: user.users_organizations.is_external,
-    verification_type: user.users_organizations.verification_type,
-  }));
-
-  return { users: users_with_external, count };
+  return { users, count };
 }
 
 export type get_users_by_organization_id_dto = ReturnType<
