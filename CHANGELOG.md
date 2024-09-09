@@ -1,5 +1,12 @@
 
 
+# [2024.9.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.4...2024.9.0) (2024-09-09)
+
+
+### Reverts
+
+* Revert "chore(deps): bump @happy-dom/global-registrator from 14.12.3 to 15.7.…" (#496) ([faa1ec6](https://github.com/numerique-gouv/hyyypertool/commit/faa1ec640216e15dbc64e94208b4b716e6f56584)), closes [#496](https://github.com/numerique-gouv/hyyypertool/issues/496)
+
 ## [2024.8.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.3...2024.8.4) (2024-08-29)
 
 
