@@ -1,5 +1,12 @@
 
 
+## [2024.9.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.0...2024.9.1) (2024-09-09)
+
+
+### Bug Fixes
+
+* **organization:** retrict user field select query ([#502](https://github.com/numerique-gouv/hyyypertool/issues/502)) ([4f9d81a](https://github.com/numerique-gouv/hyyypertool/commit/4f9d81a9256e5899b1606df76ca2588bbb89a7bd))
+
 # [2024.9.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.8.4...2024.9.0) (2024-09-09)
 
 
