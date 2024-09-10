@@ -9,10 +9,13 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { App_Context } from "@~/app.middleware/context";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
-import { member_join_organization } from "@~/moderations.lib/usecase/member_join_organization";
+import { MemberJoinOrganization } from "@~/moderations.lib/usecase/member_join_organization";
+import { GetModerationById } from "@~/moderations.repository";
 import { schema } from "@~/moncomptepro.database";
 import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
 import { add_verified_domain } from "@~/organizations.lib/usecase/add_verified_domain";
+import { GetOrganizationById } from "@~/organizations.repository";
+import { GetMember } from "@~/users.repository";
 import { to } from "await-to-js";
 import consola from "consola";
 import { eq } from "drizzle-orm";
@@ -68,7 +71,11 @@ export default new Hono<App_Context>().patch(
     if (add_domain) {
       const [error] = await to(
         add_verified_domain(
-          { pg: moncomptepro_pg },
+          {
+            get_organization_by_id: GetOrganizationById({
+              pg: moncomptepro_pg,
+            }),
+          },
           { organization_id, domain },
         ),
       );
@@ -90,12 +97,12 @@ export default new Hono<App_Context>().patch(
       .with("AS_INTERNAL", () => false)
       .with("AS_EXTERNAL", () => true)
       .exhaustive();
-
+    const member_join_organization = MemberJoinOrganization({
+      get_member: GetMember({ pg: moncomptepro_pg }),
+      get_moderation_by_id: GetModerationById({ pg: moncomptepro_pg }),
+    });
     const [error] = await to(
-      member_join_organization(
-        { pg: moncomptepro_pg },
-        { is_external, moderation_id: id },
-      ),
+      member_join_organization({ is_external, moderation_id: id }),
     );
 
     match(error)
