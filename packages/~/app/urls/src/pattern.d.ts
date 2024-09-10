@@ -14,9 +14,9 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
         };
-        output: {};
-        outputFormat: string;
-        status: import("hono/utils/http-status").StatusCode;
+        output: "OK";
+        outputFormat: "text";
+        status: 200;
       };
     };
     "/organizations/:id/domains": {
@@ -116,11 +116,11 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            verification_type?:
+            is_external?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
-            is_external?:
+            verification_type?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
