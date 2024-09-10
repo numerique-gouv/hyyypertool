@@ -7,6 +7,9 @@ updates:
       interval: "weekly"
     labels:
       - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
 
   - package-ecosystem: "npm"
     directory: "/"
@@ -14,6 +17,9 @@ updates:
       interval: "weekly"
     labels:
       - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
 
   - package-ecosystem: "npm"
     directory: "/e2e"
@@ -21,3 +27,6 @@ updates:
       interval: "weekly"
     labels:
       - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
