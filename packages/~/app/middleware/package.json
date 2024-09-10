@@ -27,7 +27,7 @@
     "@~/app.urls": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
-    "hono": "4.5.10",
+    "hono": "4.5.11",
     "hono-sessions": "0.5.8",
     "openid-client": "5.6.5"
   },
