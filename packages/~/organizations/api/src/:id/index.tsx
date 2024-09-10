@@ -1,9 +1,11 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
+import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
-import { get_organization_by_id } from "@~/organizations.repository/get_organization_by_id";
+import { GetOrganizationById } from "@~/organizations.repository";
+import { to as await_to } from "await-to-js";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import organization_procedures_router from "./$procedures";
@@ -25,15 +27,36 @@ export default new Hono<ContextType>()
       next,
     ) {
       const { id } = req.valid("param");
-      const organization = await get_organization_by_id(moncomptepro_pg, {
-        id,
+      const get_organization_by_id = GetOrganizationById({
+        pg: moncomptepro_pg,
       });
+      const [error, organization] = await await_to(
+        get_organization_by_id(id, {
+          columns: {
+            cached_activite_principale: true,
+            cached_adresse: true,
+            cached_code_postal: true,
+            cached_etat_administratif: true,
+            cached_libelle_categorie_juridique: true,
+            cached_libelle_tranche_effectif: true,
+            cached_libelle: true,
+            cached_nom_complet: true,
+            cached_tranche_effectifs: true,
+            created_at: true,
+            id: true,
+            siret: true,
+            updated_at: true,
+          },
+        }),
+      );
 
-      if (!organization) {
+      if (error instanceof NotFoundError) {
         status(404);
         return render(
           <Organization_NotFound organization_id={Number(req.param("id"))} />,
         );
+      } else if (error) {
+        throw error;
       }
 
       set("organization", organization);

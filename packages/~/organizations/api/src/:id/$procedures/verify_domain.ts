@@ -8,7 +8,7 @@ import type { App_Context } from "@~/app.middleware/context";
 import { mark_domain_as_verified } from "@~/moncomptepro.lib";
 import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { get_organization_by_id } from "@~/organizations.repository/get_organization_by_id";
+import { GetOrganizationById } from "@~/organizations.repository";
 import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
 import { update_user_by_id_in_organization } from "@~/users.repository/update_user_by_id_in_organization";
 import consola from "consola";
@@ -20,36 +20,19 @@ import { z } from "zod";
 export default new Hono<App_Context>().patch(
   "/:domain",
   zValidator("param", Entity_Schema.extend({ domain: z.string() })),
-  async function PATCH({
-    text,
-    notFound,
-    req,
-    var: { moncomptepro_pg, sentry },
-  }) {
+  async function PATCH({ text, req, var: { moncomptepro_pg, sentry } }) {
     const { id, domain } = req.valid("param");
-
-    const organization = await get_organization_by_id(moncomptepro_pg, {
-      id,
+    const get_organization_by_id = GetOrganizationById({
+      pg: moncomptepro_pg,
     });
-    if (!organization) {
-      return notFound();
-    }
 
-    // const { verified_email_domains, authorized_email_domains } = organization;
-
-    // await moncomptepro_pg.transaction(async (pg) => {
-    //   if (!verified_email_domains.includes(domain)) {
-    //     await add_verified_domain(pg, { domain, id });
-    //   }
-
-    //   if (!authorized_email_domains.includes(domain)) {
-    //     await add_authorized_domain(pg, { domain, id });
-    //   }
-    // });
+    const { id: organization_id } = await get_organization_by_id(id, {
+      columns: { id: true },
+    });
 
     const { users: users_in_organization } = await get_users_by_organization_id(
       moncomptepro_pg,
-      { organization_id: id, pagination: PAGINATION_ALL_PAGES },
+      { organization_id, pagination: PAGINATION_ALL_PAGES },
     );
 
     await Promise.all(
@@ -65,7 +48,7 @@ export default new Hono<App_Context>().patch(
 
         return update_user_by_id_in_organization(
           moncomptepro_pg,
-          { organization_id: id, user_id },
+          { organization_id, user_id },
           {
             verification_type:
               Verification_Type_Schema.Enum.verified_email_domain,
@@ -76,10 +59,10 @@ export default new Hono<App_Context>().patch(
 
     try {
       // NOTE(dougladuteil): still run legacy endpoint
-      await mark_domain_as_verified({ domain, organization_id: id });
+      await mark_domain_as_verified({ domain, organization_id });
     } catch (error) {
       consola.error(error);
-      sentry.captureException(error, { data: { domain, organization_id: id } });
+      sentry.captureException(error, { data: { domain, organization_id } });
     }
 
     return text("OK", 200, {
