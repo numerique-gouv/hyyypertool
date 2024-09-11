@@ -20,6 +20,7 @@ import * as link_with_organization from "./responses/link_with_organization";
 import * as mobilic from "./responses/mobilic";
 import * as use_official_email from "./responses/use_official_email";
 import * as use_pro_email from "./responses/use_pro_email";
+import * as test_file from "./responses/test_file";
 
 //
 
@@ -35,6 +36,7 @@ const reponse_templates = [
   accountant,
   invalid_name_job,
   chorus_pro_error,
+  test_file
 ];
 
 //
