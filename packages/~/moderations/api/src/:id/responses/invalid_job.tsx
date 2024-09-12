@@ -19,14 +19,14 @@ export default function template() {
 
     Votre demande pour rejoindre l'organisation « ${organization_name} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
-   Merci de renseigner correctement correctement votre fonction.
+    Merci de renseigner correctement correctement votre fonction.
 
-Pour se faire :
+    Pour se faire :
 
-- connectez-vous à https://app.moncomptepro.beta.gouv.fr/
-- cliquez sur le lien suivant https://app.moncomptepro.beta.gouv.fr/users/personal-information
-- corrigez votre fonction
-- sélectionnez votre organisation (exemple : numéro SIRET 18890001300015)
+    - connectez-vous à https://app.moncomptepro.beta.gouv.fr/
+    - cliquez sur le lien suivant https://app.moncomptepro.beta.gouv.fr/users/personal-information
+    - corrigez votre fonction
+    - sélectionnez votre organisation (exemple : numéro SIRET 18890001300015)
 
     Excellente journée,
   `;
