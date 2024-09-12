@@ -1,5 +1,7 @@
 
 
+## [2024.9.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.3...2024.9.4) (2024-09-12)
+
 ## [2024.9.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.2...2024.9.3) (2024-09-12)
 
 
