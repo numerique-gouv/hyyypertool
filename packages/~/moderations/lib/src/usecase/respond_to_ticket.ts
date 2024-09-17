@@ -2,7 +2,12 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { z_username } from "@~/app.core/schema/z_username";
-import { get_user, is_crisp_ticket, send_message } from "@~/crisp.lib";
+import {
+  get_user,
+  is_crisp_ticket,
+  MarkConversationAsResolved,
+  send_message,
+} from "@~/crisp.lib";
 import { get_full_ticket, send_zammad_response } from "@~/zammad.lib";
 import {
   ARTICLE_TYPE,
@@ -57,6 +62,14 @@ async function respond_in_conversation(
     user,
     session_id: moderation.ticket_id,
   });
+
+  // HACK(douglasduteil): Wait for the message to be sent
+  // Crisp seems to have a delay between the message being sent and the state being updated
+  await new Promise((resolve) => setTimeout(resolve, 1_000));
+
+  const mark_conversation_as_resolved =
+    MarkConversationAsResolved(crisp_config);
+  await mark_conversation_as_resolved(moderation.ticket_id);
 }
 
 async function respond_to_zammad_ticket(
