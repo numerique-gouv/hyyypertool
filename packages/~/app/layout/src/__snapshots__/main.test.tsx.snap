@@ -46,9 +46,13 @@ exports[`Main Layout 1`] = `
         <!--  -->
 
         <link
-              rel="stylesheet"
-              href="/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
-            />
+                rel="stylesheet"
+                href="/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
+              />
+              <link
+                rel="stylesheet"
+                href="/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+              />
 
         <!--  -->
 

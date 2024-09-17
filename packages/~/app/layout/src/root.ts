@@ -64,13 +64,21 @@ export function Root_Layout({ children }: PropsWithChildren) {
 
         ${config.NODE_ENV === "development"
           ? html`<link
-              rel="stylesheet"
-              href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-            />`
+                rel="stylesheet"
+                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+              />
+              <link
+                rel="stylesheet"
+                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+              />`
           : html`<link
-              rel="stylesheet"
-              href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
-            />`}
+                rel="stylesheet"
+                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
+              />
+              <link
+                rel="stylesheet"
+                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+              />`}
 
         <!--  -->
 
