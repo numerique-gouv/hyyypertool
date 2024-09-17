@@ -46,9 +46,13 @@ exports[`development 1`] = `
         <!--  -->
 
         <link
-              rel="stylesheet"
-              href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-            />
+                rel="stylesheet"
+                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+              />
+              <link
+                rel="stylesheet"
+                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+              />
 
         <!--  -->
 
@@ -204,9 +208,13 @@ exports[`production 1`] = `
         <!--  -->
 
         <link
-              rel="stylesheet"
-              href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-            />
+                rel="stylesheet"
+                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+              />
+              <link
+                rel="stylesheet"
+                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+              />
 
         <!--  -->
 
