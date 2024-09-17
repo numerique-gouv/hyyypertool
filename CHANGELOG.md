@@ -1,5 +1,12 @@
 
 
+## [2024.9.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.4...2024.9.5) (2024-09-17)
+
+
+### Features
+
+* **moderation:** auto mark as resolved ([#525](https://github.com/numerique-gouv/hyyypertool/issues/525)) ([1d6301e](https://github.com/numerique-gouv/hyyypertool/commit/1d6301ee5fbebadb575fb8b3fb244c0f8181ff0f))
+
 ## [2024.9.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.3...2024.9.4) (2024-09-12)
 
 ## [2024.9.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.2...2024.9.3) (2024-09-12)
