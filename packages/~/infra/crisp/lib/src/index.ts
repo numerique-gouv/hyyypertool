@@ -12,6 +12,7 @@ import type {
   GetMessagesInAConversationRoute,
   SendMessageInAConversationRoute,
   UpdateConversationMetaRoute,
+  UpdateConversationStateRoute,
 } from "@numerique-gouv/crisp/router/conversation";
 import type { OperatorsRouter } from "@numerique-gouv/crisp/router/operators";
 import { z } from "zod";
@@ -109,6 +110,17 @@ export async function create_conversation(
   });
 
   return { session_id };
+}
+
+export function MarkConversationAsResolved(config: Config) {
+  return async function mark_conversation_as_resolved(session_id: string) {
+    await fetch_crisp<UpdateConversationStateRoute>(config, {
+      endpoint: `/v1/website/${config.website_id}/conversation/${session_id}/state`,
+      method: "PATCH",
+      searchParams: {},
+      body: { state: "resolved" },
+    });
+  };
 }
 
 export type get_crisp_mail_dto = Awaited<ReturnType<typeof get_crisp_mail>>;
