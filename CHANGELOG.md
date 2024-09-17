@@ -1,5 +1,12 @@
 
 
+## [2024.9.6](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.5...2024.9.6) (2024-09-17)
+
+
+### Bug Fixes
+
+* **icon:** display icons from dsfr 🤓 ([#526](https://github.com/numerique-gouv/hyyypertool/issues/526)) ([77f5c31](https://github.com/numerique-gouv/hyyypertool/commit/77f5c31c9beed94ab410fe6ff389385782850e9f))
+
 ## [2024.9.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.4...2024.9.5) (2024-09-17)
 
 
