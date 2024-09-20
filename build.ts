@@ -1,5 +1,7 @@
 //
 
+import { $ } from "bun";
+
 const minify = true;
 
 {
@@ -39,6 +41,24 @@ const minify = true;
     outdir: "./public/built",
   });
   console.log({ logs, outputs, success });
+}
+
+{
+  console.log("> @numerique-gouv/moncomptepro install");
+  const { stdout } = await $`npm i`
+    .cwd("node_modules/@numerique-gouv/moncomptepro")
+    .env({
+      ...process.env,
+      CYPRESS_INSTALL_BINARY: "0",
+    });
+  console.log(stdout.toString());
+}
+{
+  console.log("> @numerique-gouv/moncomptepro build");
+  const { stdout } = await $`npm exec tsc`.cwd(
+    "node_modules/@numerique-gouv/moncomptepro",
+  );
+  console.log(stdout.toString());
 }
 
 export {};

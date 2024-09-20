@@ -15,7 +15,7 @@
     }
   },
   "dependencies": {
-    "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#f26af544c636f071bf6efc4343bfe4f9e98fddb5",
+    "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#0769297f523ad4a57ba878cb57be27dcecbbf896",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
     "zod": "3.23.8"
