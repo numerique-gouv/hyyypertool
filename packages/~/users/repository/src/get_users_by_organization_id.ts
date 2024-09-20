@@ -36,7 +36,7 @@ export async function get_users_by_organization_id(
         eq(schema.users.id, schema.users_organizations.user_id),
       )
       .where(where)
-      .orderBy(desc(schema.users.created_at))
+      .orderBy(desc(schema.users.created_at), desc(schema.users.id))
       .limit(take)
       .offset(page * take);
     const [{ value: count }] = await pg_t

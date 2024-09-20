@@ -11,13 +11,17 @@ import {
   migrate,
   pg,
 } from "@~/moncomptepro.database/testing";
-import { beforeAll, beforeEach, expect, test } from "bun:test";
+import { beforeAll, beforeEach, expect, setSystemTime, test } from "bun:test";
 import { get_users_by_organization_id } from "./get_users_by_organization_id";
 
 //
 
 beforeAll(migrate);
 beforeEach(empty_database);
+
+beforeAll(() => {
+  setSystemTime(new Date("2222-01-01T00:00:00.000Z"));
+});
 
 test("returns pink diamond", async () => {
   const unicorn_organization_id = await create_unicorn_organization(pg);
