@@ -50,7 +50,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.5.11",
+    "hono": "4.6.2",
     "hono-slotify": "workspace:*",
     "tailwind-variants": "0.2.1"
   },

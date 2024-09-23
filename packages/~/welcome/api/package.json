@@ -15,7 +15,7 @@
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
     "animate.css": "4.1.1",
-    "hono": "4.5.11",
+    "hono": "4.6.2",
     "lit": "3.2.0",
     "openid-client": "5.7.0"
   },
