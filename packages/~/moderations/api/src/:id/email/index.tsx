@@ -9,8 +9,8 @@ import { is_zammad_ticket } from "@~/zammad.lib/is_zammad_ticket";
 import { to } from "await-to-js";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { get_moderation, type ContextType } from "./context";
 import Page from "./page";
+import { get_moderation, type ContextType } from "./page/context";
 
 //
 
