@@ -1,0 +1,3 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /moderations/:id/email 1`] = `"<!DOCTYPE html><div class="m-auto my-12 flex justify-around"><a href="https://support.etalab.gouv.fr/#search/adora.pony@unicorn.xyz" rel="noopener noreferrer" target="_blank">Trouver l&#39;email correspondant dans Zammad</a><a href="https://app.crisp.chat/website/undefined/inbox/" rel="noopener noreferrer" target="_blank">Trouver l&#39;email correspondant dans Crisp</a></div>"`;

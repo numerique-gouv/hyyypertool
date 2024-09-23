@@ -7,7 +7,7 @@ import {
 } from "@~/moncomptepro.database/seed/unicorn";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
 import { beforeAll, expect, setSystemTime, test } from "bun:test";
-import { GetModerationById } from "./get_moderation_by_id";
+import { GetModerationById } from "./GetModerationById";
 
 //
 

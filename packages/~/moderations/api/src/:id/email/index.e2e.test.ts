@@ -43,4 +43,5 @@ test("GET /moderations/:id/email", async () => {
   if (response.status >= 400) throw await response.text();
 
   expect(response.status).toBe(200);
+  expect(await response.text()).toMatchSnapshot();
 });

@@ -4,13 +4,15 @@ import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
 import { get_crisp_mail, is_crisp_ticket } from "@~/crisp.lib";
 import { set_crisp_config } from "@~/crisp.middleware";
+import { GetModerationById } from "@~/moderations.repository";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
 import { is_zammad_ticket } from "@~/zammad.lib/is_zammad_ticket";
 import { to } from "await-to-js";
+import consola from "consola";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import Page from "./page";
-import { get_moderation, type ContextType } from "./page/context";
+import Page from "./_page";
+import { type ContextType } from "./_page/context";
 
 //
 
@@ -25,8 +27,10 @@ export default new Hono<ContextType>().get(
   },
   async function set_moderation({ req, set, var: { moncomptepro_pg } }, next) {
     const { id: moderation_id } = req.valid("param");
-    const moderation = await get_moderation(moncomptepro_pg, {
-      moderation_id,
+    const get_moderation_by_id = GetModerationById({ pg: moncomptepro_pg });
+    const moderation = await get_moderation_by_id(moderation_id, {
+      columns: { ticket_id: true },
+      with: { user: { columns: { email: true } } },
     });
     set("moderation", moderation);
     return next();
@@ -44,9 +48,13 @@ export default new Hono<ContextType>().get(
     if (!ticket_id) return next();
     if (!is_zammad_ticket(ticket_id)) return next();
 
-    const [, articles] = await to(
+    const [get_zammad_mail_err, articles] = await to(
       get_zammad_mail({ ticket_id: Number(ticket_id) }),
     );
+    if (get_zammad_mail_err) {
+      consola.error(get_zammad_mail_err);
+      return next();
+    }
     if (!articles) return next();
 
     set("zammad", {
@@ -71,10 +79,14 @@ export default new Hono<ContextType>().get(
     if (!session_id) return next();
     if (!is_crisp_ticket(session_id)) return next();
 
-    const [err_crisp, crisp] = await to(
+    const [crisp_err, crisp] = await to(
       get_crisp_mail(crisp_config, { session_id }),
     );
-    if (err_crisp) return next();
+
+    if (crisp_err) {
+      consola.error(crisp_err);
+      return next();
+    }
     const { conversation, messages } = crisp;
 
     set("crisp", {
