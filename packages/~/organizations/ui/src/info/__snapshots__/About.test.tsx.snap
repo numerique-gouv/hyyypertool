@@ -1,0 +1,63 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render about section 1`] = `
+"<!doctype html>
+<section>
+  <ul class="list-none pl-0">
+    <li>Creation de l&#39;organisation : <b></b></li>
+    <li>Nature juridique : <b></b></li>
+    <li>Dénomination : <b></b></li>
+    <li>Nom complet : <b></b></li>
+    <li>NAF/APE : <b></b></li>
+    <li>
+      Tranche d&#39;effectif : <b></b> (code : ) (<a
+        href="https://www.sirene.fr/sirene/public/variable/tefen"
+        rel="noopener noreferrer"
+        target="_blank"
+        >liste code effectif INSEE</a
+      >)
+    </li>
+    <li>
+      État administratif : <b></b> (<a
+        href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
+        rel="noopener noreferrer"
+        target="_blank"
+        >liste état administratif INSEE</a
+      >)
+    </li>
+    <li>Adresse : <b></b></li>
+    <li>
+      Siret : <b></b> (<a
+        href="https://annuaire-entreprises.data.gouv.fr/entreprise/"
+        rel="noopener noreferrer"
+        target="_blank"
+        >Voir la fiche annuaire entreprise de cette organisation</a
+      >)
+    </li>
+  </ul>
+  <div class="my-4" hx-get="/organizations/leaders?siret=" hx-trigger="load">
+    <i class="text-center">Recherche des dirigeants...</i>
+  </div>
+  <a
+    href="https://annuaire-entreprises.data.gouv.fr/etablissement/"
+    class="fr-btn fr-btn--sm fr-btn--tertiary"
+    rel="noopener noreferrer"
+    target="_blank"
+    >Fiche sur l’Annuaire des Entreprises</a
+  ><a
+    href="https://annuaire-entreprises.data.gouv.fr/dirigeants/"
+    class="fr-btn fr-btn--sm fr-btn--tertiary"
+    rel="noopener noreferrer"
+    target="_blank"
+    >Liste des Dirigeants - Annuaire des Entreprises</a
+  >
+  <details class="my-6">
+    <summary>Détails de l&#39;organisation</summary>
+    <ul>
+      <li>id : <b>42</b></li>
+      <li>Dernière mise à jour : <b></b></li>
+    </ul>
+  </details>
+</section>
+"
+`;

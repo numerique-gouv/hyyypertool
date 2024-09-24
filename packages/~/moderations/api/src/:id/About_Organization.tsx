@@ -2,7 +2,6 @@
 
 import { button } from "@~/app.ui/button";
 import { hx_urls, urls } from "@~/app.urls";
-import { type JSX } from "hono/jsx";
 import { usePageRequestContext } from "./context";
 
 //
@@ -100,55 +99,6 @@ export async function About_Organization() {
       >
         Liste des Dirigeants - Annuaire des Entreprises
       </a>
-    </section>
-  );
-}
-
-export function Investigation_Organization(
-  props: JSX.IntrinsicElements["section"],
-) {
-  const {
-    var: {
-      moderation: { organization },
-    },
-  } = usePageRequestContext();
-
-  return (
-    <section {...props}>
-      <h4>🕵️ Enquête sur cette organisation</h4>
-
-      <ul class="list-none pl-0">
-        <li>
-          <a
-            href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Mairie sur Annuaire Service Public
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Service sur Annuaire Service Public
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D${organization.siret}`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Établissement sur l'annuaire Éducation Nationale
-          </a>
-        </li>
-      </ul>
     </section>
   );
 }

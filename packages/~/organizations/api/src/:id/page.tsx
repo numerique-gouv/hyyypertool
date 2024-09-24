@@ -34,6 +34,7 @@ export default async function Page() {
   return (
     <main class="fr-container my-12">
       <h1>🏛 A propos de « {organization.cached_libelle} » </h1>
+
       <Fiche />
 
       <h3 id={$domains_describedby}>🌐 Domaines de l'organisation</h3>

@@ -1,0 +1,38 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render investigation section 1`] = `
+"<!doctype html>
+<section>
+  <h4>🕵️ Enquête sur cette organisation</h4>
+  <ul class="list-none pl-0">
+    <li>
+      <a
+        href="https://lannuaire.service-public.fr/recherche?where=75015&amp;whoWhat=Mairie"
+        class="fr-btn fr-btn--sm fr-btn--tertiary"
+        rel="noopener noreferrer"
+        target="_blank"
+        >Mairie sur Annuaire Service Public</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://lannuaire.service-public.fr/recherche?where=75015"
+        class="fr-btn fr-btn--sm fr-btn--tertiary"
+        rel="noopener noreferrer"
+        target="_blank"
+        >Service sur Annuaire Service Public</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D12345678901234"
+        class="fr-btn fr-btn--sm fr-btn--tertiary"
+        rel="noopener noreferrer"
+        target="_blank"
+        >Établissement sur l&#39;annuaire Éducation Nationale</a
+      >
+    </li>
+  </ul>
+</section>
+"
+`;

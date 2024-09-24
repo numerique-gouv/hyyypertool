@@ -18,7 +18,6 @@ export const Pool = Pg.Pool;
 //
 
 export type Readonly_Fields = "created_at" | "id" | "updated_at";
-export type Organization = typeof schema.organizations.$inferSelect;
 export type Moderation = typeof schema.moderations.$inferSelect;
 export type User = typeof schema.users.$inferSelect;
 export type Writable_User = Omit<

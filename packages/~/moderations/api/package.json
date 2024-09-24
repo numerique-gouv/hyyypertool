@@ -26,6 +26,7 @@
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "@~/organizations.repository": "workspace:*",
+    "@~/organizations.ui": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "await-to-js": "3.0.0",
     "drizzle-orm": "0.33.0",
