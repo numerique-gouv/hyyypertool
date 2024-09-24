@@ -2,6 +2,7 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_include, hx_trigger_from_body } from "@~/app.core/htmx";
+import { formattedPlural } from "@~/app.ui/plurial";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { usePageRequestContext } from "./context";
@@ -14,15 +15,6 @@ export default async function Page() {
     var: { organization },
   } = usePageRequestContext();
   const $domains_describedby = hyper_ref();
-  const $members_describedby = hyper_ref();
-  const $page_ref = hyper_ref();
-
-  const hx_get_members_query_props = await hx_urls.organizations[
-    ":id"
-  ].members.$get({
-    param: { id: organization.id.toString() },
-    query: { describedby: $members_describedby, page_ref: $page_ref },
-  });
 
   const hx_get_domains_query_props = await hx_urls.organizations[
     ":id"
@@ -47,19 +39,52 @@ export default async function Page() {
       ></div>
       <hr />
       <br />
-      <h3 id={$members_describedby}>
-        Membres enregistrés dans cette organisation :
-      </h3>
-      <div
-        {...hx_get_members_query_props}
-        class="fr-table"
-        hx-include={hx_include([$page_ref])}
-        hx-target="this"
-        hx-trigger={[
-          "load",
-          ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED]),
-        ]}
-      ></div>
+      <MembersInTheOrganization />
     </main>
+  );
+}
+
+async function MembersInTheOrganization() {
+  const $describedby = hyper_ref();
+  const $members_describedby = hyper_ref();
+  const $page_ref = hyper_ref();
+  const {
+    var: { organization, query_organization_members_count },
+  } = usePageRequestContext();
+  const count = await query_organization_members_count;
+
+  const hx_get_members_query_props = await hx_urls.organizations[
+    ":id"
+  ].members.$get({
+    param: { id: organization.id.toString() },
+    query: { describedby: $members_describedby, page_ref: $page_ref },
+  });
+
+  return (
+    <section>
+      <details open={false}>
+        <summary>
+          <h3 class="inline-block" id={$describedby}>
+            👥 {count}{" "}
+            {formattedPlural(count, {
+              one: "membre enregistré",
+              other: "membres enregistrés ",
+            })}{" "}
+            dans l’organisation :
+          </h3>
+        </summary>
+
+        <div
+          {...hx_get_members_query_props}
+          class="fr-table"
+          hx-include={hx_include([$page_ref])}
+          hx-target="this"
+          hx-trigger={[
+            "load",
+            ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED]),
+          ]}
+        ></div>
+      </details>
+    </section>
   );
 }

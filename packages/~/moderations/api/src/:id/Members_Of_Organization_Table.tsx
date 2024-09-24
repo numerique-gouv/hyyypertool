@@ -27,7 +27,7 @@ export async function Members_Of_Organization_Table() {
   return (
     <section>
       <details open={isOpen}>
-        <summary id={$describedby}>
+        <summary>
           <h3 class="inline-block" id={$describedby}>
             👥 {count}{" "}
             {formattedPlural(count, {
