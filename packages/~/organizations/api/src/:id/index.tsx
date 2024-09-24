@@ -5,6 +5,7 @@ import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
 import { GetOrganizationById } from "@~/organizations.repository";
+import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to as await_to } from "await-to-js";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -61,6 +62,18 @@ export default new Hono<ContextType>()
       }
 
       set("organization", organization);
+      return next();
+    },
+    async function set_query_organization_members_count(
+      { set, var: { organization, moncomptepro_pg } },
+      next,
+    ) {
+      set(
+        "query_organization_members_count",
+        get_organization_members_count(moncomptepro_pg, {
+          organization_id: organization.id,
+        }),
+      );
       return next();
     },
     async function GET({ render }) {

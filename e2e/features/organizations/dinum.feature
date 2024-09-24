@@ -39,7 +39,7 @@ Fonctionnalité: Page organisation
     * sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM
-    Alors je vois "Membres enregistrés dans cette organisation :"
+    Quand je clique sur "1 membre enregistré dans l’organisation :"
     * je vois la ligne de table "rdubigny@beta.gouv.fr"
     * sur la même ligne je vois "Raphael"
     * sur la même ligne je vois "Dubigny"
