@@ -1,5 +1,18 @@
 
 
+## [2024.9.7](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.6...2024.9.7) (2024-09-25)
+
+
+### Bug Fixes
+
+* **users:** sort by id for same created at date ([#528](https://github.com/numerique-gouv/hyyypertool/issues/528)) ([4c09935](https://github.com/numerique-gouv/hyyypertool/commit/4c099350d09e5fdd76af92723f10c67ceaa398ad))
+
+
+### Features
+
+* **organisation:** fold organization members by default ([#539](https://github.com/numerique-gouv/hyyypertool/issues/539)) ([d8418aa](https://github.com/numerique-gouv/hyyypertool/commit/d8418aa1255c40fc9b136c048586b23f29a4e8b6))
+* **organisation:** share organization info from moderation ([#500](https://github.com/numerique-gouv/hyyypertool/issues/500)) ([92037e7](https://github.com/numerique-gouv/hyyypertool/commit/92037e7794c35a6f351baca9cee3f9779255bb8a)), closes [#459](https://github.com/numerique-gouv/hyyypertool/issues/459)
+
 ## [2024.9.6](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.5...2024.9.6) (2024-09-17)
 
 
