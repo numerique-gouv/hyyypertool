@@ -80,7 +80,12 @@
     "tasks": [
       {
         "label": "1. 🚀 Dev",
-        "dependsOn": ["🚀 WWW Dev Server", "📦 Tailwind Dev", "📦 Types Dev"],
+        "dependsOn": [
+          "🚀 WWW Dev Server",
+          "📦 Tailwind Dev",
+          "📦 Types Dev",
+          "🐋 Docker Up",
+        ],
         "group": "build",
       },
       {
@@ -138,6 +143,18 @@
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
         "type": "shell",
+      },
+      {
+        "label": "🐋 Docker Up",
+        "command": "docker compose up --detach --wait",
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
       },
       {
         "label": "🏗️ Database MonComptePro Migrate",
