@@ -18,7 +18,6 @@
     "ts-pattern": "5.3.1"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*",
-    "prettier-plugin-organize-imports": "^4.0.0"
+    "@~/config.typescript": "workspace:*"
   }
 }
