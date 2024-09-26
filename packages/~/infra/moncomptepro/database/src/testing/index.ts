@@ -20,6 +20,8 @@ export async function empty_database() {
     //
     await tx.delete(schema.email_domains);
     await tx.delete(schema.organizations);
+    await tx.delete(schema.moderations);
+    await tx.delete(schema.users_organizations);
     await tx.delete(schema.users);
   });
 }
