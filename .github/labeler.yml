@@ -1,0 +1,26 @@
+":construction_worker: CI":
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+":jar: api":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/*/api/**/*"
+":lipstick: ui":
+  - changed-files:
+      - any-glob-to-any-file: 
+          - "packages/~/app/ui**/*"
+          - "packages/~/*/ui/**/*"
+":memo: documentation":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+":test_tube: e2e":
+  - changed-files:
+      - any-glob-to-any-file: "e2e/**/*"
+"scope: moderations":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/moderations/**/*"
+"scope: users":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/users/**/*"
+"scope: organizations":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/organizations/**/*"
