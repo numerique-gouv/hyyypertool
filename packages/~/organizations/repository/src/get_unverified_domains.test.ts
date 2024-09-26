@@ -7,6 +7,7 @@ import {
   create_adora_pony_user,
   create_unicorn_organization,
 } from "@~/moncomptepro.database/seed/unicorn";
+import { create_zombie_organization } from "@~/moncomptepro.database/seed/zombie";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
 import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
 import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
@@ -215,7 +216,7 @@ test.each(
   },
 );
 
-test("returns no organizations", async () => {
+test("returns no organizations verified by Trackdechets", async () => {
   await create_unicorn_organization(pg);
   const troll_organization_id = await create_troll_organization(pg);
   await pg.insert(schema.email_domains).values({
@@ -223,6 +224,12 @@ test("returns no organizations", async () => {
     organization_id: troll_organization_id,
     verification_type: Verification_Type_Schema.Enum.trackdechets_email_domain,
   });
+  const result = await get_unverified_domains(pg, {});
+  expect(result).toEqual({ count: 0, domains: [] });
+});
+
+test("returns no unactive organizations", async () => {
+  await create_zombie_organization(pg);
   const result = await get_unverified_domains(pg, {});
   expect(result).toEqual({ count: 0, domains: [] });
 });

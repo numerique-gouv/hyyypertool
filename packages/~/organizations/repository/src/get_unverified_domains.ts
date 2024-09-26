@@ -35,6 +35,13 @@ const where_unipersonnelle = and(
   ),
 )!;
 
+const where_active_organization = or(
+  isNull(schema.organizations.cached_est_active),
+  eq(schema.organizations.cached_est_active, true),
+);
+
+//
+
 export async function get_unverified_domains(
   pg: MonComptePro_PgDatabase,
   {
@@ -53,6 +60,7 @@ export async function get_unverified_domains(
 
   const where = and(
     search_where,
+    where_active_organization,
     where_authorized_email_domains,
     not(where_unipersonnelle),
   );
