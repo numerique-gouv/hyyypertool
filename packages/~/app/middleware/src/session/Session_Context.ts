@@ -1,6 +1,6 @@
 import type { Env } from "hono";
-import { Session } from "hono-sessions";
-import { BaseClient, TokenSet } from "openid-client";
+import type { Session } from "hono-sessions";
+import type { BaseClient, TokenSet } from "openid-client";
 import type { AgentConnect_UserInfo } from "./AgentConnect_UserInfo";
 
 //

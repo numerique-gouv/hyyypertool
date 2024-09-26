@@ -12,7 +12,11 @@ import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_a
 import { MemberJoinOrganization } from "@~/moderations.lib/usecase/member_join_organization";
 import { GetModerationById } from "@~/moderations.repository";
 import { schema } from "@~/moncomptepro.database";
-import { send_moderation_processed_email } from "@~/moncomptepro.lib/index";
+import {
+  join_organization,
+  send_moderation_processed_email,
+} from "@~/moncomptepro.lib/index";
+import { forceJoinOrganization } from "@~/moncomptepro.lib/sdk";
 import { add_verified_domain } from "@~/organizations.lib/usecase/add_verified_domain";
 import { GetOrganizationById } from "@~/organizations.repository";
 import { GetMember } from "@~/users.repository";
@@ -98,8 +102,13 @@ export default new Hono<App_Context>().patch(
       .with("AS_EXTERNAL", () => true)
       .exhaustive();
     const member_join_organization = MemberJoinOrganization({
-      get_member: GetMember({ pg: moncomptepro_pg }),
+      force_join_organization: forceJoinOrganization,
+      get_member: GetMember({
+        pg: moncomptepro_pg,
+        columns: { updated_at: true },
+      }),
       get_moderation_by_id: GetModerationById({ pg: moncomptepro_pg }),
+      join_organization: join_organization,
     });
     const [error] = await to(
       member_join_organization({ is_external, moderation_id: id }),

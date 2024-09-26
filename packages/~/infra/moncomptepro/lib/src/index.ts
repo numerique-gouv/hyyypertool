@@ -3,16 +3,16 @@
 import { fetch_mcp_admin_api } from "./fetch";
 
 //
-
-export async function join_organization({
-  is_external,
-  organization_id,
-  user_id,
-}: {
+export type JoinOrganizationHandler = (options: {
   is_external: boolean;
   organization_id: number;
   user_id: number;
-}): Promise<{}> {
+}) => Promise<{}>;
+export const join_organization: JoinOrganizationHandler = async ({
+  is_external,
+  organization_id,
+  user_id,
+}) => {
   return fetch_mcp_admin_api({
     endpoint: "/api/admin/join-organization",
     method: "POST",
@@ -22,7 +22,7 @@ export async function join_organization({
       user_id: String(user_id),
     },
   });
-}
+};
 
 export async function mark_domain_as_verified({
   domain,
