@@ -28,17 +28,15 @@ test("get an organization member", async () => {
     user_id,
   });
 
-  const get_member = GetMember({ pg });
-  const organization = await get_member(
-    { organization_id, user_id },
-    {
-      columns: {
-        is_external: true,
-        organization_id: true,
-        user_id: true,
-      },
+  const get_member = GetMember({
+    pg,
+    columns: {
+      is_external: true,
+      organization_id: true,
+      user_id: true,
     },
-  );
+  });
+  const organization = await get_member({ organization_id, user_id });
 
   expect(organization).toEqual({
     is_external: false,

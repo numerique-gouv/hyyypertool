@@ -30,12 +30,13 @@ const MAIN_ORGANIZATION_MANAGER_MODULE: {
 } = await import(`${MONCOMPTEPRO_MODULE}/src/managers/organization/main`);
 
 // import "@numerique-gouv/moncomptepro/src/managers/organization/join";
+export type ForceJoinOrganizationHandler = (options: {
+  organization_id: number;
+  user_id: number;
+  is_external?: boolean;
+}) => Promise<UserOrganizationLink>;
 const JOIN_ORGANIZATION_MANAGER_MODULE: {
-  forceJoinOrganization(options: {
-    organization_id: number;
-    user_id: number;
-    is_external?: boolean;
-  }): Promise<UserOrganizationLink>;
+  forceJoinOrganization: ForceJoinOrganizationHandler;
 } = await import(`${MONCOMPTEPRO_MODULE}/src/managers/organization/join`);
 
 //

@@ -1,19 +1,23 @@
 //
 
-import { type GetModerationByIdHandler } from "@~/moderations.repository";
-import { join_organization } from "@~/moncomptepro.lib";
-import { forceJoinOrganization } from "@~/moncomptepro.lib/sdk";
-import { type GetMemberHandler } from "@~/users.repository";
+import type { GetModerationByIdHandler } from "@~/moderations.repository";
+import type { JoinOrganizationHandler } from "@~/moncomptepro.lib";
+import type { ForceJoinOrganizationHandler } from "@~/moncomptepro.lib/sdk";
+import type { GetMemberHandler } from "@~/users.repository";
 import { to as await_to } from "await-to-js";
 
 //
 
 export function MemberJoinOrganization({
+  force_join_organization,
   get_member,
   get_moderation_by_id,
+  join_organization,
 }: {
-  get_member: GetMemberHandler;
+  force_join_organization: ForceJoinOrganizationHandler;
+  get_member: GetMemberHandler<{ updated_at: true }>;
   get_moderation_by_id: GetModerationByIdHandler;
+  join_organization: JoinOrganizationHandler;
 }) {
   return async function member_join_organization({
     moderation_id,
@@ -33,14 +37,11 @@ export function MemberJoinOrganization({
     );
 
     const [get_member_err] = await await_to(
-      get_member(
-        { organization_id, user_id },
-        { columns: { updated_at: true } },
-      ),
+      get_member({ organization_id, user_id }),
     );
 
     if (get_member_err) {
-      await forceJoinOrganization({
+      await force_join_organization({
         is_external,
         organization_id,
         user_id,

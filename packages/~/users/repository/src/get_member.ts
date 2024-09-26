@@ -5,16 +5,19 @@ import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { and, eq } from "drizzle-orm";
 
 //
+type UsersOrganizationsColumns =
+  keyof typeof schema.users_organizations._.columns;
 
-export function GetMember({ pg }: { pg: MonComptePro_PgDatabase }) {
-  type UsersOrganizationsColumns =
-    keyof typeof schema.users_organizations._.columns;
-  return async function get_member_by_id<
-    TColumns extends Partial<Record<UsersOrganizationsColumns, true>>,
-  >(
-    { organization_id, user_id }: { organization_id: number; user_id: number },
-    { columns }: { columns: TColumns },
-  ) {
+export function GetMember<
+  TColumns extends Partial<Record<UsersOrganizationsColumns, true>>,
+>({ pg, columns }: { pg: MonComptePro_PgDatabase; columns: TColumns }) {
+  return async function get_member_by_id({
+    organization_id,
+    user_id,
+  }: {
+    organization_id: number;
+    user_id: number;
+  }) {
     const member = await pg.query.users_organizations.findFirst({
       columns,
       where: and(
@@ -29,4 +32,6 @@ export function GetMember({ pg }: { pg: MonComptePro_PgDatabase }) {
   };
 }
 
-export type GetMemberHandler = ReturnType<typeof GetMember>;
+export type GetMemberHandler<
+  TColumns extends Partial<Record<UsersOrganizationsColumns, true>>,
+> = ReturnType<typeof GetMember<TColumns>>;
