@@ -16,10 +16,11 @@ export const query_schema = Pagination_Schema.merge(Search_Schema);
 
 export interface ContextVariablesType extends Env {
   Variables: {
-    query_unverified_domains: typeof get_unverified_domains;
-    $table: string;
+    $describedby: string;
     $search: string;
+    $table: string;
     hx_domains_query_props: Record<"hx-get", string>;
+    query_unverified_domains: typeof get_unverified_domains;
   };
 }
 

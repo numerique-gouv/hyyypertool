@@ -14,6 +14,7 @@ import { Page } from "./Page";
 
 //
 
+const $describedby = hyper_ref();
 const $table = hyper_ref();
 const $search = hyper_ref();
 
@@ -28,8 +29,8 @@ export default new Hono().use("/", jsxRenderer(Main_Layout)).get(
     const hx_domains_query_props = {
       ...(await hx_urls.organizations.domains.$get({ query: {} })),
       "hx-include": hx_include([
-        $table,
         $search,
+        $table,
         query_schema.keyof().enum.page,
       ]),
       "hx-replace-url": true,
@@ -38,6 +39,7 @@ export default new Hono().use("/", jsxRenderer(Main_Layout)).get(
     };
 
     return {
+      $describedby,
       $search,
       $table,
       hx_domains_query_props,

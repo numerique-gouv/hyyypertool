@@ -4,6 +4,8 @@ import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
 import consola from "consola";
 import type { MonComptePro_PgDatabase } from "../index";
 import { schema } from "../index";
+import { insert_commune_de_pompierre } from "./organizations/commune_de_pompierre";
+import { insert_yes_we_hack } from "./organizations/yes_we_hack";
 
 //
 
@@ -54,6 +56,12 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     );
     const sak = await insert_sak(db);
     consola.verbose(`🌱 INSERT organization ${sak.cached_nom_complet}`);
+    const yes_we_hack = await insert_yes_we_hack(db);
+    consola.verbose(`🌱 INSERT organization yes_we_hack (id: ${yes_we_hack})`);
+    const commune_de_pompierre = await insert_commune_de_pompierre(db);
+    consola.verbose(
+      `🌱 INSERT organization commune_de_pompierre (id: ${commune_de_pompierre})`,
+    );
 
     //
 

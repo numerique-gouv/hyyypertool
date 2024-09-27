@@ -12,7 +12,7 @@ import { query_schema, usePageRequestContext } from "./context";
 //
 export async function Page() {
   const {
-    var: { hx_domains_query_props },
+    var: { $describedby, hx_domains_query_props },
   } = usePageRequestContext();
 
   return (
@@ -26,7 +26,7 @@ export async function Page() {
         `visibilitychange[document.visibilityState === 'visible'] from:document`,
       ].join(", ")}
     >
-      <h1>Liste des domaines à vérifier</h1>
+      <h1 id={$describedby}>Liste des domaines à vérifier</h1>
       <Filter />
       <Table />
     </main>
@@ -68,6 +68,7 @@ async function Table() {
   const {
     req,
     var: {
+      $describedby,
       $table,
       hx_domains_query_props,
       query_unverified_domains,
@@ -88,7 +89,7 @@ async function Table() {
 
   return (
     <div class="fr-table [&>table]:table" id={$table}>
-      <table>
+      <table aria-describedby={$describedby}>
         <thead>
           <tr>
             <th></th>
