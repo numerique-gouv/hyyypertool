@@ -23,13 +23,13 @@ Fonctionnalité: Moderation blockante à accepter
     * sur la même ligne je vois "Menu"
 
     Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur "✅ Domain autorisé"
+    Et je clique sur "✅ Domaine autorisé"
     Alors je vois la ligne "yopmail.com" dans le tableau
     Alors sur la même ligne je vois "✅"
 
     Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur le bouton "🚫 Domain refusé"
-    Alors je ne vois pas "✅ Domain autorisé"
+    Et je clique sur le bouton "🚫 Domaine refusé"
+    Alors je ne vois pas "✅ Domaine autorisé"
 
     Quand je clique sur le champs dans le tableau
     * je tape "poymail.com"
@@ -42,7 +42,7 @@ Fonctionnalité: Moderation blockante à accepter
     Soit le tableau sous le title "Domaines de l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
     Quand j'ouvre le menu déroulant sur la même ligne
-    * je clique sur le bouton "❎ Domain externe"
+    * je clique sur le bouton "❎ Domaine externe"
     Alors sur la même ligne je vois "❎"
 
   Scénario: Envoyer l'email « Votre demande a été traitée »
