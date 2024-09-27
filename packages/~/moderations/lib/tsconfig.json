@@ -5,9 +5,17 @@
   "extends": "@~/config.typescript/base/tsconfig.json",
   "include": ["src"],
   "references": [
-    { "path": "../../app/core/tsconfig.json" },
-    { "path": "../../infra/crisp/lib/tsconfig.json" },
-    { "path": "../../infra/moncomptepro/database/tsconfig.json" },
-    { "path": "../repository/tsconfig.json" }
+    {
+      "path": "../../app/core"
+    },
+    {
+      "path": "../../infra/crisp/lib"
+    },
+    {
+      "path": "../repository"
+    },
+    {
+      "path": "../../infra/moncomptepro/database"
+    }
   ]
 }

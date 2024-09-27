@@ -4,5 +4,9 @@
   },
   "extends": "@~/config.typescript/base/tsconfig.json",
   "include": ["src"],
-  "references": [{ "path": "../../infra/moncomptepro/database/tsconfig.json" }]
+  "references": [
+    {
+      "path": "../../infra/moncomptepro/database"
+    }
+  ]
 }

@@ -6,17 +6,44 @@
   "extends": "@~/config.typescript/api/tsconfig.json",
   "include": ["src"],
   "references": [
-    { "path": "../../app/layout/tsconfig.json" },
-    { "path": "../../app/middleware/tsconfig.json" },
-    { "path": "../../app/ui/tsconfig.json" },
-    { "path": "../../app/urls/tsconfig.json" },
-    { "path": "../../infra/crisp/lib/tsconfig.json" },
-    { "path": "../../infra/crisp/middleware/tsconfig.json" },
-    { "path": "../../infra/crisp/ui/tsconfig.json" },
-    { "path": "../../infra/moncomptepro/database/tsconfig.json" },
-    { "path": "../../infra/moncomptepro/lib/tsconfig.json" },
-    { "path": "../../infra/zammad/lib/tsconfig.json" },
-    { "path": "../../organizations/repository/tsconfig.json" },
-    { "path": "../../organizations/ui/tsconfig.json" }
+    {
+      "path": "../../app/layout"
+    },
+    {
+      "path": "../../app/middleware"
+    },
+    {
+      "path": "../../app/ui"
+    },
+    {
+      "path": "../../app/urls"
+    },
+    {
+      "path": "../../infra/crisp/lib"
+    },
+    {
+      "path": "../../infra/crisp/middleware"
+    },
+    {
+      "path": "../../infra/crisp/ui"
+    },
+    {
+      "path": "../lib"
+    },
+    {
+      "path": "../../infra/moncomptepro/database"
+    },
+    {
+      "path": "../../infra/moncomptepro/lib"
+    },
+    {
+      "path": "../../organizations/repository"
+    },
+    {
+      "path": "../../organizations/ui"
+    },
+    {
+      "path": "../../infra/zammad/lib"
+    }
   ]
 }

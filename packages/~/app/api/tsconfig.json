@@ -5,15 +5,32 @@
   },
   "extends": "@~/config.typescript/base/tsconfig.json",
   "references": [
-    { "path": "../../auth/api/tsconfig.json" },
-    { "path": "../../infra/moncomptepro/database/tsconfig.json" },
-    { "path": "../../moderations/api/tsconfig.json" },
-    { "path": "../../organizations/api/tsconfig.json" },
-    { "path": "../../proxy/api/tsconfig.json" },
-    { "path": "../../users/api/tsconfig.json" },
-    { "path": "../../welcome/api/tsconfig.json" },
-    { "path": "../core/tsconfig.json" },
-    { "path": "../layout/tsconfig.json" },
-    { "path": "../middleware/tsconfig.json" }
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../layout"
+    },
+    {
+      "path": "../sentry"
+    },
+    {
+      "path": "../../auth/api"
+    },
+    {
+      "path": "../../moderations/api"
+    },
+    {
+      "path": "../../organizations/api"
+    },
+    {
+      "path": "../../proxy/api"
+    },
+    {
+      "path": "../../users/api"
+    },
+    {
+      "path": "../../welcome/api"
+    }
   ]
 }

@@ -5,10 +5,26 @@
   },
   "extends": "@~/config.typescript/api/tsconfig.json",
   "references": [
-    { "path": "../../app/layout/tsconfig.json" },
-    { "path": "../../app/middleware/tsconfig.json" },
-    { "path": "../../app/ui/tsconfig.json" },
-    { "path": "../../app/urls/tsconfig.json" },
-    { "path": "../../organizations/repository/tsconfig.json" }
+    {
+      "path": "../../app/layout"
+    },
+    {
+      "path": "../../app/middleware"
+    },
+    {
+      "path": "../../app/ui"
+    },
+    {
+      "path": "../../app/urls"
+    },
+    {
+      "path": "../repository"
+    },
+    {
+      "path": "../ui"
+    },
+    {
+      "path": "../../users/repository"
+    }
   ]
 }

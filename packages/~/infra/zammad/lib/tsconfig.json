@@ -2,5 +2,10 @@
   "compilerOptions": {
     "outDir": "./node_modules/.cache/tsc"
   },
-  "extends": "@~/config.typescript/bun/tsconfig.json"
+  "extends": "@~/config.typescript/bun/tsconfig.json",
+  "references": [
+    {
+      "path": "../../../app/core"
+    }
+  ]
 }

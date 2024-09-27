@@ -14,13 +14,13 @@ import * as already_signed from "./responses/already_signed";
 import * as chorus_pro_error from "./responses/chorus_pro_error";
 import * as contractors from "./responses/contractors";
 import * as first_last_name from "./responses/first_last_name";
+import * as invalid_job from "./responses/invalid_job";
 import * as invalid_name_job from "./responses/invalid_name_job";
 import * as link_with_eduction_gouv_fr from "./responses/link_with_eduction_gouv_fr";
 import * as link_with_organization from "./responses/link_with_organization";
 import * as mobilic from "./responses/mobilic";
 import * as use_official_email from "./responses/use_official_email";
 import * as use_pro_email from "./responses/use_pro_email";
-import * as invalid_job from "./responses/invalid_job";
 
 //
 
@@ -36,7 +36,7 @@ const reponse_templates = [
   accountant,
   invalid_name_job,
   chorus_pro_error,
-  invalid_job
+  invalid_job,
 ];
 
 //

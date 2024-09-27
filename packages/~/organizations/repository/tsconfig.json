@@ -3,5 +3,12 @@
     "outDir": "./node_modules/.cache/tsc"
   },
   "extends": "@~/config.typescript/base/tsconfig.json",
-  "references": [{ "path": "../../infra/moncomptepro/database/tsconfig.json" }]
+  "references": [
+    {
+      "path": "../../infra/moncomptepro/database"
+    },
+    {
+      "path": "../../infra/moncomptepro/lib"
+    }
+  ]
 }
