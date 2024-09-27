@@ -157,6 +157,18 @@
         },
       },
       {
+        "label": "🐋 Docker Down",
+        "command": "docker compose down --volumes",
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
         "label": "🏗️ Database MonComptePro Migrate",
         "command": "bun",
         "args": ["run", "database:moncomptepro:migrator"],
