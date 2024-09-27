@@ -61,6 +61,10 @@ Then("je ne vois pas {string} dans le tableau", function (text: string) {
   cy.get(table_scope).contains(text).should("not.exist");
 });
 
+Then("je vois {int} lignes dans le tableau", function (count: number) {
+  cy.get(table_scope).find("tbody > tr").should("have.length", count);
+});
+
 Then(
   "je vois {string} dans le tableau {string}",
   function (text: string, context: string) {
