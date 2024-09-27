@@ -17,6 +17,7 @@ import welcome_router from "@~/welcome.api";
 import consola from "consola";
 import { Hono } from "hono";
 import { compress } from "hono/compress";
+import { contextStorage } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { logger } from "hono/logger";
 import asserts_router from "./assets";
@@ -28,6 +29,7 @@ import readyz_router from "./readyz";
 
 const app = new Hono()
   .use(logger(consola.info))
+  .use(contextStorage())
   .use(compress())
   .use(set_sentry())
   .use(set_nonce())
