@@ -8,5 +8,13 @@
     "noEmit": false,
     "outDir": "./node_modules/.cache/tsc",
     "types": ["bun-types"]
-  }
+  },
+  "references": [
+    {
+      "path": "../../../app/core"
+    },
+    {
+      "path": "../lib"
+    }
+  ]
 }

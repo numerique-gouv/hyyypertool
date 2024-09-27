@@ -39,6 +39,8 @@
     "format": "bun x prettier --check .",
     "format:fix": "bun x prettier --write .",
     "format:pkg": "bun x sort-package-json ./package.json ./packages/~/*/*/package.json ./e2e/package.json",
+    "format:tsconfig": "bun x @monorepo-utils/workspaces-to-typescript-project-references && bun run format:fix",
+    "postadd": "bun run format:tsconfig",
     "renovate": "bun x npm-check-updates --packageManager bun --interactive --upgrade --deep",
     "start": "tsx bin/src/index.ts",
     "studio:moncomptepro": "bun run database:moncomptepro:run studio",
