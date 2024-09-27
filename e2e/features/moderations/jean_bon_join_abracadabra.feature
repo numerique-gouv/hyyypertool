@@ -21,22 +21,15 @@ Fonctionnalité: Moderation blockante à accepter
     * je vois la ligne "yopmail.com" dans le tableau
     * sur la même ligne je vois "❓"
     * sur la même ligne je vois "Menu"
-    Quand j'ouvre le menu déroulant sur la même ligne
-    * je vois "🗑️ Supprimer"
-    * je vois "🔄 Domain vérifié"
 
-    Quand je clique sur "🔄 Domain vérifié"
+    Quand j'ouvre le menu déroulant sur la même ligne
+    Et je clique sur "✅ Domain autorisé"
     Alors je vois la ligne "yopmail.com" dans le tableau
     Alors sur la même ligne je vois "✅"
 
     Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur "🔄 Domain autorisé"
-    Alors je vois la ligne "yopmail.com" dans le tableau
-    Alors sur la même ligne je vois "❓"
-
-    Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur le bouton "🗑️ Supprimer"
-    Alors je ne vois pas "🔄 Domain vérifié"
+    Et je clique sur le bouton "🚫 Domain refusé"
+    Alors je ne vois pas "✅ Domain autorisé"
 
     Quand je clique sur le champs dans le tableau
     * je tape "poymail.com"
@@ -49,8 +42,8 @@ Fonctionnalité: Moderation blockante à accepter
     Soit le tableau sous le title "Domaines de l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
     Quand j'ouvre le menu déroulant sur la même ligne
-    * je clique sur le bouton "🔄 Domain externe"
-    Alors sur la même ligne je vois "❌"
+    * je clique sur le bouton "❎ Domain externe"
+    Alors sur la même ligne je vois "❎"
 
   Scénario: Envoyer l'email « Votre demande a été traitée »
     Quand je clique sur "Je valide ce membre ✅"

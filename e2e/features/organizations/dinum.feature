@@ -35,7 +35,7 @@ Fonctionnalité: Page organisation
     * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"
     * je vois la ligne "prestataire.modernisation.gouv.fr" dans le tableau
-    * sur la même ligne je vois "❌"
+    * sur la même ligne je vois "❎"
     * sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM

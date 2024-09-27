@@ -1,7 +1,6 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { menu_item } from "@~/app.ui/menu";
 import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
@@ -79,37 +78,37 @@ async function Add_Domain() {
 function TypeToEmoji({ type }: { type: MCP_EmailDomain_Type }) {
   return match(type)
     .with("verified", () => (
-      <span role="img" aria-label="vérifié">
+      <span role="img" aria-label="vérifié" title="vérifié">
         ✅
       </span>
     ))
     .with("authorized", () => (
-      <span role="img" aria-label="autorisé">
+      <span role="img" aria-label="autorisé" title="autorisé">
         🔓
       </span>
     ))
     .with("external", () => (
-      <span role="img" aria-label="externe">
-        ❌
+      <span role="img" aria-label="externe" title="externe">
+        ❎
       </span>
     ))
     .with("blacklisted", () => (
-      <span role="img" aria-label="blacklisté">
-        🚫
+      <span role="img" aria-label="blacklisté" title="blacklisté">
+        ☠️
       </span>
     ))
     .with("official_contact", () => (
-      <span role="img" aria-label="contact officiel">
-        📞
+      <span role="img" aria-label="contact officiel" title="contact officiel">
+        ✅
       </span>
     ))
     .with("trackdechets_postal_mail", () => (
-      <span role="img" aria-label="postal mail">
-        📬
+      <span role="img" aria-label="postal mail" title="postal mail">
+        ✅
       </span>
     ))
     .otherwise(() => (
-      <span role="img" aria-label="inconnu">
+      <span role="img" aria-label="inconnu" title="inconnu">
         ❓
       </span>
     ));
@@ -130,7 +129,7 @@ function Row({
       </td>
       <td>{domain}</td>
       <td>{type}</td>
-      <td class="!text-end">
+      <td class="space-x-2 !text-end">
         <GoogleSearchButton
           class={button({ class: "align-bottom", size: "sm" })}
           query={domain}
@@ -154,7 +153,7 @@ async function Row_Actions({
 }: {
   organization_domain: get_orginization_domains_dto[number];
 }) {
-  const { domain, id, organization_id, organization } = organization_domain;
+  const { id, organization_id } = organization_domain;
 
   const hx_delete_domain_props = await hx_urls.organizations[":id"].domains[
     ":domain_id"
@@ -172,45 +171,13 @@ async function Row_Actions({
     <Horizontal_Menu>
       <ul class="list-none p-0">
         <li>
-          <CopyButton
-            text={domain}
-            variant={{
-              type: "tertiary",
-              class: menu_item({ class: "shadow-none" }),
-            }}
-          >
-            Copier le domaine
-          </CopyButton>
-        </li>
-        <li>
-          <button
-            {...hx_delete_domain_props}
-            class={menu_item()}
-            hx-confirm={`Êtes-vous sûr de vouloir supprimer le domaine « ${domain} » de l'organisation « ${organization.cached_libelle} » ?`}
-            hx-swap="none"
-            role="menuitem"
-          >
-            🗑️ Supprimer
-          </button>
-        </li>
-        <li>
           <button
             {...await hx_change_type_props("verified")}
             class={menu_item()}
             hx-swap="none"
             role="menuitem"
           >
-            🔄 Domain vérifié
-          </button>
-        </li>
-        <li>
-          <button
-            {...await hx_change_type_props(null)}
-            class={menu_item()}
-            hx-swap="none"
-            role="menuitem"
-          >
-            🔄 Domain autorisé
+            ✅ Domain autorisé
           </button>
         </li>
         <li>
@@ -220,7 +187,17 @@ async function Row_Actions({
             hx-swap="none"
             role="menuitem"
           >
-            🔄 Domain externe
+            ❎ Domain externe
+          </button>
+        </li>
+        <li>
+          <button
+            {...await hx_delete_domain_props}
+            class={menu_item()}
+            hx-swap="none"
+            role="menuitem"
+          >
+            🚫 Domain refusé
           </button>
         </li>
       </ul>

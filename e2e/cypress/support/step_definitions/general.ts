@@ -5,7 +5,6 @@ import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 //
 
 let target: JQuery<HTMLElement>;
-let scope: string;
 let table_scope: string;
 let row_scope: string;
 
@@ -56,6 +55,10 @@ Then("je vois {string}", function (text: string) {
 
 Then("je vois {string} dans le tableau", function (text: string) {
   cy.get(table_scope).contains(text);
+});
+
+Then("je ne vois pas {string} dans le tableau", function (text: string) {
+  cy.get(table_scope).contains(text).should("not.exist");
 });
 
 Then(
