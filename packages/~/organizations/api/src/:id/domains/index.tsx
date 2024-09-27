@@ -6,7 +6,6 @@ import { Entity_Schema, Id_Schema } from "@~/app.core/schema";
 import { EmailDomain_Type_Schema } from "@~/moncomptepro.lib/email_domain";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
-import { delete_domain_by_id } from "@~/organizations.repository/delete_domain_by_id";
 import { get_orginization_domains } from "@~/organizations.repository/get_orginization_domains";
 import { update_domain_by_id } from "@~/organizations.repository/update_domain_by_id";
 import { Hono } from "hono";
@@ -61,33 +60,23 @@ export default new Hono<ContextType>()
       } as Htmx_Header);
     },
   )
-  .delete(
-    "/:domain_id",
-    zValidator("param", Entity_Schema.merge(DomainParams_Schema)),
-    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
-      const { domain_id } = req.valid("param");
-
-      await delete_domain_by_id(moncomptepro_pg, domain_id);
-
-      return text("OK", 200, {
-        "HX-Trigger": ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED,
-      } as Htmx_Header);
-    },
-  )
   .patch(
     "/:domain_id",
     zValidator("param", Entity_Schema.merge(DomainParams_Schema)),
     zValidator(
       "query",
-      z.object({ type: EmailDomain_Type_Schema.or(z.literal("null")) }),
+      z.object({
+        type: EmailDomain_Type_Schema.or(
+          z.literal("null").transform(() => null),
+        ),
+      }),
     ),
     async function PATCH({ text, req, var: { moncomptepro_pg } }) {
       const { domain_id } = req.valid("param");
       const { type: verification_type } = req.valid("query");
 
       await update_domain_by_id(moncomptepro_pg, domain_id, {
-        verification_type:
-          verification_type === "null" ? null : verification_type,
+        verification_type: verification_type,
         verified_at:
           verification_type === "verified"
             ? new Date().toISOString()

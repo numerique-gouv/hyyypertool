@@ -5,6 +5,7 @@ import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { menu_item } from "@~/app.ui/menu";
 import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
 import { hx_urls } from "@~/app.urls";
+import type { EmailDomain_Type } from "@~/moncomptepro.lib/email_domain";
 import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/moncomptepro.d";
 import type { get_orginization_domains_dto } from "@~/organizations.repository/get_orginization_domains";
 import { match } from "ts-pattern";
@@ -75,21 +76,11 @@ async function Add_Domain() {
   );
 }
 
-function TypeToEmoji({ type }: { type: MCP_EmailDomain_Type }) {
+function TypeToEmoji({ type }: { type: EmailDomain_Type }) {
   return match(type)
-    .with("verified", () => (
-      <span role="img" aria-label="vérifié" title="vérifié">
-        ✅
-      </span>
-    ))
     .with("authorized", () => (
       <span role="img" aria-label="autorisé" title="autorisé">
         🔓
-      </span>
-    ))
-    .with("external", () => (
-      <span role="img" aria-label="externe" title="externe">
-        ❎
       </span>
     ))
     .with("blacklisted", () => (
@@ -97,13 +88,28 @@ function TypeToEmoji({ type }: { type: MCP_EmailDomain_Type }) {
         ☠️
       </span>
     ))
+    .with("external", () => (
+      <span role="img" aria-label="externe" title="externe">
+        ❎
+      </span>
+    ))
     .with("official_contact", () => (
       <span role="img" aria-label="contact officiel" title="contact officiel">
         ✅
       </span>
     ))
+    .with("refused", () => (
+      <span role="img" aria-label="postal mail" title="postal mail">
+        🚫
+      </span>
+    ))
     .with("trackdechets_postal_mail", () => (
       <span role="img" aria-label="postal mail" title="postal mail">
+        ✅
+      </span>
+    ))
+    .with("verified", () => (
+      <span role="img" aria-label="vérifié" title="vérifié">
         ✅
       </span>
     ))
@@ -155,12 +161,6 @@ async function Row_Actions({
 }) {
   const { id, organization_id } = organization_domain;
 
-  const hx_delete_domain_props = await hx_urls.organizations[":id"].domains[
-    ":domain_id"
-  ].$delete({
-    param: { id: organization_id.toString(), domain_id: id.toString() },
-  });
-
   const hx_change_type_props = (type: MCP_EmailDomain_Type) =>
     hx_urls.organizations[":id"].domains[":domain_id"].$patch({
       param: { id: organization_id.toString(), domain_id: id.toString() },
@@ -192,7 +192,7 @@ async function Row_Actions({
         </li>
         <li>
           <button
-            {...await hx_delete_domain_props}
+            {...await hx_change_type_props("refused")}
             class={menu_item()}
             hx-swap="none"
             role="menuitem"
