@@ -14,6 +14,9 @@ import { Page } from "./Page";
 
 //
 
+const $table = hyper_ref();
+const $search = hyper_ref();
+
 export default new Hono().use("/", jsxRenderer(Main_Layout)).get(
   "/",
   zValidator("query", query_schema, function hook(result, { redirect }) {
@@ -22,8 +25,6 @@ export default new Hono().use("/", jsxRenderer(Main_Layout)).get(
     return redirect(urls.organizations.domains.$url().pathname);
   }),
   set_variables(async () => {
-    const $table = hyper_ref();
-    const $search = hyper_ref();
     const hx_domains_query_props = {
       ...(await hx_urls.organizations.domains.$get({ query: {} })),
       "hx-include": hx_include([

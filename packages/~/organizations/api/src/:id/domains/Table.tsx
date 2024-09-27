@@ -177,7 +177,7 @@ async function Row_Actions({
             hx-swap="none"
             role="menuitem"
           >
-            ✅ Domain autorisé
+            ✅ Domaine autorisé
           </button>
         </li>
         <li>
@@ -187,7 +187,7 @@ async function Row_Actions({
             hx-swap="none"
             role="menuitem"
           >
-            ❎ Domain externe
+            ❎ Domaine externe
           </button>
         </li>
         <li>
@@ -197,7 +197,7 @@ async function Row_Actions({
             hx-swap="none"
             role="menuitem"
           >
-            🚫 Domain refusé
+            🚫 Domaine refusé
           </button>
         </li>
       </ul>
