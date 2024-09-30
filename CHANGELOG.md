@@ -1,3 +1,20 @@
+
+
+## [2024.9.8](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.7...2024.9.8) (2024-09-30)
+
+
+### Bug Fixes
+
+* **organization:** keep the same ids for table and search ([#551](https://github.com/numerique-gouv/hyyypertool/issues/551)) ([624d8a7](https://github.com/numerique-gouv/hyyypertool/commit/624d8a75f47a74703ccd5d895dd8962fca1d6efc))
+
+
+### Features
+
+* **app:** add set_context_variables middleware ([#547](https://github.com/numerique-gouv/hyyypertool/issues/547)) ([42d8dbe](https://github.com/numerique-gouv/hyyypertool/commit/42d8dbef4979f809c2184cc9fab7ddf5c6904e82))
+* **domains:** remove free domains from the list ([#541](https://github.com/numerique-gouv/hyyypertool/issues/541)) ([7fa8c2f](https://github.com/numerique-gouv/hyyypertool/commit/7fa8c2fafe9efc55b6784db25f51cb2b0a62c18c))
+* **organization:** change action wording ([#548](https://github.com/numerique-gouv/hyyypertool/issues/548)) ([54066f1](https://github.com/numerique-gouv/hyyypertool/commit/54066f1baf9f498c2b4e44988543d11a25b70851))
+* **organization:** change clipboard icon ([#550](https://github.com/numerique-gouv/hyyypertool/issues/550)) ([7a7efce](https://github.com/numerique-gouv/hyyypertool/commit/7a7efceb32c4f309797125cf8df8ea3fc1f86a13))
+
 ## [2024.9.7](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.6...2024.9.7) (2024-09-25)
 
 ### Bug Fixes
