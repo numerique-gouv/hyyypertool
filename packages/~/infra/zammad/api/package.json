@@ -16,7 +16,7 @@
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "hono": "4.6.3",
-    "ts-pattern": "5.3.1",
+    "ts-pattern": "5.4.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
