@@ -399,6 +399,9 @@ declare const app: import("hono/hono-base").HonoBase<
           } & {
             id: string;
           };
+          query: {
+            describedby: string | string[];
+          };
         };
         output: {};
         outputFormat: string;

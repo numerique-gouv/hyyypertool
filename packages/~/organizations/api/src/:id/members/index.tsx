@@ -1,7 +1,11 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { Entity_Schema, Pagination_Schema } from "@~/app.core/schema";
+import {
+  DescribedBy_Schema,
+  Entity_Schema,
+  Pagination_Schema,
+} from "@~/app.core/schema";
 import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -24,8 +28,7 @@ export default new Hono<ContextType>()
     zValidator("param", Entity_Schema),
     zValidator(
       "query",
-      Pagination_Schema.extend({
-        describedby: z.string(),
+      Pagination_Schema.merge(DescribedBy_Schema).extend({
         page_ref: z.string(),
       }),
     ),

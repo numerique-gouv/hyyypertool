@@ -38,7 +38,7 @@ test("GET /moderations/:id/email", async () => {
     .onError((error) => {
       throw error;
     })
-    .request(`/${moderation_id}/email`);
+    .request(`/${moderation_id}/email?describedby=🐘`);
 
   if (response.status >= 400) throw await response.text();
 
