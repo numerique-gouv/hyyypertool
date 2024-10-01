@@ -202,6 +202,17 @@
         "runOptions": { "instanceLimit": 1 },
       },
       {
+        "label": "🧪 Watch Test : Current file",
+        "command": "bun test --watch ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
         "label": "🧪 Cypress Studio",
         "command": "pnpm run studio",
         "type": "shell",
