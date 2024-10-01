@@ -1,7 +1,7 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { Entity_Schema } from "@~/app.core/schema";
+import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
 import { get_crisp_mail, is_crisp_ticket } from "@~/crisp.lib";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
@@ -18,6 +18,7 @@ export default new Hono<ContextType>().get(
   "/",
   jsxRenderer(),
   zValidator("param", Entity_Schema),
+  zValidator("query", DescribedBy_Schema),
   set_crisp_config(),
   function set_constants({ set }, next) {
     set("MAX_ARTICLE_COUNT", 3);

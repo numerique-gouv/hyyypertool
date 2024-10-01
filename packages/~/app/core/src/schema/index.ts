@@ -33,3 +33,9 @@ export const Search_Schema = z.object({
   q: z.string().default(""),
 });
 export type Search = z.infer<typeof Search_Schema>;
+//
+
+export const DescribedBy_Schema = z.object({
+  describedby: z.string(),
+});
+export type DescribedBy = z.infer<typeof DescribedBy_Schema>;

@@ -2,7 +2,11 @@
 
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
-import { Entity_Schema, Id_Schema } from "@~/app.core/schema";
+import {
+  DescribedBy_Schema,
+  Entity_Schema,
+  Id_Schema,
+} from "@~/app.core/schema";
 import { EmailDomain_Type_Schema } from "@~/moncomptepro.lib/email_domain";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
@@ -17,7 +21,6 @@ import { Table } from "./Table";
 //
 
 const DomainParams_Schema = z.object({ domain_id: Id_Schema });
-const Query_Schema = z.object({ describedby: z.string() });
 
 //
 
@@ -26,7 +29,7 @@ export default new Hono<ContextType>()
     "/",
     jsxRenderer(),
     zValidator("param", Entity_Schema),
-    zValidator("query", Query_Schema),
+    zValidator("query", DescribedBy_Schema),
     async function set_domains({ req, set, var: { moncomptepro_pg } }, next) {
       const { id: organization_id } = req.valid("param");
       const domains = await get_orginization_domains(

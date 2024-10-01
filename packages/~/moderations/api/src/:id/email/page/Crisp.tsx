@@ -10,8 +10,11 @@ import { usePageRequestContext } from "./context";
 //
 
 export default async function Crisp() {
+  const { req } = usePageRequestContext();
+  const { describedby } = req.valid("query");
+
   return (
-    <section>
+    <section aria-describedby={describedby}>
       <Header />
       <List />
     </section>

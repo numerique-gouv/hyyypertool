@@ -1,15 +1,16 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
+import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
-import { urls } from "@~/app.urls";
 import type { get_crisp_mail_dto } from "@~/crisp.lib";
 import type { Crisp_Context } from "@~/crisp.middleware";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { type get_zammad_mail_dto } from "@~/zammad.lib/get_zammad_mail";
 import { eq } from "drizzle-orm";
-import type { Env, InferRequestType } from "hono";
+import { type Env } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
+import type { z } from "zod";
 
 //
 
@@ -41,9 +42,11 @@ export type ContextType = App_Context & Crisp_Context & ContextVariablesType;
 
 //
 
-const $get = typeof urls.moderations[":id"].email.$get;
 type PageInputType = {
-  out: InferRequestType<typeof $get>;
+  out: {
+    param: z.input<typeof Entity_Schema>;
+    query: z.input<typeof DescribedBy_Schema>;
+  };
 };
 
 export const usePageRequestContext = useRequestContext<
