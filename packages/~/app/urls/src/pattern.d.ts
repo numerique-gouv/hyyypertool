@@ -54,19 +54,6 @@ declare const app: import("hono/hono-base").HonoBase<
       };
     };
     "/organizations/:id/domains/:domain_id": {
-      $delete: {
-        input: {
-          param: {
-            id: string;
-            domain_id: string;
-          } & {
-            id: string;
-          };
-        };
-        output: "OK";
-        outputFormat: "text";
-        status: 200;
-      };
       $patch: {
         input: {
           param: {
@@ -116,11 +103,11 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            is_external?:
+            verification_type?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
-            verification_type?:
+            is_external?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;

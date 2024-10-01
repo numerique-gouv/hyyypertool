@@ -169,6 +169,61 @@
         },
       },
       {
+        "label": "🧪 Run Test",
+        "command": "bun test",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Update Test Snapshots",
+        "command": "bun test --update-snapshots",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Watch Test",
+        "command": "bun test --watch",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Cypress Studio",
+        "command": "pnpm run studio",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:🧪 e2e}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Cypress Run : Current file",
+        "command": "pnpm run test --spec ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:🧪 e2e}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
         "label": "🏗️ Database MonComptePro Migrate",
         "command": "bun",
         "args": ["run", "database:moncomptepro:migrator"],

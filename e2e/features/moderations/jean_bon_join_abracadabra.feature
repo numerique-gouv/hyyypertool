@@ -29,7 +29,8 @@ Fonctionnalité: Moderation blockante à accepter
 
     Quand j'ouvre le menu déroulant sur la même ligne
     Et je clique sur le bouton "🚫 Domaine refusé"
-    Alors je ne vois pas "✅ Domaine autorisé"
+    Alors sur la même ligne je vois "🚫"
+    Alors sur la même ligne je vois "refused"
 
     Quand je clique sur le champs dans le tableau
     * je tape "poymail.com"
