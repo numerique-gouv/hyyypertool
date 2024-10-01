@@ -57,7 +57,7 @@ export async function About(props: Props) {
           Nom complet : <b>{organization.cached_nom_complet}</b>
         </li>
         <li>
-          NAF/APE : <b>{organization.cached_activite_principale}</b>
+          NAF/APE : <b>{organization.cached_libelle_categorie_juridique}</b>
         </li>
         <li>
           Tranche d'effectif :{" "}
