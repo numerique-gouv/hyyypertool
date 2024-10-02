@@ -1,5 +1,12 @@
 
 
+## [2024.10.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.1...2024.10.2) (2024-10-02)
+
+
+### Features
+
+* **welcome:** proconnect button ([#566](https://github.com/numerique-gouv/hyyypertool/issues/566)) ([43714e1](https://github.com/numerique-gouv/hyyypertool/commit/43714e107188041a5825fefe289b81378250203c))
+
 ## [2024.10.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.0...2024.10.1) (2024-10-02)
 
 
