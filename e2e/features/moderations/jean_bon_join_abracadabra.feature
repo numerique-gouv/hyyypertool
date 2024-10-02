@@ -5,7 +5,7 @@ Fonctionnalité: Moderation blockante à accepter
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
 
     Alors je vois "Liste des moderations"
     * je vois la ligne de table "51935970700022"

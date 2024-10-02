@@ -5,7 +5,7 @@ Fonctionnalité: Moderation blockante à refuser
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
 
   Scénario: Jean Bon veut rejoindre la DINUM
     Alors je vois "Liste des moderations"
