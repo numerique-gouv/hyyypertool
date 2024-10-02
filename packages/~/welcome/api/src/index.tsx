@@ -34,7 +34,7 @@ export default new Hono<App_Context>().get(
             <div class="fr-connect-group">
               <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>
-                <span class="fr-connect__brand">AgentConnect</span>
+                <span class="fr-connect__brand">ProConnect</span>
               </button>
               <p>
                 <a

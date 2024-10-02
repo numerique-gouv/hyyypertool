@@ -5,7 +5,7 @@ Fonctionnalité: Page organisation - domaine à vérifier
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
 
   Scénario:
     Quand je clique sur "Domaines à verifier"

@@ -5,7 +5,7 @@ Fonctionnalité: Moderation non blockante
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
 
     # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 

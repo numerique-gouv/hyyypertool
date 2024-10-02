@@ -7,7 +7,7 @@ Fonctionnalité: Connexion d'un utilisateur
   Scénario: Connexion de user@yopmail.com
     Etant donné que je navigue sur la page
     Alors je vois "Bonjour Hyyypertool !"
-    Quand je clique sur le bouton "AgentConnect"
+    Quand je clique sur le bouton "ProConnect"
 
     # Quand je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
