@@ -29,7 +29,7 @@ export default async function Page() {
 
       <Fiche />
 
-      <h3 id={$domains_describedby}>🌐 Domaines de l'organisation</h3>
+      <h3 id={$domains_describedby}>🌐 domaine connu dans l'organisation</h3>
       <div
         {...hx_get_domains_query_props}
         hx-trigger={[

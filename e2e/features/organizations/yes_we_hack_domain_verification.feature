@@ -21,7 +21,7 @@ Fonctionnalité: Page organisation - domaine à vérifier
     Alors je vois "A propos de « Yes we hack »"
     * je vois "Dénomination : Yes we hack"
 
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "domaine connu dans l'organisation"
     * je vois la ligne "yeswehack.com" dans le tableau
     * sur la même ligne je vois "❓"
 
