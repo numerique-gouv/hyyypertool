@@ -1,5 +1,20 @@
 
 
+# [2024.10.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.8...2024.10.0) (2024-10-02)
+
+
+### Bug Fixes
+
+* **organization:** display the libelle of NAF/APE ([#562](https://github.com/numerique-gouv/hyyypertool/issues/562)) ([797f070](https://github.com/numerique-gouv/hyyypertool/commit/797f0703551b38dba4784f1459ad6473e3611236))
+
+
+### Features
+
+* **domains:** add refused verification type ([#553](https://github.com/numerique-gouv/hyyypertool/issues/553)) ([4726159](https://github.com/numerique-gouv/hyyypertool/commit/47261591f3c63b7cd3ca10d792c4add39380cf58))
+* **moderation:** hide domaines by default ([#564](https://github.com/numerique-gouv/hyyypertool/issues/564)) ([72bcc5b](https://github.com/numerique-gouv/hyyypertool/commit/72bcc5b002b79ed167b77f89169a8f91b51cab2e))
+* **moderation:** hide exchanges by default ([#563](https://github.com/numerique-gouv/hyyypertool/issues/563)) ([29b16ed](https://github.com/numerique-gouv/hyyypertool/commit/29b16edaca0ef1241c28e261d402579e1fdb7e18))
+* **users:** gmail gouv users kpi ([#561](https://github.com/numerique-gouv/hyyypertool/issues/561)) ([881dbde](https://github.com/numerique-gouv/hyyypertool/commit/881dbdea9015405ef01bb26aa14ae908254ac632))
+
 ## [2024.9.8](https://github.com/numerique-gouv/hyyypertool/compare/2024.9.7...2024.9.8) (2024-09-30)
 
 

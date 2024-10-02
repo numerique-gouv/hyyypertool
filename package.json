@@ -1,6 +1,6 @@
 {
   "name": "hyyypertool",
-  "version": "2024.9.8",
+  "version": "2024.10.0",
   "private": true,
   "type": "module",
   "workspaces": [
