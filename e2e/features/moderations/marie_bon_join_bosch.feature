@@ -19,7 +19,7 @@ Fonctionnalité: Moderation non blockante
     Alors je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Robert bosch france » avec l’adresse marie.bon@fr.bosch.com"
 
   Scénario: Le nom de domaine est vérifié
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "domaine connu dans l'organisation"
     * le tableau est vide
     Quand je clique sur "Je valide ce membre ✅"
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
@@ -30,7 +30,7 @@ Fonctionnalité: Moderation non blockante
     * je vois la ligne de table "57206768400017"
     Quand sur la même ligne je clique sur "✅"
 
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "domaine connu dans l'organisation"
     * je vois la ligne "fr.bosch.com" dans le tableau
     * sur la même ligne je vois "✅"
 

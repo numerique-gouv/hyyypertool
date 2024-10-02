@@ -16,8 +16,10 @@ Fonctionnalité: Moderation blockante à accepter
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"
 
+    Quand je clique sur "🌐 1 domaine connu dans l'organisation"
+
   Scénario: Domaine interne
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
     * sur la même ligne je vois "❓"
     * sur la même ligne je vois "Menu"
@@ -40,7 +42,7 @@ Fonctionnalité: Moderation blockante à accepter
     Alors sur la même ligne je vois "✅"
 
   Scénario: Domaine externe
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
     Quand j'ouvre le menu déroulant sur la même ligne
     * je clique sur le bouton "❎ Domaine externe"
