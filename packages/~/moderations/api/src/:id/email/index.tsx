@@ -2,10 +2,11 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
-import { get_crisp_mail, is_crisp_ticket } from "@~/crisp.lib";
+import { get_crisp_mail } from "@~/crisp.lib";
 import { set_crisp_config } from "@~/crisp.middleware";
+import { GetCripsFromSessionId } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
+import { GetZammadFromTicketId } from "@~/moderations.lib/usecase/GetZammadFromTicketId";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
-import { is_zammad_ticket } from "@~/zammad.lib/is_zammad_ticket";
 import { to } from "await-to-js";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -43,19 +44,19 @@ export default new Hono<ContextType>().get(
     next,
   ) {
     if (!ticket_id) return next();
-    if (!is_zammad_ticket(ticket_id)) return next();
 
-    const [, articles] = await to(
-      get_zammad_mail({ ticket_id: Number(ticket_id) }),
-    );
-    if (!articles) return next();
-
-    set("zammad", {
-      articles,
-      show_more: articles.length > MAX_ARTICLE_COUNT,
-      subject: articles.at(0)?.subject ?? "",
-      ticket_id,
+    const get_zammad_from_ticket_id = GetZammadFromTicketId({
+      fetch_zammad_mail: get_zammad_mail,
     });
+    const [zammad_err, zammad] = await to(
+      get_zammad_from_ticket_id({
+        ticket_id,
+        limit: MAX_ARTICLE_COUNT,
+      }),
+    );
+    if (zammad_err) return next();
+
+    set("zammad", zammad);
     return next();
   },
   async function set_query_crisp_mail(
@@ -70,23 +71,18 @@ export default new Hono<ContextType>().get(
     next,
   ) {
     if (!session_id) return next();
-    if (!is_crisp_ticket(session_id)) return next();
-
-    const [err_crisp, crisp] = await to(
-      get_crisp_mail(crisp_config, { session_id }),
-    );
-    if (err_crisp) return next();
-    const { conversation, messages } = crisp;
-
-    set("crisp", {
-      conversation,
-      messages: messages.slice(-MAX_ARTICLE_COUNT),
-      session_id,
-      show_more: messages.length > MAX_ARTICLE_COUNT,
-      subject: conversation.meta.subject ?? "",
+    const get_crisp_from_session_id = GetCripsFromSessionId({
+      crisp_config,
+      fetch_crisp_mail: get_crisp_mail,
     });
+    const [crip_err, crip] = await to(
+      get_crisp_from_session_id({ session_id, limit: MAX_ARTICLE_COUNT }),
+    );
+    if (crip_err) return next();
+    set("crisp", crip);
     return next();
   },
+
   async function GET({ render }) {
     return render(<Page />);
   },

@@ -1,0 +1,23 @@
+{
+  "name": "@~/moderations.ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "default": "./src/*.tsx"
+    }
+  },
+  "dependencies": {
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "@~/organizations.lib": "workspace:*",
+    "hono": "4.6.3",
+    "tailwind-variants": "0.2.1",
+    "ts-pattern": "5.4.0"
+  },
+  "devDependencies": {
+    "@~/crisp.lib": "workspace:*",
+    "@~/config.typescript": "workspace:*"
+  }
+}

@@ -88,6 +88,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: dinum.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
+      ticket_id: "115793",
     });
     consola.verbose(
       `🌱 INSERT ${jean_bon.given_name} wants to join ${dinum.cached_libelle}`,
@@ -98,6 +99,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: abracadabra.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
+      ticket_id: "session_456",
     });
     consola.verbose(
       `🌱 INSERT ${jean_bon.given_name} wants to join ${abracadabra.cached_libelle}`,
@@ -117,6 +119,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      ticket_id: "session_789",
     });
     consola.verbose(
       `🌱 INSERT ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet}`,
@@ -126,6 +129,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: dengi.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
+      ticket_id: "session_321",
     });
     consola.verbose(
       `🌱 INSERT ${richard_bon.given_name} wants to join ${dengi.cached_nom_complet} again...`,
@@ -135,6 +139,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       organization_id: bosch_france.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
+      ticket_id: "session_654",
     });
     consola.verbose(
       `🌱 INSERT ${marie_bon.given_name} wants to join ${bosch_france.cached_nom_complet} again...`,
@@ -145,6 +150,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      ticket_id: "session_987",
     });
     consola.verbose(
       `🌱 INSERT ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
@@ -154,6 +160,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: raphael_alpha.id,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      ticket_id: "session_111",
     });
     consola.verbose(
       `🌱 INSERT ${raphael_alpha.given_name} wants to join ${dinum.cached_nom_complet} again...`,

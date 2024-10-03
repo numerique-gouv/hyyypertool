@@ -23,6 +23,7 @@
     "@~/crisp.middleware": "workspace:*",
     "@~/crisp.ui": "workspace:*",
     "@~/moderations.lib": "workspace:*",
+    "@~/moderations.ui": "workspace:*",
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "@~/organizations.repository": "workspace:*",
