@@ -37,6 +37,9 @@
     "./table": {
       "default": "./src/table/index.ts"
     },
+    "./testing": {
+      "default": "./src/testing/index.ts"
+    },
     "./visually_hidden": {
       "default": "./src/visually_hidden/index.ts"
     },

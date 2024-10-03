@@ -1,8 +1,7 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render about section 1`] = `
-"<!doctype html>
-<section>
+"<section id="about_section">
   <ul class="list-none pl-0">
     <li>
       Creation de l&#39;organisation :
