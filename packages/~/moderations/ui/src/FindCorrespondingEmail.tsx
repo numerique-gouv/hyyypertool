@@ -1,21 +1,15 @@
 //
 
-import { usePageRequestContext } from "./context";
+interface Props {
+  email: string;
+  website_id: string;
+}
 
 //
 
-export function FindCorrespondingEmail() {
-  const {
-    req,
-    var: {
-      config: { CRISP_WEBSITE_ID },
-      moderation: {
-        user: { email },
-      },
-    },
-  } = usePageRequestContext();
-  const { describedby } = req.valid("query");
-
+export function FindCorrespondingEmail(props: Props) {
+  const { email, website_id } = props;
+  const { describedby } = { describedby: "" };
   return (
     <div
       aria-describedby={describedby}
@@ -29,7 +23,7 @@ export function FindCorrespondingEmail() {
         Trouver l'email correspondant dans Zammad
       </a>
       <a
-        href={`https://app.crisp.chat/website/${CRISP_WEBSITE_ID}/inbox/`}
+        href={`https://app.crisp.chat/website/${website_id}/inbox/`}
         rel="noopener noreferrer"
         target="_blank"
       >

@@ -3,15 +3,25 @@
 import { callout } from "@~/app.ui/callout";
 import { OpenInCrisp, short_session_id } from "@~/app.ui/links/OpenInCrisp";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
+import type { Config } from "@~/crisp.lib/types";
 import { Message } from "@~/crisp.ui/message";
+import type { get_crisp_from_session_id } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
+import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
-import { usePageRequestContext } from "./context";
+
+//
+
+interface Values {
+  crisp_config: Config;
+  limit: number;
+  crisp: Awaited<ReturnType<get_crisp_from_session_id>>;
+}
+const context = createContext<Values>(null as any);
 
 //
 
 export default async function Crisp() {
-  const { req } = usePageRequestContext();
-  const { describedby } = req.valid("query");
+  const { describedby } = { describedby: "" };
 
   return (
     <section aria-describedby={describedby}>
@@ -20,14 +30,13 @@ export default async function Crisp() {
     </section>
   );
 }
+Crisp.Provider = context.Provider;
 
 //
 
 function Header() {
-  const {
-    var: { crisp, crisp_config },
-  } = usePageRequestContext();
-  const { subject, session_id } = crisp!;
+  const { crisp, crisp_config } = useContext(context);
+  const { subject, session_id } = crisp;
   return (
     <h5 class="flex flex-row justify-between">
       <span>{subject}</span>
@@ -39,10 +48,8 @@ function Header() {
 }
 
 function List() {
-  const {
-    var: { crisp },
-  } = usePageRequestContext();
-  const { messages } = crisp!;
+  const { crisp } = useContext(context);
+  const { messages } = crisp;
   return (
     <ul class="list-none">
       <ShowMore />
@@ -72,10 +79,8 @@ function List() {
 }
 
 function ShowMore() {
-  const {
-    var: { crisp },
-  } = usePageRequestContext();
-  const { show_more, session_id } = crisp!;
+  const { crisp } = useContext(context);
+  const { show_more, session_id } = crisp;
 
   if (!show_more) return <></>;
 
@@ -88,20 +93,19 @@ function ShowMore() {
 
 function ShowMoreCallout({ session_id }: { session_id: string }) {
   const {
-    var: {
-      config: { CRISP_WEBSITE_ID },
-      MAX_ARTICLE_COUNT,
-    },
-  } = usePageRequestContext();
+    crisp_config: { website_id },
+    limit,
+  } = useContext(context);
   const { base, text, title } = callout({ intent: "warning" });
   return (
     <div class={base()}>
       <p class={title()}>Afficher plus de messages</p>
       <p class={text()}>
-        Seul les {MAX_ARTICLE_COUNT} derniers messages sont affichés.
+        Seul les {limit} derniers messages sont affichés.
         <br />
         Consulter tous les messages sur Crisp{" "}
-        <OpenInCrisp session_id={session_id} website_id={CRISP_WEBSITE_ID}>
+        <pre>{JSON.stringify({ session_id, website_id }, null, 2)}</pre>
+        <OpenInCrisp session_id={session_id} website_id={website_id}>
           #{short_session_id(session_id)}
         </OpenInCrisp>
       </p>

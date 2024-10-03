@@ -1,42 +1,65 @@
 {
   "folders": [
-    //
-
-    { "path": "packages/~/app", "name": "🈸 app" },
-    // { "path": "packages/~/app/core", "name": "📜 app.core" },
-    // { "path": "packages/~/app/layout", "name": "💄 app.layout" },
-    // { "path": "packages/~/app/middleware", "name": "🪝 app.middleware" },
-    // { "path": "packages/~/app/api", "name": "🫙 app.api" },
-    // { "path": "packages/~/app/urls", "name": "🔗 app.urls" },
-
-    //
-
-    { "path": "packages/~/moderations", "name": "📦 moderations" },
-    { "path": "packages/~/organizations", "name": "📦 organizations" },
-    { "path": "packages/~/users", "name": "📦 users" },
-
-    //
-
-    { "path": "packages/~/auth", "name": "📦 auth" },
-    { "path": "packages/~/welcome", "name": "📦 welcome" },
-    { "path": "packages/~/proxy", "name": "📦 proxy" },
-
-    //
-    //
-
-    { "path": "packages/~/infra/moncomptepro", "name": "🏗️ moncomptepro" },
-    { "path": "packages/~/infra/zammad", "name": "🏗️ zammad" },
-    { "path": "packages/~/infra/crisp", "name": "🏗️ crisp" },
-
-    //
-    { "path": "packages/~/config", "name": "⚙️ config" },
-    //
-    { "path": "mocks", "name": "🎭 mocks" },
-    { "path": "bin", "name": "🚀 bin" },
-    { "path": "e2e", "name": "🧪 e2e" },
-    //
-    //
-    { "path": ".", "name": "root" },
+    {
+      "name": "🈸 app",
+      "path": "packages/~/app",
+    },
+    {
+      "name": "📦 moderations",
+      "path": "packages/~/moderations",
+    },
+    {
+      "name": "📦 organizations",
+      "path": "packages/~/organizations",
+    },
+    {
+      "name": "📦 users",
+      "path": "packages/~/users",
+    },
+    {
+      "name": "📦 auth",
+      "path": "packages/~/auth",
+    },
+    {
+      "name": "📦 welcome",
+      "path": "packages/~/welcome",
+    },
+    {
+      "name": "📦 proxy",
+      "path": "packages/~/proxy",
+    },
+    {
+      "name": "🏗️ moncomptepro",
+      "path": "packages/~/infra/moncomptepro",
+    },
+    {
+      "name": "🏗️ zammad",
+      "path": "packages/~/infra/zammad",
+    },
+    {
+      "name": "🏗️ crisp",
+      "path": "packages/~/infra/crisp",
+    },
+    {
+      "name": "⚙️ config",
+      "path": "packages/~/config",
+    },
+    {
+      "name": "🎭 mocks",
+      "path": "mocks",
+    },
+    {
+      "name": "🚀 bin",
+      "path": "bin",
+    },
+    {
+      "name": "🧪 e2e",
+      "path": "e2e",
+    },
+    {
+      "name": "root",
+      "path": ".",
+    },
   ],
   "extensions": {
     "recommendations": [

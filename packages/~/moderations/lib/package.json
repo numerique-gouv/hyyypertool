@@ -21,6 +21,8 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@~/crisp.lib": "workspace:*",
+    "@~/zammad.lib": "workspace:*",
     "@~/config.typescript": "workspace:*"
   }
 }
