@@ -6,6 +6,7 @@ import { hx_urls, urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { About as About_Organization } from "@~/organizations.ui/info/About";
 import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
+import { getContext } from "hono/context-storage";
 import { About_User, Investigation_User } from "./About_User";
 import { Moderation_Actions } from "./Actions";
 import { Domain_Organization } from "./Domain_Organization";
@@ -13,13 +14,14 @@ import { Header } from "./Header";
 import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
 import { Moderation_Exchanges } from "./Moderation_Exchanges";
 import { Organizations_Of_User_Table } from "./Organizations_Of_User_Table";
-import { usePageRequestContext } from "./context";
+import { type ModerationContext, usePageRequestContext } from "./context";
 
 //
 
 export default async function Moderation_Page() {
+  const { moderation } = getContext<ModerationContext>().var;
   const {
-    var: { moderation, organization_fiche },
+    var: { organization_fiche },
   } = usePageRequestContext();
 
   return (

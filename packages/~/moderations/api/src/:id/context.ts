@@ -20,6 +20,11 @@ export const EMAIL_TO_INPUT_ID = "mail-to";
 
 //
 
+export interface ModerationContext extends Env {
+  Variables: {
+    moderation: get_moderation_dto;
+  };
+}
 export interface ContextVariablesType extends Env {
   Variables: {
     domain: string;
