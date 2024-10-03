@@ -1,5 +1,12 @@
 
 
+## [2024.10.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.2...2024.10.3) (2024-10-03)
+
+
+### Bug Fixes
+
+* **organization:** display the libelle of NAF/APE again ([#569](https://github.com/numerique-gouv/hyyypertool/issues/569)) ([2a442db](https://github.com/numerique-gouv/hyyypertool/commit/2a442dbd822c39350acf335c80e77ad5f14ba30a))
+
 ## [2024.10.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.1...2024.10.2) (2024-10-02)
 
 
