@@ -5,6 +5,8 @@ import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { Main_Layout } from "@~/app.layout/index";
+import { set_context_variables } from "@~/app.middleware/set_context_variables";
+import { GetFicheOrganizationById } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
 import { get_domain_count } from "@~/organizations.repository/get_domain_count";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to } from "await-to-js";
@@ -15,6 +17,7 @@ import {
   get_moderation,
   get_organization_member,
   type ContextType,
+  type ContextVariablesType,
 } from "./context";
 import duplicate_warning_router from "./duplicate_warning";
 import moderation_email_router from "./email/index";
@@ -92,6 +95,29 @@ export default new Hono<ContextType>()
         }),
       );
       return next();
+    },
+    async function set_context(ctx, next) {
+      const {
+        domain,
+        moderation,
+        organization_member,
+        query_domain_count,
+        query_organization_members_count,
+      } = ctx.var;
+      const get_fiche_organization_by_id = GetFicheOrganizationById({
+        pg: ctx.var.moncomptepro_pg,
+      });
+      const organization_fiche = await get_fiche_organization_by_id(
+        moderation.organization_id,
+      );
+      return set_context_variables<ContextVariablesType>(() => ({
+        domain,
+        moderation,
+        organization_fiche,
+        organization_member,
+        query_domain_count,
+        query_organization_members_count,
+      }))(ctx as any, next);
     },
     function GET({ render }) {
       return render(<Page />);

@@ -3,30 +3,14 @@
 import { button } from "@~/app.ui/button";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
-import type { Organization } from "@~/organizations.lib/entities/Organization";
+import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
 import { type JSX } from "hono/jsx";
 import { InactiveWarning } from "./InactiveWarning";
 
 //
 
 type Props = JSX.IntrinsicElements["section"] & {
-  organization: Pick<
-    Organization,
-    | "cached_activite_principale"
-    | "cached_adresse"
-    | "cached_code_postal"
-    | "cached_est_active"
-    | "cached_etat_administratif"
-    | "cached_libelle_categorie_juridique"
-    | "cached_libelle_tranche_effectif"
-    | "cached_libelle"
-    | "cached_nom_complet"
-    | "cached_tranche_effectifs"
-    | "created_at"
-    | "id"
-    | "siret"
-    | "updated_at"
-  >;
+  organization: Awaited<ReturnType<GetFicheOrganizationByIdHandler>>;
 };
 
 export async function About(props: Props) {
@@ -48,7 +32,10 @@ export async function About(props: Props) {
         </li>
         <li>
           Nature juridique :{" "}
-          <b>{organization.cached_libelle_categorie_juridique}</b>
+          <b>
+            {organization.cached_libelle_categorie_juridique} (
+            {organization.cached_categorie_juridique})
+          </b>
         </li>
         <li>
           Dénomination : <b>{organization.cached_libelle}</b>
@@ -57,7 +44,10 @@ export async function About(props: Props) {
           Nom complet : <b>{organization.cached_nom_complet}</b>
         </li>
         <li>
-          NAF/APE : <b>{organization.cached_libelle_categorie_juridique}</b>
+          Enseigne : <b>{organization.cached_enseigne}</b>
+        </li>
+        <li>
+          NAF/APE : <b>{organization.cached_libelle_activite_principale}</b>
         </li>
         <li>
           Tranche d'effectif :{" "}
@@ -85,6 +75,10 @@ export async function About(props: Props) {
         </li>
         <li>
           Adresse : <b>{organization.cached_adresse}</b>
+        </li>
+        <li>
+          Code officiel géographique :{" "}
+          <b>{organization.cached_code_officiel_geographique}</b>
         </li>
         <li>
           Siret : <b>{organization.siret}</b> (
