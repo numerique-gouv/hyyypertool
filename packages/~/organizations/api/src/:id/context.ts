@@ -3,6 +3,7 @@
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { Organization } from "@~/organizations.lib/entities/Organization";
+import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
 import { type get_organization_members_count_dto } from "@~/organizations.repository/get_organization_members_count";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -29,6 +30,7 @@ type FicheOrganization = Pick<
 export interface ContextVariablesType extends Env {
   Variables: {
     organization: FicheOrganization;
+    organization_fiche: Awaited<ReturnType<GetFicheOrganizationByIdHandler>>;
     query_organization_members_count: Promise<get_organization_members_count_dto>;
   };
 }

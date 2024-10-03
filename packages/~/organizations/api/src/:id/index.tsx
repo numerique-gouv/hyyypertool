@@ -4,13 +4,16 @@ import { zValidator } from "@hono/zod-validator";
 import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
+import { set_context_variables } from "@~/app.middleware/set_context_variables";
+import { GetFicheOrganizationById } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
 import { GetOrganizationById } from "@~/organizations.repository";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to as await_to } from "await-to-js";
 import { Hono } from "hono";
+import { getContext } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
 import organization_procedures_router from "./$procedures";
-import type { ContextType } from "./context";
+import type { ContextType, ContextVariablesType } from "./context";
 import organization_domains_router from "./domains";
 import organization_members_router from "./members";
 import { Organization_NotFound } from "./not-found";
@@ -75,6 +78,24 @@ export default new Hono<ContextType>()
         }),
       );
       return next();
+    },
+    async function set_context(ctx, next) {
+      const {
+        var: { moncomptepro_pg },
+      } = getContext<ContextType>();
+      const { id: organization_id } = ctx.req.valid("param");
+      const get_fiche_organization_by_id = GetFicheOrganizationById({
+        pg: moncomptepro_pg,
+      });
+      const organization_fiche =
+        await get_fiche_organization_by_id(organization_id);
+
+      return set_context_variables<ContextVariablesType>(() => ({
+        query_organization_members_count:
+          ctx.var.query_organization_members_count,
+        organization: ctx.var.organization,
+        organization_fiche,
+      }))(ctx as any, next);
     },
     async function GET({ render }) {
       return render(<Organization_Page />);

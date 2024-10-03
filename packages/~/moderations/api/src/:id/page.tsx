@@ -19,7 +19,7 @@ import { usePageRequestContext } from "./context";
 
 export default async function Moderation_Page() {
   const {
-    var: { moderation },
+    var: { moderation, organization_fiche },
   } = usePageRequestContext();
 
   return (
@@ -70,7 +70,7 @@ export default async function Moderation_Page() {
               🏛 Organisation
             </a>
           </h3>
-          <About_Organization organization={moderation.organization} />
+          <About_Organization organization={organization_fiche} />
         </div>
       </div>
 
