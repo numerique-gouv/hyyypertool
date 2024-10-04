@@ -1,26 +1,66 @@
 ":construction_worker: CI":
   - changed-files:
       - any-glob-to-any-file: ".github/**"
-":jar: api":
-  - changed-files:
-      - any-glob-to-any-file: "packages/~/*/api/**/*"
-":lipstick: ui":
-  - changed-files:
-      - any-glob-to-any-file:
-          - "packages/~/app/ui**/*"
-          - "packages/~/*/ui/**/*"
 ":memo: documentation":
   - changed-files:
       - any-glob-to-any-file: "**/*.md"
-":test_tube: e2e":
+":traffic_light: e2e":
   - changed-files:
       - any-glob-to-any-file: "e2e/**/*"
+      - any-glob-to-any-file: "**/*.e2e.test"
+":test_tube: unit test":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.test"
+
+#
+
+":globe_with_meridians: api":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/~/app/api/**/*"
+          - "packages/~/*/api/**/*"
+":file_cabinet: database":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/~/infra/*/database/**/*"
+          - "packages/~/*/repository/**/*"
+":building_construction: infra":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/infra/**/*"
+":books: lib":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/~/infra/*/lib/**/*"
+          - "packages/~/*/lib/**/*"
+":lipstick: ui":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/~/app/ui/**/*"
+          - "packages/~/*/ui/**/*"
+
+#
+
+"scope: app":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/app/**/*"
+"scope: auth":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/auth/**/*"
+"scope: config":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/config/**/*"
 "scope: moderations":
   - changed-files:
       - any-glob-to-any-file: "packages/~/moderations/**/*"
-"scope: users":
-  - changed-files:
-      - any-glob-to-any-file: "packages/~/users/**/*"
 "scope: organizations":
   - changed-files:
       - any-glob-to-any-file: "packages/~/organizations/**/*"
+"scope: proxy":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/proxy/**/*"
+"scope: users":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/users/**/*"
+"scope: welcome":
+  - changed-files:
+      - any-glob-to-any-file: "packages/~/welcome/**/*"

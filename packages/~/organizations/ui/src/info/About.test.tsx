@@ -34,5 +34,5 @@ test("render about section", async () => {
         id="about_section"
       />,
     ),
-  ).toBeString();
+  ).toMatchSnapshot();
 });
