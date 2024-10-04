@@ -83,6 +83,8 @@ function Tools({ username }: { username?: string | undefined }) {
 }
 
 function Nav() {
+  const { req } = useRequestContext();
+
   return (
     <nav
       class="fr-nav"
@@ -93,6 +95,7 @@ function Nav() {
       <ul class="fr-nav__list">
         <li class="fr-nav__item">
           <a
+            aria-current={req.routePath.startsWith("/moderations")}
             class="fr-nav__link"
             href={urls.moderations.$url().pathname}
             target="_self"
@@ -102,6 +105,7 @@ function Nav() {
         </li>
         <li class="fr-nav__item">
           <a
+            aria-current={req.routePath.startsWith("/users")}
             class="fr-nav__link"
             href={urls.users.$url().pathname}
             target="_self"
@@ -111,6 +115,10 @@ function Nav() {
         </li>
         <li class="fr-nav__item">
           <a
+            aria-current={
+              req.routePath.startsWith("/organizations") &&
+              !req.routePath.startsWith("/organizations/domains")
+            }
             class="fr-nav__link"
             href={urls.organizations.$url().pathname}
             target="_self"
@@ -120,6 +128,7 @@ function Nav() {
         </li>
         <li class="fr-nav__item">
           <a
+            aria-current={req.routePath.startsWith("/organizations/domains")}
             class="fr-nav__link"
             href={urls.organizations.domains.$url().pathname}
             target="_self"
