@@ -2,11 +2,11 @@
 
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
+import { MessageInfo } from "@~/moderations.ui/MessageInfo";
+import { usePageRequestContext } from "./context";
 import { Desicison } from "./Desicison";
 import { Member_Invalid } from "./Member_Invalid";
 import { Member_Valid } from "./Member_Valid";
-import { MessageInfo } from "./MessageInfo";
-import { usePageRequestContext } from "./context";
 
 //
 
@@ -27,7 +27,7 @@ export async function Moderation_Actions() {
         Actions de modération <small class="fr-badge fr-badge--new">beta</small>{" "}
       </h2>
 
-      <MessageInfo />
+      <MessageInfo moderation={moderation} />
 
       <hr class="bg-none" />
       {moderation.moderated_at ? (

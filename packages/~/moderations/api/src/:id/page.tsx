@@ -4,13 +4,13 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls, urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { Header } from "@~/moderations.ui/Header";
 import { About as About_Organization } from "@~/organizations.ui/info/About";
 import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
 import { getContext } from "hono/context-storage";
 import { About_User, Investigation_User } from "./About_User";
 import { Moderation_Actions } from "./Actions";
 import { Domain_Organization } from "./Domain_Organization";
-import { Header } from "./Header";
 import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
 import { Moderation_Exchanges } from "./Moderation_Exchanges";
 import { Organizations_Of_User_Table } from "./Organizations_Of_User_Table";
@@ -52,7 +52,9 @@ export default async function Moderation_Page() {
 
       <hr class="bg-none pt-6" />
 
-      <Header />
+      <Header.Provier value={{ moderation }}>
+        <Header />
+      </Header.Provier>
 
       <hr class="my-12" />
 

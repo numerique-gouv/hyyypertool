@@ -1,22 +1,26 @@
 //
 
+import { MessageInfo } from "#ui/MessageInfo";
 import { button } from "@~/app.ui/button";
 import { callout } from "@~/app.ui/callout";
 import { notice } from "@~/app.ui/notice";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
-import type { Moderation } from "@~/moncomptepro.database";
+import type { GetModerationHeaderOutput } from "@~/moderations.lib/usecase/GetModerationHeader";
 import { raw } from "hono/html";
-import { MessageInfo } from "./MessageInfo";
-import { usePageRequestContext } from "./context";
+import { createContext, useContext } from "hono/jsx";
 
 //
 
+interface Values {
+  moderation: GetModerationHeaderOutput;
+}
+const context = createContext<Values>(null as any);
+
+//
 export async function Header() {
-  const {
-    var: { moderation },
-  } = usePageRequestContext();
+  const { moderation } = useContext(context);
 
   return (
     <header>
@@ -34,7 +38,7 @@ export async function Header() {
 
       <hr class="bg-none" />
 
-      <ModerationCallout moderation={moderation} />
+      <ModerationCallout />
 
       <hr class="bg-none" />
 
@@ -52,8 +56,8 @@ export async function Header() {
             id: moderation.id.toString(),
           },
           query: {
-            organization_id: moderation.organization_id.toString(),
-            user_id: moderation.user_id.toString(),
+            organization_id: moderation.organization.id.toString(),
+            user_id: moderation.user.id.toString(),
           },
         })}
         hx-trigger="load"
@@ -63,32 +67,33 @@ export async function Header() {
     </header>
   );
 }
+Header.Provier = context.Provider;
 
 function State_Badge() {
-  const {
-    var: { moderation },
-  } = usePageRequestContext();
+  const { moderation } = useContext(context);
   const is_treated = moderation.moderated_at !== null;
   if (is_treated) return <p class="fr-badge fr-badge--success">Traité</p>;
   return <p class="fr-badge fr-badge--new">A traiter</p>;
 }
 
 function Info() {
+  const { moderation } = useContext(context);
   const { base, container, body, title } = notice({ type: "info" });
   return (
     <div class={base()}>
       <div class={container()}>
         <div class={body()}>
-          <p class={title()}>
-            <MessageInfo />
-          </p>
+          <div class={title()}>
+            <MessageInfo moderation={moderation} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-async function ModerationCallout({ moderation }: { moderation: Moderation }) {
+async function ModerationCallout() {
+  const { moderation } = useContext(context);
   if (!moderation.moderated_at) return raw``;
 
   const { base, text, title } = callout({ intent: "success" });
@@ -125,11 +130,7 @@ async function ModerationCallout({ moderation }: { moderation: Moderation }) {
 }
 
 function LastComment() {
-  const {
-    var: {
-      moderation: { comment },
-    },
-  } = usePageRequestContext();
+  const { comment } = useContext(context).moderation;
   if (!comment) {
     return raw``;
   }
@@ -139,11 +140,7 @@ function LastComment() {
 }
 
 function Comments() {
-  const {
-    var: {
-      moderation: { comment },
-    },
-  } = usePageRequestContext();
+  const { comment } = useContext(context).moderation;
   const parsed_comment = parse_comment(comment);
   return (
     <details>

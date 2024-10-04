@@ -20,7 +20,7 @@ const context = createContext<Values>(null as any);
 
 //
 
-export default async function Crisp() {
+export async function Crisp() {
   const { describedby } = { describedby: "" };
 
   return (

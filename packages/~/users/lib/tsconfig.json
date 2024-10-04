@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./node_modules/.cache/tsc"
+  },
+  "extends": "@~/config.typescript/tsx/tsconfig.json",
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../infra/moncomptepro/database"
+    },
+    {
+      "path": "../../infra/moncomptepro/lib"
+    },
+    {
+      "path": "../repository"
+    },
+    {
+      "path": "../../users/repository"
+    }
+  ]
+}
