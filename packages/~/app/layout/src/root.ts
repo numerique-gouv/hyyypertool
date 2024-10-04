@@ -1,6 +1,7 @@
 //
 
 import type { App_Context } from "@~/app.middleware/context";
+import { set_prefers_color_scheme } from "@~/app.ui/scheme/scripts";
 import { html } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -14,6 +15,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
 
   return html`
     <html
+      _=${set_prefers_color_scheme}
       lang="fr"
       data-fr-scheme="system"
       hx-ext="${[

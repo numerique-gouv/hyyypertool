@@ -34,6 +34,9 @@
     "./quote": {
       "default": "./src/quote/index.ts"
     },
+    "./scheme/scripts": {
+      "default": "./src/scheme/scripts/index.ts"
+    },
     "./table": {
       "default": "./src/table/index.ts"
     },
