@@ -1,6 +1,6 @@
 //
 
-import Crisp from "@~/moderations.ui/Crisp";
+import { Crisp } from "@~/moderations.ui/Crisp";
 import { FindCorrespondingEmail } from "@~/moderations.ui/FindCorrespondingEmail";
 import { match, P } from "ts-pattern";
 import { usePageRequestContext } from "./context";
