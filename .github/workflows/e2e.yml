@@ -1,6 +1,6 @@
 #
 
-name: E2E
+name: 🧪 E2E
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:

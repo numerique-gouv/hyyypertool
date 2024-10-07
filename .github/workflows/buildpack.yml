@@ -1,6 +1,6 @@
 #
 
-name: scalingo/buildpack
+name: 🧷 scalingo/buildpack
 
 on:
   push:
