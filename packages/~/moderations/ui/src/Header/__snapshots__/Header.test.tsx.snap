@@ -15,7 +15,6 @@ exports[`render header section 1`] = `
     <div><p class="fr-badge fr-badge--new">A traiter</p></div>
   </section>
   <hr class="bg-none" />
-  <hr class="bg-none" />
   <div class="fr-notice fr-notice--info">
     <div class="fr-container">
       <div class="fr-notice__body">
