@@ -65,7 +65,7 @@ export default async function Moderation_Page() {
         <Header />
       </Header.Provier>
 
-      <hr class="my-12" />
+      <hr class="my-3" />
 
       <div class="grid grid-cols-2 gap-6">
         <About_User user={moderation.user} />
@@ -103,21 +103,21 @@ export default async function Moderation_Page() {
         user={moderation.user}
         query_organization_count={CountUserMemberships({ pg: moncomptepro_pg })}
       />
-      <hr class="my-12" />
+      <hr class="my-3" />
 
       <DomainsByOrganization
         organization={moderation.organization}
         query_domain_count={query_domain_count}
       />
 
-      <hr class="my-12 bg-none" />
+      <hr class="my-3 bg-none" />
 
       <UsersByOrganization
         organization={moderation.organization}
         query_members_count={query_organization_members_count}
       />
 
-      <hr class="my-12 bg-none" />
+      <hr class="my-3 bg-none" />
 
       <Actions
         value={{
@@ -131,11 +131,11 @@ export default async function Moderation_Page() {
         }}
       />
 
-      <hr class="my-12 bg-none" />
+      <hr class="my-3 bg-none" />
 
       <hr />
 
-      <hr class="my-12 bg-none" />
+      <hr class="my-3 bg-none" />
 
       <Moderation_Exchanges />
     </main>

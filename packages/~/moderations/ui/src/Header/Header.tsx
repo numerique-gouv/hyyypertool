@@ -51,8 +51,6 @@ export async function Header() {
         </div>
       </section>
 
-      <hr class="bg-none" />
-
       <ModerationCallout />
 
       <hr class="bg-none" />
@@ -109,6 +107,8 @@ async function ModerationCallout() {
 
   return (
     <div class={base()}>
+      <hr class="bg-none" />
+
       <h3 class={text()}>Modération traitée</h3>
       <p class={title()}>
         Cette modération a été marqué comme traitée le{" "}
