@@ -53,7 +53,7 @@
       "path": "bin",
     },
     {
-      "name": "🧪 e2e",
+      "name": "🚥 e2e",
       "path": "e2e",
     },
     {
@@ -247,23 +247,23 @@
         "runOptions": { "instanceLimit": 1 },
       },
       {
-        "label": "🧪 Cypress Studio",
+        "label": "🚥 Cypress Studio",
         "command": "bun run studio",
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🧪 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
       },
       {
-        "label": "🧪 Cypress Run : Current file",
+        "label": "🚥 Cypress Run : Current file",
         "command": "bun run test --spec ${fileDirname}/${fileBasename}",
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🧪 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
