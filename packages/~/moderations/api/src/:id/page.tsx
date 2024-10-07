@@ -4,24 +4,33 @@ import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls, urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { IsUserExternalMember } from "@~/moderations.lib/usecase/IsUserExternalMember";
+import { Actions } from "@~/moderations.ui/Actions";
+import { DomainsByOrganization } from "@~/moderations.ui/DomainsByOrganization";
 import { Header } from "@~/moderations.ui/Header";
+import { OrganizationsByUser } from "@~/moderations.ui/OrganizationsByUser";
+import { UsersByOrganization } from "@~/moderations.ui/UsersByOrganization";
 import { About as About_Organization } from "@~/organizations.ui/info/About";
 import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
+import { CountUserMemberships } from "@~/users.lib/usecase/CountUserMemberships";
+import { SuggestSameUserEmails } from "@~/users.lib/usecase/SuggestSameUserEmails";
+import { About as About_User } from "@~/users.ui/About";
+import { Investigation as Investigation_User } from "@~/users.ui/Investigation";
 import { getContext } from "hono/context-storage";
-import { About_User, Investigation_User } from "./About_User";
-import { Moderation_Actions } from "./Actions";
-import { Domain_Organization } from "./Domain_Organization";
-import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
-import { Moderation_Exchanges } from "./Moderation_Exchanges";
-import { Organizations_Of_User_Table } from "./Organizations_Of_User_Table";
 import { type ModerationContext, usePageRequestContext } from "./context";
+import { Moderation_Exchanges } from "./Moderation_Exchanges";
 
 //
 
 export default async function Moderation_Page() {
   const { moderation } = getContext<ModerationContext>().var;
   const {
-    var: { organization_fiche },
+    var: {
+      moncomptepro_pg,
+      organization_fiche,
+      query_domain_count,
+      query_organization_members_count,
+    },
   } = usePageRequestContext();
 
   return (
@@ -59,7 +68,7 @@ export default async function Moderation_Page() {
       <hr class="my-12" />
 
       <div class="grid grid-cols-2 gap-6">
-        <About_User />
+        <About_User user={moderation.user} />
         <div>
           <h3>
             <a
@@ -81,25 +90,46 @@ export default async function Moderation_Page() {
       <hr class="bg-none pt-6" />
 
       <div class="grid grid-cols-2 gap-6">
-        <Investigation_User />
+        <Investigation_User
+          user={moderation.user}
+          organization={moderation.organization}
+        />
         <Investigation_Organization organization={moderation.organization} />
       </div>
 
       <hr class="bg-none pt-6" />
 
-      <Organizations_Of_User_Table />
-
+      <OrganizationsByUser
+        user={moderation.user}
+        query_organization_count={CountUserMemberships({ pg: moncomptepro_pg })}
+      />
       <hr class="my-12" />
 
-      <Domain_Organization />
+      <DomainsByOrganization
+        organization={moderation.organization}
+        query_domain_count={query_domain_count}
+      />
 
       <hr class="my-12 bg-none" />
 
-      <Members_Of_Organization_Table />
+      <UsersByOrganization
+        organization={moderation.organization}
+        query_members_count={query_organization_members_count}
+      />
 
       <hr class="my-12 bg-none" />
 
-      <Moderation_Actions />
+      <Actions
+        value={{
+          moderation,
+          query_suggest_same_user_emails: SuggestSameUserEmails({
+            pg: moncomptepro_pg,
+          }),
+          query_is_user_external_member: IsUserExternalMember({
+            pg: moncomptepro_pg,
+          }),
+        }}
+      />
 
       <hr class="my-12 bg-none" />
 

@@ -13,13 +13,6 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export const RESPONSE_MESSAGE_SELECT_ID = "response-message";
-export const RESPONSE_TEXTAREA_ID = "response";
-export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
-export const EMAIL_TO_INPUT_ID = "mail-to";
-
-//
-
 export interface ModerationContext extends Env {
   Variables: {
     moderation: get_moderation_dto;

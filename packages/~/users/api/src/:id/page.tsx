@@ -1,5 +1,6 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components/copy";
@@ -14,6 +15,15 @@ export default async function User_Page() {
   const {
     var: { user },
   } = usePageRequestContext();
+  const hx_get_user_organizations = await hx_urls.users[
+    ":id"
+  ].organizations.$get({
+    param: { id: user.id.toString() },
+    query: { describedby: hyper_ref() },
+  });
+  const hx_get_user_moderations = await hx_urls.users[":id"].moderations.$get({
+    param: { id: user.id.toString() },
+  });
 
   return (
     <main class="fr-container">
@@ -28,10 +38,7 @@ export default async function User_Page() {
       suivantes :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
-          {...await hx_urls.users[":id"].organizations.$get({
-            param: { id: user.id.toString() },
-            query: {},
-          })}
+          {...hx_get_user_organizations}
           hx-target="this"
           hx-trigger="load"
           class="fr-table"
@@ -43,9 +50,7 @@ export default async function User_Page() {
       :
       <div class="fr-table max-w-full overflow-x-auto">
         <div
-          {...await hx_urls.users[":id"].moderations.$get({
-            param: { id: user.id.toString() },
-          })}
+          {...hx_get_user_moderations}
           hx-target="this"
           hx-trigger="load"
           class="fr-table"

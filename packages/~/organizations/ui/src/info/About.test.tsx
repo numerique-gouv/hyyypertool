@@ -1,12 +1,12 @@
 //
 
-import { renderHTML } from "@~/app.ui/testing";
+import { render_html } from "@~/app.ui/testing";
 import { expect, test } from "bun:test";
 import { About } from "./About";
 
 test("render about section", async () => {
   expect(
-    await renderHTML(
+    await render_html(
       <About
         organization={{
           cached_activite_principale: "cached_activite_principale",

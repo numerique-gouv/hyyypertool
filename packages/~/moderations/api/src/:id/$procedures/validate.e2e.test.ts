@@ -5,6 +5,7 @@ import { set_moncomptepro_pg } from "@~/app.middleware/set_moncomptepro_pg";
 import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { anais_tailhade } from "@~/app.middleware/set_userinfo#fixture";
+import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import {
   create_adora_pony_moderation,
   create_adora_pony_user,
@@ -26,7 +27,7 @@ import {
   test,
 } from "bun:test";
 import { Hono } from "hono";
-import app, { FORM_SCHEMA } from "./validate";
+import app from "./validate";
 
 //
 
@@ -45,7 +46,10 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
 
   const body = new FormData();
   body.append("add_domain", "true");
-  body.append("add_member", FORM_SCHEMA.shape.add_member.Enum.AS_INTERNAL);
+  body.append(
+    "add_member",
+    validate_form_schema.shape.add_member.enum.AS_INTERNAL,
+  );
   const response = await new Hono()
     .use(set_config({}))
     .use(set_moncomptepro_pg(pg))
@@ -107,7 +111,10 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
 
   const body = new FormData();
   body.append("add_domain", "false");
-  body.append("add_member", FORM_SCHEMA.shape.add_member.Enum.AS_EXTERNAL);
+  body.append(
+    "add_member",
+    validate_form_schema.shape.add_member.enum.AS_EXTERNAL,
+  );
   const response = await new Hono()
     .use(set_config({}))
     .use(set_moncomptepro_pg(pg))

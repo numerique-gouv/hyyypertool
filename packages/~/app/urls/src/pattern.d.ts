@@ -103,11 +103,11 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           form: {
-            verification_type?:
+            is_external?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
-            is_external?:
+            verification_type?:
               | import("hono/types").ParsedFormValue
               | import("hono/types").ParsedFormValue[]
               | undefined;
@@ -197,10 +197,10 @@ declare const app: import("hono/hono-base").HonoBase<
       $get: {
         input: {
           query: {
+            id?: string | string[] | undefined;
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
             q?: string | string[] | undefined;
-            id?: string | string[] | undefined;
           };
         };
         output: {};
@@ -232,6 +232,7 @@ declare const app: import("hono/hono-base").HonoBase<
             id: string;
           };
           query: {
+            describedby: string | string[];
             page?: string | string[] | undefined;
             page_size?: string | string[] | undefined;
           };

@@ -1,3 +1,3 @@
 //
 
-export { MessageInfo } from "./MessageInfo";
+export * from "./MessageInfo";
