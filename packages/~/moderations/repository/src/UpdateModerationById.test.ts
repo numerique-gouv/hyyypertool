@@ -7,7 +7,7 @@ import {
 } from "@~/moncomptepro.database/seed/unicorn";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
 import { beforeAll, expect, setSystemTime, test } from "bun:test";
-import { update_moderation_by_id } from "./update_moderation_by_id";
+import { UpdateModerationById } from "./UpdateModerationById";
 
 //
 
@@ -18,6 +18,8 @@ beforeAll(() => {
   setSystemTime(new Date("2222-01-01T00:00:00.000Z"));
 });
 
+const update_moderation_by_id = UpdateModerationById({ pg });
+
 //
 
 test("update a moderation", async () => {
@@ -26,8 +28,7 @@ test("update a moderation", async () => {
   const moderation_id = await create_adora_pony_moderation(pg, { type: "" });
 
   setSystemTime(new Date("2222-01-02T00:00:00.000Z"));
-  await update_moderation_by_id(pg, {
-    moderation_id,
+  await update_moderation_by_id(moderation_id, {
     comment: "Adora is a good pony",
     moderated_by: "Captain Midnight",
     moderated_at: new Date().toISOString(),

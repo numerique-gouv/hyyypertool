@@ -4,11 +4,10 @@ import {
   schema,
   type MonCompteProDatabaseCradle,
 } from "@~/moncomptepro.database";
+import type { UserOrganizationIdPair } from "@~/organizations.lib/entities/Organization";
 import { and, eq } from "drizzle-orm";
 
 //
-
-type UserOrganizationIdPair = { user_id: number; organization_id: number };
 
 export function IsUserExternalMember({ pg }: MonCompteProDatabaseCradle) {
   return async function is_user_external_member({
