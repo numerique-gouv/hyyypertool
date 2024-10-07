@@ -22,6 +22,3 @@ Fonctionnalité: Moderation blockante à refuser
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 
-    # Quand je clique sur "Sélectionner une response"
-    # * je sélectionne "Quel lien avec l'organisation ?"
-    # * je clique "🪄 Marquer comme traité"

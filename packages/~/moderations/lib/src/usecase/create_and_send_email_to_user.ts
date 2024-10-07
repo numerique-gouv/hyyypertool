@@ -3,7 +3,7 @@
 import { NotFoundError } from "@~/app.core/error";
 import { z_username } from "@~/app.core/schema/z_username";
 import { create_conversation } from "@~/crisp.lib";
-import { update_moderation_by_id } from "@~/moderations.repository/update_moderation_by_id";
+import { UpdateModerationById } from "@~/moderations.repository";
 import type {
   RejectedFullMessage,
   RejectedModeration_Context,
@@ -32,8 +32,8 @@ export async function create_and_send_email_to_user(
     nickname,
   });
 
-  await update_moderation_by_id(pg, {
-    moderation_id: moderation.id,
+  const update_moderation_by_id = UpdateModerationById({ pg });
+  await update_moderation_by_id(moderation.id, {
     ticket_id: session_id,
   });
 

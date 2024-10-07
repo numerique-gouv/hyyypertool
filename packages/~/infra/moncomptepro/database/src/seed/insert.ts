@@ -146,6 +146,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     );
 
     await insert_moderation(db, {
+      created_at: new Date("2011-11-12 11:11:12").toISOString(),
       organization_id: bosch_rexroth.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon.id,

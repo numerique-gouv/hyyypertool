@@ -18,7 +18,6 @@ Fonctionnalité: Duplicate Moderation
     * sur la même ligne je vois "Richard"
     * sur la même ligne je vois "richardbon@leclerc.fr"
 
-  # Scénario:
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Richard Bon veut rejoindre l'organisation « Dengi - Leclerc »"
 
