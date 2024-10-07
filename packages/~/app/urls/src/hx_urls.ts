@@ -1,6 +1,5 @@
 //
 
-import type { SetOptional } from "@~/app.core/types";
 import type { Hono, HonoRequest, Schema } from "hono";
 import { hc } from "hono/client";
 import type { Endpoint } from "hono/types";
@@ -28,15 +27,14 @@ type Methods =
   | "options"
   | "trace";
 
+type InputEndpoint = { form?: {}; query?: {}; param?: {} };
 type HtmxSpecifiedAttributes<
   Method extends Methods,
-  Input extends SetOptional<Endpoint["input"], "form">,
+  Input extends InputEndpoint,
   TForm = Input["form"],
 > =
-  Extract<TForm, undefined> extends never // IsNullable<TForm>
-    ? HasRequiredKeys<NonNullable<TForm>> extends true
-      ? Record<`hx-${Method}`, string> & Record<`hx-vals`, string>
-      : Record<`hx-${Method}`, string>
+  HasRequiredKeys<NonNullable<TForm>> extends true
+    ? Record<`hx-${Method}`, string> & Record<`hx-vals`, string>
     : Record<`hx-${Method}`, string>;
 
 type HxClientRequest<TSchema extends Schema> = {
@@ -44,17 +42,17 @@ type HxClientRequest<TSchema extends Schema> = {
     input: infer $Input;
   }
     ? { input: $Input; method: $$Method } extends {
-        input: Endpoint["input"];
+        input: InputEndpoint;
         method: `$${infer Method}`;
       }
       ? Method extends Methods
-        ? $Input extends Endpoint["input"]
+        ? $Input extends InputEndpoint
           ? HasRequiredKeys<Omit<$Input, "form">> extends true
-            ? <$Args extends SetOptional<$Input, any>>(
+            ? <$Args extends Omit<$Input, "form">>(
                 args: $Args,
                 options?: HxClientRequestOptions,
               ) => Promise<HtmxSpecifiedAttributes<Method, $Args>>
-            : <$Args extends SetOptional<$Input, any>>(
+            : <$Args extends Omit<$Input, "form">>(
                 args?: $Args,
                 options?: HxClientRequestOptions,
               ) => Promise<HtmxSpecifiedAttributes<Method, $Args>>

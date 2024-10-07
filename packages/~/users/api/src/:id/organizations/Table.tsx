@@ -32,7 +32,7 @@ export async function Table() {
     param: {
       id: user_id.toString(),
     },
-    query: {},
+    query: { describedby },
   });
 
   return (
