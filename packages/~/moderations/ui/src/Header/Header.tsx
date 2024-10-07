@@ -16,14 +16,29 @@ import { createContext, useContext } from "hono/jsx";
 interface Values {
   moderation: GetModerationHeaderOutput;
 }
-const context = createContext<Values>(null as any);
+const context = createContext<Values>({} as any);
 
 //
+
 export async function Header() {
   const { moderation } = useContext(context);
+  const hx_get_duplicate_warning = await hx_urls.moderations[
+    ":id"
+  ].duplicate_warning.$get({
+    param: {
+      id: moderation.id.toString(),
+    },
+    query: {
+      organization_id: moderation.organization.id.toString(),
+      user_id: moderation.user.id.toString(),
+    },
+  });
 
   return (
     <header>
+      <div class="float-right text-xs">
+        Créé le <LocalTime date={moderation.created_at} />
+      </div>
       <section class="flex items-baseline space-x-5">
         <h1>
           <span>
@@ -50,18 +65,7 @@ export async function Header() {
 
       <hr class="bg-none" />
 
-      <div
-        {...await hx_urls.moderations[":id"].duplicate_warning.$get({
-          param: {
-            id: moderation.id.toString(),
-          },
-          query: {
-            organization_id: moderation.organization.id.toString(),
-            user_id: moderation.user.id.toString(),
-          },
-        })}
-        hx-trigger="load"
-      >
+      <div {...hx_get_duplicate_warning} hx-trigger="load">
         Demande multiples ?
       </div>
     </header>
@@ -97,6 +101,12 @@ async function ModerationCallout() {
   if (!moderation.moderated_at) return raw``;
 
   const { base, text, title } = callout({ intent: "success" });
+  const hx_patch_moderation_reprocess = await hx_urls.moderations[
+    ":id"
+  ].$procedures.reprocess.$patch({
+    param: { id: moderation.id.toString() },
+  });
+
   return (
     <div class={base()}>
       <h3 class={text()}>Modération traitée</h3>
@@ -110,17 +120,13 @@ async function ModerationCallout() {
             {" "}
             par <b>{moderation.moderated_by}</b>
           </>
-        ) : (
-          raw``
-        )}
+        ) : null}
         .
       </p>
       <LastComment />
       <button
         class={button({ size: "sm", type: "tertiary" })}
-        {...await hx_urls.moderations[":id"].$procedures.reprocess.$patch({
-          param: { id: moderation.id.toString() },
-        })}
+        {...hx_patch_moderation_reprocess}
         hx-swap="none"
       >
         Retraiter
@@ -132,7 +138,7 @@ async function ModerationCallout() {
 function LastComment() {
   const { comment } = useContext(context).moderation;
   if (!comment) {
-    return raw``;
+    return null;
   }
   const parsed_comment = parse_comment(comment);
   const last_comment = parsed_comment.at(-1);

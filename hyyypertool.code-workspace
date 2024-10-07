@@ -214,6 +214,17 @@
         "runOptions": { "instanceLimit": 1 },
       },
       {
+        "label": "🧪 Update Test Snapshots : Current file",
+        "command": "bun test --update-snapshots ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
         "label": "🧪 Watch Test",
         "command": "bun test --watch",
         "type": "shell",
@@ -237,7 +248,7 @@
       },
       {
         "label": "🧪 Cypress Studio",
-        "command": "pnpm run studio",
+        "command": "bun run studio",
         "type": "shell",
         "group": "build",
         "options": {
@@ -248,7 +259,7 @@
       },
       {
         "label": "🧪 Cypress Run : Current file",
-        "command": "pnpm run test --spec ${fileDirname}/${fileBasename}",
+        "command": "bun run test --spec ${fileDirname}/${fileBasename}",
         "type": "shell",
         "group": "build",
         "options": {

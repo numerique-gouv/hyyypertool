@@ -1,10 +1,10 @@
 //
 
+import type { SetOptional } from "@~/app.core/types";
 import type { Hono, HonoRequest, Schema } from "hono";
 import { hc } from "hono/client";
 import type { Endpoint } from "hono/types";
 import type { HasRequiredKeys, UnionToIntersection } from "hono/utils/types";
-import type { SetOptional } from "type-fest";
 import type { Router } from "./pattern";
 
 //
@@ -53,11 +53,11 @@ type HxClientRequest<TSchema extends Schema> = {
             ? <$Args extends SetOptional<$Input, any>>(
                 args: $Args,
                 options?: HxClientRequestOptions,
-              ) => HtmxSpecifiedAttributes<Method, $Args>
+              ) => Promise<HtmxSpecifiedAttributes<Method, $Args>>
             : <$Args extends SetOptional<$Input, any>>(
                 args?: $Args,
                 options?: HxClientRequestOptions,
-              ) => HtmxSpecifiedAttributes<Method, $Args>
+              ) => Promise<HtmxSpecifiedAttributes<Method, $Args>>
           : never
         : never
       : never

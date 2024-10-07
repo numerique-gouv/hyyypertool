@@ -5,23 +5,17 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./config": {
-      "default": "./src/config/index.ts"
+    "./config/*": {
+      "default": "./src/config/*.ts"
     },
-    "./error": {
-      "default": "./src/error/index.ts"
+    "./date/*": {
+      "default": "./src/date/*.ts"
     },
-    "./html": {
-      "default": "./src/html/index.ts"
-    },
-    "./htmx": {
-      "default": "./src/htmx/index.ts"
-    },
-    "./schema": {
-      "default": "./src/schema/index.ts"
+    "./schema/*": {
+      "default": "./src/schema/*.ts"
     },
     "./*": {
-      "default": "./src/*.ts"
+      "default": "./src/*/index.ts"
     }
   },
   "scripts": {
@@ -30,6 +24,7 @@
   "dependencies": {
     "modern-errors": "7.0.1",
     "ts-pattern": "5.4.0",
+    "type-fest": "4.26.1",
     "zod": "3.23.8"
   },
   "devDependencies": {

@@ -1,16 +1,17 @@
 //
 
-import { renderHTML } from "@~/app.ui/testing";
+import { render_html } from "@~/app.ui/testing";
 import { expect, test } from "bun:test";
 import { Header } from "./Header";
 
 test("render header section", async () => {
   expect(
-    await renderHTML(
+    await render_html(
       <Header.Provier
         value={{
           moderation: {
             comment: null,
+            created_at: "2023-01-01T00:00:00.000Z",
             moderated_at: null,
             moderated_by: null,
             id: 42,

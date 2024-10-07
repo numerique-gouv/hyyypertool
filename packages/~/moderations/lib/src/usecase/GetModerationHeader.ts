@@ -8,6 +8,7 @@ export function GetModerationHeader({ pg }: MonCompteProDatabaseCradle) {
     const moderation = await pg.query.moderations.findFirst({
       columns: {
         comment: true,
+        created_at: true,
         id: true,
         moderated_at: true,
         moderated_by: true,

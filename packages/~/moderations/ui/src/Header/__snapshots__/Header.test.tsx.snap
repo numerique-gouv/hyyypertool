@@ -2,6 +2,14 @@
 
 exports[`render header section 1`] = `
 "<header>
+  <div class="float-right text-xs">
+    Créé le
+    <time
+      datetime="2023-01-01T00:00:00.000Z"
+      title="Sun Jan 01 2023 01:00:00 GMT+0100 (Central European Standard Time)"
+      >01/01/2023 01:00:00
+    </time>
+  </div>
   <section class="flex items-baseline space-x-5">
     <h1><span>🕵️ Adora Pony</span></h1>
     <div><p class="fr-badge fr-badge--new">A traiter</p></div>

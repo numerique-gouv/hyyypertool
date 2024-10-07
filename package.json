@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "bun x npm-run-all --serial build:*",
-    "build:bun": "bun run ./build.ts",
+    "build:bun": "bun run ./scripts/build.ts",
     "build:tailwind": "bun x tailwindcss -i ./packages/~/app/ui/tailwind.css -o ./public/built/tailwind.css",
     "build:tsc": "bun x tsc --build",
     "database:moncomptepro:migrator": "bun run database:moncomptepro:run migration",

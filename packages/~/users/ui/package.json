@@ -1,0 +1,32 @@
+{
+  "name": "@~/users.ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#ui/*": {
+      "types": "./src/*/index.ts",
+      "default": "./src/*/index.ts"
+    }
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*/index.ts",
+      "default": "./src/*/index.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "@~/organizations.lib": "workspace:*",
+    "@~/users.lib": "workspace:*",
+    "@~/moderations.lib": "workspace:*",
+    "hono": "4.6.3",
+    "tailwind-variants": "0.2.1",
+    "ts-pattern": "5.4.0"
+  },
+  "devDependencies": {
+    "@~/crisp.lib": "workspace:*",
+    "@~/config.typescript": "workspace:*"
+  }
+}

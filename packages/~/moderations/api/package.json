@@ -29,6 +29,7 @@
     "@~/organizations.repository": "workspace:*",
     "@~/organizations.ui": "workspace:*",
     "@~/users.lib": "workspace:*",
+    "@~/users.ui": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "await-to-js": "3.0.0",
     "drizzle-orm": "0.33.0",

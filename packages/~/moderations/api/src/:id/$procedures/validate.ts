@@ -4,10 +4,10 @@ import { zValidator } from "@hono/zod-validator";
 import { HTTPError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
-import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { App_Context } from "@~/app.middleware/context";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
 import { MemberJoinOrganization } from "@~/moderations.lib/usecase/member_join_organization";
 import { GetModerationById } from "@~/moderations.repository";
@@ -25,22 +25,13 @@ import consola from "consola";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { P, match } from "ts-pattern";
-import { z } from "zod";
-
-//
-
-export const FORM_SCHEMA = z.object({
-  add_domain: z.string().default("false").pipe(z_coerce_boolean),
-  add_member: z.enum(["AS_INTERNAL", "AS_EXTERNAL"]),
-  send_notitfication: z.string().default("false").pipe(z_coerce_boolean),
-});
 
 //
 
 export default new Hono<App_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
-  zValidator("form", FORM_SCHEMA),
+  zValidator("form", validate_form_schema),
   async function PATCH({
     text,
     req,

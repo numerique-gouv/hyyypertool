@@ -4,11 +4,9 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { set_crisp_config } from "@~/crisp.middleware";
-import {
-  RejectedMessage_Schema,
-  type RejectedModeration_Context,
-} from "@~/moderations.lib/context/rejected";
+import { type RejectedModeration_Context } from "@~/moderations.lib/context/rejected";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { reject_form_schema } from "@~/moderations.lib/schema/rejected.form";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
 import { send_rejected_message_to_user } from "@~/moderations.lib/usecase/send_rejected_message_to_user";
 import { get_moderation } from "@~/moderations.repository/get_moderation";
@@ -21,7 +19,7 @@ export default new Hono<ContextType>().patch(
   "/",
   set_crisp_config(),
   zValidator("param", Entity_Schema),
-  zValidator("form", RejectedMessage_Schema),
+  zValidator("form", reject_form_schema),
   async function PATH({
     text,
     req,
