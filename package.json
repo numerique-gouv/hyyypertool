@@ -70,7 +70,7 @@
   },
   "devDependencies": {
     "@csmith/release-it-calver-plugin": "2023.12.0",
-    "@release-it/conventional-changelog": "8.0.1",
+    "@release-it/conventional-changelog": "8.0.2",
     "@tsconfig/bun": "1.0.7",
     "@~/config.tailwindcss": "workspace:*",
     "bun-types": "1.1.29",
