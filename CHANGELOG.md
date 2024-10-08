@@ -1,5 +1,20 @@
 
 
+## [2024.10.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.3...2024.10.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **api:** hx_urls regression ([a31591d](https://github.com/numerique-gouv/hyyypertool/commit/a31591d6f5511774465c60710db812eb22de35a4))
+
+
+### Features
+
+* **moderation:** reduce spacing size ([#576](https://github.com/numerique-gouv/hyyypertool/issues/576)) ([551d1bc](https://github.com/numerique-gouv/hyyypertool/commit/551d1bc485878b1f38cf326e72d78e1a1f820bcf))
+* **moderation:** remove member when reproessing a moderation ([#577](https://github.com/numerique-gouv/hyyypertool/issues/577)) ([09b9f31](https://github.com/numerique-gouv/hyyypertool/commit/09b9f313221f77516eac0281a44092e3253fbfb0))
+* **ui:** active page indicator ([#573](https://github.com/numerique-gouv/hyyypertool/issues/573)) ([16792ed](https://github.com/numerique-gouv/hyyypertool/commit/16792ed0ce46b0bb5a1b5f8a9e911635c3085abd))
+* **ui:** move moderation header to ui layeur ([#574](https://github.com/numerique-gouv/hyyypertool/issues/574)) ([c5ba4d3](https://github.com/numerique-gouv/hyyypertool/commit/c5ba4d305a6aecbb931b33da9955335ac05262e7))
+
 ## [2024.10.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.2...2024.10.3) (2024-10-03)
 
 
