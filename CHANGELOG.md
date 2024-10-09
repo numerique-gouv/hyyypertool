@@ -1,5 +1,12 @@
 
 
+## [2024.10.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.4...2024.10.5) (2024-10-09)
+
+
+### Bug Fixes
+
+* **moderation:** validate user as internal by default ([#588](https://github.com/numerique-gouv/hyyypertool/issues/588)) ([68822e0](https://github.com/numerique-gouv/hyyypertool/commit/68822e0be08e28e4cc5285428dcd2ccb119632cb))
+
 ## [2024.10.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.3...2024.10.4) (2024-10-08)
 
 
