@@ -22,7 +22,7 @@ export function IsUserExternalMember({ pg }: MonCompteProDatabaseCradle) {
       ),
     });
 
-    return user_organization?.is_external ?? true;
+    return user_organization?.is_external ?? false;
   };
 }
 
