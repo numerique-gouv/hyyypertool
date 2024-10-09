@@ -16,14 +16,12 @@ export function GetCripsFromSessionId({
     session_id: string;
     limit?: number;
   }) {
-    console.log("get_crisp_from_session_id", { session_id });
     if (!is_crisp_ticket(session_id)) throw new Error("session_id is required");
 
     const [err_crisp, crisp] = await to(
       fetch_crisp_mail(crisp_config, { session_id }),
     );
 
-    console.log({ crisp, err_crisp });
     if (err_crisp) throw err_crisp;
     const { conversation, messages } = crisp;
 

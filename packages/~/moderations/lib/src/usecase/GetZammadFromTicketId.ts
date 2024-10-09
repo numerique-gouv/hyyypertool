@@ -24,7 +24,6 @@ export function GetZammadFromTicketId({
     const [articles_err, articles] = await to(
       fetch_zammad_mail({ ticket_id: Number(ticket_id) }),
     );
-    console.log(articles);
     if (articles_err)
       throw new HTTPError("articles is required", { cause: articles_err });
 
