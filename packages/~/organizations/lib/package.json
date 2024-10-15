@@ -7,6 +7,9 @@
     ".": {
       "default": "./src/index.ts"
     },
+    "./usecase": {
+      "default": "./src/usecase/index.ts"
+    },
     "./*": {
       "default": "./src/*.ts"
     }

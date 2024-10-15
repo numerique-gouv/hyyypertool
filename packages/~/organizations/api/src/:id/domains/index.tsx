@@ -9,6 +9,7 @@ import {
 } from "@~/app.core/schema";
 import { EmailDomain_Type_Schema } from "@~/moncomptepro.lib/email_domain";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
+import { RemoveDomainEmailById } from "@~/organizations.lib/usecase";
 import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
 import { get_orginization_domains } from "@~/organizations.repository/get_orginization_domains";
 import { update_domain_by_id } from "@~/organizations.repository/update_domain_by_id";
@@ -57,6 +58,22 @@ export default new Hono<ContextType>()
         organization_id,
         domain,
       });
+
+      return text("OK", 200, {
+        "HX-Trigger": ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED,
+      } as Htmx_Header);
+    },
+  )
+  .delete(
+    "/:domain_id",
+    zValidator("param", Entity_Schema.merge(DomainParams_Schema)),
+    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
+      const { domain_id } = req.valid("param");
+
+      const remove_domain_email_by_id = RemoveDomainEmailById({
+        pg: moncomptepro_pg,
+      });
+      await remove_domain_email_by_id(domain_id);
 
       return text("OK", 200, {
         "HX-Trigger": ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED,
