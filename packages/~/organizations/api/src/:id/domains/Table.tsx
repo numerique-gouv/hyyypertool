@@ -159,13 +159,19 @@ async function Row_Actions({
 }: {
   organization_domain: get_orginization_domains_dto[number];
 }) {
-  const { id, organization_id } = organization_domain;
+  const { domain, id, organization, organization_id } = organization_domain;
 
   const hx_change_type_props = (type: MCP_EmailDomain_Type) =>
     hx_urls.organizations[":id"].domains[":domain_id"].$patch({
       param: { id: organization_id.toString(), domain_id: id.toString() },
       query: { type },
     });
+
+  const hx_delete_domain_props = await hx_urls.organizations[":id"].domains[
+    ":domain_id"
+  ].$delete({
+    param: { id: organization_id.toString(), domain_id: id.toString() },
+  });
 
   return (
     <Horizontal_Menu>
@@ -198,6 +204,17 @@ async function Row_Actions({
             role="menuitem"
           >
             🚫 Domaine refusé
+          </button>
+        </li>
+        <li>
+          <button
+            {...hx_delete_domain_props}
+            class={menu_item()}
+            hx-confirm={`Êtes-vous sûr de vouloir supprimer le domaine « ${domain} » de l'organisation « ${organization.cached_libelle} » ?`}
+            hx-swap="none"
+            role="menuitem"
+          >
+            🗑️ Supprimer
           </button>
         </li>
       </ul>
