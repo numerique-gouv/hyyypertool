@@ -8,7 +8,7 @@ import {
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import { and, desc, count as drizzle_count, ilike } from "drizzle-orm";
+import { desc, count as drizzle_count, ilike, or } from "drizzle-orm";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 
@@ -50,7 +50,11 @@ export function get_users_list(
 ) {
   const { page, page_size: take } = pagination;
 
-  const where = and(ilike(schema.users.email, `%${search ?? ""}%`));
+  const where = or(
+    ilike(schema.users.family_name, `%${search ?? ""}%`),
+    ilike(schema.users.given_name, `%${search ?? ""}%`),
+    ilike(schema.users.email, `%${search ?? ""}%`),
+  );
   return pg.transaction(async function users_with_count(tx) {
     const users = await tx
       .select({
