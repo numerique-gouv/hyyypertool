@@ -2,7 +2,6 @@ import { hyper_ref } from "@~/app.core/html";
 import { Pagination_Schema } from "@~/app.core/schema";
 import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
 import { Foot } from "@~/app.ui/hx_table";
-import { PhCopyThin } from "@~/app.ui/icon/Copy";
 import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
 import type { get_unverified_domains_dto } from "@~/organizations.repository/get_unverified_domains";
@@ -139,11 +138,15 @@ function Row({
         <span id={$domain}> {domain} </span>
         <button
           aria-hidden="true"
-          class="leading-none"
+          class="fr-p-O leading-none"
           title="Copier le nom de domaine"
           _={copy_text_content_to_clipboard(`#${$domain}`)}
         >
-          <PhCopyThin />
+          <span
+            aria-hidden="true"
+            class="fr-icon-device-line"
+            style={{ color: "var(--text-disabled-grey)" }}
+          />
         </button>
       </td>
       <td>{organization.siret}</td>
