@@ -1,5 +1,12 @@
 
 
+## [2024.10.6](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.5...2024.10.6) (2024-10-15)
+
+
+### Features
+
+* **users:** allow search on family and given name too ([#597](https://github.com/numerique-gouv/hyyypertool/issues/597)) ([4be0653](https://github.com/numerique-gouv/hyyypertool/commit/4be06531336901f881aa411efedcd5773bf069a4))
+
 ## [2024.10.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.4...2024.10.5) (2024-10-09)
 
 
