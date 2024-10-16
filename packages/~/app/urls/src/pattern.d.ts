@@ -1,8 +1,11 @@
 declare const app: import("hono/hono-base").HonoBase<
   import("@~/app.middleware/set_nonce").NonceVariables_Context &
-    import("@~/app.middleware/set_config").ConfigVariables_Context &
-    import("@~/app.middleware/set_userinfo").UserInfoVariables_Context &
-    import("@~/app.middleware/moncomptepro_pg").MonComptePro_Pg_Context,
+    import("@~/app.middleware/set_config").ConfigVariables_Context & {
+      Bindings: any;
+      Variables: {
+        userinfo: import("@~/app.middleware/session").AgentConnect_UserInfo;
+      };
+    } & import("@~/app.middleware/moncomptepro_pg").MonComptePro_Pg_Context,
   {
     "/organizations/:id/$procedures/verify/:domain": {
       $patch: {
