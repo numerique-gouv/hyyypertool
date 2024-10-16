@@ -1,5 +1,12 @@
 
 
+## [2024.10.7](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.6...2024.10.7) (2024-10-16)
+
+
+### Features
+
+* **organization:** remove domain email ([#598](https://github.com/numerique-gouv/hyyypertool/issues/598)) ([521ac37](https://github.com/numerique-gouv/hyyypertool/commit/521ac37b72785bb1f80d59d448210ea95e5ce61c))
+
 ## [2024.10.6](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.5...2024.10.6) (2024-10-15)
 
 
