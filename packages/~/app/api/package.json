@@ -28,7 +28,7 @@
     "htmx.org": "1.9.12",
     "hyperscript.org": "0.9.12",
     "ts-pattern": "5.4.0",
-    "youch": "3.3.3"
+    "youch": "3.3.4"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
