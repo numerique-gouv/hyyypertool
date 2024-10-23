@@ -9,8 +9,10 @@ import {
 } from "@~/app.core/schema";
 import { EmailDomain_Type_Schema } from "@~/moncomptepro.lib/email_domain";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
-import { RemoveDomainEmailById } from "@~/organizations.lib/usecase";
-import { add_authorized_domain } from "@~/organizations.repository/add_authorized_domain";
+import {
+  AddAuthorizedDomain,
+  RemoveDomainEmailById,
+} from "@~/organizations.lib/usecase";
 import { get_orginization_domains } from "@~/organizations.repository/get_orginization_domains";
 import { update_domain_by_id } from "@~/organizations.repository/update_domain_by_id";
 import { Hono } from "hono";
@@ -54,10 +56,11 @@ export default new Hono<ContextType>()
       const { id: organization_id } = req.valid("param");
       const { domain } = req.valid("form");
 
-      await add_authorized_domain(moncomptepro_pg, {
-        organization_id,
-        domain,
+      const add_authorized_domain = AddAuthorizedDomain({
+        pg: moncomptepro_pg,
       });
+
+      await add_authorized_domain(organization_id, domain);
 
       return text("OK", 200, {
         "HX-Trigger": ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED,
