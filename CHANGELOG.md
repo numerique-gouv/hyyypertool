@@ -1,5 +1,13 @@
 
 
+## [2024.10.8](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.7...2024.10.8) (2024-10-29)
+
+
+### Bug Fixes
+
+* **moderations:** rename MonComptePro to ProConnect in responses ([#618](https://github.com/numerique-gouv/hyyypertool/issues/618)) ([d8286fe](https://github.com/numerique-gouv/hyyypertool/commit/d8286fe78e2de3fe3536751b957679b85e0dc619))
+* **organization:** do not allow domains with @ char ([#609](https://github.com/numerique-gouv/hyyypertool/issues/609)) ([ab2ce83](https://github.com/numerique-gouv/hyyypertool/commit/ab2ce83345b054ef8259aadaa71ad387daa3092f))
+
 ## [2024.10.7](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.6...2024.10.7) (2024-10-16)
 
 
