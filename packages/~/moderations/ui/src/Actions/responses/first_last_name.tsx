@@ -18,7 +18,7 @@ export default function template() {
 
     Votre demande pour rejoindre l'organisation « ${organization_name} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
-    Les comptes MonComptePro doivent être associés à une personne physique. Merci de renseigner correctement vos nom, prénom ainsi que votre fonction.
+    Les comptes ProConnect doivent être associés à une personne physique. Merci de renseigner correctement vos nom, prénom ainsi que votre fonction.
 
     Pour se faire :
 
@@ -30,6 +30,6 @@ export default function template() {
     Je reste à votre disposition pour tout complément d'information.
 
     Excellente journée,
-    L’équipe MonComptePro.
+    L’équipe ProConnect.
   `;
 }

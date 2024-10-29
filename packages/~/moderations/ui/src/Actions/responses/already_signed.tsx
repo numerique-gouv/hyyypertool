@@ -4,7 +4,7 @@ import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
 import { context } from "../context";
 
-export const label = "Vous possédez déjà un compte MonComptePro";
+export const label = "Vous possédez déjà un compte ProConnect";
 
 export default async function template() {
   const { moderation, query_suggest_same_user_emails } = useContext(context);
@@ -19,7 +19,7 @@ export default async function template() {
 
     Votre demande pour rejoindre l'organisation « ${moderation.organization.cached_libelle} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
-    Vous possédez déjà un compte MonComptePro :
+    Vous possédez déjà un compte ProConnect :
 
     - ${members_email.join("\n- ")}
 
@@ -28,6 +28,6 @@ export default async function template() {
     Je reste à votre disposition pour tout complément d'information.
 
     Excellente journée,
-    L’équipe MonComptePro.
+    L’équipe ProConnect.
   `;
 }

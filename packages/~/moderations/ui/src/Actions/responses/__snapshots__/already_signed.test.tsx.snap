@@ -5,7 +5,7 @@ exports[`returns all members 1`] = `
 
 Votre demande pour rejoindre l&#39;organisation « 🦄 » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
 
-Vous possédez déjà un compte MonComptePro :
+Vous possédez déjà un compte ProConnect :
 
 - 🦄@unicorn.xyz
 - 🐷@unicorn.xyz
@@ -16,6 +16,6 @@ Merci de bien vouloir vous connecter avec le compte déjà existant.
 Je reste à votre disposition pour tout complément d&#39;information.
 
 Excellente journée,
-L’équipe MonComptePro.
+L’équipe ProConnect.
 "
 `;

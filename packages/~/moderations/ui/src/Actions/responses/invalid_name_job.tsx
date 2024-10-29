@@ -9,7 +9,7 @@ export default function template() {
     Bonjour,
 
     Vos nom, prénom et/ou fonction ne sont pas renseignés correctement.
-    Merci de bien vouloir les modifier depuis votre compte MonComptePro section "Vos informations personnelles" : https://app.moncomptepro.beta.gouv.fr
+    Merci de bien vouloir les modifier depuis votre compte ProConnect section "Vos informations personnelles" : https://app.moncomptepro.beta.gouv.fr
 
     Sans cela, nous serons obligés de supprimer votre compte prochainement.
 

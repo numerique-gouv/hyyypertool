@@ -23,6 +23,6 @@ export default function template() {
     Je reste à votre disposition pour tout complément d’information.
 
     Excellente journée,
-    L’équipe MonComptePro.
+    L’équipe ProConnect.
   `;
 }

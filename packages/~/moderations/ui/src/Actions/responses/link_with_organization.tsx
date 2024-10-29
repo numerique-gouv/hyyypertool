@@ -23,6 +23,6 @@ export default function template() {
     Nous vous recommandons de demander directement à l'organisation que vous représentez d'effectuer la démarche.
 
     Excellente journée,
-    L’équipe MonComptePro.
+    L’équipe ProConnect.
   `;
 }
