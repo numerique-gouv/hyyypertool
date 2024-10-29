@@ -27,6 +27,6 @@ export default function template() {
     - Le rectorat de votre Académie.
 
     Bien cordialement,
-    L’équipe MonComptePro.
+    L’équipe ProConnect.
   `;
 }
