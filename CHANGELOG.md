@@ -1,5 +1,12 @@
 
 
+# [2024.11.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.8...2024.11.0) (2024-11-05)
+
+
+### Features
+
+* **moderation:** add deprecated conseiller numerique email ([#624](https://github.com/numerique-gouv/hyyypertool/issues/624)) ([a78eb04](https://github.com/numerique-gouv/hyyypertool/commit/a78eb041be4bbe70df98f5c87dc841b8adab52c9))
+
 ## [2024.10.8](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.7...2024.10.8) (2024-10-29)
 
 
