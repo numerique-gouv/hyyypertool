@@ -18,7 +18,7 @@
     "@sentry/profiling-node": "8.33.1",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "hono": "4.6.4"
+    "hono": "4.6.9"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
