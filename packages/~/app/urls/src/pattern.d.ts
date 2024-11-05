@@ -1,5 +1,8 @@
 declare const app: import("hono/hono-base").HonoBase<
-  import("@~/app.middleware/set_nonce").NonceVariables_Context &
+  {
+    Bindings: any;
+    Variables: any;
+  } & import("@~/app.middleware/set_nonce").NonceVariables_Context &
     import("@~/app.middleware/set_config").ConfigVariables_Context & {
       Bindings: any;
       Variables: {
