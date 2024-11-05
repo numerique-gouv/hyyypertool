@@ -28,7 +28,7 @@
     "@~/moncomptepro.database": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "hono": "4.6.9",
-    "hono-sessions": "0.5.8",
+    "hono-sessions": "0.7.0",
     "openid-client": "5.7.0"
   },
   "devDependencies": {
