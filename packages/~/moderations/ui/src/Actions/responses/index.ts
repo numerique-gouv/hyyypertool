@@ -5,6 +5,7 @@ import * as already_signed from "./already_signed";
 import * as chorus_pro_error from "./chorus_pro_error";
 import * as contractors from "./contractors";
 import * as deprecated_conseiller_numerique_email from "./deprecated_conseiller_numerique_email";
+import * as enseignement_agricole from "./enseignement_agricole";
 import * as first_last_name from "./first_last_name";
 import * as invalid_job from "./invalid_job";
 import * as invalid_name_job from "./invalid_name_job";
@@ -30,4 +31,5 @@ export const reponse_templates = [
   chorus_pro_error,
   invalid_job,
   deprecated_conseiller_numerique_email,
+  enseignement_agricole,
 ];
