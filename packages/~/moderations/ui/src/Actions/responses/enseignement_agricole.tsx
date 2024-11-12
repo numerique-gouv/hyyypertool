@@ -21,7 +21,7 @@ export default function template() {
 
     Votre adresse e-mail d’enseignement agricole : « ${domain} » ne vous permet pas de rattacher votre compte utilisateur ProConnect au « ${organization_name} ».
 
-    En tant qu'enseignant, merci de bien vouloir renouveler votre inscription en rattachant votre compte à l'**Établissement Public Local d'Enseignement et de Formation Professionnelle Agricoles** (EPLEFPA) dans lequel vous exercez.
+    En tant qu'enseignant, merci de bien vouloir renouveler votre inscription en rattachant votre compte à l' **Établissement Public Local d'Enseignement et de Formation Professionnelle Agricoles** (EPLEFPA) dans lequel vous exercez.
 
     Bien cordialement,
     L’équipe ProConnect.
