@@ -17,7 +17,7 @@
     "@~/organizations.repository": "workspace:*",
     "@~/users.repository": "workspace:*",
     "hono": "4.6.9",
-    "ts-pattern": "5.4.0",
+    "ts-pattern": "5.5.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
