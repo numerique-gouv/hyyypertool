@@ -19,12 +19,12 @@ test("returns deprecated @conseiller-numerique.fr email", async () => {
           } as Values
         }
       >
-        <AlreadySigned />
+        <Response />
       </context.Provider>,
     ),
   ).toMatchSnapshot();
 });
 
-function AlreadySigned() {
+function Response() {
   return <>{deprecated_conseiller_numerique_email()}</>;
 }
