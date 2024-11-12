@@ -24,7 +24,7 @@
     "@~/app.core": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "consola": "3.2.3",
-    "drizzle-orm": "0.34.1",
+    "drizzle-orm": "0.36.1",
     "hono": "4.6.9",
     "pg": "8.13.0"
   },
