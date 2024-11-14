@@ -1,0 +1,23 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns missing name message 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Afin que votre demande puisse être validée, merci de renseigner correctement votre profession sur le champ « Profession ou rôle au sein de votre organisation ».
+Votre profession ne peut pas être le nom de votre organisation ou le nom d’un service de votre organisation.
+
+Pour se faire :
+
+- Videz le cache de votre navigateur puis rafraîchissez votre page internet, (lien)
+- Accédez à MonComptePro : https://app.moncomptepro.beta.gouv.fr/, puis authentifiez-vous,
+- Cliquez sur l&#39;onglet « Vos Informations Personnelles »,
+- Corrigez votre profession,
+- Sélectionnez votre organisation (numéro SIRET : 🖖) pour que notre équipe puisse valider à nouveau la création de votre compte.
+
+Merci pour votre correction.
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
