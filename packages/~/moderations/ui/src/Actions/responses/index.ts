@@ -15,6 +15,7 @@ import * as link_with_organization from "./link_with_organization";
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
 import * as name_incorrectly_entered from "./name_incorrectly_entered";
+import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
@@ -39,5 +40,6 @@ export const reponse_templates = [
   missing_name,
   first_and_last_name_inversion,
   name_incorrectly_entered,
+  occupation_incorrectly_entered_not_blocking,
   occupation_incorrectly_entered,
 ];

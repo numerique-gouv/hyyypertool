@@ -1,6 +1,6 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`returns first name and last name are inversed 1`] = `
+exports[`returns incorrect name entered response 1`] = `
 "Bonjour,
 
 Votre nom et/ou prénom n&#39;a pas été correctement renseigné.
