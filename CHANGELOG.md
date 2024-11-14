@@ -1,5 +1,22 @@
 
 
+## [2024.11.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.0...2024.11.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* **moderations:** bold needs spaces ([#632](https://github.com/numerique-gouv/hyyypertool/issues/632)) ([8081ffa](https://github.com/numerique-gouv/hyyypertool/commit/8081ffa67fa638da055e2bab9623f79f29a18e51))
+
+
+### Features
+
+* **moderation:** add  occupation incorrectly entered not blocking re… ([#638](https://github.com/numerique-gouv/hyyypertool/issues/638)) ([e9906d1](https://github.com/numerique-gouv/hyyypertool/commit/e9906d1096f348fdf41c84d041db53398f637f52))
+* **moderation:** add  occupation incorrectly entered response ([#637](https://github.com/numerique-gouv/hyyypertool/issues/637)) ([69df1a4](https://github.com/numerique-gouv/hyyypertool/commit/69df1a4d3ae736271c6f289794bf01010581a2e7))
+* **moderation:** add  response name incorrectly entered ([#636](https://github.com/numerique-gouv/hyyypertool/issues/636)) ([60a1a60](https://github.com/numerique-gouv/hyyypertool/commit/60a1a60f997f8af73ecb7f9b228b9f99e0a133f9))
+* **moderation:** add enseignant agricole response ([#630](https://github.com/numerique-gouv/hyyypertool/issues/630)) ([c72dd88](https://github.com/numerique-gouv/hyyypertool/commit/c72dd88d2ce6c9a71e61a3014d5f6781de6d12d2))
+* **moderation:** add first name & last name reversed response ([#635](https://github.com/numerique-gouv/hyyypertool/issues/635)) ([945c9f0](https://github.com/numerique-gouv/hyyypertool/commit/945c9f0e99482f5a07e1c3489b50336d238b55c8))
+* **moderation:** add missing name response ([#633](https://github.com/numerique-gouv/hyyypertool/issues/633)) ([6ea5bf5](https://github.com/numerique-gouv/hyyypertool/commit/6ea5bf5312f22feb0978d2c2c2c021e977fe9f1a))
+
 # [2024.11.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.10.8...2024.11.0) (2024-11-05)
 
 
