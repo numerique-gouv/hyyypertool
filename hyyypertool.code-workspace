@@ -102,6 +102,23 @@
     "version": "2.0.0",
     "tasks": [
       {
+        "label": "🔧 build",
+        "command": "bun",
+        "args": ["run", "build"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+          "env": {
+            "NODE_ENV": "development",
+          },
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
         "label": "1. 🚀 Dev",
         "dependsOn": [
           "🚀 WWW Dev Server",
