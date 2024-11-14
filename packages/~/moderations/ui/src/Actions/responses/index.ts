@@ -11,6 +11,7 @@ import * as invalid_job from "./invalid_job";
 import * as invalid_name_job from "./invalid_name_job";
 import * as link_with_eduction_gouv_fr from "./link_with_eduction_gouv_fr";
 import * as link_with_organization from "./link_with_organization";
+import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
@@ -32,4 +33,5 @@ export const reponse_templates = [
   invalid_job,
   deprecated_conseiller_numerique_email,
   enseignement_agricole,
+  missing_name,
 ];
