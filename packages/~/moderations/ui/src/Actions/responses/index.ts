@@ -14,6 +14,7 @@ import * as link_with_eduction_gouv_fr from "./link_with_eduction_gouv_fr";
 import * as link_with_organization from "./link_with_organization";
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
+import * as name_incorrectly_entered from "./name_incorrectly_entered";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
 
@@ -36,4 +37,5 @@ export const reponse_templates = [
   enseignement_agricole,
   missing_name,
   first_and_last_name_inversion,
+  name_incorrectly_entered,
 ];
