@@ -1,6 +1,7 @@
 //
 
 import * as accountant from "./accountant";
+import * as admin_centrale from "./admin_centrale";
 import * as already_signed from "./already_signed";
 import * as chorus_pro_error from "./chorus_pro_error";
 import * as contractors from "./contractors";
@@ -44,4 +45,5 @@ export const reponse_templates = [
   occupation_incorrectly_entered_not_blocking,
   occupation_incorrectly_entered,
   min_armees,
+  admin_centrale,
 ];

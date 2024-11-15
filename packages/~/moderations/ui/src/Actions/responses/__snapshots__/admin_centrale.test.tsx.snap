@@ -1,0 +1,14 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns bad email address for admin centrale email 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Votre adresse e-mail départementale : « 💌 » ne vous permet pas de rattacher votre compte utilisateur ProConnect à cette administration centrale.
+Nous vous invitons à créer votre compte utilisateur ProConnect à nouveau, en le rattachant à l&#39;administration déconcentrée dans laquelle vous exercez.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
