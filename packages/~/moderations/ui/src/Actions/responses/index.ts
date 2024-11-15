@@ -20,6 +20,7 @@ import * as mobilic from "./mobilic";
 import * as name_incorrectly_entered from "./name_incorrectly_entered";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
+import * as public_or_private_organization from "./public_or_private_organization";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
 
@@ -48,4 +49,5 @@ export const reponse_templates = [
   min_armees,
   admin_centrale,
   link_with_chosen_organization,
+  public_or_private_organization,
 ];
