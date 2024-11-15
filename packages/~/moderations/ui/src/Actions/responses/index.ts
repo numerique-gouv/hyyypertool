@@ -11,6 +11,7 @@ import * as first_and_last_name_inversion from "./first_and_last_name_inversion"
 import * as first_last_name from "./first_last_name";
 import * as invalid_job from "./invalid_job";
 import * as invalid_name_job from "./invalid_name_job";
+import * as link_with_chosen_organization from "./link_with_chosen_organization";
 import * as link_with_eduction_gouv_fr from "./link_with_eduction_gouv_fr";
 import * as link_with_organization from "./link_with_organization";
 import * as min_armees from "./min_armees";
@@ -47,5 +48,6 @@ export const reponse_templates = [
   occupation_incorrectly_entered,
   min_armees,
   admin_centrale,
+  link_with_chosen_organization,
   public_or_private_organization,
 ];
