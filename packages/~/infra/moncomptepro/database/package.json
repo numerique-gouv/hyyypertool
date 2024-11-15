@@ -25,7 +25,7 @@
     "@~/moncomptepro.lib": "workspace:*",
     "consola": "3.2.3",
     "drizzle-orm": "0.36.1",
-    "hono": "4.6.9",
+    "hono": "4.6.10",
     "pg": "8.13.0"
   },
   "devDependencies": {

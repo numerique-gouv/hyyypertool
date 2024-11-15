@@ -2,6 +2,7 @@
 
 import type { Hono, HonoRequest, Schema } from "hono";
 import { hc } from "hono/client";
+import type { HonoBase } from "hono/hono-base";
 import type { Endpoint } from "hono/types";
 import type { HasRequiredKeys, UnionToIntersection } from "hono/utils/types";
 import type { Router } from "./pattern";
@@ -92,7 +93,7 @@ type PathToChain<
       };
 
 type HxClient<T> =
-  T extends Hono<any, infer $Schema, any>
+  T extends HonoBase<any, infer $Schema, any>
     ? $Schema extends Record<infer $Path, Schema>
       ? $Path extends string
         ? PathToChain<$Path, $Schema>
