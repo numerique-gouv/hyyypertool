@@ -1,5 +1,16 @@
 
 
+## [2024.11.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.1...2024.11.2) (2024-11-15)
+
+
+### Features
+
+* **moderation:** add  bad email admin centrale response ([#640](https://github.com/numerique-gouv/hyyypertool/issues/640)) ([8419722](https://github.com/numerique-gouv/hyyypertool/commit/8419722079a01a519ff0fe658ab708e5e36aab52))
+* **moderation:** add  min armee response ([#639](https://github.com/numerique-gouv/hyyypertool/issues/639)) ([dd40ded](https://github.com/numerique-gouv/hyyypertool/commit/dd40dedba23f792291d085b8682e41c98de784c7))
+* **moderation:** add link with chosen orga response ([#644](https://github.com/numerique-gouv/hyyypertool/issues/644)) ([e15cbd6](https://github.com/numerique-gouv/hyyypertool/commit/e15cbd6310129f24d28544939798adaada206510))
+* **moderation:** add public or private orga response ([#642](https://github.com/numerique-gouv/hyyypertool/issues/642)) ([388be47](https://github.com/numerique-gouv/hyyypertool/commit/388be4764df92dc048a94201b217ecf509522126))
+* **ui:** hide the menu when you click elsewhere ([#643](https://github.com/numerique-gouv/hyyypertool/issues/643)) ([b913f1b](https://github.com/numerique-gouv/hyyypertool/commit/b913f1b7bfea637f3f70efbfb43fe74297c0be3b))
+
 ## [2024.11.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.0...2024.11.1) (2024-11-14)
 
 

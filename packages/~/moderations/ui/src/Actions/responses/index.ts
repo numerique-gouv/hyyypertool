@@ -11,6 +11,7 @@ import * as first_and_last_name_inversion from "./first_and_last_name_inversion"
 import * as first_last_name from "./first_last_name";
 import * as invalid_job from "./invalid_job";
 import * as invalid_name_job from "./invalid_name_job";
+import * as link_with_chosen_organization from "./link_with_chosen_organization";
 import * as link_with_eduction_gouv_fr from "./link_with_eduction_gouv_fr";
 import * as link_with_organization from "./link_with_organization";
 import * as min_armees from "./min_armees";
@@ -20,6 +21,7 @@ import * as name_incorrectly_entered from "./name_incorrectly_entered";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as teacher_academic_email from "./teacher_academic_email";
+import * as public_or_private_organization from "./public_or_private_organization";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
 
@@ -48,4 +50,6 @@ export const reponse_templates = [
   min_armees,
   admin_centrale,
   teacher_academic_email,
+  link_with_chosen_organization,
+  public_or_private_organization,
 ];
