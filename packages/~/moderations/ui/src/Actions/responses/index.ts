@@ -18,6 +18,7 @@ import * as min_armees from "./min_armees";
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
 import * as name_incorrectly_entered from "./name_incorrectly_entered";
+import * as non_teaching_agent from "./non_teaching_agent";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as public_or_private_organization from "./public_or_private_organization";
@@ -50,4 +51,5 @@ export const reponse_templates = [
   admin_centrale,
   link_with_chosen_organization,
   public_or_private_organization,
+  non_teaching_agent,
 ];
