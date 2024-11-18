@@ -15,6 +15,7 @@ import * as link_with_chosen_organization from "./link_with_chosen_organization"
 import * as link_with_eduction_gouv_fr from "./link_with_eduction_gouv_fr";
 import * as link_with_organization from "./link_with_organization";
 import * as min_armees from "./min_armees";
+import * as min_armees_pec from "./min_armees_pec";
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
 import * as name_incorrectly_entered from "./name_incorrectly_entered";
@@ -50,4 +51,5 @@ export const reponse_templates = [
   admin_centrale,
   link_with_chosen_organization,
   public_or_private_organization,
+  min_armees_pec,
 ];
