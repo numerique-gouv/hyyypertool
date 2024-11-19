@@ -16,17 +16,17 @@ export default function template() {
   return dedent`
     Bonjour,
 
-    Nous avons bien reçu votre demande de rattachement à l'organisation « ${organization_name} » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+    Nous avons bien reçu votre demande de rattachement à l'organisation « ${organization_name} » sur ProConnect (anciennement : AgentConnect, MonComptePro).
 
-    Votre adresse e-mail académique : « ${email} » ne vous permet pas de rattacher votre compte utilisateur MonComptePro au Ministère de l’Éducation Nationale et de la Jeunesse. 
+    Votre adresse e-mail académique : « ${email} » ne vous permet pas de rattacher votre compte utilisateur MonComptePro au Ministère de l’Éducation Nationale et de la Jeunesse.
 
-    En fonction de votre profession et de votre périmètre d’intervention, merci de bien vouloir créer votre compte à nouveau en le rattachant à l’une des organisations suivantes : 
+    En fonction de votre profession et de votre périmètre d’intervention, merci de bien vouloir créer votre compte à nouveau en le rattachant à l’une des organisations suivantes :
 
     - L’établissement scolaire dans lequel vous exercez,
     - La Direction des services départementaux de l'Éducation nationale de laquelle vous dépendez,
     - Le rectorat de votre Académie.
 
-    Bien cordialement, 
+    Bien cordialement,
     L’équipe ProConnect.
   `;
 }
