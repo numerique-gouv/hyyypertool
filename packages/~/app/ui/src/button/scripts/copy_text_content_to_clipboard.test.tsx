@@ -13,10 +13,14 @@ beforeEach(async () => {
 
 test("copy the text context of a div", async () => {
   const selector = "message";
-  document.body.innerHTML = `
-  <button _="${copy_text_content_to_clipboard(`#${selector}`)}" >My button</button>
-  <div id="${selector}">foo </div>
-  `;
+  document.body.innerHTML = (
+    <>
+      <button _={copy_text_content_to_clipboard(`#${selector}`)}>
+        My button
+      </button>
+      <div id={selector}>foo </div>
+    </>
+  ).toString();
 
   _hyperscript.processNode(document.body);
 

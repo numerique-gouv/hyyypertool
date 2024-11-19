@@ -13,10 +13,12 @@ beforeEach(async () => {
 
 test("copy textarea value", async () => {
   const selector = "message";
-  document.body.innerHTML = `
-  <button _="${copy_value_to_clipboard(`#${selector}`)}" >My button</button>
-  <textarea id="${selector}">foo</textarea>
-  `;
+  document.body.innerHTML = (
+    <>
+      <button _={copy_value_to_clipboard(`#${selector}`)}>My button</button>
+      <textarea id={selector}>foo</textarea>
+    </>
+  ).toString();
 
   _hyperscript.processNode(document.body);
 
@@ -30,10 +32,12 @@ test("copy textarea value", async () => {
 
 test("copy input value", async () => {
   const selector = "message";
-  document.body.innerHTML = `
-  <button _="${copy_value_to_clipboard(`#${selector}`)}" >My button</button>
-  <input id="${selector}" value="foo" />
-  `;
+  document.body.innerHTML = (
+    <>
+      <button _={copy_value_to_clipboard(`#${selector}`)}>My button</button>
+      <input id={selector} value="foo" />
+    </>
+  ).toString();
 
   _hyperscript.processNode(document.body);
 

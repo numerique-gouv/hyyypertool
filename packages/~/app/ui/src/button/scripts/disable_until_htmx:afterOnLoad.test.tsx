@@ -8,9 +8,9 @@ import { disable_until_htmx_afterOnLoad } from "./disable_until_htmx:afterOnLoad
 //
 
 test("disable_until_htmx_afterOnLoad", () => {
-  document.body.innerHTML = `
-  <button _="${disable_until_htmx_afterOnLoad}" >My button</button>
-  `;
+  document.body.innerHTML = (
+    <button _={disable_until_htmx_afterOnLoad}>My button</button>
+  ).toString();
 
   _hyperscript.processNode(document.body);
 
