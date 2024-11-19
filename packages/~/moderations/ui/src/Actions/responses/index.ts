@@ -19,6 +19,7 @@ import * as min_armees_terre_marine_musee from "./min_armees_terre_marine_musee"
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
 import * as name_incorrectly_entered from "./name_incorrectly_entered";
+import * as non_teaching_agent from "./non_teaching_agent";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as teacher_academic_email from "./teacher_academic_email";
@@ -54,6 +55,7 @@ export const reponse_templates = [
   teacher_academic_email,
   link_with_chosen_organization,
   public_or_private_organization,
+  non_teaching_agent,
   refusal_france_travail,
   min_armees_terre_marine_musee,
 ];
