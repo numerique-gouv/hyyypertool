@@ -22,7 +22,7 @@
     "@~/welcome.api": "workspace:*",
     "await-to-js": "3.0.0",
     "consola": "3.2.3",
-    "drizzle-orm": "0.36.1",
+    "drizzle-orm": "0.36.3",
     "hono": "4.6.10",
     "htmx.ext...chunked-transfer": "1.0.4",
     "htmx.org": "1.9.12",
