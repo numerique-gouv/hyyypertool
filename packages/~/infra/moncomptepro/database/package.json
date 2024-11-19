@@ -24,12 +24,12 @@
     "@~/app.core": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
     "consola": "3.2.3",
-    "drizzle-orm": "0.36.1",
+    "drizzle-orm": "0.36.3",
     "hono": "4.6.10",
     "pg": "8.13.0"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "0.2.12",
+    "@electric-sql/pglite": "0.2.13",
     "@types/pg": "8.11.10",
     "@~/config.typescript": "workspace:*",
     "drizzle-kit": "0.28.0"
