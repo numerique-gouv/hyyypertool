@@ -17,7 +17,12 @@ test("returns all members", async () => {
           $decision_form: "",
           domain: "unicorn.xyz",
           moderation: {
-            organization: { cached_libelle: "🦄", id: 1, siret: "🦄 siret" },
+            organization: {
+              cached_libelle: "🦄",
+              id: 1,
+              siret: "🦄 siret",
+              cached_libelle_categorie_juridique: "🍄",
+            },
             user: { id: 42, given_name: "", email: "", family_name: "🧟" },
             id: 1,
             moderated_at: "2011-11-11",

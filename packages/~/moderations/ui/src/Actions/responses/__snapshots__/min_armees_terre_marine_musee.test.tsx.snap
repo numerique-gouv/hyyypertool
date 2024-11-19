@@ -1,0 +1,19 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns error on 🦄 organization (min armée) email 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Nous pensons que vous avez fait erreur sur l&#39;organisation à laquelle vous souhaitez rattacher votre compte utilisateur ProConnect.
+L&#39;organisation « 🦄 » est une organisation privée dont l&#39;activité est la suivante : « 👾 ».
+Ne souhaitiez-vous pas rattacher votre compte à XXXXXXX ?
+Si tel est le cas, d&#39;après nos recherches, XXXXXXXX n&#39;apparaît pas dans le répertoire SIRENE, soit parce qu&#39;elle n&#39;est pas inscrite, soit parce qu&#39;elle a choisi de ne pas diffuser ses informations en raison de la nature sensible de ses activités.
+
+Dans ce contexte, veuillez renouveler votre création de compte en le rattachant au :
+MINISTERE DES ARMEES : https://annuaire-entreprises.data.gouv.fr/entreprise/ministere-des-armees-110090016.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
