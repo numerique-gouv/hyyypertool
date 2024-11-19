@@ -13,7 +13,10 @@ export interface Values {
   domain: string;
   moderation: SimplifyDeep<
     Pick<Moderation, "id" | "moderated_at" | "type"> & {
-      organization: Pick<Organization, "cached_libelle" | "id" | "siret">;
+      organization: Pick<
+        Organization,
+        "cached_libelle" | "id" | "siret" | "cached_libelle_categorie_juridique"
+      >;
       user: Pick<User, "email" | "id" | "family_name" | "given_name">;
     }
   >;
