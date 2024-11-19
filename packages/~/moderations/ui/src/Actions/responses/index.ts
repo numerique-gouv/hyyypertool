@@ -23,6 +23,7 @@ import * as occupation_incorrectly_entered from "./occupation_incorrectly_entere
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as teacher_academic_email from "./teacher_academic_email";
 import * as public_or_private_organization from "./public_or_private_organization";
+import * as refusal_france_travail from "./refusal_france_travail";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
 
@@ -53,5 +54,6 @@ export const reponse_templates = [
   teacher_academic_email,
   link_with_chosen_organization,
   public_or_private_organization,
+  refusal_france_travail,
   min_armees_terre_marine_musee,
 ];
