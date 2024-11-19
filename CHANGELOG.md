@@ -1,5 +1,16 @@
 
 
+## [2024.11.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.2...2024.11.3) (2024-11-19)
+
+
+### Features
+
+* **moderation:** add invalid teacher email response ([#645](https://github.com/numerique-gouv/hyyypertool/issues/645)) ([166cf46](https://github.com/numerique-gouv/hyyypertool/commit/166cf469337d0e3ccf5b604464883d3ad7f495a9))
+* **moderation:** add min armee pec response ([#649](https://github.com/numerique-gouv/hyyypertool/issues/649)) ([2bd0c2f](https://github.com/numerique-gouv/hyyypertool/commit/2bd0c2f0c7a74ea6dad714ae827d35e2f1989f82))
+* **moderation:** add min armee terre marine musee response ([#648](https://github.com/numerique-gouv/hyyypertool/issues/648)) ([a0eafe9](https://github.com/numerique-gouv/hyyypertool/commit/a0eafe95530c77aae4e43f62da2d2584a9dfcd5d))
+* **moderation:** add non teaching agent response ([#647](https://github.com/numerique-gouv/hyyypertool/issues/647)) ([ca81079](https://github.com/numerique-gouv/hyyypertool/commit/ca8107986866cf937bd5c52956f1e523098b5e50))
+* **moderation:** add refusal france travail response ([#646](https://github.com/numerique-gouv/hyyypertool/issues/646)) ([bfb89d1](https://github.com/numerique-gouv/hyyypertool/commit/bfb89d1a65d785a72ee7463531bd562be3f90360))
+
 ## [2024.11.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.1...2024.11.2) (2024-11-15)
 
 
