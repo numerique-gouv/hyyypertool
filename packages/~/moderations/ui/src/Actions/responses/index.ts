@@ -15,6 +15,7 @@ import * as link_with_chosen_organization from "./link_with_chosen_organization"
 import * as link_with_eduction_gouv_fr from "./link_with_eduction_gouv_fr";
 import * as link_with_organization from "./link_with_organization";
 import * as min_armees from "./min_armees";
+import * as min_armees_pec from "./min_armees_pec";
 import * as min_armees_terre_marine_musee from "./min_armees_terre_marine_musee";
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
@@ -55,6 +56,7 @@ export const reponse_templates = [
   teacher_academic_email,
   link_with_chosen_organization,
   public_or_private_organization,
+  min_armees_pec,
   non_teaching_agent,
   refusal_france_travail,
   min_armees_terre_marine_musee,
