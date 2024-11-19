@@ -14,7 +14,8 @@ test("returns missing name message", async () => {
         value={
           {
             moderation: {
-              organization: { cached_libelle: "🦄", siret: "🖖" },
+              organization: { cached_libelle: "🦄" },
+              user: { email: "🐶@🐱.🐶" },
             },
           } as Values
         }
