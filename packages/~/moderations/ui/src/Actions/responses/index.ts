@@ -9,6 +9,7 @@ import * as deprecated_conseiller_numerique_email from "./deprecated_conseiller_
 import * as enseignement_agricole from "./enseignement_agricole";
 import * as first_and_last_name_inversion from "./first_and_last_name_inversion";
 import * as first_last_name from "./first_last_name";
+import * as gendarmerie_agent from "./gendarmerie_agent";
 import * as invalid_job from "./invalid_job";
 import * as invalid_name_job from "./invalid_name_job";
 import * as link_with_chosen_organization from "./link_with_chosen_organization";
@@ -23,9 +24,9 @@ import * as name_incorrectly_entered from "./name_incorrectly_entered";
 import * as non_teaching_agent from "./non_teaching_agent";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
-import * as teacher_academic_email from "./teacher_academic_email";
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
+import * as teacher_academic_email from "./teacher_academic_email";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
 
@@ -60,4 +61,5 @@ export const reponse_templates = [
   non_teaching_agent,
   refusal_france_travail,
   min_armees_terre_marine_musee,
+  gendarmerie_agent,
 ];

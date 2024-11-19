@@ -1,0 +1,19 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns error on 🦄 organization (gendarmerie) email 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Pour information, vous semblez avoir fait erreur sur l&#39;organisation à laquelle vous souhaitez rattacher votre compte utilisateur ProConnect.
+L&#39;organisation « 🦄 » enregistrée sous le SIRET 🌙✨ est une « 🐯 ».
+Pour information, les numéros SIREN/SIRET des organisations publiques commencent obligatoirement par 1 ou 2 (source : définition de l&#39;INSEE du Numéro SIREN).
+Comme vous pouvez le constater, le SIRET de l’organisation que vous avez choisi ne correspond pas à une organisation publique.
+Nous vous invitons donc à créer à nouveau votre compte utilisateur en le rattachant à l&#39;organisation publique dont vous dépendez (ex : région de gendarmerie dont vous dépendez…).
+
+Nous restons à votre disposition pour tout complément d&#39;information.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
