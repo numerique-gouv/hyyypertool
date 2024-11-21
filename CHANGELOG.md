@@ -1,5 +1,13 @@
 
 
+## [2024.11.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.3...2024.11.4) (2024-11-21)
+
+
+### Features
+
+* **moderation:** add gendarmerie agent response ([#656](https://github.com/numerique-gouv/hyyypertool/issues/656)) ([241e7d8](https://github.com/numerique-gouv/hyyypertool/commit/241e7d89223071a31cc0f26dd8bbb3b022181a29))
+* **moderation:** update deprecated [@conseiller-numerique](https://github.com/conseiller-numerique).fr ([#660](https://github.com/numerique-gouv/hyyypertool/issues/660)) ([6f67195](https://github.com/numerique-gouv/hyyypertool/commit/6f671956c45b5709e490f8f04bafc627309f8759))
+
 ## [2024.11.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.2...2024.11.3) (2024-11-19)
 
 
