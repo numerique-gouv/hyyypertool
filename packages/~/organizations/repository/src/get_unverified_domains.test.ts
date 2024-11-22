@@ -233,3 +233,14 @@ test("returns no unactive organizations", async () => {
   const result = await get_unverified_domains(pg, {});
   expect(result).toEqual({ count: 0, domains: [] });
 });
+
+test("returns no free domain organizations", async () => {
+  const unicorn_organization_id = await create_unicorn_organization(pg);
+  await pg.insert(schema.email_domains).values({
+    domain: "gmail.com",
+    organization_id: unicorn_organization_id,
+  });
+
+  const result = await get_unverified_domains(pg, {});
+  expect(result).toEqual({ count: 0, domains: [] });
+});
