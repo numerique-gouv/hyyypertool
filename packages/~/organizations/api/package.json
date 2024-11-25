@@ -17,7 +17,7 @@
     "@~/organizations.repository": "workspace:*",
     "@~/organizations.ui": "workspace:*",
     "@~/users.repository": "workspace:*",
-    "hono": "4.6.10",
+    "hono": "4.6.12",
     "lodash.sortby": "4.7.0",
     "tailwind-variants": "0.2.1",
     "ts-pattern": "5.5.0",
