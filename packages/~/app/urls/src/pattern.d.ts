@@ -155,8 +155,8 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
-                code: string | string[];
-                state: string | string[];
+                code: string;
+                state: string;
               };
             };
             output: undefined;
@@ -204,7 +204,7 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         query: {
-                          describedby: string | string[];
+                          describedby: string;
                         };
                       };
                       output: {};
@@ -225,8 +225,8 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         query: {
-                          user_id: string | string[];
-                          organization_id: string | string[];
+                          user_id: string;
+                          organization_id: string;
                         };
                       };
                       output: {};
@@ -266,12 +266,8 @@ declare const app: import("hono/hono-base").HonoBase<
                             };
                           } & {
                             form: {
-                              message:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[];
-                              subject:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[];
+                              message: string;
+                              subject: string;
                             };
                           };
                           output: "OK";
@@ -309,17 +305,9 @@ declare const app: import("hono/hono-base").HonoBase<
                             };
                           } & {
                             form: {
-                              add_member:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[];
-                              add_domain?:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[]
-                                | undefined;
-                              send_notitfication?:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[]
-                                | undefined;
+                              add_member: "AS_INTERNAL" | "AS_EXTERNAL";
+                              add_domain?: string | undefined;
+                              send_notitfication?: string | undefined;
                             };
                           };
                           output: {};
@@ -400,9 +388,9 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         query: {
-                          describedby: string | string[];
-                          page?: string | string[] | undefined;
-                          page_size?: string | string[] | undefined;
+                          describedby: string;
+                          page?: string | undefined;
+                          page_size?: string | undefined;
                         };
                       };
                       output: {};
@@ -439,9 +427,9 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
-                page?: string | string[] | undefined;
-                page_size?: string | string[] | undefined;
-                q?: string | string[] | undefined;
+                page?: string | undefined;
+                page_size?: string | undefined;
+                q?: string | undefined;
               };
             };
             output: {};
@@ -461,7 +449,7 @@ declare const app: import("hono/hono-base").HonoBase<
                 $get: {
                   input: {
                     query: {
-                      siret: string | string[];
+                      siret: string;
                     };
                   };
                   output: {};
@@ -480,9 +468,9 @@ declare const app: import("hono/hono-base").HonoBase<
                 $get: {
                   input: {
                     query: {
-                      page?: string | string[] | undefined;
-                      page_size?: string | string[] | undefined;
-                      q?: string | string[] | undefined;
+                      page?: string | undefined;
+                      page_size?: string | undefined;
+                      q?: string | undefined;
                     };
                   };
                   output: {};
@@ -520,7 +508,7 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         query: {
-                          describedby: string | string[];
+                          describedby: string;
                         };
                       };
                       output: {};
@@ -537,9 +525,7 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         form: {
-                          domain:
-                            | import("hono/types").ParsedFormValue
-                            | import("hono/types").ParsedFormValue[];
+                          domain: string;
                         };
                       };
                       output: "OK";
@@ -592,10 +578,10 @@ declare const app: import("hono/hono-base").HonoBase<
                           };
                         } & {
                           query: {
-                            describedby: string | string[];
-                            page_ref: string | string[];
-                            page?: string | string[] | undefined;
-                            page_size?: string | string[] | undefined;
+                            describedby: string;
+                            page_ref: string;
+                            page?: string | undefined;
+                            page_size?: string | undefined;
                           };
                         };
                         output: {};
@@ -610,9 +596,7 @@ declare const app: import("hono/hono-base").HonoBase<
                         $post: {
                           input: {
                             form: {
-                              is_external:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[];
+                              is_external: string;
                             };
                           } & {
                             param: {
@@ -636,13 +620,16 @@ declare const app: import("hono/hono-base").HonoBase<
                           } & {
                             form: {
                               verification_type?:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[]
+                                | ""
+                                | "code_sent_to_official_contact_email"
+                                | "in_liste_dirigeants_rna"
+                                | "no_validation_means_available"
+                                | "official_contact_domain"
+                                | "official_contact_email"
+                                | "trackdechets_email_domain"
+                                | "verified_email_domain"
                                 | undefined;
-                              is_external?:
-                                | import("hono/types").ParsedFormValue
-                                | import("hono/types").ParsedFormValue[]
-                                | undefined;
+                              is_external?: string | undefined;
                             };
                           };
                           output: "OK";
@@ -675,10 +662,10 @@ declare const app: import("hono/hono-base").HonoBase<
                           };
                         } & {
                           query: {
-                            describedby: string | string[];
-                            page_ref: string | string[];
-                            page?: string | string[] | undefined;
-                            page_size?: string | string[] | undefined;
+                            describedby: string;
+                            page_ref: string;
+                            page?: string | undefined;
+                            page_size?: string | undefined;
                           };
                         };
                         output: {};
@@ -718,10 +705,10 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
-                page?: string | string[] | undefined;
-                page_size?: string | string[] | undefined;
-                q?: string | string[] | undefined;
-                id?: string | string[] | undefined;
+                page?: string | undefined;
+                page_size?: string | undefined;
+                q?: string | undefined;
+                id?: string | undefined;
               };
             };
             output: {};
