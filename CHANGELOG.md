@@ -1,5 +1,12 @@
 
 
+## [2024.11.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.4...2024.11.5) (2024-11-27)
+
+
+### Features
+
+* **organization:** remove free email domains from the table ([#661](https://github.com/numerique-gouv/hyyypertool/issues/661)) ([7250ed1](https://github.com/numerique-gouv/hyyypertool/commit/7250ed1fbc744686b4e1c767444c7bec8a322ca7))
+
 ## [2024.11.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.3...2024.11.4) (2024-11-21)
 
 
