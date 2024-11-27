@@ -3,8 +3,10 @@
 import { hyper_ref } from "@~/app.core/html";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { button } from "@~/app.ui/button";
-import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
+import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
+import { description_list } from "@~/app.ui/list";
+import { FrNumberConverter } from "@~/app.ui/number/index";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
 import { usePageRequestContext } from "./context";
@@ -26,37 +28,48 @@ export default async function User_Page() {
   });
 
   return (
-    <main class="fr-container">
-      <h1>👨‍💻 A propos de {user.given_name}</h1>
-      <Fiche />
-      <AccountInfo />
-      <hr />
-      <Actions />
-      <br />
-      <hr />
-      <b>{user.given_name}</b> est enregistré(e) dans les organisations
-      suivantes :
-      <div class="fr-table max-w-full overflow-x-auto">
-        <div
-          {...hx_get_user_organizations}
-          hx-target="this"
-          hx-trigger="load"
-          class="fr-table"
-          id="table-user-organisations"
-        ></div>
+    <main>
+      <div class="bg-[var(--background-alt-blue-france)] py-6">
+        <div class="fr-container py-6">
+          <h1 cla>👨‍💻 A propos de {user.given_name}</h1>
+          <div className="grid grid-cols-2 gap-4">
+            <Fiche />
+            <AccountInfo />
+          </div>
+        </div>
       </div>
       <hr />
-      <b>{user.given_name}</b> est enregistré(e) dans les modérations suivantes
-      :
-      <div class="fr-table max-w-full overflow-x-auto">
-        <div
-          {...hx_get_user_moderations}
-          hx-target="this"
-          hx-trigger="load"
-          class="fr-table"
-          id="table-user-organisations"
-        ></div>
+      <div class="fr-container">
+        <b>{user.given_name}</b> est enregistré(e) dans les organisations
+        suivantes :
+        <div class="fr-table max-w-full overflow-x-auto">
+          <div
+            {...hx_get_user_organizations}
+            hx-target="this"
+            hx-trigger="load"
+            class="fr-table"
+            id="table-user-organisations"
+          ></div>
+        </div>
+        <hr />
+        <b>{user.given_name}</b> est enregistré(e) dans les modérations
+        suivantes :
+        <div class="fr-table max-w-full overflow-x-auto">
+          <div
+            {...hx_get_user_moderations}
+            hx-target="this"
+            hx-trigger="load"
+            class="fr-table"
+            id="table-user-organisations"
+          ></div>
+        </div>
       </div>
+      <div class="bg-[var(--background-alt-red-marianne)] py-6">
+        <div class="fr-container py-6">
+          <Actions />
+        </div>
+      </div>
+      <hr />
     </main>
   );
 }
@@ -66,23 +79,27 @@ async function Actions() {
     var: { user },
   } = usePageRequestContext();
 
-  const { email, id } = user;
-  const domain = z_email_domain.parse(email, { path: ["email"] });
+  const { id } = user;
+
   return (
     <div class="grid grid-cols-3 justify-items-center gap-1">
-      <CopyButton text={email}>Copier l'email</CopyButton>
-      <CopyButton text={domain}>Copier le domain</CopyButton>
-      <GoogleSearchButton query={domain}>
-        « <span>{domain}</span> » sur Google
-      </GoogleSearchButton>
       <button
         class={button({ intent: "danger" })}
-        {...await hx_urls.users[":id"].reset.$patch({
+        {...await hx_urls.users[":id"].reset.email_verified.$patch({
           param: { id: id.toString() },
         })}
         hx-swap="none"
       >
         🚫 réinitialiser la vérification de l’email (bloquer)
+      </button>
+      <button
+        class={button({ intent: "danger" })}
+        {...await hx_urls.users[":id"].reset.mfa.$patch({
+          param: { id: id.toString() },
+        })}
+        hx-swap="none"
+      >
+        📵 réinitialiser la MFA
       </button>
       <button
         class={button({ intent: "dark" })}
@@ -102,28 +119,81 @@ function Fiche() {
   const {
     var: { user },
   } = usePageRequestContext();
+  const { base, dd, dt } = description_list();
+
+  const $domain = hyper_ref();
+  const $email = hyper_ref();
+
+  const domain = z_email_domain.parse(user.email, { path: ["email"] });
 
   return (
-    <ul>
-      <li>
-        id : <b>{user.id}</b>
-      </li>
-      <li>
-        email : <b>{user.email}</b>
-      </li>
-      <li>
-        prénom : <b>{user.given_name}</b>
-      </li>
-      <li>
-        nom : <b>{user.family_name}</b>
-      </li>
-      <li>
-        téléphone : <b>{user.phone_number}</b>
-      </li>
-      <li>
-        fonction : <b>{user.job}</b>
-      </li>
-    </ul>
+    <dl class={base({ className: "grid-cols-[100px_1fr]" })}>
+      <dt class={dt()}>id</dt>
+      <dd class={dd()}>
+        <b>{user.id}</b>
+      </dd>
+
+      <dt class={dt()}>email</dt>
+      <dd class={dd()}>
+        <b id={$email}> {user.email} </b>
+        <button
+          aria-hidden="true"
+          class="fr-p-O leading-none"
+          title="Copier l'email"
+          _={copy_text_content_to_clipboard(`#${$email}`)}
+        >
+          <span
+            aria-hidden="true"
+            class="fr-icon-device-line"
+            style={{ color: "var(--text-disabled-grey)" }}
+          />
+        </button>
+      </dd>
+
+      <dt class={dt()}>domain</dt>
+      <dd class={dd()}>
+        <b id={$domain}> {domain} </b>
+        <button
+          aria-hidden="true"
+          class="fr-p-O leading-none"
+          title="Copier le nom de domaine"
+          _={copy_text_content_to_clipboard(`#${$domain}`)}
+        >
+          <span
+            aria-hidden="true"
+            class="fr-icon-device-line"
+            style={{ color: "var(--text-disabled-grey)" }}
+          />
+        </button>
+
+        <GoogleSearchButton
+          class={button({ class: "align-bottom", size: "sm" })}
+          query={domain}
+        >
+          Vérifier le nom de domaine
+        </GoogleSearchButton>
+      </dd>
+
+      <dt class={dt()}>prénom</dt>
+      <dd class={dd()}>
+        <b>{user.given_name}</b>
+      </dd>
+
+      <dt class={dt()}>nom</dt>
+      <dd class={dd()}>
+        <b>{user.family_name}</b>
+      </dd>
+
+      <dt class={dt()}>téléphone</dt>
+      <dd class={dd()}>
+        <b>{user.phone_number}</b>
+      </dd>
+
+      <dt class={dt()}>fonction</dt>
+      <dd class={dd()}>
+        <b>{user.job}</b>
+      </dd>
+    </dl>
   );
 }
 
@@ -132,44 +202,54 @@ function AccountInfo() {
     var: { user },
   } = usePageRequestContext();
 
+  const { base, dd, dt } = description_list();
+
   return (
-    <ul>
-      <li>
-        nombre de connection : <b>{user.sign_in_count}</b>
-      </li>
-      <li>
-        Création :{" "}
+    <dl class={base()}>
+      <dt class={dt()}>Nombre de connection</dt>
+      <dd class={dd()}>
+        <b>{FrNumberConverter.format(user.sign_in_count)}</b>
+      </dd>
+
+      <dt class={dt()}>Création</dt>
+      <dd class={dd()}>
         <b>
           <LocalTime date={user.created_at} />
         </b>
-      </li>
-      <li>
-        Dernière connectio :{" "}
+      </dd>
+
+      <dt class={dt()}>Dernière connection</dt>
+      <dd class={dd()}>
         <b>
           <LocalTime date={user.last_sign_in_at} />
         </b>
-      </li>
-      <li>
-        Dernière modif :
+      </dd>
+
+      <dt class={dt()}>Dernière modification</dt>
+      <dd class={dd()}>
         <b>
           <LocalTime date={user.updated_at} />
         </b>
-      </li>
-      <li>
-        Email vérifié : <b>{user.email_verified ? "✅" : "❌"}</b>
-      </li>
-      <li>
-        mail de vérif envoyé :{" "}
+      </dd>
+
+      <dt class={dt()}>Email vérifié</dt>
+      <dd class={dd()}>
+        <b>{user.email_verified ? "✅" : "❌"}</b>
+      </dd>
+
+      <dt class={dt()}>Email vérifié envoyé le</dt>
+      <dd class={dd()}>
         <b>
           <LocalTime date={user.verify_email_sent_at} />
         </b>
-      </li>
-      <li>
-        mail chgmt mdp envoyé :{" "}
+      </dd>
+
+      <dt class={dt()}>Demande de changement de mot de passe envoyé</dt>
+      <dd class={dd()}>
         <b>
           <LocalTime date={user.reset_password_sent_at} />
         </b>
-      </li>
-    </ul>
+      </dd>
+    </dl>
   );
 }

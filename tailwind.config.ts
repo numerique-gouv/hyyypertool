@@ -14,6 +14,7 @@ const config: Pick<Config, "content" | "presets"> = {
     "./packages/~/moderations/ui/src/**/*.{ts,tsx}",
     "./packages/~/organizations/api/src/**/*.{ts,tsx}",
     "./packages/~/organizations/ui/src/**/*.{ts,tsx}",
+    "./packages/~/users/api/src/**/*.{ts,tsx}",
     "./packages/~/users/ui/src/**/*.{ts,tsx}",
   ],
   presets: [base_config],

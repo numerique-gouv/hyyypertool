@@ -6,6 +6,7 @@ import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout/index";
 import { urls } from "@~/app.urls";
 import { schema } from "@~/moncomptepro.database";
+import { ResetMFA } from "@~/users.lib/usecase";
 import { get_user_by_id } from "@~/users.repository/get_user_by_id";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -56,7 +57,7 @@ export default new Hono<ContextType>()
     },
   )
   .patch(
-    "/reset",
+    "/reset/email_verified",
     zValidator("param", Entity_Schema),
     async function PATCH_RESET({ text, req, var: { moncomptepro_pg } }) {
       const { id } = req.valid("param");
@@ -66,6 +67,16 @@ export default new Hono<ContextType>()
           email_verified: false,
         })
         .where(eq(schema.users.id, id));
+      return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
+    },
+  )
+  .patch(
+    "/reset/mfa",
+    zValidator("param", Entity_Schema),
+    async function PATCH_RESET({ text, req, var: { moncomptepro_pg } }) {
+      const { id: user_id } = req.valid("param");
+      const reset_mfa = ResetMFA({ pg: moncomptepro_pg });
+      await reset_mfa(user_id);
       return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
     },
   )

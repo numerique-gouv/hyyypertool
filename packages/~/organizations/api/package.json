@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@types/lodash.sortby": "4.7.9",
+    "@~/config.tailwindcss": "workspace:*",
     "@~/config.typescript": "workspace:*"
   }
 }

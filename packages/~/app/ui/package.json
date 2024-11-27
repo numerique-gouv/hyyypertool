@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./badge": {
+      "default": "./src/badge/index.ts"
+    },
     "./button": {
       "default": "./src/button/index.ts"
     },
@@ -18,6 +21,9 @@
     },
     "./hx_table": {
       "default": "./src/hx_table/index.ts"
+    },
+    "./list": {
+      "default": "./src/list/index.ts"
     },
     "./loader": {
       "default": "./src/loader/index.ts"

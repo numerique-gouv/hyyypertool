@@ -17,13 +17,13 @@ Fonctionnalité: Page utilisateur
 
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "A propos de Raphael"
-    * je vois "email : rdubigny@beta.gouv.fr"
-    * je vois "prénom : Raphael"
-    * je vois "nom : Dubigny"
-    * je vois "téléphone : 0123456789"
-    * je vois "Création : 13/07/2018 15:35:15"
-    * je vois "Dernière modif :22/06/2023 14:34:34"
-    * je vois "mail de vérif envoyé : 22/06/2023 14:34:34"
+    * je vois "email rdubigny@beta.gouv.fr"
+    * je vois "prénomRaphael"
+    * je vois "nomDubigny"
+    * je vois "téléphone0123456789"
+    * je vois "Création13/07/2018 15:35:15"
+    * je vois "Dernière modification22/06/2023 14:34:34"
+    * je vois "Email vérifié envoyé le22/06/2023 14:34:34"
 
   # Scénario: Organisations de Raphael
     Alors je vois "Raphael est enregistré(e) dans les organisations suivantes "

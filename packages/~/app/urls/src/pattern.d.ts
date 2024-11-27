@@ -1,8 +1,5 @@
 declare const app: import("hono/hono-base").HonoBase<
-  {
-    Bindings: any;
-    Variables: any;
-  } & import("@~/app.middleware/set_nonce").NonceVariables_Context &
+  import("@~/app.middleware/set_nonce").NonceVariables_Context &
     import("@~/app.middleware/set_config").ConfigVariables_Context &
     import("@~/app.middleware/set_userinfo").UserInfoVariables_Context &
     import("@~/app.middleware/moncomptepro_pg").MonComptePro_Pg_Context,
@@ -365,7 +362,20 @@ declare const app: import("hono/hono-base").HonoBase<
                   };
                 };
               } & {
-                "/reset": {
+                "/reset/email_verified": {
+                  $patch: {
+                    input: {
+                      param: {
+                        id: string;
+                      };
+                    };
+                    output: "OK";
+                    outputFormat: "text";
+                    status: 200;
+                  };
+                };
+              } & {
+                "/reset/mfa": {
                   $patch: {
                     input: {
                       param: {
