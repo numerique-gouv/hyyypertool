@@ -7,7 +7,6 @@ import { Config } from "tailwindcss";
 
 const config: Pick<Config, "content" | "presets"> = {
   content: [
-    "./packages/~/**/*.{ts,tsx}",
     "./packages/~/app/ui/src/**/*.{ts,tsx}",
     "./packages/~/infra/crisp/ui/src/**/*.{ts,tsx}",
     "./packages/~/moderations/api/src/**/*.{ts,tsx}",

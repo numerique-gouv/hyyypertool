@@ -53,7 +53,7 @@ export function createSlot<P extends {}>() {
       return children_array[0](restProps);
     }
 
-    return <>{children}</>;
+    return children;
   }) as SlotType<P>;
 
   const Renderer: RendererType<P> = ({ childs, children, ...restProps }) => {
