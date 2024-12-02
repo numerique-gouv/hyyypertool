@@ -29,7 +29,7 @@
     "@~/moncomptepro.lib": "workspace:*",
     "hono": "4.6.12",
     "hono-sessions": "0.7.0",
-    "openid-client": "5.7.0"
+    "openid-client": "6.1.6"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
