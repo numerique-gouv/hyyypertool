@@ -58,6 +58,10 @@ export function ResetMFA({
       session_id,
       user,
     });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    await crisp.mark_conversation_as_resolved({ session_id });
   };
 }
 

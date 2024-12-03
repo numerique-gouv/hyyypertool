@@ -10,14 +10,16 @@ import type {
   CreateConversationRoute,
   SendMessageInAConversationRoute,
   UpdateConversationMetaRoute,
+  UpdateConversationStateRoute,
 } from "@numerique-gouv/crisp/router/conversation";
 import type { OperatorsRouter } from "@numerique-gouv/crisp/router/operators";
 
 export function CrispApi(config: Config) {
   return {
     create_conversation: CreateConversation(config),
-    send_message: SendMessage(config),
     get_user: GetUserInfo(config),
+    mark_conversation_as_resolved: MarkConversationAsResolved(config),
+    send_message: SendMessage(config),
   };
 }
 
@@ -74,6 +76,21 @@ function SendMessage(config: Config) {
         type: "text",
         user,
       },
+    });
+  };
+}
+
+function MarkConversationAsResolved(config: Config) {
+  return async function mark_conversation_as_resolved({
+    session_id,
+  }: {
+    session_id: string;
+  }) {
+    await fetch_crisp<UpdateConversationStateRoute>(config, {
+      endpoint: `/v1/website/${config.website_id}/conversation/${session_id}/state`,
+      method: "PATCH",
+      searchParams: {},
+      body: { state: "resolved" },
     });
   };
 }
