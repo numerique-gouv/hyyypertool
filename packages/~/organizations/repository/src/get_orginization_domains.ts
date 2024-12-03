@@ -10,10 +10,13 @@ export function get_orginization_domains(
 ) {
   return pg.query.email_domains.findMany({
     columns: {
+      created_at: true,
       domain: true,
       id: true,
       organization_id: true,
+      updated_at: true,
       verification_type: true,
+      verified_at: true,
     },
     with: {
       organization: {
