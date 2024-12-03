@@ -89,7 +89,6 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
         ),
     }),
   ).toEqual({
-    authentication_by_peers_type: null,
     created_at: "2222-01-02 00:00:00+00",
     has_been_greeted: false,
     is_external: false,
@@ -97,7 +96,6 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
     official_contact_email_verification_sent_at: null,
     official_contact_email_verification_token: null,
     organization_id: unicorn_organization_id,
-    sponsor_id: null,
     updated_at: "2222-01-02 00:00:00+00",
     user_id: adora_pony_user_id,
     verification_type: "domain",
@@ -154,7 +152,6 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
         ),
     }),
   ).toEqual({
-    authentication_by_peers_type: null,
     created_at: "2222-01-02 00:00:00+00",
     has_been_greeted: false,
     is_external: true,
@@ -162,7 +159,6 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
     official_contact_email_verification_sent_at: null,
     official_contact_email_verification_token: null,
     organization_id: unicorn_organization_id,
-    sponsor_id: null,
     updated_at: "2222-01-02 00:00:00+00",
     user_id: adora_pony_user_id,
     verification_type: "domain",

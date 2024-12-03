@@ -17,6 +17,7 @@ export default {
   schema: "src/drizzle/schema.ts",
   strict: true,
   tablesFilter: [
+    "authenticators",
     "email_domains",
     "moderations",
     "oidc_clients",

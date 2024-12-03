@@ -1,6 +1,6 @@
 import { hyper_ref } from "@~/app.core/html";
 import { Pagination_Schema } from "@~/app.core/schema";
-import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
+import { copy_value_to_clipboard } from "@~/app.ui/button/scripts";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
@@ -140,7 +140,7 @@ function Row({
           aria-hidden="true"
           class="fr-p-O leading-none"
           title="Copier le nom de domaine"
-          _={copy_text_content_to_clipboard(`#${$domain}`)}
+          _={copy_value_to_clipboard(`#${$domain}`)}
         >
           <span
             aria-hidden="true"

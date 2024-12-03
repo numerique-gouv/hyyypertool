@@ -1,234 +1,52 @@
+import { sql } from "drizzle-orm";
 import {
+  bigint,
   boolean,
+  foreignKey,
   integer,
+  pgSequence,
   pgTable,
   primaryKey,
   serial,
+  text,
   timestamp,
   unique,
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
 
-export const oidc_clients = pgTable("oidc_clients", {
-  id: serial("id").primaryKey().notNull(),
-  client_name: varchar("client_name").notNull(),
-  client_id: varchar("client_id").notNull(),
-  client_secret: varchar("client_secret").notNull(),
-  redirect_uris: varchar("redirect_uris").default("{}").array().notNull(),
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  post_logout_redirect_uris: varchar("post_logout_redirect_uris")
-    .default("{}")
-    .array()
-    .notNull(),
-  scope: varchar("scope").default("openid email").notNull(),
-  client_uri: varchar("client_uri"),
-  client_description: varchar("client_description"),
-  userinfo_signed_response_alg: varchar("userinfo_signed_response_alg"),
-  id_token_signed_response_alg: varchar("id_token_signed_response_alg"),
-  authorization_signed_response_alg: varchar(
-    "authorization_signed_response_alg",
-  ),
-  introspection_signed_response_alg: varchar(
-    "introspection_signed_response_alg",
-  ),
+export const pgmigrations_id_seq = pgSequence("pgmigrations_id_seq", {
+  startWith: "1",
+  increment: "1",
+  minValue: "1",
+  maxValue: "9223372036854775807",
+  cache: "1",
+  cycle: false,
 });
-
-export const users_oidc_clients = pgTable("users_oidc_clients", {
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  oidc_client_id: integer("oidc_client_id")
-    .notNull()
-    .references(() => oidc_clients.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    }),
-  created_at: timestamp("created_at", {
-    withTimezone: true,
-    mode: "string",
-  }).notNull(),
-  updated_at: timestamp("updated_at", {
-    withTimezone: true,
-    mode: "string",
-  }).notNull(),
-  id: serial("id").primaryKey().notNull(),
-  organization_id: integer("organization_id").references(
-    () => organizations.id,
-    { onDelete: "set null", onUpdate: "cascade" },
-  ),
-});
-
-export const moderations = pgTable("moderations", {
-  id: serial("id").primaryKey().notNull(),
-  user_id: integer("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  organization_id: integer("organization_id")
-    .notNull()
-    .references(() => organizations.id, { onDelete: "cascade" }),
-  type: varchar("type").notNull(),
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  moderated_at: timestamp("moderated_at", {
-    withTimezone: true,
-    mode: "string",
-  }),
-  comment: varchar("comment"),
-  ticket_id: varchar("ticket_id"),
-  moderated_by: varchar("moderated_by"),
-});
-
-export const organizations = pgTable(
-  "organizations",
-  {
-    id: serial("id").primaryKey().notNull(),
-    siret: varchar("siret").notNull(),
-    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
-      .defaultNow()
-      .notNull(),
-    updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
-      .defaultNow()
-      .notNull(),
-    cached_libelle: varchar("cached_libelle"),
-    cached_nom_complet: varchar("cached_nom_complet"),
-    cached_enseigne: varchar("cached_enseigne"),
-    cached_tranche_effectifs: varchar("cached_tranche_effectifs"),
-    cached_tranche_effectifs_unite_legale: varchar(
-      "cached_tranche_effectifs_unite_legale",
-    ),
-    cached_libelle_tranche_effectif: varchar("cached_libelle_tranche_effectif"),
-    cached_etat_administratif: varchar("cached_etat_administratif"),
-    cached_est_active: boolean("cached_est_active"),
-    cached_statut_diffusion: varchar("cached_statut_diffusion"),
-    cached_est_diffusible: boolean("cached_est_diffusible"),
-    cached_adresse: varchar("cached_adresse"),
-    cached_code_postal: varchar("cached_code_postal"),
-    cached_activite_principale: varchar("cached_activite_principale"),
-    cached_libelle_activite_principale: varchar(
-      "cached_libelle_activite_principale",
-    ),
-    cached_categorie_juridique: varchar("cached_categorie_juridique"),
-    cached_libelle_categorie_juridique: varchar(
-      "cached_libelle_categorie_juridique",
-    ),
-    organization_info_fetched_at: timestamp("organization_info_fetched_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    cached_code_officiel_geographique: varchar(
-      "cached_code_officiel_geographique",
-    ),
-  },
-  (table) => {
-    return {
-      index_organizations_on_siret: uniqueIndex(
-        "index_organizations_on_siret",
-      ).on(table.siret),
-    };
-  },
-);
-
-export const users = pgTable(
-  "users",
-  {
-    id: serial("id").primaryKey().notNull(),
-    email: varchar("email").default("").notNull(),
-    encrypted_password: varchar("encrypted_password").default(""),
-    reset_password_token: varchar("reset_password_token"),
-    reset_password_sent_at: timestamp("reset_password_sent_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    sign_in_count: integer("sign_in_count").default(0).notNull(),
-    last_sign_in_at: timestamp("last_sign_in_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    created_at: timestamp("created_at", {
-      withTimezone: true,
-      mode: "string",
-    }).notNull(),
-    updated_at: timestamp("updated_at", {
-      withTimezone: true,
-      mode: "string",
-    }).notNull(),
-    email_verified: boolean("email_verified").default(false).notNull(),
-    verify_email_token: varchar("verify_email_token"),
-    verify_email_sent_at: timestamp("verify_email_sent_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    given_name: varchar("given_name"),
-    family_name: varchar("family_name"),
-    phone_number: varchar("phone_number"),
-    job: varchar("job"),
-    magic_link_token: varchar("magic_link_token"),
-    magic_link_sent_at: timestamp("magic_link_sent_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    email_verified_at: timestamp("email_verified_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    current_challenge: varchar("current_challenge"),
-    needs_inclusionconnect_welcome_page: boolean(
-      "needs_inclusionconnect_welcome_page",
-    )
-      .default(false)
-      .notNull(),
-    needs_inclusionconnect_onboarding_help: boolean(
-      "needs_inclusionconnect_onboarding_help",
-    )
-      .default(false)
-      .notNull(),
-    encrypted_totp_key: varchar("encrypted_totp_key"),
-    totp_key_verified_at: timestamp("totp_key_verified_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    force_2fa: boolean("force_2fa").default(false).notNull(),
-  },
-  (table) => {
-    return {
-      index_users_on_email: uniqueIndex("index_users_on_email").on(table.email),
-      index_users_on_reset_password_token: uniqueIndex(
-        "index_users_on_reset_password_token",
-      ).on(table.reset_password_token),
-    };
-  },
-);
 
 export const email_domains = pgTable(
   "email_domains",
   {
-    id: serial("id").primaryKey().notNull(),
-    organization_id: integer("organization_id")
-      .notNull()
-      .references(() => organizations.id, { onDelete: "cascade" }),
-    domain: varchar("domain", { length: 255 }).notNull(),
-    verification_type: varchar("verification_type", { length: 255 }),
-    can_be_suggested: boolean("can_be_suggested").default(true).notNull(),
-    verified_at: timestamp("verified_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
-    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
-      .defaultNow()
+    id: serial().primaryKey().notNull(),
+    organization_id: integer().notNull(),
+    domain: varchar({ length: 255 }).notNull(),
+    verification_type: varchar({ length: 255 }),
+    can_be_suggested: boolean().default(true).notNull(),
+    verified_at: timestamp({ withTimezone: true, mode: "string" }),
+    created_at: timestamp({ withTimezone: true, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
-      .defaultNow()
+    updated_at: timestamp({ withTimezone: true, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
   },
   (table) => {
     return {
+      email_domains_organization_id_fkey: foreignKey({
+        columns: [table.organization_id],
+        foreignColumns: [organizations.id],
+        name: "email_domains_organization_id_fkey",
+      }).onDelete("cascade"),
       unique_organization_domain: unique("unique_organization_domain").on(
         table.organization_id,
         table.domain,
@@ -238,47 +56,254 @@ export const email_domains = pgTable(
   },
 );
 
-export const users_organizations = pgTable(
-  "users_organizations",
+export const authenticators = pgTable(
+  "authenticators",
   {
-    user_id: integer("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-    organization_id: integer("organization_id")
-      .notNull()
-      .references(() => organizations.id, { onUpdate: "cascade" }),
-    is_external: boolean("is_external").default(false).notNull(),
-    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+    credential_id: text().primaryKey().notNull(),
+    credential_public_key: text().notNull(),
+    counter: bigint({ mode: "number" }).notNull(),
+    credential_device_type: varchar({ length: 32 }),
+    credential_backed_up: boolean().notNull(),
+    transports: varchar({ length: 255 }).array().default([""]),
+    user_id: integer().notNull(),
+    display_name: varchar(),
+    created_at: timestamp({ withTimezone: true, mode: "string" })
       .defaultNow()
       .notNull(),
-    updated_at: timestamp("updated_at", { withTimezone: true, mode: "string" })
-      .defaultNow()
-      .notNull(),
-    verification_type: varchar("verification_type"),
-    authentication_by_peers_type: varchar("authentication_by_peers_type"),
-    has_been_greeted: boolean("has_been_greeted").default(false).notNull(),
-    sponsor_id: integer("sponsor_id").references(() => users.id, {
-      onDelete: "set null",
-    }),
-    needs_official_contact_email_verification: boolean(
-      "needs_official_contact_email_verification",
-    )
-      .default(false)
-      .notNull(),
-    official_contact_email_verification_token: varchar(
-      "official_contact_email_verification_token",
-    ),
-    official_contact_email_verification_sent_at: timestamp(
-      "official_contact_email_verification_sent_at",
-      { withTimezone: true, mode: "string" },
-    ),
-    verified_at: timestamp("verified_at", {
-      withTimezone: true,
-      mode: "string",
-    }),
+    last_used_at: timestamp({ withTimezone: true, mode: "string" }),
+    usage_count: integer().default(0).notNull(),
+    user_verified: boolean().default(true).notNull(),
   },
   (table) => {
     return {
+      index_authenticators_on_credential_id: uniqueIndex(
+        "index_authenticators_on_credential_id",
+      ).using("btree", table.credential_id.asc().nullsLast().op("text_ops")),
+      authenticators_user_id_fkey: foreignKey({
+        columns: [table.user_id],
+        foreignColumns: [users.id],
+        name: "authenticators_user_id_fkey",
+      }).onDelete("cascade"),
+    };
+  },
+);
+
+export const oidc_clients = pgTable("oidc_clients", {
+  id: serial().primaryKey().notNull(),
+  client_name: varchar().notNull(),
+  client_id: varchar().notNull(),
+  client_secret: varchar().notNull(),
+  redirect_uris: varchar().array().default([""]).notNull(),
+  created_at: timestamp({ withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  updated_at: timestamp({ withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  post_logout_redirect_uris: varchar().array().default([""]).notNull(),
+  scope: varchar().default("openid email").notNull(),
+  client_uri: varchar(),
+  client_description: varchar(),
+  userinfo_signed_response_alg: varchar(),
+  id_token_signed_response_alg: varchar(),
+  authorization_signed_response_alg: varchar(),
+  introspection_signed_response_alg: varchar(),
+  is_proconnect_federation: boolean().default(false).notNull(),
+});
+
+export const moderations = pgTable(
+  "moderations",
+  {
+    id: serial().primaryKey().notNull(),
+    user_id: integer().notNull(),
+    organization_id: integer().notNull(),
+    type: varchar().notNull(),
+    created_at: timestamp({ withTimezone: true, mode: "string" })
+      .defaultNow()
+      .notNull(),
+    moderated_at: timestamp({ withTimezone: true, mode: "string" }),
+    comment: varchar(),
+    moderated_by: varchar(),
+    ticket_id: text(),
+  },
+  (table) => {
+    return {
+      moderations_organization_id_fkey: foreignKey({
+        columns: [table.organization_id],
+        foreignColumns: [organizations.id],
+        name: "moderations_organization_id_fkey",
+      }).onDelete("cascade"),
+      moderations_user_id_fkey: foreignKey({
+        columns: [table.user_id],
+        foreignColumns: [users.id],
+        name: "moderations_user_id_fkey",
+      }).onDelete("cascade"),
+    };
+  },
+);
+
+export const organizations = pgTable(
+  "organizations",
+  {
+    id: serial().primaryKey().notNull(),
+    siret: varchar().notNull(),
+    created_at: timestamp({ withTimezone: true, mode: "string" })
+      .default("1970-01-01 00:00:00")
+      .notNull(),
+    updated_at: timestamp({ withTimezone: true, mode: "string" })
+      .default("1970-01-01 00:00:00")
+      .notNull(),
+    cached_libelle: varchar(),
+    cached_nom_complet: varchar(),
+    cached_enseigne: varchar(),
+    cached_tranche_effectifs: varchar(),
+    cached_tranche_effectifs_unite_legale: varchar(),
+    cached_libelle_tranche_effectif: varchar(),
+    cached_etat_administratif: varchar(),
+    cached_est_active: boolean(),
+    cached_statut_diffusion: varchar(),
+    cached_est_diffusible: boolean(),
+    cached_adresse: varchar(),
+    cached_code_postal: varchar(),
+    cached_activite_principale: varchar(),
+    cached_libelle_activite_principale: varchar(),
+    cached_categorie_juridique: varchar(),
+    cached_libelle_categorie_juridique: varchar(),
+    organization_info_fetched_at: timestamp({
+      withTimezone: true,
+      mode: "string",
+    }),
+    cached_code_officiel_geographique: varchar(),
+  },
+  (table) => {
+    return {
+      index_organizations_on_siret: uniqueIndex(
+        "index_organizations_on_siret",
+      ).using("btree", table.siret.asc().nullsLast().op("text_ops")),
+    };
+  },
+);
+
+export const users = pgTable(
+  "users",
+  {
+    id: serial().primaryKey().notNull(),
+    email: varchar().default("").notNull(),
+    encrypted_password: varchar().default(""),
+    reset_password_token: varchar(),
+    reset_password_sent_at: timestamp({ withTimezone: true, mode: "string" }),
+    sign_in_count: integer().default(0).notNull(),
+    last_sign_in_at: timestamp({ withTimezone: true, mode: "string" }),
+    created_at: timestamp({ withTimezone: true, mode: "string" }).notNull(),
+    updated_at: timestamp({ withTimezone: true, mode: "string" }).notNull(),
+    email_verified: boolean().default(false).notNull(),
+    verify_email_token: varchar(),
+    verify_email_sent_at: timestamp({ withTimezone: true, mode: "string" }),
+    given_name: varchar(),
+    family_name: varchar(),
+    phone_number: varchar(),
+    job: varchar(),
+    magic_link_token: varchar(),
+    magic_link_sent_at: timestamp({ withTimezone: true, mode: "string" }),
+    email_verified_at: timestamp({ withTimezone: true, mode: "string" }),
+    current_challenge: varchar(),
+    needs_inclusionconnect_welcome_page: boolean().default(false).notNull(),
+    needs_inclusionconnect_onboarding_help: boolean().default(false).notNull(),
+    encrypted_totp_key: varchar(),
+    totp_key_verified_at: timestamp({ withTimezone: true, mode: "string" }),
+    force_2fa: boolean().default(false).notNull(),
+  },
+  (table) => {
+    return {
+      index_users_on_email: uniqueIndex("index_users_on_email").using(
+        "btree",
+        table.email.asc().nullsLast().op("text_ops"),
+      ),
+      index_users_on_reset_password_token: uniqueIndex(
+        "index_users_on_reset_password_token",
+      ).using(
+        "btree",
+        table.reset_password_token.asc().nullsLast().op("text_ops"),
+      ),
+    };
+  },
+);
+
+export const users_oidc_clients = pgTable(
+  "users_oidc_clients",
+  {
+    user_id: integer().notNull(),
+    oidc_client_id: integer().notNull(),
+    created_at: timestamp({ withTimezone: true, mode: "string" }).notNull(),
+    updated_at: timestamp({ withTimezone: true, mode: "string" }).notNull(),
+    id: serial().primaryKey().notNull(),
+    organization_id: integer(),
+  },
+  (table) => {
+    return {
+      users_oidc_clients_oidc_client_id_fkey: foreignKey({
+        columns: [table.oidc_client_id],
+        foreignColumns: [oidc_clients.id],
+        name: "users_oidc_clients_oidc_client_id_fkey",
+      })
+        .onUpdate("cascade")
+        .onDelete("cascade"),
+      users_oidc_clients_organization_id_fkey: foreignKey({
+        columns: [table.organization_id],
+        foreignColumns: [organizations.id],
+        name: "users_oidc_clients_organization_id_fkey",
+      })
+        .onUpdate("cascade")
+        .onDelete("set null"),
+      users_oidc_clients_user_id_fkey: foreignKey({
+        columns: [table.user_id],
+        foreignColumns: [users.id],
+        name: "users_oidc_clients_user_id_fkey",
+      })
+        .onUpdate("cascade")
+        .onDelete("cascade"),
+    };
+  },
+);
+
+export const users_organizations = pgTable(
+  "users_organizations",
+  {
+    user_id: integer().notNull(),
+    organization_id: integer().notNull(),
+    is_external: boolean().default(false).notNull(),
+    created_at: timestamp({ withTimezone: true, mode: "string" })
+      .default("1970-01-01 00:00:00")
+      .notNull(),
+    updated_at: timestamp({ withTimezone: true, mode: "string" })
+      .default("1970-01-01 00:00:00")
+      .notNull(),
+    verification_type: varchar(),
+    has_been_greeted: boolean().default(false).notNull(),
+    needs_official_contact_email_verification: boolean()
+      .default(false)
+      .notNull(),
+    official_contact_email_verification_token: varchar(),
+    official_contact_email_verification_sent_at: timestamp({
+      withTimezone: true,
+      mode: "string",
+    }),
+    verified_at: timestamp({ withTimezone: true, mode: "string" }),
+  },
+  (table) => {
+    return {
+      users_organizations_organization_id_fkey: foreignKey({
+        columns: [table.organization_id],
+        foreignColumns: [organizations.id],
+        name: "users_organizations_organization_id_fkey",
+      }).onUpdate("cascade"),
+      users_organizations_user_id_fkey: foreignKey({
+        columns: [table.user_id],
+        foreignColumns: [users.id],
+        name: "users_organizations_user_id_fkey",
+      })
+        .onUpdate("cascade")
+        .onDelete("cascade"),
       users_organizations_pkey: primaryKey({
         columns: [table.user_id, table.organization_id],
         name: "users_organizations_pkey",
