@@ -9,6 +9,9 @@ import { schema } from "../index";
 
 export async function delete_database(db: MonComptePro_PgDatabase) {
   try {
+    const authenticators = await db.delete(schema.authenticators).returning();
+    consola.info(`🚮 DELETE ${authenticators.length} authenticators`);
+
     const users_organizations = await db
       .delete(schema.users_organizations)
       .returning();

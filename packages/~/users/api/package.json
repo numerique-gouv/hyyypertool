@@ -21,6 +21,7 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@~/config.tailwindcss": "workspace:*",
     "@~/config.typescript": "workspace:*"
   }
 }

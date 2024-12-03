@@ -12,8 +12,10 @@ import { OrganizationsByUser } from "@~/moderations.ui/OrganizationsByUser";
 import { UsersByOrganization } from "@~/moderations.ui/UsersByOrganization";
 import { About as About_Organization } from "@~/organizations.ui/info/About";
 import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
-import { CountUserMemberships } from "@~/users.lib/usecase/CountUserMemberships";
-import { SuggestSameUserEmails } from "@~/users.lib/usecase/SuggestSameUserEmails";
+import {
+  CountUserMemberships,
+  SuggestSameUserEmails,
+} from "@~/users.lib/usecase";
 import { About as About_User } from "@~/users.ui/About";
 import { Investigation as Investigation_User } from "@~/users.ui/Investigation";
 import { getContext } from "hono/context-storage";

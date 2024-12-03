@@ -17,13 +17,13 @@ Fonctionnalité: Page utilisateur with moderations
 
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "A propos de Jean"
-    * je vois "email : jeanbon@yopmail.com"
-    * je vois "prénom : Jean"
-    * je vois "nom : Bon"
-    * je vois "téléphone : 0123456789"
-    * je vois "Création : 13/07/2018 15:35:15"
-    * je vois "Dernière modif :22/06/2023 14:34:34"
-    * je vois "mail de vérif envoyé : 22/06/2023 14:34:34"
+    * je vois "email jeanbon@yopmail.com"
+    * je vois "prénomJean"
+    * je vois "nomBon"
+    * je vois "téléphone0123456789"
+    * je vois "Création13/07/2018 15:35:15"
+    * je vois "Dernière modification22/06/2023 14:34:34"
+    * je vois "Email vérifié envoyé le22/06/2023 14:34:34"
 
   # Scénario: Organisations de Raphael
     Alors je vois "Jean est enregistré(e) dans les modérations suivantes :"
