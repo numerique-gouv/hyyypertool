@@ -16,8 +16,13 @@ import type {
 } from "@numerique-gouv/crisp/router/conversation";
 import type { OperatorsRouter } from "@numerique-gouv/crisp/router/operators";
 import { z } from "zod";
+import type { CrispApi } from "./api";
 
 //
+
+export type CrispApiCradle = {
+  crisp: CrispApi;
+};
 
 export function is_crisp_ticket(session_id: string | number) {
   return z.string().startsWith("session_").safeParse(session_id).success;
@@ -44,6 +49,9 @@ export async function get_crisp_mail(
   return { conversation, messages };
 }
 
+/**
+ * @deprecated Use `crisp.send_message` instead.
+ */
 export async function send_message(
   config: Config,
   {
@@ -66,6 +74,9 @@ export async function send_message(
   });
 }
 
+/**
+ * @deprecated Use `crisp.get_user` instead.
+ */
 export async function get_user(config: Config, { email }: { email: string }) {
   const operators = await fetch_crisp<OperatorsRouter>(config, {
     endpoint: `/v1/website/${config.website_id}/operators/list`,
@@ -83,6 +94,9 @@ export async function get_user(config: Config, { email }: { email: string }) {
   } as User;
 }
 
+/**
+ * @deprecated Use `crisp.create_conversation` instead.
+ */
 export async function create_conversation(
   config: Config,
   {
