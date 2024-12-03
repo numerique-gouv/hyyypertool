@@ -65,4 +65,7 @@ test("reset user MFA", async () => {
       nickname: "👩‍🚀",
     },
   });
+  expect(crisp.mark_conversation_as_resolved).toHaveBeenCalledWith({
+    session_id: "🗨️",
+  });
 });

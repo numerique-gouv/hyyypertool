@@ -10,5 +10,6 @@ export const crisp: CrispApi = {
   get_user: mock().mockResolvedValue({
     nickname: "👩‍🚀",
   }),
+  mark_conversation_as_resolved: mock().mockResolvedValue(undefined),
   send_message: mock().mockResolvedValue(undefined),
 };
