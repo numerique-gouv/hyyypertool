@@ -21,6 +21,7 @@
     "@~/organizations.lib": "workspace:*",
     "@~/users.lib": "workspace:*",
     "@~/moderations.lib": "workspace:*",
+    "ts-dedent": "2.2.0",
     "hono": "4.6.12",
     "tailwind-variants": "0.2.1",
     "ts-pattern": "5.5.0"

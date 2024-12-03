@@ -1,5 +1,7 @@
 //
 
+import { anais_tailhade } from "@~/app.middleware/set_userinfo#fixture";
+import { crisp } from "@~/crisp.lib/api#mock";
 import { schema } from "@~/moncomptepro.database";
 import { create_pink_diamond_user } from "@~/moncomptepro.database/seed/unicorn";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
@@ -12,7 +14,7 @@ import { ResetMFA } from "./ResetMFA";
 beforeAll(migrate);
 beforeEach(empty_database);
 
-const reset_mfa = ResetMFA({ pg });
+const reset_mfa = ResetMFA({ crisp, pg });
 
 //
 
@@ -23,7 +25,7 @@ test("reset user MFA", async () => {
     .set({ email_verified: true, encrypted_password: "🔑", force_2fa: true })
     .where(eq(schema.users.id, pink_diamond_user_id));
 
-  await reset_mfa(pink_diamond_user_id);
+  await reset_mfa({ moderator: anais_tailhade, user_id: pink_diamond_user_id });
 
   const result = await pg.query.users.findFirst({
     columns: {
@@ -44,5 +46,23 @@ test("reset user MFA", async () => {
     force_2fa: false,
     id: pink_diamond_user_id,
     totp_key_verified_at: null,
+  });
+
+  expect(crisp.create_conversation).toHaveBeenCalledWith({
+    email: "pink.diamond@unicorn.xyz",
+    subject: "[ProConnect] - Réinitialisation de la validation en deux étapes",
+    nickname: "Pink Diamond",
+  });
+  expect(crisp.get_user).toHaveBeenCalledWith({
+    email: "anais.tailhade@omage.gouv.fr",
+  });
+  expect(crisp.send_message).toHaveBeenCalledWith({
+    content: expect.stringContaining(
+      "Nous avons réinitialiser votre mot de passe",
+    ),
+    session_id: "🗨️",
+    user: {
+      nickname: "👩‍🚀",
+    },
   });
 });

@@ -1,15 +1,25 @@
 //
 
+import { z_username } from "@~/app.core/schema/z_username";
+import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
+import type { CrispApiCradle } from "@~/crisp.lib";
 import {
   schema,
   type MonCompteProDatabaseCradle,
 } from "@~/moncomptepro.database";
+import { ResetMFA_Message } from "@~/users.ui/templates";
+import { to as await_to } from "await-to-js";
 import { eq } from "drizzle-orm";
+import { GetUserInfo } from "./GetUserInfo";
 
 //
 
-export function ResetMFA({ pg }: MonCompteProDatabaseCradle) {
-  return async function reset_mfa(user_id: number) {
+export function ResetMFA({
+  crisp,
+  pg,
+}: MonCompteProDatabaseCradle & CrispApiCradle) {
+  type ResetMFA_Input = { moderator: AgentConnect_UserInfo; user_id: number };
+  return async function reset_mfa({ moderator, user_id }: ResetMFA_Input) {
     await pg
       .delete(schema.authenticators)
       .where(eq(schema.authenticators.user_id, user_id));
@@ -24,8 +34,34 @@ export function ResetMFA({ pg }: MonCompteProDatabaseCradle) {
         totp_key_verified_at: null,
       })
       .where(eq(schema.users.id, user_id));
+
+    const get_user = GetUserInfo({ pg });
+    const { email, given_name, family_name } = await get_user(user_id);
+    const nickname = z_username.parse({ given_name, usual_name: family_name });
+    const { session_id } = await crisp.create_conversation({
+      email,
+      subject:
+        "[ProConnect] - Réinitialisation de la validation en deux étapes",
+      nickname,
+    });
+
+    const [, found_user] = await await_to(
+      crisp.get_user({ email: moderator.email }),
+    );
+    const user = found_user ?? {
+      nickname: z_username.parse(moderator),
+      email: moderator.email,
+    };
+
+    await crisp.send_message({
+      content: ResetMFA_Message(),
+      session_id,
+      user,
+    });
   };
 }
+
+//
 
 export type ResetMFAHandler = ReturnType<typeof ResetMFA>;
 
