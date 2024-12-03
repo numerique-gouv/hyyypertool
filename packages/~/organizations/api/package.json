@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "@gouvfr-lasuite/moncomptepro.core": "0.0.3",
+    "@gouvfr-lasuite/moncomptepro.core": "0.1.0",
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.ui": "workspace:*",
