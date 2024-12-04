@@ -1,5 +1,26 @@
 
 
+# [2024.12.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.5...2024.12.0) (2024-12-04)
+
+
+### Bug Fixes
+
+* **users:** auto close conversation after notification ([#687](https://github.com/numerique-gouv/hyyypertool/issues/687)) ([46b75a0](https://github.com/numerique-gouv/hyyypertool/commit/46b75a02b21bf960eca4f1f21f3d327b3cff3530))
+
+
+### Features
+
+* **infra:** update moncomptepro schema ([#683](https://github.com/numerique-gouv/hyyypertool/issues/683)) ([c1dd743](https://github.com/numerique-gouv/hyyypertool/commit/c1dd7436d81ab4b6aeb501cfb61a2d6fefc11518))
+* **organization:** display verificated at date ([#685](https://github.com/numerique-gouv/hyyypertool/issues/685)) ([53e127d](https://github.com/numerique-gouv/hyyypertool/commit/53e127dd5e2f3647acb53c0d1992f572c0be04ee))
+* **users:** send crips message to informe the user ([#686](https://github.com/numerique-gouv/hyyypertool/issues/686)) ([75db022](https://github.com/numerique-gouv/hyyypertool/commit/75db022cd05bf815c1a17eed11d8e14e7d4722b5))
+* **users:** update user page ([#684](https://github.com/numerique-gouv/hyyypertool/issues/684)) ([c6dad3f](https://github.com/numerique-gouv/hyyypertool/commit/c6dad3f9f6cc7e2ac49c9f5acdd25f79e8d0968b))
+
+
+### Reverts
+
+* Revert "chore(database): update dependencies" ([da8449e](https://github.com/numerique-gouv/hyyypertool/commit/da8449e2e85626275a7a30bf7a6c615fbfdbb83b))
+* Revert "chore(lock): update lockfile" ([c1a172d](https://github.com/numerique-gouv/hyyypertool/commit/c1a172de79470b72c5959ce6fa69dbbbc3bad04d))
+
 ## [2024.11.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.4...2024.11.5) (2024-11-27)
 
 
