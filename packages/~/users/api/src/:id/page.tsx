@@ -101,6 +101,17 @@ async function Actions() {
       </button>
       <button
         class={button({ intent: "danger" })}
+        hx-confirm={"Confirmez-vous la réinitialisation du mot de passe ?"}
+        {...await hx_urls.users[":id"].reset.password.$patch({
+          param: { id: id.toString() },
+        })}
+        hx-swap="none"
+      >
+        🔐 réinitialiser le mot de passe
+      </button>
+      <button
+        class={button({ intent: "danger" })}
+        hx-confirm={"Confirmez-vous la réinitialisation de la MFA ?"}
         {...await hx_urls.users[":id"].reset.mfa.$patch({
           param: { id: id.toString() },
         })}
