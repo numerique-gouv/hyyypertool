@@ -1,5 +1,12 @@
 
 
+## [2024.12.3](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.2...2024.12.3) (2024-12-04)
+
+
+### Features
+
+* **users:** reset user password ([#694](https://github.com/numerique-gouv/hyyypertool/issues/694)) ([af7a9b1](https://github.com/numerique-gouv/hyyypertool/commit/af7a9b1801304e0e4c9538586c26f47273d7c08f))
+
 ## [2024.12.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.1...2024.12.2) (2024-12-04)
 
 
