@@ -16,7 +16,8 @@ Fonctionnalité: Page utilisateur
     * je vois la ligne de table "Raphael"
 
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "A propos de Raphael"
+    Alors je vois "👨‍💻 A propos de l'utilisateur"
+    * je vois "« Raphael Dubigny »"
     * je vois "email rdubigny@beta.gouv.fr"
     * je vois "prénomRaphael"
     * je vois "nomDubigny"

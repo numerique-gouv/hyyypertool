@@ -17,7 +17,8 @@ Fonctionnalité: Page organisation
 
   # Scénario: Fiche de DINUM
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "A propos de « DINUM »"
+    Alors je vois "🏛 A propos de l'organisation"
+    * je vois "« DINUM »"
     * je vois "Creation de l'organisation : 13/07/2018 15:35:15"
     * je vois "Dernière mise à jour : 22/06/2023 14:34:34"
     * je vois "Dénomination : DINUM"

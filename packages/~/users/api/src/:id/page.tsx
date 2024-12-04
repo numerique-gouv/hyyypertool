@@ -30,11 +30,18 @@ export default async function User_Page() {
   return (
     <main>
       <div class="bg-[var(--background-alt-blue-france)] py-6">
-        <div class="fr-container py-6">
-          <h1 cla>👨‍💻 A propos de {user.given_name}</h1>
+        <div class="fr-container !py-6">
+          <h1>👨‍💻 A propos de l'utilisateur</h1>
           <div className="grid grid-cols-2 gap-4">
-            <Fiche />
-            <AccountInfo />
+            <div class="fr-card !p-6">
+              <h1 class="text-[--text-action-high-blue-france]">
+                « {user.given_name} {user.family_name} »
+              </h1>
+              <Fiche />
+            </div>
+            <div class="fr-card !p-6">
+              <AccountInfo />
+            </div>
           </div>
         </div>
       </div>

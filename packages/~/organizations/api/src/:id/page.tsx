@@ -27,29 +27,35 @@ export default async function Page() {
   const count = await query_organization_domains_count;
 
   return (
-    <main class="fr-container my-12">
-      <h1>🏛 A propos de « {organization.cached_libelle} » </h1>
+    <main>
+      <div class="bg-[var(--background-alt-blue-france)] py-6">
+        <div class="fr-container py-6">
+          <h1>🏛 A propos de l'organisation</h1>
 
-      <Fiche />
-
-      <h3 id={$domains_describedby}>
-        🌐 {FrNumberConverter.format(count)}{" "}
-        {formattedPlural(count, {
-          one: "domaine",
-          other: "domaines",
-        })}{" "}
-        connu dans l'organisation
-      </h3>
-      <div
-        {...hx_get_domains_query_props}
-        hx-trigger={[
-          "load",
-          ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED]),
-        ]}
-      ></div>
+          <Fiche />
+        </div>
+      </div>
       <hr />
-      <br />
-      <MembersInTheOrganization />
+      <div class="fr-container">
+        <h3 id={$domains_describedby}>
+          🌐 {FrNumberConverter.format(count)}{" "}
+          {formattedPlural(count, {
+            one: "domaine",
+            other: "domaines",
+          })}{" "}
+          connu dans l'organisation
+        </h3>
+        <div
+          {...hx_get_domains_query_props}
+          hx-trigger={[
+            "load",
+            ...hx_trigger_from_body([ORGANISATION_EVENTS.Enum.DOMAIN_UPDATED]),
+          ]}
+        ></div>
+        <hr />
+        <br />
+        <MembersInTheOrganization />
+      </div>
     </main>
   );
 }
