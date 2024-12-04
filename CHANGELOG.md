@@ -1,5 +1,17 @@
 
 
+## [2024.12.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.0...2024.12.1) (2024-12-04)
+
+
+### Bug Fixes
+
+* **organization:** add domain count in the title ([#688](https://github.com/numerique-gouv/hyyypertool/issues/688)) ([29b09d7](https://github.com/numerique-gouv/hyyypertool/commit/29b09d77639a057ffc83f3e1404549865801dff8))
+
+
+### Features
+
+* add card in about pages ([#689](https://github.com/numerique-gouv/hyyypertool/issues/689)) ([8b9f2d5](https://github.com/numerique-gouv/hyyypertool/commit/8b9f2d5850cc2553ca13d76296b669091ff84989))
+
 # [2024.12.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.11.5...2024.12.0) (2024-12-04)
 
 
