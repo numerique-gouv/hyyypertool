@@ -2,6 +2,7 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_include, hx_trigger_from_body } from "@~/app.core/htmx";
+import { FrNumberConverter } from "@~/app.ui/number/index";
 import { formattedPlural } from "@~/app.ui/plurial";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
@@ -12,7 +13,7 @@ import { Fiche } from "./Fiche";
 
 export default async function Page() {
   const {
-    var: { organization },
+    var: { organization, query_organization_domains_count },
   } = usePageRequestContext();
   const $domains_describedby = hyper_ref();
 
@@ -23,13 +24,22 @@ export default async function Page() {
     query: { describedby: $domains_describedby },
   });
 
+  const count = await query_organization_domains_count;
+
   return (
     <main class="fr-container my-12">
       <h1>🏛 A propos de « {organization.cached_libelle} » </h1>
 
       <Fiche />
 
-      <h3 id={$domains_describedby}>🌐 domaine connu dans l'organisation</h3>
+      <h3 id={$domains_describedby}>
+        🌐 {FrNumberConverter.format(count)}{" "}
+        {formattedPlural(count, {
+          one: "domaine",
+          other: "domaines",
+        })}{" "}
+        connu dans l'organisation
+      </h3>
       <div
         {...hx_get_domains_query_props}
         hx-trigger={[
@@ -65,7 +75,7 @@ async function MembersInTheOrganization() {
       <details open={false}>
         <summary>
           <h3 class="inline-block" id={$describedby}>
-            👥 {count}{" "}
+            👥 {FrNumberConverter.format(count)}{" "}
             {formattedPlural(count, {
               one: "membre enregistré",
               other: "membres enregistrés ",
