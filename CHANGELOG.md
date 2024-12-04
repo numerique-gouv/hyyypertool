@@ -1,5 +1,12 @@
 
 
+## [2024.12.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.1...2024.12.2) (2024-12-04)
+
+
+### Features
+
+* **organization:** add verified_by_coop_mediation_numerique ([#693](https://github.com/numerique-gouv/hyyypertool/issues/693)) ([184a4bb](https://github.com/numerique-gouv/hyyypertool/commit/184a4bbe5f792cc09cca250dcf8b5654f959ca37))
+
 ## [2024.12.1](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.0...2024.12.1) (2024-12-04)
 
 
