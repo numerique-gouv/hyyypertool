@@ -73,6 +73,20 @@ export default new Hono<ContextType>()
     },
   )
   .patch(
+    "/reset/password",
+    zValidator("param", Entity_Schema),
+    async function PATCH_RESET({ text, req, var: { moncomptepro_pg } }) {
+      const { id } = req.valid("param");
+      await moncomptepro_pg
+        .update(schema.users)
+        .set({
+          encrypted_password: null,
+        })
+        .where(eq(schema.users.id, id));
+      return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
+    },
+  )
+  .patch(
     "/reset/mfa",
     set_crisp_config(),
     zValidator("param", Entity_Schema),
