@@ -1,0 +1,77 @@
+name: "🧹 Cleanup Old Release Branches"
+
+on:
+  schedule:
+    - cron: "0 0 1 * *" # Once a month
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Activer le mode dry-run (ne supprime pas les branches)"
+        required: false
+        default: "true"
+
+jobs:
+  cleanup-release-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get branches starting with 'release/'
+        id: list_branches
+        run: |
+          git fetch --all --prune
+          branches=$(git for-each-ref --sort=-committerdate refs/remotes/origin/release/* --format='%(refname:short)|%(committerdate:iso)' | grep -v 'HEAD' | sed 's/origin\///')
+          echo "::set-output name=branches::$branches"
+
+      - name: Filter branches older than 6 months
+        id: filter_branches
+        run: |
+          now=$(date +%s)
+          six_months_ago=$(date -d "6 months ago" +%s)
+          filtered=""
+          echo "${{ steps.list_branches.outputs.branches }}" | tr '|' '\n' | while IFS= read -r branch; do
+            branch_name=$(echo $branch | cut -d'|' -f1)
+            branch_date=$(echo $branch | cut -d'|' -f2)
+            branch_timestamp=$(date -d "$branch_date" +%s)
+            if [ $branch_timestamp -lt $six_months_ago ]; then
+              filtered+="$branch_name "
+            fi
+          done
+          echo "::set-output name=old_branches::$filtered"
+
+      - name: Keep only the latest 5 branches
+        id: prune_branches
+        run: |
+          old_branches="${{ steps.filter_branches.outputs.old_branches }}"
+          # Keep the first 5 branches in the list
+          to_delete=$(echo "$old_branches" | tr ' ' '\n' | tail -n +6)
+          echo "::set-output name=to_delete::$to_delete"
+
+      - name: Log branches to delete
+        run: |
+          echo "Branches older than 6 months:"
+          echo "${{ steps.filter_branches.outputs.old_branches }}" | tr ' ' '\n'
+          echo ""
+          echo "Branches to be deleted (excluding the 5 most recent):"
+          echo "${{ steps.prune_branches.outputs.to_delete }}" | tr ' ' '\n'
+
+      - name: Delete branches
+        if: ${{ inputs.dry_run != 'true' && steps.prune_branches.outputs.to_delete != '' }}
+        run: |
+          echo "${{ steps.prune_branches.outputs.to_delete }}" | tr ' ' '\n' | while IFS= read -r branch; do
+            echo "Deleting branch: $branch"
+            git push origin --delete "$branch"
+          done
+
+      - name: Dry run notice
+        if: ${{ inputs.dry_run == 'true' }}
+        run: |
+          echo "Dry run mode enabled. No branches were deleted."
