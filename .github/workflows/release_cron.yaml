@@ -1,4 +1,4 @@
-name: "🧹 Cleanup Old Release Branches"
+name: "🌳 Deforestation: Cleanup Old Release Branches"
 
 on:
   schedule:
@@ -12,10 +12,11 @@ on:
 
 jobs:
   cleanup-release-branches:
+    name: "🌳 Deforestation Job"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
@@ -29,7 +30,8 @@ jobs:
         run: |
           git fetch --all --prune
           branches=$(git for-each-ref --sort=-committerdate refs/remotes/origin/release/* --format='%(refname:short)|%(committerdate:iso)' | grep -v 'HEAD' | sed 's/origin\///')
-          echo "::set-output name=branches::$branches"
+          safe_branches=$(echo "$branches" | tr '\n' ',' | sed 's/,$//')
+          echo "branches=$safe_branches" >> $GITHUB_ENV
 
       - name: Filter branches older than 6 months
         id: filter_branches
@@ -37,41 +39,60 @@ jobs:
           now=$(date +%s)
           six_months_ago=$(date -d "6 months ago" +%s)
           filtered=""
-          echo "${{ steps.list_branches.outputs.branches }}" | tr '|' '\n' | while IFS= read -r branch; do
-            branch_name=$(echo $branch | cut -d'|' -f1)
-            branch_date=$(echo $branch | cut -d'|' -f2)
+          IFS=',' read -r -a branch_array <<< "$branches"
+          for branch in "${branch_array[@]}"; do
+            branch_name=$(echo "$branch" | cut -d'|' -f1)
+            branch_date=$(echo "$branch" | cut -d'|' -f2)
             branch_timestamp=$(date -d "$branch_date" +%s)
             if [ $branch_timestamp -lt $six_months_ago ]; then
-              filtered+="$branch_name "
+              filtered+="$branch_name,"
             fi
           done
-          echo "::set-output name=old_branches::$filtered"
+          filtered=$(echo "$filtered" | sed 's/,$//') # Retirer la dernière virgule
+          echo "old_branches=$filtered" >> $GITHUB_ENV
 
       - name: Keep only the latest 5 branches
         id: prune_branches
         run: |
-          old_branches="${{ steps.filter_branches.outputs.old_branches }}"
-          # Keep the first 5 branches in the list
-          to_delete=$(echo "$old_branches" | tr ' ' '\n' | tail -n +6)
-          echo "::set-output name=to_delete::$to_delete"
+          IFS=',' read -r -a old_branch_array <<< "$old_branches"
+          to_delete=$(echo "${old_branch_array[@]}" | tr ' ' '\n' | tail -n +6 | tr '\n' ',' | sed 's/,$//')
+          echo "to_delete=$to_delete" >> $GITHUB_ENV
 
-      - name: Log branches to delete
+      - name: Annotate results
         run: |
-          echo "Branches older than 6 months:"
-          echo "${{ steps.filter_branches.outputs.old_branches }}" | tr ' ' '\n'
-          echo ""
-          echo "Branches to be deleted (excluding the 5 most recent):"
-          echo "${{ steps.prune_branches.outputs.to_delete }}" | tr ' ' '\n'
+          # Ajouter un titre principal dans le résumé
+          echo "### Deforestation Report 🌳" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Ajouter la liste des branches filtrées (plus anciennes que 6 mois)
+          echo "**Branches older than 6 months (filtered):**" >> $GITHUB_STEP_SUMMARY
+          IFS=',' read -r -a branch_array <<< "$old_branches"
+          for branch in "${branch_array[@]}"; do
+            echo "- $branch" >> $GITHUB_STEP_SUMMARY
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Ajouter la section des branches à supprimer, excluant les 5 plus récentes
+          if [ -z "$to_delete" ]; then
+            echo "**No branches to delete after keeping the 5 most recent.**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Branches to be deleted (excluding the 5 most recent):**" >> $GITHUB_STEP_SUMMARY
+            IFS=',' read -r -a delete_branch_array <<< "$to_delete"
+            for branch in "${delete_branch_array[@]}"; do
+              echo "- $branch" >> $GITHUB_STEP_SUMMARY
+            done
+          fi
 
       - name: Delete branches
-        if: ${{ inputs.dry_run != 'true' && steps.prune_branches.outputs.to_delete != '' }}
+        if: ${{ inputs.dry_run != 'true' && env.to_delete != '' }}
         run: |
-          echo "${{ steps.prune_branches.outputs.to_delete }}" | tr ' ' '\n' | while IFS= read -r branch; do
+          IFS=',' read -r -a delete_branch_array <<< "$to_delete"
+          for branch in "${delete_branch_array[@]}"; do
             echo "Deleting branch: $branch"
-            git push origin --delete "$branch"
+            git push origin --delete "$branch" || exit 1
           done
 
       - name: Dry run notice
         if: ${{ inputs.dry_run == 'true' }}
         run: |
-          echo "Dry run mode enabled. No branches were deleted."
+          echo "::notice::Dry run mode enabled. No branches were deleted."
