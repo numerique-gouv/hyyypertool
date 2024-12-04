@@ -7,6 +7,7 @@ import { Main_Layout } from "@~/app.layout";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";
 import { GetFicheOrganizationById } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
 import { GetOrganizationById } from "@~/organizations.repository";
+import { get_domain_count } from "@~/organizations.repository/get_domain_count";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to as await_to } from "await-to-js";
 import { Hono } from "hono";
@@ -89,12 +90,16 @@ export default new Hono<ContextType>()
       });
       const organization_fiche =
         await get_fiche_organization_by_id(organization_id);
-
+      const query_organization_domains_count = get_domain_count(
+        moncomptepro_pg,
+        { organization_id },
+      );
       return set_context_variables<ContextVariablesType>(() => ({
+        organization_fiche,
+        organization: ctx.var.organization,
+        query_organization_domains_count,
         query_organization_members_count:
           ctx.var.query_organization_members_count,
-        organization: ctx.var.organization,
-        organization_fiche,
       }))(ctx as any, next);
     },
     async function GET({ render }) {

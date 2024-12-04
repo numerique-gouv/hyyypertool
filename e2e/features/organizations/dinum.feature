@@ -27,7 +27,7 @@ Fonctionnalité: Page organisation
     * je vois "Siret : 13002526500013 (Voir la fiche annuaire entreprise de cette organisation)"
 
   # Scénario: domaine connu dans l'organisation DINUM
-    Soit le tableau sous le title "domaine connu dans l'organisation"
+    Soit le tableau sous le title "🌐 3 domaines connu dans l'organisation"
     * je vois la ligne "beta.gouv.fr" dans le tableau
     * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"
