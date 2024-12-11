@@ -207,7 +207,7 @@ async function Row_Actions() {
             })}
             hx-swap="none"
           >
-            🔄 vérif: no verified by coop mediation numerique
+            🔄 vérif: verified by coop mediation numerique
           </button>
         </li>
         <li>
