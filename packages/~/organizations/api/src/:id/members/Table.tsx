@@ -194,27 +194,21 @@ async function Row_Actions() {
           </button>
         </li>
         <li>
-          {verification_type ? (
-            <button
-              class={menu_item()}
-              {...await hx_urls.organizations[":id"].members[":user_id"].$patch(
-                {
-                  param: {
-                    id: organization_id.toString(),
-                    user_id: user_id.toString(),
-                  },
-                  form: {
-                    verification_type: "verified_by_coop_mediation_numerique",
-                  },
-                },
-              )}
-              hx-swap="none"
-            >
-              🔄 vérif: no verified by coop mediation numerique
-            </button>
-          ) : (
-            <></>
-          )}
+          <button
+            class={menu_item()}
+            {...await hx_urls.organizations[":id"].members[":user_id"].$patch({
+              param: {
+                id: organization_id.toString(),
+                user_id: user_id.toString(),
+              },
+              form: {
+                verification_type: "verified_by_coop_mediation_numerique",
+              },
+            })}
+            hx-swap="none"
+          >
+            🔄 vérif: no verified by coop mediation numerique
+          </button>
         </li>
         <li>
           {verification_type ? (
