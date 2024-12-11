@@ -64,7 +64,7 @@
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.7",
     "hono": "4.6.12",
     "tsx": "4.19.2"
   },
