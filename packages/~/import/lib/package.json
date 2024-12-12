@@ -1,0 +1,23 @@
+{
+  "name": "@~/import.lib",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*/index.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.middleware": "workspace:*",
+    "@~/crisp.lib": "workspace:*",
+    "@~/moncomptepro.database": "workspace:*",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

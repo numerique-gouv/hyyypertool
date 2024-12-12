@@ -47,7 +47,8 @@ export const app_env = z.object({
   ALLOWED_USERS: z.string().trim().default(""),
   API_AUTH_PASSWORD: z.string().trim(),
   API_AUTH_URL: z.string().trim().url(),
-  API_AUTH_USERNAME: z.string().trim(),
+  API_COOP_PASSWORD: z.string().trim().default("coop"),
+  API_COOP_USERNAME: z.string().trim().default("coop"),
   COOKIE_ENCRYPTION_KEY: z
     .string()
     .trim()

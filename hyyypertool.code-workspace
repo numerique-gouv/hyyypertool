@@ -29,6 +29,10 @@
       "path": "packages/~/proxy",
     },
     {
+      "name": "📦 import",
+      "path": "packages/~/import",
+    },
+    {
       "name": "🏗️ moncomptepro",
       "path": "packages/~/infra/moncomptepro",
     },
