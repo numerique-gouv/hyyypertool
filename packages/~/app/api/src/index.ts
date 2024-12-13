@@ -9,6 +9,7 @@ import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { set_sentry } from "@~/app.sentry";
 import auth_router from "@~/auth.api";
+import import_router from "@~/import.api";
 import moderations_router from "@~/moderations.api";
 import organizations_router from "@~/organizations.api";
 import proxy_router from "@~/proxy.api";
@@ -44,6 +45,7 @@ const app = new Hono()
   //
 
   .route("/proxy", proxy_router)
+  .route("/import", import_router)
 
   //
 

@@ -18,6 +18,7 @@
     "@~/moderations.api": "workspace:*",
     "@~/organizations.api": "workspace:*",
     "@~/proxy.api": "workspace:*",
+    "@~/import.api": "workspace:*",
     "@~/users.api": "workspace:*",
     "@~/welcome.api": "workspace:*",
     "await-to-js": "3.0.0",
