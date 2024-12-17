@@ -647,8 +647,8 @@ declare const app: import("hono/hono-base").HonoBase<
                                 | "code_sent_to_official_contact_email"
                                 | "in_liste_dirigeants_rna"
                                 | "no_validation_means_available"
-                                | "official_contact_email"
                                 | "official_contact_domain"
+                                | "official_contact_email"
                                 | "trackdechets_email_domain"
                                 | "verified_by_coop_mediation_numerique"
                                 | "verified_email_domain"
@@ -708,8 +708,8 @@ declare const app: import("hono/hono-base").HonoBase<
                         $patch: {
                           input: {
                             param: {
-                              domain: string;
                               id: string;
+                              domain: string;
                             };
                           };
                           output: "OK";
