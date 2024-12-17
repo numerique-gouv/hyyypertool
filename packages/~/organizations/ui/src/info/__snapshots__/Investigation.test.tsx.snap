@@ -1,7 +1,7 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render investigation section 1`] = `
-"<!doctype html>
+"<!DOCTYPE html>
 <section>
   <h4>🕵️ Enquête sur cette organisation</h4>
   <ul class="list-none pl-0">

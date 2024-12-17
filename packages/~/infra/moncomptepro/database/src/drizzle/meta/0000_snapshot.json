@@ -67,12 +67,8 @@
           "tableFrom": "email_domains",
           "tableTo": "organizations",
           "schemaTo": "public",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -80,11 +76,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "unique_organization_domain": {
-          "columns": [
-            "organization_id",
-            "domain",
-            "verification_type"
-          ],
+          "columns": ["organization_id", "domain", "verification_type"],
           "nullsNotDistinct": false,
           "name": "unique_organization_domain"
         }
@@ -198,12 +190,8 @@
           "tableFrom": "authenticators",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -396,12 +384,8 @@
           "tableFrom": "moderations",
           "tableTo": "organizations",
           "schemaTo": "public",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -410,12 +394,8 @@
           "tableFrom": "moderations",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -841,12 +821,8 @@
           "tableFrom": "users_oidc_clients",
           "tableTo": "oidc_clients",
           "schemaTo": "public",
-          "columnsFrom": [
-            "oidc_client_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["oidc_client_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -855,12 +831,8 @@
           "tableFrom": "users_oidc_clients",
           "tableTo": "organizations",
           "schemaTo": "public",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -869,12 +841,8 @@
           "tableFrom": "users_oidc_clients",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -968,12 +936,8 @@
           "tableFrom": "users_organizations",
           "tableTo": "organizations",
           "schemaTo": "public",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "cascade"
         },
@@ -982,12 +946,8 @@
           "tableFrom": "users_organizations",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -995,10 +955,7 @@
       "compositePrimaryKeys": {
         "users_organizations_pkey": {
           "name": "users_organizations_pkey",
-          "columns": [
-            "user_id",
-            "organization_id"
-          ]
+          "columns": ["user_id", "organization_id"]
         }
       },
       "uniqueConstraints": {},
