@@ -152,6 +152,7 @@ function Row({
         <LocalTime date={created_at} />
         {created_at !== updated_at ? (
           <>
+            <br />
             Modifié le <LocalTime date={updated_at} />
           </>
         ) : null}
