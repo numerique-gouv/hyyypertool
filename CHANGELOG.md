@@ -1,3 +1,14 @@
+
+
+## [2024.12.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.4...2024.12.5) (2024-12-17)
+
+
+### Bug Fixes
+
+* **organization:** correct verified_by_coop_mediation_numerique label ([#701](https://github.com/numerique-gouv/hyyypertool/issues/701)) ([0fd162b](https://github.com/numerique-gouv/hyyypertool/commit/0fd162b3d357ac865486a62169da5e3cab628bb4))
+* **organization:** eol after domain creation date ([#707](https://github.com/numerique-gouv/hyyypertool/issues/707)) ([f0d18ff](https://github.com/numerique-gouv/hyyypertool/commit/f0d18ff7547894ed233946dbc2df24305ad751f2))
+* **users:** notify the user of the password reset ([#704](https://github.com/numerique-gouv/hyyypertool/issues/704)) ([df76994](https://github.com/numerique-gouv/hyyypertool/commit/df76994d6fd3166a6d99dfae9e485e7e6482670f))
+
 ## [2024.12.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.3...2024.12.4) (2024-12-11)
 
 ### Bug Fixes
