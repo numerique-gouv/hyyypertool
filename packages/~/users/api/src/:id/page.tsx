@@ -30,11 +30,18 @@ export default async function User_Page() {
   return (
     <main>
       <div class="bg-[var(--background-alt-blue-france)] py-6">
-        <div class="fr-container py-6">
-          <h1 cla>👨‍💻 A propos de {user.given_name}</h1>
+        <div class="fr-container !py-6">
+          <h1>👨‍💻 A propos de l'utilisateur</h1>
           <div className="grid grid-cols-2 gap-4">
-            <Fiche />
-            <AccountInfo />
+            <div class="fr-card !p-6">
+              <h1 class="text-[--text-action-high-blue-france]">
+                « {user.given_name} {user.family_name} »
+              </h1>
+              <Fiche />
+            </div>
+            <div class="fr-card !p-6">
+              <AccountInfo />
+            </div>
           </div>
         </div>
       </div>
@@ -94,6 +101,17 @@ async function Actions() {
       </button>
       <button
         class={button({ intent: "danger" })}
+        hx-confirm={"Confirmez-vous la réinitialisation du mot de passe ?"}
+        {...await hx_urls.users[":id"].reset.password.$patch({
+          param: { id: id.toString() },
+        })}
+        hx-swap="none"
+      >
+        🔐 réinitialiser le mot de passe
+      </button>
+      <button
+        class={button({ intent: "danger" })}
+        hx-confirm={"Confirmez-vous la réinitialisation de la MFA ?"}
         {...await hx_urls.users[":id"].reset.mfa.$patch({
           param: { id: id.toString() },
         })}

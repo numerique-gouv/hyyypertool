@@ -16,7 +16,8 @@ Fonctionnalité: Page utilisateur with moderations
     * je vois la ligne de table "jeanbon@yopmail.com"
 
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "A propos de Jean"
+    Alors je vois "👨‍💻 A propos de l'utilisateur"
+    * je vois "« Jean Bon »"
     * je vois "email jeanbon@yopmail.com"
     * je vois "prénomJean"
     * je vois "nomBon"

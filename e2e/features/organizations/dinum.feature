@@ -17,7 +17,8 @@ Fonctionnalité: Page organisation
 
   # Scénario: Fiche de DINUM
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "A propos de « DINUM »"
+    Alors je vois "🏛 A propos de l'organisation"
+    * je vois "« DINUM »"
     * je vois "Creation de l'organisation : 13/07/2018 15:35:15"
     * je vois "Dernière mise à jour : 22/06/2023 14:34:34"
     * je vois "Dénomination : DINUM"
@@ -27,7 +28,7 @@ Fonctionnalité: Page organisation
     * je vois "Siret : 13002526500013 (Voir la fiche annuaire entreprise de cette organisation)"
 
   # Scénario: domaine connu dans l'organisation DINUM
-    Soit le tableau sous le title "domaine connu dans l'organisation"
+    Soit le tableau sous le title "🌐 3 domaines connu dans l'organisation"
     * je vois la ligne "beta.gouv.fr" dans le tableau
     * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"

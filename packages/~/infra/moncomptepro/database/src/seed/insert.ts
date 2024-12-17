@@ -4,8 +4,11 @@ import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
 import consola from "consola";
 import type { MonComptePro_PgDatabase } from "../index";
 import { schema } from "../index";
+import { insert_bosch_france } from "./organizations/bosch_france";
+import { insert_bosch_rexroth } from "./organizations/bosch_rexroth";
 import { insert_commune_de_pompierre } from "./organizations/commune_de_pompierre";
 import { insert_yes_we_hack } from "./organizations/yes_we_hack";
+import { insert_mariebon } from "./users/mariebon";
 
 //
 
@@ -32,9 +35,7 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
       `🌱 INSERT user ${richard_bon.given_name} ${richard_bon.family_name}`,
     );
     const marie_bon = await insert_mariebon(db);
-    consola.verbose(
-      `🌱 INSERT user ${marie_bon.given_name} ${marie_bon.family_name}`,
-    );
+    consola.verbose(`🌱 INSERT user (id: ${marie_bon})`);
 
     //
 
@@ -47,13 +48,10 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     const dengi = await insert_dengi(db);
     consola.verbose(`🌱 INSERT organization ${dengi.cached_nom_complet}`);
     const bosch_france = await insert_bosch_france(db);
-    consola.verbose(
-      `🌱 INSERT organization ${bosch_france.cached_nom_complet}`,
-    );
+    consola.verbose(`🌱 INSERT organization (id: ${bosch_france})`);
     const bosch_rexroth = await insert_bosch_rexroth(db);
-    consola.verbose(
-      `🌱 INSERT organization ${bosch_rexroth.cached_nom_complet}`,
-    );
+    consola.verbose(`🌱 INSERT organization (id: ${bosch_rexroth})`);
+
     const sak = await insert_sak(db);
     consola.verbose(`🌱 INSERT organization ${sak.cached_nom_complet}`);
     const yes_we_hack = await insert_yes_we_hack(db);
@@ -74,12 +72,10 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     );
 
     await insert_users_organizations(db, {
-      organization_id: bosch_rexroth.id,
-      user_id: marie_bon.id,
+      organization_id: bosch_rexroth,
+      user_id: marie_bon,
     });
-    consola.verbose(
-      `🌱 INSERT ${marie_bon.given_name} join ${bosch_rexroth.cached_libelle}`,
-    );
+    consola.verbose(`🌱 INSERT ${marie_bon} join ${bosch_rexroth}`);
 
     //
 
@@ -136,25 +132,25 @@ export async function insert_database(db: MonComptePro_PgDatabase) {
     );
 
     await insert_moderation(db, {
-      organization_id: bosch_france.id,
+      organization_id: bosch_france,
       type: "non_verified_domain" as MCP_Moderation["type"],
-      user_id: marie_bon.id,
+      user_id: marie_bon,
       ticket_id: "session_654",
     });
     consola.verbose(
-      `🌱 INSERT ${marie_bon.given_name} wants to join ${bosch_france.cached_nom_complet} again...`,
+      `🌱 INSERT ${marie_bon} wants to join ${bosch_france} again...`,
     );
 
     await insert_moderation(db, {
       created_at: new Date("2011-11-12 11:11:12").toISOString(),
-      organization_id: bosch_rexroth.id,
+      organization_id: bosch_rexroth,
       type: "non_verified_domain" as MCP_Moderation["type"],
-      user_id: marie_bon.id,
+      user_id: marie_bon,
       moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
       ticket_id: "session_987",
     });
     consola.verbose(
-      `🌱 INSERT ${marie_bon.given_name} wants to join ${bosch_rexroth.cached_nom_complet} again...`,
+      `🌱 INSERT ${marie_bon} wants to join ${bosch_rexroth} again...`,
     );
     await insert_moderation(db, {
       organization_id: dinum.id,
@@ -245,26 +241,6 @@ async function insert_richardbon(db: MonComptePro_PgDatabase) {
 
   return insert.at(0)!;
 }
-
-async function insert_mariebon(db: MonComptePro_PgDatabase) {
-  const insert = await db
-    .insert(schema.users)
-    .values({
-      created_at: new Date("2014-02-13T17:25:09.000Z").toISOString(),
-      email_verified: true,
-      email: "marie.bon@fr.bosch.com",
-      family_name: "Bon",
-      given_name: "Marie",
-      job: "Gestionnaire données sociales",
-      last_sign_in_at: new Date("2024-02-15T12:48:00.106Z").toISOString(),
-      sign_in_count: 3,
-      updated_at: new Date("2014-02-15T13:48:00.000Z").toISOString(),
-    })
-    .returning();
-
-  return insert.at(0)!;
-}
-
 async function insert_raphael(db: MonComptePro_PgDatabase) {
   const insert = await db
     .insert(schema.users)
@@ -458,58 +434,6 @@ async function insert_dengi(db: MonComptePro_PgDatabase) {
   const organization = insert.at(0)!;
   await db.insert(schema.email_domains).values({
     domain: "scapartois.fr",
-    organization_id: organization.id,
-    verification_type: "verified",
-  });
-  return organization;
-}
-
-async function insert_bosch_france(db: MonComptePro_PgDatabase) {
-  const insert = await db
-    .insert(schema.organizations)
-    .values({
-      cached_activite_principale: "29.32Z",
-      cached_categorie_juridique: "SAS, société par actions simplifiée",
-      cached_code_officiel_geographique: "93070",
-      cached_est_active: true,
-      cached_etat_administratif: "A",
-      cached_libelle_activite_principale:
-        "29.32Z - Fabrication d'autres équipements automobiles",
-      cached_libelle_tranche_effectif: "500 à 999 salariés, en 2021",
-      cached_libelle: "Robert bosch france",
-      cached_nom_complet: "Robert bosch france",
-      cached_tranche_effectifs: "41",
-      created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
-      siret: "57206768400017",
-      updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
-    })
-    .returning();
-  return insert.at(0)!;
-}
-
-async function insert_bosch_rexroth(db: MonComptePro_PgDatabase) {
-  const insert = await db
-    .insert(schema.organizations)
-    .values({
-      cached_activite_principale: "28.12Z",
-      cached_categorie_juridique: "SAS, société par actions simplifiée",
-      cached_code_officiel_geographique: "69259",
-      cached_est_active: true,
-      cached_etat_administratif: "A",
-      cached_libelle_activite_principale:
-        "29.12Z - Fabrication d'autres équipements automobiles",
-      cached_libelle_tranche_effectif: "250 à 499 salariés, en 2021",
-      cached_libelle: "Bosch rexroth d.s.i.",
-      cached_nom_complet: "Bosch rexroth d.s.i.",
-      cached_tranche_effectifs: "41",
-      created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
-      siret: "44023386400014 ",
-      updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
-    })
-    .returning();
-  const organization = insert.at(0)!;
-  await db.insert(schema.email_domains).values({
-    domain: "fr.bosch.com",
     organization_id: organization.id,
     verification_type: "verified",
   });

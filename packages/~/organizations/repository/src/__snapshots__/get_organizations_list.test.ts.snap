@@ -1,0 +1,112 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns no organizations 1`] = `
+{
+  "count": 0,
+  "organizations": [],
+}
+`;
+
+exports[`returns 1 organization 1`] = `
+{
+  "count": 1,
+  "organizations": [
+    {
+      "cached_code_officiel_geographique": null,
+      "cached_libelle": "🦄 libelle",
+      "created_at": "1970-01-01 00:00:00+00",
+      "email_domains": [
+        {
+          "domain": "unicorn.xyz",
+        },
+      ],
+      "id": 1,
+      "siret": "🦄 siret",
+    },
+  ],
+}
+`;
+
+exports[`returns 3 organizations 1`] = `
+{
+  "count": 3,
+  "organizations": [
+    {
+      "cached_code_officiel_geographique": null,
+      "cached_libelle": "🌵 libelle",
+      "created_at": "1970-01-01 00:00:00+00",
+      "email_domains": [
+        {
+          "domain": "cactus.corn",
+        },
+      ],
+      "id": 1,
+      "siret": "🌵 siret",
+    },
+    {
+      "cached_code_officiel_geographique": null,
+      "cached_libelle": "🦄 libelle",
+      "created_at": "1970-01-01 00:00:00+00",
+      "email_domains": [
+        {
+          "domain": "unicorn.xyz",
+        },
+      ],
+      "id": 2,
+      "siret": "🦄 siret",
+    },
+    {
+      "cached_code_officiel_geographique": null,
+      "cached_libelle": "🧟‍♂️ libelle",
+      "created_at": "1970-01-01 00:00:00+00",
+      "email_domains": [
+        {
+          "domain": "zombie.corn",
+        },
+      ],
+      "id": 3,
+      "siret": "🧟‍♂️ siret",
+    },
+  ],
+}
+`;
+
+exports[`search 🦄 libelle 1`] = `
+{
+  "count": 1,
+  "organizations": [
+    {
+      "cached_code_officiel_geographique": null,
+      "cached_libelle": "🦄 libelle",
+      "created_at": "1970-01-01 00:00:00+00",
+      "email_domains": [
+        {
+          "domain": "unicorn.xyz",
+        },
+      ],
+      "id": 2,
+      "siret": "🦄 siret",
+    },
+  ],
+}
+`;
+
+exports[`search 🦄 siret 1`] = `
+{
+  "count": 1,
+  "organizations": [
+    {
+      "cached_code_officiel_geographique": null,
+      "cached_libelle": "🦄 libelle",
+      "created_at": "1970-01-01 00:00:00+00",
+      "email_domains": [
+        {
+          "domain": "unicorn.xyz",
+        },
+      ],
+      "id": 2,
+      "siret": "🦄 siret",
+    },
+  ],
+}
+`;

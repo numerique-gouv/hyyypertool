@@ -7,31 +7,29 @@ import {
   schema,
   type MonCompteProDatabaseCradle,
 } from "@~/moncomptepro.database";
-import { ResetMFA_Message } from "@~/users.ui/templates";
+import { ResetPassword_Message } from "@~/users.ui/templates";
 import { to as await_to } from "await-to-js";
 import { eq } from "drizzle-orm";
 import { GetUserInfo } from "./GetUserInfo";
 
 //
 
-export function ResetMFA({
+export function ResetPassword({
   crisp,
   pg,
 }: MonCompteProDatabaseCradle & CrispApiCradle) {
-  type ResetMFA_Input = { moderator: AgentConnect_UserInfo; user_id: number };
-  return async function reset_mfa({ moderator, user_id }: ResetMFA_Input) {
-    await pg
-      .delete(schema.authenticators)
-      .where(eq(schema.authenticators.user_id, user_id));
-
+  type ResetPassword_Input = {
+    moderator: AgentConnect_UserInfo;
+    user_id: number;
+  };
+  return async function reset_password({
+    moderator,
+    user_id,
+  }: ResetPassword_Input) {
     await pg
       .update(schema.users)
       .set({
-        email_verified: false,
         encrypted_password: null,
-        encrypted_totp_key: null,
-        force_2fa: false,
-        totp_key_verified_at: null,
       })
       .where(eq(schema.users.id, user_id));
 
@@ -41,7 +39,7 @@ export function ResetMFA({
     const { session_id } = await crisp.create_conversation({
       email,
       subject:
-        "[ProConnect] - Réinitialisation de la validation en deux étapes",
+        "[ProConnect] - Instructions pour la réinitialisation du mot de passe",
       nickname,
     });
 
@@ -54,7 +52,7 @@ export function ResetMFA({
     };
 
     await crisp.send_message({
-      content: ResetMFA_Message(),
+      content: ResetPassword_Message(),
       session_id,
       user,
     });
@@ -67,4 +65,4 @@ export function ResetMFA({
 
 //
 
-export type ResetMFAHandler = ReturnType<typeof ResetMFA>;
+export type ResetPasswordHandler = ReturnType<typeof ResetPassword>;

@@ -375,6 +375,19 @@ declare const app: import("hono/hono-base").HonoBase<
                   };
                 };
               } & {
+                "/reset/password": {
+                  $patch: {
+                    input: {
+                      param: {
+                        id: string;
+                      };
+                    };
+                    output: "OK";
+                    outputFormat: "text";
+                    status: 200;
+                  };
+                };
+              } & {
                 "/reset/mfa": {
                   $patch: {
                     input: {
@@ -637,6 +650,7 @@ declare const app: import("hono/hono-base").HonoBase<
                                 | "official_contact_domain"
                                 | "official_contact_email"
                                 | "trackdechets_email_domain"
+                                | "verified_by_coop_mediation_numerique"
                                 | "verified_email_domain"
                                 | undefined;
                               is_external?: string | undefined;
@@ -715,10 +729,10 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
+                id?: string | undefined;
                 page?: string | undefined;
                 page_size?: string | undefined;
                 q?: string | undefined;
-                id?: string | undefined;
               };
             };
             output: {};

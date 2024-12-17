@@ -7,32 +7,32 @@ import { create_pink_diamond_user } from "@~/moncomptepro.database/seed/unicorn"
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { eq } from "drizzle-orm";
-import { ResetMFA } from "./ResetMFA";
+import { ResetPassword } from "./ResetPassword";
 
 //
 
 beforeAll(migrate);
 beforeEach(empty_database);
 
-const reset_mfa = ResetMFA({ crisp, pg });
+const reset_password = ResetPassword({ crisp, pg });
 
 //
 
-test("reset user MFA", async () => {
+test("reset user password", async () => {
   const pink_diamond_user_id = await create_pink_diamond_user(pg);
   await pg
     .update(schema.users)
     .set({ email_verified: true, encrypted_password: "🔑", force_2fa: true })
     .where(eq(schema.users.id, pink_diamond_user_id));
 
-  await reset_mfa({ moderator: anais_tailhade, user_id: pink_diamond_user_id });
+  await reset_password({
+    moderator: anais_tailhade,
+    user_id: pink_diamond_user_id,
+  });
 
   const result = await pg.query.users.findFirst({
     columns: {
       email_verified: true,
-      encrypted_password: true,
-      encrypted_totp_key: true,
-      force_2fa: true,
       id: true,
       totp_key_verified_at: true,
     },
@@ -40,17 +40,15 @@ test("reset user MFA", async () => {
   });
 
   expect(result).toEqual({
-    email_verified: false,
-    encrypted_password: null,
-    encrypted_totp_key: null,
-    force_2fa: false,
+    email_verified: true,
     id: pink_diamond_user_id,
     totp_key_verified_at: null,
   });
 
   expect(crisp.create_conversation).toHaveBeenCalledWith({
     email: "pink.diamond@unicorn.xyz",
-    subject: "[ProConnect] - Réinitialisation de la validation en deux étapes",
+    subject:
+      "[ProConnect] - Instructions pour la réinitialisation du mot de passe",
     nickname: "Pink Diamond",
   });
   expect(crisp.get_user).toHaveBeenCalledWith({
@@ -58,7 +56,7 @@ test("reset user MFA", async () => {
   });
   expect(crisp.send_message).toHaveBeenCalledWith({
     content: expect.stringContaining(
-      "Nous avons réinitialiser votre mot de passe et vos clé d'accès.",
+      "Nous avons réinitialiser votre mot de passe",
     ),
     session_id: "🗨️",
     user: {
