@@ -16,3 +16,15 @@ export function ResetMFA_Message() {
     L'équipe ProConnect.
   `;
 }
+
+export function ResetPassword_Message() {
+  return dedent`
+    Bonjour,
+
+    Nous avons réinitialiser votre mot de passe.
+    Vous serez obligé de définir un nouveau mot de passe ou de vous connecter avec un lien magique à la prochaine connexion.
+
+    Excellente journée,
+    L'équipe ProConnect.
+  `;
+}

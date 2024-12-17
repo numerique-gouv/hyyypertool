@@ -8,7 +8,7 @@ import { urls } from "@~/app.urls";
 import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { schema } from "@~/moncomptepro.database";
-import { ResetMFA } from "@~/users.lib/usecase";
+import { ResetMFA, ResetPassword } from "@~/users.lib/usecase";
 import { get_user_by_id } from "@~/users.repository/get_user_by_id";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -74,15 +74,21 @@ export default new Hono<ContextType>()
   )
   .patch(
     "/reset/password",
+    set_crisp_config(),
     zValidator("param", Entity_Schema),
-    async function PATCH_RESET({ text, req, var: { moncomptepro_pg } }) {
-      const { id } = req.valid("param");
-      await moncomptepro_pg
-        .update(schema.users)
-        .set({
-          encrypted_password: null,
-        })
-        .where(eq(schema.users.id, id));
+    async function PATCH_RESET({
+      text,
+      req,
+      var: { crisp_config, moncomptepro_pg, userinfo },
+    }) {
+      const { id: user_id } = req.valid("param");
+
+      const reset_password = ResetPassword({
+        crisp: CrispApi(crisp_config),
+        pg: moncomptepro_pg,
+      });
+      await reset_password({ moderator: userinfo, user_id });
+
       return text("OK", 200, { "HX-Refresh": "true" } as Htmx_Header);
     },
   )
