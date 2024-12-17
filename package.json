@@ -60,7 +60,7 @@
     "tailwindPreserveWhitespace": true
   },
   "dependencies": {
-    "@gouvfr/dsfr": "1.12.1",
+    "@gouvfr/dsfr": "1.13.0",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.2.3",
@@ -76,9 +76,9 @@
     "bun-types": "1.1.38",
     "prettier": "3.4.2",
     "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-tailwindcss": "0.6.8",
+    "prettier-plugin-tailwindcss": "0.6.9",
     "release-it": "17.10.0",
-    "tailwindcss": "3.4.15",
+    "tailwindcss": "3.4.16",
     "typescript": "5.7.2"
   },
   "overrides": {
