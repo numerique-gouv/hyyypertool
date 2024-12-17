@@ -23,7 +23,7 @@ export default new Hono().get(
   async function GET({ render, req }) {
     const { id } = req.valid("param");
     const { organization_id, user_id } = req.valid("query");
-    
+
     return render(
       <Duplicate_Warning
         moderation_id={id}
