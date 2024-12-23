@@ -56,7 +56,7 @@ test("reset user password", async () => {
   });
   expect(crisp.send_message).toHaveBeenCalledWith({
     content: expect.stringContaining(
-      "Nous avons réinitialiser votre mot de passe",
+      "Nous avons réinitialisé votre mot de passe",
     ),
     session_id: "🗨️",
     user: {

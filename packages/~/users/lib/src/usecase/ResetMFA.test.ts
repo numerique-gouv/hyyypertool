@@ -58,7 +58,7 @@ test("reset user MFA", async () => {
   });
   expect(crisp.send_message).toHaveBeenCalledWith({
     content: expect.stringContaining(
-      "Nous avons réinitialiser votre mot de passe et vos clé d'accès.",
+      "Nous avons réinitialisé votre mot de passe et vos clés d'accès.",
     ),
     session_id: "🗨️",
     user: {
