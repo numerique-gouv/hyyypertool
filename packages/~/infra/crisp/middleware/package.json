@@ -17,6 +17,6 @@
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
     "@~/crisp.lib": "workspace:*",
-    "bun-types": "1.1.38"
+    "bun-types": "1.1.42"
   }
 }
