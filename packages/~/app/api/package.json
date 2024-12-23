@@ -21,7 +21,7 @@
     "@~/users.api": "workspace:*",
     "@~/welcome.api": "workspace:*",
     "await-to-js": "3.0.0",
-    "consola": "3.2.3",
+    "consola": "3.3.0",
     "drizzle-orm": "0.36.4",
     "hono": "4.6.14",
     "htmx.ext...chunked-transfer": "1.0.4",

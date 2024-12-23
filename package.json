@@ -63,7 +63,7 @@
     "@gouvfr/dsfr": "1.13.0",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
-    "consola": "3.2.3",
+    "consola": "3.3.0",
     "dotenv": "16.4.7",
     "hono": "4.6.14",
     "tsx": "4.19.2"
@@ -73,12 +73,12 @@
     "@release-it/conventional-changelog": "9.0.3",
     "@tsconfig/bun": "1.0.7",
     "@~/config.tailwindcss": "workspace:*",
-    "bun-types": "1.1.38",
+    "bun-types": "1.1.42",
     "prettier": "3.4.2",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-tailwindcss": "0.6.9",
     "release-it": "17.10.0",
-    "tailwindcss": "3.4.16",
+    "tailwindcss": "3.4.17",
     "typescript": "5.7.2"
   },
   "overrides": {
