@@ -17,7 +17,7 @@
     "animate.css": "4.1.1",
     "hono": "4.6.14",
     "lit": "3.2.1",
-    "openid-client": "5.7.0"
+    "openid-client": "6.1.7"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
