@@ -14,7 +14,7 @@
   "dependencies": {
     "@numerique-gouv/crisp": "https://github.com/douglasduteil/crisp/releases/download/v1.6.1/douglasduteil-crisp-1.6.1.tgz",
     "@~/app.core": "workspace:*",
-    "consola": "3.3.0",
+    "consola": "3.3.3",
     "zod": "3.23.8"
   },
   "devDependencies": {
