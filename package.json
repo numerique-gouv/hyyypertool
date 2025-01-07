@@ -82,7 +82,7 @@
     "typescript": "5.7.2"
   },
   "overrides": {
-    "hono": "4.6.14"
+    "hono": "4.6.16"
   },
   "release-it": {
     "git": {
