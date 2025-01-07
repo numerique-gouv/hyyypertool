@@ -17,7 +17,7 @@
   "dependencies": {
     "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#f26af544c636f071bf6efc4343bfe4f9e98fddb5",
     "@~/app.core": "workspace:*",
-    "consola": "3.3.0",
+    "consola": "3.3.3",
     "zod": "3.23.8"
   },
   "devDependencies": {
