@@ -73,7 +73,7 @@
     "@release-it/conventional-changelog": "9.0.4",
     "@tsconfig/bun": "1.0.7",
     "@~/config.tailwindcss": "workspace:*",
-    "bun-types": "1.1.42",
+    "bun-types": "1.1.43",
     "prettier": "3.4.2",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-tailwindcss": "0.6.9",
