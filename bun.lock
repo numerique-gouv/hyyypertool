@@ -173,7 +173,7 @@
       "name": "@~/config.happydom",
       "version": "0.0.0",
       "dependencies": {
-        "@happy-dom/global-registrator": "16.3.0",
+        "@happy-dom/global-registrator": "16.6.0",
       },
     },
     "packages/~/config/tailwindcss": {
@@ -633,7 +633,7 @@
 
     "@gouvfr/dsfr": ["@gouvfr/dsfr@1.13.0", "", {}, "sha512-I6JLYfE63dogk5qOx69gMfW/bKsm+daFgfx2QX75isbKBy5khlJdVxOD0A6ohvywvUJlEcZTmVK8rNHeVvGmgw=="],
 
-    "@happy-dom/global-registrator": ["@happy-dom/global-registrator@16.3.0", "", { "dependencies": { "happy-dom": "^16.3.0" } }, "sha512-IbWtlmwmnGePbMTP3MCQYZ5S/fps6xH3uF/1RKOmCPrWN1dAt4fdA3AtmJ2eHHXZVjXc5qDm2uEr6Mp+Y/PCNg=="],
+    "@happy-dom/global-registrator": ["@happy-dom/global-registrator@16.6.0", "", { "dependencies": { "happy-dom": "^16.6.0" } }, "sha512-AfiL61jiNas3GKn6kSYUvEAxE+ZQWQcgJjTq6Cku/gEfHm4GFJT/rbM+Vp8DiscO8VAlQkc3pTsluJkTOIe2fg=="],
 
     "@hexagon/base64": ["@hexagon/base64@1.1.28", "", {}, "sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw=="],
 
@@ -969,7 +969,7 @@
 
     "@~/auth.api": ["@~/auth.api@workspace:packages/~/auth/api", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "hono": "4.6.16", "openid-client": "5.7.0", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
 
-    "@~/config.happydom": ["@~/config.happydom@workspace:packages/~/config/happydom", { "dependencies": { "@happy-dom/global-registrator": "16.3.0" } }],
+    "@~/config.happydom": ["@~/config.happydom@workspace:packages/~/config/happydom", { "dependencies": { "@happy-dom/global-registrator": "16.6.0" } }],
 
     "@~/config.tailwindcss": ["@~/config.tailwindcss@workspace:packages/~/config/tailwindcss", { "dependencies": { "@tailwindcss/typography": "0.5.15", "autoprefixer": "10.4.20", "tailwind-variants": "0.2.1", "tailwindcss": "3.4.17" } }],
 
@@ -1463,7 +1463,7 @@
 
     "handlebars": ["handlebars@4.7.8", "", { "dependencies": { "minimist": "^1.2.5", "neo-async": "^2.6.2", "source-map": "^0.6.1", "wordwrap": "^1.0.0" }, "optionalDependencies": { "uglify-js": "^3.1.4" }, "bin": { "handlebars": "bin/handlebars" } }, "sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ=="],
 
-    "happy-dom": ["happy-dom@16.3.0", "", { "dependencies": { "webidl-conversions": "^7.0.0", "whatwg-mimetype": "^3.0.0" } }, "sha512-Q71RaIhyS21vhW17Tpa5W36yqQXIlE1TZ0A0Gguts8PShUSQE/7fBgxYGxgm3+5y0gF6afdlAVHLQqgrIcfRzg=="],
+    "happy-dom": ["happy-dom@16.6.0", "", { "dependencies": { "webidl-conversions": "^7.0.0", "whatwg-mimetype": "^3.0.0" } }, "sha512-Zz5S9sog8a3p8XYZbO+eI1QMOAvCNnIoyrH8A8MLX+X2mJrzADTy+kdETmc4q+uD9AGAvQYGn96qBAn2RAciKw=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 
