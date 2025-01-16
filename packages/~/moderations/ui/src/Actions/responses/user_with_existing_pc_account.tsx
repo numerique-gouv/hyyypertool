@@ -4,8 +4,7 @@ import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
 import { context } from "../context";
 
-export const label =
-  "Enseignant : e-mail académique —> Min Edu Nat et Jeunesse";
+export const label = "Utilisateur possédant déjà un compte ProConnect";
 
 export default function template() {
   const {
