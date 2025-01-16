@@ -1,0 +1,17 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns Association with staff but no domain name: Ordinary person 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Après consultation de la Déclaration de la liste des personnes chargées de l&#39;administration de l’association : « 🦄 », nous constatons que votre nom n&#39;y figure pas.
+
+Nous ne pouvons donc pas valider votre création de compte ProConnect.
+Afin de donner suite à cette demande, pourriez-vous nous transmettre un justificatif permettant d’attester votre rôle (ex : président, trésorier, secrétaire etc.) au sein du bureau de cette association ?
+Si non, veuillez confier l’action que souhaitez réaliser à l’une des personnes chargées de l&#39;administration de l’association.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
