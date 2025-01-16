@@ -27,6 +27,7 @@ import * as occupation_incorrectly_entered_not_blocking from "./occupation_incor
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
 import * as teacher_academic_email from "./teacher_academic_email";
+import * as university_email_cnrs from "./university_email_cnrs";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
 import * as user_with_existing_pc_account from "./user_with_existing_pc_account";
@@ -63,5 +64,6 @@ export const reponse_templates = [
   refusal_france_travail,
   min_armees_terre_marine_musee,
   gendarmerie_agent,
+  university_email_cnrs,
   user_with_existing_pc_account,
 ];
