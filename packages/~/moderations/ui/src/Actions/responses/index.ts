@@ -21,6 +21,7 @@ import * as min_armees_pec from "./min_armees_pec";
 import * as min_armees_terre_marine_musee from "./min_armees_terre_marine_musee";
 import * as missing_name from "./missing_name";
 import * as mobilic from "./mobilic";
+import * as more_precise_existing_establishement_cnrs from "./more_precise_existing_establishement_cnrs";
 import * as name_incorrectly_entered from "./name_incorrectly_entered";
 import * as non_teaching_agent from "./non_teaching_agent";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
@@ -68,4 +69,5 @@ export const reponse_templates = [
   university_email_cnrs,
   user_with_existing_pc_account,
   existing_domain_name,
+  more_precise_existing_establishement_cnrs,
 ];
