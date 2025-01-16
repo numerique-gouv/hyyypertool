@@ -3,6 +3,7 @@
 import * as accountant from "./accountant";
 import * as admin_centrale from "./admin_centrale";
 import * as already_signed from "./already_signed";
+import * as association_with_staff_but_no_domain_name from "./association_with_staff_but_no_domain_name";
 import * as chorus_pro_error from "./chorus_pro_error";
 import * as contractors from "./contractors";
 import * as deprecated_conseiller_numerique_email from "./deprecated_conseiller_numerique_email";
@@ -70,4 +71,5 @@ export const reponse_templates = [
   user_with_existing_pc_account,
   existing_domain_name,
   more_precise_existing_establishement_cnrs,
+  association_with_staff_but_no_domain_name,
 ];
