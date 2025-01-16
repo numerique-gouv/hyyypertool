@@ -7,6 +7,7 @@ import * as chorus_pro_error from "./chorus_pro_error";
 import * as contractors from "./contractors";
 import * as deprecated_conseiller_numerique_email from "./deprecated_conseiller_numerique_email";
 import * as enseignement_agricole from "./enseignement_agricole";
+import * as existing_domain_name from "./existing_domain_name";
 import * as first_and_last_name_inversion from "./first_and_last_name_inversion";
 import * as first_last_name from "./first_last_name";
 import * as gendarmerie_agent from "./gendarmerie_agent";
@@ -67,5 +68,6 @@ export const reponse_templates = [
   gendarmerie_agent,
   university_email_cnrs,
   user_with_existing_pc_account,
+  existing_domain_name,
   more_precise_existing_establishement_cnrs,
 ];
