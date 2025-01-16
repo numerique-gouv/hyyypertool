@@ -29,7 +29,7 @@ import * as refusal_france_travail from "./refusal_france_travail";
 import * as teacher_academic_email from "./teacher_academic_email";
 import * as use_official_email from "./use_official_email";
 import * as use_pro_email from "./use_pro_email";
-import * as user_with_existing_pc_account from "./user_with_existing_pc_account.test";
+import * as user_with_existing_pc_account from "./user_with_existing_pc_account";
 
 //
 
