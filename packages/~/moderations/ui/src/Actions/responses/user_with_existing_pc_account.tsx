@@ -16,7 +16,6 @@ export default function template() {
     },
   } = useContext(context);
 
-  console.log();
 
   return dedent`
     Bonjour,
