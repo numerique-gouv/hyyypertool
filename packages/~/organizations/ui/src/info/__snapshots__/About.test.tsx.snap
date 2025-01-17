@@ -8,8 +8,8 @@ exports[`render about section 1`] = `
       <b
         ><time
           datetime="2011-11-22T14:34:34.000Z"
-          title="Tue Nov 22 2011 14:34:34 GMT+0000 (Coordinated Universal Time)"
-          >22/11/2011 14:34:34
+          title="Tue Nov 22 2011 15:34:34 GMT+0100 (Central European Standard Time)"
+          >22/11/2011 15:34:34
         </time></b
       >
     </li>
@@ -80,8 +80,8 @@ exports[`render about section 1`] = `
         <b
           ><time
             datetime="2011-11-15T13:48:00.000Z"
-            title="Tue Nov 15 2011 13:48:00 GMT+0000 (Coordinated Universal Time)"
-            >15/11/2011 13:48:00
+            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
+            >15/11/2011 14:48:00
           </time></b
         >
       </li>

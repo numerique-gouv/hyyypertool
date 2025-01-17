@@ -6,7 +6,6 @@ import { LocalTime } from "./LocalTime";
 //
 
 test("LocalTime > 1970", () => {
-  process.env.TZ = "Europe/Paris";
   expect((<LocalTime date={new Date(0)} />).toString()).toBe(
     (
       <time
