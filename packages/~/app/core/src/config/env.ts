@@ -75,6 +75,7 @@ export const app_env = z.object({
     .default("development"),
   PORT: z.coerce.number().default(3000),
   SENTRY_DNS: z.string().trim().url().optional(),
+  TZ: z.string().trim().optional(),
   VERSION: z.string().default(
     match(
       DEPLOY_ENV_SHEMA.optional().parse(env["DEPLOY_ENV"], {
