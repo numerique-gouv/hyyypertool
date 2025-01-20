@@ -1,5 +1,7 @@
 # Changelog
 
+## [2025.1.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.0...2025.1.1) (2025-01-20)
+
 # [2025.1.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.5...2025.1.0) (2025-01-20)
 
 
