@@ -41,9 +41,9 @@ export default new Hono<App_Context>().get(
                   href="https://www.proconnect.gouv.fr/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+                  title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
                 >
-                  Qu’est-ce que AgentConnect ?
+                  Qu’est-ce que ProConnect ?
                 </a>
               </p>
             </div>
