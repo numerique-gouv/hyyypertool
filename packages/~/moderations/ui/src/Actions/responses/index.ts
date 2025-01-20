@@ -30,11 +30,12 @@ import * as non_teaching_agent from "./non_teaching_agent";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as presta_email_admin_public from "./presta_email_admin_public";
+import * as presta_email_orga_public_beta_gouv from "./presta_email_orga_public_beta_gouv";
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
-import * as student_school_training_establishment from "./student_school_training_establishment";
-import * as student_host_organisation from "./student_host_organisation";
 import * as seconded_agent_min_interior from "./seconded_agent_min_interior";
+import * as student_host_organisation from "./student_host_organisation";
+import * as student_school_training_establishment from "./student_school_training_establishment";
 import * as teacher_academic_email from "./teacher_academic_email";
 import * as university_email_cnrs from "./university_email_cnrs";
 import * as use_official_email from "./use_official_email";
@@ -84,4 +85,5 @@ export const reponse_templates = [
   student_school_training_establishment,
   student_host_organisation,
   seconded_agent_min_interior,
+  presta_email_orga_public_beta_gouv,
 ];
