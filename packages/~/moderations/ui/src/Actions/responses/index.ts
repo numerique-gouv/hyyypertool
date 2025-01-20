@@ -33,6 +33,7 @@ import * as presta_email_admin_public from "./presta_email_admin_public";
 import * as presta_email_orga_public_beta_gouv from "./presta_email_orga_public_beta_gouv";
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
+import * as reservist_or_other_email_perso from "./reservist_or_other_email_perso";
 import * as seconded_agent_min_interior from "./seconded_agent_min_interior";
 import * as student_host_organisation from "./student_host_organisation";
 import * as student_school_training_establishment from "./student_school_training_establishment";
@@ -86,4 +87,5 @@ export const reponse_templates = [
   student_host_organisation,
   seconded_agent_min_interior,
   presta_email_orga_public_beta_gouv,
+  reservist_or_other_email_perso,
 ];

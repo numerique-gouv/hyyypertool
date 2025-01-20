@@ -1,0 +1,15 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns reservist or other - Personal e-mail response 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Veuillez utiliser votre adresse e-mail professionnelle gouvernementale, associée au nom de domaine : « @interieur.gouv.fr » ou « @gendarmerie.interieur.gouv.fr ».
+Pour information, vous n&#39;êtes pas autorisé à rattacher votre compte utilisateur à une administration publique avec une adresse e-mail personnelle.
+Si vous ne disposez pas d&#39;une adresse e-mail professionnelle gouvernementale, veuillez accéder au service souhaité sans passer par ProConnect.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
