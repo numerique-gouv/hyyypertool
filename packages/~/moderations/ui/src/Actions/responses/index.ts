@@ -31,6 +31,9 @@ import * as occupation_incorrectly_entered from "./occupation_incorrectly_entere
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
+import * as student_school_training_establishment from "./student_school_training_establishment";
+import * as student_host_organisation from "./student_host_organisation";
+import * as seconded_agent_min_interior from "./seconded_agent_min_interior";
 import * as teacher_academic_email from "./teacher_academic_email";
 import * as university_email_cnrs from "./university_email_cnrs";
 import * as use_official_email from "./use_official_email";
@@ -76,4 +79,7 @@ export const reponse_templates = [
   association_with_staff_but_no_domain_name,
   association_ordinary_person,
   agent_outside_min_finance_chorus_pro,
+  student_school_training_establishment,
+  student_host_organisation,
+  seconded_agent_min_interior,
 ];
