@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if [ -f $1/bun.lockb ]; then
+# Use this buildpack only if the app has a bun.lockb or bun.lock file exist
+if [ -f $1/bun.lockb ] || [ -f $1/bun.lock ]; then
   echo "Bun"
   exit 0
 else
