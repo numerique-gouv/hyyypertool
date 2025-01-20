@@ -2,6 +2,7 @@
 
 import * as accountant from "./accountant";
 import * as admin_centrale from "./admin_centrale";
+import * as agent_comcom_comaglo from "./agent_comcom_comaglo";
 import * as agent_outside_min_finance_chorus_pro from "./agent_outside_min_finance_chorus_pro";
 import * as already_signed from "./already_signed";
 import * as association_ordinary_person from "./association_ordinary_person";
@@ -88,4 +89,5 @@ export const reponse_templates = [
   seconded_agent_min_interior,
   presta_email_orga_public_beta_gouv,
   reservist_or_other_email_perso,
+  agent_comcom_comaglo,
 ];
