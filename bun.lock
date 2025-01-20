@@ -17,7 +17,7 @@
         "@release-it/conventional-changelog": "9.0.4",
         "@tsconfig/bun": "1.0.7",
         "@~/config.tailwindcss": "packages/~/config/tailwindcss",
-        "bun-types": "1.1.43",
+        "bun-types": "1.1.45",
         "prettier": "3.4.2",
         "prettier-plugin-organize-imports": "4.1.0",
         "prettier-plugin-tailwindcss": "0.6.9",
@@ -76,7 +76,7 @@
       },
       "devDependencies": {
         "@~/config.typescript": "packages/~/config/typescript",
-        "bun-types": "1.1.43",
+        "bun-types": "1.1.45",
       },
     },
     "packages/~/app/layout": {
@@ -192,7 +192,7 @@
       "dependencies": {
         "@tsconfig/bun": "1.0.7",
         "@tsconfig/strictest": "2.0.5",
-        "bun-types": "1.1.43",
+        "bun-types": "1.1.45",
         "hono": "4.6.17",
       },
     },
@@ -218,7 +218,7 @@
       "devDependencies": {
         "@~/config.typescript": "packages/~/config/typescript",
         "@~/crisp.lib": "packages/~/infra/crisp/lib",
-        "bun-types": "1.1.43",
+        "bun-types": "1.1.45",
       },
     },
     "packages/~/infra/crisp/ui": {
@@ -283,7 +283,7 @@
       },
       "devDependencies": {
         "@~/config.typescript": "packages/~/config/typescript",
-        "bun-types": "1.1.43",
+        "bun-types": "1.1.45",
       },
     },
     "packages/~/infra/zammad/lib": {
@@ -533,7 +533,7 @@
       },
       "devDependencies": {
         "@~/config.typescript": "packages/~/config/typescript",
-        "bun-types": "1.1.43",
+        "bun-types": "1.1.45",
       },
     },
   },
@@ -955,7 +955,7 @@
 
     "@~/app.api": ["@~/app.api@workspace:packages/~/app/api", { "dependencies": { "@hono/node-server": "1.13.7", "@hono/sentry": "1.2.0", "@~/app.core": "packages/~/app/core", "@~/app.layout": "packages/~/app/layout", "@~/app.sentry": "packages/~/app/sentry", "@~/auth.api": "packages/~/auth/api", "@~/moderations.api": "packages/~/moderations/api", "@~/organizations.api": "packages/~/organizations/api", "@~/proxy.api": "packages/~/proxy/api", "@~/users.api": "packages/~/users/api", "@~/welcome.api": "packages/~/welcome/api", "await-to-js": "3.0.0", "consola": "3.3.3", "drizzle-orm": "0.38.4", "hono": "4.6.17", "htmx.ext...chunked-transfer": "1.0.4", "htmx.org": "1.9.12", "hyperscript.org": "0.9.13", "ts-pattern": "5.6.0", "youch": "3.3.4" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
 
-    "@~/app.core": ["@~/app.core@workspace:packages/~/app/core", { "dependencies": { "modern-errors": "7.0.1", "ts-pattern": "5.6.0", "type-fest": "4.28.1", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.43" } }],
+    "@~/app.core": ["@~/app.core@workspace:packages/~/app/core", { "dependencies": { "modern-errors": "7.0.1", "ts-pattern": "5.6.0", "type-fest": "4.28.1", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.45" } }],
 
     "@~/app.layout": ["@~/app.layout@workspace:packages/~/app/layout", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "hono": "4.6.17", "nprogress": "0.2.0" }, "devDependencies": { "@types/nprogress": "0.2.3", "@~/config.typescript": "packages/~/config/typescript" } }],
 
@@ -973,11 +973,11 @@
 
     "@~/config.tailwindcss": ["@~/config.tailwindcss@workspace:packages/~/config/tailwindcss", { "dependencies": { "@tailwindcss/typography": "0.5.15", "autoprefixer": "10.4.20", "tailwind-variants": "0.2.1", "tailwindcss": "3.4.17" } }],
 
-    "@~/config.typescript": ["@~/config.typescript@workspace:packages/~/config/typescript", { "dependencies": { "@tsconfig/bun": "1.0.7", "@tsconfig/strictest": "2.0.5", "bun-types": "1.1.43", "hono": "4.6.17" } }],
+    "@~/config.typescript": ["@~/config.typescript@workspace:packages/~/config/typescript", { "dependencies": { "@tsconfig/bun": "1.0.7", "@tsconfig/strictest": "2.0.5", "bun-types": "1.1.45", "hono": "4.6.17" } }],
 
     "@~/crisp.lib": ["@~/crisp.lib@workspace:packages/~/infra/crisp/lib", { "dependencies": { "@gouvfr-lasuite/proconnect.crisp": "0.4.0", "@~/app.core": "packages/~/app/core", "consola": "3.3.3", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
 
-    "@~/crisp.middleware": ["@~/crisp.middleware@workspace:packages/~/infra/crisp/middleware", { "dependencies": { "hono": "4.6.17" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib", "bun-types": "1.1.43" } }],
+    "@~/crisp.middleware": ["@~/crisp.middleware@workspace:packages/~/infra/crisp/middleware", { "dependencies": { "hono": "4.6.17" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib", "bun-types": "1.1.45" } }],
 
     "@~/crisp.ui": ["@~/crisp.ui@workspace:packages/~/infra/crisp/ui", { "dependencies": { "@~/crisp.lib": "packages/~/infra/crisp/lib", "rehype-sanitize": "6.0.0", "rehype-stringify": "10.0.1", "remark-parse": "11.0.0", "remark-rehype": "11.1.1", "ts-pattern": "5.6.0", "unified": "11.0.5" }, "devDependencies": { "@~/config.tailwindcss": "packages/~/config/tailwindcss", "@~/config.typescript": "packages/~/config/typescript" } }],
 
@@ -1011,9 +1011,9 @@
 
     "@~/users.ui": ["@~/users.ui@workspace:packages/~/users/ui", { "dependencies": { "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/moderations.lib": "packages/~/moderations/lib", "@~/organizations.lib": "packages/~/organizations/lib", "@~/users.lib": "packages/~/users/lib", "hono": "4.6.17", "tailwind-variants": "0.2.1", "ts-dedent": "2.2.0", "ts-pattern": "5.6.0" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib" } }],
 
-    "@~/welcome.api": ["@~/welcome.api@workspace:packages/~/welcome/api", { "dependencies": { "@lit-labs/motion": "1.0.7", "@~/app.core": "packages/~/app/core", "@~/app.layout": "packages/~/app/layout", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "animate.css": "4.1.1", "hono": "4.6.17", "lit": "3.2.1", "openid-client": "5.7.0" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.43" } }],
+    "@~/welcome.api": ["@~/welcome.api@workspace:packages/~/welcome/api", { "dependencies": { "@lit-labs/motion": "1.0.7", "@~/app.core": "packages/~/app/core", "@~/app.layout": "packages/~/app/layout", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "animate.css": "4.1.1", "hono": "4.6.17", "lit": "3.2.1", "openid-client": "5.7.0" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.45" } }],
 
-    "@~/zammad.api": ["@~/zammad.api@workspace:packages/~/infra/zammad/api", { "dependencies": { "@hono/zod-validator": "0.4.2", "@~/app.core": "packages/~/app/core", "@~/zammad.lib": "packages/~/infra/zammad/lib", "hono": "4.6.17", "ts-pattern": "5.6.0", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.43" } }],
+    "@~/zammad.api": ["@~/zammad.api@workspace:packages/~/infra/zammad/api", { "dependencies": { "@hono/zod-validator": "0.4.2", "@~/app.core": "packages/~/app/core", "@~/zammad.lib": "packages/~/infra/zammad/lib", "hono": "4.6.17", "ts-pattern": "5.6.0", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.45" } }],
 
     "@~/zammad.lib": ["@~/zammad.lib@workspace:packages/~/infra/zammad/lib", { "dependencies": { "@~/app.core": "packages/~/app/core", "consola": "3.3.3", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
 
@@ -1107,7 +1107,7 @@
 
     "buffer-from": ["buffer-from@1.1.2", "", {}, "sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ=="],
 
-    "bun-types": ["bun-types@1.1.43", "", { "dependencies": { "@types/node": "~20.12.8", "@types/ws": "~8.5.10" } }, "sha512-W0wCtVH+bwFp7p3Zgs03CqxEDmXxEvmmUM/FBKgWIv9T8gyeotvIjIbHzuDScc2DphhRNtr7hJLCR5PspYL5qw=="],
+    "bun-types": ["bun-types@1.1.45", "", { "dependencies": { "@types/node": "~20.12.8", "@types/ws": "~8.5.10" } }, "sha512-8NT3BYwkyO8nzTG1k+q86VEvucw7s5W1fjRIGs0Y6/XNbTZn+mHEU39LFnuDLj4UmGCMpWCQtXUhLd6cko49Ww=="],
 
     "bundle-name": ["bundle-name@4.1.0", "", { "dependencies": { "run-applescript": "^7.0.0" } }, "sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q=="],
 
