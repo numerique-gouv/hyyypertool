@@ -1,0 +1,16 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns Agent outside Min Finances -> Chorus Pro response 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Vous tentez de rattacher votre compte à l’organisation à laquelle sont facturés les achats de votre administration.
+Il ne s’agit pas de l’organisation dans laquelle vous exercez.
+Pour information, seuls les Agents du Ministre de l&#39;Économie et des Finances peuvent rattacher leur compte à cette administration.
+Veuillez créer votre compte à nouveau en le rattachant à l&#39;Administration publique ou le Ministère dont vous dépendez.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;
