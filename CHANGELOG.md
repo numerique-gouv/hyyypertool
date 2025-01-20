@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.1.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.1...2025.1.2) (2025-01-20)
+
+
+### Bug Fixes
+
+* **typo:** replace agentConnect with ProConnect ([#748](https://github.com/numerique-gouv/hyyypertool/issues/748)) ([f4ad32d](https://github.com/numerique-gouv/hyyypertool/commit/f4ad32d4ecf16dcf7f4381c177104eea5f883d63))
+
 ## [2025.1.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.0...2025.1.1) (2025-01-20)
 
 # [2025.1.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.5...2025.1.0) (2025-01-20)
