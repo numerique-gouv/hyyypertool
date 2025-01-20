@@ -2,6 +2,7 @@
 
 import * as accountant from "./accountant";
 import * as admin_centrale from "./admin_centrale";
+import * as agent_outside_min_finance_chorus_pro from "./agent_outside_min_finance_chorus_pro";
 import * as already_signed from "./already_signed";
 import * as association_ordinary_person from "./association_ordinary_person";
 import * as association_with_staff_but_no_domain_name from "./association_with_staff_but_no_domain_name";
@@ -77,6 +78,7 @@ export const reponse_templates = [
   more_precise_existing_establishement_cnrs,
   association_with_staff_but_no_domain_name,
   association_ordinary_person,
+  agent_outside_min_finance_chorus_pro,
   student_school_training_establishment,
   student_host_organisation,
   seconded_agent_min_interior,
