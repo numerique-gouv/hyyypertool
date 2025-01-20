@@ -28,6 +28,7 @@ import * as name_incorrectly_entered from "./name_incorrectly_entered";
 import * as non_teaching_agent from "./non_teaching_agent";
 import * as occupation_incorrectly_entered from "./occupation_incorrectly_entered";
 import * as occupation_incorrectly_entered_not_blocking from "./occupation_incorrectly_entered_not_blocking";
+import * as presta_email_admin_public from "./presta_email_admin_public";
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
 import * as teacher_academic_email from "./teacher_academic_email";
@@ -74,4 +75,5 @@ export const reponse_templates = [
   more_precise_existing_establishement_cnrs,
   association_with_staff_but_no_domain_name,
   association_ordinary_person,
+  presta_email_admin_public,
 ];
