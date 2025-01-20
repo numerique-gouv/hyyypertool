@@ -1,4 +1,29 @@
+# Changelog
 
+# [2025.1.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.5...2025.1.0) (2025-01-20)
+
+
+### Bug Fixes
+
+* **user:** typo on sent messages ([10d66f5](https://github.com/numerique-gouv/hyyypertool/commit/10d66f56330029d7da5b5bdb76816fc26b0764f9))
+
+
+### Features
+
+* **moderation:** add more precise existing establishment CNRS response ([#733](https://github.com/numerique-gouv/hyyypertool/issues/733)) ([8f2e803](https://github.com/numerique-gouv/hyyypertool/commit/8f2e803fa071555232f4c8c24285dba9e3796eb6))
+* **moderation:** add university email cnrs response ([#730](https://github.com/numerique-gouv/hyyypertool/issues/730)) ([d9d48b2](https://github.com/numerique-gouv/hyyypertool/commit/d9d48b27b692368f02c64751dfbf2274e08d7488))
+* **moderation:** add user with existing account moderation ([#729](https://github.com/numerique-gouv/hyyypertool/issues/729)) ([9242528](https://github.com/numerique-gouv/hyyypertool/commit/924252893079883b27678bb77d8e59edd5b860c1))
+* **moderation:** Agent outside Min Finances -> Chorus Pro ([#743](https://github.com/numerique-gouv/hyyypertool/issues/743)) ([4866930](https://github.com/numerique-gouv/hyyypertool/commit/4866930fa55f9aaa98e6e3e896ff6a6561068686))
+* **moderation:** association with staff but no domain name : ordinary person ([#736](https://github.com/numerique-gouv/hyyypertool/issues/736)) ([ca0f95f](https://github.com/numerique-gouv/hyyypertool/commit/ca0f95ffe70b03d963eed9c85301cc1fe55c1c2a))
+* **moderation:** association with staff but no domain name ([#735](https://github.com/numerique-gouv/hyyypertool/issues/735)) ([615d96a](https://github.com/numerique-gouv/hyyypertool/commit/615d96aeae975e2f9fb96ba2a42fdbaf0e0eccbe))
+* **moderation:** E-mail Public administration - Employing organisation ([#744](https://github.com/numerique-gouv/hyyypertool/issues/744)) ([29589ce](https://github.com/numerique-gouv/hyyypertool/commit/29589cea603104215b1df1a5139d001caa813227))
+* **moderation:** existing domain name response ([#734](https://github.com/numerique-gouv/hyyypertool/issues/734)) ([4fb852c](https://github.com/numerique-gouv/hyyypertool/commit/4fb852c4bde1de706422de772bad9cd9fe1b9d1c))
+* **moderation:** presta E-mail Employing organisation or beta.gouv ([#745](https://github.com/numerique-gouv/hyyypertool/issues/745)) ([3598025](https://github.com/numerique-gouv/hyyypertool/commit/3598025e72b5fd270848a9726d1f806f4141bd79))
+* **moderation:** Reservist or other - Personal e-mail ([#746](https://github.com/numerique-gouv/hyyypertool/issues/746)) ([6331134](https://github.com/numerique-gouv/hyyypertool/commit/6331134adea51fa7de80d0445e549f2d7efe3cc3))
+* **moderation:** Seconded agent diplomatie.gouv -> Ministry of the Interior ([#739](https://github.com/numerique-gouv/hyyypertool/issues/739)) ([a980a13](https://github.com/numerique-gouv/hyyypertool/commit/a980a13c876fc4007de97eee64f3b6b91e276a2b))
+* **moderation:** Student - Host organisation ([#741](https://github.com/numerique-gouv/hyyypertool/issues/741)) ([b91742a](https://github.com/numerique-gouv/hyyypertool/commit/b91742a284e0cefc3bb04249395427111e916bcd))
+* **moderation:** Student - School or training establishment ([#742](https://github.com/numerique-gouv/hyyypertool/issues/742)) ([6449c3f](https://github.com/numerique-gouv/hyyypertool/commit/6449c3f3d7fefbb5e21f44398b247e3061b78963))
+* **ui:** expect navigator.writeText to exist ([e3c6aa1](https://github.com/numerique-gouv/hyyypertool/commit/e3c6aa15f4888cd35174a8d1082c5dbcffcc4e92))
 
 ## [2024.12.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.4...2024.12.5) (2024-12-17)
 
