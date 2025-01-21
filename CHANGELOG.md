@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.1.3](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.2...2025.1.3) (2025-01-21)
+
+
+### Features
+
+* **users:** display totp verified at ([#750](https://github.com/numerique-gouv/hyyypertool/issues/750)) ([fac20da](https://github.com/numerique-gouv/hyyypertool/commit/fac20da72475afbbeaefc16a0f6e3299a0d100d8))
+
 ## [2025.1.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.1...2025.1.2) (2025-01-20)
 
 
