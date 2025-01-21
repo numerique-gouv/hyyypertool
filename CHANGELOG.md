@@ -1,5 +1,17 @@
 # Changelog
 
+## [2025.1.4](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.3...2025.1.4) (2025-01-21)
+
+
+### Bug Fixes
+
+* **moderation:** fix wrong label and describe test on moderation ([#751](https://github.com/numerique-gouv/hyyypertool/issues/751)) ([77fa403](https://github.com/numerique-gouv/hyyypertool/commit/77fa4030affa1667ecb38e3efbd5d222d9602598))
+
+
+### Features
+
+* **moderation:** Agent - departmental e-mail address -> Admin centrale ([#740](https://github.com/numerique-gouv/hyyypertool/issues/740)) ([aea9285](https://github.com/numerique-gouv/hyyypertool/commit/aea9285b13981cc3b943217763f2a93a156a03a6))
+
 ## [2025.1.3](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.2...2025.1.3) (2025-01-21)
 
 
