@@ -1,6 +1,6 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`returns agent - departmental e-mail address - Admin centrale 1`] = `
+exports[`returns agent 'Communes’ -> ComCom, ComAgglo, Métropole response 1`] = `
 "Bonjour,
 
 Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).

@@ -4,7 +4,7 @@ import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
 import { context } from "../context";
 
-export const label = "Agent - adresse e-mail départementale —> Admin centrale";
+export const label = "Agent “Communes” —> ComCom, ComAgglo, Métropole";
 
 export default function template() {
   const {

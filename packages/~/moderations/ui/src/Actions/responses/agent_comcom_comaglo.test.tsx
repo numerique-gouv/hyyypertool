@@ -7,7 +7,7 @@ import agent_comcom_comaglo from "./agent_comcom_comaglo";
 
 //
 
-test("returns agent - departmental e-mail address - Admin centrale", async () => {
+test("returns agent 'Communes’ -> ComCom, ComAgglo, Métropole response", async () => {
   expect(
     await render_md(
       <context.Provider
