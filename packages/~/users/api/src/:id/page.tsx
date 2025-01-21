@@ -268,6 +268,13 @@ function AccountInfo() {
           <LocalTime date={user.reset_password_sent_at} />
         </b>
       </dd>
+
+      <dt class={dt()}>TOTP vérifié envoyé le</dt>
+      <dd class={dd()}>
+        <b>
+          <LocalTime date={user.totp_key_verified_at} />
+        </b>
+      </dd>
     </dl>
   );
 }
