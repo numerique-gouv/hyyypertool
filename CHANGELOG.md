@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.1.5](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.4...2025.1.5) (2025-01-21)
+
+
+### Features
+
+* **moderation:** Agent “ComCom, ComAgglo, Métropole” —> Communes ([#752](https://github.com/numerique-gouv/hyyypertool/issues/752)) ([1afe024](https://github.com/numerique-gouv/hyyypertool/commit/1afe0241a0c8857e7c460153fdb80fd9fbd80d68))
+
 ## [2025.1.4](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.3...2025.1.4) (2025-01-21)
 
 
