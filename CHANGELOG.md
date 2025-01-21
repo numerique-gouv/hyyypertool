@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.1.6](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.5...2025.1.6) (2025-01-21)
+
+
+### Features
+
+* **moderation:** delete unused responses type ([#753](https://github.com/numerique-gouv/hyyypertool/issues/753)) ([52b4170](https://github.com/numerique-gouv/hyyypertool/commit/52b4170025f2d424f52fddd3f38c8c02439b08a6))
+
 ## [2025.1.5](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.4...2025.1.5) (2025-01-21)
 
 
