@@ -22,7 +22,7 @@ export default function template() {
     Pour se faire :
 
     - Videz le cache de votre navigateur (lien FAQ MCP) puis rafraîchissez votre page internet, 
-    - Accédez à ProConnect : https://app.moncomptepro.beta.gouv.fr/, puis authentifiez-vous,
+    - Accédez à ProConnect : https://app.moncomptepro.beta.gouv.fr/users/personal-information, puis authentifiez-vous,
     - Cliquez sur l'onglet « Vos Informations Personnelles »,
     - Corrigez votre prénom et votre nom,
     - Sélectionnez votre organisation (numéro SIRET : ${siret}) pour que notre équipe puisse valider à nouveau la création de votre compte.
