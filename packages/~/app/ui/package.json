@@ -61,7 +61,7 @@
     "@~/app.urls": "workspace:*",
     "hono": "4.6.17",
     "hono-slotify": "workspace:*",
-    "tailwind-variants": "0.2.1"
+    "tailwind-variants": "0.3.1"
   },
   "devDependencies": {
     "@~/config.happydom": "workspace:*",

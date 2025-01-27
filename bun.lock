@@ -1,11 +1,11 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "dependencies": {
         "@gouvfr/dsfr": "1.13.0",
-        "@~/app.api": "packages/~/app/api",
-        "@~/app.core": "packages/~/app/core",
+        "@~/app.api": "workspace:*",
+        "@~/app.core": "workspace:*",
         "consola": "3.3.3",
         "dotenv": "16.4.7",
         "hono": "4.6.17",
@@ -15,7 +15,7 @@
         "@csmith/release-it-calver-plugin": "2023.12.0",
         "@release-it/conventional-changelog": "10.0.0",
         "@tsconfig/bun": "1.0.7",
-        "@~/config.tailwindcss": "packages/~/config/tailwindcss",
+        "@~/config.tailwindcss": "workspace:*",
         "bun-types": "1.1.43",
         "prettier": "3.4.2",
         "prettier-plugin-organize-imports": "4.1.0",
@@ -32,7 +32,7 @@
         "hono": "4.6.17",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/app/api": {
@@ -41,15 +41,15 @@
       "dependencies": {
         "@hono/node-server": "1.13.7",
         "@hono/sentry": "1.2.0",
-        "@~/app.core": "packages/~/app/core",
-        "@~/app.layout": "packages/~/app/layout",
-        "@~/app.sentry": "packages/~/app/sentry",
-        "@~/auth.api": "packages/~/auth/api",
-        "@~/moderations.api": "packages/~/moderations/api",
-        "@~/organizations.api": "packages/~/organizations/api",
-        "@~/proxy.api": "packages/~/proxy/api",
-        "@~/users.api": "packages/~/users/api",
-        "@~/welcome.api": "packages/~/welcome/api",
+        "@~/app.core": "workspace:*",
+        "@~/app.layout": "workspace:*",
+        "@~/app.sentry": "workspace:*",
+        "@~/auth.api": "workspace:*",
+        "@~/moderations.api": "workspace:*",
+        "@~/organizations.api": "workspace:*",
+        "@~/proxy.api": "workspace:*",
+        "@~/users.api": "workspace:*",
+        "@~/welcome.api": "workspace:*",
         "await-to-js": "3.0.0",
         "consola": "3.3.3",
         "drizzle-orm": "0.38.4",
@@ -61,7 +61,7 @@
         "youch": "3.3.4",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/app/core": {
@@ -74,7 +74,7 @@
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
         "bun-types": "1.1.43",
       },
     },
@@ -82,33 +82,33 @@
       "name": "@~/app.layout",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/app.urls": "packages/~/app/urls",
+        "@~/app.core": "workspace:*",
+        "@~/app.middleware": "workspace:*",
+        "@~/app.urls": "workspace:*",
         "hono": "4.6.17",
         "nprogress": "0.2.0",
       },
       "devDependencies": {
         "@types/nprogress": "0.2.3",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/app/middleware": {
       "name": "@~/app.middleware",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
-        "@~/app.sentry": "packages/~/app/sentry",
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
-        "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib",
+        "@~/app.core": "workspace:*",
+        "@~/app.sentry": "workspace:*",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/moncomptepro.database": "workspace:*",
+        "@~/moncomptepro.lib": "workspace:*",
         "hono": "4.6.17",
         "hono-sessions": "0.7.0",
         "openid-client": "5.7.0",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/app/sentry": {
@@ -117,28 +117,28 @@
       "dependencies": {
         "@sentry/node": "8.51.0",
         "@sentry/profiling-node": "8.51.0",
-        "@~/app.core": "packages/~/app/core",
+        "@~/app.core": "workspace:*",
         "consola": "3.3.3",
         "hono": "4.6.17",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/app/ui": {
       "name": "@~/app.ui",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
-        "@~/app.urls": "packages/~/app/urls",
+        "@~/app.core": "workspace:*",
+        "@~/app.urls": "workspace:*",
         "hono": "4.6.17",
-        "hono-slotify": "packages/hono-slotify",
-        "tailwind-variants": "0.2.1",
+        "hono-slotify": "workspace:*",
+        "tailwind-variants": "0.3.1",
       },
       "devDependencies": {
-        "@~/config.happydom": "packages/~/config/happydom",
-        "@~/config.tailwindcss": "packages/~/config/tailwindcss",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.happydom": "workspace:*",
+        "@~/config.tailwindcss": "workspace:*",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/app/urls": {
@@ -150,22 +150,22 @@
         "static-path": "0.0.4",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/auth/api": {
       "name": "@~/auth.api",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/app.urls": "packages/~/app/urls",
+        "@~/app.core": "workspace:*",
+        "@~/app.middleware": "workspace:*",
+        "@~/app.urls": "workspace:*",
         "hono": "4.6.17",
         "openid-client": "5.7.0",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/config/happydom": {
@@ -181,7 +181,7 @@
       "dependencies": {
         "@tailwindcss/typography": "0.5.15",
         "autoprefixer": "10.4.20",
-        "tailwind-variants": "0.2.1",
+        "tailwind-variants": "0.3.1",
         "tailwindcss": "3.4.17",
       },
     },
@@ -200,12 +200,12 @@
       "version": "1.0.0",
       "dependencies": {
         "@gouvfr-lasuite/proconnect.crisp": "0.4.0",
-        "@~/app.core": "packages/~/app/core",
+        "@~/app.core": "workspace:*",
         "consola": "3.3.3",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/infra/crisp/middleware": {
@@ -215,8 +215,8 @@
         "hono": "4.6.17",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
+        "@~/config.typescript": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
         "bun-types": "1.1.43",
       },
     },
@@ -224,7 +224,7 @@
       "name": "@~/crisp.ui",
       "version": "1.0.0",
       "dependencies": {
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
+        "@~/crisp.lib": "workspace:*",
         "rehype-sanitize": "6.0.0",
         "rehype-stringify": "10.0.1",
         "remark-parse": "11.0.0",
@@ -233,16 +233,16 @@
         "unified": "11.0.5",
       },
       "devDependencies": {
-        "@~/config.tailwindcss": "packages/~/config/tailwindcss",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.tailwindcss": "workspace:*",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/infra/moncomptepro/database": {
       "name": "@~/moncomptepro.database",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
-        "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib",
+        "@~/app.core": "workspace:*",
+        "@~/moncomptepro.lib": "workspace:*",
         "consola": "3.3.3",
         "drizzle-orm": "0.38.4",
         "hono": "4.6.17",
@@ -251,7 +251,7 @@
       "devDependencies": {
         "@electric-sql/pglite": "0.2.15",
         "@types/pg": "8.11.10",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
         "drizzle-kit": "0.30.1",
       },
     },
@@ -260,12 +260,12 @@
       "version": "1.0.0",
       "dependencies": {
         "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#f26af544c636f071bf6efc4343bfe4f9e98fddb5",
-        "@~/app.core": "packages/~/app/core",
+        "@~/app.core": "workspace:*",
         "consola": "3.3.3",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
         "pg": "8.13.1",
       },
     },
@@ -274,14 +274,14 @@
       "version": "1.0.0",
       "dependencies": {
         "@hono/zod-validator": "0.4.2",
-        "@~/app.core": "packages/~/app/core",
-        "@~/zammad.lib": "packages/~/infra/zammad/lib",
+        "@~/app.core": "workspace:*",
+        "@~/zammad.lib": "workspace:*",
         "hono": "4.6.17",
         "ts-pattern": "5.6.2",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
         "bun-types": "1.1.43",
       },
     },
@@ -289,92 +289,92 @@
       "name": "@~/zammad.lib",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
+        "@~/app.core": "workspace:*",
         "consola": "3.3.3",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/moderations/api": {
       "name": "@~/moderations.api",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.layout": "packages/~/app/layout",
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
-        "@~/crisp.middleware": "packages/~/infra/crisp/middleware",
-        "@~/crisp.ui": "packages/~/infra/crisp/ui",
-        "@~/moderations.lib": "packages/~/moderations/lib",
-        "@~/moderations.ui": "packages/~/moderations/ui",
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
-        "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib",
-        "@~/organizations.repository": "packages/~/organizations/repository",
-        "@~/organizations.ui": "packages/~/organizations/ui",
-        "@~/users.lib": "packages/~/users/lib",
-        "@~/users.ui": "packages/~/users/ui",
-        "@~/zammad.lib": "packages/~/infra/zammad/lib",
+        "@~/app.layout": "workspace:*",
+        "@~/app.middleware": "workspace:*",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
+        "@~/crisp.middleware": "workspace:*",
+        "@~/crisp.ui": "workspace:*",
+        "@~/moderations.lib": "workspace:*",
+        "@~/moderations.ui": "workspace:*",
+        "@~/moncomptepro.database": "workspace:*",
+        "@~/moncomptepro.lib": "workspace:*",
+        "@~/organizations.repository": "workspace:*",
+        "@~/organizations.ui": "workspace:*",
+        "@~/users.lib": "workspace:*",
+        "@~/users.ui": "workspace:*",
+        "@~/zammad.lib": "workspace:*",
         "await-to-js": "3.0.0",
         "drizzle-orm": "0.38.4",
         "hono": "4.6.17",
-        "tailwind-variants": "0.2.1",
+        "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.6.2",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.tailwindcss": "packages/~/config/tailwindcss",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.tailwindcss": "workspace:*",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/moderations/lib": {
       "name": "@~/moderations.lib",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.core": "packages/~/app/core",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
-        "@~/moderations.repository": "packages/~/moderations/repository",
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
+        "@~/app.core": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
+        "@~/moderations.repository": "workspace:*",
+        "@~/moncomptepro.database": "workspace:*",
         "drizzle-orm": "0.38.4",
         "ts-pattern": "5.6.2",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
-        "@~/zammad.lib": "packages/~/infra/zammad/lib",
+        "@~/config.typescript": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
+        "@~/zammad.lib": "workspace:*",
       },
     },
     "packages/~/moderations/repository": {
       "name": "@~/moderations.repository",
       "version": "1.0.0",
       "dependencies": {
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
+        "@~/moncomptepro.database": "workspace:*",
         "drizzle-orm": "0.38.4",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/moderations/ui": {
       "name": "@~/moderations.ui",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/moderations.lib": "packages/~/moderations/lib",
-        "@~/organizations.lib": "packages/~/organizations/lib",
-        "@~/users.lib": "packages/~/users/lib",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/moderations.lib": "workspace:*",
+        "@~/organizations.lib": "workspace:*",
+        "@~/users.lib": "workspace:*",
         "hono": "4.6.17",
-        "tailwind-variants": "0.2.1",
+        "tailwind-variants": "0.3.1",
         "ts-pattern": "5.6.2",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
+        "@~/config.typescript": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
       },
     },
     "packages/~/organizations/api": {
@@ -382,66 +382,66 @@
       "version": "1.0.0",
       "dependencies": {
         "@gouvfr-lasuite/moncomptepro.core": "0.1.0",
-        "@~/app.layout": "packages/~/app/layout",
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/organizations.repository": "packages/~/organizations/repository",
-        "@~/organizations.ui": "packages/~/organizations/ui",
-        "@~/users.repository": "packages/~/users/repository",
+        "@~/app.layout": "workspace:*",
+        "@~/app.middleware": "workspace:*",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/organizations.repository": "workspace:*",
+        "@~/organizations.ui": "workspace:*",
+        "@~/users.repository": "workspace:*",
         "hono": "4.6.17",
         "lodash.sortby": "4.7.0",
-        "tailwind-variants": "0.2.1",
+        "tailwind-variants": "0.3.1",
         "ts-pattern": "5.6.2",
         "zod": "3.23.8",
       },
       "devDependencies": {
         "@types/lodash.sortby": "4.7.9",
-        "@~/config.tailwindcss": "packages/~/config/tailwindcss",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.tailwindcss": "workspace:*",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/organizations/lib": {
       "name": "@~/organizations.lib",
       "version": "1.0.0",
       "dependencies": {
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
-        "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib",
-        "@~/organizations.repository": "packages/~/organizations/repository",
-        "@~/users.repository": "packages/~/users/repository",
+        "@~/moncomptepro.database": "workspace:*",
+        "@~/moncomptepro.lib": "workspace:*",
+        "@~/organizations.repository": "workspace:*",
+        "@~/users.repository": "workspace:*",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/organizations/repository": {
       "name": "@~/organizations.repository",
       "version": "1.0.0",
       "dependencies": {
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
-        "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib",
+        "@~/moncomptepro.database": "workspace:*",
+        "@~/moncomptepro.lib": "workspace:*",
         "drizzle-orm": "0.38.4",
         "ts-pattern": "5.6.2",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/organizations/ui": {
       "name": "@~/organizations.ui",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/organizations.lib": "packages/~/organizations/lib",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/organizations.lib": "workspace:*",
         "hono": "4.6.17",
-        "tailwind-variants": "0.2.1",
+        "tailwind-variants": "0.3.1",
         "ts-pattern": "5.6.2",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/proxy/api": {
@@ -451,69 +451,69 @@
         "hono": "4.6.17",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/users/api": {
       "name": "@~/users.api",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.layout": "packages/~/app/layout",
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/moderations.repository": "packages/~/moderations/repository",
-        "@~/organizations.repository": "packages/~/organizations/repository",
-        "@~/users.repository": "packages/~/users/repository",
+        "@~/app.layout": "workspace:*",
+        "@~/app.middleware": "workspace:*",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/moderations.repository": "workspace:*",
+        "@~/organizations.repository": "workspace:*",
+        "@~/users.repository": "workspace:*",
         "hono": "4.6.17",
         "ts-pattern": "5.6.2",
         "zod": "3.23.8",
       },
       "devDependencies": {
-        "@~/config.tailwindcss": "packages/~/config/tailwindcss",
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.tailwindcss": "workspace:*",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/users/lib": {
       "name": "@~/users.lib",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
+        "@~/app.middleware": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
+        "@~/moncomptepro.database": "workspace:*",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/users/repository": {
       "name": "@~/users.repository",
       "version": "1.0.0",
       "dependencies": {
-        "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database",
+        "@~/moncomptepro.database": "workspace:*",
         "drizzle-orm": "0.38.4",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
       },
     },
     "packages/~/users/ui": {
       "name": "@~/users.ui",
       "version": "1.0.0",
       "dependencies": {
-        "@~/app.ui": "packages/~/app/ui",
-        "@~/app.urls": "packages/~/app/urls",
-        "@~/moderations.lib": "packages/~/moderations/lib",
-        "@~/organizations.lib": "packages/~/organizations/lib",
-        "@~/users.lib": "packages/~/users/lib",
+        "@~/app.ui": "workspace:*",
+        "@~/app.urls": "workspace:*",
+        "@~/moderations.lib": "workspace:*",
+        "@~/organizations.lib": "workspace:*",
+        "@~/users.lib": "workspace:*",
         "hono": "4.6.17",
-        "tailwind-variants": "0.2.1",
+        "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.6.2",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
-        "@~/crisp.lib": "packages/~/infra/crisp/lib",
+        "@~/config.typescript": "workspace:*",
+        "@~/crisp.lib": "workspace:*",
       },
     },
     "packages/~/welcome/api": {
@@ -521,17 +521,17 @@
       "version": "1.0.0",
       "dependencies": {
         "@lit-labs/motion": "1.0.7",
-        "@~/app.core": "packages/~/app/core",
-        "@~/app.layout": "packages/~/app/layout",
-        "@~/app.middleware": "packages/~/app/middleware",
-        "@~/app.urls": "packages/~/app/urls",
+        "@~/app.core": "workspace:*",
+        "@~/app.layout": "workspace:*",
+        "@~/app.middleware": "workspace:*",
+        "@~/app.urls": "workspace:*",
         "animate.css": "4.1.1",
         "hono": "4.6.17",
         "lit": "3.2.1",
         "openid-client": "5.7.0",
       },
       "devDependencies": {
-        "@~/config.typescript": "packages/~/config/typescript",
+        "@~/config.typescript": "workspace:*",
         "bun-types": "1.1.43",
       },
     },
@@ -952,69 +952,69 @@
 
     "@zootools/email-spell-checker": ["@zootools/email-spell-checker@1.12.0", "", {}, "sha512-yM0lH4yjg+jZG5QubtvpHE+ahSnsHbw9ilnQgKgOF3fk6OBVQLRsEq4NR+/nRvrwG8Vo+29bzKwhXk5y1b/FwA=="],
 
-    "@~/app.api": ["@~/app.api@workspace:packages/~/app/api", { "dependencies": { "@hono/node-server": "1.13.7", "@hono/sentry": "1.2.0", "@~/app.core": "packages/~/app/core", "@~/app.layout": "packages/~/app/layout", "@~/app.sentry": "packages/~/app/sentry", "@~/auth.api": "packages/~/auth/api", "@~/moderations.api": "packages/~/moderations/api", "@~/organizations.api": "packages/~/organizations/api", "@~/proxy.api": "packages/~/proxy/api", "@~/users.api": "packages/~/users/api", "@~/welcome.api": "packages/~/welcome/api", "await-to-js": "3.0.0", "consola": "3.3.3", "drizzle-orm": "0.38.4", "hono": "4.6.17", "htmx.ext...chunked-transfer": "1.0.4", "htmx.org": "1.9.12", "hyperscript.org": "0.9.13", "ts-pattern": "5.6.2", "youch": "3.3.4" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/app.api": ["@~/app.api@workspace:packages/~/app/api"],
 
-    "@~/app.core": ["@~/app.core@workspace:packages/~/app/core", { "dependencies": { "modern-errors": "7.0.1", "ts-pattern": "5.6.2", "type-fest": "4.28.1", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.43" } }],
+    "@~/app.core": ["@~/app.core@workspace:packages/~/app/core"],
 
-    "@~/app.layout": ["@~/app.layout@workspace:packages/~/app/layout", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "hono": "4.6.17", "nprogress": "0.2.0" }, "devDependencies": { "@types/nprogress": "0.2.3", "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/app.layout": ["@~/app.layout@workspace:packages/~/app/layout"],
 
-    "@~/app.middleware": ["@~/app.middleware@workspace:packages/~/app/middleware", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/app.sentry": "packages/~/app/sentry", "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib", "hono": "4.6.17", "hono-sessions": "0.7.0", "openid-client": "5.7.0" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/app.middleware": ["@~/app.middleware@workspace:packages/~/app/middleware"],
 
-    "@~/app.sentry": ["@~/app.sentry@workspace:packages/~/app/sentry", { "dependencies": { "@sentry/node": "8.51.0", "@sentry/profiling-node": "8.51.0", "@~/app.core": "packages/~/app/core", "consola": "3.3.3", "hono": "4.6.17" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/app.sentry": ["@~/app.sentry@workspace:packages/~/app/sentry"],
 
-    "@~/app.ui": ["@~/app.ui@workspace:packages/~/app/ui", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/app.urls": "packages/~/app/urls", "hono": "4.6.17", "hono-slotify": "packages/hono-slotify", "tailwind-variants": "0.2.1" }, "devDependencies": { "@~/config.happydom": "packages/~/config/happydom", "@~/config.tailwindcss": "packages/~/config/tailwindcss", "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/app.ui": ["@~/app.ui@workspace:packages/~/app/ui"],
 
-    "@~/app.urls": ["@~/app.urls@workspace:packages/~/app/urls", { "dependencies": { "consola": "3.3.3", "hono": "4.6.17", "static-path": "0.0.4" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/app.urls": ["@~/app.urls@workspace:packages/~/app/urls"],
 
-    "@~/auth.api": ["@~/auth.api@workspace:packages/~/auth/api", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "hono": "4.6.17", "openid-client": "5.7.0", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/auth.api": ["@~/auth.api@workspace:packages/~/auth/api"],
 
-    "@~/config.happydom": ["@~/config.happydom@workspace:packages/~/config/happydom", { "dependencies": { "@happy-dom/global-registrator": "16.6.0" } }],
+    "@~/config.happydom": ["@~/config.happydom@workspace:packages/~/config/happydom"],
 
-    "@~/config.tailwindcss": ["@~/config.tailwindcss@workspace:packages/~/config/tailwindcss", { "dependencies": { "@tailwindcss/typography": "0.5.15", "autoprefixer": "10.4.20", "tailwind-variants": "0.2.1", "tailwindcss": "3.4.17" } }],
+    "@~/config.tailwindcss": ["@~/config.tailwindcss@workspace:packages/~/config/tailwindcss"],
 
-    "@~/config.typescript": ["@~/config.typescript@workspace:packages/~/config/typescript", { "dependencies": { "@tsconfig/bun": "1.0.7", "@tsconfig/strictest": "2.0.5", "bun-types": "1.1.43", "hono": "4.6.17" } }],
+    "@~/config.typescript": ["@~/config.typescript@workspace:packages/~/config/typescript"],
 
-    "@~/crisp.lib": ["@~/crisp.lib@workspace:packages/~/infra/crisp/lib", { "dependencies": { "@gouvfr-lasuite/proconnect.crisp": "0.4.0", "@~/app.core": "packages/~/app/core", "consola": "3.3.3", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/crisp.lib": ["@~/crisp.lib@workspace:packages/~/infra/crisp/lib"],
 
-    "@~/crisp.middleware": ["@~/crisp.middleware@workspace:packages/~/infra/crisp/middleware", { "dependencies": { "hono": "4.6.17" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib", "bun-types": "1.1.43" } }],
+    "@~/crisp.middleware": ["@~/crisp.middleware@workspace:packages/~/infra/crisp/middleware"],
 
-    "@~/crisp.ui": ["@~/crisp.ui@workspace:packages/~/infra/crisp/ui", { "dependencies": { "@~/crisp.lib": "packages/~/infra/crisp/lib", "rehype-sanitize": "6.0.0", "rehype-stringify": "10.0.1", "remark-parse": "11.0.0", "remark-rehype": "11.1.1", "ts-pattern": "5.6.2", "unified": "11.0.5" }, "devDependencies": { "@~/config.tailwindcss": "packages/~/config/tailwindcss", "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/crisp.ui": ["@~/crisp.ui@workspace:packages/~/infra/crisp/ui"],
 
-    "@~/moderations.api": ["@~/moderations.api@workspace:packages/~/moderations/api", { "dependencies": { "@~/app.layout": "packages/~/app/layout", "@~/app.middleware": "packages/~/app/middleware", "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/crisp.lib": "packages/~/infra/crisp/lib", "@~/crisp.middleware": "packages/~/infra/crisp/middleware", "@~/crisp.ui": "packages/~/infra/crisp/ui", "@~/moderations.lib": "packages/~/moderations/lib", "@~/moderations.ui": "packages/~/moderations/ui", "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib", "@~/organizations.repository": "packages/~/organizations/repository", "@~/organizations.ui": "packages/~/organizations/ui", "@~/users.lib": "packages/~/users/lib", "@~/users.ui": "packages/~/users/ui", "@~/zammad.lib": "packages/~/infra/zammad/lib", "await-to-js": "3.0.0", "drizzle-orm": "0.38.4", "hono": "4.6.17", "tailwind-variants": "0.2.1", "ts-dedent": "2.2.0", "ts-pattern": "5.6.2", "zod": "3.23.8" }, "devDependencies": { "@~/config.tailwindcss": "packages/~/config/tailwindcss", "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/moderations.api": ["@~/moderations.api@workspace:packages/~/moderations/api"],
 
-    "@~/moderations.lib": ["@~/moderations.lib@workspace:packages/~/moderations/lib", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/crisp.lib": "packages/~/infra/crisp/lib", "@~/moderations.repository": "packages/~/moderations/repository", "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "drizzle-orm": "0.38.4", "ts-pattern": "5.6.2", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib", "@~/zammad.lib": "packages/~/infra/zammad/lib" } }],
+    "@~/moderations.lib": ["@~/moderations.lib@workspace:packages/~/moderations/lib"],
 
-    "@~/moderations.repository": ["@~/moderations.repository@workspace:packages/~/moderations/repository", { "dependencies": { "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "drizzle-orm": "0.38.4" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/moderations.repository": ["@~/moderations.repository@workspace:packages/~/moderations/repository"],
 
-    "@~/moderations.ui": ["@~/moderations.ui@workspace:packages/~/moderations/ui", { "dependencies": { "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/moderations.lib": "packages/~/moderations/lib", "@~/organizations.lib": "packages/~/organizations/lib", "@~/users.lib": "packages/~/users/lib", "hono": "4.6.17", "tailwind-variants": "0.2.1", "ts-pattern": "5.6.2" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib" } }],
+    "@~/moderations.ui": ["@~/moderations.ui@workspace:packages/~/moderations/ui"],
 
-    "@~/moncomptepro.database": ["@~/moncomptepro.database@workspace:packages/~/infra/moncomptepro/database", { "dependencies": { "@~/app.core": "packages/~/app/core", "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib", "consola": "3.3.3", "drizzle-orm": "0.38.4", "hono": "4.6.17", "pg": "8.13.1" }, "devDependencies": { "@electric-sql/pglite": "0.2.15", "@types/pg": "8.11.10", "@~/config.typescript": "packages/~/config/typescript", "drizzle-kit": "0.30.1" } }],
+    "@~/moncomptepro.database": ["@~/moncomptepro.database@workspace:packages/~/infra/moncomptepro/database"],
 
-    "@~/moncomptepro.lib": ["@~/moncomptepro.lib@workspace:packages/~/infra/moncomptepro/lib", { "dependencies": { "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#f26af544c636f071bf6efc4343bfe4f9e98fddb5", "@~/app.core": "packages/~/app/core", "consola": "3.3.3", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "pg": "8.13.1" } }],
+    "@~/moncomptepro.lib": ["@~/moncomptepro.lib@workspace:packages/~/infra/moncomptepro/lib"],
 
-    "@~/organizations.api": ["@~/organizations.api@workspace:packages/~/organizations/api", { "dependencies": { "@gouvfr-lasuite/moncomptepro.core": "0.1.0", "@~/app.layout": "packages/~/app/layout", "@~/app.middleware": "packages/~/app/middleware", "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/organizations.repository": "packages/~/organizations/repository", "@~/organizations.ui": "packages/~/organizations/ui", "@~/users.repository": "packages/~/users/repository", "hono": "4.6.17", "lodash.sortby": "4.7.0", "tailwind-variants": "0.2.1", "ts-pattern": "5.6.2", "zod": "3.23.8" }, "devDependencies": { "@types/lodash.sortby": "4.7.9", "@~/config.tailwindcss": "packages/~/config/tailwindcss", "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/organizations.api": ["@~/organizations.api@workspace:packages/~/organizations/api"],
 
-    "@~/organizations.lib": ["@~/organizations.lib@workspace:packages/~/organizations/lib", { "dependencies": { "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib", "@~/organizations.repository": "packages/~/organizations/repository", "@~/users.repository": "packages/~/users/repository", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/organizations.lib": ["@~/organizations.lib@workspace:packages/~/organizations/lib"],
 
-    "@~/organizations.repository": ["@~/organizations.repository@workspace:packages/~/organizations/repository", { "dependencies": { "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "@~/moncomptepro.lib": "packages/~/infra/moncomptepro/lib", "drizzle-orm": "0.38.4", "ts-pattern": "5.6.2" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/organizations.repository": ["@~/organizations.repository@workspace:packages/~/organizations/repository"],
 
-    "@~/organizations.ui": ["@~/organizations.ui@workspace:packages/~/organizations/ui", { "dependencies": { "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/organizations.lib": "packages/~/organizations/lib", "hono": "4.6.17", "tailwind-variants": "0.2.1", "ts-pattern": "5.6.2", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/organizations.ui": ["@~/organizations.ui@workspace:packages/~/organizations/ui"],
 
-    "@~/proxy.api": ["@~/proxy.api@workspace:packages/~/proxy/api", { "dependencies": { "hono": "4.6.17" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/proxy.api": ["@~/proxy.api@workspace:packages/~/proxy/api"],
 
-    "@~/users.api": ["@~/users.api@workspace:packages/~/users/api", { "dependencies": { "@~/app.layout": "packages/~/app/layout", "@~/app.middleware": "packages/~/app/middleware", "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/moderations.repository": "packages/~/moderations/repository", "@~/organizations.repository": "packages/~/organizations/repository", "@~/users.repository": "packages/~/users/repository", "hono": "4.6.17", "ts-pattern": "5.6.2", "zod": "3.23.8" }, "devDependencies": { "@~/config.tailwindcss": "packages/~/config/tailwindcss", "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/users.api": ["@~/users.api@workspace:packages/~/users/api"],
 
-    "@~/users.lib": ["@~/users.lib@workspace:packages/~/users/lib", { "dependencies": { "@~/app.middleware": "packages/~/app/middleware", "@~/crisp.lib": "packages/~/infra/crisp/lib", "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/users.lib": ["@~/users.lib@workspace:packages/~/users/lib"],
 
-    "@~/users.repository": ["@~/users.repository@workspace:packages/~/users/repository", { "dependencies": { "@~/moncomptepro.database": "packages/~/infra/moncomptepro/database", "drizzle-orm": "0.38.4" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/users.repository": ["@~/users.repository@workspace:packages/~/users/repository"],
 
-    "@~/users.ui": ["@~/users.ui@workspace:packages/~/users/ui", { "dependencies": { "@~/app.ui": "packages/~/app/ui", "@~/app.urls": "packages/~/app/urls", "@~/moderations.lib": "packages/~/moderations/lib", "@~/organizations.lib": "packages/~/organizations/lib", "@~/users.lib": "packages/~/users/lib", "hono": "4.6.17", "tailwind-variants": "0.2.1", "ts-dedent": "2.2.0", "ts-pattern": "5.6.2" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "@~/crisp.lib": "packages/~/infra/crisp/lib" } }],
+    "@~/users.ui": ["@~/users.ui@workspace:packages/~/users/ui"],
 
-    "@~/welcome.api": ["@~/welcome.api@workspace:packages/~/welcome/api", { "dependencies": { "@lit-labs/motion": "1.0.7", "@~/app.core": "packages/~/app/core", "@~/app.layout": "packages/~/app/layout", "@~/app.middleware": "packages/~/app/middleware", "@~/app.urls": "packages/~/app/urls", "animate.css": "4.1.1", "hono": "4.6.17", "lit": "3.2.1", "openid-client": "5.7.0" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.43" } }],
+    "@~/welcome.api": ["@~/welcome.api@workspace:packages/~/welcome/api"],
 
-    "@~/zammad.api": ["@~/zammad.api@workspace:packages/~/infra/zammad/api", { "dependencies": { "@hono/zod-validator": "0.4.2", "@~/app.core": "packages/~/app/core", "@~/zammad.lib": "packages/~/infra/zammad/lib", "hono": "4.6.17", "ts-pattern": "5.6.2", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript", "bun-types": "1.1.43" } }],
+    "@~/zammad.api": ["@~/zammad.api@workspace:packages/~/infra/zammad/api"],
 
-    "@~/zammad.lib": ["@~/zammad.lib@workspace:packages/~/infra/zammad/lib", { "dependencies": { "@~/app.core": "packages/~/app/core", "consola": "3.3.3", "zod": "3.23.8" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "@~/zammad.lib": ["@~/zammad.lib@workspace:packages/~/infra/zammad/lib"],
 
     "accepts": ["accepts@1.3.8", "", { "dependencies": { "mime-types": "~2.1.34", "negotiator": "0.6.3" } }, "sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw=="],
 
@@ -1490,7 +1490,7 @@
 
     "hono-sessions": ["hono-sessions@0.7.0", "", { "dependencies": { "hono": "^4.0.0", "iron-webcrypto": "0.10.1" } }, "sha512-bclJUXaBq66R7jEjccqs/tc9WPJiS/wbWV5rrSMuYkTTCRF24wUi2nHjIummb7yzSpkT3GqLRifZkvNbzSMTzg=="],
 
-    "hono-slotify": ["hono-slotify@workspace:packages/hono-slotify", { "dependencies": { "hono": "4.6.17" }, "devDependencies": { "@~/config.typescript": "packages/~/config/typescript" } }],
+    "hono-slotify": ["hono-slotify@workspace:packages/hono-slotify"],
 
     "hosted-git-info": ["hosted-git-info@7.0.2", "", { "dependencies": { "lru-cache": "^10.0.1" } }, "sha512-puUZAUKT5m8Zzvs72XWy3HtvVbTWljRE66cP60bxJzAqf2DgICo7lYTY2IHUmLnNpjYvw5bvmoHvPc0QO2a62w=="],
 
@@ -2178,9 +2178,9 @@
 
     "supports-preserve-symlinks-flag": ["supports-preserve-symlinks-flag@1.0.0", "", {}, "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="],
 
-    "tailwind-merge": ["tailwind-merge@2.4.0", "", {}, "sha512-49AwoOQNKdqKPd9CViyH5wJoSKsCDjUlzL8DxuGp3P1FsGY36NJDAa18jLZcaHAUUuTj+JB8IAo8zWgBNvBF7A=="],
+    "tailwind-merge": ["tailwind-merge@2.5.4", "", {}, "sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q=="],
 
-    "tailwind-variants": ["tailwind-variants@0.2.1", "", { "dependencies": { "tailwind-merge": "^2.2.0" }, "peerDependencies": { "tailwindcss": "*" } }, "sha512-2xmhAf4UIc3PijOUcJPA1LP4AbxhpcHuHM2C26xM0k81r0maAO6uoUSHl3APmvHZcY5cZCY/bYuJdfFa4eGoaw=="],
+    "tailwind-variants": ["tailwind-variants@0.3.1", "", { "dependencies": { "tailwind-merge": "2.5.4" }, "peerDependencies": { "tailwindcss": "*" } }, "sha512-krn67M3FpPwElg4FsZrOQd0U26o7UDH/QOkK8RNaiCCrr052f6YJPBUfNKnPo/s/xRzNPtv1Mldlxsg8Tb46BQ=="],
 
     "tailwindcss": ["tailwindcss@3.4.17", "", { "dependencies": { "@alloc/quick-lru": "^5.2.0", "arg": "^5.0.2", "chokidar": "^3.6.0", "didyoumean": "^1.2.2", "dlv": "^1.1.3", "fast-glob": "^3.3.2", "glob-parent": "^6.0.2", "is-glob": "^4.0.3", "jiti": "^1.21.6", "lilconfig": "^3.1.3", "micromatch": "^4.0.8", "normalize-path": "^3.0.0", "object-hash": "^3.0.0", "picocolors": "^1.1.1", "postcss": "^8.4.47", "postcss-import": "^15.1.0", "postcss-js": "^4.0.1", "postcss-load-config": "^4.0.2", "postcss-nested": "^6.2.0", "postcss-selector-parser": "^6.1.2", "resolve": "^1.22.8", "sucrase": "^3.35.0" }, "bin": { "tailwind": "lib/cli.js", "tailwindcss": "lib/cli.js" } }, "sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og=="],
 
