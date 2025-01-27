@@ -71,7 +71,7 @@
         "modern-errors": "7.0.1",
         "ts-pattern": "5.6.2",
         "type-fest": "4.28.1",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -162,7 +162,7 @@
         "@~/app.urls": "workspace:*",
         "hono": "4.6.17",
         "openid-client": "5.7.0",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -202,7 +202,7 @@
         "@gouvfr-lasuite/proconnect.crisp": "0.4.0",
         "@~/app.core": "workspace:*",
         "consola": "3.3.3",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -262,7 +262,7 @@
         "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#f26af544c636f071bf6efc4343bfe4f9e98fddb5",
         "@~/app.core": "workspace:*",
         "consola": "3.3.3",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -278,7 +278,7 @@
         "@~/zammad.lib": "workspace:*",
         "hono": "4.6.17",
         "ts-pattern": "5.6.2",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -291,7 +291,7 @@
       "dependencies": {
         "@~/app.core": "workspace:*",
         "consola": "3.3.3",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -323,7 +323,7 @@
         "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.6.2",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.tailwindcss": "workspace:*",
@@ -340,7 +340,7 @@
         "@~/moncomptepro.database": "workspace:*",
         "drizzle-orm": "0.38.4",
         "ts-pattern": "5.6.2",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -393,7 +393,7 @@
         "lodash.sortby": "4.7.0",
         "tailwind-variants": "0.3.1",
         "ts-pattern": "5.6.2",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@types/lodash.sortby": "4.7.9",
@@ -409,7 +409,7 @@
         "@~/moncomptepro.lib": "workspace:*",
         "@~/organizations.repository": "workspace:*",
         "@~/users.repository": "workspace:*",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -438,7 +438,7 @@
         "hono": "4.6.17",
         "tailwind-variants": "0.3.1",
         "ts-pattern": "5.6.2",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -467,7 +467,7 @@
         "@~/users.repository": "workspace:*",
         "hono": "4.6.17",
         "ts-pattern": "5.6.2",
-        "zod": "3.23.8",
+        "zod": "3.24.1",
       },
       "devDependencies": {
         "@~/config.tailwindcss": "workspace:*",
@@ -2330,7 +2330,7 @@
 
     "youch": ["youch@3.3.4", "", { "dependencies": { "cookie": "^0.7.1", "mustache": "^4.2.0", "stacktracey": "^2.1.8" } }, "sha512-UeVBXie8cA35DS6+nBkls68xaBBXCye0CNznrhszZjTbRVnJKQuNsyLKBTTL4ln1o1rh2PKtv35twV7irj5SEg=="],
 
-    "zod": ["zod@3.23.8", "", {}, "sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g=="],
+    "zod": ["zod@3.24.1", "", {}, "sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A=="],
 
     "zod-validation-error": ["zod-validation-error@3.3.1", "", { "peerDependencies": { "zod": "^3.18.0" } }, "sha512-uFzCZz7FQis256dqw4AhPQgD6f3pzNca/Zh62RNELavlumQB3nDIUFbF5JQfFLcMbO1s02Q7Xg/gpcOBlEnYZA=="],
 

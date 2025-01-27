@@ -15,7 +15,7 @@
     "@gouvfr-lasuite/proconnect.crisp": "0.4.0",
     "@~/app.core": "workspace:*",
     "consola": "3.3.3",
-    "zod": "3.23.8"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
