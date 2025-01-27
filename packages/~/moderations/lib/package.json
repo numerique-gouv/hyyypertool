@@ -18,7 +18,7 @@
     "@~/moncomptepro.database": "workspace:*",
     "drizzle-orm": "0.38.4",
     "ts-pattern": "5.6.2",
-    "zod": "3.23.8"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@~/crisp.lib": "workspace:*",
