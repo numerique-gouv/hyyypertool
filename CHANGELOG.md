@@ -1,5 +1,12 @@
 # Changelog
 
+# [2025.2.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.7...2025.2.0) (2025-02-03)
+
+
+### Bug Fixes
+
+* **moderation:** existing email response ([#768](https://github.com/numerique-gouv/hyyypertool/issues/768)) ([24355a7](https://github.com/numerique-gouv/hyyypertool/commit/24355a7cd99b899f10041c1f220889b3ddf5f170))
+
 ## [2025.1.7](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.6...2025.1.7) (2025-01-27)
 
 ## [2025.1.6](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.5...2025.1.6) (2025-01-21)
