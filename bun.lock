@@ -104,7 +104,7 @@
         "@~/moncomptepro.database": "workspace:*",
         "@~/moncomptepro.lib": "workspace:*",
         "hono": "4.6.17",
-        "hono-sessions": "0.7.0",
+        "hono-sessions": "0.7.1",
         "openid-client": "5.7.0",
       },
       "devDependencies": {
@@ -1488,7 +1488,7 @@
 
     "hono": ["hono@4.6.17", "", {}, "sha512-Kbh4M0so2RzLiIg6iP33DoTU68TdvP2O/kb1Hhhdwa37fazuf402ig8ZRfjkz2dqXwiWl2dAgh0f++TuKAdOtQ=="],
 
-    "hono-sessions": ["hono-sessions@0.7.0", "", { "dependencies": { "hono": "^4.0.0", "iron-webcrypto": "0.10.1" } }, "sha512-bclJUXaBq66R7jEjccqs/tc9WPJiS/wbWV5rrSMuYkTTCRF24wUi2nHjIummb7yzSpkT3GqLRifZkvNbzSMTzg=="],
+    "hono-sessions": ["hono-sessions@0.7.1", "", { "dependencies": { "hono": "^4.0.0", "iron-webcrypto": "0.10.1" } }, "sha512-GHIXltc74BfGZNzlHzapc2mwQJHF7/YNpeT9tZ76j8DEXldoE111elLjFvZ3i5wveTU+/IiQwnl2INAji/ZEaA=="],
 
     "hono-slotify": ["hono-slotify@workspace:packages/hono-slotify"],
 
