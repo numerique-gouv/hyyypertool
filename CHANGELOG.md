@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.2.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.0...2025.2.1) (2025-02-05)
+
+
+### Bug Fixes
+
+* **crips:** add CRISP_RESOLVE_DELAY ([#774](https://github.com/numerique-gouv/hyyypertool/issues/774)) ([cd141b1](https://github.com/numerique-gouv/hyyypertool/commit/cd141b14d10e6862b1458f786ef73518c40347f1))
+
 # [2025.2.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.7...2025.2.0) (2025-02-03)
 
 
