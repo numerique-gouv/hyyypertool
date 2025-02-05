@@ -16,8 +16,9 @@ import { GetUserInfo } from "./GetUserInfo";
 
 export function ResetPassword({
   crisp,
+  resolve_delay,
   pg,
-}: MonCompteProDatabaseCradle & CrispApiCradle) {
+}: MonCompteProDatabaseCradle & CrispApiCradle & { resolve_delay: number }) {
   type ResetPassword_Input = {
     moderator: AgentConnect_UserInfo;
     user_id: number;
@@ -57,7 +58,7 @@ export function ResetPassword({
       user,
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, resolve_delay));
 
     await crisp.mark_conversation_as_resolved({ session_id });
   };

@@ -17,7 +17,8 @@ import { GetUserInfo } from "./GetUserInfo";
 export function ResetMFA({
   crisp,
   pg,
-}: MonCompteProDatabaseCradle & CrispApiCradle) {
+  resolve_delay,
+}: MonCompteProDatabaseCradle & CrispApiCradle & { resolve_delay: number }) {
   type ResetMFA_Input = { moderator: AgentConnect_UserInfo; user_id: number };
   return async function reset_mfa({ moderator, user_id }: ResetMFA_Input) {
     await pg
@@ -59,7 +60,7 @@ export function ResetMFA({
       user,
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, resolve_delay));
 
     await crisp.mark_conversation_as_resolved({ session_id });
   };

@@ -14,7 +14,7 @@ import { ResetPassword } from "./ResetPassword";
 beforeAll(migrate);
 beforeEach(empty_database);
 
-const reset_password = ResetPassword({ crisp, pg });
+const reset_password = ResetPassword({ crisp, pg, resolve_delay: 0 });
 
 //
 

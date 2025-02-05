@@ -79,13 +79,14 @@ export default new Hono<ContextType>()
     async function PATCH_RESET({
       text,
       req,
-      var: { crisp_config, moncomptepro_pg, userinfo },
+      var: { config, crisp_config, moncomptepro_pg, userinfo },
     }) {
       const { id: user_id } = req.valid("param");
 
       const reset_password = ResetPassword({
         crisp: CrispApi(crisp_config),
         pg: moncomptepro_pg,
+        resolve_delay: config.CRISP_RESOLVE_DELAY,
       });
       await reset_password({ moderator: userinfo, user_id });
 
@@ -99,13 +100,14 @@ export default new Hono<ContextType>()
     async function PATCH_RESET({
       text,
       req,
-      var: { crisp_config, moncomptepro_pg, userinfo },
+      var: { config, crisp_config, moncomptepro_pg, userinfo },
     }) {
       const { id: user_id } = req.valid("param");
 
       const reset_mfa = ResetMFA({
         crisp: CrispApi(crisp_config),
         pg: moncomptepro_pg,
+        resolve_delay: config.CRISP_RESOLVE_DELAY,
       });
       await reset_mfa({ moderator: userinfo, user_id });
 

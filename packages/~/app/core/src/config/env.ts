@@ -56,6 +56,7 @@ export const app_env = z.object({
   CRISP_IDENTIFIER: z.string().trim(),
   CRISP_KEY: z.string().trim(),
   CRISP_PLUGIN_URN: z.string().trim(),
+  CRISP_RESOLVE_DELAY: z.coerce.number().default(2000),
   CRISP_USER_NICKNAME: z.string().trim(),
   CRISP_WEBSITE_ID: z.string().trim(),
   DATABASE_URL: z

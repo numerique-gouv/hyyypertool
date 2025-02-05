@@ -40,7 +40,12 @@ export async function respond_to_ticket(
 }
 
 async function respond_in_conversation(
-  { crisp_config, moderation, userinfo }: RejectedModeration_Context,
+  {
+    crisp_config,
+    moderation,
+    userinfo,
+    resolve_delay,
+  }: RejectedModeration_Context,
   { message }: RejectedFullMessage,
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
@@ -61,7 +66,7 @@ async function respond_in_conversation(
 
   // HACK(douglasduteil): Wait for the message to be sent
   // Crisp seems to have a delay between the message being sent and the state being updated
-  await new Promise((resolve) => setTimeout(resolve, 1_000));
+  await new Promise((resolve) => setTimeout(resolve, resolve_delay));
 
   const { mark_conversation_as_resolved } = CrispApi(crisp_config);
   await mark_conversation_as_resolved({ session_id: moderation.ticket_id });
