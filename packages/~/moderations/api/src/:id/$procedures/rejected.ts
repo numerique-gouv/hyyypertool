@@ -23,7 +23,7 @@ export default new Hono<ContextType>().patch(
   async function PATH({
     text,
     req,
-    var: { moncomptepro_pg, userinfo, crisp_config },
+    var: { moncomptepro_pg, userinfo, crisp_config, config },
   }) {
     const { id: moderation_id } = req.valid("param");
     const { message, subject } = req.valid("form");
@@ -34,6 +34,7 @@ export default new Hono<ContextType>().patch(
       moderation,
       pg: moncomptepro_pg,
       userinfo,
+      resolve_delay: config.CRISP_RESOLVE_DELAY,
     };
     await send_rejected_message_to_user(context, { message, subject });
 

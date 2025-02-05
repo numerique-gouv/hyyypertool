@@ -14,7 +14,7 @@ import { ResetMFA } from "./ResetMFA";
 beforeAll(migrate);
 beforeEach(empty_database);
 
-const reset_mfa = ResetMFA({ crisp, pg });
+const reset_mfa = ResetMFA({ crisp, pg, resolve_delay: 0 });
 
 //
 
