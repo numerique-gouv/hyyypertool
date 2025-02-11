@@ -74,7 +74,7 @@
     "@tsconfig/bun": "1.0.7",
     "@~/config.tailwindcss": "workspace:*",
     "bun-types": "1.1.43",
-    "prettier": "3.4.2",
+    "prettier": "3.5.0",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-tailwindcss": "0.6.11",
     "release-it": "17.11.0",
