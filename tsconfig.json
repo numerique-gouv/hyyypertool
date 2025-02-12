@@ -8,8 +8,8 @@
   "include": [
     "bin/src",
     "build.ts",
-    "packages/~/*/*/*/src/**/*.tsx",
-    "packages/~/*/*/src/**/*.tsx"
+    "packages/~/*/*/*/src",
+    "packages/~/*/*/src"
   ],
   "references": [
     { "path": "packages/~/app/api/tsconfig.json" },
