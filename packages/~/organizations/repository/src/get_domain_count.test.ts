@@ -14,10 +14,8 @@ beforeEach(empty_database);
 //
 
 test("returns no member", async () => {
-  const unicorn_organization_id = await create_unicorn_organization(pg);
-
   const domain_unicorn = await get_domain_count(pg, {
-    organization_id: unicorn_organization_id,
+    organization_id: 666,
   });
 
   expect(domain_unicorn).toEqual(0);
@@ -33,7 +31,7 @@ test("returns 1 member", async () => {
   expect(domain_unicorn).toBe(1);
 });
 
-test.only("returns 3 domains", async () => {
+test("returns 3 domains", async () => {
   const unicorn_organization_id = await create_unicorn_organization(pg);
   await pg.insert(schema.email_domains).values({
     domain: "bi.corn",
