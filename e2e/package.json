@@ -12,7 +12,7 @@
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "22.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.4",
-    "cypress": "14.0.2",
+    "cypress": "14.0.3",
     "pg": "8.13.1",
     "typescript": "5.7.3"
   },
