@@ -5,6 +5,7 @@ import type { SimplifyDeep } from "@~/app.core/types";
 import type { Moderation } from "@~/moderations.lib/entities/Moderation";
 import type { IsUserExternalMemberHandler } from "@~/moderations.lib/usecase/IsUserExternalMember";
 import type { Organization } from "@~/organizations.lib/entities/Organization";
+import type { SuggestOrganizationDomainsHandler } from "@~/organizations.lib/usecase";
 import type { User } from "@~/users.lib/entities/User";
 import type { SuggestSameUserEmailsHandler } from "@~/users.lib/usecase/SuggestSameUserEmails";
 import { createContext } from "hono/jsx";
@@ -25,6 +26,7 @@ export interface Values {
   $decision_form: string;
   query_suggest_same_user_emails: SuggestSameUserEmailsHandler;
   query_is_user_external_member: IsUserExternalMemberHandler;
+  query_suggest_organization_domains: SuggestOrganizationDomainsHandler;
 }
 export const context = createContext<Values>(null as any);
 

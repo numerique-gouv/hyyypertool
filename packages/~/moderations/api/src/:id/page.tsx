@@ -10,6 +10,7 @@ import { DomainsByOrganization } from "@~/moderations.ui/DomainsByOrganization";
 import { Header } from "@~/moderations.ui/Header";
 import { OrganizationsByUser } from "@~/moderations.ui/OrganizationsByUser";
 import { UsersByOrganization } from "@~/moderations.ui/UsersByOrganization";
+import { SuggestOrganizationDomains } from "@~/organizations.lib/usecase";
 import { About as About_Organization } from "@~/organizations.ui/info/About";
 import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
 import {
@@ -128,6 +129,9 @@ export default async function Moderation_Page() {
             pg: moncomptepro_pg,
           }),
           query_is_user_external_member: IsUserExternalMember({
+            pg: moncomptepro_pg,
+          }),
+          query_suggest_organization_domains: SuggestOrganizationDomains({
             pg: moncomptepro_pg,
           }),
         }}
