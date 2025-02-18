@@ -15,6 +15,9 @@
     }
   },
   "dependencies": {
+    "@gouvfr-lasuite/proconnect.core": "^0.4.0",
+    "@gouvfr-lasuite/proconnect.identite": "^0.5.1",
+    "@gouvfr-lasuite/proconnect.insee": "^0.3.2",
     "@numerique-gouv/moncomptepro": "numerique-gouv/moncomptepro#f26af544c636f071bf6efc4343bfe4f9e98fddb5",
     "@~/app.core": "workspace:*",
     "consola": "3.3.3",
