@@ -1,5 +1,13 @@
 # Changelog
 
+## [2025.2.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.1...2025.2.2) (2025-02-19)
+
+
+### Features
+
+* **infra:** use @gouvfr-lasuite/proconnect.identite ([#792](https://github.com/numerique-gouv/hyyypertool/issues/792)) ([8a9272d](https://github.com/numerique-gouv/hyyypertool/commit/8a9272d88456946eb227d9087d7735f3586d898d))
+* **moderation:** list organisation domain in reponse type ([#783](https://github.com/numerique-gouv/hyyypertool/issues/783)) ([b74138c](https://github.com/numerique-gouv/hyyypertool/commit/b74138c578d58f22e5216d5ab6f13e9292d49bcb))
+
 ## [2025.2.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.0...2025.2.1) (2025-02-05)
 
 
