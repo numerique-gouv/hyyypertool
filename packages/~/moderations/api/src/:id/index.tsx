@@ -7,7 +7,7 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { Main_Layout } from "@~/app.layout/index";
 import type { App_Context } from "@~/app.middleware/context";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";
-import { GetFicheOrganizationById } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
+import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
 import { get_domain_count } from "@~/organizations.repository/get_domain_count";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to } from "await-to-js";

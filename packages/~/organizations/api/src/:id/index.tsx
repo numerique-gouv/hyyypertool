@@ -5,7 +5,7 @@ import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";
-import { GetFicheOrganizationById } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
+import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
 import { GetOrganizationById } from "@~/organizations.repository";
 import { get_domain_count } from "@~/organizations.repository/get_domain_count";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";

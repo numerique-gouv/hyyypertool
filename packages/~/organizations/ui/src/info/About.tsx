@@ -3,7 +3,7 @@
 import { button } from "@~/app.ui/button";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
-import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
+import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";
 import { InactiveWarning } from "./InactiveWarning";
 
