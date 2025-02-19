@@ -1,12 +1,5 @@
 //
 
-export * from "@gouvfr-lasuite/proconnect.identite/managers/organization";
-export * as EmailDomainRepository from "@gouvfr-lasuite/proconnect.identite/repositories/email-domain";
-export * as OrganizationRepository from "@gouvfr-lasuite/proconnect.identite/repositories/organization";
-export * as UserRepository from "@gouvfr-lasuite/proconnect.identite/repositories/user";
-
-//
-
 import {
   forceJoinOrganizationFactory,
   markDomainAsVerifiedFactory,
