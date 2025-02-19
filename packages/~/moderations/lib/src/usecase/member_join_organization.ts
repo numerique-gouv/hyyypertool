@@ -1,7 +1,6 @@
 //
 
 import type { GetModerationByIdHandler } from "@~/moderations.repository";
-import type { JoinOrganizationHandler } from "@~/moncomptepro.lib";
 import type { ForceJoinOrganizationHandler } from "@~/moncomptepro.lib/sdk";
 import type { GetMemberHandler } from "@~/users.repository";
 import { to as await_to } from "await-to-js";
@@ -12,12 +11,10 @@ export function MemberJoinOrganization({
   force_join_organization,
   get_member,
   get_moderation_by_id,
-  join_organization,
 }: {
   force_join_organization: ForceJoinOrganizationHandler;
   get_member: GetMemberHandler<{ updated_at: true }>;
   get_moderation_by_id: GetModerationByIdHandler;
-  join_organization: JoinOrganizationHandler;
 }) {
   return async function member_join_organization({
     moderation_id,
@@ -47,12 +44,5 @@ export function MemberJoinOrganization({
         user_id,
       });
     }
-
-    // NOTE(dougladuteil): still run legacy endpoint
-    await join_organization({
-      is_external,
-      organization_id,
-      user_id,
-    });
   };
 }

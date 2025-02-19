@@ -3,7 +3,7 @@
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { Organization } from "@~/organizations.lib/entities/Organization";
-import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase/GetFicheOrganizationById";
+import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type get_domain_count_dto } from "@~/organizations.repository/get_domain_count";
 import { type get_organization_members_count_dto } from "@~/organizations.repository/get_organization_members_count";
 import type { Env, InferRequestType } from "hono";

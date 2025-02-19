@@ -14,6 +14,10 @@ export type MonComptePro_PgDatabase = PgDatabase<
   PgQueryResultHKT,
   typeof schema
 >;
+export type MonCompteProSdkDatabaseCradle = {
+  pg_client: Pg.Pool;
+};
+
 export type MonCompteProDatabaseCradle = {
   pg: MonComptePro_PgDatabase;
 };
