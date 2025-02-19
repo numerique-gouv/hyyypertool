@@ -1,19 +1,19 @@
 //
 
-import {
-  fetch_crisp,
-  type Config,
-  type ConversationMeta,
-  type User,
-} from "@numerique-gouv/crisp";
+import { fetch_crisp } from "@gouvfr-lasuite/proconnect.crisp/client";
 import type {
   CreateConversationRoute,
   GetConversationRoute,
   GetMessagesInAConversationRoute,
+  OperatorsRouter,
   SendMessageInAConversationRoute,
   UpdateConversationMetaRoute,
-} from "@numerique-gouv/crisp/router/conversation";
-import type { OperatorsRouter } from "@numerique-gouv/crisp/router/operators";
+} from "@gouvfr-lasuite/proconnect.crisp/router";
+import type {
+  Config,
+  ConversationMeta,
+  User,
+} from "@gouvfr-lasuite/proconnect.crisp/types";
 import { z } from "zod";
 import type { CrispApi } from "./api";
 

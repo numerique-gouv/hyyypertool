@@ -35,6 +35,6 @@ export function GetCripsFromSessionId({
   };
 }
 
-export type get_crisp_from_session_id = ReturnType<
+export type GetCripsFromSessionIdHandler = ReturnType<
   typeof GetCripsFromSessionId
 >;
