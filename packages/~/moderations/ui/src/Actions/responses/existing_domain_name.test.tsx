@@ -1,13 +1,16 @@
 //
 
 import { render_md } from "@~/app.ui/testing";
+import type { SuggestOrganizationDomainsHandler } from "@~/organizations.lib/usecase";
 import { expect, test } from "bun:test";
 import { context, type Values } from "../context";
-import existing_domain_name from "./existing_domain_name";
+import existing_domain_name, { label } from "./existing_domain_name";
 
 //
 
-test("returns existing domain name use personal e-mail address or free domain", async () => {
+test(label, async () => {
+  const query_suggest_organization_domains: SuggestOrganizationDomainsHandler =
+    async () => ["yahoo.fr", "test.koukou"];
   expect(
     await render_md(
       <context.Provider
@@ -16,13 +19,26 @@ test("returns existing domain name use personal e-mail address or free domain", 
             moderation: {
               organization: { cached_libelle: "🦄" },
             },
+            query_suggest_organization_domains,
           } as Values
         }
       >
         <Response />
       </context.Provider>,
     ),
-  ).toMatchSnapshot();
+  ).toMatchInlineSnapshot(`
+    "Bonjour,
+
+    Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+    D’après nos recherches, l’organisation « 🦄 » dispose d’un nom de domaine officiel.
+    Conformément à nos règles, nous ne pouvons pas accepter votre demande de rattachement avec votre adresse e-mail personnelle ou associée à un domaine grand public (gmail, orange, wanadoo, yahoo…).
+    Veuillez créer à nouveau votre compte utilisateur avec votre adresse e-mail professionnelle, associée au nom de domaine : « yahoo.fr », « test.koukou ».
+
+    Bien cordialement,
+    L’équipe ProConnect.
+    "
+  `);
 });
 
 function Response() {
