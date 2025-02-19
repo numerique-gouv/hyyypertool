@@ -5,7 +5,7 @@ import { OpenInCrisp, short_session_id } from "@~/app.ui/links/OpenInCrisp";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import type { Config } from "@~/crisp.lib/types";
 import { Message } from "@~/crisp.ui/message";
-import type { get_crisp_from_session_id } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
+import type { GetCripsFromSessionIdHandler } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
 import { createContext, useContext } from "hono/jsx";
 import { match } from "ts-pattern";
 
@@ -14,7 +14,7 @@ import { match } from "ts-pattern";
 interface Values {
   crisp_config: Config;
   limit: number;
-  crisp: Awaited<ReturnType<get_crisp_from_session_id>>;
+  crisp: Awaited<ReturnType<GetCripsFromSessionIdHandler>>;
 }
 const context = createContext<Values>(null as any);
 

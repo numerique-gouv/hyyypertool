@@ -4,7 +4,7 @@ import { NotFoundError } from "@~/app.core/error";
 import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { Crisp_Context } from "@~/crisp.middleware";
-import type { get_crisp_from_session_id } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
+import type { GetCripsFromSessionIdHandler } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { type get_zammad_mail_dto } from "@~/zammad.lib/get_zammad_mail";
 import { eq } from "drizzle-orm";
@@ -18,7 +18,7 @@ export interface ContextVariablesType extends Env {
   Variables: {
     MAX_ARTICLE_COUNT: number;
     //
-    crisp?: Awaited<ReturnType<get_crisp_from_session_id>>;
+    crisp?: Awaited<ReturnType<GetCripsFromSessionIdHandler>>;
     moderation: get_moderation_dto;
     zammad:
       | undefined
