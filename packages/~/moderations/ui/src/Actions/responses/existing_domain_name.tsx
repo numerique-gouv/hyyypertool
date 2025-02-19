@@ -15,7 +15,6 @@ export default async function template() {
     query_suggest_organization_domains,
   } = useContext(context);
   const domains = await query_suggest_organization_domains(id);
-  console.log(useContext(context), "🥳🥳🥳🥳");
 
   return dedent`
     Bonjour,
