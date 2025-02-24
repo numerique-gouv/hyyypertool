@@ -17,7 +17,7 @@
         "@tsconfig/bun": "1.0.7",
         "@~/config.tailwindcss": "workspace:*",
         "bun-types": "1.1.43",
-        "prettier": "3.5.0",
+        "prettier": "3.5.2",
         "prettier-plugin-organize-imports": "4.1.0",
         "prettier-plugin-tailwindcss": "0.6.11",
         "release-it": "17.11.0",
@@ -1630,7 +1630,7 @@
 
     "postgres-range": ["postgres-range@1.1.4", "", {}, "sha512-i/hbxIE9803Alj/6ytL7UHQxRvZkI9O4Sy+J3HGc4F4oo/2eQAjTSNJ0bfxyse3bH0nuVesCk+3IRLaMtG3H6w=="],
 
-    "prettier": ["prettier@3.5.0", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-quyMrVt6svPS7CjQ9gKb3GLEX/rl3BCL2oa/QkNcXv4YNVBC9olt3s+H7ukto06q7B1Qz46PbrKLO34PR6vXcA=="],
+    "prettier": ["prettier@3.5.2", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-lc6npv5PH7hVqozBR7lkBNOGXV9vMwROAPlumdBkX0wTbbzPu/U1hk5yL8p2pt4Xoc+2mkT8t/sow2YrV/M5qg=="],
 
     "prettier-plugin-organize-imports": ["prettier-plugin-organize-imports@4.1.0", "", { "peerDependencies": { "prettier": ">=2.0", "typescript": ">=2.9", "vue-tsc": "^2.1.0" }, "optionalPeers": ["vue-tsc"] }, "sha512-5aWRdCgv645xaa58X8lOxzZoiHAldAPChljr/MT0crXVOWTZ+Svl4hIWlz+niYSlO6ikE5UXkN1JrRvIP2ut0A=="],
 
