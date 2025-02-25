@@ -35,7 +35,6 @@ export const reject_context = createContext({
   $destination: hyper_ref(),
   $message: hyper_ref(),
   $object: hyper_ref(),
-  $select: hyper_ref(),
 });
 export const valid_context = createContext({
   $add_as_external_member: hyper_ref(),
