@@ -7,24 +7,30 @@ import { reponse_templates } from "./responses";
 //
 
 export function ResponseMessageSelector() {
-  const { $message, $select } = useContext(reject_context);
+  const { $message } = useContext(reject_context);
   return (
-    <select
-      _={`
-      on change
-        set #${$message}.value to my value
-      `}
-      class="fr-select"
-      id={$select}
-    >
-      <option value="" selected disabled hidden>
-        Sélectionner une response
-      </option>
-      {reponse_templates.map(async ({ label, default: template }) => (
-        <option key={label} value={await Promise.resolve(template())}>
-          {label}
-        </option>
-      ))}
-    </select>
+    <div>
+      <input
+        _={`
+        on change
+          set :key to my value
+          set :option to <option[value="${"${:key}"}"]/> in #responses-type
+          set #${$message}.value to :option@message
+        `}
+        class="fr-select"
+        list="responses-type"
+        placeholder="Recherche d'une réponse type"
+        autocomplete="off"
+      />
+      <datalist id="responses-type">
+        {reponse_templates.map(async ({ label, default: template }, index) => (
+          <option
+            key={index}
+            value={label}
+            message={await Promise.resolve(template())}
+          ></option>
+        ))}
+      </datalist>
+    </div>
   );
 }
