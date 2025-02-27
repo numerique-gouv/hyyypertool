@@ -12,6 +12,7 @@ import { match, P } from "ts-pattern";
 //
 
 type Props = {
+  isOpen?: boolean;
   organization: Pick<Organization, "id">;
   query_members_count: Promise<number>;
 };
@@ -20,10 +21,18 @@ export async function UsersByOrganization(props: Props) {
   const $page_ref = hyper_ref();
   const { organization, query_members_count } = props;
   const count = await query_members_count;
-  const isOpen = match(count)
-    .with(0, () => false)
-    .with(P.number.between(1, 3), () => true)
-    .otherwise(() => false);
+  const isOpen =
+    props.isOpen ??
+    match(count)
+      .with(0, () => false)
+      .with(P.number.between(1, 3), () => true)
+      .otherwise(() => false);
+  const hx_get_users_by_organization_props = {
+    ...(await hx_urls.organizations[":id"].members.$get({
+      param: { id: organization.id.toString() },
+      query: { describedby: $describedby, page_ref: $page_ref },
+    })),
+  };
 
   return (
     <section>
@@ -40,13 +49,8 @@ export async function UsersByOrganization(props: Props) {
         </summary>
 
         <div
+          {...hx_get_users_by_organization_props}
           class="fr-table"
-          {...await hx_urls.organizations[":id"].members.$get({
-            param: {
-              id: organization.id.toString(),
-            },
-            query: { describedby: $describedby, page_ref: $page_ref },
-          })}
           hx-include={hx_include([$page_ref])}
           hx-target="this"
           hx-trigger={[
