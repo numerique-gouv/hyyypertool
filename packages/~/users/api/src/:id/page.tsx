@@ -17,13 +17,15 @@ export default async function User_Page() {
   const {
     var: { user },
   } = usePageRequestContext();
-  const hx_get_user_organizations = await hx_urls.users[
+  const hx_get_user_organizations_props = await hx_urls.users[
     ":id"
   ].organizations.$get({
     param: { id: user.id.toString() },
-    query: { describedby: hyper_ref() },
+    query: { describedby: hyper_ref(), page_ref: hyper_ref() },
   });
-  const hx_get_user_moderations = await hx_urls.users[":id"].moderations.$get({
+  const hx_get_user_moderations_props = await hx_urls.users[
+    ":id"
+  ].moderations.$get({
     param: { id: user.id.toString() },
   });
 
@@ -51,7 +53,7 @@ export default async function User_Page() {
         suivantes :
         <div class="fr-table max-w-full overflow-x-auto">
           <div
-            {...hx_get_user_organizations}
+            {...hx_get_user_organizations_props}
             hx-target="this"
             hx-trigger="load"
             class="fr-table"
@@ -63,7 +65,7 @@ export default async function User_Page() {
         suivantes :
         <div class="fr-table max-w-full overflow-x-auto">
           <div
-            {...hx_get_user_moderations}
+            {...hx_get_user_moderations_props}
             hx-target="this"
             hx-trigger="load"
             class="fr-table"
