@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.2.5](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.4...2025.2.5) (2025-02-27)
+
+
+### Bug Fixes
+
+* **organization:** list by user id pagination ([#803](https://github.com/numerique-gouv/hyyypertool/issues/803)) ([546eb58](https://github.com/numerique-gouv/hyyypertool/commit/546eb58e1e1c42e83ecb05deb3ad7c046c61dea4))
+
 ## [2025.2.4](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.3...2025.2.4) (2025-02-26)
 
 ## [2025.2.3](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.2...2025.2.3) (2025-02-19)
