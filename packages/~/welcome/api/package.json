@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "@lit-labs/motion": "1.0.7",
+    "@lit-labs/motion": "1.0.8",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
