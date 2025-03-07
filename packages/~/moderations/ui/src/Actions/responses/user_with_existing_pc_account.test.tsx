@@ -36,7 +36,7 @@ test("with one email found", async () => {
 
     Vous possédez déjà un compte ProConnect associé à l’adresse e-mail professionnelle : « 🦄@unicorn.xyz ».
 
-    Merci de bien vouloir vous connecter avec le compte déjà existant.
+    Merci de bien vouloir vous connecter avec le compte déjà existant ou de le supprimer (nous pouvons le faire pour vous si vous répondez à ce message).
 
     Votre adresse e-mail associée à un nom de domaine gratuit tel que « 🧨 » ne sera pas autorisée.
 
@@ -78,7 +78,7 @@ test("with three emails found", async () => {
     - 🐷@unicorn.xyz
     - 🧧@unicorn.xyz
 
-    Merci de bien vouloir vous connecter avec le compte déjà existant.
+    Merci de bien vouloir vous connecter avec le compte déjà existant ou de le supprimer (nous pouvons le faire pour vous si vous répondez à ce message).
 
     Votre adresse e-mail associée à un nom de domaine gratuit tel que « 🧨 » ne sera pas autorisée.
 
@@ -116,7 +116,7 @@ test("with no emails found", async () => {
 
     Vous possédez déjà un compte ProConnect associé à l’adresse e-mail professionnelle : « ???? ».
 
-    Merci de bien vouloir vous connecter avec le compte déjà existant.
+    Merci de bien vouloir vous connecter avec le compte déjà existant ou de le supprimer (nous pouvons le faire pour vous si vous répondez à ce message).
 
     Votre adresse e-mail associée à un nom de domaine gratuit tel que « 🧨 » ne sera pas autorisée.
 
