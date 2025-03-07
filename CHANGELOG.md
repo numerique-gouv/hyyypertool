@@ -1,5 +1,13 @@
 # Changelog
 
+# [2025.3.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.5...2025.3.0) (2025-03-07)
+
+
+### Features
+
+* **moderation:** replace old mcp link with pc link ([#811](https://github.com/numerique-gouv/hyyypertool/issues/811)) ([2212e40](https://github.com/numerique-gouv/hyyypertool/commit/2212e4039187f9ac67fa343aceda1c125af0b604))
+* **moderation:** update content of mail from user_with_existing_pc_account ([#810](https://github.com/numerique-gouv/hyyypertool/issues/810)) ([3e16854](https://github.com/numerique-gouv/hyyypertool/commit/3e16854bb2cb220a7333e197798b13817178fc9c))
+
 ## [2025.2.5](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.4...2025.2.5) (2025-02-27)
 
 
