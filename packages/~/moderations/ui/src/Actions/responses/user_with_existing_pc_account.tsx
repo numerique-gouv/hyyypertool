@@ -30,7 +30,7 @@ export default async function template() {
 
     ${possible_emails}
 
-    Merci de bien vouloir vous connecter avec le compte déjà existant.
+    Merci de bien vouloir vous connecter avec le compte déjà existant ou de le supprimer (nous pouvons le faire pour vous si vous répondez à ce message).
 
     Votre adresse e-mail associée à un nom de domaine gratuit tel que « ${domain} » ne sera pas autorisée.
 
