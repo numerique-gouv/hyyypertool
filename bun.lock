@@ -56,7 +56,7 @@
         "hono": "4.6.17",
         "htmx.ext...chunked-transfer": "1.0.4",
         "htmx.org": "1.9.12",
-        "hyperscript.org": "0.9.13",
+        "hyperscript.org": "0.9.14",
         "ts-pattern": "5.6.2",
         "youch": "3.3.4",
       },
@@ -1276,7 +1276,7 @@
 
     "human-signals": ["human-signals@5.0.0", "", {}, "sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ=="],
 
-    "hyperscript.org": ["hyperscript.org@0.9.13", "", { "dependencies": { "markdown-it-deflist": "^2.1.0", "terser": "^5.14.1" }, "bin": { "_hyperscript": "src/bin/node-hyperscript.js" } }, "sha512-TRmZx1l3OeVKwdSlmKHFBJPu6VydBWafQ8KlI9AquhJ1XVfZ5QuT/w3PLyqg3vQX5NBNgEMqKkDcCITnKozejw=="],
+    "hyperscript.org": ["hyperscript.org@0.9.14", "", { "dependencies": { "markdown-it-deflist": "^2.1.0", "terser": "^5.14.1" }, "bin": { "_hyperscript": "src/node-hyperscript.js" } }, "sha512-ugmojsQQUMmXcnwaXYiYf8L3GbeANy/m59EmE/0Z6C5eQ52fOuSrvFkuEIejG9BdpbYB4iTtoYGqV99eYqDVMA=="],
 
     "iconv-lite": ["iconv-lite@0.4.24", "", { "dependencies": { "safer-buffer": ">= 2.1.2 < 3" } }, "sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA=="],
 
