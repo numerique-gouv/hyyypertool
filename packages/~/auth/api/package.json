@@ -16,7 +16,7 @@
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
     "hono": "4.6.17",
-    "openid-client": "5.7.0",
+    "openid-client": "6.3.3",
     "zod": "3.24.1"
   },
   "devDependencies": {
