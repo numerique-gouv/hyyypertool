@@ -15,7 +15,7 @@
     }
   },
   "dependencies": {
-    "@gouvfr-lasuite/proconnect.core": "0.4.0",
+    "@gouvfr-lasuite/proconnect.core": "0.5.0",
     "@gouvfr-lasuite/proconnect.identite": "0.5.1",
     "@gouvfr-lasuite/proconnect.insee": "0.3.2",
     "@~/app.core": "workspace:*",
