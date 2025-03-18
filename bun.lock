@@ -259,7 +259,7 @@
       "name": "@~/moncomptepro.lib",
       "version": "1.0.0",
       "dependencies": {
-        "@gouvfr-lasuite/proconnect.core": "0.4.0",
+        "@gouvfr-lasuite/proconnect.core": "0.5.0",
         "@gouvfr-lasuite/proconnect.identite": "0.5.1",
         "@gouvfr-lasuite/proconnect.insee": "0.3.2",
         "@~/app.core": "workspace:*",
@@ -616,7 +616,7 @@
 
     "@gouvfr-lasuite/moncomptepro.core": ["@gouvfr-lasuite/moncomptepro.core@0.1.0", "", { "dependencies": { "@zootools/email-spell-checker": "^1.12.0", "is-disposable-email-domain": "^1.0.7" } }, "sha512-U3QbT6tax8qWGf9+TFzd89TnoD/m31vIiPlRw0WAIHz4VwBVMSgOgGA/hCunCvsW+Knk7twvuA6tAIPsL+uBUw=="],
 
-    "@gouvfr-lasuite/proconnect.core": ["@gouvfr-lasuite/proconnect.core@0.4.0", "", { "dependencies": { "@types/bcryptjs": "^2.4.6", "@types/lodash-es": "^4.17.12", "@zootools/email-spell-checker": "^1.12.0", "bcryptjs": "^2.4.3", "is-disposable-email-domain": "^1.0.7", "lodash-es": "^4.17.21", "nanoid": "^5.0.9", "tld-extract": "^2.1.0" } }, "sha512-cd8bakGaRXU83YEIT4++nZA3c8L48uqQsFpxalIhe4HEdhbY2X3xN2v9HSJUG7x1A7lt9JgYo1VAtHe9YRw72w=="],
+    "@gouvfr-lasuite/proconnect.core": ["@gouvfr-lasuite/proconnect.core@0.5.0", "", { "dependencies": { "@types/bcryptjs": "^2.4.6", "@types/lodash-es": "^4.17.12", "@types/oidc-provider": "^8.5.2", "@zootools/email-spell-checker": "^1.12.0", "bcryptjs": "^2.4.3", "is-disposable-email-domain": "^1.0.7", "lodash-es": "^4.17.21", "nanoid": "^5.0.9", "tld-extract": "^2.1.0" } }, "sha512-dhVcvfkP8jf3sB/hf8V5W8I5aCH4u+wLX2QvSBOcmb9hq1Ejee3cxS21Qp0//+nUQsqTs5Wk0csw+eWDFdqCaw=="],
 
     "@gouvfr-lasuite/proconnect.crisp": ["@gouvfr-lasuite/proconnect.crisp@0.5.0", "", {}, "sha512-WplyIj6BFcAp0CIGh2QvmF5EhullPzXZg01xDgEJBZ9d1yDAUPgLZh9Fg8zDQdfjJP3ZSKtFwSl80bETz/rrKg=="],
 
@@ -792,13 +792,35 @@
 
     "@tsconfig/strictest": ["@tsconfig/strictest@2.0.5", "", {}, "sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg=="],
 
+    "@types/accepts": ["@types/accepts@1.3.7", "", { "dependencies": { "@types/node": "*" } }, "sha512-Pay9fq2lM2wXPWbteBsRAGiWH2hig4ZE2asK+mm7kUzlxRTfL961rj89I6zV/E3PcIkDqyuBEcMxFT7rccugeQ=="],
+
     "@types/bcryptjs": ["@types/bcryptjs@2.4.6", "", {}, "sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ=="],
+
+    "@types/body-parser": ["@types/body-parser@1.19.5", "", { "dependencies": { "@types/connect": "*", "@types/node": "*" } }, "sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg=="],
 
     "@types/connect": ["@types/connect@3.4.36", "", { "dependencies": { "@types/node": "*" } }, "sha512-P63Zd/JUGq+PdrM1lv0Wv5SBYeA2+CORvbrXbngriYY0jzLUWfQMQQxOhjONEz/wlHOAxOdY7CY65rgQdTjq2w=="],
 
+    "@types/content-disposition": ["@types/content-disposition@0.5.8", "", {}, "sha512-QVSSvno3dE0MgO76pJhmv4Qyi/j0Yk9pBp0Y7TJ2Tlj+KCgJWY6qX7nnxCOLkZ3VYRSIk1WTxCvwUSdx6CCLdg=="],
+
+    "@types/cookies": ["@types/cookies@0.9.0", "", { "dependencies": { "@types/connect": "*", "@types/express": "*", "@types/keygrip": "*", "@types/node": "*" } }, "sha512-40Zk8qR147RABiQ7NQnBzWzDcjKzNrntB5BAmeGCb2p/MIyOE+4BVvc17wumsUqUw00bJYqoXFHYygQnEFh4/Q=="],
+
     "@types/debug": ["@types/debug@4.1.12", "", { "dependencies": { "@types/ms": "*" } }, "sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ=="],
 
+    "@types/express": ["@types/express@5.0.0", "", { "dependencies": { "@types/body-parser": "*", "@types/express-serve-static-core": "^5.0.0", "@types/qs": "*", "@types/serve-static": "*" } }, "sha512-DvZriSMehGHL1ZNLzi6MidnsDhUZM/x2pRdDIKdwbUNqqwHxMlRdkxtn6/EPKyqKpHqTl/4nRZsRNLpZxZRpPQ=="],
+
+    "@types/express-serve-static-core": ["@types/express-serve-static-core@5.0.6", "", { "dependencies": { "@types/node": "*", "@types/qs": "*", "@types/range-parser": "*", "@types/send": "*" } }, "sha512-3xhRnjJPkULekpSzgtoNYYcTWgEZkp4myc+Saevii5JPnHNvHMRlBSHDbs7Bh1iPPoVTERHEZXyhyLbMEsExsA=="],
+
     "@types/hast": ["@types/hast@3.0.4", "", { "dependencies": { "@types/unist": "*" } }, "sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ=="],
+
+    "@types/http-assert": ["@types/http-assert@1.5.6", "", {}, "sha512-TTEwmtjgVbYAzZYWyeHPrrtWnfVkm8tQkP8P21uQifPgMRgjrow3XDEYqucuC8SKZJT7pUnhU/JymvjggxO9vw=="],
+
+    "@types/http-errors": ["@types/http-errors@2.0.4", "", {}, "sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA=="],
+
+    "@types/keygrip": ["@types/keygrip@1.0.6", "", {}, "sha512-lZuNAY9xeJt7Bx4t4dx0rYCDqGPW8RXhQZK1td7d4H6E9zYbLoOtjBvfwdTKpsyxQI/2jv+armjX/RW+ZNpXOQ=="],
+
+    "@types/koa": ["@types/koa@2.15.0", "", { "dependencies": { "@types/accepts": "*", "@types/content-disposition": "*", "@types/cookies": "*", "@types/http-assert": "*", "@types/http-errors": "*", "@types/keygrip": "*", "@types/koa-compose": "*", "@types/node": "*" } }, "sha512-7QFsywoE5URbuVnG3loe03QXuGajrnotr3gQkXcEBShORai23MePfFYdhz90FEtBBpkyIYQbVD+evKtloCgX3g=="],
+
+    "@types/koa-compose": ["@types/koa-compose@3.2.8", "", { "dependencies": { "@types/koa": "*" } }, "sha512-4Olc63RY+MKvxMwVknCUDhRQX1pFQoBZ/lXcRLP69PQkEpze/0cr8LNqJQe5NFb/b19DWi2a5bTi2VAlQzhJuA=="],
 
     "@types/lodash": ["@types/lodash@4.17.7", "", {}, "sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA=="],
 
@@ -807,6 +829,8 @@
     "@types/lodash.sortby": ["@types/lodash.sortby@4.7.9", "", { "dependencies": { "@types/lodash": "*" } }, "sha512-PDmjHnOlndLS59GofH0pnxIs+n9i4CWeXGErSB5JyNFHu2cmvW6mQOaUKjG8EDPkni14IgF8NsRW8bKvFzTm9A=="],
 
     "@types/mdast": ["@types/mdast@4.0.4", "", { "dependencies": { "@types/unist": "*" } }, "sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA=="],
+
+    "@types/mime": ["@types/mime@1.3.5", "", {}, "sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w=="],
 
     "@types/ms": ["@types/ms@0.7.34", "", {}, "sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g=="],
 
@@ -818,11 +842,21 @@
 
     "@types/nprogress": ["@types/nprogress@0.2.3", "", {}, "sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA=="],
 
+    "@types/oidc-provider": ["@types/oidc-provider@8.8.1", "", { "dependencies": { "@types/keygrip": "*", "@types/koa": "*", "@types/node": "*" } }, "sha512-Yi/OJ7s0CFJ1AWAQrY2EO/zkV9uppLtiGAzrA07lBDveUOvxtYh7GflnHFXcgufVaPxVAjdykizjTYTMNVhdJw=="],
+
     "@types/pg": ["@types/pg@8.11.10", "", { "dependencies": { "@types/node": "*", "pg-protocol": "*", "pg-types": "^4.0.1" } }, "sha512-LczQUW4dbOQzsH2RQ5qoeJ6qJPdrcM/DcMLoqWQkMLMsq83J5lAX3LXjdkWdpscFy67JSOWDnh7Ny/sPFykmkg=="],
 
     "@types/pg-pool": ["@types/pg-pool@2.0.6", "", { "dependencies": { "@types/pg": "*" } }, "sha512-TaAUE5rq2VQYxab5Ts7WZhKNmuN78Q6PiFonTDdpbx8a1H0M1vhy3rhiMjl+e2iHmogyMw7jZF4FrE6eJUy5HQ=="],
 
+    "@types/qs": ["@types/qs@6.9.18", "", {}, "sha512-kK7dgTYDyGqS+e2Q4aK9X3D7q234CIZ1Bv0q/7Z5IwRDoADNU81xXJK/YVyLbLTZCoIwUoDoffFeF+p/eIklAA=="],
+
+    "@types/range-parser": ["@types/range-parser@1.2.7", "", {}, "sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ=="],
+
     "@types/semver": ["@types/semver@7.5.8", "", {}, "sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ=="],
+
+    "@types/send": ["@types/send@0.17.4", "", { "dependencies": { "@types/mime": "^1", "@types/node": "*" } }, "sha512-x2EM6TJOybec7c52BX0ZspPodMsQUd5L6PRwOunVyVUhXiBSKf3AezDL8Dgvgt5o0UfKNfuA0eMLr2wLT4AiBA=="],
+
+    "@types/serve-static": ["@types/serve-static@1.15.7", "", { "dependencies": { "@types/http-errors": "*", "@types/node": "*", "@types/send": "*" } }, "sha512-W8Ym+h8nhuRwaKPaDw34QUkwsGi6Rc4yYqvKFo5rm2FUEhCFbzVWrxXUxuKK8TASjWsysJY0nsmNCGhCOIsrOw=="],
 
     "@types/shimmer": ["@types/shimmer@1.2.0", "", {}, "sha512-UE7oxhQLLd9gub6JKIAhDq06T0F6FnztwMNRvYgjeQSBeMc1ZG/tA47EwfduvkuQS8apbkM/lpLpWsaCeYsXVg=="],
 
