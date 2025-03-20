@@ -8,6 +8,7 @@ import * as agent_outside_min_finance_chorus_pro from "./agent_outside_min_finan
 import * as association_ordinary_person from "./association_ordinary_person";
 import * as association_with_staff_but_no_domain_name from "./association_with_staff_but_no_domain_name";
 import * as contractors from "./contractors";
+import * as domain_name_not_found from "./domain_name_not_found";
 import * as enseignement_agricole from "./enseignement_agricole";
 import * as existing_domain_name from "./existing_domain_name";
 import * as first_and_last_name_inversion from "./first_and_last_name_inversion";
@@ -72,4 +73,5 @@ export const reponse_templates = [
   reservist_or_other_email_perso,
   agent_comcom_comaglo,
   agent_comcom_to_commune,
+  domain_name_not_found,
 ];
