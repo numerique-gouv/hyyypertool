@@ -21,9 +21,8 @@ export default function template() {
 
     Pour se faire :
 
-    - Videz le cache de votre navigateur (lien FAQ MCP) puis rafraîchissez votre page internet, 
-    - Accédez à ProConnect : https://identite.proconnect.gouv.fr/users/personal-information, puis authentifiez-vous,
-    - Cliquez sur l'onglet « Vos Informations Personnelles »,
+    - Accédez à votre compte ProConnect en cliquant sur le lien suivant : https://identite.proconnect.gouv.fr/users/personal-information,
+    - Authentifiez-vous si cela vous est demandé par l'interface,
     - Corrigez votre prénom et votre nom,
     - Sélectionnez votre organisation (numéro SIRET : ${siret}) pour que notre équipe puisse valider à nouveau la création de votre compte.
 
