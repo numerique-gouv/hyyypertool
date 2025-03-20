@@ -23,9 +23,8 @@ export default function template() {
 
     Pour se faire :
 
-    - Videz le cache de votre navigateur puis rafraîchissez votre page internet, (lien)
-    - Accédez à ProConnect : https://identite.proconnect.gouv.fr/users/personal-information, puis authentifiez-vous,
-    - Cliquez sur l'onglet « Vos Informations Personnelles »,
+    - Accédez à votre compte ProConnect en cliquant sur le lien suivant : https://app.moncomptepro.beta.gouv.fr/users/personal-information,
+    - Authentifiez-vous si cela vous est demandé par l'interface,
     - Corrigez votre profession,
     - Sélectionnez votre organisation (numéro SIRET : ${siret}) pour que notre équipe puisse valider à nouveau la création de votre compte.
 
