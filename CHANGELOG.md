@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.3.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.0...2025.3.1) (2025-03-24)
+
+
+### Features
+
+* **moderation:** update responses types ([#826](https://github.com/numerique-gouv/hyyypertool/issues/826)) ([b74541c](https://github.com/numerique-gouv/hyyypertool/commit/b74541cfe8a36b849c47eee9e5d930a0cb242cc9))
+
 # [2025.3.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.5...2025.3.0) (2025-03-07)
 
 
