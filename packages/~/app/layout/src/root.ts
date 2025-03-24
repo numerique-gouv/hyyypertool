@@ -118,7 +118,9 @@ export function Root_Layout({ children }: PropsWithChildren) {
         class="flex min-h-screen flex-col"
       >
         <div class="flex flex-1 flex-col">${children}</div>
-        <footer class="container mx-auto flex flex-row justify-between p-2">
+        <footer
+          class="container mx-auto mb-[100px] flex flex-row justify-between p-2"
+        >
           <div>© ${new Date().getFullYear()} 🇫🇷</div>
           <a
             href="https://github.com/numerique-gouv/hyyypertool/tree/${config.VERSION}"
