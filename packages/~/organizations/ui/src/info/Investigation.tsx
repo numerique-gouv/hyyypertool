@@ -14,44 +14,34 @@ type Props = JSX.IntrinsicElements["section"] & {
 //
 
 export function Investigation(props: Props) {
-  const { organization, ...section_props } = props;
+  const { organization } = props;
 
   return (
-    <section {...section_props}>
-      <h4>🕵️ Enquête sur cette organisation</h4>
-
-      <ul class="list-none pl-0">
-        <li>
-          <a
-            href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Mairie sur Annuaire Service Public
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Service sur Annuaire Service Public
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=siren_siret%3D${organization.siret}`}
-            class={button({ size: "sm", type: "tertiary" })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Établissement sur l'annuaire Éducation Nationale
-          </a>
-        </li>
-      </ul>
-    </section>
+    <div class="mt-5 w-full bg-[#F6F6F6] p-3">
+      <a
+        href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
+        class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Chercher la mairie associée
+      </a>
+      <a
+        href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
+        class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Chercher les services publics associés
+      </a>
+      <a
+        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
+        class={`${button({ size: "sm", type: "tertiary" })} bg-white`}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Voir liste dirigeants - Annuaire entreprise API
+      </a>
+    </div>
   );
 }
