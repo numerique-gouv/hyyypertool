@@ -148,56 +148,6 @@ export default async function Moderation_Page() {
 
         <Moderation_Exchanges />
       </main>
-
-      <div class="fixed bottom-0 left-0 right-0 w-full shadow-lg">
-        <div
-          style="border: 1px solid var(--text-action-high-blue-france);"
-          class="m-2 w-1/2 justify-self-end bg-[--blue-france-975-75] p-6"
-          id="modal"
-        >
-          <div class="mb-4 flex items-center justify-between">
-            <p class="mb-0 text-lg font-bold">✅ Accepter</p>
-            <button
-              class="fr-btn fr-icon-subtract-line  fr-btn--tertiary-no-outline"
-              _={`
-            on click
-              add .hidden to #modal
-          `}
-            >
-              Label bouton
-            </button>
-          </div>
-          <p>
-            A propos de 
-            <span class="font-bold text-[--text-action-high-blue-france]">
-              {user.email}
-            </span>
-            , je valide :
-          </p>
-        </div>
-        <div class="fr-p-1w flex justify-end bg-[--blue-france-975-75]">
-          <button
-            class="fr-btn fr-mr-2w fr-btn--secondary bg-white"
-            _={`
-              on click
-                remove .hidden from #modal
-            `}
-          >
-            ✅ Accepter
-          </button>
-
-          <button class="fr-btn fr-mr-2w fr-btn--secondary bg-white">
-            ❌ Refuser
-          </button>
-          <a
-            href="#exchange_moderation"
-            class="fr-btn fr-btn--secondary bg-white"
-            onclick="document.getElementById('exchange_details').setAttribute('open', ''); return true;"
-          >
-            💬 Voir les échanges
-          </a>
-        </div>
-      </div>
     </>
   );
 }
