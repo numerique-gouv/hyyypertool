@@ -72,7 +72,14 @@ export default async function Moderation_Page() {
 
       <div class="grid grid-cols-2 gap-6">
         <About_User user={moderation.user} />
-        <div>
+      <Investigation_User
+        user={moderation.user}
+        organization={moderation.organization}
+      />
+      <About_Organization organization={organization_fiche} />
+      <Investigation_Organization organization={moderation.organization} />
+
+      {/* <div>
           <h3>
             <a
               href={

@@ -22,34 +22,26 @@ export function Investigation(props: InvestigationProps) {
 
   return (
     <section {...props}>
-      <h4>🕵️ Enquête sur ce profile</h4>
-
-      <ul class="list-none pl-0">
-        <li>
-          <GoogleSearchButton
-            class={button({ size: "sm", type: "tertiary" })}
-            query={user.email}
-          >
-            Résultats Google pour cet email
-          </GoogleSearchButton>
-        </li>
-        <li>
-          <GoogleSearchButton
-            class={button({ size: "sm", type: "tertiary" })}
-            query={domain}
-          >
-            Résultats Google pour ce nom de domaine
-          </GoogleSearchButton>
-        </li>
-        <li>
-          <GoogleSearchButton
-            class={button({ size: "sm", type: "tertiary" })}
-            query={`${organization.cached_libelle} ${domain}`}
-          >
-            Résultats Google pour le nom de l'organisation et le nom de domaine
-          </GoogleSearchButton>
-        </li>
-      </ul>
+      <div class="mt-5 w-full bg-[#F6F6F6] p-3">
+        <GoogleSearchButton
+          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
+          query={user.email}
+        >
+          Chercher l'email
+        </GoogleSearchButton>
+        <GoogleSearchButton
+          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
+          query={domain}
+        >
+          Chercher le domaine email
+        </GoogleSearchButton>
+        <GoogleSearchButton
+          class={`${button({ size: "sm", type: "tertiary" })} bg-white`}
+          query={`${organization.cached_libelle} ${domain}`}
+        >
+          Chercher le matching
+        </GoogleSearchButton>
+      </div>
     </section>
   );
 }
