@@ -13,7 +13,7 @@ export function CopyButton(
       variant?: VariantProps<typeof button> & ClassProp;
     }>,
 ) {
-  const { text, class: className, children, variant, ...other_props } = props;
+  const { text, class: className, variant, ...other_props } = props;
   return (
     <button
       _="
@@ -24,11 +24,11 @@ export function CopyButton(
             navigator.clipboard.writeText(text)
           }
         end"
-      class={button(variant)}
+      class="text-[--text-action-high-blue-france]"
       data-text={text}
       {...other_props}
     >
-      📋 {children}
+      <span class="fr-icon-clipboard-line" aria-hidden="true"></span>
     </button>
   );
 }
