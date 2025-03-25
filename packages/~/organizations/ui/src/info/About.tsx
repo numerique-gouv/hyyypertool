@@ -1,8 +1,7 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { hx_urls } from "@~/app.urls";
+import { hx_urls, urls } from "@~/app.urls";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";
 import { InactiveWarning } from "./InactiveWarning";
@@ -14,121 +13,81 @@ type Props = JSX.IntrinsicElements["section"] & {
 };
 
 export async function About(props: Props) {
-  const { organization, ...section_props } = props;
+  const { organization, moderation, ...section_props } = props;
   const hx_organizations_leaders_props =
     await hx_urls.organizations.leaders.$get({
       query: { siret: organization.siret },
     });
 
   return (
-    <section {...section_props}>
+    <section class="mt-6" {...section_props}>
+      <h3>
+        <a
+          class="bg-none"
+          target="_blank"
+          href={
+            urls.organizations[":id"].$url({
+              param: {
+                id: organization.id.toString(),
+              },
+            }).pathname
+          }
+        >
+          🏛 Organisation
+        </a>
+      </h3>
       <InactiveWarning organization={organization} />
-      <ul class="list-none pl-0">
-        <li>
-          Creation de l'organisation :{" "}
-          <b>
-            <LocalTime date={organization.created_at} />
-          </b>
-        </li>
-        <li>
-          Nature juridique :{" "}
-          <b>
-            {organization.cached_libelle_categorie_juridique} (
-            {organization.cached_categorie_juridique})
-          </b>
-        </li>
-        <li>
-          Dénomination : <b>{organization.cached_libelle}</b>
-        </li>
-        <li>
-          Nom complet : <b>{organization.cached_nom_complet}</b>
-        </li>
-        <li>
-          Enseigne : <b>{organization.cached_enseigne}</b>
-        </li>
-        <li>
-          NAF/APE : <b>{organization.cached_libelle_activite_principale}</b>
-        </li>
-        <li>
-          Tranche d'effectif :{" "}
-          <b>{organization.cached_libelle_tranche_effectif}</b> (code :{" "}
-          {organization.cached_tranche_effectifs}) (
-          <a
-            href="https://www.sirene.fr/sirene/public/variable/tefen"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            liste code effectif INSEE
-          </a>
-          )
-        </li>
-        <li>
-          État administratif : <b>{organization.cached_etat_administratif}</b> (
-          <a
-            href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            liste état administratif INSEE
-          </a>
-          )
-        </li>
-        <li>
-          Adresse : <b>{organization.cached_adresse}</b>
-        </li>
-        <li>
-          Code officiel géographique :{" "}
-          <b>{organization.cached_code_officiel_geographique}</b>
-        </li>
-        <li>
-          Siret : <b>{organization.siret}</b> (
-          <a
-            href={`https://annuaire-entreprises.data.gouv.fr/entreprise/${organization.siret}`}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Voir la fiche annuaire entreprise de cette organisation
-          </a>
-          )
-        </li>
-      </ul>
+      <div class="border border-gray-300 bg-white">
+        <div class="grid grid-cols-[200px_1px_1fr] items-center gap-4">
+          <div class="flex flex-col gap-3 text-gray-700">
+            <div>DÉNOMINATION</div>
+            <div>SIRET</div>
+            <div>NAF/APE</div>
+            <div>ADRESSE</div>
+            <div>NATURE JURIDIQUE</div>
+            <div>TRANCHE D'EFFECTIF</div>
+          </div>
+
+          <div class="h-full w-[1px] bg-gray-400"></div>
+
+          <div class="flex flex-col gap-3 font-medium text-gray-900">
+            <div>{organization.cached_libelle}</div>
+            <div>
+              {organization.siret}
+              <a
+                href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+                class={`${button({ size: "sm", type: "tertiary" })} ml-2`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Fiche annuaire
+              </a>
+            </div>
+            <div>{organization.cached_libelle_activite_principale}</div>
+            <div>{organization.cached_adresse}</div>
+            <div>
+              {organization.cached_libelle_categorie_juridique} (
+              {organization.cached_categorie_juridique})
+            </div>
+            <div>
+              {organization.cached_libelle_tranche_effectif} (code :{" "}
+              {organization.cached_tranche_effectifs}) (
+              <a
+                href="https://www.sirene.fr/sirene/public/variable/tefen"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                liste code effectif INSEE
+              </a>
+              )
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="my-4" {...hx_organizations_leaders_props} hx-trigger="load">
         <i class="text-center">Recherche des dirigeants...</i>
       </div>
-
-      <a
-        href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
-        class={button({ size: "sm", type: "tertiary" })}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Fiche sur l’Annuaire des Entreprises
-      </a>
-
-      <a
-        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
-        class={button({ size: "sm", type: "tertiary" })}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Liste des Dirigeants - Annuaire des Entreprises
-      </a>
-
-      <details class="my-6">
-        <summary>Détails de l'organisation</summary>
-        <ul>
-          <li>
-            id : <b>{organization.id}</b>
-          </li>
-          <li>
-            Dernière mise à jour :{" "}
-            <b>
-              <LocalTime date={organization.updated_at} />
-            </b>
-          </li>
-        </ul>
-      </details>
     </section>
   );
 }

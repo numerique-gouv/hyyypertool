@@ -30,7 +30,7 @@ async function List_Leaders({ siret }: { siret: string }) {
   if (!doc) return <>Pas de liste des dirigeants</>;
   return (
     <a class="fr-link" href={doc.url} rel="noopener noreferrer" target="_blank">
-      Liste des dirigeants
+      Liste des dirigeants - entreprises API
     </a>
   );
 }

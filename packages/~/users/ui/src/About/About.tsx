@@ -30,8 +30,8 @@ export function About({ user }: AboutProps) {
           👨‍💻 Profile
         </a>
       </h3>
-      <div class="max-w-md border border-gray-300 bg-white">
-        <div class="grid grid-cols-[auto_1px_auto] items-center gap-4">
+      <div class="border border-gray-300 bg-white">
+        <div class="grid grid-cols-[200px_1px_1fr] items-center gap-4">
           <div class="flex flex-col gap-3 text-gray-700">
             <div>EMAIL</div>
             <div>DOMAINE MAIL</div>
