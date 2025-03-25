@@ -2,7 +2,6 @@
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { CopyButton } from "@~/app.ui/button/components/copy";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import type { GetUserInfoOutput } from "@~/users.lib/usecase/GetUserInfo";
 
@@ -21,6 +20,8 @@ export function About({ user }: AboutProps) {
     <section>
       <h3>
         <a
+          class="bg-none"
+          target="_blank"
           href={
             urls.users[":id"].$url({ param: { id: user.id.toString() } })
               .pathname
@@ -29,55 +30,41 @@ export function About({ user }: AboutProps) {
           👨‍💻 Profile
         </a>
       </h3>
+      <div class="max-w-md border border-gray-300 bg-white">
+        <div class="grid grid-cols-[auto_1px_auto] items-center gap-4">
+          <div class="flex flex-col gap-3 text-gray-700">
+            <div>EMAIL</div>
+            <div>DOMAINE MAIL</div>
+            <div>PRÉNOM</div>
+            <div>NOM</div>
+            <div>NUMÉRO</div>
+            <div>PROFESSION</div>
+          </div>
 
-      <ul class="list-none pl-0">
-        <li>
-          Email : <b>{user.email}</b>
-        </li>
-        <li>
-          Prénom : <b>{user.given_name}</b>
-        </li>
-        <li>
-          Nom : <b>{user.family_name}</b>
-        </li>
-        <li>
-          Téléphone : <b>{user.phone_number}</b>
-        </li>
-        <li>
-          Profession : <b>{user.job}</b>
-        </li>
-      </ul>
+          <div class="h-full w-[1px] bg-gray-400"></div>
 
-      <CopyButton text={user.email} variant={{ size: "sm", type: "tertiary" }}>
-        Copier l'email
-      </CopyButton>
-      <CopyButton text={domain} variant={{ size: "sm", type: "tertiary" }}>
-        Copier le domaine
-      </CopyButton>
-
-      <details class="my-6">
-        <summary>Détails du profile</summary>
-        <ul>
-          <li>
-            id : <b>{user.id}</b>
-          </li>
-          <li>
-            Dernière connexion :{" "}
-            <b>
-              <LocalTime date={user.last_sign_in_at} />
-            </b>
-          </li>
-          <li>
-            Creation de compte :{" "}
-            <b>
-              <LocalTime date={user.created_at} />
-            </b>
-          </li>
-          <li>
-            Nombre de connection : <b>{user.sign_in_count}</b>
-          </li>
-        </ul>
-      </details>
+          <div class="flex flex-col gap-3 font-medium text-gray-900">
+            <div>
+              {user.email}
+              <CopyButton
+                text={user.email}
+                variant={{ size: "sm", type: "tertiary" }}
+              ></CopyButton>
+            </div>
+            <div>
+              {domain}
+              <CopyButton
+                text={domain}
+                variant={{ size: "sm", type: "tertiary" }}
+              ></CopyButton>
+            </div>
+            <div>{user.given_name}</div>
+            <div>{user.family_name}</div>
+            <div>{user.phone_number}</div>
+            <div>{user.job}</div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
