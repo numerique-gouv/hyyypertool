@@ -54,7 +54,7 @@ export default async function Moderation_Page() {
       <button
         _="on click go back"
         class={button({
-          class: "fr-btn--icon-left fr-icon-checkbox-circle-line",
+          class: "fr-btn--icon-left fr-icon-arrow-go-back-fill",
           type: "tertiary",
           size: "sm",
         })}
