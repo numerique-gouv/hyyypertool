@@ -2,6 +2,7 @@
 
 import { zValidator } from "@hono/zod-validator";
 import env from "@~/app.core/config";
+import { button } from "@~/app.ui/button";
 import consola from "consola";
 import { Hono } from "hono";
 import lodash_sortby from "lodash.sortby";
@@ -27,10 +28,22 @@ export default new Hono().get(
 
 async function List_Leaders({ siret }: { siret: string }) {
   const doc = await load_leaders({ siret });
-  if (!doc) return <>Pas de liste des dirigeants</>;
+  if (!doc)
+    return (
+      <a
+        class={`${button({ size: "sm", type: "tertiary" })} disabled: bg-white`}
+      >
+        Pas de liste des dirigeants
+      </a>
+    );
   return (
-    <a class="fr-link" href={doc.url} rel="noopener noreferrer" target="_blank">
-      Liste des dirigeants - entreprises API
+    <a
+      class={`${button({ size: "sm", type: "tertiary" })} bg-white`}
+      href={doc.url}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Liste dirigeants associations
     </a>
   );
 }
