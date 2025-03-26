@@ -1,92 +1,50 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render about section 1`] = `
-"<section id="about_section">
-  <ul class="list-none pl-0">
-    <li>
-      Creation de l&#39;organisation :
-      <b
-        ><time
-          datetime="2011-11-22T14:34:34.000Z"
-          title="Tue Nov 22 2011 15:34:34 GMT+0100 (Central European Standard Time)"
-          >22/11/2011 15:34:34
-        </time></b
-      >
-    </li>
-    <li>
-      Nature juridique :
-      <b>cached_libelle_categorie_juridique (cached_categorie_juridique)</b>
-    </li>
-    <li>Dénomination : <b>cached_libelle</b></li>
-    <li>Nom complet : <b>cached_nom_complet</b></li>
-    <li>Enseigne : <b>cached_enseigne</b></li>
-    <li>NAF/APE : <b>cached_libelle_activite_principale</b></li>
-    <li>
-      Tranche d&#39;effectif : <b>cached_libelle_tranche_effectif</b> (code :
-      cached_tranche_effectifs) (<a
-        href="https://www.sirene.fr/sirene/public/variable/tefen"
-        rel="noopener noreferrer"
-        target="_blank"
-        >liste code effectif INSEE</a
-      >)
-    </li>
-    <li>
-      État administratif : <b>cached_etat_administratif</b> (<a
-        href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
-        rel="noopener noreferrer"
-        target="_blank"
-        >liste état administratif INSEE</a
-      >)
-    </li>
-    <li>Adresse : <b>cached_adresse</b></li>
-    <li>
-      Code officiel géographique : <b>cached_code_officiel_geographique</b>
-    </li>
-    <li>
-      Siret : <b>siret</b> (<a
-        href="https://annuaire-entreprises.data.gouv.fr/entreprise/siret"
-        rel="noopener noreferrer"
-        target="_blank"
-        >Voir la fiche annuaire entreprise de cette organisation</a
-      >)
-    </li>
-  </ul>
-  <div
-    class="my-4"
-    hx-get="/organizations/leaders?siret=siret"
-    hx-trigger="load"
-  >
-    <i class="text-center">Recherche des dirigeants...</i>
+"<section class="mt-6" id="about_section">
+  <h3>
+    <a class="bg-none" target="_blank" href="/organizations/42"
+      >🏛 Organisation</a
+    >
+  </h3>
+  <div class="border border-gray-300 bg-white">
+    <div class="grid grid-cols-[200px_1px_1fr] items-center gap-4">
+      <div class="flex flex-col gap-3 text-gray-700">
+        <div>DÉNOMINATION</div>
+        <div>SIRET</div>
+        <div>NAF/APE</div>
+        <div>ADRESSE</div>
+        <div>NATURE JURIDIQUE</div>
+        <div>TRANCHE D&#39;EFFECTIF</div>
+      </div>
+      <div class="h-full w-[1px] bg-gray-400"></div>
+      <div class="flex flex-col gap-3 font-medium text-gray-900">
+        <div>cached_libelle</div>
+        <div>
+          siret<a
+            href="https://annuaire-entreprises.data.gouv.fr/etablissement/siret"
+            class="fr-btn fr-btn--sm fr-btn--tertiary ml-2"
+            rel="noopener noreferrer"
+            target="_blank"
+            >Fiche annuaire</a
+          >
+        </div>
+        <div>cached_libelle_activite_principale</div>
+        <div>cached_adresse</div>
+        <div>
+          cached_libelle_categorie_juridique (cached_categorie_juridique)
+        </div>
+        <div>
+          cached_libelle_tranche_effectif (code : cached_tranche_effectifs) (<a
+            href="https://www.sirene.fr/sirene/public/variable/tefen"
+            rel="noopener noreferrer"
+            target="_blank"
+            >liste code effectif INSEE</a
+          >)
+        </div>
+      </div>
+    </div>
   </div>
-  <a
-    href="https://annuaire-entreprises.data.gouv.fr/etablissement/siret"
-    class="fr-btn fr-btn--sm fr-btn--tertiary"
-    rel="noopener noreferrer"
-    target="_blank"
-    >Fiche sur l’Annuaire des Entreprises</a
-  ><a
-    href="https://annuaire-entreprises.data.gouv.fr/dirigeants/siret"
-    class="fr-btn fr-btn--sm fr-btn--tertiary"
-    rel="noopener noreferrer"
-    target="_blank"
-    >Liste des Dirigeants - Annuaire des Entreprises</a
-  >
-  <details class="my-6">
-    <summary>Détails de l&#39;organisation</summary>
-    <ul>
-      <li>id : <b>42</b></li>
-      <li>
-        Dernière mise à jour :
-        <b
-          ><time
-            datetime="2011-11-15T13:48:00.000Z"
-            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
-            >15/11/2011 14:48:00
-          </time></b
-        >
-      </li>
-    </ul>
-  </details>
 </section>
 "
 `;
