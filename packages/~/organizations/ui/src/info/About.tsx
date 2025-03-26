@@ -1,7 +1,7 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { hx_urls, urls } from "@~/app.urls";
+import { urls } from "@~/app.urls";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";
 import { InactiveWarning } from "./InactiveWarning";
@@ -12,12 +12,8 @@ type Props = JSX.IntrinsicElements["section"] & {
   organization: Awaited<ReturnType<GetFicheOrganizationByIdHandler>>;
 };
 
-export async function About(props: Props) {
+export function About(props: Props) {
   const { organization, moderation, ...section_props } = props;
-  const hx_organizations_leaders_props =
-    await hx_urls.organizations.leaders.$get({
-      query: { siret: organization.siret },
-    });
 
   return (
     <section class="mt-6" {...section_props}>
@@ -83,10 +79,6 @@ export async function About(props: Props) {
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="my-4" {...hx_organizations_leaders_props} hx-trigger="load">
-        <i class="text-center">Recherche des dirigeants...</i>
       </div>
     </section>
   );
