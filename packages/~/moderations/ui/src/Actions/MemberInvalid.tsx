@@ -41,7 +41,7 @@ export async function MemberInvalid() {
           <label class="fr-label">
             <h6>Motif de refus : </h6>
           </label>
-          <ResponseMessageSelector />
+          <ResponseMessageSelector $message={$message} />
         </div>
         <div class={element()}>
           <div class="fr-input-group">
