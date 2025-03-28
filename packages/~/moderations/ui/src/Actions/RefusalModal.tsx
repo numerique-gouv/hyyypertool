@@ -1,4 +1,8 @@
-import { hx_disabled_form_elements, hx_include } from "@~/app.core/htmx";
+import {
+  Htmx_Events,
+  hx_disabled_form_elements,
+  hx_include,
+} from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { reject_form_schema } from "@~/moderations.lib/schema/rejected.form";
@@ -22,6 +26,13 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
         {...hx_disabled_form_elements}
         hx-include={hx_include([$object, $destination])}
         hx-swap="none"
+        _={`
+          on submit
+            wait for ${Htmx_Events.enum.afterOnLoad}
+            go to the top of .last-message smoothly
+            wait 2s
+            go back
+          `}
       >
         <div class="mb-4 flex items-center justify-between">
           <p class="mb-0 text-lg font-bold">❌ Refuser</p>
