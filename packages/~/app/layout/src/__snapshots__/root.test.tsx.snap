@@ -90,7 +90,9 @@ exports[`development 1`] = `
         class="flex min-h-screen flex-col"
       >
         <div class="flex flex-1 flex-col"></div>
-        <footer class="container mx-auto flex flex-row justify-between p-2">
+        <footer
+          class="container mx-auto mb-[100px] flex flex-row justify-between p-2"
+        >
           <div>© 2222 🇫🇷</div>
           <a
             href="https://github.com/numerique-gouv/hyyypertool/tree/__VERSION__"
@@ -252,7 +254,9 @@ exports[`production 1`] = `
         class="flex min-h-screen flex-col"
       >
         <div class="flex flex-1 flex-col"></div>
-        <footer class="container mx-auto flex flex-row justify-between p-2">
+        <footer
+          class="container mx-auto mb-[100px] flex flex-row justify-between p-2"
+        >
           <div>© 2222 🇫🇷</div>
           <a
             href="https://github.com/numerique-gouv/hyyypertool/tree/__VERSION__"
