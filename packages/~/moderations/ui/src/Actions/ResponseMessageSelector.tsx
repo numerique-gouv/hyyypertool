@@ -1,13 +1,10 @@
 //
 
-import { useContext } from "hono/jsx";
-import { reject_context } from "./context";
 import { reponse_templates } from "./responses";
 
 //
 
-export function ResponseMessageSelector() {
-  const { $message } = useContext(reject_context);
+export function ResponseMessageSelector({ $message }: { $message: string }) {
   return (
     <div>
       <input

@@ -23,8 +23,8 @@ export async function Moderation_Exchanges() {
   });
 
   return (
-    <section>
-      <details>
+    <section id="exchange_moderation">
+      <details id="exchange_details">
         <summary>
           <h2 class="inline-block" id={$describedby}>
             📥️ Échanges entre {moderation.user.given_name} et nous :{" "}
