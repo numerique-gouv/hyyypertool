@@ -23,7 +23,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/moncomptepro.lib": "workspace:*",
-    "consola": "3.3.3",
+    "consola": "3.4.2",
     "drizzle-orm": "0.40.1",
     "hono": "4.6.17",
     "pg": "8.14.1"

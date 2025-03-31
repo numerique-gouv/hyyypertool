@@ -6,7 +6,7 @@
         "@gouvfr/dsfr": "1.13.0",
         "@~/app.api": "workspace:*",
         "@~/app.core": "workspace:*",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "dotenv": "16.4.7",
         "hono": "4.6.17",
         "tsx": "4.19.2",
@@ -51,7 +51,7 @@
         "@~/users.api": "workspace:*",
         "@~/welcome.api": "workspace:*",
         "await-to-js": "3.0.0",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "drizzle-orm": "0.40.1",
         "hono": "4.6.17",
         "htmx.ext...chunked-transfer": "1.0.4",
@@ -118,7 +118,7 @@
         "@sentry/node": "8.51.0",
         "@sentry/profiling-node": "8.51.0",
         "@~/app.core": "workspace:*",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "hono": "4.6.17",
       },
       "devDependencies": {
@@ -145,7 +145,7 @@
       "name": "@~/app.urls",
       "version": "1.0.0",
       "dependencies": {
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "hono": "4.6.17",
         "static-path": "0.0.4",
       },
@@ -201,7 +201,7 @@
       "dependencies": {
         "@gouvfr-lasuite/proconnect.crisp": "0.5.0",
         "@~/app.core": "workspace:*",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -243,7 +243,7 @@
       "dependencies": {
         "@~/app.core": "workspace:*",
         "@~/moncomptepro.lib": "workspace:*",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "drizzle-orm": "0.40.1",
         "hono": "4.6.17",
         "pg": "8.14.1",
@@ -263,7 +263,7 @@
         "@gouvfr-lasuite/proconnect.identite": "0.5.1",
         "@gouvfr-lasuite/proconnect.insee": "0.3.2",
         "@~/app.core": "workspace:*",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -292,7 +292,7 @@
       "version": "1.0.0",
       "dependencies": {
         "@~/app.core": "workspace:*",
-        "consola": "3.3.3",
+        "consola": "3.4.2",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -1082,7 +1082,7 @@
 
     "configstore": ["configstore@7.0.0", "", { "dependencies": { "atomically": "^2.0.3", "dot-prop": "^9.0.0", "graceful-fs": "^4.2.11", "xdg-basedir": "^5.1.0" } }, "sha512-yk7/5PN5im4qwz0WFZW3PXnzHgPu9mX29Y8uZ3aefe2lBPC1FYttWZRcaW9fKkT0pBCJyuQ2HfbmPVaODi9jcQ=="],
 
-    "consola": ["consola@3.3.3", "", {}, "sha512-Qil5KwghMzlqd51UXM0b6fyaGHtOC22scxrwrz4A2882LyUMwQjnvaedN1HAeXzphspQ6CpHkzMAWxBTUruDLg=="],
+    "consola": ["consola@3.4.2", "", {}, "sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA=="],
 
     "conventional-changelog": ["conventional-changelog@6.0.0", "", { "dependencies": { "conventional-changelog-angular": "^8.0.0", "conventional-changelog-atom": "^5.0.0", "conventional-changelog-codemirror": "^5.0.0", "conventional-changelog-conventionalcommits": "^8.0.0", "conventional-changelog-core": "^8.0.0", "conventional-changelog-ember": "^5.0.0", "conventional-changelog-eslint": "^6.0.0", "conventional-changelog-express": "^5.0.0", "conventional-changelog-jquery": "^6.0.0", "conventional-changelog-jshint": "^5.0.0", "conventional-changelog-preset-loader": "^5.0.0" } }, "sha512-tuUH8H/19VjtD9Ig7l6TQRh+Z0Yt0NZ6w/cCkkyzUbGQTnUEmKfGtkC9gGfVgCfOL1Rzno5NgNF4KY8vR+Jo3w=="],
 
