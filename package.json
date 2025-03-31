@@ -63,7 +63,7 @@
     "@gouvfr/dsfr": "1.13.0",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
-    "consola": "3.3.3",
+    "consola": "3.4.2",
     "dotenv": "16.4.7",
     "hono": "4.6.17",
     "tsx": "4.19.2"
