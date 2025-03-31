@@ -275,7 +275,7 @@
       "name": "@~/zammad.api",
       "version": "1.0.0",
       "dependencies": {
-        "@hono/zod-validator": "0.4.2",
+        "@hono/zod-validator": "0.4.3",
         "@~/app.core": "workspace:*",
         "@~/zammad.lib": "workspace:*",
         "hono": "4.6.17",
@@ -632,7 +632,7 @@
 
     "@hono/sentry": ["@hono/sentry@1.2.0", "", { "dependencies": { "toucan-js": "^4.0.0" }, "peerDependencies": { "hono": ">=3.*" } }, "sha512-9mS8GrkGtR4YxM1CViL4Ft8LFQ9YhCoXeqKnUA1AUmrvA5PhUU/V+xoo8Autw0nVriin3liX5/lPrwWz3muwiw=="],
 
-    "@hono/zod-validator": ["@hono/zod-validator@0.4.2", "", { "peerDependencies": { "hono": ">=3.9.0", "zod": "^3.19.1" } }, "sha512-1rrlBg+EpDPhzOV4hT9pxr5+xDVmKuz6YJl+la7VCwK6ass5ldyKm5fD+umJdV2zhHD6jROoCCv8NbTwyfhT0g=="],
+    "@hono/zod-validator": ["@hono/zod-validator@0.4.3", "", { "peerDependencies": { "hono": ">=3.9.0", "zod": "^3.19.1" } }, "sha512-xIgMYXDyJ4Hj6ekm9T9Y27s080Nl9NXHcJkOvkXPhubOLj8hZkOL8pDnnXfvCf5xEE8Q4oMFenQUZZREUY2gqQ=="],
 
     "@hutson/parse-repository-url": ["@hutson/parse-repository-url@5.0.0", "", {}, "sha512-e5+YUKENATs1JgYHMzTr2MW/NDcXGfYFAuOQU8gJgF/kEh4EqKgfGrfLI67bMD4tbhZVlkigz/9YYwWcbOFthg=="],
 
