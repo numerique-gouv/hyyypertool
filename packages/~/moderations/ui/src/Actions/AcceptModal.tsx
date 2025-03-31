@@ -1,11 +1,9 @@
-import { Htmx_Events, hx_include } from "@~/app.core/htmx";
+import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
-import { useContext } from "hono/jsx";
 import { AddAsMemberExternal } from "./AddAsMemberExternal";
 import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
-import { context, valid_context } from "./context";
 
 export async function AcceptModal({
   userEmail,
@@ -14,9 +12,6 @@ export async function AcceptModal({
   userEmail: string;
   moderation: any;
 }) {
-  const context_value = useContext(valid_context);
-  const { $add_domain } = context_value;
-  const { $decision_form, $accept } = useContext(context);
   const hx_path_validate_moderation = await hx_urls.moderations[
     ":id"
   ].$procedures.validate.$patch({
@@ -48,12 +43,8 @@ export async function AcceptModal({
       </p>
       <form
         {...hx_path_validate_moderation}
-        hx-include={hx_include([$add_domain])}
         hx-swap="none"
         _={`
-            on load if #${$accept}.checked then remove @hidden end
-            on change from #${$decision_form}
-              if #${$accept}.checked then remove @hidden else add @hidden end
             on submit
               wait for ${Htmx_Events.enum.afterOnLoad}
               go to the top of body smoothly
