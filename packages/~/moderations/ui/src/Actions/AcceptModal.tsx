@@ -1,9 +1,9 @@
-import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { AddAsMemberExternal } from "./AddAsMemberExternal";
 import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
+import { TagInput } from "./TagInput";
 
 export async function AcceptModal({
   userEmail,
@@ -31,7 +31,7 @@ export async function AcceptModal({
                 add .hidden to #acceptModal
             `}
         >
-          Label bouton
+          Fermer la modale
         </button>
       </div>
       <p>
@@ -44,13 +44,13 @@ export async function AcceptModal({
       <form
         {...hx_path_validate_moderation}
         hx-swap="none"
-        _={`
-            on submit
-              wait for ${Htmx_Events.enum.afterOnLoad}
-              go to the top of body smoothly
-              wait 2s
-              go back
-          `}
+        // _={`
+        //     on submit
+        //       wait for ${Htmx_Events.enum.afterOnLoad}
+        //       go to the top of body smoothly
+        //       wait 2s
+        //       go back
+        //   `}
       >
         <div class="mb-5">
           <AddDomain />
@@ -60,6 +60,9 @@ export async function AcceptModal({
         </div>
         <div class="mb-5">
           <AddAsMemberExternal />
+        </div>
+        <div class="mb-5">
+          <TagInput />
         </div>
         <div>
           <button
