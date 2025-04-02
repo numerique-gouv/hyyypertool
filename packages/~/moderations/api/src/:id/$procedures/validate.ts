@@ -41,7 +41,8 @@ export default new Hono<App_Context>().patch(
     var: { moncomptepro_pg_client, moncomptepro_pg, userinfo, sentry },
   }) {
     const { id } = req.valid("param");
-    const { add_domain, add_member, send_notitfication } = req.valid("form");
+    const { add_domain, add_member, send_notitfication, verification_type } =
+      req.valid("form");
     const add_verified_domain = AddVerifiedDomain({
       get_organization_by_id: GetFicheOrganizationById({ pg: moncomptepro_pg }),
       mark_domain_as_verified: MarkDomainAsVerified(moncomptepro_pg_client),
@@ -101,7 +102,15 @@ export default new Hono<App_Context>().patch(
     const [error] = await to(
       member_join_organization({ is_external, moderation_id: id }),
     );
-
+    if (verification_type) {
+      moncomptepro_pg
+        .update(schema.users_organizations)
+        .set({ verification_type })
+        .where(
+          eq(schema.users_organizations.user_id, user_id),
+          eq(schema.users_organizations.organization_id, organization_id),
+        );
+    }
     match(error)
       .with(P.instanceOf(HTTPError), () => {
         consola.error(error);
