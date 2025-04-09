@@ -33,8 +33,9 @@ export default new Hono<ContextType>().patch(
       crisp_config,
       moderation,
       pg: moncomptepro_pg,
-      userinfo,
       resolve_delay: config.CRISP_RESOLVE_DELAY,
+      subject,
+      userinfo,
     };
     await send_rejected_message_to_user(context, { message, subject });
 
