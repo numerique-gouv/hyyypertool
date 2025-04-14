@@ -57,7 +57,7 @@
         "htmx.ext...chunked-transfer": "1.0.4",
         "htmx.org": "1.9.12",
         "hyperscript.org": "0.9.14",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "youch": "3.3.4",
       },
       "devDependencies": {
@@ -69,7 +69,7 @@
       "version": "1.0.0",
       "dependencies": {
         "modern-errors": "7.0.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "type-fest": "4.38.0",
         "zod": "3.24.1",
       },
@@ -229,7 +229,7 @@
         "rehype-stringify": "10.0.1",
         "remark-parse": "11.0.0",
         "remark-rehype": "11.1.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "unified": "11.0.5",
       },
       "devDependencies": {
@@ -279,7 +279,7 @@
         "@~/app.core": "workspace:*",
         "@~/zammad.lib": "workspace:*",
         "hono": "4.6.17",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -324,7 +324,7 @@
         "hono": "4.6.17",
         "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -341,7 +341,7 @@
         "@~/moderations.repository": "workspace:*",
         "@~/moncomptepro.database": "workspace:*",
         "drizzle-orm": "0.40.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -372,7 +372,7 @@
         "@~/users.lib": "workspace:*",
         "hono": "4.6.17",
         "tailwind-variants": "0.3.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -394,7 +394,7 @@
         "hono": "4.6.17",
         "lodash.sortby": "4.7.0",
         "tailwind-variants": "0.3.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -424,7 +424,7 @@
         "@~/moncomptepro.database": "workspace:*",
         "@~/moncomptepro.lib": "workspace:*",
         "drizzle-orm": "0.40.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -439,7 +439,7 @@
         "@~/organizations.lib": "workspace:*",
         "hono": "4.6.17",
         "tailwind-variants": "0.3.1",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -468,7 +468,7 @@
         "@~/organizations.repository": "workspace:*",
         "@~/users.repository": "workspace:*",
         "hono": "4.6.17",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
       "devDependencies": {
@@ -511,7 +511,7 @@
         "hono": "4.6.17",
         "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
-        "ts-pattern": "5.6.2",
+        "ts-pattern": "5.7.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -1888,7 +1888,7 @@
 
     "ts-interface-checker": ["ts-interface-checker@0.1.13", "", {}, "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="],
 
-    "ts-pattern": ["ts-pattern@5.6.2", "", {}, "sha512-d4IxJUXROL5NCa3amvMg6VQW2HVtZYmUTPfvVtO7zJWGYLJ+mry9v2OmYm+z67aniQoQ8/yFNadiEwtNS9qQiw=="],
+    "ts-pattern": ["ts-pattern@5.7.0", "", {}, "sha512-0/FvIG4g3kNkYgbNwBBW5pZBkfpeYQnH+2AA3xmjkCAit/DSDPKmgwC3fKof4oYUq6gupClVOJlFl+939VRBMg=="],
 
     "tslib": ["tslib@2.6.3", "", {}, "sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ=="],
 
