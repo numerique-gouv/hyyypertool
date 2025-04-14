@@ -16,7 +16,7 @@
         "@release-it/conventional-changelog": "10.0.0",
         "@tsconfig/bun": "1.0.7",
         "@~/config.tailwindcss": "workspace:*",
-        "bun-types": "1.2.5",
+        "bun-types": "1.2.9",
         "prettier": "3.5.3",
         "prettier-plugin-organize-imports": "4.1.0",
         "prettier-plugin-tailwindcss": "0.6.11",
@@ -75,7 +75,7 @@
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
-        "bun-types": "1.2.5",
+        "bun-types": "1.2.9",
       },
     },
     "packages/~/app/layout": {
@@ -191,7 +191,7 @@
       "dependencies": {
         "@tsconfig/bun": "1.0.7",
         "@tsconfig/strictest": "2.0.5",
-        "bun-types": "1.2.5",
+        "bun-types": "1.2.9",
         "hono": "4.6.17",
       },
     },
@@ -217,7 +217,7 @@
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
         "@~/crisp.lib": "workspace:*",
-        "bun-types": "1.2.5",
+        "bun-types": "1.2.9",
       },
     },
     "packages/~/infra/crisp/ui": {
@@ -284,7 +284,7 @@
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
-        "bun-types": "1.2.5",
+        "bun-types": "1.2.9",
       },
     },
     "packages/~/infra/zammad/lib": {
@@ -534,7 +534,7 @@
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
-        "bun-types": "1.2.5",
+        "bun-types": "1.2.9",
       },
     },
   },
@@ -1040,7 +1040,7 @@
 
     "buffer-from": ["buffer-from@1.1.2", "", {}, "sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ=="],
 
-    "bun-types": ["bun-types@1.2.5", "", { "dependencies": { "@types/node": "*", "@types/ws": "~8.5.10" } }, "sha512-3oO6LVGGRRKI4kHINx5PIdIgnLRb7l/SprhzqXapmoYkFl5m4j6EvALvbDVuuBFaamB46Ap6HCUxIXNLCGy+tg=="],
+    "bun-types": ["bun-types@1.2.9", "", { "dependencies": { "@types/node": "*", "@types/ws": "*" } }, "sha512-dk/kOEfQbajENN/D6FyiSgOKEuUi9PWfqKQJEgwKrCMWbjS/S6tEXp178mWvWAcUSYm9ArDlWHZKO3T/4cLXiw=="],
 
     "bundle-name": ["bundle-name@4.1.0", "", { "dependencies": { "run-applescript": "^7.0.0" } }, "sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q=="],
 
