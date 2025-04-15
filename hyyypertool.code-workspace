@@ -64,9 +64,10 @@
   "extensions": {
     "recommendations": [
       "bradlc.vscode-tailwindcss",
+      "CucumberOpen.cucumber-official",
+      "dz4k.vscode-hyperscript-org",
       "esbenp.prettier-vscode",
       "oxc.oxc-vscode",
-      "dz4k.vscode-hyperscript-org",
     ],
   },
   "settings": {
@@ -97,6 +98,11 @@
       ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"], // tv(`...`)
     ],
     "autoHide.autoHidePanel": false,
+    //
+
+    "cSpell.language": "en,fr",
+    "cucumber.features": ["features/**/*.feature"],
+    "cucumber.glue": ["cypress/support/step_definitions/**/*.ts"],
   },
   "tasks": {
     "version": "2.0.0",
