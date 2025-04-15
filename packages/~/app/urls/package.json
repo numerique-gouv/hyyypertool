@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "consola": "3.4.2",
-    "hono": "4.6.17",
+    "hono": "4.7.6",
     "static-path": "0.0.4"
   },
   "devDependencies": {

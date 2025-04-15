@@ -65,7 +65,7 @@
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
     "dotenv": "16.5.0",
-    "hono": "4.6.17",
+    "hono": "4.7.6",
     "tsx": "4.19.3"
   },
   "devDependencies": {
