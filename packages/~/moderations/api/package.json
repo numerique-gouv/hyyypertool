@@ -33,7 +33,7 @@
     "@~/zammad.lib": "workspace:*",
     "await-to-js": "3.0.0",
     "drizzle-orm": "0.40.1",
-    "hono": "4.6.17",
+    "hono": "4.7.6",
     "tailwind-variants": "0.3.1",
     "ts-dedent": "2.2.0",
     "ts-pattern": "5.7.0",
