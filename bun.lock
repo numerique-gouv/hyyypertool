@@ -52,7 +52,7 @@
         "@~/welcome.api": "workspace:*",
         "await-to-js": "3.0.0",
         "consola": "3.4.2",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
         "hono": "4.7.6",
         "htmx.ext...chunked-transfer": "1.0.4",
         "htmx.org": "1.9.12",
@@ -228,7 +228,7 @@
         "rehype-sanitize": "6.0.0",
         "rehype-stringify": "10.0.1",
         "remark-parse": "11.0.0",
-        "remark-rehype": "11.1.1",
+        "remark-rehype": "11.1.2",
         "ts-pattern": "5.7.0",
         "unified": "11.0.5",
       },
@@ -244,7 +244,7 @@
         "@~/app.core": "workspace:*",
         "@~/moncomptepro.lib": "workspace:*",
         "consola": "3.4.2",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
         "hono": "4.7.6",
         "pg": "8.14.1",
       },
@@ -320,7 +320,7 @@
         "@~/users.ui": "workspace:*",
         "@~/zammad.lib": "workspace:*",
         "await-to-js": "3.0.0",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
         "hono": "4.7.6",
         "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
@@ -340,7 +340,7 @@
         "@~/crisp.lib": "workspace:*",
         "@~/moderations.repository": "workspace:*",
         "@~/moncomptepro.database": "workspace:*",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
         "ts-pattern": "5.7.0",
         "zod": "3.24.1",
       },
@@ -355,7 +355,7 @@
       "version": "1.0.0",
       "dependencies": {
         "@~/moncomptepro.database": "workspace:*",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -423,7 +423,7 @@
       "dependencies": {
         "@~/moncomptepro.database": "workspace:*",
         "@~/moncomptepro.lib": "workspace:*",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
         "ts-pattern": "5.7.0",
       },
       "devDependencies": {
@@ -493,7 +493,7 @@
       "version": "1.0.0",
       "dependencies": {
         "@~/moncomptepro.database": "workspace:*",
-        "drizzle-orm": "0.40.1",
+        "drizzle-orm": "0.41.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -1194,7 +1194,7 @@
 
     "drizzle-kit": ["drizzle-kit@0.30.6", "", { "dependencies": { "@drizzle-team/brocli": "^0.10.2", "@esbuild-kit/esm-loader": "^2.5.5", "esbuild": "^0.19.7", "esbuild-register": "^3.5.0", "gel": "^2.0.0" }, "bin": { "drizzle-kit": "bin.cjs" } }, "sha512-U4wWit0fyZuGuP7iNmRleQyK2V8wCuv57vf5l3MnG4z4fzNTjY/U13M8owyQ5RavqvqxBifWORaR3wIUzlN64g=="],
 
-    "drizzle-orm": ["drizzle-orm@0.40.1", "", { "peerDependencies": { "@aws-sdk/client-rds-data": ">=3", "@cloudflare/workers-types": ">=4", "@electric-sql/pglite": ">=0.2.0", "@libsql/client": ">=0.10.0", "@libsql/client-wasm": ">=0.10.0", "@neondatabase/serverless": ">=0.10.0", "@op-engineering/op-sqlite": ">=2", "@opentelemetry/api": "^1.4.1", "@planetscale/database": ">=1", "@prisma/client": "*", "@tidbcloud/serverless": "*", "@types/better-sqlite3": "*", "@types/pg": "*", "@types/sql.js": "*", "@vercel/postgres": ">=0.8.0", "@xata.io/client": "*", "better-sqlite3": ">=7", "bun-types": "*", "expo-sqlite": ">=14.0.0", "gel": ">=2", "knex": "*", "kysely": "*", "mysql2": ">=2", "pg": ">=8", "postgres": ">=3", "sql.js": ">=1", "sqlite3": ">=5" }, "optionalPeers": ["@aws-sdk/client-rds-data", "@cloudflare/workers-types", "@electric-sql/pglite", "@libsql/client", "@libsql/client-wasm", "@neondatabase/serverless", "@op-engineering/op-sqlite", "@opentelemetry/api", "@planetscale/database", "@prisma/client", "@tidbcloud/serverless", "@types/better-sqlite3", "@types/pg", "@types/sql.js", "@vercel/postgres", "@xata.io/client", "better-sqlite3", "bun-types", "expo-sqlite", "gel", "knex", "kysely", "mysql2", "pg", "postgres", "sql.js", "sqlite3"] }, "sha512-aPNhtiJiPfm3qxz1czrnIDkfvkSdKGXYeZkpG55NPTVI186LmK2fBLMi4dsHpPHlJrZeQ92D322YFPHADBALew=="],
+    "drizzle-orm": ["drizzle-orm@0.41.0", "", { "peerDependencies": { "@aws-sdk/client-rds-data": ">=3", "@cloudflare/workers-types": ">=4", "@electric-sql/pglite": ">=0.2.0", "@libsql/client": ">=0.10.0", "@libsql/client-wasm": ">=0.10.0", "@neondatabase/serverless": ">=0.10.0", "@op-engineering/op-sqlite": ">=2", "@opentelemetry/api": "^1.4.1", "@planetscale/database": ">=1", "@prisma/client": "*", "@tidbcloud/serverless": "*", "@types/better-sqlite3": "*", "@types/pg": "*", "@types/sql.js": "*", "@vercel/postgres": ">=0.8.0", "@xata.io/client": "*", "better-sqlite3": ">=7", "bun-types": "*", "expo-sqlite": ">=14.0.0", "gel": ">=2", "knex": "*", "kysely": "*", "mysql2": ">=2", "pg": ">=8", "postgres": ">=3", "sql.js": ">=1", "sqlite3": ">=5" }, "optionalPeers": ["@aws-sdk/client-rds-data", "@cloudflare/workers-types", "@electric-sql/pglite", "@libsql/client", "@libsql/client-wasm", "@neondatabase/serverless", "@op-engineering/op-sqlite", "@opentelemetry/api", "@planetscale/database", "@prisma/client", "@tidbcloud/serverless", "@types/better-sqlite3", "@types/pg", "@types/sql.js", "@vercel/postgres", "@xata.io/client", "better-sqlite3", "bun-types", "expo-sqlite", "gel", "knex", "kysely", "mysql2", "pg", "postgres", "sql.js", "sqlite3"] }, "sha512-7A4ZxhHk9gdlXmTdPj/lREtP+3u8KvZ4yEN6MYVxBzZGex5Wtdc+CWSbu7btgF6TB0N+MNPrvW7RKBbxJchs/Q=="],
 
     "eastasianwidth": ["eastasianwidth@0.2.0", "", {}, "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA=="],
 
@@ -1752,7 +1752,7 @@
 
     "remark-parse": ["remark-parse@11.0.0", "", { "dependencies": { "@types/mdast": "^4.0.0", "mdast-util-from-markdown": "^2.0.0", "micromark-util-types": "^2.0.0", "unified": "^11.0.0" } }, "sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA=="],
 
-    "remark-rehype": ["remark-rehype@11.1.1", "", { "dependencies": { "@types/hast": "^3.0.0", "@types/mdast": "^4.0.0", "mdast-util-to-hast": "^13.0.0", "unified": "^11.0.0", "vfile": "^6.0.0" } }, "sha512-g/osARvjkBXb6Wo0XvAeXQohVta8i84ACbenPpoSsxTOQH/Ae0/RGP4WZgnMH5pMLpsj4FG7OHmcIcXxpza8eQ=="],
+    "remark-rehype": ["remark-rehype@11.1.2", "", { "dependencies": { "@types/hast": "^3.0.0", "@types/mdast": "^4.0.0", "mdast-util-to-hast": "^13.0.0", "unified": "^11.0.0", "vfile": "^6.0.0" } }, "sha512-Dh7l57ianaEoIpzbp0PC9UKAdCSVklD8E5Rpw7ETfbTl3FqcOOgq5q2LVDhgGCkaBv7p24JXikPdvhhmHvKMsw=="],
 
     "require-directory": ["require-directory@2.1.1", "", {}, "sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q=="],
 

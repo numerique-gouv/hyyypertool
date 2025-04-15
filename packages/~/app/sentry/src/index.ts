@@ -2,9 +2,9 @@ import {
   SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN,
   SEMANTIC_ATTRIBUTE_SENTRY_SOURCE,
   Scope,
-  addRequestDataToEvent,
   continueTrace,
   getGlobalScope,
+  getTraceMetaTags,
   httpIntegration,
   init,
   postgresIntegration,
@@ -23,6 +23,7 @@ import { createMiddleware } from "hono/factory";
 export interface SentryVariables_Context extends Env {
   Variables: {
     sentry: Scope;
+    sentry_trace_meta_tags: string;
   };
 }
 
@@ -58,6 +59,7 @@ export function set_sentry() {
       c.req.method.toUpperCase() === "HEAD"
     ) {
       c.set("sentry", getGlobalScope());
+      c.set("sentry_trace_meta_tags", getTraceMetaTags());
       return next();
     }
 
@@ -96,21 +98,8 @@ export function set_sentry() {
               name: `${c.req.method} ${c.req.path || "/"}`,
             },
             async function start_span_callback(span) {
-              scope.addEventProcessor(function event_processor_callback(event) {
-                return addRequestDataToEvent(
-                  event,
-                  {
-                    method: c.req.method,
-                    url: c.req.url,
-                  },
-                  {
-                    include: {
-                      user: false,
-                    },
-                  },
-                );
-              });
               c.set("sentry", scope);
+
               await next();
 
               if (!span) {
