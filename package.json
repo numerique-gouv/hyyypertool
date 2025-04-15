@@ -64,20 +64,20 @@
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
-    "dotenv": "16.4.7",
+    "dotenv": "16.5.0",
     "hono": "4.6.17",
-    "tsx": "4.19.2"
+    "tsx": "4.19.3"
   },
   "devDependencies": {
     "@csmith/release-it-calver-plugin": "2023.12.0",
     "@release-it/conventional-changelog": "10.0.0",
     "@tsconfig/bun": "1.0.7",
     "@~/config.tailwindcss": "workspace:*",
-    "bun-types": "1.2.5",
+    "bun-types": "1.2.9",
     "prettier": "3.5.3",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-tailwindcss": "0.6.11",
-    "release-it": "17.11.0",
+    "release-it": "18.1.2",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3"
   },

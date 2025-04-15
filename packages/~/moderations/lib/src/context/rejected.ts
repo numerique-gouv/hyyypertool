@@ -11,8 +11,9 @@ import type { RejectedMessage } from "../schema/rejected.form";
 export type RejectedModeration_Context = {
   crisp_config: Config;
   moderation: get_moderation_dto;
-  userinfo: AgentConnect_UserInfo;
   pg: MonComptePro_PgDatabase;
   resolve_delay: number;
+  subject: string;
+  userinfo: AgentConnect_UserInfo;
 };
 export type RejectedFullMessage = RejectedMessage & { to: string };
