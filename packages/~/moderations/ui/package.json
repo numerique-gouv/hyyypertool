@@ -21,7 +21,7 @@
     "@~/organizations.lib": "workspace:*",
     "@~/users.lib": "workspace:*",
     "@~/moderations.lib": "workspace:*",
-    "hono": "4.6.17",
+    "hono": "4.7.6",
     "tailwind-variants": "0.3.1",
     "ts-pattern": "5.7.0"
   },
