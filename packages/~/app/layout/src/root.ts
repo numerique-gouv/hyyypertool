@@ -1,7 +1,7 @@
 //
 
 import type { App_Context } from "@~/app.middleware/context";
-import { html } from "hono/html";
+import { html, raw } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 
@@ -34,7 +34,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
         <meta name="theme-color" content="#000091" />
 
         <!--  -->
-        ${sentry_trace_meta_tags}
+        ${raw(sentry_trace_meta_tags ?? "")}
         <!--  -->
 
         <link

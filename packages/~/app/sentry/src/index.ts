@@ -58,8 +58,8 @@ export function set_sentry() {
       c.req.method.toUpperCase() === "OPTIONS" ||
       c.req.method.toUpperCase() === "HEAD"
     ) {
-      c.set("sentry", getGlobalScope());
       c.set("sentry_trace_meta_tags", getTraceMetaTags());
+      c.set("sentry", getGlobalScope());
       return next();
     }
 
@@ -98,6 +98,7 @@ export function set_sentry() {
               name: `${c.req.method} ${c.req.path || "/"}`,
             },
             async function start_span_callback(span) {
+              c.set("sentry_trace_meta_tags", getTraceMetaTags());
               c.set("sentry", scope);
 
               await next();
