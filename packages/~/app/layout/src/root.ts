@@ -34,7 +34,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
         <meta name="theme-color" content="#000091" />
 
         <!--  -->
-        ${raw(sentry_trace_meta_tags)}
+        ${raw(sentry_trace_meta_tags ?? "")}
         <!--  -->
 
         <link
