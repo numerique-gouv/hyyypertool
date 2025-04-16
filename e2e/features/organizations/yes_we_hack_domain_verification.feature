@@ -20,7 +20,7 @@ Fonctionnalité: Page organisation - domaine à vérifier
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "🏛 A propos de l'organisation"
     * je vois "« Yes we hack »"
-    * je vois "Dénomination : Yes we hack"
+    * je vois "Dénomination Yes we hack"
 
     Soit le tableau sous le title "domaine connu dans l'organisation"
     * je vois la ligne "yeswehack.com" dans le tableau
