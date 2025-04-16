@@ -1,61 +1,81 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render about section 1`] = `
-"<!doctype html>
-<section>
-  <ul class="list-none pl-0">
-    <li>Creation de l&#39;organisation : <b></b></li>
-    <li>Nature juridique : <b></b></li>
-    <li>Dénomination : <b></b></li>
-    <li>Nom complet : <b></b></li>
-    <li>NAF/APE : <b></b></li>
-    <li>
-      Tranche d&#39;effectif : <b></b> (code : ) (<a
-        href="https://www.sirene.fr/sirene/public/variable/tefen"
-        rel="noopener noreferrer"
-        target="_blank"
-        >liste code effectif INSEE</a
-      >)
-    </li>
-    <li>
-      État administratif : <b></b> (<a
-        href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
-        rel="noopener noreferrer"
-        target="_blank"
-        >liste état administratif INSEE</a
-      >)
-    </li>
-    <li>Adresse : <b></b></li>
-    <li>
-      Siret : <b></b> (<a
-        href="https://annuaire-entreprises.data.gouv.fr/entreprise/"
-        rel="noopener noreferrer"
-        target="_blank"
-        >Voir la fiche annuaire entreprise de cette organisation</a
-      >)
-    </li>
-  </ul>
-  <div class="my-4" hx-get="/organizations/leaders?siret=" hx-trigger="load">
-    <i class="text-center">Recherche des dirigeants...</i>
-  </div>
-  <a
-    href="https://annuaire-entreprises.data.gouv.fr/etablissement/"
-    class="fr-btn fr-btn--sm fr-btn--tertiary"
-    rel="noopener noreferrer"
-    target="_blank"
-    >Fiche sur l’Annuaire des Entreprises</a
-  ><a
-    href="https://annuaire-entreprises.data.gouv.fr/dirigeants/"
-    class="fr-btn fr-btn--sm fr-btn--tertiary"
-    rel="noopener noreferrer"
-    target="_blank"
-    >Liste des Dirigeants - Annuaire des Entreprises</a
+"<section class="mt-6" id="about_section">
+  <h3>
+    <a class="bg-none" target="_blank" href="/organizations/42"
+      >🏛 Organisation</a
+    >
+  </h3>
+  <dl
+    class="grid grid-cols-[222px_1fr] gap-x-3 ps-0 [&amp;_dd]:p-0 [&amp;_dd]:py-1 [&amp;_dd]:font-semibold [&amp;_dt]:border-0 [&amp;_dt]:border-r [&amp;_dt]:border-solid [&amp;_dt]:border-gray-300 [&amp;_dt]:p-0 [&amp;_dt]:py-1 [&amp;_dt]:uppercase"
   >
+    <dt>Dénomination</dt>
+    <dd><abbr title="cached_nom_complet">cached_libelle</abbr></dd>
+    <dt>Siret</dt>
+    <dd>
+      siret
+      <a
+        href="https://annuaire-entreprises.data.gouv.fr/etablissement/siret"
+        class="fr-btn fr-btn--sm fr-btn--tertiary ml-2"
+        rel="noopener noreferrer"
+        target="_blank"
+        >Fiche annuaire</a
+      >
+    </dd>
+    <dt>NAF/APE</dt>
+    <dd>cached_libelle_activite_principale</dd>
+    <dt>Adresse</dt>
+    <dd>cached_adresse</dd>
+    <dt>Nature juridique</dt>
+    <dd>cached_libelle_categorie_juridique (cached_categorie_juridique)</dd>
+    <dt>Tranche d effectif</dt>
+    <dd>
+      cached_libelle_tranche_effectif (code : cached_tranche_effectifs)
+      <span class="text-nowrap"
+        >(<a
+          href="https://www.sirene.fr/sirene/public/variable/tefen"
+          rel="noopener noreferrer"
+          target="_blank"
+          >liste code effectif INSEE</a
+        >)</span
+      >
+    </dd>
+  </dl>
   <details class="my-6">
     <summary>Détails de l&#39;organisation</summary>
     <ul>
       <li>id : <b>42</b></li>
-      <li>Dernière mise à jour : <b></b></li>
+      <li>
+        Création de l&#39;organisation :
+        <b
+          ><time
+            datetime="2011-11-22T14:34:34.000Z"
+            title="Tue Nov 22 2011 15:34:34 GMT+0100 (Central European Standard Time)"
+            >22/11/2011 15:34:34
+          </time></b
+        >
+      </li>
+      <li>
+        Dernière mise à jour :
+        <b
+          ><time
+            datetime="2011-11-15T13:48:00.000Z"
+            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
+            >15/11/2011 14:48:00
+          </time></b
+        >
+      </li>
+      <li>
+        Dernière mise à jour :
+        <b
+          ><time
+            datetime="2011-11-15T13:48:00.000Z"
+            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
+            >15/11/2011 14:48:00
+          </time></b
+        >
+      </li>
     </ul>
   </details>
 </section>

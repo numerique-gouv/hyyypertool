@@ -1,131 +1,107 @@
 //
 
 import { button } from "@~/app.ui/button";
+import { description_list } from "@~/app.ui/list";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { hx_urls } from "@~/app.urls";
-import type { Organization } from "@~/organizations.lib/entities/Organization";
+import { urls } from "@~/app.urls";
+import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";
 import { InactiveWarning } from "./InactiveWarning";
 
 //
 
 type Props = JSX.IntrinsicElements["section"] & {
-  organization: Pick<
-    Organization,
-    | "cached_activite_principale"
-    | "cached_adresse"
-    | "cached_code_postal"
-    | "cached_est_active"
-    | "cached_etat_administratif"
-    | "cached_libelle_categorie_juridique"
-    | "cached_libelle_tranche_effectif"
-    | "cached_libelle"
-    | "cached_nom_complet"
-    | "cached_tranche_effectifs"
-    | "created_at"
-    | "id"
-    | "siret"
-    | "updated_at"
-  >;
+  organization: Awaited<ReturnType<GetFicheOrganizationByIdHandler>>;
 };
 
-export async function About(props: Props) {
-  const { organization, ...section_props } = props;
-  const hx_organizations_leaders_props =
-    await hx_urls.organizations.leaders.$get({
-      query: { siret: organization.siret },
-    });
+export function About(props: Props) {
+  const { organization, moderation, ...section_props } = props;
 
   return (
-    <section {...section_props}>
+    <section class="mt-6" {...section_props}>
+      <h3>
+        <a
+          class="bg-none"
+          target="_blank"
+          href={
+            urls.organizations[":id"].$url({
+              param: {
+                id: organization.id.toString(),
+              },
+            }).pathname
+          }
+        >
+          🏛 Organisation
+        </a>
+      </h3>
       <InactiveWarning organization={organization} />
-      <ul class="list-none pl-0">
-        <li>
-          Creation de l'organisation :{" "}
-          <b>
-            <LocalTime date={organization.created_at} />
-          </b>
-        </li>
-        <li>
-          Nature juridique :{" "}
-          <b>{organization.cached_libelle_categorie_juridique}</b>
-        </li>
-        <li>
-          Dénomination : <b>{organization.cached_libelle}</b>
-        </li>
-        <li>
-          Nom complet : <b>{organization.cached_nom_complet}</b>
-        </li>
-        <li>
-          NAF/APE : <b>{organization.cached_activite_principale}</b>
-        </li>
-        <li>
-          Tranche d'effectif :{" "}
-          <b>{organization.cached_libelle_tranche_effectif}</b> (code :{" "}
-          {organization.cached_tranche_effectifs}) (
+      <dl class={description_list()}>
+        <dt>Dénomination </dt>
+        <dd>
+          <abbr title={organization.cached_nom_complet ?? ""}>
+            {organization.cached_libelle}
+          </abbr>{" "}
+        </dd>
+
+        <dt>Siret </dt>
+        <dd>
+          {organization.siret}{" "}
           <a
-            href="https://www.sirene.fr/sirene/public/variable/tefen"
+            href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+            class={`${button({ size: "sm", type: "tertiary" })} ml-2`}
             rel="noopener noreferrer"
             target="_blank"
           >
-            liste code effectif INSEE
+            Fiche annuaire
           </a>
-          )
-        </li>
-        <li>
-          État administratif : <b>{organization.cached_etat_administratif}</b> (
-          <a
-            href="https://www.sirene.fr/sirene/public/variable/etatAdministratifEtablissement"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            liste état administratif INSEE
-          </a>
-          )
-        </li>
-        <li>
-          Adresse : <b>{organization.cached_adresse}</b>
-        </li>
-        <li>
-          Siret : <b>{organization.siret}</b> (
-          <a
-            href={`https://annuaire-entreprises.data.gouv.fr/entreprise/${organization.siret}`}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Voir la fiche annuaire entreprise de cette organisation
-          </a>
-          )
-        </li>
-      </ul>
+        </dd>
 
-      <div class="my-4" {...hx_organizations_leaders_props} hx-trigger="load">
-        <i class="text-center">Recherche des dirigeants...</i>
-      </div>
+        <dt>NAF/APE </dt>
+        <dd>{organization.cached_libelle_activite_principale} </dd>
 
-      <a
-        href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
-        class={button({ size: "sm", type: "tertiary" })}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Fiche sur l’Annuaire des Entreprises
-      </a>
+        <dt>Adresse </dt>
+        <dd>{organization.cached_adresse} </dd>
 
-      <a
-        href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
-        class={button({ size: "sm", type: "tertiary" })}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Liste des Dirigeants - Annuaire des Entreprises
-      </a>
+        <dt>Nature juridique </dt>
+        <dd>
+          {organization.cached_libelle_categorie_juridique} (
+          {organization.cached_categorie_juridique})
+        </dd>
 
+        <dt>Tranche d effectif </dt>
+        <dd>
+          {organization.cached_libelle_tranche_effectif} (code :{" "}
+          {organization.cached_tranche_effectifs}){" "}
+          <span class="text-nowrap">
+            (
+            <a
+              href="https://www.sirene.fr/sirene/public/variable/tefen"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              liste code effectif INSEE
+            </a>
+            )
+          </span>
+        </dd>
+      </dl>
       <details class="my-6">
         <summary>Détails de l'organisation</summary>
         <ul>
           <li>
             id : <b>{organization.id}</b>
+          </li>
+          <li>
+            Création de l'organisation :{" "}
+            <b>
+              <LocalTime date={organization.created_at} />
+            </b>
+          </li>
+          <li>
+            Dernière mise à jour :{" "}
+            <b>
+              <LocalTime date={organization.updated_at} />
+            </b>
           </li>
           <li>
             Dernière mise à jour :{" "}

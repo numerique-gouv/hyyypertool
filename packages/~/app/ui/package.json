@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./badge": {
+      "default": "./src/badge/index.ts"
+    },
     "./button": {
       "default": "./src/button/index.ts"
     },
@@ -18,6 +21,9 @@
     },
     "./hx_table": {
       "default": "./src/hx_table/index.ts"
+    },
+    "./list": {
+      "default": "./src/list/index.ts"
     },
     "./loader": {
       "default": "./src/loader/index.ts"
@@ -37,6 +43,9 @@
     "./table": {
       "default": "./src/table/index.ts"
     },
+    "./testing": {
+      "default": "./src/testing/index.ts"
+    },
     "./visually_hidden": {
       "default": "./src/visually_hidden/index.ts"
     },
@@ -50,9 +59,9 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.6.3",
+    "hono": "4.7.6",
     "hono-slotify": "workspace:*",
-    "tailwind-variants": "0.2.1"
+    "tailwind-variants": "0.3.1"
   },
   "devDependencies": {
     "@~/config.happydom": "workspace:*",

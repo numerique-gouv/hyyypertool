@@ -1,7 +1,7 @@
 //
 
 import type { App_Context } from "@~/app.middleware/context";
-import { html } from "hono/html";
+import { html, raw } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 
@@ -9,7 +9,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 export function Root_Layout({ children }: PropsWithChildren) {
   const {
-    var: { config, nonce },
+    var: { config, nonce, sentry_trace_meta_tags },
   } = useRequestContext<App_Context>();
 
   return html`
@@ -32,6 +32,10 @@ export function Root_Layout({ children }: PropsWithChildren) {
         />
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#000091" />
+
+        <!--  -->
+        ${raw(sentry_trace_meta_tags ?? "")}
+        <!--  -->
 
         <link
           rel="apple-touch-icon"

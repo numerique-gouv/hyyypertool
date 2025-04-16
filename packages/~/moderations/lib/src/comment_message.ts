@@ -12,6 +12,7 @@ const VALIDATED_COMMENT = BUILTIN_COMMENT.extend({
   type: z.literal("VALIDATED"),
 });
 const REJECTED_COMMENT = BUILTIN_COMMENT.extend({
+  subject: z.string(),
   type: z.literal("REJECTED"),
 });
 const REPROCESSED_COMMENT = BUILTIN_COMMENT.extend({
@@ -32,7 +33,10 @@ export function comment_message(comment_type: Comment_Type) {
       { type: "REPROCESSED" },
       ({ created_by }) => `Réouverte par ${created_by}`,
     )
-    .with({ type: "REJECTED" }, ({ created_by }) => `Rejeté par ${created_by}`)
+    .with(
+      { type: "REJECTED" },
+      ({ created_by, subject }) => `Rejeté par ${created_by} car "${subject}"`,
+    )
     .exhaustive();
   return `${Number(new Date())} ${comment_type.created_by} | ${comment_message}`;
 }

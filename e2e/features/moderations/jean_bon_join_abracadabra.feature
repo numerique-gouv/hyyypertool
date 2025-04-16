@@ -5,7 +5,7 @@ Fonctionnalité: Moderation blockante à accepter
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
 
     Alors je vois "Liste des moderations"
     * je vois la ligne de table "51935970700022"
@@ -16,27 +16,23 @@ Fonctionnalité: Moderation blockante à accepter
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"
 
+    Quand je clique sur "🌐 1 domaine connu dans l'organisation"
+
   Scénario: Domaine interne
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
     * sur la même ligne je vois "❓"
     * sur la même ligne je vois "Menu"
-    Quand j'ouvre le menu déroulant sur la même ligne
-    * je vois "🗑️ Supprimer"
-    * je vois "🔄 Domain vérifié"
 
-    Quand je clique sur "🔄 Domain vérifié"
+    Quand j'ouvre le menu déroulant sur la même ligne
+    Et je clique sur "✅ Domaine autorisé"
     Alors je vois la ligne "yopmail.com" dans le tableau
     Alors sur la même ligne je vois "✅"
 
     Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur "🔄 Domain autorisé"
-    Alors je vois la ligne "yopmail.com" dans le tableau
-    Alors sur la même ligne je vois "❓"
-
-    Quand j'ouvre le menu déroulant sur la même ligne
-    Et je clique sur le bouton "🗑️ Supprimer"
-    Alors je ne vois pas "🔄 Domain vérifié"
+    Et je clique sur le bouton "🚫 Domaine refusé"
+    Alors sur la même ligne je vois "🚫"
+    Alors sur la même ligne je vois "refused"
 
     Quand je clique sur le champs dans le tableau
     * je tape "poymail.com"
@@ -46,11 +42,11 @@ Fonctionnalité: Moderation blockante à accepter
     Alors sur la même ligne je vois "✅"
 
   Scénario: Domaine externe
-    Soit le tableau sous le title "Domaines de l'organisation"
+    Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
     * je vois la ligne "yopmail.com" dans le tableau
     Quand j'ouvre le menu déroulant sur la même ligne
-    * je clique sur le bouton "🔄 Domain externe"
-    Alors sur la même ligne je vois "❌"
+    * je clique sur le bouton "❎ Domaine externe"
+    Alors sur la même ligne je vois "❎"
 
   Scénario: Envoyer l'email « Votre demande a été traitée »
     Quand je clique sur "Je valide ce membre ✅"

@@ -1,5 +1,6 @@
 //
 
+import most_used_free_email_domains from "@gouvfr-lasuite/moncomptepro.core/data/most-used-free-email-domains.js";
 import type { Pagination } from "@~/app.core/schema";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import {
@@ -14,8 +15,19 @@ import {
   not,
   or,
 } from "drizzle-orm";
+import { readFile } from "fs/promises";
+import { fileURLToPath } from "node:url";
 
 //
+
+const disposable_free_email_domain = (
+  await readFile(
+    fileURLToPath(
+      import.meta.resolve("is-disposable-email-domain/data/free.txt"),
+    ),
+    "utf-8",
+  )
+).split("\n");
 
 const where_authorized_email_domains = and(
   isNull(schema.email_domains.verification_type),
@@ -38,6 +50,11 @@ const where_unipersonnelle = and(
 const where_active_organization = or(
   isNull(schema.organizations.cached_est_active),
   eq(schema.organizations.cached_est_active, true),
+);
+
+const where_is_free_domain = inArray(
+  schema.email_domains.domain,
+  most_used_free_email_domains.concat(disposable_free_email_domain),
 );
 
 //
@@ -63,6 +80,7 @@ export async function get_unverified_domains(
     where_active_organization,
     where_authorized_email_domains,
     not(where_unipersonnelle),
+    not(where_is_free_domain),
   );
 
   return pg.transaction(async function moderation_count(tx) {

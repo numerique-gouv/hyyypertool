@@ -2,14 +2,18 @@
 
 import type { JSX } from "hono/jsx";
 import { visually_hidden } from "../../visually_hidden";
+import { hide_on_click_elsewere } from "./scripts/hide_on_click_elsewere";
 
 type TriggerProps = JSX.IntrinsicElements["button"] & {
   target_id: string;
 };
 export function Trigger({ target_id, ...other_props }: TriggerProps) {
+  const toggle_on_click = `on click toggle @hidden on #${target_id}`;
   return (
     <button
-      _={`on click toggle @hidden on #${target_id}`}
+      _={[toggle_on_click, hide_on_click_elsewere(`#${target_id}`)].join(
+        " then ",
+      )}
       class="
       inline-flex items-center rounded-lg
       bg-white p-2 text-center text-sm font-medium text-gray-900

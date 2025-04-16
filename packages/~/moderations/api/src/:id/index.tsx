@@ -5,15 +5,22 @@ import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { Main_Layout } from "@~/app.layout/index";
+import type { App_Context } from "@~/app.middleware/context";
+import { set_context_variables } from "@~/app.middleware/set_context_variables";
+import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
+import { get_domain_count } from "@~/organizations.repository/get_domain_count";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
 import { to } from "await-to-js";
 import { Hono } from "hono";
+import { getContext } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
 import moderation_procedures_router from "./$procedures";
 import {
   get_moderation,
   get_organization_member,
   type ContextType,
+  type ContextVariablesType,
+  type ModerationContext,
 } from "./context";
 import duplicate_warning_router from "./duplicate_warning";
 import moderation_email_router from "./email/index";
@@ -22,15 +29,13 @@ import Page from "./page";
 
 //
 
-export default new Hono<ContextType>()
+export default new Hono<ModerationContext>()
   .get(
     "/",
     jsxRenderer(Main_Layout),
     zValidator("param", Entity_Schema),
-    async function set_moderation(
-      { render, req, set, status, var: { moncomptepro_pg } },
-      next,
-    ) {
+    async function set_moderation({ render, req, set, status }, next) {
+      const { moncomptepro_pg } = getContext<App_Context>().var;
       const { id: moderation_id } = req.valid("param");
 
       const [moderation_error, moderation] = await to(
@@ -47,17 +52,17 @@ export default new Hono<ContextType>()
       set("moderation", moderation);
       return next();
     },
-    async function set_domain({ set, var: { moderation } }, next) {
+    set_context_variables<ContextVariablesType>(async () => {
+      const { moderation, moncomptepro_pg } = getContext<ContextType>().var;
+
+      //
+
       const domain = z_email_domain.parse(moderation.user.email, {
         path: ["moderation.users.email"],
       });
-      set("domain", domain);
-      return next();
-    },
-    async function set_organization_member(
-      { set, var: { moderation, moncomptepro_pg } },
-      next,
-    ) {
+
+      //
+
       const organization_member = await get_organization_member(
         { pg: moncomptepro_pg },
         {
@@ -65,21 +70,34 @@ export default new Hono<ContextType>()
           user_id: moderation.user.id,
         },
       );
-      set("organization_member", organization_member);
-      return next();
-    },
-    async function set_query_organization_members_count(
-      { set, var: { moderation, moncomptepro_pg } },
-      next,
-    ) {
-      set(
-        "query_organization_members_count",
-        get_organization_members_count(moncomptepro_pg, {
+
+      //
+
+      const get_fiche_organization_by_id = GetFicheOrganizationById({
+        pg: moncomptepro_pg,
+      });
+      const organization_fiche = await get_fiche_organization_by_id(
+        moderation.organization_id,
+      );
+
+      //
+
+      return {
+        domain,
+        moderation,
+        organization_fiche,
+        organization_member,
+        query_domain_count: get_domain_count(moncomptepro_pg, {
           organization_id: moderation.organization_id,
         }),
-      );
-      return next();
-    },
+        query_organization_members_count: get_organization_members_count(
+          moncomptepro_pg,
+          {
+            organization_id: moderation.organization_id,
+          },
+        ),
+      };
+    }),
     function GET({ render }) {
       return render(<Page />);
     },

@@ -3,11 +3,19 @@
 import { fetch_mcp_admin_api } from "./fetch";
 
 //
+
+/**
+ * @deprecated - use sdk ForceJoinOrganization instead
+ */
 export type JoinOrganizationHandler = (options: {
   is_external: boolean;
   organization_id: number;
   user_id: number;
 }) => Promise<{}>;
+
+/**
+ * @deprecated - use sdk ForceJoinOrganization instead
+ */
 export const join_organization: JoinOrganizationHandler = async ({
   is_external,
   organization_id,

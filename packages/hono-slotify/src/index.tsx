@@ -38,7 +38,7 @@ export type SlotType<P> = FC<
 export function createSlot<P extends {}>() {
   const Slot: SlotType<P> = (({ children, showChildren, restProps }) => {
     if (!showChildren) {
-      return <></>;
+      return null;
     }
 
     const children_array = Children.toArray(children as Child[]) as
@@ -53,7 +53,7 @@ export function createSlot<P extends {}>() {
       return children_array[0](restProps);
     }
 
-    return <>{children}</>;
+    return raw(children);
   }) as SlotType<P>;
 
   const Renderer: RendererType<P> = ({ childs, children, ...restProps }) => {

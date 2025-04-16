@@ -34,16 +34,16 @@ export default new Hono<App_Context>().get(
             <div class="fr-connect-group">
               <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>
-                <span class="fr-connect__brand">AgentConnect</span>
+                <span class="fr-connect__brand">ProConnect</span>
               </button>
               <p>
                 <a
-                  href="https://agentconnect.gouv.fr/"
+                  href="https://www.proconnect.gouv.fr/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+                  title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
                 >
-                  Qu’est-ce que AgentConnect ?
+                  Qu’est-ce que ProConnect ?
                 </a>
               </p>
             </div>

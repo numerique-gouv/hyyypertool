@@ -5,7 +5,7 @@ Fonctionnalité: Moderation blockante à refuser
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
 
   Scénario: Jean Bon veut rejoindre la DINUM
     Alors je vois "Liste des moderations"
@@ -22,6 +22,3 @@ Fonctionnalité: Moderation blockante à refuser
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 
-    # Quand je clique sur "Sélectionner une response"
-    # * je sélectionne "Quel lien avec l'organisation ?"
-    # * je clique "🪄 Marquer comme traité"

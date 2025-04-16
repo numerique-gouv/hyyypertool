@@ -2,12 +2,8 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { z_username } from "@~/app.core/schema/z_username";
-import {
-  get_user,
-  is_crisp_ticket,
-  MarkConversationAsResolved,
-  send_message,
-} from "@~/crisp.lib";
+import { get_user, is_crisp_ticket, send_message } from "@~/crisp.lib";
+import { CrispApi } from "@~/crisp.lib/api";
 import { get_full_ticket, send_zammad_response } from "@~/zammad.lib";
 import {
   ARTICLE_TYPE,
@@ -44,7 +40,12 @@ export async function respond_to_ticket(
 }
 
 async function respond_in_conversation(
-  { crisp_config, moderation, userinfo }: RejectedModeration_Context,
+  {
+    crisp_config,
+    moderation,
+    userinfo,
+    resolve_delay,
+  }: RejectedModeration_Context,
   { message }: RejectedFullMessage,
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
@@ -65,11 +66,10 @@ async function respond_in_conversation(
 
   // HACK(douglasduteil): Wait for the message to be sent
   // Crisp seems to have a delay between the message being sent and the state being updated
-  await new Promise((resolve) => setTimeout(resolve, 1_000));
+  await new Promise((resolve) => setTimeout(resolve, resolve_delay));
 
-  const mark_conversation_as_resolved =
-    MarkConversationAsResolved(crisp_config);
-  await mark_conversation_as_resolved(moderation.ticket_id);
+  const { mark_conversation_as_resolved } = CrispApi(crisp_config);
+  await mark_conversation_as_resolved({ session_id: moderation.ticket_id });
 }
 
 async function respond_to_zammad_ticket(

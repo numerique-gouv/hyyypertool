@@ -2,24 +2,38 @@
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
-import { hx_urls, urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
+import { IsUserExternalMember } from "@~/moderations.lib/usecase/IsUserExternalMember";
+import { Actions } from "@~/moderations.ui/Actions";
+import { DomainsByOrganization } from "@~/moderations.ui/DomainsByOrganization";
+import { Header } from "@~/moderations.ui/Header";
+import { OrganizationsByUser } from "@~/moderations.ui/OrganizationsByUser";
+import { UsersByOrganization } from "@~/moderations.ui/UsersByOrganization";
+import { SuggestOrganizationDomains } from "@~/organizations.lib/usecase";
 import { About as About_Organization } from "@~/organizations.ui/info/About";
 import { Investigation as Investigation_Organization } from "@~/organizations.ui/info/Investigation";
-import { About_User, Investigation_User } from "./About_User";
-import { Moderation_Actions } from "./Actions";
-import { Domain_Organization } from "./Domain_Organization";
-import { Header } from "./Header";
-import { Members_Of_Organization_Table } from "./Members_Of_Organization_Table";
+import {
+  CountUserMemberships,
+  SuggestSameUserEmails,
+} from "@~/users.lib/usecase";
+import { About as About_User } from "@~/users.ui/About";
+import { Investigation as Investigation_User } from "@~/users.ui/Investigation";
+import { getContext } from "hono/context-storage";
+import { type ModerationContext, usePageRequestContext } from "./context";
 import { Moderation_Exchanges } from "./Moderation_Exchanges";
-import { Organizations_Of_User_Table } from "./Organizations_Of_User_Table";
-import { usePageRequestContext } from "./context";
 
 //
 
 export default async function Moderation_Page() {
+  const { moderation } = getContext<ModerationContext>().var;
   const {
-    var: { moderation },
+    var: {
+      moncomptepro_pg,
+      organization_fiche,
+      query_domain_count,
+      query_organization_members_count,
+    },
   } = usePageRequestContext();
 
   return (
@@ -40,7 +54,7 @@ export default async function Moderation_Page() {
       <button
         _="on click go back"
         class={button({
-          class: "fr-btn--icon-left fr-icon-checkbox-circle-line",
+          class: "fr-btn--icon-left fr-icon-arrow-go-back-fill",
           type: "tertiary",
           size: "sm",
         })}
@@ -48,60 +62,65 @@ export default async function Moderation_Page() {
         retour
       </button>
 
-      <hr class="bg-none pt-6" />
+      <hr class="bg-none pb-5" />
 
-      <Header />
+      <Header.Provier value={{ moderation }}>
+        <Header />
+      </Header.Provier>
 
-      <hr class="my-12" />
+      <hr class="bg-none pb-5" />
 
-      <div class="grid grid-cols-2 gap-6">
-        <About_User />
-        <div>
-          <h3>
-            <a
-              href={
-                urls.organizations[":id"].$url({
-                  param: {
-                    id: moderation.organization.id.toString(),
-                  },
-                }).pathname
-              }
-            >
-              🏛 Organisation
-            </a>
-          </h3>
-          <About_Organization organization={moderation.organization} />
-        </div>
-      </div>
+      <About_User user={moderation.user} />
+      <Investigation_User
+        user={moderation.user}
+        organization={moderation.organization}
+      />
+      <About_Organization organization={organization_fiche} />
+      <Investigation_Organization organization={moderation.organization} />
 
-      <hr class="bg-none pt-6" />
+      <hr class="bg-none" />
 
-      <div class="grid grid-cols-2 gap-6">
-        <Investigation_User />
-        <Investigation_Organization organization={moderation.organization} />
-      </div>
+      <DomainsByOrganization
+        organization={moderation.organization}
+        query_domain_count={query_domain_count}
+      />
 
-      <hr class="bg-none pt-6" />
+      <hr class="bg-none" />
 
-      <Organizations_Of_User_Table />
+      <OrganizationsByUser
+        user={moderation.user}
+        query_organization_count={CountUserMemberships({ pg: moncomptepro_pg })}
+      />
 
-      <hr class="my-12" />
+      <hr class="bg-none" />
 
-      <Domain_Organization />
+      <UsersByOrganization
+        organization={moderation.organization}
+        query_members_count={query_organization_members_count}
+      />
 
-      <hr class="my-12 bg-none" />
+      <hr class="bg-none" />
 
-      <Members_Of_Organization_Table />
+      <Actions
+        value={{
+          moderation,
+          query_suggest_same_user_emails: SuggestSameUserEmails({
+            pg: moncomptepro_pg,
+          }),
+          query_is_user_external_member: IsUserExternalMember({
+            pg: moncomptepro_pg,
+          }),
+          query_suggest_organization_domains: SuggestOrganizationDomains({
+            pg: moncomptepro_pg,
+          }),
+        }}
+      />
 
-      <hr class="my-12 bg-none" />
-
-      <Moderation_Actions />
-
-      <hr class="my-12 bg-none" />
+      <hr class="bg-none" />
 
       <hr />
 
-      <hr class="my-12 bg-none" />
+      <hr class="bg-none" />
 
       <Moderation_Exchanges />
     </main>

@@ -1,11 +1,12 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { CopyButton } from "@~/app.ui/button/components/copy";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { menu_item } from "@~/app.ui/menu";
 import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
+import type { EmailDomain_Type } from "@~/moncomptepro.lib/email_domain";
 import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/moncomptepro.d";
 import type { get_orginization_domains_dto } from "@~/organizations.repository/get_orginization_domains";
 import { match } from "ts-pattern";
@@ -28,6 +29,8 @@ export function Table() {
             <th>Status</th>
             <th>Domain</th>
             <th>Type</th>
+            <th>Vérifié le</th>
+            <th>Crée le</th>
             <th></th>
           </tr>
         </thead>
@@ -38,7 +41,7 @@ export function Table() {
         </tbody>
         <tfoot>
           <tr>
-            <td colspan={4}>
+            <td colspan={6}>
               <Add_Domain />
             </td>
           </tr>
@@ -76,40 +79,45 @@ async function Add_Domain() {
   );
 }
 
-function TypeToEmoji({ type }: { type: MCP_EmailDomain_Type }) {
+function TypeToEmoji({ type }: { type: EmailDomain_Type }) {
   return match(type)
-    .with("verified", () => (
-      <span role="img" aria-label="vérifié">
-        ✅
-      </span>
-    ))
     .with("authorized", () => (
-      <span role="img" aria-label="autorisé">
+      <span role="img" aria-label="autorisé" title="autorisé">
         🔓
       </span>
     ))
-    .with("external", () => (
-      <span role="img" aria-label="externe">
-        ❌
+    .with("blacklisted", () => (
+      <span role="img" aria-label="blacklisté" title="blacklisté">
+        ☠️
       </span>
     ))
-    .with("blacklisted", () => (
-      <span role="img" aria-label="blacklisté">
-        🚫
+    .with("external", () => (
+      <span role="img" aria-label="externe" title="externe">
+        ❎
       </span>
     ))
     .with("official_contact", () => (
-      <span role="img" aria-label="contact officiel">
-        📞
+      <span role="img" aria-label="contact officiel" title="contact officiel">
+        ✅
+      </span>
+    ))
+    .with("refused", () => (
+      <span role="img" aria-label="postal mail" title="postal mail">
+        🚫
       </span>
     ))
     .with("trackdechets_postal_mail", () => (
-      <span role="img" aria-label="postal mail">
-        📬
+      <span role="img" aria-label="postal mail" title="postal mail">
+        ✅
+      </span>
+    ))
+    .with("verified", () => (
+      <span role="img" aria-label="vérifié" title="vérifié">
+        ✅
       </span>
     ))
     .otherwise(() => (
-      <span role="img" aria-label="inconnu">
+      <span role="img" aria-label="inconnu" title="inconnu">
         ❓
       </span>
     ));
@@ -122,15 +130,34 @@ function Row({
   key?: string;
   organization_domain: get_orginization_domains_dto[number];
 }) {
-  const { domain, verification_type: type, organization } = organization_domain;
+  const {
+    created_at,
+    domain,
+    organization,
+    updated_at,
+    verification_type,
+    verified_at,
+  } = organization_domain;
   return (
     <tr key={key}>
       <td>
-        <TypeToEmoji type={type as MCP_EmailDomain_Type} />
+        <TypeToEmoji type={verification_type as MCP_EmailDomain_Type} />
       </td>
       <td>{domain}</td>
-      <td>{type}</td>
-      <td class="!text-end">
+      <td>{verification_type}</td>
+      <td>
+        <LocalTime date={verified_at} />
+      </td>
+      <td>
+        <LocalTime date={created_at} />
+        {created_at !== updated_at ? (
+          <>
+            <br />
+            Modifié le <LocalTime date={updated_at} />
+          </>
+        ) : null}
+      </td>
+      <td class="space-x-2 !text-end">
         <GoogleSearchButton
           class={button({ class: "align-bottom", size: "sm" })}
           query={domain}
@@ -154,13 +181,7 @@ async function Row_Actions({
 }: {
   organization_domain: get_orginization_domains_dto[number];
 }) {
-  const { domain, id, organization_id, organization } = organization_domain;
-
-  const hx_delete_domain_props = await hx_urls.organizations[":id"].domains[
-    ":domain_id"
-  ].$delete({
-    param: { id: organization_id.toString(), domain_id: id.toString() },
-  });
+  const { domain, id, organization, organization_id } = organization_domain;
 
   const hx_change_type_props = (type: MCP_EmailDomain_Type) =>
     hx_urls.organizations[":id"].domains[":domain_id"].$patch({
@@ -168,19 +189,44 @@ async function Row_Actions({
       query: { type },
     });
 
+  const hx_delete_domain_props = await hx_urls.organizations[":id"].domains[
+    ":domain_id"
+  ].$delete({
+    param: { id: organization_id.toString(), domain_id: id.toString() },
+  });
+
   return (
     <Horizontal_Menu>
       <ul class="list-none p-0">
         <li>
-          <CopyButton
-            text={domain}
-            variant={{
-              type: "tertiary",
-              class: menu_item({ class: "shadow-none" }),
-            }}
+          <button
+            {...await hx_change_type_props("verified")}
+            class={menu_item()}
+            hx-swap="none"
+            role="menuitem"
           >
-            Copier le domaine
-          </CopyButton>
+            ✅ Domaine autorisé
+          </button>
+        </li>
+        <li>
+          <button
+            {...await hx_change_type_props("external")}
+            class={menu_item()}
+            hx-swap="none"
+            role="menuitem"
+          >
+            ❎ Domaine externe
+          </button>
+        </li>
+        <li>
+          <button
+            {...await hx_change_type_props("refused")}
+            class={menu_item()}
+            hx-swap="none"
+            role="menuitem"
+          >
+            🚫 Domaine refusé
+          </button>
         </li>
         <li>
           <button
@@ -191,36 +237,6 @@ async function Row_Actions({
             role="menuitem"
           >
             🗑️ Supprimer
-          </button>
-        </li>
-        <li>
-          <button
-            {...await hx_change_type_props("verified")}
-            class={menu_item()}
-            hx-swap="none"
-            role="menuitem"
-          >
-            🔄 Domain vérifié
-          </button>
-        </li>
-        <li>
-          <button
-            {...await hx_change_type_props(null)}
-            class={menu_item()}
-            hx-swap="none"
-            role="menuitem"
-          >
-            🔄 Domain autorisé
-          </button>
-        </li>
-        <li>
-          <button
-            {...await hx_change_type_props("external")}
-            class={menu_item()}
-            hx-swap="none"
-            role="menuitem"
-          >
-            🔄 Domain externe
           </button>
         </li>
       </ul>

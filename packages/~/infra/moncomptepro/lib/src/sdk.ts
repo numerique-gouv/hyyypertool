@@ -1,51 +1,55 @@
 //
 
+import {
+  forceJoinOrganizationFactory,
+  markDomainAsVerifiedFactory,
+} from "@gouvfr-lasuite/proconnect.identite/managers/organization";
+import * as EmailDomainRepository from "@gouvfr-lasuite/proconnect.identite/repositories/email-domain";
+import * as OrganizationRepository from "@gouvfr-lasuite/proconnect.identite/repositories/organization";
+import * as UserRepository from "@gouvfr-lasuite/proconnect.identite/repositories/user";
 import type Pg from "pg";
-import type { MCP_EmailDomain_Type } from "./moncomptepro";
 
 //
-//
-//
 
-// HACK(douglasduteil): disable typescript check on @numerique-gouv/moncomptepro
-//
-// As the @numerique-gouv/moncomptepro/database is not yet published as a standalone package
-// we need to disable the typescript check on it to avoid many typescript errors
-//
+export function ForceJoinOrganization(client: Pg.Pool) {
+  return forceJoinOrganizationFactory({
+    findById: OrganizationRepository.findByIdFactory({ pg: client }),
+    findEmailDomainsByOrganizationId:
+      EmailDomainRepository.findEmailDomainsByOrganizationIdFactory({
+        pg: client,
+      }),
+    findUserById: UserRepository.findByIdFactory({ pg: client }),
+    linkUserToOrganization:
+      OrganizationRepository.linkUserToOrganizationFactory({ pg: client }),
+  });
+}
 
-const MONCOMPTEPRO_MODULE = "@numerique-gouv/moncomptepro";
-
-// import "@numerique-gouv/moncomptepro/src/connectors/postgres";
-const POSTGRES_CONNECTOR_MODULE: {
-  setDatabaseConnection(newPool: Pg.Pool): void;
-} = await import(`${MONCOMPTEPRO_MODULE}/src/connectors/postgres`);
-
-// import "@numerique-gouv/moncomptepro/src/managers/organization/main";
-const MAIN_ORGANIZATION_MANAGER_MODULE: {
-  markDomainAsVerified(options: {
-    organization_id: number;
-    domain: string;
-    domain_verification_type: MCP_EmailDomain_Type;
-  }): Promise<void>;
-} = await import(`${MONCOMPTEPRO_MODULE}/src/managers/organization/main`);
-
-// import "@numerique-gouv/moncomptepro/src/managers/organization/join";
-export type ForceJoinOrganizationHandler = (options: {
-  organization_id: number;
-  user_id: number;
-  is_external?: boolean;
-}) => Promise<UserOrganizationLink>;
-const JOIN_ORGANIZATION_MANAGER_MODULE: {
-  forceJoinOrganization: ForceJoinOrganizationHandler;
-} = await import(`${MONCOMPTEPRO_MODULE}/src/managers/organization/join`);
+export type ForceJoinOrganizationHandler = ReturnType<
+  typeof ForceJoinOrganization
+>;
 
 //
-//
-//
 
-export const setDatabaseConnection =
-  POSTGRES_CONNECTOR_MODULE.setDatabaseConnection;
-export const markDomainAsVerified =
-  MAIN_ORGANIZATION_MANAGER_MODULE.markDomainAsVerified;
-export const forceJoinOrganization =
-  JOIN_ORGANIZATION_MANAGER_MODULE.forceJoinOrganization;
+export function MarkDomainAsVerified(client: Pg.Pool) {
+  return markDomainAsVerifiedFactory({
+    addDomain: EmailDomainRepository.addDomainFactory({ pg: client }),
+    findEmailDomainsByOrganizationId:
+      EmailDomainRepository.findEmailDomainsByOrganizationIdFactory({
+        pg: client,
+      }),
+    findOrganizationById: OrganizationRepository.findByIdFactory({
+      pg: client,
+    }),
+    getUsers: OrganizationRepository.getUsersByOrganizationFactory({
+      pg: client,
+    }),
+    updateUserOrganizationLink:
+      UserRepository.updateUserOrganizationLinkFactory({
+        pg: client,
+      }),
+  });
+}
+
+export type MarkDomainAsVerifiedHandler = ReturnType<
+  typeof MarkDomainAsVerified
+>;

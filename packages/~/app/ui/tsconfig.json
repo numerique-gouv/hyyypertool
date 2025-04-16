@@ -8,8 +8,17 @@
   },
   "extends": "@~/config.typescript/tsx/tsconfig.json",
   "references": [
-    { "path": "../../config/happydom/tsconfig.json" },
-    { "path": "../core/tsconfig.json" },
-    { "path": "../urls/tsconfig.json" }
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../urls"
+    },
+    {
+      "path": "../../../hono-slotify"
+    },
+    {
+      "path": "../../config/happydom"
+    }
   ]
 }

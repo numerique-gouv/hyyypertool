@@ -1,13 +1,12 @@
 //
 
 import { date_to_dom_string } from "@~/app.core/date/date_format";
-import { Pagination_Schema } from "@~/app.core/schema";
+import { hx_include } from "@~/app.core/htmx";
 import { Foot } from "@~/app.ui/hx_table";
 import { notice } from "@~/app.ui/notice";
 import { Time } from "@~/app.ui/time/LocalTime";
 import { hx_urls, urls } from "@~/app.urls";
 import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
-import { match } from "ts-pattern";
 import { usePageRequestContext } from "./context";
 
 //
@@ -15,26 +14,26 @@ import { usePageRequestContext } from "./context";
 export async function Table() {
   const {
     req,
-    var: { count, organizations },
+    var: { pagination, query_organizations_collection },
   } = usePageRequestContext();
   const { id: user_id } = req.valid("param");
+  const { describedby, page_ref } = req.valid("query");
 
-  const pagination = match(
-    Pagination_Schema.safeParse(req.query(), { path: ["req.query()"] }),
-  )
-    .with({ success: true }, ({ data }) => data)
-    .otherwise(() => Pagination_Schema.parse({}));
+  const { organizations, count } = await query_organizations_collection;
 
-  const hx_organizations_query_props = hx_urls.users[":id"].organizations.$get({
-    param: {
-      id: user_id.toString(),
-    },
-    query: {},
-  });
+  const hx_get_organizations_query_props = {
+    ...(await hx_urls.users[":id"].organizations.$get({
+      param: {
+        id: user_id.toString(),
+      },
+      query: { describedby, page_ref },
+    })),
+    "hx-include": hx_include([page_ref]),
+  };
 
   return (
     <div class="fr-table [&>table]:table">
-      <table>
+      <table aria-describedby={describedby}>
         <thead>
           <tr>
             <th>Date de création</th>
@@ -55,7 +54,8 @@ export async function Table() {
 
         <Foot
           count={count}
-          hx_query_props={hx_organizations_query_props}
+          hx_query_props={hx_get_organizations_query_props}
+          id={page_ref}
           pagination={pagination}
         />
       </table>

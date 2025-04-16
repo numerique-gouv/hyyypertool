@@ -9,8 +9,11 @@ import { Message } from "./Message";
 //
 
 export default async function Zammad() {
+  const { req } = usePageRequestContext();
+  const { describedby } = req.valid("query");
+
   return (
-    <section>
+    <section aria-describedby={describedby}>
       <Header />
       <List />
     </section>

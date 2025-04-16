@@ -1,3 +1,5 @@
 //
 
-export * from "./get_moderation_by_id";
+export * from "./GetModerationById";
+export * from "./RemoveUserFromOrganization";
+export * from "./UpdateModerationById";

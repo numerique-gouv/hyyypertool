@@ -15,9 +15,9 @@
     "@~/app.core": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.6.3",
+    "hono": "4.7.6",
     "openid-client": "5.7.0",
-    "zod": "3.23.8"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

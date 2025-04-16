@@ -7,6 +7,9 @@
     ".": {
       "default": "./src/index.ts"
     },
+    "./usecase": {
+      "default": "./src/usecase/index.ts"
+    },
     "./*": {
       "default": "./src/*.ts"
     }
@@ -16,7 +19,7 @@
     "@~/moncomptepro.lib": "workspace:*",
     "@~/organizations.repository": "workspace:*",
     "@~/users.repository": "workspace:*",
-    "zod": "3.23.8"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

@@ -4,11 +4,13 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
-import { append_comment } from "@~/moderations.lib/comment_message";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
-import { update_moderation_by_id } from "@~/moderations.repository/update_moderation_by_id";
-import { schema } from "@~/moncomptepro.database";
-import { eq } from "drizzle-orm";
+import { ReprocessModerationById } from "@~/moderations.lib/usecase/ReprocessModerationById";
+import {
+  GetModerationById,
+  RemoveUserFromOrganization,
+  UpdateModerationById,
+} from "@~/moderations.repository";
 import { Hono } from "hono";
 
 //
@@ -16,24 +18,19 @@ import { Hono } from "hono";
 export default new Hono<App_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
-  async ({ text, req, notFound, var: { moncomptepro_pg, userinfo } }) => {
+  async ({ text, req, var: { moncomptepro_pg, userinfo } }) => {
     const { id } = req.valid("param");
-    const moderation = await moncomptepro_pg.query.moderations.findFirst({
-      columns: { comment: true },
-      where: eq(schema.moderations.id, id),
-    });
-    if (!moderation) return notFound();
-    const { comment } = moderation;
 
-    await update_moderation_by_id(moncomptepro_pg, {
-      comment: append_comment(comment, {
-        type: "REPROCESSED",
-        created_by: userinfo.email,
+    const reprocess_moderation_by_id = ReprocessModerationById({
+      get_moderation_by_id: GetModerationById({ pg: moncomptepro_pg }),
+      remove_user_from_organization: RemoveUserFromOrganization({
+        pg: moncomptepro_pg,
       }),
-      moderation_id: id,
-      moderated_by: null,
-      moderated_at: null,
+      update_moderation_by_id: UpdateModerationById({ pg: moncomptepro_pg }),
+      userinfo,
     });
+
+    await reprocess_moderation_by_id(id);
 
     return text("OK", 200, {
       "HX-Trigger": MODERATION_EVENTS.Enum.MODERATION_UPDATED,

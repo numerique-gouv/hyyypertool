@@ -1,23 +1,27 @@
 //
 
-import {
-  fetch_crisp,
-  type Config,
-  type ConversationMeta,
-  type User,
-} from "@numerique-gouv/crisp";
+import { fetch_crisp } from "@gouvfr-lasuite/proconnect.crisp/client";
 import type {
   CreateConversationRoute,
   GetConversationRoute,
   GetMessagesInAConversationRoute,
+  OperatorsRouter,
   SendMessageInAConversationRoute,
   UpdateConversationMetaRoute,
-  UpdateConversationStateRoute,
-} from "@numerique-gouv/crisp/router/conversation";
-import type { OperatorsRouter } from "@numerique-gouv/crisp/router/operators";
+} from "@gouvfr-lasuite/proconnect.crisp/router";
+import type {
+  Config,
+  ConversationMeta,
+  User,
+} from "@gouvfr-lasuite/proconnect.crisp/types";
 import { z } from "zod";
+import type { CrispApi } from "./api";
 
 //
+
+export type CrispApiCradle = {
+  crisp: CrispApi;
+};
 
 export function is_crisp_ticket(session_id: string | number) {
   return z.string().startsWith("session_").safeParse(session_id).success;
@@ -44,6 +48,9 @@ export async function get_crisp_mail(
   return { conversation, messages };
 }
 
+/**
+ * @deprecated Use `crisp.send_message` instead.
+ */
 export async function send_message(
   config: Config,
   {
@@ -66,6 +73,9 @@ export async function send_message(
   });
 }
 
+/**
+ * @deprecated Use `crisp.get_user` instead.
+ */
 export async function get_user(config: Config, { email }: { email: string }) {
   const operators = await fetch_crisp<OperatorsRouter>(config, {
     endpoint: `/v1/website/${config.website_id}/operators/list`,
@@ -83,6 +93,9 @@ export async function get_user(config: Config, { email }: { email: string }) {
   } as User;
 }
 
+/**
+ * @deprecated Use `crisp.create_conversation` instead.
+ */
 export async function create_conversation(
   config: Config,
   {
@@ -110,17 +123,6 @@ export async function create_conversation(
   });
 
   return { session_id };
-}
-
-export function MarkConversationAsResolved(config: Config) {
-  return async function mark_conversation_as_resolved(session_id: string) {
-    await fetch_crisp<UpdateConversationStateRoute>(config, {
-      endpoint: `/v1/website/${config.website_id}/conversation/${session_id}/state`,
-      method: "PATCH",
-      searchParams: {},
-      body: { state: "resolved" },
-    });
-  };
 }
 
 export type get_crisp_mail_dto = Awaited<ReturnType<typeof get_crisp_mail>>;

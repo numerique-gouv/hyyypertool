@@ -8,7 +8,7 @@ Fonctionnalité: Duplicate Moderation
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
     # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario: Richard Bon veut rejoindre l'organisation Dengi - Leclerc
@@ -18,7 +18,6 @@ Fonctionnalité: Duplicate Moderation
     * sur la même ligne je vois "Richard"
     * sur la même ligne je vois "richardbon@leclerc.fr"
 
-  # Scénario:
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Richard Bon veut rejoindre l'organisation « Dengi - Leclerc »"
 

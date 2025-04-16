@@ -4,6 +4,8 @@ import { NotFoundError } from "@~/app.core/error";
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
+import { type get_domain_count_dto } from "@~/organizations.repository/get_domain_count";
 import { type get_organization_members_count_dto } from "@~/organizations.repository/get_organization_members_count";
 import { and, eq } from "drizzle-orm";
 import type { Env, InferRequestType } from "hono";
@@ -11,19 +13,19 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export const RESPONSE_MESSAGE_SELECT_ID = "response-message";
-export const RESPONSE_TEXTAREA_ID = "response";
-export const EMAIL_SUBJECT_INPUT_ID = "mail-subject";
-export const EMAIL_TO_INPUT_ID = "mail-to";
-
-//
-
+export interface ModerationContext extends Env {
+  Variables: {
+    moderation: get_moderation_dto;
+  };
+}
 export interface ContextVariablesType extends Env {
   Variables: {
     domain: string;
     moderation: get_moderation_dto;
     organization_member: get_organization_member_dto;
+    organization_fiche: Awaited<ReturnType<GetFicheOrganizationByIdHandler>>;
     query_organization_members_count: Promise<get_organization_members_count_dto>;
+    query_domain_count: Promise<get_domain_count_dto>;
   };
 }
 export type ContextType = App_Context & ContextVariablesType;

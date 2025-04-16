@@ -1,0 +1,17 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns error on 🦄 organization (min armée pec) email 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+En rattachant votre compte utilisateur MonComptePro au « 🦄 », sachez que vous ne serez pas d&#39;identifier comme étant un Agent, car cette organisation est enregistrée en tant qu&#39;Association, sous le SIRET « 🌸 ».
+
+Pour information, les numéros SIREN/SIRET des organisations publiques commencent obligatoirement par le chiffre 1 ou le chiffre 2 (source : définition de l&#39;INSEE du Numéro SIREN).
+
+Si vous créez votre compte utilisateur MonComptePro dans le but de pouvoir vous authentifier via AgentConnect, veuillez créer votre compte à nouveau en le rattachant à une autre organisation publique dont vous dépendez, ou au MINISTERE DES ARMEES : https://annuaire-entreprises.data.gouv.fr/entreprise/ministere-des-armees-110090016.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;

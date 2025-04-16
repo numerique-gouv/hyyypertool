@@ -5,7 +5,7 @@ Fonctionnalité: Page organisation
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "AgentConnect"
+    * je clique sur le bouton "ProConnect"
     # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario:
@@ -17,17 +17,17 @@ Fonctionnalité: Page organisation
 
   # Scénario: Fiche de DINUM
     Quand sur la même ligne je clique sur "➡️"
-    Alors je vois "A propos de « DINUM »"
-    * je vois "Creation de l'organisation : 13/07/2018 15:35:15"
-    * je vois "Dernière mise à jour : 22/06/2023 14:34:34"
-    * je vois "Dénomination : DINUM"
-    * je vois "Nom complet : Direction interministerielle du numerique (DINUM)"
-    * je vois "Tranche d'effectif : 100 à 199 salariés, en 2021 (code : 22) (liste code effectif INSEE)"
-    * je vois "État administratif : A (liste état administratif INSEE)"
-    * je vois "Siret : 13002526500013 (Voir la fiche annuaire entreprise de cette organisation)"
+    Alors je vois "🏛 A propos de l'organisation"
+    * je vois "« DINUM »"
+    * je vois "Dénomination DINUM"
+    * je vois "Siret 13002526500013 Fiche annuaire"
+    * je vois "NAF/APE 84.11Z - Administration publique générale"
+    * je vois "Adresse 20 avenue de segur, 75007 Paris"
+    * je vois "Nature juridique SA nationale à conseil d'administration (Service central d'un ministère)"
+    * je vois "Tranche d effectif 100 à 199 salariés, en 2021 (code : 22) (liste code effectif INSEE)"
 
-  # Scénario: Domaines de l'organisation DINUM
-    Soit le tableau sous le title "Domaines de l'organisation"
+  # Scénario: domaine connu dans l'organisation DINUM
+    Soit le tableau sous le title "🌐 3 domaines connu dans l'organisation"
     * je vois la ligne "beta.gouv.fr" dans le tableau
     * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"
@@ -35,7 +35,7 @@ Fonctionnalité: Page organisation
     * sur la même ligne je vois "✅"
     * sur la même ligne je vois "verified"
     * je vois la ligne "prestataire.modernisation.gouv.fr" dans le tableau
-    * sur la même ligne je vois "❌"
+    * sur la même ligne je vois "❎"
     * sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM

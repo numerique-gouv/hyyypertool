@@ -15,11 +15,31 @@ test("index.$get() returns a hx-get attibute", async () => {
   });
 });
 
+test(":slug.$get() returns a hx-get attibute", async () => {
+  const app = new Hono().get("/:slug", ({ text }) => text("OK"));
+  const attibute = await hono_hx_attibute<typeof app>()[":slug"].$get({
+    param: { slug: "foo" },
+  });
+  expect(attibute).toEqual({
+    "hx-get": "/foo",
+  });
+});
+
 test("index.$post() returns a hx-post attibute", async () => {
   const app = new Hono().post("/", ({ text }) => text("OK"));
   const attibute = await hono_hx_attibute<typeof app>().index.$post();
   expect(attibute).toEqual({
     "hx-post": "/",
+  });
+});
+
+test(":slug.$post() returns a hx-post attibute", async () => {
+  const app = new Hono().post("/:slug", ({ text }) => text("OK"));
+  const attibute = await hono_hx_attibute<typeof app>()[":slug"].$post({
+    param: { slug: "foo" },
+  });
+  expect(attibute).toEqual({
+    "hx-post": "/foo",
   });
 });
 
@@ -31,11 +51,31 @@ test("index.$put() returns a hx-put attibute", async () => {
   });
 });
 
+test(":slug.$put() returns a hx-put attibute", async () => {
+  const app = new Hono().put("/:slug", ({ text }) => text("OK"));
+  const attibute = await hono_hx_attibute<typeof app>()[":slug"].$put({
+    param: { slug: "foo" },
+  });
+  expect(attibute).toEqual({
+    "hx-put": "/foo",
+  });
+});
+
 test("index.$delete() returns a hx-delete attibute", async () => {
   const app = new Hono().delete("/", ({ text }) => text("OK"));
   const attibute = await hono_hx_attibute<typeof app>().index.$delete();
   expect(attibute).toEqual({
     "hx-delete": "/",
+  });
+});
+
+test(":slug.$delete() returns a hx-delete attibute", async () => {
+  const app = new Hono().delete("/:slug", ({ text }) => text("OK"));
+  const attibute = await hono_hx_attibute<typeof app>()[":slug"].$delete({
+    param: { slug: "foo" },
+  });
+  expect(attibute).toEqual({
+    "hx-delete": "/foo",
   });
 });
 
@@ -47,11 +87,31 @@ test("index.$patch() returns a hx-patch attibute", async () => {
   });
 });
 
+test(":slug.$patch() returns a hx-patch attibute", async () => {
+  const app = new Hono().patch("/:slug", ({ text }) => text("OK"));
+  const attibute = await hono_hx_attibute<typeof app>()[":slug"].$patch({
+    param: { slug: "foo" },
+  });
+  expect(attibute).toEqual({
+    "hx-patch": "/foo",
+  });
+});
+
 test("index.$options() returns a hx-options attibute", async () => {
   const app = new Hono().options("/", ({ text }) => text("OK"));
   const attibute = await hono_hx_attibute<typeof app>().index.$options();
   expect(attibute).toEqual({
     "hx-options": "/",
+  });
+});
+
+test(":slug.$options() returns a hx-options attibute", async () => {
+  const app = new Hono().options("/:slug", ({ text }) => text("OK"));
+  const attibute = await hono_hx_attibute<typeof app>()[":slug"].$options({
+    param: { slug: "foo" },
+  });
+  expect(attibute).toEqual({
+    "hx-options": "/foo",
   });
 });
 

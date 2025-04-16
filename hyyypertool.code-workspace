@@ -1,49 +1,73 @@
 {
   "folders": [
-    //
-
-    { "path": "packages/~/app", "name": "🈸 app" },
-    // { "path": "packages/~/app/core", "name": "📜 app.core" },
-    // { "path": "packages/~/app/layout", "name": "💄 app.layout" },
-    // { "path": "packages/~/app/middleware", "name": "🪝 app.middleware" },
-    // { "path": "packages/~/app/api", "name": "🫙 app.api" },
-    // { "path": "packages/~/app/urls", "name": "🔗 app.urls" },
-
-    //
-
-    { "path": "packages/~/moderations", "name": "📦 moderations" },
-    { "path": "packages/~/organizations", "name": "📦 organizations" },
-    { "path": "packages/~/users", "name": "📦 users" },
-
-    //
-
-    { "path": "packages/~/auth", "name": "📦 auth" },
-    { "path": "packages/~/welcome", "name": "📦 welcome" },
-    { "path": "packages/~/proxy", "name": "📦 proxy" },
-
-    //
-    //
-
-    { "path": "packages/~/infra/moncomptepro", "name": "🏗️ moncomptepro" },
-    { "path": "packages/~/infra/zammad", "name": "🏗️ zammad" },
-    { "path": "packages/~/infra/crisp", "name": "🏗️ crisp" },
-
-    //
-    { "path": "packages/~/config", "name": "⚙️ config" },
-    //
-    { "path": "mocks", "name": "🎭 mocks" },
-    { "path": "bin", "name": "🚀 bin" },
-    { "path": "e2e", "name": "🧪 e2e" },
-    //
-    //
-    { "path": ".", "name": "root" },
+    {
+      "name": "🈸 packages/~/app/",
+      "path": "packages/~/app",
+    },
+    {
+      "name": "📦 packages/~/moderations/",
+      "path": "packages/~/moderations",
+    },
+    {
+      "name": "📦 packages/~/organizations/",
+      "path": "packages/~/organizations",
+    },
+    {
+      "name": "📦 packages/~/users/",
+      "path": "packages/~/users",
+    },
+    {
+      "name": "📦 packages/~/auth/",
+      "path": "packages/~/auth",
+    },
+    {
+      "name": "📦 packages/~/welcome/",
+      "path": "packages/~/welcome",
+    },
+    {
+      "name": "📦 packages/~/proxy/",
+      "path": "packages/~/proxy",
+    },
+    {
+      "name": "🏗️ packages/~/infra/moncomptepro/",
+      "path": "packages/~/infra/moncomptepro",
+    },
+    {
+      "name": "🏗️ packages/~/infra/zammad/",
+      "path": "packages/~/infra/zammad",
+    },
+    {
+      "name": "🏗️ packages/~/infra/crisp/",
+      "path": "packages/~/infra/crisp",
+    },
+    {
+      "name": "⚙️ packages/~/config/",
+      "path": "packages/~/config",
+    },
+    {
+      "name": "🎭 mocks/",
+      "path": "mocks",
+    },
+    {
+      "name": "🚀 bin/",
+      "path": "bin",
+    },
+    {
+      "name": "🚥 e2e/",
+      "path": "e2e",
+    },
+    {
+      "name": "root",
+      "path": ".",
+    },
   ],
   "extensions": {
     "recommendations": [
       "bradlc.vscode-tailwindcss",
+      "CucumberOpen.cucumber-official",
+      "dz4k.vscode-hyperscript-org",
       "esbenp.prettier-vscode",
       "oxc.oxc-vscode",
-      "dz4k.vscode-hyperscript-org",
     ],
   },
   "settings": {
@@ -74,13 +98,40 @@
       ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"], // tv(`...`)
     ],
     "autoHide.autoHidePanel": false,
+    //
+
+    "cSpell.language": "en,fr",
+    "cucumber.features": ["features/**/*.feature"],
+    "cucumber.glue": ["cypress/support/step_definitions/**/*.ts"],
   },
   "tasks": {
     "version": "2.0.0",
     "tasks": [
       {
+        "label": "🔧 build",
+        "command": "bun",
+        "args": ["run", "build"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+          "env": {
+            "NODE_ENV": "development",
+          },
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
         "label": "1. 🚀 Dev",
-        "dependsOn": ["🚀 WWW Dev Server", "📦 Tailwind Dev", "📦 Types Dev"],
+        "dependsOn": [
+          "🚀 WWW Dev Server",
+          "📦 Tailwind Dev",
+          "📦 Types Dev",
+          "🐋 Docker Up",
+        ],
         "group": "build",
       },
       {
@@ -138,6 +189,107 @@
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
         "type": "shell",
+      },
+      {
+        "label": "🐋 Docker Up",
+        "command": "docker compose up --detach --wait",
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
+        "label": "🐋 Docker Down",
+        "command": "docker compose down --volumes",
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
+        "label": "🧪 Run Test",
+        "command": "bun test",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Update Test Snapshots",
+        "command": "bun test --update-snapshots",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Update Test Snapshots : Current file",
+        "command": "bun test --update-snapshots ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Watch Test",
+        "command": "bun test --watch",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Watch Test : Current file",
+        "command": "bun test --watch ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🚥 Cypress Studio",
+        "command": "bun run studio",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:🚥 e2e}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🚥 Cypress Run : Current file",
+        "command": "bun run test --spec ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:🚥 e2e}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
       },
       {
         "label": "🏗️ Database MonComptePro Migrate",

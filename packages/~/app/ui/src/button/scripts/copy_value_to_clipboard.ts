@@ -5,9 +5,7 @@ export function copy_value_to_clipboard(element: `#${string}` | string) {
     on click
       set text to ${element}.value
       js(me, text)
-        if ('clipboard' in window.navigator) {
-          navigator.clipboard.writeText(text)
-        }
+        navigator.clipboard.writeText(text)
       end
       halt
   `;

@@ -2,9 +2,9 @@
 
 import type { Hono, HonoRequest, Schema } from "hono";
 import { hc } from "hono/client";
+import type { HonoBase } from "hono/hono-base";
 import type { Endpoint } from "hono/types";
 import type { HasRequiredKeys, UnionToIntersection } from "hono/utils/types";
-import type { SetOptional } from "type-fest";
 import type { Router } from "./pattern";
 
 //
@@ -28,15 +28,14 @@ type Methods =
   | "options"
   | "trace";
 
+type InputEndpoint = { form?: {}; query?: {}; param?: {} };
 type HtmxSpecifiedAttributes<
   Method extends Methods,
-  Input extends SetOptional<Endpoint["input"], "form">,
+  Input extends InputEndpoint,
   TForm = Input["form"],
 > =
-  Extract<TForm, undefined> extends never // IsNullable<TForm>
-    ? HasRequiredKeys<NonNullable<TForm>> extends true
-      ? Record<`hx-${Method}`, string> & Record<`hx-vals`, string>
-      : Record<`hx-${Method}`, string>
+  HasRequiredKeys<NonNullable<TForm>> extends true
+    ? Record<`hx-${Method}`, string> & Record<`hx-vals`, string>
     : Record<`hx-${Method}`, string>;
 
 type HxClientRequest<TSchema extends Schema> = {
@@ -44,20 +43,20 @@ type HxClientRequest<TSchema extends Schema> = {
     input: infer $Input;
   }
     ? { input: $Input; method: $$Method } extends {
-        input: Endpoint["input"];
+        input: InputEndpoint;
         method: `$${infer Method}`;
       }
       ? Method extends Methods
-        ? $Input extends Endpoint["input"]
+        ? $Input extends InputEndpoint
           ? HasRequiredKeys<Omit<$Input, "form">> extends true
-            ? <$Args extends SetOptional<$Input, any>>(
+            ? <$Args extends Omit<$Input, "form">>(
                 args: $Args,
                 options?: HxClientRequestOptions,
-              ) => HtmxSpecifiedAttributes<Method, $Args>
-            : <$Args extends SetOptional<$Input, any>>(
+              ) => Promise<HtmxSpecifiedAttributes<Method, $Args>>
+            : <$Args extends Omit<$Input, "form">>(
                 args?: $Args,
                 options?: HxClientRequestOptions,
-              ) => HtmxSpecifiedAttributes<Method, $Args>
+              ) => Promise<HtmxSpecifiedAttributes<Method, $Args>>
           : never
         : never
       : never
@@ -94,7 +93,7 @@ type PathToChain<
       };
 
 type HxClient<T> =
-  T extends Hono<any, infer $Schema, any>
+  T extends HonoBase<any, infer $Schema, any>
     ? $Schema extends Record<infer $Path, Schema>
       ? $Path extends string
         ? PathToChain<$Path, $Schema>
