@@ -21,25 +21,31 @@ export function Investigation(props: InvestigationProps) {
   const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
 
   return (
-    <div class="mt-5 w-full bg-[#F6F6F6] p-3">
-      <GoogleSearchButton
-        class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
-        query={user.email}
-      >
-        Chercher l'email
-      </GoogleSearchButton>
-      <GoogleSearchButton
-        class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
-        query={domain}
-      >
-        Chercher le domaine email
-      </GoogleSearchButton>
-      <GoogleSearchButton
-        class={`${button({ size: "sm", type: "tertiary" })} bg-white`}
-        query={`${organization.cached_libelle} ${domain}`}
-      >
-        Chercher le matching
-      </GoogleSearchButton>
-    </div>
+    <ul class="mt-5 w-full bg-[#F6F6F6] p-3 [&_li]:inline-block">
+      <li>
+        <GoogleSearchButton
+          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
+          query={user.email}
+        >
+          Chercher l'email
+        </GoogleSearchButton>
+      </li>
+      <li>
+        <GoogleSearchButton
+          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white`}
+          query={domain}
+        >
+          Chercher le domaine email
+        </GoogleSearchButton>
+      </li>
+      <li>
+        <GoogleSearchButton
+          class={`${button({ size: "sm", type: "tertiary" })} bg-white`}
+          query={`${organization.cached_libelle} ${domain}`}
+        >
+          Chercher le matching
+        </GoogleSearchButton>
+      </li>
+    </ul>
   );
 }

@@ -1,6 +1,8 @@
 //
 
 import { button } from "@~/app.ui/button";
+import { description_list } from "@~/app.ui/list";
+import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { urls } from "@~/app.urls";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";
@@ -33,53 +35,82 @@ export function About(props: Props) {
         </a>
       </h3>
       <InactiveWarning organization={organization} />
-      <div class="border border-gray-300 bg-white">
-        <div class="grid grid-cols-[200px_1px_1fr] items-center gap-4">
-          <div class="flex flex-col gap-3 text-gray-700">
-            <div>DÉNOMINATION</div>
-            <div>SIRET</div>
-            <div>NAF/APE</div>
-            <div>ADRESSE</div>
-            <div>NATURE JURIDIQUE</div>
-            <div>TRANCHE D'EFFECTIF</div>
-          </div>
+      <dl class={description_list()}>
+        <dt>Dénomination </dt>
+        <dd>
+          <abbr title={organization.cached_nom_complet ?? ""}>
+            {organization.cached_libelle}
+          </abbr>{" "}
+        </dd>
 
-          <div class="h-full w-[1px] bg-gray-400"></div>
+        <dt>Siret </dt>
+        <dd>
+          {organization.siret}{" "}
+          <a
+            href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+            class={`${button({ size: "sm", type: "tertiary" })} ml-2`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Fiche annuaire
+          </a>
+        </dd>
 
-          <div class="flex flex-col gap-3 font-medium text-gray-900">
-            <div>{organization.cached_libelle}</div>
-            <div>
-              {organization.siret}
-              <a
-                href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
-                class={`${button({ size: "sm", type: "tertiary" })} ml-2`}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Fiche annuaire
-              </a>
-            </div>
-            <div>{organization.cached_libelle_activite_principale}</div>
-            <div>{organization.cached_adresse}</div>
-            <div>
-              {organization.cached_libelle_categorie_juridique} (
-              {organization.cached_categorie_juridique})
-            </div>
-            <div>
-              {organization.cached_libelle_tranche_effectif} (code :{" "}
-              {organization.cached_tranche_effectifs}) (
-              <a
-                href="https://www.sirene.fr/sirene/public/variable/tefen"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                liste code effectif INSEE
-              </a>
-              )
-            </div>
-          </div>
-        </div>
-      </div>
+        <dt>NAF/APE </dt>
+        <dd>{organization.cached_libelle_activite_principale} </dd>
+
+        <dt>Adresse </dt>
+        <dd>{organization.cached_adresse} </dd>
+
+        <dt>Nature juridique </dt>
+        <dd>
+          {organization.cached_libelle_categorie_juridique} (
+          {organization.cached_categorie_juridique})
+        </dd>
+
+        <dt>Tranche d effectif </dt>
+        <dd>
+          {organization.cached_libelle_tranche_effectif} (code :{" "}
+          {organization.cached_tranche_effectifs}){" "}
+          <span class="text-nowrap">
+            (
+            <a
+              href="https://www.sirene.fr/sirene/public/variable/tefen"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              liste code effectif INSEE
+            </a>
+            )
+          </span>
+        </dd>
+      </dl>
+      <details class="my-6">
+        <summary>Détails de l'organisation</summary>
+        <ul>
+          <li>
+            id : <b>{organization.id}</b>
+          </li>
+          <li>
+            Création de l'organisation :{" "}
+            <b>
+              <LocalTime date={organization.created_at} />
+            </b>
+          </li>
+          <li>
+            Dernière mise à jour :{" "}
+            <b>
+              <LocalTime date={organization.updated_at} />
+            </b>
+          </li>
+          <li>
+            Dernière mise à jour :{" "}
+            <b>
+              <LocalTime date={organization.updated_at} />
+            </b>
+          </li>
+        </ul>
+      </details>
     </section>
   );
 }

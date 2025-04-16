@@ -7,6 +7,7 @@ import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { IsUserExternalMember } from "@~/moderations.lib/usecase/IsUserExternalMember";
 import { Actions } from "@~/moderations.ui/Actions";
 import { DomainsByOrganization } from "@~/moderations.ui/DomainsByOrganization";
+import { Header } from "@~/moderations.ui/Header";
 import { OrganizationsByUser } from "@~/moderations.ui/OrganizationsByUser";
 import { UsersByOrganization } from "@~/moderations.ui/UsersByOrganization";
 import { SuggestOrganizationDomains } from "@~/organizations.lib/usecase";
@@ -37,7 +38,7 @@ export default async function Moderation_Page() {
 
   return (
     <main
-      class="fr-container my-5"
+      class="fr-container my-12"
       hx-disinherit="*"
       {...await hx_urls.moderations[":id"].$get(
         {
@@ -60,6 +61,12 @@ export default async function Moderation_Page() {
       >
         retour
       </button>
+
+      <hr class="bg-none pb-5" />
+
+      <Header.Provier value={{ moderation }}>
+        <Header />
+      </Header.Provier>
 
       <hr class="bg-none pb-5" />
 

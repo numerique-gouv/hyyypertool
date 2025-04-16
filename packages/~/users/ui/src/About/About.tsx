@@ -2,6 +2,7 @@
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { CopyButton } from "@~/app.ui/button/components/copy";
+import { description_list } from "@~/app.ui/list";
 import { urls } from "@~/app.urls";
 import type { GetUserInfoOutput } from "@~/users.lib/usecase/GetUserInfo";
 
@@ -30,41 +31,39 @@ export function About({ user }: AboutProps) {
           👨‍💻 Profile
         </a>
       </h3>
-      <div class="border border-gray-300 bg-white">
-        <div class="grid grid-cols-[200px_1px_1fr] items-center gap-4">
-          <div class="flex flex-col gap-3 text-gray-700">
-            <div>EMAIL</div>
-            <div>DOMAINE MAIL</div>
-            <div>PRÉNOM</div>
-            <div>NOM</div>
-            <div>NUMÉRO</div>
-            <div>PROFESSION</div>
-          </div>
+      <dl class={description_list()}>
+        <dt>Email </dt>
+        <dd>
+          {user.email}{" "}
+          <CopyButton
+            class="ml-2"
+            text={user.email}
+            variant={{ size: "sm", type: "tertiary" }}
+          ></CopyButton>
+        </dd>
 
-          <div class="h-full w-[1px] bg-gray-400"></div>
+        <dt>Domaine email </dt>
+        <dd>
+          {domain}{" "}
+          <CopyButton
+            class="ml-2"
+            text={domain}
+            variant={{ size: "sm", type: "tertiary" }}
+          ></CopyButton>
+        </dd>
 
-          <div class="flex flex-col gap-3 font-medium text-gray-900">
-            <div>
-              {user.email}
-              <CopyButton
-                text={user.email}
-                variant={{ size: "sm", type: "tertiary" }}
-              ></CopyButton>
-            </div>
-            <div>
-              {domain}
-              <CopyButton
-                text={domain}
-                variant={{ size: "sm", type: "tertiary" }}
-              ></CopyButton>
-            </div>
-            <div>{user.given_name}</div>
-            <div>{user.family_name}</div>
-            <div>{user.phone_number}</div>
-            <div>{user.job}</div>
-          </div>
-        </div>
-      </div>
+        <dt>Prénom </dt>
+        <dd>{user.given_name}</dd>
+
+        <dt>Nom </dt>
+        <dd>{user.family_name}</dd>
+
+        <dt>Numéro de téléphone </dt>
+        <dd>{user.phone_number}</dd>
+
+        <dt>Profession </dt>
+        <dd>{user.job}</dd>
+      </dl>
     </section>
   );
 }

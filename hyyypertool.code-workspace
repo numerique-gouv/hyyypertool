@@ -5,11 +5,11 @@
       "path": "packages/~/app",
     },
     {
-      "name": "📦 moderations",
+      "name": "📦 packages/~/moderations/",
       "path": "packages/~/moderations",
     },
     {
-      "name": "📦 organizations",
+      "name": "📦 packages/~/organizations/",
       "path": "packages/~/organizations",
     },
     {

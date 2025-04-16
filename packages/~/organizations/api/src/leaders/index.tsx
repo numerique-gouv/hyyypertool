@@ -6,6 +6,7 @@ import { button } from "@~/app.ui/button";
 import consola from "consola";
 import { Hono } from "hono";
 import lodash_sortby from "lodash.sortby";
+import { match, P } from "ts-pattern";
 import { z } from "zod";
 
 //
@@ -28,24 +29,22 @@ export default new Hono().get(
 
 async function List_Leaders({ siret }: { siret: string }) {
   const doc = await load_leaders({ siret });
-  if (!doc)
-    return (
+  return match(doc)
+    .with({ url: P.string }, ({ url }) => (
       <a
-        class={`${button({ size: "sm", type: "tertiary" })} disabled: bg-white`}
+        class={button({ className: "bg-white", size: "sm", type: "tertiary" })}
+        href={url}
+        rel="noopener noreferrer"
+        target="_blank"
       >
+        Liste dirigeants associations
+      </a>
+    ))
+    .otherwise(() => (
+      <a class={button({ size: "sm", type: "tertiary" })}>
         Pas de liste des dirigeants
       </a>
-    );
-  return (
-    <a
-      class={`${button({ size: "sm", type: "tertiary" })} bg-white`}
-      href={doc.url}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      Liste dirigeants associations
-    </a>
-  );
+    ));
 }
 
 async function load_leaders({ siret }: { siret: string }) {

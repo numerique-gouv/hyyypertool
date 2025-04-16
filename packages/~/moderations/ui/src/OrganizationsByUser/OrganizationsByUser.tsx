@@ -34,12 +34,12 @@ export async function OrganizationsByUser(props: Props) {
       <details open={isOpen}>
         <summary>
           <h3 class="inline-block" id={$describedby}>
-            🏢{" "}
+            🏢 {count}{" "}
             {formattedPlural(count, {
-              one: "Organisation",
-              other: "Organisations",
+              one: "organisation connu",
+              other: "organisations connues",
             })}{" "}
-            de {user.given_name} {user.family_name}
+            pour {user.given_name} {user.family_name}
           </h3>
         </summary>
 

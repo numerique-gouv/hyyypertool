@@ -7,44 +7,77 @@ exports[`render about section 1`] = `
       >🏛 Organisation</a
     >
   </h3>
-  <div class="border border-gray-300 bg-white">
-    <div class="grid grid-cols-[200px_1px_1fr] items-center gap-4">
-      <div class="flex flex-col gap-3 text-gray-700">
-        <div>DÉNOMINATION</div>
-        <div>SIRET</div>
-        <div>NAF/APE</div>
-        <div>ADRESSE</div>
-        <div>NATURE JURIDIQUE</div>
-        <div>TRANCHE D&#39;EFFECTIF</div>
-      </div>
-      <div class="h-full w-[1px] bg-gray-400"></div>
-      <div class="flex flex-col gap-3 font-medium text-gray-900">
-        <div>cached_libelle</div>
-        <div>
-          siret<a
-            href="https://annuaire-entreprises.data.gouv.fr/etablissement/siret"
-            class="fr-btn fr-btn--sm fr-btn--tertiary ml-2"
-            rel="noopener noreferrer"
-            target="_blank"
-            >Fiche annuaire</a
-          >
-        </div>
-        <div>cached_libelle_activite_principale</div>
-        <div>cached_adresse</div>
-        <div>
-          cached_libelle_categorie_juridique (cached_categorie_juridique)
-        </div>
-        <div>
-          cached_libelle_tranche_effectif (code : cached_tranche_effectifs) (<a
-            href="https://www.sirene.fr/sirene/public/variable/tefen"
-            rel="noopener noreferrer"
-            target="_blank"
-            >liste code effectif INSEE</a
-          >)
-        </div>
-      </div>
-    </div>
-  </div>
+  <dl
+    class="grid grid-cols-[222px_1fr] gap-x-3 ps-0 [&amp;_dd]:p-0 [&amp;_dd]:py-1 [&amp;_dd]:font-semibold [&amp;_dt]:border-0 [&amp;_dt]:border-r [&amp;_dt]:border-solid [&amp;_dt]:border-gray-300 [&amp;_dt]:p-0 [&amp;_dt]:py-1 [&amp;_dt]:uppercase"
+  >
+    <dt>Dénomination</dt>
+    <dd><abbr title="cached_nom_complet">cached_libelle</abbr></dd>
+    <dt>Siret</dt>
+    <dd>
+      siret
+      <a
+        href="https://annuaire-entreprises.data.gouv.fr/etablissement/siret"
+        class="fr-btn fr-btn--sm fr-btn--tertiary ml-2"
+        rel="noopener noreferrer"
+        target="_blank"
+        >Fiche annuaire</a
+      >
+    </dd>
+    <dt>NAF/APE</dt>
+    <dd>cached_libelle_activite_principale</dd>
+    <dt>Adresse</dt>
+    <dd>cached_adresse</dd>
+    <dt>Nature juridique</dt>
+    <dd>cached_libelle_categorie_juridique (cached_categorie_juridique)</dd>
+    <dt>Tranche d effectif</dt>
+    <dd>
+      cached_libelle_tranche_effectif (code : cached_tranche_effectifs)
+      <span class="text-nowrap"
+        >(<a
+          href="https://www.sirene.fr/sirene/public/variable/tefen"
+          rel="noopener noreferrer"
+          target="_blank"
+          >liste code effectif INSEE</a
+        >)</span
+      >
+    </dd>
+  </dl>
+  <details class="my-6">
+    <summary>Détails de l&#39;organisation</summary>
+    <ul>
+      <li>id : <b>42</b></li>
+      <li>
+        Création de l&#39;organisation :
+        <b
+          ><time
+            datetime="2011-11-22T14:34:34.000Z"
+            title="Tue Nov 22 2011 15:34:34 GMT+0100 (Central European Standard Time)"
+            >22/11/2011 15:34:34
+          </time></b
+        >
+      </li>
+      <li>
+        Dernière mise à jour :
+        <b
+          ><time
+            datetime="2011-11-15T13:48:00.000Z"
+            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
+            >15/11/2011 14:48:00
+          </time></b
+        >
+      </li>
+      <li>
+        Dernière mise à jour :
+        <b
+          ><time
+            datetime="2011-11-15T13:48:00.000Z"
+            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
+            >15/11/2011 14:48:00
+          </time></b
+        >
+      </li>
+    </ul>
+  </details>
 </section>
 "
 `;
