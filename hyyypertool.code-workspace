@@ -275,7 +275,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🚥 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -286,7 +286,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🚥 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
