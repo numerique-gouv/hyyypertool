@@ -122,7 +122,7 @@ export default new Hono<App_Context>().patch(
       {
         moderation,
         pg: moncomptepro_pg,
-        subject: "[MonComptePro] ✨ Modeation validée",
+        subject: "[ProConnect] ✨ Modeation validée",
         userinfo,
       },
       "VALIDATED",
