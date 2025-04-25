@@ -10,6 +10,7 @@ import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
 import { context, valid_context } from "./context";
 import { SendNotification } from "./SendNotification";
+import { TagInput } from "./TagInput";
 
 //
 
@@ -61,7 +62,10 @@ export async function MemberValid() {
           <div class={element()}>
             <SendNotification />
           </div>
-          <div class={element({ class: "mt-8" })}>
+          <div class={element()}>
+            <TagInput />
+          </div>
+          <div class={element()}>
             <button class={button()} type="submit">
               Terminer
             </button>
