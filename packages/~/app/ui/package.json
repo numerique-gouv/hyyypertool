@@ -43,6 +43,9 @@
     "./table": {
       "default": "./src/table/index.ts"
     },
+    "./tag": {
+      "default": "./src/tag/index.ts"
+    },
     "./testing": {
       "default": "./src/testing/index.ts"
     },

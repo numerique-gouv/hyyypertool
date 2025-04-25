@@ -1,3 +1,4 @@
+import { tag } from "@~/app.ui/tag";
 import {
   Verification_Type_Schema,
   type Verification_Type,
@@ -23,12 +24,13 @@ const verificationType: Array<[Verification_Type, string]> = [
   // "No validation means available",
   // "Verified by coop mediation numerique",
 ];
+
 export function TagInput() {
   return (
     <ul class="fr-tags-group">
       {verificationType.map(([value, key]) => (
-        <li>
-          <label class="fr-tag m-1 bg-[--background-action-low-blue-france] has-[:checked]:bg-[--blue-france-sun-113-625] has-[:checked]:text-white">
+        <li key={key}>
+          <label class={tag()}>
             <input
               hidden
               class="m-1"
