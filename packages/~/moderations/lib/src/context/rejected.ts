@@ -12,6 +12,7 @@ export type RejectedModeration_Context = {
   crisp_config: Config;
   moderation: get_moderation_dto;
   pg: MonComptePro_PgDatabase;
+  reason: string;
   resolve_delay: number;
   subject: string;
   userinfo: AgentConnect_UserInfo;

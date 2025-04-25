@@ -1,5 +1,6 @@
 //
 
+import { reject_form_schema } from "@~/moderations.lib/schema/rejected.form";
 import { useContext } from "hono/jsx";
 import { reject_context } from "./context";
 import { reponse_templates } from "./responses";
@@ -12,15 +13,18 @@ export function ResponseMessageSelector() {
     <div>
       <input
         _={`
-        on change
+        on keydown
           set :key to my value
           set :option to <option[value="${"${:key}"}"]/> in #responses-type
           set #${$message}.value to :option@message
+        on keydown[key is 'Enter']
+          halt
         `}
         class="fr-select"
         list="responses-type"
         placeholder="Recherche d'une réponse type"
         autocomplete="off"
+        name={reject_form_schema.keyof().Enum.reason}
       />
       <datalist id="responses-type">
         {reponse_templates.map(async ({ label, default: template }, index) => (

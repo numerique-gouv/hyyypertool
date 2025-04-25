@@ -170,8 +170,12 @@ function Comments() {
 function parse_comment(comment: string | null) {
   if (!comment) return [];
   return comment.split("\n").map((line) => {
-    const [when_and_by, value] = line.split(" | ");
+    const [when_and_by, ...value] = line.split(" | ");
     const [created_at, created_by] = when_and_by.split(" ");
-    return { created_at: new Date(Number(created_at)), created_by, value };
+    return {
+      created_at: new Date(Number(created_at)),
+      created_by,
+      value: value.join(" | "),
+    };
   });
 }
