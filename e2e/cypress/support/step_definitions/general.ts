@@ -12,10 +12,10 @@ import "@testing-library/cypress/add-commands";
 let target: JQuery<HTMLElement>;
 let table_scope: string;
 let row_scope: string;
-let within_context: Cypress.Chainable<JQuery<HTMLElement>>;
+let get_within_context: () => Cypress.Chainable<JQuery<HTMLElement>>;
 
 Before(() => {
-  within_context = cy.get("body");
+  get_within_context = () => cy.get("body");
 });
 
 //
@@ -117,7 +117,7 @@ Then("sur la ligne suivante je vois {string}", function (text: string) {
 //
 
 When("je clique sur {string}", (text: string) => {
-  within_context.within(() => cy.contains(text).click());
+  get_within_context().within(() => cy.contains(text).click());
 });
 
 When("je clique sur le bouton {string}", (text: string) => {
@@ -160,7 +160,9 @@ When("je tape {string}", (text: string) => {
 When(
   "je saisie le(s) mot(s) {string} dans la boîte à texte nommée {string}",
   (text: string, name: string) => {
-    cy.get(`input[placeholder="${name}"]`).type(text);
+    get_within_context().within(() =>
+      cy.get(`input[placeholder="${name}"]`).type(text),
+    );
   },
 );
 Then(
@@ -185,5 +187,13 @@ When("je reviens en avant", () => {
 });
 
 Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
-  within_context = cy.findAllByLabelText(text);
+  get_within_context = () => cy.findAllByLabelText(text);
+});
+
+Given("je vais à l'intérieur de la section nommé {string}", (text: string) => {
+  get_within_context = () => cy.findAllByLabelText(text);
+});
+
+Given("je reinitialise le contexte", () => {
+  get_within_context = () => cy.get("body");
 });

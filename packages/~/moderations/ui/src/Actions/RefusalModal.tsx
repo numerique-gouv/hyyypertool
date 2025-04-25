@@ -18,6 +18,7 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
     <div
       class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] p-6"
       id="refusalModal"
+      aria-label="la modale de refus"
     >
       <form
         {...await hx_urls.moderations[":id"].$procedures.rejected.$patch({

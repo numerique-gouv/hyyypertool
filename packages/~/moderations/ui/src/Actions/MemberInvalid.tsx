@@ -36,7 +36,7 @@ export async function MemberInvalid() {
       {...hx_disabled_form_elements}
       hx-swap="none"
     >
-      <fieldset class={base()}>
+      <fieldset aria-label="la section motif de refus" class={base()}>
         <div class={element()}>
           <label class="fr-label">
             <h6>Motif de refus : </h6>

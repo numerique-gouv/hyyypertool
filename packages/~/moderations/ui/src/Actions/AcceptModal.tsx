@@ -22,7 +22,7 @@ export async function AcceptModal({
     <div
       class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] p-6"
       id="acceptModal"
-      aria-label="la modale de modération"
+      aria-label="la modale de validation"
     >
       <div class="mb-4 flex items-center justify-between">
         <p class="mb-0 text-lg font-bold">✅ Accepter</p>
