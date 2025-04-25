@@ -22,7 +22,7 @@ Fonctionnalité: Moderation blockante à refuser
     Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 
 
-  Scénario: Jean Bon ne  peux pas rejoindre l'organisation DINUM
+  Scénario: Jean Bon ne peux pas rejoindre l'organisation DINUM
     Quand je clique sur "Je refuse ce membre ❌"
     Alors je vois "Motif de refus :"
 
