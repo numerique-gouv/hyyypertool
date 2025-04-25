@@ -49,7 +49,7 @@ export async function MemberValid() {
         {...hx_path_validate_moderation}
         hx-swap="none"
       >
-        <fieldset class={base()}>
+        <fieldset class={base({ class: "m-0" })}>
           <div class={element()}>
             <AddDomain />
           </div>
@@ -65,7 +65,7 @@ export async function MemberValid() {
           <div class={element()}>
             <TagInput />
           </div>
-          <div class={element()}>
+          <div class={element({ class: "m-0" })}>
             <button class={button()} type="submit">
               Terminer
             </button>

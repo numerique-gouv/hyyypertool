@@ -25,7 +25,7 @@ export function MessageInfo(props: MessageInfoProps) {
   } = props;
 
   return (
-    <p>
+    <p class="mb-0">
       <b>
         {given_name} {family_name}
       </b>{" "}
