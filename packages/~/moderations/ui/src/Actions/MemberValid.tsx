@@ -1,6 +1,6 @@
 //
 
-import { Htmx_Events, hx_include } from "@~/app.core/htmx";
+import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { hx_urls } from "@~/app.urls";
@@ -17,7 +17,6 @@ export async function MemberValid() {
   const { moderation, $decision_form, $accept, query_is_user_external_member } =
     useContext(context);
   const context_value = useContext(valid_context);
-  const { $add_domain } = context_value;
   const { base, element } = fieldset();
   const hx_path_validate_moderation = await hx_urls.moderations[
     ":id"
@@ -47,7 +46,6 @@ export async function MemberValid() {
       `}
         hidden
         {...hx_path_validate_moderation}
-        hx-include={hx_include([$add_domain])}
         hx-swap="none"
       >
         <fieldset class={base()}>

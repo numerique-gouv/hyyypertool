@@ -27,7 +27,6 @@ import { Moderation_Exchanges } from "./Moderation_Exchanges";
 
 export default async function Moderation_Page() {
   const { moderation } = getContext<ModerationContext>().var;
-  const { user } = moderation;
   const {
     var: {
       moncomptepro_pg,
