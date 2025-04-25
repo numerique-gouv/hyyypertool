@@ -55,3 +55,15 @@ Fonctionnalité: Moderation blockante à accepter
 
     Alors je vois "Liste des moderations"
     Alors je ne vois pas "51935970700022"
+
+  @only
+  Scénario: Le modérateur le valide avec la barre d'outils
+    Quand je clique sur "✅ Accepter"
+    Alors je vois "A propos de jeanbon@yopmail.com, je valide :"
+
+    Soit je vais à l'intérieur du dialogue nommé "la modale de modération"
+    Quand je clique sur "Notifier le membre et terminer"
+    * je vois "Cette modération a été marqué comme traitée le"
+
+    Alors je vois "Liste des moderations"
+    Alors je ne vois pas "51935970700022"

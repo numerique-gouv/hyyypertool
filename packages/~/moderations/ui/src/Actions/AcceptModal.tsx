@@ -1,3 +1,4 @@
+import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { AddAsMemberExternal } from "./AddAsMemberExternal";
@@ -21,6 +22,7 @@ export async function AcceptModal({
     <div
       class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] p-6"
       id="acceptModal"
+      aria-label="la modale de modération"
     >
       <div class="mb-4 flex items-center justify-between">
         <p class="mb-0 text-lg font-bold">✅ Accepter</p>
@@ -44,13 +46,13 @@ export async function AcceptModal({
       <form
         {...hx_path_validate_moderation}
         hx-swap="none"
-        // _={`
-        //     on submit
-        //       wait for ${Htmx_Events.enum.afterOnLoad}
-        //       go to the top of body smoothly
-        //       wait 2s
-        //       go back
-        //   `}
+        _={`
+            on submit
+              wait for ${Htmx_Events.enum.afterOnLoad}
+              go to the top of body smoothly
+              wait 2s
+              go back
+          `}
       >
         <div class="mb-5">
           <AddDomain />

@@ -1,5 +1,10 @@
 //
-import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
+import {
+  Before,
+  Given,
+  Then,
+  When,
+} from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
 
 //
@@ -7,6 +12,11 @@ import "@testing-library/cypress/add-commands";
 let target: JQuery<HTMLElement>;
 let table_scope: string;
 let row_scope: string;
+let within_context: Cypress.Chainable<JQuery<HTMLElement>>;
+
+Before(() => {
+  within_context = cy.get("body");
+});
 
 //
 
@@ -107,7 +117,7 @@ Then("sur la ligne suivante je vois {string}", function (text: string) {
 //
 
 When("je clique sur {string}", (text: string) => {
-  cy.contains(text).click();
+  within_context.within(() => cy.contains(text).click());
 });
 
 When("je clique sur le bouton {string}", (text: string) => {
@@ -172,4 +182,8 @@ When("je retire le focus", () => {
 
 When("je reviens en avant", () => {
   cy.go(1);
+});
+
+Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
+  within_context = cy.findAllByLabelText(text);
 });

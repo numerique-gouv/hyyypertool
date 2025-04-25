@@ -1,6 +1,10 @@
 export function Toolbar() {
   return (
-    <div class="fixed bottom-0 right-0 z-50 flex w-full justify-end overflow-hidden bg-[--blue-france-975-75] p-2">
+    <div
+      class="fixed bottom-0 right-0 z-50 flex w-full justify-end overflow-hidden bg-[--blue-france-975-75] p-2"
+      role="dialog"
+      aria-modal="true"
+    >
       <button
         class="fr-btn fr-mr-2w fr-btn--secondary bg-white"
         _={`
@@ -22,7 +26,7 @@ export function Toolbar() {
       <button
         class="fr-btn fr-mr-2w fr-btn--secondary bg-white"
         _={`
-        on click 
+        on click
           if #acceptModal.classList.contains('hidden') is false
             add .hidden to #acceptModal
           end
