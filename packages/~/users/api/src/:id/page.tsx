@@ -5,7 +5,7 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { button } from "@~/app.ui/button";
 import { GoogleSearchButton } from "@~/app.ui/button/components/search";
 import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
-import { description_list } from "@~/app.ui/list";
+import { badge_description_list } from "@~/app.ui/list";
 import { FrNumberConverter } from "@~/app.ui/number/index";
 import { LocalTime } from "@~/app.ui/time/LocalTime";
 import { hx_urls } from "@~/app.urls";
@@ -139,7 +139,7 @@ function Fiche() {
   const {
     var: { user },
   } = usePageRequestContext();
-  const { base, dd, dt } = description_list();
+  const { base, dd, dt } = badge_description_list();
 
   const $domain = hyper_ref();
   const $email = hyper_ref();
@@ -222,7 +222,7 @@ function AccountInfo() {
     var: { user },
   } = usePageRequestContext();
 
-  const { base, dd, dt } = description_list();
+  const { base, dd, dt } = badge_description_list();
 
   return (
     <dl class={base()}>

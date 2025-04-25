@@ -264,6 +264,7 @@ declare const app: import("hono/hono-base").HonoBase<
                           } & {
                             form: {
                               message: string;
+                              reason: string;
                               subject: string;
                             };
                           };
@@ -643,6 +644,7 @@ declare const app: import("hono/hono-base").HonoBase<
                             };
                           } & {
                             form: {
+                              is_external?: string | undefined;
                               verification_type?:
                                 | ""
                                 | "code_sent_to_official_contact_email"
@@ -654,7 +656,6 @@ declare const app: import("hono/hono-base").HonoBase<
                                 | "verified_by_coop_mediation_numerique"
                                 | "verified_email_domain"
                                 | undefined;
-                              is_external?: string | undefined;
                             };
                           };
                           output: "OK";
@@ -730,10 +731,10 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
+                id?: string | undefined;
                 page?: string | undefined;
                 page_size?: string | undefined;
                 q?: string | undefined;
-                id?: string | undefined;
               };
             };
             output: {};

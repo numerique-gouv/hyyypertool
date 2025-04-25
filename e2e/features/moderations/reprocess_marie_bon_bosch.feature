@@ -16,7 +16,6 @@ Fonctionnalité: Retraiter une moderation
     * je vois "Cette modération a été marqué comme traité"
     * je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Bosch rexroth d.s.i. »"
 
-  @only
   Scénario: Marie Bon à rejoindre l'organisation Bosch par erreur
     Quand je clique sur "Retraiter"
     Alors je ne vois pas "Cette modération a été marqué comme traité"

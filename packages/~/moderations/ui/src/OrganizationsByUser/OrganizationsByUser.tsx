@@ -14,7 +14,7 @@ import type { CountUserMembershipsHandler } from "@~/users.lib/usecase/CountUser
 type Props = {
   isOpen?: boolean;
   query_organization_count: CountUserMembershipsHandler;
-  user: Pick<User, "id">;
+  user: Pick<User, "id" | "given_name" | "family_name">;
 };
 export async function OrganizationsByUser(props: Props) {
   const { user, query_organization_count } = props;
@@ -34,11 +34,12 @@ export async function OrganizationsByUser(props: Props) {
       <details open={isOpen}>
         <summary>
           <h3 class="inline-block" id={$describedby}>
-            🏢 Member de {count}{" "}
+            🏢 {count}{" "}
             {formattedPlural(count, {
-              one: "organisation",
-              other: "organisations",
-            })}
+              one: "organisation connu",
+              other: "organisations connues",
+            })}{" "}
+            pour {user.given_name} {user.family_name}
           </h3>
         </summary>
 

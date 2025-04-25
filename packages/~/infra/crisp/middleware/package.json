@@ -12,11 +12,11 @@
     "test": "bun test"
   },
   "dependencies": {
-    "hono": "4.6.17"
+    "hono": "4.7.6"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
     "@~/crisp.lib": "workspace:*",
-    "bun-types": "1.2.5"
+    "bun-types": "1.2.9"
   }
 }

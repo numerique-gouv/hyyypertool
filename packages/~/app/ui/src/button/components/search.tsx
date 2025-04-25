@@ -13,13 +13,12 @@ export function GoogleSearchButton(
   const { children, query, ...other_props } = props;
   return (
     <a
-      class="fr-link"
       href={google_search(query)}
       rel="noopener noreferrer"
       target="_blank"
       {...other_props}
     >
-      🔍 {children}
+      {children}
     </a>
   );
 }

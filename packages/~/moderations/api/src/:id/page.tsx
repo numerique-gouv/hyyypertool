@@ -2,7 +2,7 @@
 
 import { hx_trigger_from_body } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
-import { hx_urls, urls } from "@~/app.urls";
+import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { IsUserExternalMember } from "@~/moderations.lib/usecase/IsUserExternalMember";
 import { Actions } from "@~/moderations.ui/Actions";

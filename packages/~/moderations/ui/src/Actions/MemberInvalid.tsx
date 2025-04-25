@@ -43,6 +43,7 @@ export async function MemberInvalid() {
           </label>
           <ResponseMessageSelector $message={$message} />
         </div>
+
         <div class={element()}>
           <div class="fr-input-group">
             <label
@@ -95,7 +96,7 @@ export async function MemberInvalid() {
               type="text"
               id={$object}
               name={reject_form_schema.keyof().Enum.subject}
-              value={`[MonComptePro] Demande pour rejoindre « ${moderation.organization.cached_libelle} »`}
+              value={`[ProConnect] Demande pour rejoindre « ${moderation.organization.cached_libelle} »`}
             />
           </div>
         </div>

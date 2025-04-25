@@ -129,8 +129,9 @@ export default new Hono<App_Context>().patch(
 
     await mark_moderation_as(
       {
-        pg: moncomptepro_pg,
         moderation,
+        pg: moncomptepro_pg,
+        reason: "[ProConnect] ✨ Modeation validée",
         userinfo,
       },
       "VALIDATED",

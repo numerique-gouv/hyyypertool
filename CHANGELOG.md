@@ -1,5 +1,13 @@
 # Changelog
 
+# [2025.4.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.1...2025.4.0) (2025-04-22)
+
+
+### Features
+
+* **moderation:** design flow 2 💥 ([#832](https://github.com/numerique-gouv/hyyypertool/issues/832)) ([15b9931](https://github.com/numerique-gouv/hyyypertool/commit/15b99310e745f7238eb8be716a18492d91cb758a))
+* **moderations:** add why its rejected ([#846](https://github.com/numerique-gouv/hyyypertool/issues/846)) ([1db1ec7](https://github.com/numerique-gouv/hyyypertool/commit/1db1ec78df6528031383883027dd9e4716e39f49))
+
 ## [2025.3.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.0...2025.3.1) (2025-03-24)
 
 

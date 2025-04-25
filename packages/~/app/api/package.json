@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hono/node-server": "1.14.0",
-    "@hono/sentry": "1.2.0",
+    "@hono/sentry": "1.2.1",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
     "@~/app.sentry": "workspace:*",
@@ -22,12 +22,12 @@
     "@~/welcome.api": "workspace:*",
     "await-to-js": "3.0.0",
     "consola": "3.4.2",
-    "drizzle-orm": "0.40.1",
-    "hono": "4.6.17",
+    "drizzle-orm": "0.41.0",
+    "hono": "4.7.6",
     "htmx.ext...chunked-transfer": "1.0.4",
     "htmx.org": "1.9.12",
     "hyperscript.org": "0.9.14",
-    "ts-pattern": "5.6.2",
+    "ts-pattern": "5.7.0",
     "youch": "3.3.4"
   },
   "devDependencies": {
