@@ -26,7 +26,7 @@ export default new Hono<ContextType>().patch(
     var: { moncomptepro_pg, userinfo, crisp_config, config },
   }) {
     const { id: moderation_id } = req.valid("param");
-    const { message, subject } = req.valid("form");
+    const { message, reason, subject } = req.valid("form");
 
     const moderation = await get_moderation(moncomptepro_pg, { moderation_id });
     const context: RejectedModeration_Context = {
@@ -34,10 +34,15 @@ export default new Hono<ContextType>().patch(
       moderation,
       pg: moncomptepro_pg,
       resolve_delay: config.CRISP_RESOLVE_DELAY,
+      reason,
       subject,
       userinfo,
     };
-    await send_rejected_message_to_user(context, { message, subject });
+    await send_rejected_message_to_user(context, {
+      message,
+      reason,
+      subject,
+    });
 
     await mark_moderation_as(context, "REJECTED");
 

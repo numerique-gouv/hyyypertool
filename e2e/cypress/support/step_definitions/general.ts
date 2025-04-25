@@ -1,6 +1,6 @@
 //
-
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
+import "@testing-library/cypress/add-commands";
 
 //
 
@@ -147,6 +147,29 @@ When("je tape {string}", (text: string) => {
   cy.focused().type(text);
 });
 
+When(
+  "je saisie le(s) mot(s) {string} dans la boîte à texte nommée {string}",
+  (text: string, name: string) => {
+    cy.get(`input[placeholder="${name}"]`).type(text);
+  },
+);
+Then(
+  "je dois voir une boîte à texte nommée {string} et contenant {string}",
+  (name: string, text: string) => {
+    cy.findByLabelText(name).should("have.value", text);
+  },
+);
+Then(
+  "je dois voir une boîte à texte nommée {string} et contenant:",
+  (name: string, text: string) => {
+    cy.findByLabelText(name).should("contain", text);
+  },
+);
+
 When("je retire le focus", () => {
   cy.focused().blur();
+});
+
+When("je reviens en avant", () => {
+  cy.go(1);
 });
