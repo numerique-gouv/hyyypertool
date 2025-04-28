@@ -40,6 +40,9 @@
     "./quote": {
       "default": "./src/quote/index.ts"
     },
+    "./scroll/scripts": {
+      "default": "./src/scroll/scripts/index.ts"
+    },
     "./table": {
       "default": "./src/table/index.ts"
     },
