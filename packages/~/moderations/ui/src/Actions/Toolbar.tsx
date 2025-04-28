@@ -1,7 +1,14 @@
+//
+
+import { is_sticky } from "@~/app.ui/scroll/scripts";
+
+//
+
 export function Toolbar() {
   return (
     <div
-      class="fixed bottom-0 right-0 z-50 flex w-full justify-end overflow-hidden bg-[--blue-france-975-75] p-2"
+      _={is_sticky}
+      class="sticky bottom-[-1px] right-0 z-50 flex w-full justify-end overflow-hidden bg-[--blue-france-975-75] p-2"
       role="dialog"
       aria-modal="true"
     >
