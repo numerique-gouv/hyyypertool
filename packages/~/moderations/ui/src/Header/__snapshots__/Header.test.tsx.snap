@@ -19,7 +19,7 @@ exports[`render header section 1`] = `
     <div class="fr-container">
       <div class="fr-notice__body">
         <div class="fr-notice__title">
-          <p>
+          <p class="mb-0">
             <b>Adora Pony</b>
             <span class="text-gray-600">veut rejoindre l&#39;organisation</span>
             « <b>🦄 libelle</b> »

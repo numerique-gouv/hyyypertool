@@ -1,6 +1,6 @@
 //
 
-import { Htmx_Events, hx_include } from "@~/app.core/htmx";
+import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { hx_urls } from "@~/app.urls";
@@ -10,6 +10,7 @@ import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
 import { context, valid_context } from "./context";
 import { SendNotification } from "./SendNotification";
+import { TagInput } from "./TagInput";
 
 //
 
@@ -17,7 +18,6 @@ export async function MemberValid() {
   const { moderation, $decision_form, $accept, query_is_user_external_member } =
     useContext(context);
   const context_value = useContext(valid_context);
-  const { $add_domain } = context_value;
   const { base, element } = fieldset();
   const hx_path_validate_moderation = await hx_urls.moderations[
     ":id"
@@ -47,10 +47,9 @@ export async function MemberValid() {
       `}
         hidden
         {...hx_path_validate_moderation}
-        hx-include={hx_include([$add_domain])}
         hx-swap="none"
       >
-        <fieldset class={base()}>
+        <fieldset class={base({ class: "m-0" })}>
           <div class={element()}>
             <AddDomain />
           </div>
@@ -63,7 +62,10 @@ export async function MemberValid() {
           <div class={element()}>
             <SendNotification />
           </div>
-          <div class={element({ class: "mt-8" })}>
+          <div class={element()}>
+            <TagInput />
+          </div>
+          <div class={element({ class: "m-0" })}>
             <button class={button()} type="submit">
               Terminer
             </button>

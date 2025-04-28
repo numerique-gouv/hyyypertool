@@ -26,6 +26,7 @@ Fonctionnalité: Moderation blockante à refuser
     Quand je clique sur "Je refuse ce membre ❌"
     Alors je vois "Motif de refus :"
 
+    Soit je vais à l'intérieur de la section nommé "la section motif de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
     # Alors je dois voir une boîte à texte nommée "Message" et contenant:
     #   """
@@ -33,6 +34,7 @@ Fonctionnalité: Moderation blockante à refuser
     #   """
 
     Quand je clique sur "Notifier le membre et terminer"
+    * je reinitialise le contexte
     Alors je vois "Liste des moderations"
     Alors je ne vois pas "13002526500013"
 
@@ -42,3 +44,17 @@ Fonctionnalité: Moderation blockante à refuser
     Quand je clique sur "Commentaires"
     Alors je vois "Rejeté par user@yopmail.com"
     Alors je vois 'Raison : "Nom de domaine introuvable"'
+
+  Scénario: Le modérateur le refuse avec la barre d'outils
+    Quand je clique sur "❌ Refuser"
+    Alors je vois "Vous refusez la demande de jeanbon@yopmail.com"
+
+    Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
+    Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
+    * je clique sur "Notifier le membre et terminer"
+    Alors je vois "Cette modération a été marqué comme traitée le"
+    * je vois "Rejeté par user@yopmail.com"
+    * je vois 'Raison : "Nom de domaine introuvable"'
+
+    Alors je vois "Liste des moderations"
+    Alors je ne vois pas "13002526500013"

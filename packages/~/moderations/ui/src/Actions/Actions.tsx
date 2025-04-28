@@ -5,10 +5,13 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { MessageInfo } from "@~/moderations.ui/MessageInfo";
+import { AcceptModal } from "./AcceptModal";
 import { context, type Values } from "./context";
 import { Desicison } from "./Desicison";
 import { MemberInvalid } from "./MemberInvalid";
 import { MemberValid } from "./MemberValid";
+import { RefusalModal } from "./RefusalModal";
+import { Toolbar } from "./Toolbar";
 
 //
 
@@ -18,6 +21,8 @@ type ActionProps = {
 
 export async function Actions({ value }: ActionProps) {
   const { moderation } = value;
+
+  const { user } = moderation;
 
   const hx_moderation_reprocess_props = await hx_urls.moderations[
     ":id"
@@ -61,6 +66,9 @@ export async function Actions({ value }: ActionProps) {
           </>
         )}
       </div>
+      <Toolbar />
+      <AcceptModal userEmail={user.email} moderation={moderation} />
+      <RefusalModal userEmail={user.email} />
     </context.Provider>
   );
 }

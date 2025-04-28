@@ -24,7 +24,7 @@ import {
 import { GetMember } from "@~/users.repository";
 import { to } from "await-to-js";
 import consola from "consola";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { P, match } from "ts-pattern";
 
@@ -41,7 +41,8 @@ export default new Hono<App_Context>().patch(
     var: { moncomptepro_pg_client, moncomptepro_pg, userinfo, sentry },
   }) {
     const { id } = req.valid("param");
-    const { add_domain, add_member, send_notitfication } = req.valid("form");
+    const { add_domain, add_member, send_notitfication, verification_type } =
+      req.valid("form");
     const add_verified_domain = AddVerifiedDomain({
       get_organization_by_id: GetFicheOrganizationById({ pg: moncomptepro_pg }),
       mark_domain_as_verified: MarkDomainAsVerified(moncomptepro_pg_client),
@@ -68,6 +69,7 @@ export default new Hono<App_Context>().patch(
       path: ["moderation.user.email"],
     });
 
+    //#region ✨ Add verified domain
     if (add_domain) {
       const [error] = await to(
         add_verified_domain({ organization_id, domain }),
@@ -85,11 +87,15 @@ export default new Hono<App_Context>().patch(
           throw error;
         });
     }
+    //#endregion
+
+    //#region ✨ Member join organization
 
     const is_external = match(add_member)
       .with("AS_INTERNAL", () => false)
       .with("AS_EXTERNAL", () => true)
       .exhaustive();
+
     const member_join_organization = MemberJoinOrganization({
       force_join_organization: ForceJoinOrganization(moncomptepro_pg_client),
       get_member: GetMember({
@@ -114,10 +120,29 @@ export default new Hono<App_Context>().patch(
         throw error;
       });
 
+    //#endregion
+
+    //#region ✨ Change the verification type of the user in the organization
+    if (verification_type) {
+      await moncomptepro_pg
+        .update(schema.users_organizations)
+        .set({ verification_type })
+        .where(
+          and(
+            eq(schema.users_organizations.user_id, user_id),
+            eq(schema.users_organizations.organization_id, organization_id),
+          ),
+        );
+    }
+    //#endregion
+
+    //#region ✨ Send notification
     if (send_notitfication) {
       await send_moderation_processed_email({ organization_id, user_id });
     }
+    //#endregion
 
+    //#region ✨ Mark moderation as validated
     await mark_moderation_as(
       {
         moderation,
@@ -127,6 +152,7 @@ export default new Hono<App_Context>().patch(
       },
       "VALIDATED",
     );
+    //#endregion
 
     return text("OK", 200, {
       "HX-Trigger": [MODERATION_EVENTS.Enum.MODERATION_UPDATED].join(", "),

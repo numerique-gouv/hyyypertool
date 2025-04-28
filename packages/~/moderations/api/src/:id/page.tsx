@@ -84,15 +84,10 @@ export default async function Moderation_Page() {
         organization={moderation.organization}
         query_domain_count={query_domain_count}
       />
-
-      <hr class="bg-none" />
-
       <OrganizationsByUser
         user={moderation.user}
         query_organization_count={CountUserMemberships({ pg: moncomptepro_pg })}
       />
-
-      <hr class="bg-none" />
 
       <UsersByOrganization
         organization={moderation.organization}

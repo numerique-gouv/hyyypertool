@@ -52,6 +52,19 @@ Fonctionnalité: Moderation blockante à accepter
     Quand je clique sur "Je valide ce membre ✅"
     Et je clique sur "Terminer"
     * je vois "Cette modération a été marqué comme traitée le"
+    * je vois "Validé par user@yopmail.com"
+
+    Alors je vois "Liste des moderations"
+    * je ne vois pas "51935970700022"
+
+  Scénario: Le modérateur le valide avec la barre d'outils
+    Quand je clique sur "✅ Accepter"
+    Alors je vois "A propos de jeanbon@yopmail.com, je valide :"
+
+    Soit je vais à l'intérieur du dialogue nommé "la modale de validation"
+    Quand je clique sur "Notifier le membre et terminer"
+    * je vois "Cette modération a été marqué comme traitée le"
+    * je vois "Validé par user@yopmail.com"
 
     Alors je vois "Liste des moderations"
     Alors je ne vois pas "51935970700022"
