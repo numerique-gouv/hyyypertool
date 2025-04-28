@@ -29,8 +29,9 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
         hx-swap="none"
         _={`
           on submit
+            add .hidden to #refusalModal
             wait for ${Htmx_Events.enum.afterOnLoad}
-            go to the top of .last-message smoothly
+            go to the top of body smoothly
             wait 2s
             go back
           `}
