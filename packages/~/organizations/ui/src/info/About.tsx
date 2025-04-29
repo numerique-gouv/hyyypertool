@@ -2,7 +2,7 @@
 
 import { button } from "@~/app.ui/button";
 import { description_list } from "@~/app.ui/list";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time";
 import { urls } from "@~/app.urls";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";

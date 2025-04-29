@@ -5,8 +5,7 @@ import { Htmx_Events } from "@~/app.core/htmx";
 import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
-import { OpenInZammad } from "@~/app.ui/zammad/components/OpenInZammad";
-import { SearchInZammad } from "@~/app.ui/zammad/components/SearchInZammad";
+import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
 import { hx_urls, urls } from "@~/app.urls";
 import {
   get_duplicate_moderations,

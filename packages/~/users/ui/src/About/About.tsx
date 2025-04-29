@@ -1,7 +1,7 @@
 //
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
-import { CopyButton } from "@~/app.ui/button/components/copy";
+import { CopyButton } from "@~/app.ui/button/components";
 import { description_list } from "@~/app.ui/list";
 import { urls } from "@~/app.urls";
 import type { GetUserInfoOutput } from "@~/users.lib/usecase/GetUserInfo";

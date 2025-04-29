@@ -1,8 +1,8 @@
 //
 
 import { callout } from "@~/app.ui/callout";
-import { OpenInCrisp, short_session_id } from "@~/app.ui/links/OpenInCrisp";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { OpenInCrisp, short_session_id } from "@~/app.ui/links";
+import { LocalTime } from "@~/app.ui/time";
 import type { Config } from "@~/crisp.lib/types";
 import { Message } from "@~/crisp.ui/message";
 import type { GetCripsFromSessionIdHandler } from "@~/moderations.lib/usecase/GetCripsFromSessionId";

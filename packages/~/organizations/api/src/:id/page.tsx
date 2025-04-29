@@ -2,7 +2,7 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_include, hx_trigger_from_body } from "@~/app.core/htmx";
-import { FrNumberConverter } from "@~/app.ui/number/index";
+import { FrNumberConverter } from "@~/app.ui/number";
 import { formattedPlural } from "@~/app.ui/plurial";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";

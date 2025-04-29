@@ -4,7 +4,7 @@ import { MessageInfo } from "#ui/MessageInfo";
 import { button } from "@~/app.ui/button";
 import { callout } from "@~/app.ui/callout";
 import { notice } from "@~/app.ui/notice";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time";
 import { hx_urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { GetModerationHeaderOutput } from "@~/moderations.lib/usecase/GetModerationHeader";

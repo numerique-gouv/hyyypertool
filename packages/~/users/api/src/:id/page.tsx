@@ -3,11 +3,11 @@
 import { hyper_ref } from "@~/app.core/html";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { button } from "@~/app.ui/button";
-import { GoogleSearchButton } from "@~/app.ui/button/components/search";
+import { GoogleSearchButton } from "@~/app.ui/button/components";
 import { copy_text_content_to_clipboard } from "@~/app.ui/button/scripts";
 import { badge_description_list } from "@~/app.ui/list";
-import { FrNumberConverter } from "@~/app.ui/number/index";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { FrNumberConverter } from "@~/app.ui/number";
+import { LocalTime } from "@~/app.ui/time";
 import { hx_urls } from "@~/app.urls";
 import { usePageRequestContext } from "./context";
 
