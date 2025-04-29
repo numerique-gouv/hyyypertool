@@ -2,7 +2,7 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
-import { Loader } from "@~/app.ui/loader/Loader";
+import { Loader } from "@~/app.ui/loader";
 import { formattedPlural } from "@~/app.ui/plurial";
 import { hx_urls } from "@~/app.urls";
 import type { Organization } from "@~/organizations.lib/entities/Organization";

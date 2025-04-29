@@ -4,7 +4,7 @@ import { tv } from "tailwind-variants";
 import { visually_hidden } from "../visually_hidden";
 
 //
-
+export { Loader } from "./Loader";
 export const loader = tv({
   base: `
     inline-block
