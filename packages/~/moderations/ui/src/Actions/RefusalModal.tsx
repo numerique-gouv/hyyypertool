@@ -38,7 +38,8 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
         <div class="mb-4 flex items-center justify-between">
           <p class="mb-0 text-lg font-bold">❌ Refuser</p>
           <button
-            class="fr-btn fr-icon-subtract-line  fr-btn--tertiary-no-outline"
+            class="fr-btn fr-icon-subtract-line fr-btn--tertiary-no-outline"
+            type="button"
             _={`
               on click
                 add .hidden to #refusalModal
