@@ -157,7 +157,7 @@ async function MarkModerationAsProcessed() {
     <form
       _={`
       on submit
-        wait for ${Htmx_Events.enum.afterOnLoad}
+        wait for ${Htmx_Events.enum.afterSettle}
         wait 2s
         go back
       `}

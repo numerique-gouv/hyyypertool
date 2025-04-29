@@ -1,5 +1,6 @@
 //
 
+import { Htmx_Events } from "@~/app.core/htmx";
 import type { App_Context } from "@~/app.middleware/context";
 import { html, raw } from "hono/html";
 import type { PropsWithChildren } from "hono/jsx";
@@ -63,6 +64,14 @@ export function Root_Layout({ children }: PropsWithChildren) {
           rel="stylesheet"
           href="${config.ASSETS_PATH}/node_modules/animate.css/source/_vars.css"
         />
+        <link
+          rel="stylesheet"
+          href="${config.ASSETS_PATH}/node_modules/animate.css/source/_base.css"
+        />
+        <link
+          rel="stylesheet"
+          href="${config.ASSETS_PATH}/node_modules/animate.css/source/bouncing_entrances/bounceIn.css"
+        />
 
         <!--  -->
 
@@ -115,9 +124,9 @@ export function Root_Layout({ children }: PropsWithChildren) {
       </head>
       <body
         _="
-          on every htmx:beforeSend NProgress.start()
-          on every htmx:afterOnLoad NProgress.done()
-          on every htmx:afterSettle NProgress.done()
+          on every ${Htmx_Events.enum.beforeSend} NProgress.start()
+          on every ${Htmx_Events.enum.afterOnLoad} NProgress.done()
+          on every ${Htmx_Events.enum.afterSettle} NProgress.done()
         "
         class="flex min-h-screen flex-col"
       >
@@ -212,6 +221,10 @@ export function Root_Layout({ children }: PropsWithChildren) {
             nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
           ></script> `}
+      <script
+        nonce="${nonce}"
+        src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/template.js"
+      ></script>
     </html>
   `;
 }
