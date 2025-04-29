@@ -43,12 +43,8 @@ function List() {
   return (
     <ul class="list-none">
       <ShowMore />
-      {articles.map((article, index) => (
-        <li
-          class={index === articles.length - 1 ? "last-message" : ""}
-          id={`${article.id}`}
-          key={`${article.id}`}
-        >
+      {articles.map((article) => (
+        <li id={`${article.id}`} key={`${article.id}`}>
           <p class="text-center text-sm font-bold">
             <LocalTime date={article.created_at} />
           </p>

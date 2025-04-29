@@ -29,13 +29,21 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
         hx-swap="none"
         _={`
           on submit
+            add .hidden to #refusalModal
             wait for ${Htmx_Events.enum.afterOnLoad}
-            go to the top of .last-message smoothly
+            go to the top of body smoothly
             wait 2s
             go back
           `}
       >
         <div class="mb-4 flex items-center justify-between">
+          <input
+            class="fr-input hidden"
+            type="text"
+            id={$object}
+            name={reject_form_schema.keyof().Enum.subject}
+            value={`[ProConnect] Demande pour rejoindre « ${moderation.organization.cached_libelle} »`}
+          />
           <p class="mb-0 text-lg font-bold">❌ Refuser</p>
           <button
             class="fr-btn fr-icon-subtract-line fr-btn--tertiary-no-outline"

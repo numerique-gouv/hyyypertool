@@ -53,12 +53,8 @@ function List() {
   return (
     <ul class="list-none">
       <ShowMore />
-      {messages.map((message, index) => (
-        <li
-          class={index === messages.length - 1 ? "last-message" : ""}
-          id={`${message.fingerprint}`}
-          key={`${message.fingerprint}`}
-        >
+      {messages.map((message) => (
+        <li id={`${message.fingerprint}`} key={`${message.fingerprint}`}>
           {match(message.type)
             .with("text", () => (
               <>

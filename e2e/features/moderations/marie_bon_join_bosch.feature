@@ -21,9 +21,9 @@ Fonctionnalité: Moderation non blockante
   Scénario: Le nom de domaine est vérifié
     Soit le tableau sous le title "domaine connu dans l'organisation"
     * le tableau est vide
-    Quand je clique sur "Je valide ce membre ✅"
+    Quand je clique sur "✅ Accepter"
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
-    Quand je clique sur "Terminer"
+    Quand je clique sur "Notifier le membre et terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -37,9 +37,9 @@ Fonctionnalité: Moderation non blockante
   Scénario: Marie est un membre interne de l'organization.
     Soit le tableau sous le title "0 membre connu dans l’organisation"
     * le tableau est vide
-    Quand je clique sur "Je valide ce membre ✅"
+    Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
-    Quand je clique sur "Terminer"
+    Quand je clique sur "Notifier le membre et terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -54,9 +54,9 @@ Fonctionnalité: Moderation non blockante
     Soit le tableau sous le title "0 membre connu dans l’organisation"
     * le tableau est vide
 
-    Quand je clique sur "Je valide ce membre ✅"
+    Quand je clique sur "✅ Accepter"
     * je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
-    * je clique sur "Terminer"
+    * je clique sur "Notifier le membre et terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"

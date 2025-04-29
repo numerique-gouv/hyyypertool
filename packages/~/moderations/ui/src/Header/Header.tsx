@@ -40,11 +40,9 @@ export async function Header() {
         Créé le <LocalTime date={moderation.created_at} />
       </div>
       <section class="flex items-baseline space-x-5">
-        <h1>
-          <span>
-            {moderation_type_to_emoji(moderation.type)}{" "}
-            {moderation.user.given_name} {moderation.user.family_name}
-          </span>
+        <h1 className="fr-h2">
+          {moderation_type_to_emoji(moderation.type)}{" "}
+          {moderation.user.given_name} {moderation.user.family_name}
         </h1>
         <div>
           <State_Badge />
@@ -52,8 +50,6 @@ export async function Header() {
       </section>
 
       <ModerationCallout />
-
-      <hr class="bg-none" />
 
       <Info />
 

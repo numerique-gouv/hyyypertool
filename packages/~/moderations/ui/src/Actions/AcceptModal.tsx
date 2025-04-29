@@ -48,6 +48,7 @@ export async function AcceptModal({
         hx-swap="none"
         _={`
             on submit
+              add .hidden to #acceptModal
               wait for ${Htmx_Events.enum.afterOnLoad}
               go to the top of body smoothly
               wait 2s
@@ -67,14 +68,7 @@ export async function AcceptModal({
           <TagInput />
         </div>
         <div>
-          <button
-            _={`
-              on click
-                add .hidden to #acceptModal
-            `}
-            class={`${button()} w-full justify-center`}
-            type="submit"
-          >
+          <button class={`${button()} w-full justify-center`} type="submit">
             Notifier le membre et terminer
           </button>
         </div>
