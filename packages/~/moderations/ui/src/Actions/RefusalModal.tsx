@@ -37,6 +37,13 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
           `}
       >
         <div class="mb-4 flex items-center justify-between">
+          <input
+            class="fr-input hidden"
+            type="text"
+            id={$object}
+            name={reject_form_schema.keyof().Enum.subject}
+            value={`[ProConnect] Demande pour rejoindre « ${moderation.organization.cached_libelle} »`}
+          />
           <p class="mb-0 text-lg font-bold">❌ Refuser</p>
           <button
             class="fr-btn fr-icon-subtract-line fr-btn--tertiary-no-outline"
