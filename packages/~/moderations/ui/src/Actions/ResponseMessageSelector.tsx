@@ -10,7 +10,7 @@ export function ResponseMessageSelector({ $message }: { $message: string }) {
     <div>
       <input
         _={`
-        on keydown
+        on keydown or change
           set :key to my value
           set :option to <option[value="${"${:key}"}"]/> in #responses-type
           set #${$message}.value to :option@message
