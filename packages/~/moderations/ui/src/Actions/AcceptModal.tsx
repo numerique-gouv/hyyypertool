@@ -48,8 +48,8 @@ export async function AcceptModal({
         hx-swap="none"
         _={`
             on submit
-              add .hidden to #acceptModal
               wait for ${Htmx_Events.enum.afterSettle}
+              add .hidden to #acceptModal
               go to the top of body smoothly
               wait 2s
               go back
