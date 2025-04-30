@@ -1,5 +1,13 @@
 # Changelog
 
+## [2025.4.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.0...2025.4.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* **button:** add type="button" on button to close modal and not submit ([#875](https://github.com/numerique-gouv/hyyypertool/issues/875)) ([57cb658](https://github.com/numerique-gouv/hyyypertool/commit/57cb65850b57345e1ffd990c00b6f76503cf65a0))
+* **moderation:** replace subject by raison in comments ([#864](https://github.com/numerique-gouv/hyyypertool/issues/864)) ([7a17836](https://github.com/numerique-gouv/hyyypertool/commit/7a17836a31f4a8c41de3ebf0d91f435434bf3739))
+
 # [2025.4.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.1...2025.4.0) (2025-04-22)
 
 
