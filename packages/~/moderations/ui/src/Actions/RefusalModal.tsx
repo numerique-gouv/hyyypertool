@@ -1,8 +1,4 @@
-import {
-  Htmx_Events,
-  hx_disabled_form_elements,
-  hx_include,
-} from "@~/app.core/htmx";
+import { Htmx_Events, hx_disabled_form_elements } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
 import { reject_form_schema } from "@~/moderations.lib/schema/rejected.form";
@@ -12,7 +8,7 @@ import { ResponseMessageSelector } from "./ResponseMessageSelector";
 
 export async function RefusalModal({ userEmail }: { userEmail: string }) {
   const { moderation } = useContext(context);
-  const { $modal_message, $object, $destination } = useContext(reject_context);
+  const { $modal_message } = useContext(reject_context);
 
   return (
     <div
@@ -25,12 +21,11 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
           param: { id: moderation.id.toString() },
         })}
         {...hx_disabled_form_elements}
-        hx-include={hx_include([$object, $destination])}
         hx-swap="none"
         _={`
           on submit
             add .hidden to #refusalModal
-            wait for ${Htmx_Events.enum.afterOnLoad}
+            wait for ${Htmx_Events.enum.afterSettle}
             go to the top of body smoothly
             wait 2s
             go back
@@ -40,7 +35,6 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
           <input
             class="fr-input hidden"
             type="text"
-            id={$object}
             name={reject_form_schema.keyof().Enum.subject}
             value={`[ProConnect] Demande pour rejoindre « ${moderation.organization.cached_libelle} »`}
           />

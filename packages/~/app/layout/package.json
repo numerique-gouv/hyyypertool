@@ -14,6 +14,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.middleware": "workspace:*",
+    "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
     "hono": "4.7.6",
     "nprogress": "0.2.0"

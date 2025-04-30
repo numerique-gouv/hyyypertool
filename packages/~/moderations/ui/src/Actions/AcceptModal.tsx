@@ -49,7 +49,7 @@ export async function AcceptModal({
         _={`
             on submit
               add .hidden to #acceptModal
-              wait for ${Htmx_Events.enum.afterOnLoad}
+              wait for ${Htmx_Events.enum.afterSettle}
               go to the top of body smoothly
               wait 2s
               go back
