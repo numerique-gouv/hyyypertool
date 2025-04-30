@@ -1,22 +1,13 @@
 //
-import {
-  Before,
-  Given,
-  Then,
-  When,
-} from "@badeball/cypress-cucumber-preprocessor";
+import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
+import { get_within_context } from "./uvv";
 
 //
 
 let target: JQuery<HTMLElement>;
 let table_scope: string;
 let row_scope: string;
-let get_within_context: () => Cypress.Chainable<JQuery<HTMLElement>>;
-
-Before(() => {
-  get_within_context = () => cy.get("body");
-});
 
 //
 
@@ -184,16 +175,4 @@ When("je retire le focus", () => {
 
 When("je reviens en avant", () => {
   cy.go(1);
-});
-
-Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
-  get_within_context = () => cy.findAllByLabelText(text);
-});
-
-Given("je vais à l'intérieur de la section nommé {string}", (text: string) => {
-  get_within_context = () => cy.findAllByLabelText(text);
-});
-
-Given("je reinitialise le contexte", () => {
-  get_within_context = () => cy.get("body");
 });
