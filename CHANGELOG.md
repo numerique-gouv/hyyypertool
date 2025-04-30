@@ -1,5 +1,17 @@
 # Changelog
 
+## [2025.4.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.1...2025.4.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* **moderation:** use keydow and change to detect input changes ([#878](https://github.com/numerique-gouv/hyyypertool/issues/878)) ([5e7eaac](https://github.com/numerique-gouv/hyyypertool/commit/5e7eaac6178bd2cd835de56557bfdd85702a6e27))
+
+
+### Features
+
+* **ui:** add toasters ([#877](https://github.com/numerique-gouv/hyyypertool/issues/877)) ([5f3c73f](https://github.com/numerique-gouv/hyyypertool/commit/5f3c73f69e6aa3a71ba3e10e943ae1841d4327a9))
+
 ## [2025.4.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.0...2025.4.1) (2025-04-30)
 
 
