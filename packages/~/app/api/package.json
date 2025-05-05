@@ -24,7 +24,7 @@
     "consola": "3.4.2",
     "drizzle-orm": "0.41.0",
     "hono": "4.7.6",
-    "htmx.ext...chunked-transfer": "1.0.4",
+    "htmx.ext...chunked-transfer": "2.1.0",
     "htmx.org": "1.9.12",
     "hyperscript.org": "0.9.14",
     "ts-pattern": "5.7.0",
