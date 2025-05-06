@@ -133,7 +133,6 @@ exports[`development 1`] = `
       <script
             nonce="nonce"
             src="/assets/ASSETS_PATH/node_modules/htmx.org/dist/htmx.js"
-            type="module"
           ></script>
 
       <meta
@@ -145,12 +144,12 @@ exports[`development 1`] = `
 
       <script
         nonce="nonce"
-        src="/assets/ASSETS_PATH/node_modules/htmx.org/dist/ext/include-vals.js"
+        src="/assets/ASSETS_PATH/node_modules/htmx-ext-include-vals/include-vals.js"
         type="module"
       ></script>
       <script
         nonce="nonce"
-        src="/assets/ASSETS_PATH/node_modules/htmx.org/dist/ext/sse.js"
+        src="/assets/ASSETS_PATH/node_modules/htmx-ext-sse/dist/sse.js"
         type="module"
       ></script>
       <script
@@ -311,7 +310,6 @@ exports[`production 1`] = `
       <script
             nonce="nonce"
             src="/assets/ASSETS_PATH/node_modules/htmx.org/dist/htmx.js"
-            type="module"
           ></script>
 
       <meta
@@ -323,12 +321,12 @@ exports[`production 1`] = `
 
       <script
         nonce="nonce"
-        src="/assets/ASSETS_PATH/node_modules/htmx.org/dist/ext/include-vals.js"
+        src="/assets/ASSETS_PATH/node_modules/htmx-ext-include-vals/include-vals.js"
         type="module"
       ></script>
       <script
         nonce="nonce"
-        src="/assets/ASSETS_PATH/node_modules/htmx.org/dist/ext/sse.js"
+        src="/assets/ASSETS_PATH/node_modules/htmx-ext-sse/dist/sse.js"
         type="module"
       ></script>
       <script
