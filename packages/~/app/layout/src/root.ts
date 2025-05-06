@@ -163,12 +163,10 @@ export function Root_Layout({ children }: PropsWithChildren) {
         ? html`<script
             nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
-            type="module"
           ></script>`
         : html`<script
             nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
-            type="module"
           ></script>`}
 
       <meta
@@ -184,19 +182,18 @@ export function Root_Layout({ children }: PropsWithChildren) {
       ${config.DEPLOY_ENV === "preview"
         ? html`<script
             nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/debug.js"
-            type="module"
+            src="${config.ASSETS_PATH}/node_modules/htmx-ext-debug/debug.js"
           ></script>`
         : ""}
 
       <script
         nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/include-vals.js"
+        src="${config.ASSETS_PATH}/node_modules/htmx-ext-include-vals/include-vals.js"
         type="module"
       ></script>
       <script
         nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/sse.js"
+        src="${config.ASSETS_PATH}/node_modules/htmx-ext-sse/dist/sse.js"
         type="module"
       ></script>
       <script
