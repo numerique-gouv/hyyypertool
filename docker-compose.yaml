@@ -13,5 +13,15 @@ services:
     ports:
       - "5432:5432"
 
+  postgres-hyperbase:
+    image: timescale/timescaledb:latest-pg15
+    volumes:
+      - hyperbase:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "6543:5432"
+
 volumes:
+  hyperbase:
   postgres:

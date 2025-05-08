@@ -33,6 +33,10 @@
       "path": "packages/~/infra/moncomptepro",
     },
     {
+      "name": "🏗️ packages/~/infra/hyyyperdatabase/",
+      "path": "packages/~/infra/hyyyperdatabase",
+    },
+    {
       "name": "🏗️ packages/~/infra/zammad/",
       "path": "packages/~/infra/zammad",
     },

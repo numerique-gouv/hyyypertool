@@ -1,0 +1,35 @@
+{
+  "name": "@~/hyyyperbase.database",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./testing": {
+      "default": "./src/testing/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "introspect": "bun x drizzle introspect:pg",
+    "migration": "bun run bin/migration.ts",
+    "seed": "bun run bin/seed.ts",
+    "studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "consola": "3.4.2",
+    "drizzle-orm": "0.41.0",
+    "hono": "4.7.6",
+    "pg": "8.14.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.2.17",
+    "@types/pg": "8.11.11",
+    "@~/config.typescript": "workspace:*",
+    "drizzle-kit": "0.30.6"
+  }
+}
