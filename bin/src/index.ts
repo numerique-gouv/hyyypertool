@@ -16,12 +16,12 @@ consola.log("# Hyyypertool 🚀", new Date());
 consola.log(Array.from({ length: 42 }).fill("=").join(""));
 consola.log("");
 
-const { ALLOWED_USERS, NODE_ENV, DEPLOY_ENV, VERSION, GIT_SHA } = config;
+const { ALLOWED_USERS, NODE_ENV, DEPLOY_ENV, VERSION, GIT_SHA, TZ } = config;
 consola.log("");
 consola.log("");
 consola.log("┌─── ENV");
 if (consola.level >= LogLevels.log) {
-  console.table({ NODE_ENV, DEPLOY_ENV, VERSION, GIT_SHA });
+  console.table({ NODE_ENV, DEPLOY_ENV, VERSION, GIT_SHA, TZ });
 }
 
 consola.log("");
