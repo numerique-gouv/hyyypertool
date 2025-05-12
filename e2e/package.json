@@ -14,7 +14,7 @@
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.4",
     "@testing-library/cypress": "^10.0.3",
     "cypress": "14.3.2",
-    "pg": "8.15.6",
+    "pg": "8.16.0",
     "typescript": "5.8.3"
   },
   "trustedDependencies": [
