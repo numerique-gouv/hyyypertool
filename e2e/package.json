@@ -13,7 +13,7 @@
     "@badeball/cypress-cucumber-preprocessor": "22.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.4",
     "@testing-library/cypress": "^10.0.3",
-    "cypress": "14.3.2",
+    "cypress": "14.3.3",
     "pg": "8.16.0",
     "typescript": "5.8.3"
   },
