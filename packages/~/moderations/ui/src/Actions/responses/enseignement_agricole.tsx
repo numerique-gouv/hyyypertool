@@ -24,5 +24,5 @@ export default function template() {
 
     Bien cordialement,
     L’équipe ProConnect.
-;
+  `;
 }
