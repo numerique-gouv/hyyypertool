@@ -51,6 +51,8 @@ export function Toolbar({ moderation }: any) {
         _={`
               on click
                 set #exchange_details.open to true
+                add .hidden to #refusalModal
+                add .hidden to #acceptModal
                 return true
             `}
       >
