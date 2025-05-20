@@ -14,8 +14,8 @@
     "format": "prettier --write src/**/*.ts"
   },
   "dependencies": {
-    "@sentry/node": "9.17.0",
-    "@sentry/profiling-node": "9.17.0",
+    "@sentry/node": "9.20.0",
+    "@sentry/profiling-node": "9.20.0",
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
     "hono": "4.7.6"
