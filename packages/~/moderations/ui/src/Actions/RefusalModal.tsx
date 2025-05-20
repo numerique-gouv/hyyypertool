@@ -51,7 +51,8 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
           </button>
         </div>
         <p class="my-2">
-          Motif de refus pour <b>{userEmail}</b>
+          Motif de refus pour <b>{userEmail}</b> (organisation :{" "}
+          {moderation.organization.cached_libelle})
         </p>
         <ResponseMessageSelector $message={$modal_message} />
         <div class="my-2">
