@@ -1,5 +1,12 @@
 # Changelog
 
+# [2025.5.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.2...2025.5.0) (2025-05-20)
+
+
+### Bug Fixes
+
+* **moderation:** hide the modal if the request is successful ([#879](https://github.com/numerique-gouv/hyyypertool/issues/879)) ([6fcf0a3](https://github.com/numerique-gouv/hyyypertool/commit/6fcf0a3456c35d6a56563afce8072aed52803e4c))
+
 ## [2025.4.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.1...2025.4.2) (2025-04-30)
 
 
