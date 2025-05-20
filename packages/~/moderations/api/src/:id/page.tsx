@@ -70,7 +70,7 @@ export default async function Moderation_Page() {
 
       <hr class="bg-none pb-5" />
 
-      <About_User user={moderation.user} />
+      <About_User user={moderation.user} organization={organization_fiche} />
       <Investigation_User
         user={moderation.user}
         organization={moderation.organization}
