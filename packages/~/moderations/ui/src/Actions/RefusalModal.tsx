@@ -69,8 +69,8 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
               `}
           />
         </div>
-        <button class={`${button()} w-full justify-center`} type="submit">
-          Notifier le membre et terminer
+        <button class={`${button()} justify-center`} type="submit">
+          Notifier et terminer
         </button>
       </form>
     </div>

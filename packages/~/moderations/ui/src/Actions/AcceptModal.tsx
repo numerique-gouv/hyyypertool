@@ -20,7 +20,7 @@ export async function AcceptModal({
   });
   return (
     <div
-      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] p-6"
+      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] px-4 py-2"
       id="acceptModal"
       aria-label="la modale de validation"
     >
@@ -68,8 +68,8 @@ export async function AcceptModal({
           <TagInput />
         </div>
         <div>
-          <button class={`${button()} w-full justify-center`} type="submit">
-            Notifier le membre et terminer
+          <button class={`${button()} justify-center`} type="submit">
+            Notifier et terminer
           </button>
         </div>
       </form>

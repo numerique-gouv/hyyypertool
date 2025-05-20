@@ -27,7 +27,7 @@ Fonctionnalité: Moderation blockante à refuser
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
-    * je clique sur "Notifier le membre et terminer"
+    * je clique sur "Notifier et terminer"
     Etant donné que je reinitialise le contexte
     Quand je reviens en avant
     Alors je vois "Cette modération a été marqué comme traitée le"

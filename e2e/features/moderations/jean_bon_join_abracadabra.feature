@@ -53,7 +53,7 @@ Fonctionnalité: Moderation blockante à accepter
     Alors je vois "A propos de jeanbon@yopmail.com, je valide :"
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de validation"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Notifier et terminer"
     * je vois "Cette modération a été marqué comme traitée le"
     * je vois "Validé par user@yopmail.com"
 
