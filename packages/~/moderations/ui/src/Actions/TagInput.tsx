@@ -14,15 +14,16 @@ const verificationType: Array<[Verification_Type, string]> = [
     Verification_Type_Schema.enum.no_validation_means_available,
     "No validation means available",
   ],
-  // [Verification_Type_Schema.enum.verified_email_domain, "Domaine email"],
-  // [
-  //   Verification_Type_Schema.enum.verified_by_coop_mediation_numerique,
-  //   "Verified by coop mediation numerique",
-  // ],
+  [Verification_Type_Schema.enum.domain, "Domaine email"],
 
-  // "Justificatif transmis",
-  // "No validation means available",
-  // "Verified by coop mediation numerique",
+  [
+    Verification_Type_Schema.enum.verified_by_coop_mediation_numerique,
+    "Verified by coop mediation numerique",
+  ],
+  [Verification_Type_Schema.enum.receipt_sent, "Justificatif transmis"],
+
+  // "Justificatif transmis", 🚧 missing 🚧
+  // "Verified by coop mediation numerique", 🚧 missing 🚧
 ];
 
 export function TagInput() {
@@ -37,10 +38,6 @@ export function TagInput() {
               type="radio"
               value={value ?? "null"}
               name="verification_type"
-              checked={
-                value ===
-                Verification_Type_Schema.enum.no_validation_means_available
-              }
             />
             {key}
           </label>
