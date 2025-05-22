@@ -25,7 +25,10 @@ export function CopyButton(
           if ('clipboard' in window.navigator) {
             navigator.clipboard.writeText(text)
           }
-        end"
+        end
+        add .copied to me
+        wait 1s
+        remove .copied from me"
       class={copy_button_style({
         ...variant,
         className: String(className),
@@ -34,7 +37,14 @@ export function CopyButton(
       data-text={text}
       {...other_props}
     >
-      <span class="fr-icon-clipboard-line" aria-hidden="true"></span>
+      <span
+        class="fr-icon-clipboard-line [.copied_&]:hidden"
+        aria-hidden="true"
+      ></span>
+      <span
+        class="fr-icon-check-line animated bounceIn hidden [.copied_&]:inline"
+        aria-hidden="true"
+      ></span>
       {children}
     </button>
   );

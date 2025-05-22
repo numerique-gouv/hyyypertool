@@ -1,6 +1,7 @@
 //
 
 import { button } from "@~/app.ui/button";
+import { CopyButton } from "@~/app.ui/button/components";
 import { description_list } from "@~/app.ui/list";
 import { LocalTime } from "@~/app.ui/time";
 import { urls } from "@~/app.urls";
@@ -41,6 +42,11 @@ export function About(props: Props) {
           <abbr title={organization.cached_nom_complet ?? ""}>
             {organization.cached_libelle}
           </abbr>{" "}
+          <CopyButton
+            class="ml-2"
+            text={organization.cached_libelle ?? ""}
+            variant={{ size: "sm", type: "tertiary" }}
+          ></CopyButton>
         </dd>
 
         <dt>Siret </dt>
@@ -54,6 +60,11 @@ export function About(props: Props) {
           >
             Fiche annuaire
           </a>
+          <CopyButton
+            class="ml-2"
+            text={organization.siret}
+            variant={{ size: "sm", type: "tertiary" }}
+          ></CopyButton>
         </dd>
 
         <dt>NAF/APE </dt>
