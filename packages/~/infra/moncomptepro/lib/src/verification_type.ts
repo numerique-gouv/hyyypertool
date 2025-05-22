@@ -13,5 +13,7 @@ export const Verification_Type_Schema = z.enum([
   "trackdechets_email_domain",
   "verified_by_coop_mediation_numerique",
   "verified_email_domain",
+  "domain",
+  "receipt_sent",
 ]);
 export type Verification_Type = MCP_UserOrganizationLink["verification_type"];
