@@ -28,10 +28,6 @@ export function TagInput() {
               type="radio"
               value={value ?? "null"}
               name="verification_type"
-              checked={
-                value ===
-                Verification_Type_Schema.enum.no_validation_means_available
-              }
             />
             {key}
           </label>
