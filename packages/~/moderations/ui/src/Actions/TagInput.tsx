@@ -14,15 +14,6 @@ const verificationType: Array<[Verification_Type, string]> = [
     Verification_Type_Schema.enum.no_validation_means_available,
     "No validation means available",
   ],
-  // [Verification_Type_Schema.enum.verified_email_domain, "Domaine email"],
-  // [
-  //   Verification_Type_Schema.enum.verified_by_coop_mediation_numerique,
-  //   "Verified by coop mediation numerique",
-  // ],
-
-  // "Justificatif transmis",
-  // "No validation means available",
-  // "Verified by coop mediation numerique",
 ];
 
 export function TagInput() {
