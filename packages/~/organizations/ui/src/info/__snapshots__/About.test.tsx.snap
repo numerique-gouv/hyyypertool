@@ -11,17 +11,66 @@ exports[`render about section 1`] = `
     class="grid grid-cols-[222px_1fr] gap-x-3 ps-0 [&amp;_dd]:p-0 [&amp;_dd]:py-1 [&amp;_dd]:font-semibold [&amp;_dt]:border-0 [&amp;_dt]:border-r [&amp;_dt]:border-solid [&amp;_dt]:border-gray-300 [&amp;_dt]:p-0 [&amp;_dt]:py-1 [&amp;_dt]:uppercase"
   >
     <dt>Dénomination</dt>
-    <dd><abbr title="cached_nom_complet">cached_libelle</abbr></dd>
+    <dd>
+      <abbr title="cached_nom_complet">cached_libelle</abbr>
+      <button
+        _="
+      on click
+        set text to @data-text
+        js(me, text)
+          if (&#39;clipboard&#39; in window.navigator) {
+            navigator.clipboard.writeText(text)
+          }
+        end
+        add .copied to me
+        wait 1s
+        remove .copied from me"
+        class="fr-btn bg-transparent text-black hover:!bg-[--background-default-grey-hover] fr-btn--sm fr-btn--tertiary ml-2"
+        data-text="cached_libelle"
+      >
+        <span
+          class="fr-icon-clipboard-line [.copied_&amp;]:hidden"
+          aria-hidden="true"
+        ></span
+        ><span
+          class="fr-icon-check-line animated bounceIn hidden [.copied_&amp;]:inline"
+          aria-hidden="true"
+        ></span>
+      </button>
+    </dd>
     <dt>Siret</dt>
     <dd>
       siret
       <a
-        href="https://annuaire-entreprises.data.gouv.fr/etablissement/siret"
+        href="https://annuaire-entreprises.data.gouv.fr/entreprise/siret"
         class="fr-btn fr-btn--sm fr-btn--tertiary ml-2"
         rel="noopener noreferrer"
         target="_blank"
         >Fiche annuaire</a
+      ><button
+        _="
+      on click
+        set text to @data-text
+        js(me, text)
+          if (&#39;clipboard&#39; in window.navigator) {
+            navigator.clipboard.writeText(text)
+          }
+        end
+        add .copied to me
+        wait 1s
+        remove .copied from me"
+        class="fr-btn bg-transparent text-black hover:!bg-[--background-default-grey-hover] fr-btn--sm fr-btn--tertiary ml-2"
+        data-text="siret"
       >
+        <span
+          class="fr-icon-clipboard-line [.copied_&amp;]:hidden"
+          aria-hidden="true"
+        ></span
+        ><span
+          class="fr-icon-check-line animated bounceIn hidden [.copied_&amp;]:inline"
+          aria-hidden="true"
+        ></span>
+      </button>
     </dd>
     <dt>NAF/APE</dt>
     <dd>cached_libelle_activite_principale</dd>
@@ -51,8 +100,8 @@ exports[`render about section 1`] = `
         <b
           ><time
             datetime="2011-11-22T14:34:34.000Z"
-            title="Tue Nov 22 2011 15:34:34 GMT+0100 (Central European Standard Time)"
-            >22/11/2011 15:34:34
+            title="Tue Nov 22 2011 14:34:34 GMT+0000 (Coordinated Universal Time)"
+            >22/11/2011 14:34:34
           </time></b
         >
       </li>
@@ -61,8 +110,8 @@ exports[`render about section 1`] = `
         <b
           ><time
             datetime="2011-11-15T13:48:00.000Z"
-            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
-            >15/11/2011 14:48:00
+            title="Tue Nov 15 2011 13:48:00 GMT+0000 (Coordinated Universal Time)"
+            >15/11/2011 13:48:00
           </time></b
         >
       </li>
@@ -71,8 +120,8 @@ exports[`render about section 1`] = `
         <b
           ><time
             datetime="2011-11-15T13:48:00.000Z"
-            title="Tue Nov 15 2011 14:48:00 GMT+0100 (Central European Standard Time)"
-            >15/11/2011 14:48:00
+            title="Tue Nov 15 2011 13:48:00 GMT+0000 (Coordinated Universal Time)"
+            >15/11/2011 13:48:00
           </time></b
         >
       </li>

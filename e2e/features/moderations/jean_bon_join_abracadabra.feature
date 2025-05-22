@@ -50,7 +50,7 @@ Fonctionnalité: Moderation blockante à accepter
 
   Scénario: Le modérateur le valide avec la barre d'outils
     Quand je clique sur "✅ Accepter"
-    Alors je vois "A propos de jeanbon@yopmail.com, je valide :"
+    Alors je vois "A propos de jeanbon@yopmail.com (organisation : Abracadabra), je valide :"
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de validation"
     Quand je clique sur "Notifier et terminer"
