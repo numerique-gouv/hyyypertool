@@ -16,7 +16,8 @@ type Props = JSX.IntrinsicElements["section"] & {
 };
 
 export function About(props: Props) {
-  const { organization, moderation, ...section_props } = props;
+  const { organization, ...section_props } = props;
+  const siren = (organization.siret || "").substring(0, 9);
 
   return (
     <section class="mt-6" {...section_props}>
@@ -53,7 +54,7 @@ export function About(props: Props) {
         <dd>
           {organization.siret}{" "}
           <a
-            href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+            href={`https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             class={`${button({ size: "sm", type: "tertiary" })} ml-2`}
             rel="noopener noreferrer"
             target="_blank"
