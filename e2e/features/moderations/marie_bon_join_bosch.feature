@@ -23,7 +23,7 @@ Fonctionnalité: Moderation non blockante
     * le tableau est vide
     Quand je clique sur "✅ Accepter"
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Notifier et terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -39,7 +39,7 @@ Fonctionnalité: Moderation non blockante
     * le tableau est vide
     Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Notifier et terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -56,7 +56,7 @@ Fonctionnalité: Moderation non blockante
 
     Quand je clique sur "✅ Accepter"
     * je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
-    * je clique sur "Notifier le membre et terminer"
+    * je clique sur "Notifier et terminer"
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"

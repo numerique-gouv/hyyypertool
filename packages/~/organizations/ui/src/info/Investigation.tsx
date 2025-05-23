@@ -44,16 +44,6 @@ export async function Investigation(props: Props) {
         </a>
       </li>
       <li>
-        <a
-          href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
-          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white `}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Liste dirigeants - Annuaire entreprise API
-        </a>
-      </li>
-      <li>
         <a class="" {...hx_organizations_leaders_props} hx-trigger="load">
           <i class="text-center">Recherche des dirigeants...</i>
         </a>

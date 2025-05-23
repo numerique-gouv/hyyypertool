@@ -12,7 +12,7 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
 
   return (
     <div
-      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] p-6"
+      class="fixed bottom-14 right-0 z-[751] m-2 hidden w-4/6 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] px-4 py-2"
       id="refusalModal"
       aria-label="la modale de refus"
     >
@@ -31,7 +31,7 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
             go back
           `}
       >
-        <div class="mb-4 flex items-center justify-between">
+        <div class="mb-1 flex items-center justify-between">
           <input
             class="fr-input hidden"
             type="text"
@@ -50,8 +50,10 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
             Label bouton
           </button>
         </div>
-        <p>Vous refusez la demande de {userEmail}</p>
-        <p class="my-2">Motif de refus</p>
+        <p class="my-2">
+          Motif de refus pour <b>{userEmail}</b> (organisation :{" "}
+          {moderation.organization.cached_libelle})
+        </p>
         <ResponseMessageSelector $message={$modal_message} />
         <div class="my-2">
           <label class="fr-label" for={$modal_message}>
@@ -59,7 +61,7 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
           </label>
           <textarea
             class="fr-input"
-            rows={5}
+            rows={17}
             id={$modal_message}
             name={reject_form_schema.keyof().Enum.message}
             _={`
@@ -67,8 +69,8 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
               `}
           />
         </div>
-        <button class={`${button()} w-full justify-center`} type="submit">
-          Notifier le membre et terminer
+        <button class={`${button()} justify-center`} type="submit">
+          Notifier et terminer
         </button>
       </form>
     </div>

@@ -23,11 +23,11 @@ Fonctionnalité: Moderation blockante à refuser
 
   Scénario: Le modérateur le refuse avec la barre d'outils
     Quand je clique sur "❌ Refuser"
-    Alors je vois "Vous refusez la demande de jeanbon@yopmail.com"
+    Alors je vois "Motif de refus pour jeanbon@yopmail.com (organisation : DINUM)"
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
-    * je clique sur "Notifier le membre et terminer"
+    * je clique sur "Notifier et terminer"
     Etant donné que je reinitialise le contexte
     Quand je reviens en avant
     Alors je vois "Cette modération a été marqué comme traitée le"

@@ -1,20 +1,23 @@
 //
 
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
+import { button } from "@~/app.ui/button";
 import { CopyButton } from "@~/app.ui/button/components";
 import { description_list } from "@~/app.ui/list";
 import { urls } from "@~/app.urls";
+import type { Organization } from "@~/organizations.lib/entities/Organization";
 import type { GetUserInfoOutput } from "@~/users.lib/usecase/GetUserInfo";
 
 //
 
 type AboutProps = {
   user: GetUserInfoOutput;
+  organization: Pick<Organization, "siret">;
 };
 
 //
 
-export function About({ user }: AboutProps) {
+export function About({ user, organization }: AboutProps) {
   const domain = z_email_domain.parse(user.email, { path: ["user.email"] });
 
   return (
@@ -62,7 +65,17 @@ export function About({ user }: AboutProps) {
         <dd>{user.phone_number}</dd>
 
         <dt>Profession </dt>
-        <dd>{user.job}</dd>
+        <dd>
+          {user.job}{" "}
+          <a
+            href={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${organization.siret.substring(0, 9)}`}
+            class={`${button({ size: "sm", type: "tertiary" })} ml-2 mr-2 bg-white`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Liste dirigeants - Annuaire entreprise API
+          </a>
+        </dd>
       </dl>
     </section>
   );
