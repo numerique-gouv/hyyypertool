@@ -22,7 +22,7 @@
     "test": "bun test"
   },
   "dependencies": {
-    "modern-errors": "7.0.1",
+    "modern-errors": "7.1.1",
     "ts-pattern": "5.7.0",
     "type-fest": "4.41.0",
     "zod": "3.24.1"
