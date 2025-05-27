@@ -18,11 +18,6 @@ type Options =
       };
     }
   | {
-      endpoint: "/api/admin/mark-domain-as-verified";
-      method: "POST";
-      searchParams: { domain: string; organization_id: string };
-    }
-  | {
       endpoint: "/api/admin/send-moderation-processed-email";
       method: "POST";
       searchParams: { organization_id: string; user_id: string };
