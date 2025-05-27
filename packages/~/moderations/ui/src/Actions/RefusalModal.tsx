@@ -50,10 +50,14 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
             Label bouton
           </button>
         </div>
-        <p class="my-2">
-          Motif de refus pour <b>{userEmail}</b> (organisation :{" "}
-          {moderation.organization.cached_libelle})
+        <p class="mb-1">
+          A propos de{" "}
+          <span class="font-bold text-[--text-action-high-blue-france]">
+            {userEmail}{" "}
+          </span>
+          pour l'organisation <b>{moderation.organization.cached_libelle}</b>
         </p>
+        <p class="mb-1">Motif de refus :</p>
         <ResponseMessageSelector $message={$modal_message} />
         <div class="my-2">
           <label class="fr-label" for={$modal_message}>
@@ -61,7 +65,7 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
           </label>
           <textarea
             class="fr-input"
-            rows={17}
+            rows={15}
             id={$modal_message}
             name={reject_form_schema.keyof().Enum.message}
             _={`
