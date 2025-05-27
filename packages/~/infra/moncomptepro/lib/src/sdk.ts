@@ -13,12 +13,12 @@ import type Pg from "pg";
 
 export function ForceJoinOrganization(client: Pg.Pool) {
   return forceJoinOrganizationFactory({
-    findById: OrganizationRepository.findByIdFactory({ pg: client }),
     findEmailDomainsByOrganizationId:
       EmailDomainRepository.findEmailDomainsByOrganizationIdFactory({
         pg: client,
       }),
-    findUserById: UserRepository.findByIdFactory({ pg: client }),
+    getById: OrganizationRepository.getByIdFactory({ pg: client }),
+    getUserById: UserRepository.getByIdFactory({ pg: client }),
     linkUserToOrganization:
       OrganizationRepository.linkUserToOrganizationFactory({ pg: client }),
   });
