@@ -262,6 +262,7 @@
       "version": "1.0.0",
       "dependencies": {
         "@gouvfr-lasuite/proconnect.core": "0.5.0",
+        "@gouvfr-lasuite/proconnect.entreprise": "0.0.0",
         "@gouvfr-lasuite/proconnect.identite": "0.5.3",
         "@gouvfr-lasuite/proconnect.insee": "0.3.2",
         "@~/app.core": "workspace:*",
@@ -622,6 +623,8 @@
     "@gouvfr-lasuite/proconnect.core": ["@gouvfr-lasuite/proconnect.core@0.5.0", "", { "dependencies": { "@types/bcryptjs": "^2.4.6", "@types/lodash-es": "^4.17.12", "@types/oidc-provider": "^8.5.2", "@zootools/email-spell-checker": "^1.12.0", "bcryptjs": "^2.4.3", "is-disposable-email-domain": "^1.0.7", "lodash-es": "^4.17.21", "nanoid": "^5.0.9", "tld-extract": "^2.1.0" } }, "sha512-dhVcvfkP8jf3sB/hf8V5W8I5aCH4u+wLX2QvSBOcmb9hq1Ejee3cxS21Qp0//+nUQsqTs5Wk0csw+eWDFdqCaw=="],
 
     "@gouvfr-lasuite/proconnect.crisp": ["@gouvfr-lasuite/proconnect.crisp@0.5.0", "", {}, "sha512-WplyIj6BFcAp0CIGh2QvmF5EhullPzXZg01xDgEJBZ9d1yDAUPgLZh9Fg8zDQdfjJP3ZSKtFwSl80bETz/rrKg=="],
+
+    "@gouvfr-lasuite/proconnect.entreprise": ["@gouvfr-lasuite/proconnect.entreprise@0.0.0", "", { "dependencies": { "openapi-fetch": "^0.13.4" } }, "sha512-mJxP0cYW0FAd7NUV9JSe5k9d3Tlboq3Sbv0IDw+Ia67+g9xsiEVQUuMLA7AS4XxPC6zcVqojcXXNzeozhAzTlQ=="],
 
     "@gouvfr-lasuite/proconnect.identite": ["@gouvfr-lasuite/proconnect.identite@0.5.3", "", { "dependencies": { "leven": "^4.0.0", "openid-client": "^6.4.2", "sql-template-tag": "^5.2.1", "zod": "^3.24.4" } }, "sha512-bzbPKCQEbsOSAYIakEjXPDRBwOUFYKh2YoOIhnLLd6qcUaXDkTt0+/lcWAuWlkSSQkK/7eW0+xgQ9SOmEerWoA=="],
 
@@ -1580,6 +1583,10 @@
     "onetime": ["onetime@7.0.0", "", { "dependencies": { "mimic-function": "^5.0.0" } }, "sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ=="],
 
     "open": ["open@10.1.1", "", { "dependencies": { "default-browser": "^5.2.1", "define-lazy-prop": "^3.0.0", "is-inside-container": "^1.0.0", "is-wsl": "^3.1.0" } }, "sha512-zy1wx4+P3PfhXSEPJNtZmJXfhkkIaxU1VauWIrDZw1O7uJRDRJtKr9n3Ic4NgbA16KyOxOXO2ng9gYwCdXuSXA=="],
+
+    "openapi-fetch": ["openapi-fetch@0.13.8", "", { "dependencies": { "openapi-typescript-helpers": "^0.0.15" } }, "sha512-yJ4QKRyNxE44baQ9mY5+r/kAzZ8yXMemtNAOFwOzRXJscdjSxxzWSNlyBAr+o5JjkUw9Lc3W7OIoca0cY3PYnQ=="],
+
+    "openapi-typescript-helpers": ["openapi-typescript-helpers@0.0.15", "", {}, "sha512-opyTPaunsklCBpTK8JGef6mfPhLSnyy5a0IN9vKtx3+4aExf+KxEqYwIy3hqkedXIB97u357uLMJsOnm3GVjsw=="],
 
     "openid-client": ["openid-client@5.7.0", "", { "dependencies": { "jose": "^4.15.9", "lru-cache": "^6.0.0", "object-hash": "^2.2.0", "oidc-token-hash": "^5.0.3" } }, "sha512-4GCCGZt1i2kTHpwvaC/sCpTpQqDnBzDzuJcJMbH+y1Q5qI8U8RBvoSh28svarXszZHR5BAMXbJPX1PGPRE3VOA=="],
 
