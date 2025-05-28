@@ -90,7 +90,7 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
     updated_at: "2222-01-02 00:00:00+00",
     user_id: adora_pony_user_id,
     verification_type: "domain",
-    verified_at: null,
+    verified_at: "2222-01-02 00:00:00+00",
   });
 });
 
@@ -154,7 +154,7 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
     updated_at: "2222-01-02 00:00:00+00",
     user_id: adora_pony_user_id,
     verification_type: "domain",
-    verified_at: null,
+    verified_at: "2222-01-02 00:00:00+00",
   });
 });
 

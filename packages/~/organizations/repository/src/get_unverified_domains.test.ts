@@ -9,8 +9,8 @@ import {
 } from "@~/moncomptepro.database/seed/unicorn";
 import { create_zombie_organization } from "@~/moncomptepro.database/seed/zombie";
 import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
-import type { MCP_Moderation } from "@~/moncomptepro.lib/moncomptepro.d";
-import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
+import type { EmailDomain } from "@~/moncomptepro.lib";
+import type { MCP_Moderation } from "@~/moncomptepro.lib/types";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { get_unverified_domains } from "./get_unverified_domains";
 
@@ -222,7 +222,8 @@ test("returns no organizations verified by Trackdechets", async () => {
   await pg.insert(schema.email_domains).values({
     domain: "troll.corn",
     organization_id: troll_organization_id,
-    verification_type: Verification_Type_Schema.Enum.trackdechets_email_domain,
+    verification_type:
+      "trackdechets_postal_mail" as EmailDomain["verification_type"],
   });
   const result = await get_unverified_domains(pg, {});
   expect(result).toEqual({ count: 0, domains: [] });

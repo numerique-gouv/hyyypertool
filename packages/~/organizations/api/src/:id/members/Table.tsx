@@ -148,8 +148,7 @@ async function Row_Actions() {
                 user_id: user_id.toString(),
               },
               form: {
-                verification_type:
-                  Verification_Type_Schema.Enum.verified_email_domain,
+                verification_type: Verification_Type_Schema.Enum.domain,
               },
             })}
             hx-swap="none"

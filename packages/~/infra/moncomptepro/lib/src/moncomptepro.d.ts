@@ -6,9 +6,6 @@
 /// <reference types="@numerique-gouv/moncomptepro/src/types/user-organization-link.d.ts" />
 
 export type MCP_Moderation = Moderation | LegacyModeration;
-export type MCP_User = User;
-export type MCP_UserOrganizationLink = UserOrganizationLink;
-export type MCP_EmailDomain = EmailDomain;
 export type MCP_EmailDomain_Type = EmailDomain["type"];
 
 //
