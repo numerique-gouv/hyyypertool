@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.5.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.0...2025.5.1) (2025-05-28)
+
+
+### Bug Fixes
+
+* **moderation:** improvement ui ([#897](https://github.com/numerique-gouv/hyyypertool/issues/897)) ([bcf9ad3](https://github.com/numerique-gouv/hyyypertool/commit/bcf9ad3da4b85ffc729a2ca7973b1ced4b17b6e3))
+
 # [2025.5.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.2...2025.5.0) (2025-05-20)
 
 
