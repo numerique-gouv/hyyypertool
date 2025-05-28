@@ -14,7 +14,7 @@ export function AddDomain() {
         type="checkbox"
         value="true"
       />
-      <label class="fr-label !flex-row" for={id}>
+      <label class="fr-label flex-row!" for={id}>
         J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
         l’organisation
       </label>
