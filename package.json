@@ -60,7 +60,7 @@
     "tailwindPreserveWhitespace": true
   },
   "dependencies": {
-    "@gouvfr/dsfr": "1.13.1",
+    "@gouvfr/dsfr": "1.13.2",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
