@@ -28,7 +28,7 @@ export default async function Page() {
 
   return (
     <main>
-      <div class="bg-[var(--background-alt-blue-france)] py-6">
+      <div class="bg-(--background-alt-blue-france) py-6">
         <div class="fr-container py-6">
           <h1>🏛 A propos de l'organisation</h1>
 

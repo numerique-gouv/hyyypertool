@@ -32,7 +32,7 @@ export async function Table() {
   };
 
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table aria-describedby={describedby}>
         <thead>
           <tr>
@@ -92,7 +92,7 @@ export function Row({
       <td>{cached_libelle}</td>
       <td>{email_domains.map(({ domain }) => domain).join(", ")}</td>
       <td>{cached_code_officiel_geographique}</td>
-      <td class="!text-right">
+      <td class="text-right!">
         <a
           class="p-3"
           href={

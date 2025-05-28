@@ -21,7 +21,7 @@ export function AddAsMemberInternal() {
         value={validate_form_schema.shape.add_member.Enum.AS_INTERNAL}
         checked={!is_already_internal_member}
       />
-      <label class="fr-label !flex-row" for={id}>
+      <label class="fr-label flex-row!" for={id}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
         QU'INTERNE
       </label>

@@ -91,7 +91,7 @@ async function Table() {
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table>
         <thead>
           <tr>
@@ -152,7 +152,7 @@ function Row({
         <LocalTime date={user.email_verified_at} />
       </td>
       <td>{user.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }

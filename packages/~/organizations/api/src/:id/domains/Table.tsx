@@ -22,7 +22,7 @@ export function Table() {
   const { describedby } = req.valid("query");
 
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table aria-describedby={describedby}>
         <thead>
           <tr>
@@ -157,7 +157,7 @@ function Row({
           </>
         ) : null}
       </td>
-      <td class="space-x-2 !text-end">
+      <td class="space-x-2 text-end!">
         <GoogleSearchButton
           class={button({ class: "align-bottom", size: "sm" })}
           query={domain}

@@ -62,8 +62,8 @@ export class Hyyyper_title extends LitElement {
       <!--  -->
 
       <div class="inline-flex">
-        <span class="text-[--text-active-blue-france]">H</span>
-        <span class="text-[--text-active-blue-france]"
+        <span class="text-(--text-active-blue-france)">H</span>
+        <span class="text-(--text-active-blue-france)"
           >${repeat(
             this.hyper,
             (i) => i,
@@ -91,7 +91,7 @@ export class Hyyyper_title extends LitElement {
           per
         </span>
         <span
-          class="animated slower delay-1s zoomInDown inline-block text-[--text-active-red-marianne]"
+          class="animated slower delay-1s zoomInDown inline-block text-(--text-active-red-marianne)"
         >
           tool
         </span>

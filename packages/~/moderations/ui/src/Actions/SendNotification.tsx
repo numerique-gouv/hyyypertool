@@ -29,7 +29,7 @@ export function SendNotification() {
           }) !== Moderation_Type_Schema.Enum.non_verified_domain
         }
       />
-      <label class="fr-label !flex-row" for={$send_notification}>
+      <label class="fr-label flex-row!" for={$send_notification}>
         Notifier <b class="mx-1">{email}</b> du traitement de la modération.
       </label>
     </div>

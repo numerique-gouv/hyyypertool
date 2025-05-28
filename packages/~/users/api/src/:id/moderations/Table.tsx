@@ -15,7 +15,7 @@ export function Table() {
     var: { moderations },
   } = usePageRequestContext();
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table>
         <thead>
           <tr>

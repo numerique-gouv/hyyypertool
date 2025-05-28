@@ -53,7 +53,7 @@ export function Error_Page({ error }: { error: Error }) {
   } = useRequestContext<App_Context>();
 
   return (
-    <main class="flex h-full flex-grow flex-col items-center justify-center">
+    <main class="flex h-full grow flex-col items-center justify-center">
       <div class="card-container not-found-error">
         <img src={`${config.PUBLIC_ASSETS_PATH}/404.svg`} alt="" />
         <h3>Oups, une erreur s'est produite.</h3>

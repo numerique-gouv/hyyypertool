@@ -31,17 +31,17 @@ export default async function User_Page() {
 
   return (
     <main>
-      <div class="bg-[var(--background-alt-blue-france)] py-6">
-        <div class="fr-container !py-6">
+      <div class="bg-(--background-alt-blue-france) py-6">
+        <div class="fr-container py-6!">
           <h1>👨‍💻 A propos de l'utilisateur</h1>
           <div className="grid grid-cols-2 gap-4">
-            <div class="fr-card !p-6">
-              <h1 class="text-[--text-action-high-blue-france]">
+            <div class="fr-card p-6!">
+              <h1 class="text-(--text-action-high-blue-france)">
                 « {user.given_name} {user.family_name} »
               </h1>
               <Fiche />
             </div>
-            <div class="fr-card !p-6">
+            <div class="fr-card p-6!">
               <AccountInfo />
             </div>
           </div>
@@ -73,7 +73,7 @@ export default async function User_Page() {
           ></div>
         </div>
       </div>
-      <div class="bg-[var(--background-alt-red-marianne)] py-6">
+      <div class="bg-(--background-alt-red-marianne) py-6">
         <div class="fr-container py-6">
           <Actions />
         </div>

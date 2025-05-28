@@ -18,7 +18,7 @@ export default new Hono<App_Context>().get(
     }
 
     return render(
-      <main class="flex h-full flex-grow flex-col items-center justify-center">
+      <main class="flex h-full grow flex-col items-center justify-center">
         <h1 class="fr-display--xl drop-shadow-lg">
           <hyyyper-title>Bonjour Hyyypertool !</hyyyper-title>
           <script
