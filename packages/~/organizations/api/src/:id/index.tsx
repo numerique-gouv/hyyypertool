@@ -13,7 +13,6 @@ import { to as await_to } from "await-to-js";
 import { Hono } from "hono";
 import { getContext } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
-import organization_procedures_router from "./$procedures";
 import type { ContextType, ContextVariablesType } from "./context";
 import organization_domains_router from "./domains";
 import organization_members_router from "./members";
@@ -108,5 +107,4 @@ export default new Hono<ContextType>()
   )
   //
   .route("/members", organization_members_router)
-  .route("/domains", organization_domains_router)
-  .route("/$procedures", organization_procedures_router);
+  .route("/domains", organization_domains_router);

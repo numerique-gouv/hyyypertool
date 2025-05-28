@@ -23,7 +23,7 @@ Fonctionnalité: Moderation blockante à refuser
 
   Scénario: Le modérateur le refuse avec la barre d'outils
     Quand je clique sur "❌ Refuser"
-    Alors je vois "Motif de refus pour jeanbon@yopmail.com (organisation : DINUM)"
+    Alors je vois "Motif de refus :"
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"

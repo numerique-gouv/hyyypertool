@@ -41,7 +41,8 @@ export async function AcceptModal({
         <span class="font-bold text-(--text-action-high-blue-france)">
           {userEmail}{" "}
         </span>
-        (organisation : {moderation.organization.cached_libelle}), je valide :
+        pour l'organisation <b>{moderation.organization.cached_libelle}</b>, je
+        valide :
       </p>
       <form
         {...hx_path_validate_moderation}
