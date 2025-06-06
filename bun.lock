@@ -263,7 +263,7 @@
       "dependencies": {
         "@gouvfr-lasuite/proconnect.core": "0.5.0",
         "@gouvfr-lasuite/proconnect.entreprise": "0.0.0",
-        "@gouvfr-lasuite/proconnect.identite": "0.5.3",
+        "@gouvfr-lasuite/proconnect.identite": "0.6.0",
         "@gouvfr-lasuite/proconnect.insee": "0.3.2",
         "@~/app.core": "workspace:*",
         "consola": "3.4.2",
@@ -626,7 +626,7 @@
 
     "@gouvfr-lasuite/proconnect.entreprise": ["@gouvfr-lasuite/proconnect.entreprise@0.0.0", "", { "dependencies": { "openapi-fetch": "^0.13.4" } }, "sha512-mJxP0cYW0FAd7NUV9JSe5k9d3Tlboq3Sbv0IDw+Ia67+g9xsiEVQUuMLA7AS4XxPC6zcVqojcXXNzeozhAzTlQ=="],
 
-    "@gouvfr-lasuite/proconnect.identite": ["@gouvfr-lasuite/proconnect.identite@0.5.3", "", { "dependencies": { "leven": "^4.0.0", "openid-client": "^6.4.2", "sql-template-tag": "^5.2.1", "zod": "^3.24.4" } }, "sha512-bzbPKCQEbsOSAYIakEjXPDRBwOUFYKh2YoOIhnLLd6qcUaXDkTt0+/lcWAuWlkSSQkK/7eW0+xgQ9SOmEerWoA=="],
+    "@gouvfr-lasuite/proconnect.identite": ["@gouvfr-lasuite/proconnect.identite@0.6.0", "", { "dependencies": { "leven": "^4.0.0", "openid-client": "^6.4.2", "sql-template-tag": "^5.2.1", "zod": "^3.25.28" } }, "sha512-jjTWpiVlpgqzh+GeFuysiQ3GI9LayPmlOe5NgH73MraI8fJXBwYDdl0fak+fCknVYpdd7Vfysup9tQ9994gYzQ=="],
 
     "@gouvfr-lasuite/proconnect.insee": ["@gouvfr-lasuite/proconnect.insee@0.3.2", "", { "dependencies": { "axios": "^1.7.7" } }, "sha512-etFs8VT5VYU+WhBRB/kThUTlKg+WbAwuuoGpDaDuE+z6bx/6eBv6NTqQjgiZ4OJnkgfS9bYPmJEWJfOhRnNZrQ=="],
 
