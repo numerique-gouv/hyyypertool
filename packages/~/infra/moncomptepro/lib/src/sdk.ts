@@ -33,8 +33,8 @@ export type ForceJoinOrganizationHandler = ReturnType<
 export function MarkDomainAsVerified(client: Pg.Pool) {
   return markDomainAsVerifiedFactory({
     addDomain: EmailDomainRepository.addDomainFactory({ pg: client }),
-    findEmailDomainsByOrganizationId:
-      EmailDomainRepository.findEmailDomainsByOrganizationIdFactory({
+    deleteEmailDomainsByVerificationTypes:
+      EmailDomainRepository.deleteEmailDomainsByVerificationTypesFactory({
         pg: client,
       }),
     findOrganizationById: OrganizationRepository.findByIdFactory({
