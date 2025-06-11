@@ -9,18 +9,17 @@
     }
   },
   "dependencies": {
-    "@lit-labs/motion": "1.0.8",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.urls": "workspace:*",
+    "@lit-labs/motion": "1.0.8",
     "animate.css": "4.1.1",
     "hono": "4.7.6",
     "lit": "3.3.0",
     "openid-client": "5.7.0"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*",
-    "bun-types": "1.2.9"
+    "@~/config.typescript": "workspace:*"
   }
 }

@@ -28,7 +28,6 @@
     "zod": "3.24.1"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*",
-    "bun-types": "1.2.9"
+    "@~/config.typescript": "workspace:*"
   }
 }
