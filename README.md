@@ -36,10 +36,10 @@ Go to the ‘Actions’ tab, click on 'Release it!'
 
 Run the workflow from the master branch
 
-Once the release is complete, go to [Hyyypertool Sandbox](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool) Scalingo
+Once the release is complete, go to [Hyyypertool Sandbox](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool-sandbox) Scalingo
 
 Manually deploy the release branch (the branch name looks like: release/year.month.number)
 
-Repeat the same action in the [Hyypertool production](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool-sandbox) Scalingo
+Repeat the same action in the [Hyypertool production](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool) Scalingo
 
 Finally, you need to make a summary note in the ProConnect general channel and pin the message.
