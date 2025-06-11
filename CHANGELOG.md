@@ -1,5 +1,12 @@
 # Changelog
 
+## [2025.6.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.0...2025.6.1) (2025-06-11)
+
+
+### Bug Fixes
+
+* **moderation:** add sendNotification component ([#919](https://github.com/numerique-gouv/hyyypertool/issues/919)) ([c16c108](https://github.com/numerique-gouv/hyyypertool/commit/c16c108eb2ed56db25281ce1c782da2223830768))
+
 # [2025.6.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.2...2025.6.0) (2025-06-10)
 
 ## [2025.5.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.1...2025.5.2) (2025-05-28)
