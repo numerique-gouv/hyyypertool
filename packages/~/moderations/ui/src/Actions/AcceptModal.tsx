@@ -4,6 +4,7 @@ import { hx_urls } from "@~/app.urls";
 import { AddAsMemberExternal } from "./AddAsMemberExternal";
 import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
+import { SendNotification } from "./SendNotification";
 import { TagInput } from "./TagInput";
 
 export async function AcceptModal({
@@ -68,9 +69,12 @@ export async function AcceptModal({
         <div class="mb-5">
           <TagInput />
         </div>
+        <div class="mb-5">
+          <SendNotification />
+        </div>
         <div>
           <button class={`${button()} justify-center`} type="submit">
-            Notifier et terminer
+            Terminer
           </button>
         </div>
       </form>
