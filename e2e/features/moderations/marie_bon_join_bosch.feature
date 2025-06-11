@@ -25,6 +25,8 @@ Fonctionnalité: Moderation non blockante
     Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
     Quand je clique sur "Terminer"
 
+    Alors une notification mail n'est pas envoyée
+
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
     * je vois la ligne de table "57206768400017"
@@ -40,6 +42,8 @@ Fonctionnalité: Moderation non blockante
     Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
     Quand je clique sur "Terminer"
+
+    Alors une notification mail n'est pas envoyée
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -57,6 +61,8 @@ Fonctionnalité: Moderation non blockante
     Quand je clique sur "✅ Accepter"
     * je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
     * je clique sur "Terminer"
+
+    Alors une notification mail n'est pas envoyée
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"

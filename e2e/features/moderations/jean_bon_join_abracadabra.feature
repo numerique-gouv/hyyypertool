@@ -59,3 +59,5 @@ Fonctionnalité: Moderation blockante à accepter
 
     Alors je vois "Liste des moderations"
     Alors je ne vois pas "51935970700022"
+
+    Alors une notification mail est envoyée
