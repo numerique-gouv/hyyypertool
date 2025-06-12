@@ -26,6 +26,9 @@ export default defineConfig({
     specPattern: "**/*.feature",
     supportFile: false,
   },
+  env: {
+    APP_MONCOMPTEPRO_URL: "http://localhost:6300",
+  },
   video: true,
 });
 

@@ -6,25 +6,27 @@
 
 > Backoffice moderation tool for MonComptePro
 
-## Install
+## Install 📦
 
 First, you need bun to be installed: https://bun.sh/
 
 Then install dependencies with: `bun install`.
 
-Build it: `bun run build`.
+## Development 🚧
 
-Start the moncomptepro database with: `docker compose up -d`
+### Development server
 
-Ask a colleague for a database dump, then import it with:
-
-```
-docker compose exec -T postgres-moncomptepro pg_restore --clean --no-owner --dbname postgres --user postgres < moncomptepro-staging-database_20231114103427.sql
-```
-
-Then run the app: `bun run dev`.
+Then run the app: `bun run scripts/dev.ts`.
 
 Then go to http://localhost:3000/.
+
+### Development database
+
+Reset the local database with : `bun run scripts/seed.ts`.
+
+> [!WARNING]
+> This will delete all the data in the database.
+> There is a lock in the [scripts/seed.ts](scripts/seed.ts) file to prevent production database seeding.
 
 ## Deployment 🚀
 
@@ -36,10 +38,10 @@ Go to the ‘Actions’ tab, click on 'Release it!'
 
 Run the workflow from the master branch
 
-Once the release is complete, go to [Hyyypertool Sandbox](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool) Scalingo
+Once the release is complete, go to [Hyyypertool Sandbox](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool-sandbox) Scalingo
 
 Manually deploy the release branch (the branch name looks like: release/year.month.number)
 
-Repeat the same action in the [Hyypertool production](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool-sandbox) Scalingo
+Repeat the same action in the [Hyypertool production](https://dashboard.scalingo.com/apps/osc-secnum-fr1/hyyypertool) Scalingo
 
 Finally, you need to make a summary note in the ProConnect general channel and pin the message.

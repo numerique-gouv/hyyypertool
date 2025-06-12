@@ -18,16 +18,16 @@
   "dependencies": {
     "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
+    "@~/moderations.lib": "workspace:*",
     "@~/organizations.lib": "workspace:*",
     "@~/users.lib": "workspace:*",
-    "@~/moderations.lib": "workspace:*",
-    "ts-dedent": "2.2.0",
     "hono": "4.7.6",
     "tailwind-variants": "0.3.1",
+    "ts-dedent": "2.2.0",
     "ts-pattern": "5.7.0"
   },
   "devDependencies": {
-    "@~/crisp.lib": "workspace:*",
-    "@~/config.typescript": "workspace:*"
+    "@~/config.typescript": "workspace:*",
+    "@~/crisp.lib": "workspace:*"
   }
 }
