@@ -34,7 +34,7 @@ export const app_env = z.object({
     .string()
     .trim()
     .default("ES256"),
-  AGENTCONNECT_OIDC_ISSUER: z.string().trim(),
+  AGENTCONNECT_OIDC_ISSUER: z.string().trim().url(),
   AGENTCONNECT_OIDC_SCOPE: z
     .string()
     .trim()
