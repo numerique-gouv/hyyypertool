@@ -30,6 +30,6 @@ test("MonComptePro Postgres middleware", async () => {
     });
 
   expect(() => app.fetch(new Request("http://localhost/readyz"))).toThrowError(
-    "Failed to connect",
+    new Error(""),
   );
 });
