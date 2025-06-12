@@ -39,7 +39,7 @@ test("production", async () => {
     .use(
       set_config({
         ASSETS_PATH: "/assets/ASSETS_PATH",
-        NODE_ENV: "development",
+        NODE_ENV: "production",
         PUBLIC_ASSETS_PATH: `/assets/PUBLIC_ASSETS_PATH/public/built`,
         VERSION: "__VERSION__",
       }),

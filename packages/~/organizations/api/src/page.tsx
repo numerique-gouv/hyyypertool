@@ -86,7 +86,7 @@ async function Table() {
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table>
         <thead>
           <tr>
@@ -145,7 +145,7 @@ function Row({
       </td>
       <td>{organization.cached_code_officiel_geographique}</td>
       <td>{organization.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }

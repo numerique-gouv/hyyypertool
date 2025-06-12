@@ -21,7 +21,7 @@ export async function AcceptModal({
   });
   return (
     <div
-      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] px-4 py-2"
+      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-(--text-action-high-blue-france) bg-(--blue-france-975-75) px-4 py-2"
       id="acceptModal"
       aria-label="la modale de validation"
     >
@@ -39,7 +39,7 @@ export async function AcceptModal({
       </div>
       <p>
         A propos de{" "}
-        <span class="font-bold text-[--text-action-high-blue-france]">
+        <span class="font-bold text-(--text-action-high-blue-france)">
           {userEmail}{" "}
         </span>
         pour l'organisation <b>{moderation.organization.cached_libelle}</b>, je

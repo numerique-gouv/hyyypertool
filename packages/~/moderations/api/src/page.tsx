@@ -231,7 +231,7 @@ async function ModerationList_Table() {
     useContext(Moderations_Context);
   const { count, moderations } = await query_moderations_list;
   return (
-    <div class="fr-table [&>table]:table" id={MODERATION_TABLE_ID}>
+    <div class="fr-table *:table!" id={MODERATION_TABLE_ID}>
       <table>
         <thead>
           <tr>

@@ -25,7 +25,7 @@ export function AddAsMemberExternal() {
         value={validate_form_schema.shape.add_member.Enum.AS_EXTERNAL}
         checked={is_already_external_member}
       />
-      <label class="fr-label !flex-row" for={id}>
+      <label class="fr-label flex-row!" for={id}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
         QU'EXTERNE
       </label>

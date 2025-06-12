@@ -21,12 +21,18 @@ export async function Investigation(props: Props) {
       query: { siret: organization.siret },
     });
 
+  const button_classes = button({
+    class: "mr-2 bg-white",
+    size: "sm",
+    type: "tertiary",
+  });
+
   return (
     <ul class="mt-5 w-full list-none bg-[#F6F6F6] p-3 [&_li]:inline-block">
       <li>
         <a
           href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}&whoWhat=Mairie`}
-          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white `}
+          class={button_classes}
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -36,7 +42,7 @@ export async function Investigation(props: Props) {
       <li>
         <a
           href={`https://lannuaire.service-public.fr/recherche?where=${organization.cached_code_postal}`}
-          class={`${button({ size: "sm", type: "tertiary" })} mr-2 bg-white `}
+          class={button_classes}
           rel="noopener noreferrer"
           target="_blank"
         >

@@ -38,11 +38,11 @@ export function CopyButton(
       {...other_props}
     >
       <span
-        class="fr-icon-clipboard-line [.copied_&]:hidden"
+        class="fr-icon-clipboard-line in-[.copied]:hidden"
         aria-hidden="true"
       ></span>
       <span
-        class="fr-icon-check-line animated bounceIn hidden [.copied_&]:inline"
+        class="fr-icon-check-line animated bounceIn hidden in-[.copied]:inline"
         aria-hidden="true"
       ></span>
       {children}
@@ -51,6 +51,6 @@ export function CopyButton(
 }
 
 const copy_button_style = tv({
-  base: "text-[--text-action-high-blue-france]",
+  base: "text-(--text-action-high-blue-france)",
   extend: button,
 });

@@ -13,7 +13,7 @@ export function NotAuthorized() {
   } = useRequestContext<AppEnv_Context>();
 
   return (
-    <main class="flex h-full flex-grow flex-col items-center justify-center">
+    <main class="flex h-full grow flex-col items-center justify-center">
       <div class="fr-container">
         <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
           <div class="fr-server__body fr-col-12 fr-col-md-6">

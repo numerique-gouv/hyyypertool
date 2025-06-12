@@ -87,7 +87,7 @@ async function Table() {
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table aria-describedby={$describedby}>
         <thead>
           <tr>
@@ -152,7 +152,7 @@ function Row({
       <td>{organization.siret}</td>
       <td>{organization.cached_libelle}</td>
       <td>{organization.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }
