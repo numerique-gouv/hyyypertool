@@ -15,7 +15,7 @@ await connection.connect();
 
 const db = drizzle(connection, {
   schema,
-  logger: consola.level >= LogLevels.debug,
+  logger: consola.level >= LogLevels.verbose,
 });
 
 await migrate(db, { migrationsFolder: "src/drizzle" });
