@@ -57,16 +57,16 @@ export async function AcceptModal({
               go back
           `}
       >
-        <div class="mb-5 hidden">
+        <div class="mb-5">
           <AddAsMemberInternal />
         </div>
-        <div class="mb-5">
+        <div class="mb-5" id="domainInternalSection">
           <AddDomain mailType="interne" />
         </div>
         <div class="mb-5">
           <AddAsMemberExternal />
         </div>
-        <div class="mb-5 hidden" id="addDomainExternalSection">
+        <div class="mb-5 hidden" id="domainExternalSection">
           <AddDomain mailType="externe" />
         </div>
         <div class="mb-5">

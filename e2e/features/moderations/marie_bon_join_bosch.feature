@@ -22,7 +22,7 @@ Fonctionnalité: Moderation non blockante
     Soit le tableau sous le title "domaine connu dans l'organisation"
     * le tableau est vide
     Quand je clique sur "✅ Accepter"
-    Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
+    Quand je clique sur "J’autorise le domaine fr.bosch.com en interne à l'organisation"
     Quand je clique sur "Terminer"
 
     Alors une notification mail n'est pas envoyée
