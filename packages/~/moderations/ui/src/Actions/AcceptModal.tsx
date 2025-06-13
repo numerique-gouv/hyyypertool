@@ -21,7 +21,7 @@ export async function AcceptModal({
   });
   return (
     <div
-      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-(--text-action-high-blue-france) bg-(--blue-france-975-75) px-4 py-2"
+      class="fixed right-0 bottom-14 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-(--text-action-high-blue-france) bg-(--blue-france-975-75) px-4 py-2"
       id="acceptModal"
       aria-label="la modale de validation"
     >
@@ -58,13 +58,16 @@ export async function AcceptModal({
           `}
       >
         <div class="mb-5">
-          <AddDomain />
-        </div>
-        <div class="mb-5">
           <AddAsMemberInternal />
+        </div>
+        <div class="mb-5" id="domainInternalSection">
+          <AddDomain mailType="interne" />
         </div>
         <div class="mb-5">
           <AddAsMemberExternal />
+        </div>
+        <div class="mb-5 hidden" id="domainExternalSection">
+          <AddDomain mailType="externe" />
         </div>
         <div class="mb-5">
           <TagInput />
