@@ -1,6 +1,6 @@
 //
 
-import { Before, Given, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 // from https://app.swaggerhub.com/apis/jamesdbloom/mock-server-openapi/5.15.x#/Verification
 type MockServerRequestVerificationBody = {
@@ -12,11 +12,6 @@ type MockServerRequestVerificationBody = {
     atMost?: number;
   };
 };
-
-Before(() => {
-  cy.exec("docker compose restart app.moncomptepro.beta.gouv.fr");
-  cy.exec("docker compose up --wait app.moncomptepro.beta.gouv.fr");
-});
 
 Given("un server faut server {string}", function (server: string) {
   cy.exec(`docker compose restart ${server}`);
