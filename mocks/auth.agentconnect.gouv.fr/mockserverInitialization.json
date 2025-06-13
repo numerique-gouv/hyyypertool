@@ -1,43 +1,15 @@
 [
   {
     "httpRequest": {
-      "path": "/api/v2/token"
-    },
-    "httpResponse": {
-      "statusCode": 200,
-      "reasonPhrase": "OK"
-    }
-  },
-  {
-    "httpRequest": {
-      "path": "/api/v2/authorize/le_jeton_de_jean_passepartout"
-    },
-    "httpResponse": {
-      "statusCode": 303,
-      "headers": {
-        "Location": ["http://localhost:3000/auth/fake/login/callback"]
+      "path": "/api/v2/authorize",
+      "queryStringParameters": {
+        "state": [".*"]
       }
-    }
-  },
-  {
-    "httpRequest": {
-      "path": "/api/v2/login"
-    },
-    "httpResponse": {
-      "statusCode": 303,
-      "headers": {
-        "Location": ["/api/v2/authorize/le_jeton_de_jean_passepartout"]
-      }
-    }
-  },
-  {
-    "httpRequest": {
-      "path": "/api/v2/authorize"
     },
     "httpResponse": {
       "statusCode": 302,
       "headers": {
-        "Location": ["/api/v2/login"]
+        "Location": ["http://localhost:3000/auth/fake/login/callback"]
       }
     }
   },

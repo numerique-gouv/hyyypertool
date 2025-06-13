@@ -2,28 +2,33 @@
 
 import env from "@~/app.core/config";
 import type { Env, MiddlewareHandler } from "hono";
-import { BaseClient, Issuer } from "openid-client";
+import {
+  allowInsecureRequests,
+  ClientSecretPost,
+  discovery,
+  type Configuration,
+} from "openid-client";
 
 //
 
 export function agentconnect(): MiddlewareHandler<Oidc_Context> {
   return async function agentconnect_middleware({ set }, next) {
-    const agentconnect_oidc_issuer = await Issuer.discover(
-      env.AGENTCONNECT_OIDC_ISSUER,
+    const config = await discovery(
+      new URL(env.AGENTCONNECT_OIDC_ISSUER),
+      env.AGENTCONNECT_OIDC_CLIENT_ID,
+      {
+        id_token_signed_response_alg: "ES256",
+        userinfo_signed_response_alg: "ES256",
+      },
+      ClientSecretPost(env.AGENTCONNECT_OIDC_SECRET_ID),
+      env.NODE_ENV === "development"
+        ? { execute: [allowInsecureRequests] }
+        : undefined,
     );
-
-    const client = new agentconnect_oidc_issuer.Client({
-      client_id: env.AGENTCONNECT_OIDC_CLIENT_ID,
-      client_secret: env.AGENTCONNECT_OIDC_SECRET_ID,
-      id_token_signed_response_alg: "ES256",
-      // redirect_uris: [urls.auth.login.callback.$url().href],
-      response_types: ["code"],
-      userinfo_signed_response_alg: "ES256",
-    });
 
     //
 
-    set("oidc", client);
+    set("oidc_config", config);
 
     return next();
   };
@@ -33,6 +38,6 @@ export function agentconnect(): MiddlewareHandler<Oidc_Context> {
 
 export interface Oidc_Context extends Env {
   Variables: {
-    oidc: BaseClient;
+    oidc_config: Configuration;
   };
 }

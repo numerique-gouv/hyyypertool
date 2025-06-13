@@ -3,6 +3,7 @@ Fonctionnalité: Moderation blockante à accepter
 
   Contexte: Jean Bon veut rejoindre l'organisation « Abracadabra »
     Soit une base de données nourrie au grain
+    * un server faut server "app.moncomptepro.beta.gouv.fr"
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "ProConnect"
