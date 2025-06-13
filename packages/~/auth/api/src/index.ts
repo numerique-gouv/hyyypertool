@@ -97,9 +97,10 @@ export default new Hono<Oidc_Context & App_Context>()
 
       const config = get("oidc_config");
 
+      const redirect_uri = get_redirect_uri(req.url);
       const tokens = await authorizationCodeGrant(
         config,
-        req.raw,
+        new URL(redirect_uri),
         {
           expectedNonce: session.get("nonce"),
           expectedState: session.get("state"),

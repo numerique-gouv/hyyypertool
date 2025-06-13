@@ -10,7 +10,6 @@ import {
 } from "openid-client";
 
 //
-
 export function agentconnect(): MiddlewareHandler<Oidc_Context> {
   return async function agentconnect_middleware({ set }, next) {
     const config = await discovery(
