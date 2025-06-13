@@ -72,7 +72,12 @@ export default new Hono<App_Context>().patch(
     //#region ✨ Add verified domain
     if (add_domain) {
       const [error] = await to(
-        add_verified_domain({ organization_id, domain }),
+        add_verified_domain({
+          organization_id,
+          domain,
+          domain_verification_type:
+            add_member === "AS_INTERNAL" ? "verified" : "external",
+        }),
       );
 
       match(error)
