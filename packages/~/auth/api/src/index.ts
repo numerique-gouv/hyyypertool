@@ -93,7 +93,7 @@ export default new Hono<Oidc_Context & App_Context>()
       const session = c.get("session");
       const { redirect, req, get } = c;
 
-      const { code } = req.valid("query");
+      req.valid("query");
 
       const config = get("oidc_config");
 
@@ -105,7 +105,6 @@ export default new Hono<Oidc_Context & App_Context>()
           expectedNonce: session.get("nonce"),
           expectedState: session.get("state"),
         },
-        { code },
       );
 
       const claims = tokens.claims();
