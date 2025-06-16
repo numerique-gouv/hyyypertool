@@ -97,17 +97,13 @@ export default new Hono<Oidc_Context & App_Context>()
       const query = req.valid("query");
       const config = get("oidc_config");
 
-      const redirect_uri = get_redirect_uri(req.url);
-      console.debug({ query });
-      const tokens = await authorizationCodeGrant(
-        config,
-        new URL(redirect_uri),
-        {
-          expectedNonce: session.get("nonce"),
-          expectedState: session.get("state"),
-        },
-        query,
-      );
+      const redirect_uri = new URL(get_redirect_uri(req.url));
+      redirect_uri.search = new URLSearchParams(query).toString();
+      console.debug(redirect_uri.href);
+      const tokens = await authorizationCodeGrant(config, redirect_uri, {
+        expectedNonce: session.get("nonce"),
+        expectedState: session.get("state"),
+      });
 
       const claims = tokens.claims();
       const userinfo = await fetchUserInfo(
