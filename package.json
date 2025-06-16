@@ -69,7 +69,7 @@
     "@gouvfr/dsfr": "1.13.2",
     "consola": "3.4.2",
     "dotenv": "16.5.0",
-    "hono": "4.7.6",
+    "hono": "4.7.11",
     "tsx": "4.19.3"
   },
   "devDependencies": {
