@@ -87,6 +87,7 @@ export default new Hono<Oidc_Context & App_Context>()
       z.object({
         code: z.string().trim(),
         state: z.string(),
+        iss: z.string(),
       }),
     ),
     async function oidc_callback(c) {
@@ -96,7 +97,7 @@ export default new Hono<Oidc_Context & App_Context>()
       const config = get("oidc_config");
 
       const redirect_uri = get_redirect_uri(req.url);
-      console.trace();
+
       const tokens = await authorizationCodeGrant(
         config,
         new URL(redirect_uri),
@@ -104,7 +105,7 @@ export default new Hono<Oidc_Context & App_Context>()
           expectedNonce: session.get("nonce"),
           expectedState: session.get("state"),
         },
-        req.query(),
+        req.valid("query"),
       );
 
       const claims = tokens.claims();
