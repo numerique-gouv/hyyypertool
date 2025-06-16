@@ -25,6 +25,6 @@
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
-    "pg": "8.14.1"
+    "pg": "8.16.0"
   }
 }
