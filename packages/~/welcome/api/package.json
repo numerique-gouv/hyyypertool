@@ -15,7 +15,7 @@
     "@~/app.urls": "workspace:*",
     "@lit-labs/motion": "1.0.8",
     "animate.css": "4.1.1",
-    "hono": "4.7.6",
+    "hono": "4.7.11",
     "lit": "3.3.0",
     "openid-client": "6.5.1"
   },
