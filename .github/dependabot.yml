@@ -19,6 +19,10 @@ updates:
       sentry:
         patterns:
           - "@sentry/*"
+      tailwindcss: 
+        patterns:
+          - "@tailwindcss/*"
+          - "tailwindcss"
     schedule:
       interval: "weekly"
     labels:
