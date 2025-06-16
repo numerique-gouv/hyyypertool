@@ -99,7 +99,7 @@ export default new Hono<Oidc_Context & App_Context>()
 
       const redirect_uri = new URL(get_redirect_uri(req.url));
       redirect_uri.search = new URLSearchParams(query).toString();
-      console.debug(redirect_uri.href);
+
       const tokens = await authorizationCodeGrant(config, redirect_uri, {
         expectedNonce: session.get("nonce"),
         expectedState: session.get("state"),
