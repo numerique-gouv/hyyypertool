@@ -94,10 +94,11 @@ export default new Hono<Oidc_Context & App_Context>()
       const session = c.get("session");
       const { redirect, req, get } = c;
 
+      const query = req.valid("query");
       const config = get("oidc_config");
 
       const redirect_uri = get_redirect_uri(req.url);
-
+      console.debug({ query });
       const tokens = await authorizationCodeGrant(
         config,
         new URL(redirect_uri),
@@ -105,7 +106,7 @@ export default new Hono<Oidc_Context & App_Context>()
           expectedNonce: session.get("nonce"),
           expectedState: session.get("state"),
         },
-        req.valid("query"),
+        query,
       );
 
       const claims = tokens.claims();
