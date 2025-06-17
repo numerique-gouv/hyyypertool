@@ -1,12 +1,22 @@
 //
-
-import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
+import {
+  Before,
+  Given,
+  Then,
+  When,
+} from "@badeball/cypress-cucumber-preprocessor";
+import "@testing-library/cypress/add-commands";
 
 //
 
 let target: JQuery<HTMLElement>;
 let table_scope: string;
 let row_scope: string;
+let get_within_context: () => Cypress.Chainable<JQuery<HTMLElement>>;
+
+Before(() => {
+  get_within_context = () => cy.get("body");
+});
 
 //
 
@@ -107,7 +117,7 @@ Then("sur la ligne suivante je vois {string}", function (text: string) {
 //
 
 When("je clique sur {string}", (text: string) => {
-  cy.contains(text).click();
+  get_within_context().within(() => cy.contains(text).click());
 });
 
 When("je clique sur le bouton {string}", (text: string) => {
@@ -147,6 +157,43 @@ When("je tape {string}", (text: string) => {
   cy.focused().type(text);
 });
 
+When(
+  "je saisie le(s) mot(s) {string} dans la boîte à texte nommée {string}",
+  (text: string, name: string) => {
+    get_within_context().within(() =>
+      cy.get(`input[placeholder="${name}"]`).type(text),
+    );
+  },
+);
+Then(
+  "je dois voir une boîte à texte nommée {string} et contenant {string}",
+  (name: string, text: string) => {
+    cy.findByLabelText(name).should("have.value", text);
+  },
+);
+Then(
+  "je dois voir une boîte à texte nommée {string} et contenant:",
+  (name: string, text: string) => {
+    cy.findByLabelText(name).should("contain", text);
+  },
+);
+
 When("je retire le focus", () => {
   cy.focused().blur();
+});
+
+When("je reviens en avant", () => {
+  cy.go(1);
+});
+
+Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
+  get_within_context = () => cy.findAllByLabelText(text);
+});
+
+Given("je vais à l'intérieur de la section nommé {string}", (text: string) => {
+  get_within_context = () => cy.findAllByLabelText(text);
+});
+
+Given("je reinitialise le contexte", () => {
+  get_within_context = () => cy.get("body");
 });

@@ -25,13 +25,13 @@
     "@~/moncomptepro.lib": "workspace:*",
     "consola": "3.4.2",
     "drizzle-orm": "0.41.0",
-    "hono": "4.7.6",
+    "hono": "4.7.11",
     "pg": "8.14.1"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "0.2.17",
+    "@electric-sql/pglite": "0.3.3",
     "@types/pg": "8.11.11",
     "@~/config.typescript": "workspace:*",
-    "drizzle-kit": "0.30.6"
+    "drizzle-kit": "0.31.1"
   }
 }

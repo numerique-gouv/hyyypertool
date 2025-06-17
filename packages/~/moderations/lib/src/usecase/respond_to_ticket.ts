@@ -46,7 +46,7 @@ async function respond_in_conversation(
     userinfo,
     resolve_delay,
   }: RejectedModeration_Context,
-  { message }: RejectedFullMessage,
+  { message }: { message: string },
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
 
@@ -74,7 +74,7 @@ async function respond_in_conversation(
 
 async function respond_to_zammad_ticket(
   { moderation, userinfo }: RejectedModeration_Context,
-  { message, subject, to }: RejectedFullMessage,
+  { message, subject, to }: { message: string; subject: string; to: string },
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
 

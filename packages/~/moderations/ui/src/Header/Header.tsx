@@ -4,7 +4,7 @@ import { MessageInfo } from "#ui/MessageInfo";
 import { button } from "@~/app.ui/button";
 import { callout } from "@~/app.ui/callout";
 import { notice } from "@~/app.ui/notice";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time";
 import { hx_urls } from "@~/app.urls";
 import { moderation_type_to_emoji } from "@~/moderations.lib/moderation_type.mapper";
 import type { GetModerationHeaderOutput } from "@~/moderations.lib/usecase/GetModerationHeader";
@@ -40,11 +40,9 @@ export async function Header() {
         Créé le <LocalTime date={moderation.created_at} />
       </div>
       <section class="flex items-baseline space-x-5">
-        <h1>
-          <span>
-            {moderation_type_to_emoji(moderation.type)}{" "}
-            {moderation.user.given_name} {moderation.user.family_name}
-          </span>
+        <h1 className="fr-h2">
+          {moderation_type_to_emoji(moderation.type)}{" "}
+          {moderation.user.given_name} {moderation.user.family_name}
         </h1>
         <div>
           <State_Badge />
@@ -52,8 +50,6 @@ export async function Header() {
       </section>
 
       <ModerationCallout />
-
-      <hr class="bg-none" />
 
       <Info />
 
@@ -170,8 +166,12 @@ function Comments() {
 function parse_comment(comment: string | null) {
   if (!comment) return [];
   return comment.split("\n").map((line) => {
-    const [when_and_by, value] = line.split(" | ");
+    const [when_and_by, ...value] = line.split(" | ");
     const [created_at, created_by] = when_and_by.split(" ");
-    return { created_at: new Date(Number(created_at)), created_by, value };
+    return {
+      created_at: new Date(Number(created_at)),
+      created_by,
+      value: value.join(" | "),
+    };
   });
 }

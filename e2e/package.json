@@ -10,10 +10,11 @@
     "test": "cypress run -e filterSpecs=true"
   },
   "dependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "22.0.1",
-    "@bahmutov/cypress-esbuild-preprocessor": "2.2.4",
-    "cypress": "14.3.0",
-    "pg": "8.14.1",
+    "@badeball/cypress-cucumber-preprocessor": "22.1.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "2.2.5",
+    "@testing-library/cypress": "^10.0.3",
+    "cypress": "14.4.1",
+    "pg": "8.16.0",
     "typescript": "5.8.3"
   },
   "trustedDependencies": [

@@ -4,7 +4,7 @@ import { date_to_dom_string } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import { Foot } from "@~/app.ui/hx_table";
 import { notice } from "@~/app.ui/notice";
-import { Time } from "@~/app.ui/time/LocalTime";
+import { Time } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
 import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
 import { usePageRequestContext } from "./context";
@@ -32,7 +32,7 @@ export async function Table() {
   };
 
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table aria-describedby={describedby}>
         <thead>
           <tr>
@@ -92,7 +92,7 @@ export function Row({
       <td>{cached_libelle}</td>
       <td>{email_domains.map(({ domain }) => domain).join(", ")}</td>
       <td>{cached_code_officiel_geographique}</td>
-      <td class="!text-right">
+      <td class="text-right!">
         <a
           class="p-3"
           href={

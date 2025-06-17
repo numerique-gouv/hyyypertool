@@ -2,7 +2,7 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_include, hx_trigger_from_body } from "@~/app.core/htmx";
-import { FrNumberConverter } from "@~/app.ui/number/index";
+import { FrNumberConverter } from "@~/app.ui/number";
 import { formattedPlural } from "@~/app.ui/plurial";
 import { hx_urls } from "@~/app.urls";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
@@ -28,7 +28,7 @@ export default async function Page() {
 
   return (
     <main>
-      <div class="bg-[var(--background-alt-blue-france)] py-6">
+      <div class="bg-(--background-alt-blue-france) py-6">
         <div class="fr-container py-6">
           <h1>🏛 A propos de l'organisation</h1>
 

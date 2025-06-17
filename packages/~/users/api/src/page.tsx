@@ -5,7 +5,7 @@ import { hx_include } from "@~/app.core/htmx";
 import { Pagination_Schema } from "@~/app.core/schema";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
 import { match } from "ts-pattern";
 import {
@@ -91,7 +91,7 @@ async function Table() {
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table>
         <thead>
           <tr>
@@ -152,7 +152,7 @@ function Row({
         <LocalTime date={user.email_verified_at} />
       </td>
       <td>{user.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }

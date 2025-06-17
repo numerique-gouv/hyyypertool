@@ -1,8 +1,9 @@
 //
 
 import { button } from "@~/app.ui/button";
+import { CopyButton } from "@~/app.ui/button/components";
 import { description_list } from "@~/app.ui/list";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { LocalTime } from "@~/app.ui/time";
 import { urls } from "@~/app.urls";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type JSX } from "hono/jsx";
@@ -15,7 +16,8 @@ type Props = JSX.IntrinsicElements["section"] & {
 };
 
 export function About(props: Props) {
-  const { organization, moderation, ...section_props } = props;
+  const { organization, ...section_props } = props;
+  const siren = (organization.siret || "").substring(0, 9);
 
   return (
     <section class="mt-6" {...section_props}>
@@ -41,19 +43,29 @@ export function About(props: Props) {
           <abbr title={organization.cached_nom_complet ?? ""}>
             {organization.cached_libelle}
           </abbr>{" "}
+          <CopyButton
+            class="ml-2"
+            text={organization.cached_libelle ?? ""}
+            variant={{ size: "sm", type: "tertiary" }}
+          ></CopyButton>
         </dd>
 
         <dt>Siret </dt>
         <dd>
           {organization.siret}{" "}
           <a
-            href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${organization.siret}`}
+            href={`https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             class={`${button({ size: "sm", type: "tertiary" })} ml-2`}
             rel="noopener noreferrer"
             target="_blank"
           >
             Fiche annuaire
           </a>
+          <CopyButton
+            class="ml-2"
+            text={organization.siret}
+            variant={{ size: "sm", type: "tertiary" }}
+          ></CopyButton>
         </dd>
 
         <dt>NAF/APE </dt>

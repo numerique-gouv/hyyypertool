@@ -14,7 +14,7 @@ import { respond_to_ticket } from "./respond_to_ticket";
 
 export async function create_and_send_email_to_user(
   context: RejectedModeration_Context,
-  { message, subject, to }: RejectedFullMessage,
+  { message, reason, subject, to }: RejectedFullMessage,
 ) {
   const { crisp_config, moderation, pg } = context;
   const user = await pg.query.users.findFirst({
@@ -42,6 +42,6 @@ export async function create_and_send_email_to_user(
       ...context,
       moderation: { ...context.moderation, ticket_id: session_id },
     },
-    { message, subject, to: session_id },
+    { message, reason, subject, to: session_id },
   );
 }

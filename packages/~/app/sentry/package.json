@@ -14,11 +14,11 @@
     "format": "prettier --write src/**/*.ts"
   },
   "dependencies": {
-    "@sentry/node": "8.51.0",
-    "@sentry/profiling-node": "8.51.0",
     "@~/app.core": "workspace:*",
+    "@sentry/node": "9.29.0",
+    "@sentry/profiling-node": "9.29.0",
     "consola": "3.4.2",
-    "hono": "4.7.6"
+    "hono": "4.7.11"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

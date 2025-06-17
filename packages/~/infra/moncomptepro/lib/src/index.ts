@@ -4,6 +4,12 @@ import { fetch_mcp_admin_api } from "./fetch";
 
 //
 
+// HACK(douglasduteil): dirty export type
+// waiting for full identity types exports from @gouvfr-lasuite/proconnect.identite
+export * from "@gouvfr-lasuite/proconnect.identite/types";
+
+//
+
 /**
  * @deprecated - use sdk ForceJoinOrganization instead
  */
@@ -31,23 +37,6 @@ export const join_organization: JoinOrganizationHandler = async ({
     },
   });
 };
-
-export async function mark_domain_as_verified({
-  domain,
-  organization_id,
-}: {
-  domain: string;
-  organization_id: number;
-}): Promise<{}> {
-  return fetch_mcp_admin_api({
-    endpoint: "/api/admin/mark-domain-as-verified",
-    method: "POST",
-    searchParams: {
-      domain: String(domain),
-      organization_id: String(organization_id),
-    },
-  });
-}
 
 export async function send_moderation_processed_email({
   organization_id,

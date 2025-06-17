@@ -13,12 +13,12 @@ export async function mark_moderatio_as_rejected({
   pg,
   moderation,
   userinfo,
-  subject,
+  reason,
 }: {
   moderation: get_moderation_dto;
   userinfo: AgentConnect_UserInfo;
   pg: MonComptePro_PgDatabase;
-  subject: string;
+  reason: string;
 }) {
   const { comment, id: moderation_id } = moderation;
   const moderated_by = z_username.parse(userinfo);
@@ -27,7 +27,7 @@ export async function mark_moderatio_as_rejected({
   await update_moderation_by_id(moderation_id, {
     comment: append_comment(comment, {
       created_by: userinfo.email,
-      subject,
+      reason,
       type: "REJECTED",
     }),
     moderated_by,

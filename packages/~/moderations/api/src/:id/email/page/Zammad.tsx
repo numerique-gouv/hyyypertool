@@ -1,8 +1,8 @@
 //
 
 import { callout } from "@~/app.ui/callout";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
-import { OpenInZammad } from "@~/app.ui/zammad/components/OpenInZammad";
+import { LocalTime } from "@~/app.ui/time";
+import { OpenInZammad } from "@~/app.ui/zammad/components";
 import { usePageRequestContext } from "./context";
 import { Message } from "./Message";
 
@@ -43,12 +43,8 @@ function List() {
   return (
     <ul class="list-none">
       <ShowMore />
-      {articles.map((article, index) => (
-        <li
-          class={index === articles.length - 1 ? "last-message" : ""}
-          id={`${article.id}`}
-          key={`${article.id}`}
-        >
+      {articles.map((article) => (
+        <li id={`${article.id}`} key={`${article.id}`}>
           <p class="text-center text-sm font-bold">
             <LocalTime date={article.created_at} />
           </p>

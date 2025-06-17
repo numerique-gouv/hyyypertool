@@ -2,6 +2,7 @@
 
 import { z_username } from "@~/app.core/schema/z_username";
 import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
+import { ToasterContainer } from "@~/app.ui/toast/components";
 import { urls } from "@~/app.urls";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -15,7 +16,7 @@ export function Main_Layout({ children }: PropsWithChildren) {
   const username = z_username.parse(userinfo);
   return (
     <Root_Layout>
-      <div class="flex min-h-full flex-grow flex-col">
+      <div class="flex min-h-full grow flex-col">
         <header role="banner" class="fr-header">
           <div class="fr-header__body">
             <div class="fr-container">
@@ -35,6 +36,7 @@ export function Main_Layout({ children }: PropsWithChildren) {
         </header>
         <div class="relative flex flex-1 flex-col">{children}</div>
       </div>
+      <ToasterContainer />
     </Root_Layout>
   );
 }

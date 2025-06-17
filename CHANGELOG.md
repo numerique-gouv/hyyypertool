@@ -1,5 +1,58 @@
 # Changelog
 
+## [2025.6.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.0...2025.6.1) (2025-06-11)
+
+
+### Bug Fixes
+
+* **moderation:** add sendNotification component ([#919](https://github.com/numerique-gouv/hyyypertool/issues/919)) ([c16c108](https://github.com/numerique-gouv/hyyypertool/commit/c16c108eb2ed56db25281ce1c782da2223830768))
+
+# [2025.6.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.2...2025.6.0) (2025-06-10)
+
+## [2025.5.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.1...2025.5.2) (2025-05-28)
+
+## [2025.5.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.0...2025.5.1) (2025-05-28)
+
+
+### Bug Fixes
+
+* **moderation:** improvement ui ([#897](https://github.com/numerique-gouv/hyyypertool/issues/897)) ([bcf9ad3](https://github.com/numerique-gouv/hyyypertool/commit/bcf9ad3da4b85ffc729a2ca7973b1ced4b17b6e3))
+
+# [2025.5.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.2...2025.5.0) (2025-05-20)
+
+
+### Bug Fixes
+
+* **moderation:** hide the modal if the request is successful ([#879](https://github.com/numerique-gouv/hyyypertool/issues/879)) ([6fcf0a3](https://github.com/numerique-gouv/hyyypertool/commit/6fcf0a3456c35d6a56563afce8072aed52803e4c))
+
+## [2025.4.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.1...2025.4.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* **moderation:** use keydow and change to detect input changes ([#878](https://github.com/numerique-gouv/hyyypertool/issues/878)) ([5e7eaac](https://github.com/numerique-gouv/hyyypertool/commit/5e7eaac6178bd2cd835de56557bfdd85702a6e27))
+
+
+### Features
+
+* **ui:** add toasters ([#877](https://github.com/numerique-gouv/hyyypertool/issues/877)) ([5f3c73f](https://github.com/numerique-gouv/hyyypertool/commit/5f3c73f69e6aa3a71ba3e10e943ae1841d4327a9))
+
+## [2025.4.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.0...2025.4.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* **button:** add type="button" on button to close modal and not submit ([#875](https://github.com/numerique-gouv/hyyypertool/issues/875)) ([57cb658](https://github.com/numerique-gouv/hyyypertool/commit/57cb65850b57345e1ffd990c00b6f76503cf65a0))
+* **moderation:** replace subject by raison in comments ([#864](https://github.com/numerique-gouv/hyyypertool/issues/864)) ([7a17836](https://github.com/numerique-gouv/hyyypertool/commit/7a17836a31f4a8c41de3ebf0d91f435434bf3739))
+
+# [2025.4.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.1...2025.4.0) (2025-04-22)
+
+
+### Features
+
+* **moderation:** design flow 2 💥 ([#832](https://github.com/numerique-gouv/hyyypertool/issues/832)) ([15b9931](https://github.com/numerique-gouv/hyyypertool/commit/15b99310e745f7238eb8be716a18492d91cb758a))
+* **moderations:** add why its rejected ([#846](https://github.com/numerique-gouv/hyyypertool/issues/846)) ([1db1ec7](https://github.com/numerique-gouv/hyyypertool/commit/1db1ec78df6528031383883027dd9e4716e39f49))
+
 ## [2025.3.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.0...2025.3.1) (2025-03-24)
 
 

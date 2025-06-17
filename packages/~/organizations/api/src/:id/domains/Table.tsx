@@ -1,10 +1,10 @@
 //
 
 import { button } from "@~/app.ui/button";
-import { GoogleSearchButton } from "@~/app.ui/button/components/search";
+import { GoogleSearchButton } from "@~/app.ui/button/components";
 import { menu_item } from "@~/app.ui/menu";
-import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { Horizontal_Menu } from "@~/app.ui/menu/components";
+import { LocalTime } from "@~/app.ui/time";
 import { hx_urls } from "@~/app.urls";
 import type { EmailDomain_Type } from "@~/moncomptepro.lib/email_domain";
 import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/moncomptepro.d";
@@ -22,7 +22,7 @@ export function Table() {
   const { describedby } = req.valid("query");
 
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table aria-describedby={describedby}>
         <thead>
           <tr>
@@ -157,7 +157,7 @@ function Row({
           </>
         ) : null}
       </td>
-      <td class="space-x-2 !text-end">
+      <td class="space-x-2 text-end!">
         <GoogleSearchButton
           class={button({ class: "align-bottom", size: "sm" })}
           query={domain}

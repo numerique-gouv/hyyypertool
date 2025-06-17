@@ -2,7 +2,7 @@
 
 import { hyper_ref } from "@~/app.core/html";
 import { hx_trigger_from_body } from "@~/app.core/htmx";
-import { Loader } from "@~/app.ui/loader/Loader";
+import { Loader } from "@~/app.ui/loader";
 import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { usePageRequestContext } from "./context";
@@ -23,8 +23,8 @@ export async function Moderation_Exchanges() {
   });
 
   return (
-    <section>
-      <details>
+    <section id="exchange_moderation">
+      <details id="exchange_details">
         <summary>
           <h2 class="inline-block" id={$describedby}>
             📥️ Échanges entre {moderation.user.given_name} et nous :{" "}

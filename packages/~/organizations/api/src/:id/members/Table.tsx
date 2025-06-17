@@ -3,7 +3,7 @@
 import { hx_include } from "@~/app.core/htmx";
 import { Foot } from "@~/app.ui/hx_table";
 import { menu_item } from "@~/app.ui/menu";
-import { Horizontal_Menu } from "@~/app.ui/menu/components/Horizontal_Menu";
+import { Horizontal_Menu } from "@~/app.ui/menu/components";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
 import {
@@ -35,7 +35,7 @@ export async function Table() {
   };
 
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table aria-describedby={describedby}>
         <thead>
           <tr>
@@ -148,8 +148,7 @@ async function Row_Actions() {
                 user_id: user_id.toString(),
               },
               form: {
-                verification_type:
-                  Verification_Type_Schema.Enum.verified_email_domain,
+                verification_type: Verification_Type_Schema.Enum.domain,
               },
             })}
             hx-swap="none"

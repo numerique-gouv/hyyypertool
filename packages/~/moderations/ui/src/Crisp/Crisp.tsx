@@ -1,8 +1,8 @@
 //
 
 import { callout } from "@~/app.ui/callout";
-import { OpenInCrisp, short_session_id } from "@~/app.ui/links/OpenInCrisp";
-import { LocalTime } from "@~/app.ui/time/LocalTime";
+import { OpenInCrisp, short_session_id } from "@~/app.ui/links";
+import { LocalTime } from "@~/app.ui/time";
 import type { Config } from "@~/crisp.lib/types";
 import { Message } from "@~/crisp.ui/message";
 import type { GetCripsFromSessionIdHandler } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
@@ -53,12 +53,8 @@ function List() {
   return (
     <ul class="list-none">
       <ShowMore />
-      {messages.map((message, index) => (
-        <li
-          class={index === messages.length - 1 ? "last-message" : ""}
-          id={`${message.fingerprint}`}
-          key={`${message.fingerprint}`}
-        >
+      {messages.map((message) => (
+        <li id={`${message.fingerprint}`} key={`${message.fingerprint}`}>
           {match(message.type)
             .with("text", () => (
               <>

@@ -6,7 +6,7 @@ import { hx_include } from "@~/app.core/htmx";
 import { Pagination_Schema } from "@~/app.core/schema";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
-import { Time } from "@~/app.ui/time/LocalTime";
+import { Time } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
 import type { get_organizations_dto } from "@~/organizations.repository/get_organizations_list";
 import { match } from "ts-pattern";
@@ -86,7 +86,7 @@ async function Table() {
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table>
         <thead>
           <tr>
@@ -145,7 +145,7 @@ function Row({
       </td>
       <td>{organization.cached_code_officiel_geographique}</td>
       <td>{organization.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }

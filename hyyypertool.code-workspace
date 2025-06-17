@@ -57,7 +57,7 @@
       "path": "e2e",
     },
     {
-      "name": "root",
+      "name": "/",
       "path": ".",
     },
   ],
@@ -113,7 +113,7 @@
         "args": ["run", "build"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": {
             "NODE_ENV": "development",
           },
@@ -140,7 +140,7 @@
         "args": ["run", "dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": {
             "NODE_ENV": "development",
           },
@@ -157,7 +157,7 @@
         "group": "build",
         "label": "📦 Tailwind Dev",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
@@ -170,7 +170,7 @@
         "group": "build",
         "label": "📦 Types Dev",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
@@ -183,7 +183,7 @@
         "group": "build",
         "label": "📦 Api Urls Dev",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
@@ -195,7 +195,7 @@
         "command": "docker compose up --detach --wait",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "group": "build",
         "runOptions": {
@@ -207,7 +207,7 @@
         "command": "docker compose down --volumes",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "group": "build",
         "runOptions": {
@@ -220,7 +220,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -231,7 +231,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -242,7 +242,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -253,7 +253,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -264,7 +264,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -275,7 +275,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🚥 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -286,7 +286,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🚥 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -297,7 +297,7 @@
         "args": ["run", "database:moncomptepro:migrator"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -311,7 +311,7 @@
         "args": ["run", "database:moncomptepro:seed"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -325,7 +325,7 @@
         "args": ["run", "studio:moncomptepro"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -343,13 +343,13 @@
         "type": "node",
         "request": "launch",
         "program": "bin/src/index.ts",
-        "cwd": "${workspaceFolder:root}",
-        "runtimeExecutable": "${workspaceFolder:root}/node_modules/.bin/tsx",
+        "cwd": "${workspaceFolder:/}",
+        "runtimeExecutable": "${workspaceFolder:/}/node_modules/.bin/tsx",
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
         "skipFiles": [
           "<node_internals>/**",
-          "${workspaceFolder:root}/node_modules/**",
+          "${workspaceFolder:/}/node_modules/**",
         ],
       },
       {
@@ -359,7 +359,7 @@
         "port": 9229,
         "skipFiles": [
           "<node_internals>/**",
-          "${workspaceFolder:root}/node_modules/**",
+          "${workspaceFolder:/}/node_modules/**",
         ],
       },
       {
@@ -375,12 +375,12 @@
         "type": "node",
         "request": "launch",
         "program": "${file}",
-        "runtimeExecutable": "${workspaceFolder:root}/node_modules/.bin/tsx",
+        "runtimeExecutable": "${workspaceFolder:/}/node_modules/.bin/tsx",
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
         "skipFiles": [
           "<node_internals>/**",
-          "${workspaceFolder:root}/node_modules/**",
+          "${workspaceFolder:/}/node_modules/**",
         ],
       },
     ],

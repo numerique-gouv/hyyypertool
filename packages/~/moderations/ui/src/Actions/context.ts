@@ -32,14 +32,9 @@ export const context = createContext<Values>(null as any);
 
 //
 export const reject_context = createContext({
-  $destination: hyper_ref(),
-  $message: hyper_ref(),
-  $object: hyper_ref(),
+  $modal_message: hyper_ref(),
 });
 export const valid_context = createContext({
-  $add_as_external_member: hyper_ref(),
-  $add_as_internal_member: hyper_ref(),
-  $add_domain: hyper_ref(),
   $send_notification: hyper_ref(),
   is_already_internal_member: false,
   is_already_external_member: false,

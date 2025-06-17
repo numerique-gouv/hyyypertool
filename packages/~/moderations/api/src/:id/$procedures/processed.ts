@@ -30,7 +30,7 @@ export default new Hono<
       pg: moncomptepro_pg,
       moderation,
       userinfo,
-      subject: "DUPLICATE",
+      reason: "DUPLICATE",
     });
 
     return text("OK", 200, {

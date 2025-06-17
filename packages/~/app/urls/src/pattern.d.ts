@@ -222,8 +222,8 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         query: {
-                          user_id: string;
                           organization_id: string;
+                          user_id: string;
                         };
                       };
                       output: {};
@@ -264,6 +264,7 @@ declare const app: import("hono/hono-base").HonoBase<
                           } & {
                             form: {
                               message: string;
+                              reason: string;
                               subject: string;
                             };
                           };
@@ -305,6 +306,17 @@ declare const app: import("hono/hono-base").HonoBase<
                               add_member: "AS_INTERNAL" | "AS_EXTERNAL";
                               add_domain?: string | undefined;
                               send_notitfication?: string | undefined;
+                              verification_type?:
+                                | "null"
+                                | "code_sent_to_official_contact_email"
+                                | "in_liste_dirigeants_rna"
+                                | "no_validation_means_available"
+                                | "official_contact_domain"
+                                | "official_contact_email"
+                                | "trackdechets_email_domain"
+                                | "verified_by_coop_mediation_numerique"
+                                | "verified_email_domain"
+                                | undefined;
                             };
                           };
                           output: {};
@@ -643,6 +655,7 @@ declare const app: import("hono/hono-base").HonoBase<
                             };
                           } & {
                             form: {
+                              is_external?: string | undefined;
                               verification_type?:
                                 | ""
                                 | "code_sent_to_official_contact_email"
@@ -654,7 +667,6 @@ declare const app: import("hono/hono-base").HonoBase<
                                 | "verified_by_coop_mediation_numerique"
                                 | "verified_email_domain"
                                 | undefined;
-                              is_external?: string | undefined;
                             };
                           };
                           output: "OK";
@@ -700,28 +712,6 @@ declare const app: import("hono/hono-base").HonoBase<
                     };
                   }),
                 "/members"
-              >
-            | import("hono/types").MergeSchemaPath<
-                | import("hono/types").BlankSchema
-                | import("hono/types").MergeSchemaPath<
-                    {
-                      "/:domain": {
-                        $patch: {
-                          input: {
-                            param: {
-                              id: string;
-                              domain: string;
-                            };
-                          };
-                          output: "OK";
-                          outputFormat: "text";
-                          status: 200;
-                        };
-                      };
-                    },
-                    "/verify"
-                  >,
-                "/$procedures"
               >,
             "/:id"
           >
@@ -730,10 +720,10 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
+                id?: string | undefined;
                 page?: string | undefined;
                 page_size?: string | undefined;
                 q?: string | undefined;
-                id?: string | undefined;
               };
             };
             output: {};

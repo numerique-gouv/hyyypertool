@@ -12,12 +12,12 @@ export async function mark_moderation_as(
   {
     moderation,
     pg,
-    subject,
+    reason,
     userinfo,
   }: {
     moderation: Pick<typeof schema.moderations.$inferSelect, "comment" | "id">;
     pg: MonComptePro_PgDatabase;
-    subject: string;
+    reason: string;
     userinfo: AgentConnect_UserInfo;
   },
   type: Comment_Type["type"],
@@ -30,7 +30,7 @@ export async function mark_moderation_as(
   await update_moderation_by_id(moderation_id, {
     comment: append_comment(comment, {
       created_by: userinfo.email,
-      subject,
+      reason,
       type,
     }),
     moderated_by,
