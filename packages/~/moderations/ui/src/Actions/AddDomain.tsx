@@ -14,7 +14,7 @@ export function AddDomain(props: { mailType: string }) {
         type="checkbox"
         value="true"
       />
-      <label class="fr-label fr-hint-text flex-row!" for={id}>
+      <label for={id}>
         J’autorise le domaine <b class="mx-1">{domain}</b> en {props.mailType} à
         l'organisation
       </label>
