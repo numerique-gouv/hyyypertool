@@ -5,15 +5,20 @@ import {
 } from "@~/moncomptepro.lib/verification_type";
 
 const verificationType: Array<[Verification_Type, string]> = [
-  [
-    Verification_Type_Schema.enum.in_liste_dirigeants_rna,
-    "Liste des dirigeants",
-  ],
   [Verification_Type_Schema.enum.official_contact_email, "Mail officiel"],
   [
-    Verification_Type_Schema.enum.no_validation_means_available,
-    "No validation means available",
+    Verification_Type_Schema.enum.in_liste_dirigeants_rna,
+    "Liste des dirigeants RNA",
   ],
+  [
+    Verification_Type_Schema.enum.in_liste_dirigeants_rne,
+    "Liste des dirigeants RNE",
+  ],
+  [
+    Verification_Type_Schema.enum.imported_from_coop_mediation_numerique,
+    "Coop",
+  ],
+  [Verification_Type_Schema.enum.proof_received, "Justificatif transmis"],
 ];
 
 export function TagInput() {
