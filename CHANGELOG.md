@@ -1,5 +1,18 @@
 # Changelog
 
+## [2025.6.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.1...2025.6.2) (2025-06-17)
+
+
+### Bug Fixes
+
+* **app:** redirect_uri missmatch issue ([#927](https://github.com/numerique-gouv/hyyypertool/issues/927)) ([f99b009](https://github.com/numerique-gouv/hyyypertool/commit/f99b009e1bba27175c4a300d64eaa777049bf540))
+* **readme:** fix error in doc links ([#923](https://github.com/numerique-gouv/hyyypertool/issues/923)) ([5d0c1c5](https://github.com/numerique-gouv/hyyypertool/commit/5d0c1c51185227e500df1f3cd67156c41e2b981d))
+
+
+### Features
+
+* **moderation:** add new verification type ([#937](https://github.com/numerique-gouv/hyyypertool/issues/937)) ([2334540](https://github.com/numerique-gouv/hyyypertool/commit/2334540210204aedcaeb9dd50512a7d8f431920b))
+
 ## [2025.6.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.0...2025.6.1) (2025-06-11)
 
 
