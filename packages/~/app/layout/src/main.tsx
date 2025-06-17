@@ -135,7 +135,7 @@ function Nav() {
             href={urls.organizations.domains.$url().pathname}
             target="_self"
           >
-            Domaines à verifier
+            Domaines à vérifier
           </a>
         </li>
       </ul>
