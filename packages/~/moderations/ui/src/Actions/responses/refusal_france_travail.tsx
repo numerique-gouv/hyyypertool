@@ -4,7 +4,7 @@ import { useContext } from "hono/jsx";
 import { dedent } from "ts-dedent";
 import { context } from "../context";
 
-export const label = "Refus Agent France Travail - FI sur PCF";
+export const label = "Agent France Travail - FI sur PCF";
 
 export default function template() {
   const {
