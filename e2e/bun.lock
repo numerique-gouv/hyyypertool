@@ -3,7 +3,7 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "@badeball/cypress-cucumber-preprocessor": "22.1.0",
+        "@badeball/cypress-cucumber-preprocessor": "22.2.0",
         "@bahmutov/cypress-esbuild-preprocessor": "2.2.5",
         "@testing-library/cypress": "^10.0.3",
         "cypress": "14.4.1",
@@ -62,7 +62,7 @@
 
     "@babel/types": ["@babel/types@7.25.6", "", { "dependencies": { "@babel/helper-string-parser": "^7.24.8", "@babel/helper-validator-identifier": "^7.24.7", "to-fast-properties": "^2.0.0" } }, "sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw=="],
 
-    "@badeball/cypress-cucumber-preprocessor": ["@badeball/cypress-cucumber-preprocessor@22.1.0", "", { "dependencies": { "@cucumber/ci-environment": "^10.0.1", "@cucumber/cucumber": "^11.0.0", "@cucumber/cucumber-expressions": "^18.0.0", "@cucumber/gherkin": "^32.0.0", "@cucumber/html-formatter": "^21.7.0", "@cucumber/message-streams": "^4.0.1", "@cucumber/messages": "^27.0.0", "@cucumber/pretty-formatter": "^1.0.1", "@cucumber/tag-expressions": "^6.1.0", "base64-js": "^1.5.1", "chalk": "^4.1.2", "cli-table": "^0.3.11", "common-ancestor-path": "^1.0.1", "cosmiconfig": "^9.0.0", "debug": "^4.3.6", "error-stack-parser": "^2.1.4", "find-cypress-specs": "^1.45.2", "glob": "^10.4.5", "mocha": "^11.0.0", "seedrandom": "^3.0.5", "source-map": "^0.6.1", "split": "^1.0.1", "uuid": "^10.0.0" }, "peerDependencies": { "cypress": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0" }, "bin": { "cucumber-html-formatter": "dist/bin/cucumber-html-formatter.js", "cucumber-json-formatter": "dist/bin/cucumber-json-formatter.js", "cucumber-merge-messages": "dist/bin/cucumber-merge-messages.js" } }, "sha512-6hZdi7krImbUKp8lVqwMcW5cGxMmyZahPpkWL5D3wfTYRRhVgeOx9Y7liyCqKcOZkyCoufJEx8iGtTNYKiR3SQ=="],
+    "@badeball/cypress-cucumber-preprocessor": ["@badeball/cypress-cucumber-preprocessor@22.2.0", "", { "dependencies": { "@cucumber/ci-environment": "^10.0.1", "@cucumber/cucumber": "^11.0.0", "@cucumber/cucumber-expressions": "^18.0.0", "@cucumber/gherkin": "^32.0.0", "@cucumber/html-formatter": "^21.7.0", "@cucumber/message-streams": "^4.0.1", "@cucumber/messages": "^27.0.0", "@cucumber/pretty-formatter": "^1.0.1", "@cucumber/tag-expressions": "^6.1.0", "base64-js": "^1.5.1", "chalk": "^4.1.2", "cli-table": "^0.3.11", "common-ancestor-path": "^1.0.1", "cosmiconfig": "^9.0.0", "debug": "^4.3.6", "error-stack-parser": "^2.1.4", "find-cypress-specs": "^1.45.2", "glob": "^10.4.5", "mocha": "^11.0.0", "seedrandom": "^3.0.5", "source-map": "^0.6.1", "split": "^1.0.1", "uuid": "^10.0.0" }, "peerDependencies": { "cypress": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0" }, "bin": { "cucumber-html-formatter": "dist/bin/cucumber-html-formatter.js", "cucumber-json-formatter": "dist/bin/cucumber-json-formatter.js", "cucumber-merge-messages": "dist/bin/cucumber-merge-messages.js" } }, "sha512-od4a1k5VeptXSr1AI2gi5iHMmrKQhwXeLouiuv1yF6Th/FoDstaukdPy6lvwqAuEgb4wx0H1eFVi5/rlSD+1pA=="],
 
     "@bahmutov/cypress-esbuild-preprocessor": ["@bahmutov/cypress-esbuild-preprocessor@2.2.5", "", { "dependencies": { "debug": "4.4.1" }, "peerDependencies": { "esbuild": ">=0.17.0" } }, "sha512-T8jugcaKdK3G470eWTo9fxeLXupnlTHLdWrjcfWuFM9spkHrASkiG20IpmAKiSPUjeXU0+A1EDssD48XMMxaKg=="],
 
