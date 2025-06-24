@@ -27,7 +27,7 @@
     "htmx.ext...chunked-transfer": "2.1.0",
     "htmx.org": "1.9.12",
     "hyperscript.org": "0.9.14",
-    "ts-pattern": "5.7.0",
+    "ts-pattern": "5.7.1",
     "youch": "3.3.4"
   },
   "devDependencies": {
