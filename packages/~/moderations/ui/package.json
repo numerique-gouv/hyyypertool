@@ -22,7 +22,7 @@
     "@~/organizations.lib": "workspace:*",
     "@~/users.lib": "workspace:*",
     "hono": "4.8.2",
-    "tailwind-variants": "0.3.1",
+    "tailwind-variants": "1.0.0",
     "ts-pattern": "5.7.1"
   },
   "devDependencies": {
