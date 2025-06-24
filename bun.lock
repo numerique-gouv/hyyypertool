@@ -9,7 +9,7 @@
         "@~/app.core": "workspace:*",
         "consola": "3.4.2",
         "dotenv": "16.5.0",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "tsx": "4.19.3",
       },
       "devDependencies": {
@@ -31,7 +31,7 @@
       "name": "hono-slotify",
       "version": "1.0.0",
       "dependencies": {
-        "hono": "4.7.11",
+        "hono": "4.8.2",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -55,7 +55,7 @@
         "await-to-js": "3.0.0",
         "consola": "3.4.2",
         "drizzle-orm": "0.41.0",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "htmx.ext...chunked-transfer": "2.1.0",
         "htmx.org": "1.9.12",
         "hyperscript.org": "0.9.14",
@@ -87,7 +87,7 @@
         "@~/app.middleware": "workspace:*",
         "@~/app.ui": "workspace:*",
         "@~/app.urls": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "nprogress": "0.2.0",
       },
       "devDependencies": {
@@ -105,7 +105,7 @@
         "@~/app.urls": "workspace:*",
         "@~/moncomptepro.database": "workspace:*",
         "@~/moncomptepro.lib": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "hono-sessions": "0.7.2",
         "openid-client": "6.5.1",
       },
@@ -121,7 +121,7 @@
         "@sentry/profiling-node": "9.31.0",
         "@~/app.core": "workspace:*",
         "consola": "3.4.2",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -133,7 +133,7 @@
       "dependencies": {
         "@~/app.core": "workspace:*",
         "@~/app.urls": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "hono-slotify": "workspace:*",
         "tailwind-variants": "0.3.1",
       },
@@ -148,7 +148,7 @@
       "version": "1.0.0",
       "dependencies": {
         "consola": "3.4.2",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "static-path": "0.0.4",
       },
       "devDependencies": {
@@ -162,7 +162,7 @@
         "@~/app.core": "workspace:*",
         "@~/app.middleware": "workspace:*",
         "@~/app.urls": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "openid-client": "6.5.1",
         "zod": "3.25.64",
       },
@@ -194,7 +194,7 @@
         "@tsconfig/bun": "1.0.7",
         "@tsconfig/strictest": "2.0.5",
         "@types/bun": "1.2.16",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
       },
     },
     "packages/~/infra/crisp/lib": {
@@ -214,7 +214,7 @@
       "name": "@~/crisp.middleware",
       "version": "1.0.0",
       "dependencies": {
-        "hono": "4.7.11",
+        "hono": "4.8.2",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -246,7 +246,7 @@
         "@~/moncomptepro.lib": "workspace:*",
         "consola": "3.4.2",
         "drizzle-orm": "0.41.0",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "pg": "8.16.2",
       },
       "devDependencies": {
@@ -280,7 +280,7 @@
         "@hono/zod-validator": "0.7.0",
         "@~/app.core": "workspace:*",
         "@~/zammad.lib": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
       },
@@ -322,7 +322,7 @@
         "@~/zammad.lib": "workspace:*",
         "await-to-js": "3.0.0",
         "drizzle-orm": "0.41.0",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.7.1",
@@ -371,7 +371,7 @@
         "@~/moderations.lib": "workspace:*",
         "@~/organizations.lib": "workspace:*",
         "@~/users.lib": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "tailwind-variants": "0.3.1",
         "ts-pattern": "5.7.1",
       },
@@ -392,7 +392,7 @@
         "@~/organizations.repository": "workspace:*",
         "@~/organizations.ui": "workspace:*",
         "@~/users.repository": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "lodash.sortby": "4.7.0",
         "tailwind-variants": "0.3.1",
         "ts-pattern": "5.7.1",
@@ -438,7 +438,7 @@
         "@~/app.ui": "workspace:*",
         "@~/app.urls": "workspace:*",
         "@~/organizations.lib": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "tailwind-variants": "0.3.1",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
@@ -451,7 +451,7 @@
       "name": "@~/proxy.api",
       "version": "1.0.0",
       "dependencies": {
-        "hono": "4.7.11",
+        "hono": "4.8.2",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -468,7 +468,7 @@
         "@~/moderations.repository": "workspace:*",
         "@~/organizations.repository": "workspace:*",
         "@~/users.repository": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
       },
@@ -509,7 +509,7 @@
         "@~/moderations.lib": "workspace:*",
         "@~/organizations.lib": "workspace:*",
         "@~/users.lib": "workspace:*",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "tailwind-variants": "0.3.1",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.7.1",
@@ -529,7 +529,7 @@
         "@~/app.middleware": "workspace:*",
         "@~/app.urls": "workspace:*",
         "animate.css": "4.1.1",
-        "hono": "4.7.11",
+        "hono": "4.8.2",
         "lit": "3.3.0",
         "openid-client": "6.5.1",
       },
@@ -539,7 +539,7 @@
     },
   },
   "overrides": {
-    "hono": "4.7.11",
+    "hono": "4.8.2",
     "zod": "3.24.1",
   },
   "packages": {
@@ -1347,7 +1347,7 @@
 
     "he": ["he@1.2.0", "", { "bin": { "he": "bin/he" } }, "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw=="],
 
-    "hono": ["hono@4.7.11", "", {}, "sha512-rv0JMwC0KALbbmwJDEnxvQCeJh+xbS3KEWW5PC9cMJ08Ur9xgatI0HmtgYZfOdOSOeYsp5LO2cOhdI8cLEbDEQ=="],
+    "hono": ["hono@4.8.2", "", {}, "sha512-hM+1RIn9PK1I6SiTNS6/y7O1mvg88awYLFEuEtoiMtRyT3SD2iu9pSFgbBXT3b1Ua4IwzvSTLvwO0SEhDxCi4w=="],
 
     "hono-sessions": ["hono-sessions@0.7.2", "", { "dependencies": { "hono": "^4.0.0", "iron-webcrypto": "^1.2.1" } }, "sha512-QuoDqovzibnIYK0E3G7Pfoe63mYsyY8WgR1wmAuRDWpxpIglDVxShBn4VveFC+VGZummY407XeImoJhUpGcJMg=="],
 
