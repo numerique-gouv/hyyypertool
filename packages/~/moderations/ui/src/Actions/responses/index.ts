@@ -1,6 +1,6 @@
 //
 
-import * as accountant from "./accountant";
+import * as refusal_interieur_gouv from "./refusal_interieur_gouv";
 import * as admin_centrale from "./admin_centrale";
 import * as agent_comcom_comaglo from "./agent_comcom_comaglo";
 import * as agent_comcom_to_commune from "./agent_comcom_to_commune";
@@ -41,7 +41,7 @@ import * as user_with_existing_pc_account from "./user_with_existing_pc_account"
 export const reponse_templates = [
   use_official_email,
   contractors,
-  accountant,
+  refusal_interieur_gouv,
   enseignement_agricole,
   missing_name,
   first_and_last_name_inversion,
