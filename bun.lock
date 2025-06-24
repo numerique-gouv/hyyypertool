@@ -57,7 +57,7 @@
         "drizzle-orm": "0.41.0",
         "hono": "4.8.2",
         "htmx.ext...chunked-transfer": "2.1.0",
-        "htmx.org": "1.9.12",
+        "htmx.org": "2.0.5",
         "hyperscript.org": "0.9.14",
         "ts-pattern": "5.7.1",
         "youch": "3.3.4",
@@ -1359,7 +1359,7 @@
 
     "htmx.ext...chunked-transfer": ["htmx.ext...chunked-transfer@2.1.0", "", {}, "sha512-b3o+gZS2EH8XTgct+gE8iw3i761jttj1vz1PQev3cho+Fr2Q3cDX9u8/Z7Tv5FxZljgx3hlDxHeOO0pWWOOXnw=="],
 
-    "htmx.org": ["htmx.org@1.9.12", "", {}, "sha512-VZAohXyF7xPGS52IM8d1T1283y+X4D+Owf3qY1NZ9RuBypyu9l8cGsxUMAG5fEAb/DhT7rDoJ9Hpu5/HxFD3cw=="],
+    "htmx.org": ["htmx.org@2.0.5", "", {}, "sha512-ocgvtHCShWFW0DvSV1NbJC7Y5EzUMy2eo5zeWvGj2Ac4LOr7sv9YKg4jzCZJdXN21fXACmCViwKSy+cm6i2dWQ=="],
 
     "http-proxy-agent": ["http-proxy-agent@7.0.2", "", { "dependencies": { "agent-base": "^7.1.0", "debug": "^4.3.4" } }, "sha512-T1gkAiYYDWYx3V5Bmyu7HcfcvL7mUrTWiM6yOfa3PIphViJ/gFPbvidQ+veqSOHci/PxBcDabeUNCzpOODJZig=="],
 
