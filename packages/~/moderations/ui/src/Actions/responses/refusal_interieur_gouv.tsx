@@ -16,7 +16,7 @@ export default function template() {
   return dedent`
     Bonjour,
 
-    Nous avons bien reçu votre demande de rattachement à l'organisation « `${organization_name}` » sur ProConnect.
+    Nous avons bien reçu votre demande de rattachement à l'organisation « ${organization_name} » sur ProConnect.
 
     Pour des raisons de sécurité, il ne vous est pas possible de créer directement un compte sur ProConnect. Vous devez impérativement passer par votre Portail d’authentification CALYPSSO ou PASSAGE2 pour vous connecter.
     Pour y accéder via ProConnect, voici les étapes à suivre :
