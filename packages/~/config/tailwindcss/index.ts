@@ -1,12 +1,11 @@
 //
 
 import tailwindcss_typography from "@tailwindcss/typography";
-import { withTV } from "tailwind-variants/transformer";
 import plugin from "tailwindcss/plugin";
 
 //
 
-export default withTV({
+export default {
   content: [],
   theme: {
     extend: {},
@@ -21,4 +20,4 @@ export default withTV({
       addVariant("htmx-added", ["&.htmx-added", ".htmx-added &"]);
     }),
   ],
-});
+};
