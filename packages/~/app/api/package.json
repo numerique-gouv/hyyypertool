@@ -19,7 +19,7 @@
     "@~/users.api": "workspace:*",
     "@~/welcome.api": "workspace:*",
     "@hono/node-server": "1.14.4",
-    "@hono/sentry": "1.2.1",
+    "@hono/sentry": "1.2.2",
     "await-to-js": "3.0.0",
     "consola": "3.4.2",
     "drizzle-orm": "0.41.0",
