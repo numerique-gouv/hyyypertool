@@ -22,7 +22,7 @@
     "@hono/sentry": "1.2.2",
     "await-to-js": "3.0.0",
     "consola": "3.4.2",
-    "drizzle-orm": "0.41.0",
+    "drizzle-orm": "0.44.2",
     "hono": "4.8.2",
     "htmx.ext...chunked-transfer": "2.1.0",
     "htmx.org": "1.9.12",
