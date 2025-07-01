@@ -135,7 +135,7 @@
         "@~/app.urls": "workspace:*",
         "hono": "4.8.2",
         "hono-slotify": "workspace:*",
-        "tailwind-variants": "0.3.1",
+        "tailwind-variants": "1.0.0",
       },
       "devDependencies": {
         "@~/config.happydom": "workspace:*",
@@ -323,7 +323,7 @@
         "await-to-js": "3.0.0",
         "drizzle-orm": "0.41.0",
         "hono": "4.8.2",
-        "tailwind-variants": "0.3.1",
+        "tailwind-variants": "1.0.0",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
@@ -372,7 +372,7 @@
         "@~/organizations.lib": "workspace:*",
         "@~/users.lib": "workspace:*",
         "hono": "4.8.2",
-        "tailwind-variants": "0.3.1",
+        "tailwind-variants": "1.0.0",
         "ts-pattern": "5.7.1",
       },
       "devDependencies": {
@@ -394,7 +394,7 @@
         "@~/users.repository": "workspace:*",
         "hono": "4.8.2",
         "lodash.sortby": "4.7.0",
-        "tailwind-variants": "0.3.1",
+        "tailwind-variants": "1.0.0",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
       },
@@ -439,7 +439,7 @@
         "@~/app.urls": "workspace:*",
         "@~/organizations.lib": "workspace:*",
         "hono": "4.8.2",
-        "tailwind-variants": "0.3.1",
+        "tailwind-variants": "1.0.0",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
       },
@@ -510,7 +510,7 @@
         "@~/organizations.lib": "workspace:*",
         "@~/users.lib": "workspace:*",
         "hono": "4.8.2",
-        "tailwind-variants": "0.3.1",
+        "tailwind-variants": "1.0.0",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.7.1",
       },
@@ -1843,9 +1843,9 @@
 
     "supports-preserve-symlinks-flag": ["supports-preserve-symlinks-flag@1.0.0", "", {}, "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="],
 
-    "tailwind-merge": ["tailwind-merge@2.5.4", "", {}, "sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q=="],
+    "tailwind-merge": ["tailwind-merge@3.0.2", "", {}, "sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw=="],
 
-    "tailwind-variants": ["tailwind-variants@0.3.1", "", { "dependencies": { "tailwind-merge": "2.5.4" }, "peerDependencies": { "tailwindcss": "*" } }, "sha512-krn67M3FpPwElg4FsZrOQd0U26o7UDH/QOkK8RNaiCCrr052f6YJPBUfNKnPo/s/xRzNPtv1Mldlxsg8Tb46BQ=="],
+    "tailwind-variants": ["tailwind-variants@1.0.0", "", { "dependencies": { "tailwind-merge": "3.0.2" }, "peerDependencies": { "tailwindcss": "*" } }, "sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA=="],
 
     "tailwindcss": ["tailwindcss@4.1.11", "", {}, "sha512-2E9TBm6MDD/xKYe+dvJZAmg3yxIEDNRc0jwlNyDg/4Fil2QcSLjFKGVff0lAf1jjeaArlG/M75Ey/EYr/OJtBA=="],
 
@@ -2021,8 +2021,6 @@
 
     "@types/tedious/@types/node": ["@types/node@24.0.1", "", { "dependencies": { "undici-types": "~7.8.0" } }, "sha512-MX4Zioh39chHlDJbKmEgydJDS3tspMP/lnQC67G3SWsTnb9NeYVWOjkxpOSy4oMfPs4StcWHwBrvUb4ybfnuaw=="],
 
-    "@~/config.tailwindcss/tailwind-variants": ["tailwind-variants@1.0.0", "", { "dependencies": { "tailwind-merge": "3.0.2" }, "peerDependencies": { "tailwindcss": "*" } }, "sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA=="],
-
     "ansi-escapes/type-fest": ["type-fest@0.21.3", "", {}, "sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w=="],
 
     "anymatch/picomatch": ["picomatch@2.3.1", "", {}, "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="],
@@ -2164,8 +2162,6 @@
     "@types/serve-static/@types/node/undici-types": ["undici-types@7.8.0", "", {}, "sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw=="],
 
     "@types/tedious/@types/node/undici-types": ["undici-types@7.8.0", "", {}, "sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw=="],
-
-    "@~/config.tailwindcss/tailwind-variants/tailwind-merge": ["tailwind-merge@3.0.2", "", {}, "sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw=="],
 
     "bun-types/@types/node/undici-types": ["undici-types@7.8.0", "", {}, "sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw=="],
 
