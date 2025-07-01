@@ -1,7 +1,6 @@
 //
 
 import { expect, test } from "bun:test";
-import "htmx.org";
 import _hyperscript from "hyperscript.org";
 import "hyperscript.org/src/hdb";
 import { hide_on_click_elsewere } from "./hide_on_click_elsewere";
