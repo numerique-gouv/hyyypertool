@@ -4,6 +4,7 @@ Fonctionnalité: Moderation blockante à accepter
   Contexte: Jean Bon veut rejoindre l'organisation « Abracadabra »
     Soit une base de données nourrie au grain
     * un server faut server "identite.proconnect.gouv.fr"
+    * je reinitialise le contexte
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "ProConnect"
@@ -55,6 +56,7 @@ Fonctionnalité: Moderation blockante à accepter
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de validation"
     Quand je clique sur "Terminer"
+    * je reinitialise le contexte
     * je vois "Cette modération a été marqué comme traitée le"
     * je vois "Validé par user@yopmail.com"
 

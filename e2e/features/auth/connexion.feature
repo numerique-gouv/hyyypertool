@@ -7,21 +7,21 @@ Fonctionnalité: Connexion d'un utilisateur
 
   Scénario: Connexion de user@yopmail.com
     Etant donné que je suis sur la page "/"
-    Alors je dois voir le texte "Bonjour Hyyypertool !"
-    Quand je clique sur le bouton nommé "ProConnect"
+    Alors je vois "Bonjour Hyyypertool !"
+    Quand je clique sur le bouton "ProConnect"
 
     Alors je suis redirigé vers "/moderations"
-    Et je dois voir le texte "Jean User"
-    Et je dois voir le texte "Hyyypertool"
+    Et je vois "Jean User"
+    Et je vois "Hyyypertool"
 
-    Quand je clique sur le lien nommé "Utilisateurs"
+    Quand je clique sur "Utilisateurs"
     Alors je suis redirigé vers "/users"
-    Et je dois voir le texte "Liste des utilisateurs"
+    Et je vois "Liste des utilisateurs"
 
-    Quand je clique sur le lien nommé "Organisations"
+    Quand je clique sur "Organisations"
     Alors je suis redirigé vers "/organizations"
-    Et je dois voir le texte "Liste des organisations"
+    Et je vois "Liste des organisations"
 
-    Quand je clique sur le lien nommé "Moderations"
+    Quand je clique sur "Moderations"
     Alors je suis redirigé vers "/moderations"
-    Et je dois voir le texte "Liste des moderations"
+    Et je vois "Liste des moderations"

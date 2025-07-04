@@ -5,7 +5,7 @@
 
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
-import { get_within_context } from "./uvv";
+import { get_within_context, set_within_context } from "./uvv";
 
 //
 
@@ -156,4 +156,96 @@ Then(
 
 When("je reviens en avant", () => {
   cy.go(1);
+});
+
+//
+// Domain-specific step definitions for Hyyypertool
+//
+
+// Enhanced table interactions (project-specific)
+Given("je consulte la ligne contenant {string}", (text: string) => {
+  cy.contains("td", text).parent("tr").as("current-row");
+});
+
+When("sur la ligne sélectionnée je clique sur {string}", (text: string) => {
+  cy.get("@current-row").contains(text).click();
+});
+
+Then("sur la ligne sélectionnée je vois {string}", (text: string) => {
+  cy.get("@current-row").contains(text).should("be.visible");
+});
+
+When("je consulte le tableau {string}", (title: string) => {
+  cy.contains(title)
+    .invoke("attr", "id")
+    .then((id) => {
+      cy.get(`[aria-describedby="${id}"]`).as("current-table");
+    });
+});
+
+Then("le tableau sélectionné est vide", () => {
+  cy.get("@current-table").within(() =>
+    cy.get("tbody > tr").should("have.length", 0),
+  );
+});
+
+Then("je vois {int} lignes dans le tableau sélectionné", (count: number) => {
+  cy.get("@current-table").find("tbody > tr").should("have.length", count);
+});
+
+When("dans le tableau sélectionné je clique sur {string}", (text: string) => {
+  cy.get("@current-table").contains(text).click();
+});
+
+// Modal/Dialog interactions (application-specific)
+When("j'ouvre le dialogue {string}", (title: string) => {
+  cy.findAllByLabelText(title).as("current-dialog");
+  set_within_context(() => cy.get("@current-dialog"));
+});
+
+When("je ferme le dialogue", () => {
+  set_within_context(() => cy.get("body"));
+});
+
+When("je confirme l'action via le dialogue", () => {
+  get_within_context().within(() => {
+    cy.contains("button", /Confirmer|Valider|OK|Oui/).click();
+  });
+});
+
+When("j'annule l'action via le dialogue", () => {
+  get_within_context().within(() => {
+    cy.contains("button", /Annuler|Non|Fermer/).click();
+  });
+});
+
+// Organization workflow patterns (Hyyypertool specific)
+When("j'accepte la demande d'adhésion", () => {
+  cy.contains("✅ Accepter").click();
+});
+
+When("je refuse la demande d'adhésion", () => {
+  cy.contains("❌ Refuser").click();
+});
+
+When("j'autorise le domaine {string} en interne", (domain: string) => {
+  cy.contains(
+    `J'autorise le domaine ${domain} en interne à l'organisation`,
+  ).click();
+});
+
+When("j'ajoute l'utilisateur en tant qu'interne", () => {
+  cy.contains("Ajouter").contains("EN TANT QU'INTERNE").click();
+});
+
+When("j'ajoute l'utilisateur en tant qu'externe", () => {
+  cy.contains("Ajouter").contains("EN TANT QU'EXTERNE").click();
+});
+
+When("je termine la modération", () => {
+  cy.contains("Terminer").click();
+});
+
+When("je retraite la modération", () => {
+  cy.contains("Retraiter").click();
 });

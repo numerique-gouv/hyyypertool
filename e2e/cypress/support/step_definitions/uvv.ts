@@ -20,25 +20,56 @@ import "@testing-library/cypress/add-commands";
  */
 export let get_within_context: () => Cypress.Chainable<JQuery<HTMLElement>>;
 
+/**
+ * Sets the current context for domain-specific step definitions
+ */
+export const set_within_context = (context: () => Cypress.Chainable<JQuery<HTMLElement>>) => {
+  get_within_context = context;
+};
+
 Before(() => {
   get_within_context = () => cy.get("body");
 });
 
-//
-
+// Context management
 Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
   get_within_context = () => cy.findAllByLabelText(text);
 });
 
-Given("je vais à l'intérieur de la section nommé {string}", (text: string) => {
-  get_within_context = () => cy.findAllByLabelText(text);
+Given("je vais à l'intérieur du tableau {string}", (title: string) => {
+  cy.contains(title)
+    .invoke("attr", "id")
+    .then((id) => {
+      get_within_context = () => cy.get(`[aria-describedby="${id}"]`);
+    });
+});
+
+Given("je vais à l'intérieur de la ligne contenant {string}", (text: string) => {
+  cy.contains("td", text).parent("tr").as("current-row");
+  get_within_context = () => cy.get("@current-row");
 });
 
 Given("je reinitialise le contexte", () => {
   get_within_context = () => cy.get("body");
 });
 
-//
+// Navigation
+Given("je suis sur la page {string}", (path: string) => {
+  cy.visit(path);
+});
+
+Given("je navigue sur la page", () => {
+  cy.visit("/");
+});
+
+// Actions
+When("je clique sur {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).click());
+});
+
+When("je clique sur le bouton {string}", (text: string) => {
+  cy.contains("button", text).click({ force: true });
+});
 
 When("je clique sur le bouton nommé {string}", (text: string) => {
   get_within_context().within(() => cy.contains("button", text).click());
@@ -48,116 +79,12 @@ When("je clique sur le lien nommé {string}", (text: string) => {
   get_within_context().within(() => cy.contains("a", text).click());
 });
 
-//
-
-Then("je dois voir un élément qui contient {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("be.visible"));
-});
-
-Then("je dois voir le texte {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("be.visible"));
-});
-
-Then("je ne dois pas voir le texte {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("not.exist"));
-});
-
-Then("je vois le texte {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("be.visible"));
-});
-
-Then("je vois {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("be.visible"));
-});
-
-Then("je ne vois pas {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("not.exist"));
-});
-
-//
-
 When("je saisie {string} dans le champ nommé {string}", (text: string, name: string) => {
   get_within_context().within(() => cy.findByLabelText(name).type(text));
 });
 
 When("je saisie le mot {string} dans la boîte à texte nommée {string}", (text: string, name: string) => {
   get_within_context().within(() => cy.get(`input[placeholder="${name}"]`).type(text));
-});
-
-When("je clique sur l'élément contenant {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).click());
-});
-
-When("je clique sur {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).click());
-});
-
-//
-
-Given("je suis sur la page {string}", (path: string) => {
-  cy.visit(path);
-});
-
-Given("je navigue sur la page", () => {
-  cy.visit("/");
-});
-
-When("je suis redirigé vers {string}", (path: string) => {
-  cy.url().should("contain", path);
-});
-
-Then("je suis redirigé sur {string}", (path: string) => {
-  cy.url().should("contain", path);
-});
-
-//
-
-When("je sélectionne {string} dans la liste déroulante nommée {string}", (option: string, name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).select(option));
-});
-
-When("je coche la case nommée {string}", (name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).check());
-});
-
-When("je décoche la case nommée {string}", (name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).uncheck());
-});
-
-//
-
-Then("je dois voir un bouton nommé {string}", (text: string) => {
-  get_within_context().within(() => cy.contains("button", text).should("be.visible"));
-});
-
-Then("je dois voir un lien nommé {string}", (text: string) => {
-  get_within_context().within(() => cy.contains("a", text).should("be.visible"));
-});
-
-Then("je dois voir un champ nommé {string}", (name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).should("be.visible"));
-});
-
-Then("le champ nommé {string} doit contenir {string}", (name: string, value: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).should("have.value", value));
-});
-
-Then("le champ nommé {string} doit être vide", (name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).should("have.value", ""));
-});
-
-Then("le champ nommé {string} doit être désactivé", (name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).should("be.disabled"));
-});
-
-Then("le champ nommé {string} doit être activé", (name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).should("be.enabled"));
-});
-
-//
-
-When("je clique sur le bouton {string}", (text: string) => {
-  cy.contains("button", text).click({ force: true });
 });
 
 When("je tape {string}", (text: string) => {
@@ -167,3 +94,37 @@ When("je tape {string}", (text: string) => {
 When("je retire le focus", () => {
   cy.focused().blur();
 });
+
+// Assertions
+Then("je vois {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).should("be.visible"));
+});
+
+Then("je dois voir le texte {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).should("be.visible"));
+});
+
+Then("je ne vois pas {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).should("not.exist"));
+});
+
+Then("je suis redirigé vers {string}", (path: string) => {
+  cy.url().should("contain", path);
+});
+
+Then("je suis redirigé sur {string}", (path: string) => {
+  cy.url().should("contain", path);
+});
+
+Then("je ne vois aucun élément", () => {
+  get_within_context().within(() => 
+    cy.get("tbody > tr, .empty-state, [data-empty]").should("have.length", 0)
+  );
+});
+
+Then("je vois {int} éléments", (count: number) => {
+  get_within_context().within(() => 
+    cy.get("tbody > tr, [data-item], .list-item").should("have.length", count)
+  );
+});
+
