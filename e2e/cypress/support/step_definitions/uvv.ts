@@ -66,6 +66,10 @@ Then("je vois le texte {string}", (text: string) => {
   get_within_context().within(() => cy.contains(text).should("be.visible"));
 });
 
+Then("je vois {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).should("be.visible"));
+});
+
 //
 
 When("je saisie {string} dans le champ nommé {string}", (text: string, name: string) => {
@@ -73,6 +77,10 @@ When("je saisie {string} dans le champ nommé {string}", (text: string, name: st
 });
 
 When("je clique sur l'élément contenant {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).click());
+});
+
+When("je clique sur {string}", (text: string) => {
   get_within_context().within(() => cy.contains(text).click());
 });
 
@@ -87,6 +95,10 @@ Given("je navigue sur la page", () => {
 });
 
 When("je suis redirigé vers {string}", (path: string) => {
+  cy.url().should("contain", path);
+});
+
+Then("je suis redirigé sur {string}", (path: string) => {
   cy.url().should("contain", path);
 });
 

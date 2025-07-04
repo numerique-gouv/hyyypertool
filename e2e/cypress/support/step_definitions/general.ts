@@ -1,4 +1,8 @@
 //
+// Sentence description heavily inspired by UVV
+// https://e2e-test-quest.github.io/uuv/fr/docs/wordings/generated-wording-description/fr-generated-wording-description/
+//
+
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
 import { get_within_context } from "./uvv";
@@ -11,9 +15,7 @@ let row_scope: string;
 
 //
 
-Given("je navigue sur la page", () => {
-  cy.visit("/");
-});
+// Navigation steps moved to uvv.ts
 
 Given("la ligne contenant {string}", (text) => {
   cy.contains("td", text)
@@ -50,9 +52,7 @@ Given("le tableau est vide", function (text: string) {
 
 //
 
-Then("je vois {string}", function (text: string) {
-  cy.contains(text).should("be.visible");
-});
+// Basic visibility checks moved to uvv.ts
 
 Then("je vois {string} dans le tableau", function (text: string) {
   cy.get(table_scope).contains(text);
@@ -73,9 +73,7 @@ Then(
   },
 );
 
-Then("je ne vois pas {string}", function (text: string) {
-  cy.contains(text).should("not.exist");
-});
+// Negative visibility checks moved to uvv.ts
 
 Then(
   "je vois la ligne {string} dans le table {string}",
@@ -107,13 +105,9 @@ Then("sur la ligne suivante je vois {string}", function (text: string) {
 
 //
 
-When("je clique sur {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).click());
-});
+// Basic click steps moved to uvv.ts
 
-When("je clique sur le bouton {string}", (text: string) => {
-  cy.contains("button", text).click({ force: true });
-});
+// Button click step moved to uvv.ts
 
 When("j'ouvre le menu déroulant sur la même ligne", () => {
   cy.get(row_scope).contains("button", "Menu").click();
@@ -138,24 +132,13 @@ When("sur la même ligne je clique sur {string}", function (text: string) {
   cy.get(row_scope).contains(text).click();
 });
 
-When("je suis redirigé sur {string}", (path: string) => {
-  cy.url().should("contain", path);
-});
+// Redirection steps moved to uvv.ts
 
 //
 
-When("je tape {string}", (text: string) => {
-  cy.focused().type(text);
-});
+// Type step moved to uvv.ts
 
-When(
-  "je saisie le(s) mot(s) {string} dans la boîte à texte nommée {string}",
-  (text: string, name: string) => {
-    get_within_context().within(() =>
-      cy.get(`input[placeholder="${name}"]`).type(text),
-    );
-  },
-);
+// Input steps moved to uvv.ts
 Then(
   "je dois voir une boîte à texte nommée {string} et contenant {string}",
   (name: string, text: string) => {
