@@ -70,6 +70,10 @@ Then("je vois {string}", (text: string) => {
   get_within_context().within(() => cy.contains(text).should("be.visible"));
 });
 
+Then("je ne vois pas {string}", (text: string) => {
+  get_within_context().within(() => cy.contains(text).should("not.exist"));
+});
+
 //
 
 When("je saisie {string} dans le champ nommé {string}", (text: string, name: string) => {

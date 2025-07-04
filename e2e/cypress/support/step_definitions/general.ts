@@ -152,9 +152,7 @@ Then(
   },
 );
 
-When("je retire le focus", () => {
-  cy.focused().blur();
-});
+// Focus step moved to uvv.ts
 
 When("je reviens en avant", () => {
   cy.go(1);
