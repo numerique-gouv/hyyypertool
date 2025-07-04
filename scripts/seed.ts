@@ -12,6 +12,6 @@ $.env({
 
 //
 
-await $`docker compose up --wait postgres-moncomptepro`;
-await $`bun run database:moncomptepro:migrator`;
-await $`bun run database:moncomptepro:seed`;
+await $`docker compose up --wait postgres-identite-proconnect`;
+await $`bun run database:identite-proconnect:migrator`;
+await $`bun run database:identite-proconnect:seed`;

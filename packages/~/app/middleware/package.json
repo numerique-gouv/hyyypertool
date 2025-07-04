@@ -25,8 +25,8 @@
     "@~/app.sentry": "workspace:*",
     "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "@~/moncomptepro.database": "workspace:*",
-    "@~/moncomptepro.lib": "workspace:*",
+    "@~/identite-proconnect.database": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
     "hono": "4.8.2",
     "hono-sessions": "0.7.2",
     "openid-client": "6.5.1"

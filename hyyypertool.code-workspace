@@ -29,8 +29,8 @@
       "path": "packages/~/proxy",
     },
     {
-      "name": "🏗️ packages/~/infra/moncomptepro/",
-      "path": "packages/~/infra/moncomptepro",
+      "name": "🏗️ packages/~/infra/proconnect-identite/",
+      "path": "packages/~/infra/proconnect-identite",
     },
     {
       "name": "🏗️ packages/~/infra/zammad/",
@@ -294,7 +294,7 @@
       {
         "label": "🏗️ Database MonComptePro Migrate",
         "command": "bun",
-        "args": ["run", "database:moncomptepro:migrator"],
+        "args": ["run", "database:proconnect-identite:migrator"],
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:/}",
@@ -308,7 +308,7 @@
       {
         "label": "🏗️ Database MonComptePro Seed",
         "command": "bun",
-        "args": ["run", "database:moncomptepro:seed"],
+        "args": ["run", "database:proconnect-identite:seed"],
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:/}",
@@ -322,7 +322,7 @@
       {
         "label": "🏗️ Database MonComptePro Studio",
         "command": "bun",
-        "args": ["run", "studio:moncomptepro"],
+        "args": ["run", "studio:proconnect-identite"],
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:/}",

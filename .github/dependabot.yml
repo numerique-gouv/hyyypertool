@@ -17,7 +17,7 @@ updates:
       sentry:
         patterns:
           - "@sentry/*"
-      tailwindcss: 
+      tailwindcss:
         patterns:
           - "@tailwindcss/*"
           - "tailwindcss"

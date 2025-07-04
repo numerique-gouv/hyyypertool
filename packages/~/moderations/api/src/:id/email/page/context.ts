@@ -4,8 +4,11 @@ import { NotFoundError } from "@~/app.core/error";
 import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { Crisp_Context } from "@~/crisp.middleware";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import type { GetCripsFromSessionIdHandler } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { type get_zammad_mail_dto } from "@~/zammad.lib/get_zammad_mail";
 import { eq } from "drizzle-orm";
 import { type Env } from "hono";
@@ -50,7 +53,7 @@ export const usePageRequestContext = useRequestContext<
 //
 
 export async function get_moderation(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   { moderation_id }: { moderation_id: number },
 ) {
   const moderation = await pg.query.moderations.findFirst({

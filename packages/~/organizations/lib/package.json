@@ -15,8 +15,8 @@
     }
   },
   "dependencies": {
-    "@~/moncomptepro.database": "workspace:*",
-    "@~/moncomptepro.lib": "workspace:*",
+    "@~/identite-proconnect.database": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
     "@~/organizations.repository": "workspace:*",
     "@~/users.repository": "workspace:*",
     "zod": "3.25.64"

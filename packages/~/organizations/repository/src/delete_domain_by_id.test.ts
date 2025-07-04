@@ -1,7 +1,11 @@
 //
 
-import { create_unicorn_organization } from "@~/moncomptepro.database/seed/unicorn";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+import { create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, expect, test } from "bun:test";
 import { delete_domain_by_id } from "./delete_domain_by_id";
 

@@ -46,7 +46,7 @@ jobs:
           echo "Fake https://entreprise.api.gouv.fr ready"
           curl -sSf -XGET http://127.0.0.1:6200/readyz
           echo
-          echo "Fake https://app.moncomptepro.beta.gouv.fr ready"
+          echo "Fake https://identite.proconnect.gouv.fr ready"
           curl -sSf -XGET http://127.0.0.1:6300/readyz
         working-directory: "."
 

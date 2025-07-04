@@ -1,13 +1,16 @@
 //
 
 import type { Pagination } from "@~/app.core/schema";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { and, desc, count as drizzle_count, eq } from "drizzle-orm";
 
 //
 
 export async function get_users_by_organization_id(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   {
     organization_id,
     pagination = { page: 0, page_size: 10 },

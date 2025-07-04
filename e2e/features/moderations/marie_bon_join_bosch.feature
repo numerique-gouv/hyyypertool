@@ -3,7 +3,7 @@ Fonctionnalité: Moderation non blockante
 
   Contexte: Marie Bon veut rejoindre l'organisation Dengi - Leclerc
     Soit une base de données nourrie au grain
-    * un server faut server "app.moncomptepro.beta.gouv.fr"
+    * un server faut server "identite.proconnect.gouv.fr"
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "ProConnect"

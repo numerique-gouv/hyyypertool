@@ -18,10 +18,10 @@
       "path": "../urls"
     },
     {
-      "path": "../../infra/moncomptepro/database"
+      "path": "../../infra/identite-proconnect/database"
     },
     {
-      "path": "../../infra/moncomptepro/lib"
+      "path": "../../infra/identite-proconnect/lib"
     }
   ]
 }

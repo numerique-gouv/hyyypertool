@@ -1,7 +1,7 @@
 //
 
-import type { EmailDomainVerificationType } from "@~/moncomptepro.lib";
-import { type MarkDomainAsVerifiedHandler } from "@~/moncomptepro.lib/sdk";
+import type { EmailDomainVerificationType } from "@~/identite-proconnect.lib";
+import { type MarkDomainAsVerifiedHandler } from "@~/identite-proconnect.lib/sdk";
 import type { GetFicheOrganizationByIdHandler } from "./GetFicheOrganizationById";
 
 //

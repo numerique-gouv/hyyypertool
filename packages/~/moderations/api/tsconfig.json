@@ -31,16 +31,25 @@
       "path": "../lib"
     },
     {
-      "path": "../../infra/moncomptepro/database"
+      "path": "../ui"
     },
     {
-      "path": "../../infra/moncomptepro/lib"
+      "path": "../../infra/identite-proconnect/database"
+    },
+    {
+      "path": "../../infra/identite-proconnect/lib"
     },
     {
       "path": "../../organizations/repository"
     },
     {
       "path": "../../organizations/ui"
+    },
+    {
+      "path": "../../users/lib"
+    },
+    {
+      "path": "../../users/ui"
     },
     {
       "path": "../../infra/zammad/lib"

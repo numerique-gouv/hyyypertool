@@ -3,7 +3,7 @@
 exports[`returns invalid teacher email message 1`] = `
 "Bonjour,
 
-Votre demande pour rejoindre l’organisation « 🦄 » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
+Votre demande pour rejoindre l’organisation « 🦄 » a été prise en compte sur https://identite.proconnect.gouv.fr.
 
 Votre adresse e-mail académique : « 💌 » ne vous permet pas de rattacher votre compte utilisateur MonComptePro au Ministère de l’Éducation Nationale et de la Jeunesse.
 

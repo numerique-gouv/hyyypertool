@@ -5,8 +5,8 @@ import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
 import type { CrispApiCradle } from "@~/crisp.lib";
 import {
   schema,
-  type MonCompteProDatabaseCradle,
-} from "@~/moncomptepro.database";
+  type IdentiteProconnectDatabaseCradle,
+} from "@~/identite-proconnect.database";
 import { ResetMFA_Message } from "@~/users.ui/templates";
 import { to as await_to } from "await-to-js";
 import { eq } from "drizzle-orm";
@@ -18,7 +18,8 @@ export function ResetMFA({
   crisp,
   pg,
   resolve_delay,
-}: MonCompteProDatabaseCradle & CrispApiCradle & { resolve_delay: number }) {
+}: IdentiteProconnectDatabaseCradle &
+  CrispApiCradle & { resolve_delay: number }) {
   type ResetMFA_Input = { moderator: AgentConnect_UserInfo; user_id: number };
   return async function reset_mfa({ moderator, user_id }: ResetMFA_Input) {
     await pg

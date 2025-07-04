@@ -50,8 +50,8 @@ async function List_Leaders({ siret }: { siret: string }) {
 async function load_leaders({ siret }: { siret: string }) {
   const siren = siret.substring(0, 9);
   const query_params = new URLSearchParams({
-    context: "Modération MonComptePro",
-    object: "Modération MonComptePro",
+    context: "Modération IdentiteProconnect",
+    object: "Modération IdentiteProconnect",
     recipient: "13002526500013",
   });
 

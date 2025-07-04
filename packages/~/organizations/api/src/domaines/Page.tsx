@@ -71,7 +71,7 @@ async function Table() {
       $table,
       hx_domains_query_props,
       query_unverified_domains,
-      moncomptepro_pg,
+      identite_pg,
     },
   } = usePageRequestContext();
   const { q } = req.valid("query");
@@ -81,7 +81,7 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, domains } = await query_unverified_domains(moncomptepro_pg, {
+  const { count, domains } = await query_unverified_domains(identite_pg, {
     pagination: { ...pagination, page: pagination.page - 1 },
     search: q ? String(q) : undefined,
   });

@@ -6,16 +6,13 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../infra/moncomptepro/database"
+      "path": "../../app/middleware"
     },
     {
-      "path": "../../infra/moncomptepro/lib"
+      "path": "../../infra/crisp/lib"
     },
     {
-      "path": "../repository"
-    },
-    {
-      "path": "../../users/repository"
+      "path": "../../infra/identite-proconnect/database"
     }
   ]
 }

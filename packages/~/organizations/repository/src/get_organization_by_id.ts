@@ -1,12 +1,19 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { eq } from "drizzle-orm";
 
 //
 
-export function GetOrganizationById({ pg }: { pg: MonComptePro_PgDatabase }) {
+export function GetOrganizationById({
+  pg,
+}: {
+  pg: IdentiteProconnect_PgDatabase;
+}) {
   type Organizations = typeof schema.organizations.$inferSelect;
   type OrganizationColumnsKeys = keyof Organizations;
 

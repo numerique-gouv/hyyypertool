@@ -7,7 +7,7 @@
     "packages/~/app/*",
     "packages/~/auth/*",
     "packages/~/config/*",
-    "packages/~/infra/moncomptepro/*",
+    "packages/~/infra/identite-proconnect/*",
     "packages/~/infra/crisp/*",
     "packages/~/infra/zammad/*",
     "packages/~/moderations/*",
@@ -22,9 +22,9 @@
     "build:bun": "bun run ./scripts/build.ts",
     "build:tailwind": "bun x tailwindcss -i ./packages/~/app/ui/tailwind.css -o ./public/built/tailwind.css",
     "build:tsc": "bun x tsc --build",
-    "database:moncomptepro:migrator": "bun run database:moncomptepro:run migration",
-    "database:moncomptepro:run": "bun run --cwd packages/~/infra/moncomptepro/database",
-    "database:moncomptepro:seed": "bun run database:moncomptepro:run seed",
+    "database:identite-proconnect:migrator": "bun run database:identite-proconnect:run migration",
+    "database:identite-proconnect:run": "bun run --cwd packages/~/infra/identite-proconnect/database",
+    "database:identite-proconnect:seed": "bun run database:identite-proconnect:run seed",
     "dev": "tsx watch bin/src/index.ts",
     "dev:api": "bun x run-z dev:api:clean dev:api:tsc dev:api:cp dev:api:format",
     "dev:api:clean": "bun run --cwd packages/~/app/urls clean",
@@ -35,7 +35,7 @@
     "dev:tailwind": "bun run build:tailwind --watch",
     "e2e:install": "cd e2e && bun install",
     "e2e:run": "cd e2e && bun run",
-    "fixtures:load": "bun x run-z database:moncomptepro:migrator database:moncomptepro:seed",
+    "fixtures:load": "bun x run-z database:identite-proconnect:migrator database:identite-proconnect:seed",
     "format": "bun x prettier --check .",
     "format:fix": "bun x prettier --write .",
     "format:pkg": "bun x sort-package-json ./package.json ./packages/~/*/*/package.json ./e2e/package.json",
@@ -43,7 +43,7 @@
     "postadd": "bun run format:tsconfig",
     "renovate": "bun x npm-check-updates --packageManager bun --interactive --upgrade --deep",
     "start": "tsx bin/src/index.ts",
-    "studio:moncomptepro": "bun run database:moncomptepro:run studio",
+    "studio:identite-proconnect": "bun run database:identite-proconnect:run studio",
     "test": "bun run test:type-check && bun run test:all",
     "test:all": "bun test",
     "test:inspect": "bun test --inspect-wait=localhost:6499/",
@@ -114,6 +114,5 @@
         }
       }
     }
-  },
-  "packageManager": "npm@11.3.0+sha512.96eb611483f49c55f7fa74df61b588de9e213f80a256728e6798ddc67176c7b07e4a1cfc7de8922422cbce02543714367037536955221fa451b0c4fefaf20c66"
+  }
 }

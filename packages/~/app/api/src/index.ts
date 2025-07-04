@@ -2,7 +2,6 @@
 
 import config from "@~/app.core/config";
 import { Root_Layout } from "@~/app.layout/root";
-import { moncomptepro_pg_database } from "@~/app.middleware/moncomptepro_pg";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import { set_config } from "@~/app.middleware/set_config";
 import { set_nonce } from "@~/app.middleware/set_nonce";
@@ -54,7 +53,7 @@ const app = new Hono()
   .route("/", welcome_router)
   .route("/auth", auth_router)
   //
-  .use(moncomptepro_pg_database({ connectionString: config.DATABASE_URL }))
+  .use(identite_pg_database({ connectionString: config.DATABASE_URL }))
   //
 
   .route("/moderations", moderations_router)

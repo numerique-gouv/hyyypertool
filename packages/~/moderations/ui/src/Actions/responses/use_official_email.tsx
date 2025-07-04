@@ -16,7 +16,7 @@ export default function template() {
   return dedent`
     Bonjour,
 
-    Votre demande pour rejoindre l’organisation « ${organization_name} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
+    Votre demande pour rejoindre l’organisation « ${organization_name} » a été prise en compte sur https://identite.proconnect.gouv.fr.
 
     Afin de donner suite à votre demande, merci d’effectuer votre inscription avec votre email officiel de contact ADRESSE, tel que déclaré sur LIEN
 

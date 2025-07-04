@@ -23,16 +23,16 @@ export default new Hono<ContextType>().patch(
   async function PATH({
     text,
     req,
-    var: { moncomptepro_pg, userinfo, crisp_config, config },
+    var: { identite_pg, userinfo, crisp_config, config },
   }) {
     const { id: moderation_id } = req.valid("param");
     const { message, reason, subject } = req.valid("form");
 
-    const moderation = await get_moderation(moncomptepro_pg, { moderation_id });
+    const moderation = await get_moderation(identite_pg, { moderation_id });
     const context: RejectedModeration_Context = {
       crisp_config,
       moderation,
-      pg: moncomptepro_pg,
+      pg: identite_pg,
       resolve_delay: config.CRISP_RESOLVE_DELAY,
       reason,
       subject,

@@ -1,12 +1,15 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { count as drizzle_count, eq } from "drizzle-orm";
 
 //
 
 export async function get_organization_members_count(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   { organization_id }: { organization_id: number },
 ) {
   const [{ value: count }] = await pg

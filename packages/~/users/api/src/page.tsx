@@ -75,7 +75,7 @@ function Filter() {
 async function Table() {
   const {
     req,
-    var: { query_users, moncomptepro_pg },
+    var: { query_users, identite_pg },
   } = usePageRequestContext();
 
   const { q } = req.valid("query");
@@ -85,7 +85,7 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, users } = await query_users(moncomptepro_pg, {
+  const { count, users } = await query_users(identite_pg, {
     search: q ? String(q) : undefined,
     pagination: { ...pagination, page: pagination.page - 1 },
   });

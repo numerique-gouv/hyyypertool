@@ -27,12 +27,12 @@ export default new Hono<ContextType>()
     "/",
     zValidator("param", Entity_Schema),
     async function set_organization(
-      { render, req, set, status, var: { moncomptepro_pg } },
+      { render, req, set, status, var: { identite_pg } },
       next,
     ) {
       const { id } = req.valid("param");
       const get_organization_by_id = GetOrganizationById({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
       const [error, organization] = await await_to(
         get_organization_by_id(id, {
@@ -68,12 +68,12 @@ export default new Hono<ContextType>()
       return next();
     },
     async function set_query_organization_members_count(
-      { set, var: { organization, moncomptepro_pg } },
+      { set, var: { organization, identite_pg } },
       next,
     ) {
       set(
         "query_organization_members_count",
-        get_organization_members_count(moncomptepro_pg, {
+        get_organization_members_count(identite_pg, {
           organization_id: organization.id,
         }),
       );
@@ -81,18 +81,17 @@ export default new Hono<ContextType>()
     },
     async function set_context(ctx, next) {
       const {
-        var: { moncomptepro_pg },
+        var: { identite_pg },
       } = getContext<ContextType>();
       const { id: organization_id } = ctx.req.valid("param");
       const get_fiche_organization_by_id = GetFicheOrganizationById({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
       const organization_fiche =
         await get_fiche_organization_by_id(organization_id);
-      const query_organization_domains_count = get_domain_count(
-        moncomptepro_pg,
-        { organization_id },
-      );
+      const query_organization_domains_count = get_domain_count(identite_pg, {
+        organization_id,
+      });
       return set_context_variables<ContextVariablesType>(() => ({
         organization_fiche,
         organization: ctx.var.organization,

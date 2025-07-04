@@ -71,7 +71,7 @@ function Filter() {
 async function Table() {
   const {
     req,
-    var: { query_organizations, moncomptepro_pg },
+    var: { query_organizations, identite_pg },
   } = usePageRequestContext();
   const { q } = req.valid("query");
   const pagination = match(
@@ -80,7 +80,7 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, organizations } = await query_organizations(moncomptepro_pg, {
+  const { count, organizations } = await query_organizations(identite_pg, {
     pagination: { ...pagination, page: pagination.page - 1 },
     search: q ? String(q) : undefined,
   });

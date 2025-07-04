@@ -2,14 +2,16 @@
 
 import {
   schema,
-  type MonCompteProDatabaseCradle,
-} from "@~/moncomptepro.database";
+  type IdentiteProconnectDatabaseCradle,
+} from "@~/identite-proconnect.database";
 import type { UserOrganizationIdPair } from "@~/organizations.lib/entities/Organization";
 import { and, eq } from "drizzle-orm";
 
 //
 
-export function RemoveUserFromOrganization({ pg }: MonCompteProDatabaseCradle) {
+export function RemoveUserFromOrganization({
+  pg,
+}: IdentiteProconnectDatabaseCradle) {
   return async function remove_user_from_organization({
     organization_id,
     user_id,

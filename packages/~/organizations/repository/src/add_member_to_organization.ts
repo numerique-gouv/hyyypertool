@@ -4,16 +4,16 @@ import { NotFoundError } from "@~/app.core/error";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import {
   schema,
-  type MonComptePro_PgDatabase,
+  type IdentiteProconnect_PgDatabase,
   type Writable_Users_Organizations,
-} from "@~/moncomptepro.database";
+} from "@~/identite-proconnect.database";
 import { eq } from "drizzle-orm";
 import { match } from "ts-pattern";
 
 //
 
 export async function add_member_to_organization(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   values: Writable_Users_Organizations & {
     organization_id: number;
     user_id: number;

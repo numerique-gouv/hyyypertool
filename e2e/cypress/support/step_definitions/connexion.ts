@@ -11,7 +11,7 @@ When(
       cy.get("#email-input").type("user@yopmail.com");
       cy.contains("button", "Se connecter").click();
     });
-    cy.origin("https://app-test.moncomptepro.beta.gouv.fr", () => {
+    cy.origin("https://app-test.identite.beta.gouv.fr", () => {
       cy.get('[name="password"]').type("user@yopmail.com");
       cy.contains("button", "S’identifier").click();
       cy.contains("button", "Continuer").click();

@@ -2,8 +2,8 @@
 
 import {
   schema,
-  type MonCompteProDatabaseCradle,
-} from "@~/moncomptepro.database";
+  type IdentiteProconnectDatabaseCradle,
+} from "@~/identite-proconnect.database";
 import { eq } from "drizzle-orm";
 
 //
@@ -13,7 +13,7 @@ export type ModerationUpdate = Pick<
   "comment" | "moderated_by" | "moderated_at" | "ticket_id"
 >;
 
-export function UpdateModerationById({ pg }: MonCompteProDatabaseCradle) {
+export function UpdateModerationById({ pg }: IdentiteProconnectDatabaseCradle) {
   return function update_moderation_by_id(
     id: number,
     values: ModerationUpdate,

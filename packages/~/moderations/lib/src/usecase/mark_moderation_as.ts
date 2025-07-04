@@ -2,8 +2,11 @@
 
 import { z_username } from "@~/app.core/schema/z_username";
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
+import type {
+  IdentiteProconnect_PgDatabase,
+  schema,
+} from "@~/identite-proconnect.database";
 import { UpdateModerationById } from "@~/moderations.repository";
-import type { MonComptePro_PgDatabase, schema } from "@~/moncomptepro.database";
 import { append_comment, type Comment_Type } from "../comment_message";
 
 //
@@ -16,7 +19,7 @@ export async function mark_moderation_as(
     userinfo,
   }: {
     moderation: Pick<typeof schema.moderations.$inferSelect, "comment" | "id">;
-    pg: MonComptePro_PgDatabase;
+    pg: IdentiteProconnect_PgDatabase;
     reason: string;
     userinfo: AgentConnect_UserInfo;
   },
