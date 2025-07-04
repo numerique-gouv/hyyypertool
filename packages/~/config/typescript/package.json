@@ -7,7 +7,7 @@
   "dependencies": {
     "@tsconfig/bun": "1.0.7",
     "@tsconfig/strictest": "2.0.5",
-    "@types/bun": "1.2.16",
+    "@types/bun": "1.2.18",
     "hono": "4.8.2"
   }
 }
