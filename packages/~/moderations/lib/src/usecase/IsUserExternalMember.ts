@@ -2,14 +2,14 @@
 
 import {
   schema,
-  type MonCompteProDatabaseCradle,
-} from "@~/moncomptepro.database";
+  type IdentiteProconnectDatabaseCradle,
+} from "@~/identite-proconnect.database";
 import type { UserOrganizationIdPair } from "@~/organizations.lib/entities/Organization";
 import { and, eq } from "drizzle-orm";
 
 //
 
-export function IsUserExternalMember({ pg }: MonCompteProDatabaseCradle) {
+export function IsUserExternalMember({ pg }: IdentiteProconnectDatabaseCradle) {
   return async function is_user_external_member({
     organization_id,
     user_id,

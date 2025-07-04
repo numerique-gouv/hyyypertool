@@ -2,16 +2,16 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { Htmx_Events } from "@~/app.core/htmx";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
 import { hx_urls, urls } from "@~/app.urls";
+import { schema } from "@~/identite-proconnect.database";
 import {
   get_duplicate_moderations,
   type get_duplicate_moderations_dto,
 } from "@~/moderations.repository/get_duplicate_moderations";
-import { schema } from "@~/moncomptepro.database";
 import {
   get_user_by_id,
   type get_user_by_id_dto,
@@ -35,14 +35,14 @@ export async function Duplicate_Warning({
   user_id: number;
 }) {
   const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
-  const moderations = await get_duplicate_moderations(moncomptepro_pg, {
+    var: { identite_pg },
+  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  const moderations = await get_duplicate_moderations(identite_pg, {
     organization_id,
     user_id,
   });
 
-  const user = await get_user_by_id(moncomptepro_pg, { id: user_id });
+  const user = await get_user_by_id(identite_pg, { id: user_id });
   if (!user) return <p>Utilisateur introuvable</p>;
 
   return (
@@ -86,18 +86,30 @@ async function Alert_Duplicate_User() {
       </h3>
 
       <ul>
-        {duplicate_users.map(({ user_id, email, family_name, given_name }) => (
-          <li key={user_id}>
-            <a
-              href={
-                urls.users[":id"].$url({ param: { id: user_id.toString() } })
-                  .pathname
-              }
-            >
-              {given_name} {family_name} {`<${email}>`}
-            </a>
-          </li>
-        ))}
+        {duplicate_users.map(
+          ({
+            user_id,
+            email,
+            family_name,
+            given_name,
+          }: {
+            user_id: number;
+            email: string | null;
+            family_name: string | null;
+            given_name: string | null;
+          }) => (
+            <li key={user_id}>
+              <a
+                href={
+                  urls.users[":id"].$url({ param: { id: user_id.toString() } })
+                    .pathname
+                }
+              >
+                {given_name} {family_name} {`<${email}>`}
+              </a>
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );
@@ -194,10 +206,10 @@ function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
 
 async function get_moderation(moderation_id: number) {
   const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
+    var: { identite_pg },
+  } = useRequestContext<IdentiteProconnect_Pg_Context>();
 
-  const moderation = await moncomptepro_pg.query.moderations.findFirst({
+  const moderation = await identite_pg.query.moderations.findFirst({
     columns: { moderated_at: true },
     where: eq(schema.moderations.id, moderation_id),
   });
@@ -207,10 +219,10 @@ async function get_moderation(moderation_id: number) {
 
 async function get_duplicate_users(moderation_id: number) {
   const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
+    var: { identite_pg },
+  } = useRequestContext<IdentiteProconnect_Pg_Context>();
 
-  const moderation = await moncomptepro_pg.query.moderations.findFirst({
+  const moderation = await identite_pg.query.moderations.findFirst({
     columns: { organization_id: true },
     with: {
       user: { columns: { id: true, given_name: true, family_name: true } },
@@ -225,7 +237,7 @@ async function get_duplicate_users(moderation_id: number) {
     user: { family_name, id: user_id },
   } = moderation;
 
-  return await moncomptepro_pg
+  return await identite_pg
     .select({
       email: schema.users.email,
       family_name: schema.users.family_name,

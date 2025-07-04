@@ -4,11 +4,11 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
+import { schema } from "@~/identite-proconnect.database";
+import { join_organization } from "@~/identite-proconnect.lib/index";
+import { Verification_Type_Schema } from "@~/identite-proconnect.lib/verification_type";
 import { RemoveUserFromOrganization } from "@~/moderations.repository";
-import { schema } from "@~/moncomptepro.database";
-import { join_organization } from "@~/moncomptepro.lib/index";
-import { Verification_Type_Schema } from "@~/moncomptepro.lib/verification_type";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -16,7 +16,7 @@ import { z } from "zod";
 
 //
 
-export default new Hono<MonComptePro_Pg_Context>()
+export default new Hono<IdentiteProconnect_Pg_Context>()
   //
   .post(
     "/",
@@ -64,11 +64,11 @@ export default new Hono<MonComptePro_Pg_Context>()
         is_external: z.string().pipe(z_coerce_boolean).optional(),
       }),
     ),
-    async function PATCH({ text, req, var: { moncomptepro_pg } }) {
+    async function PATCH({ text, req, var: { identite_pg } }) {
       const { id: organization_id, user_id } = req.valid("param");
       const { verification_type, is_external } = req.valid("form");
 
-      await moncomptepro_pg
+      await identite_pg
         .update(schema.users_organizations)
         .set({
           is_external,
@@ -92,11 +92,11 @@ export default new Hono<MonComptePro_Pg_Context>()
       "param",
       Entity_Schema.extend({ user_id: z.string().pipe(z.coerce.number()) }),
     ),
-    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
+    async function DELETE({ text, req, var: { identite_pg } }) {
       const { id: organization_id, user_id } = req.valid("param");
 
       const remove_user_from_organization = RemoveUserFromOrganization({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
       await remove_user_from_organization({
         organization_id,

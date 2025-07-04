@@ -25,9 +25,9 @@ export default new Hono<ContextType>().get(
     set("MAX_ARTICLE_COUNT", 3);
     return next();
   },
-  async function set_moderation({ req, set, var: { moncomptepro_pg } }, next) {
+  async function set_moderation({ req, set, var: { identite_pg } }, next) {
     const { id: moderation_id } = req.valid("param");
-    const moderation = await get_moderation(moncomptepro_pg, {
+    const moderation = await get_moderation(identite_pg, {
       moderation_id,
     });
     set("moderation", moderation);

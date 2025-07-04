@@ -7,7 +7,7 @@ import {
   Entity_Schema,
   Id_Schema,
 } from "@~/app.core/schema";
-import { EmailDomain_Type_Schema } from "@~/moncomptepro.lib/email_domain";
+import { EmailDomain_Type_Schema } from "@~/identite-proconnect.lib/email_domain";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import {
   AddAuthorizedDomain,
@@ -33,10 +33,10 @@ export default new Hono<ContextType>()
     jsxRenderer(),
     zValidator("param", Entity_Schema),
     zValidator("query", DescribedBy_Schema),
-    async function set_domains({ req, set, var: { moncomptepro_pg } }, next) {
+    async function set_domains({ req, set, var: { identite_pg } }, next) {
       const { id: organization_id } = req.valid("param");
       const domains = await get_orginization_domains(
-        { pg: moncomptepro_pg },
+        { pg: identite_pg },
         {
           organization_id: organization_id,
         },
@@ -52,12 +52,12 @@ export default new Hono<ContextType>()
     "/",
     zValidator("param", Entity_Schema),
     zValidator("form", z.object({ domain: z.string().min(1) })),
-    async function PUT({ text, req, var: { moncomptepro_pg } }) {
+    async function PUT({ text, req, var: { identite_pg } }) {
       const { id: organization_id } = req.valid("param");
       const { domain } = req.valid("form");
 
       const add_authorized_domain = AddAuthorizedDomain({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
 
       await add_authorized_domain(organization_id, domain);
@@ -70,11 +70,11 @@ export default new Hono<ContextType>()
   .delete(
     "/:domain_id",
     zValidator("param", Entity_Schema.merge(DomainParams_Schema)),
-    async function DELETE({ text, req, var: { moncomptepro_pg } }) {
+    async function DELETE({ text, req, var: { identite_pg } }) {
       const { domain_id } = req.valid("param");
 
       const remove_domain_email_by_id = RemoveDomainEmailById({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
       await remove_domain_email_by_id(domain_id);
 
@@ -94,11 +94,11 @@ export default new Hono<ContextType>()
         ),
       }),
     ),
-    async function PATCH({ text, req, var: { moncomptepro_pg } }) {
+    async function PATCH({ text, req, var: { identite_pg } }) {
       const { domain_id } = req.valid("param");
       const { type: verification_type } = req.valid("query");
 
-      await update_domain_by_id(moncomptepro_pg, domain_id, {
+      await update_domain_by_id(identite_pg, domain_id, {
         verification_type: verification_type,
         verified_at:
           verification_type === "verified"

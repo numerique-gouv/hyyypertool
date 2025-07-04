@@ -13,6 +13,9 @@
       "path": "../middleware"
     },
     {
+      "path": "../ui"
+    },
+    {
       "path": "../urls"
     }
   ]

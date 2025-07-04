@@ -1,9 +1,9 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import type { MonCompteProDatabaseCradle } from "@~/moncomptepro.database";
+import type { IdentiteProconnectDatabaseCradle } from "@~/identite-proconnect.database";
 
-export function GetModerationHeader({ pg }: MonCompteProDatabaseCradle) {
+export function GetModerationHeader({ pg }: IdentiteProconnectDatabaseCradle) {
   return async function get_moderation_header(id: number) {
     const moderation = await pg.query.moderations.findFirst({
       columns: {

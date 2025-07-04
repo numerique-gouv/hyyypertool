@@ -18,7 +18,7 @@ export default function template() {
   return dedent`
     Bonjour,
 
-    Votre demande pour rejoindre l’organisation « ${organization_name} » a été prise en compte sur https://app.moncomptepro.beta.gouv.fr.
+    Votre demande pour rejoindre l’organisation « ${organization_name} » a été prise en compte sur https://identite.proconnect.gouv.fr.
 
     Votre adresse e-mail académique : « ${email} » ne vous permet pas de rattacher votre compte utilisateur MonComptePro au Ministère de l’Éducation Nationale et de la Jeunesse. 
 

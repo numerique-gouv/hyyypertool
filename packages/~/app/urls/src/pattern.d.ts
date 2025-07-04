@@ -2,7 +2,7 @@ declare const app: import("hono/hono-base").HonoBase<
   import("@~/app.middleware/set_nonce").NonceVariables_Context &
     import("@~/app.middleware/set_config").ConfigVariables_Context &
     import("@~/app.middleware/set_userinfo").UserInfoVariables_Context &
-    import("@~/app.middleware/moncomptepro_pg").MonComptePro_Pg_Context,
+    import("@~/app.middleware/identite_pg").IdentiteProconnect_Pg_Context,
   | ({
       "/healthz": {
         $get: {
@@ -89,7 +89,7 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
       } & {
-        "/drizzle/moncomptepro": {
+        "/drizzle/identite": {
           $get: {
             input: {};
             output: string;

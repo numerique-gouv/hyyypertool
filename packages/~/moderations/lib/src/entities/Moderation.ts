@@ -1,6 +1,6 @@
 //
 
-import type { schema } from "@~/moncomptepro.database";
+import type { schema } from "@~/identite-proconnect.database";
 
 //
 

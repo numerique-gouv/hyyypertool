@@ -1,8 +1,12 @@
 //
 
 import { BadRequestError } from "@~/app.core/error";
-import { create_unicorn_organization } from "@~/moncomptepro.database/seed/unicorn";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+import { create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { AddAuthorizedDomain } from "./AddAuthorizedDomain";
 

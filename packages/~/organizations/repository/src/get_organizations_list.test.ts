@@ -1,9 +1,13 @@
 //
 
-import { create_cactus_organization } from "@~/moncomptepro.database/seed/captus";
-import { create_unicorn_organization } from "@~/moncomptepro.database/seed/unicorn";
-import { create_zombie_organization } from "@~/moncomptepro.database/seed/zombie";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+import { create_cactus_organization } from "@~/identite-proconnect.database/seed/captus";
+import { create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import { create_zombie_organization } from "@~/identite-proconnect.database/seed/zombie";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { get_organizations_list } from "./get_organizations_list";
 

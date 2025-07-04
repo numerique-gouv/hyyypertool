@@ -15,10 +15,10 @@ export default new Hono<ContextType>()
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async function GET({ render, req, set, var: { moncomptepro_pg } }) {
+    async function GET({ render, req, set, var: { identite_pg } }) {
       const { id } = req.valid("param");
       const get_moderations_by_user_id = GetModerationsByUserId({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
       const moderations = await get_moderations_by_user_id(id);
       set("moderations", moderations);

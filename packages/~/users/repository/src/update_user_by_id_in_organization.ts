@@ -2,15 +2,15 @@
 
 import {
   schema,
-  type MonComptePro_PgDatabase,
+  type IdentiteProconnect_PgDatabase,
   type Writable_Users_Organizations,
-} from "@~/moncomptepro.database";
+} from "@~/identite-proconnect.database";
 import { and, eq } from "drizzle-orm";
 
 //
 
 export async function update_user_by_id_in_organization(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   { organization_id, user_id }: { organization_id: number; user_id: number },
   values: Writable_Users_Organizations,
 ) {

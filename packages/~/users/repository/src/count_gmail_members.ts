@@ -1,12 +1,15 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { and, eq, like } from "drizzle-orm";
 
 //
 
 export async function count_gmail_members(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   { domain, siret }: { domain: string; siret: string },
 ) {
   return pg

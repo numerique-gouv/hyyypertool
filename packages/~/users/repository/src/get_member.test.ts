@@ -1,11 +1,15 @@
 //
 
-import { schema } from "@~/moncomptepro.database";
+import { schema } from "@~/identite-proconnect.database";
 import {
   create_adora_pony_user,
   create_unicorn_organization,
-} from "@~/moncomptepro.database/seed/unicorn";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+} from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, expect, setSystemTime, test } from "bun:test";
 import { GetMember } from "./get_member";
 

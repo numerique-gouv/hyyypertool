@@ -1,11 +1,11 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import type { MonCompteProDatabaseCradle } from "@~/moncomptepro.database";
+import type { IdentiteProconnectDatabaseCradle } from "@~/identite-proconnect.database";
 
 //
 
-export function GetUserInfo({ pg }: MonCompteProDatabaseCradle) {
+export function GetUserInfo({ pg }: IdentiteProconnectDatabaseCradle) {
   return async function get_user_info(id: number) {
     const organization = await pg.query.users.findFirst({
       columns: {

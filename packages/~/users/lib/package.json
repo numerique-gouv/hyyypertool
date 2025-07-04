@@ -17,7 +17,7 @@
   "dependencies": {
     "@~/app.middleware": "workspace:*",
     "@~/crisp.lib": "workspace:*",
-    "@~/moncomptepro.database": "workspace:*"
+    "@~/identite-proconnect.database": "workspace:*"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

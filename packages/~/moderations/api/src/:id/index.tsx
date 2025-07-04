@@ -35,11 +35,11 @@ export default new Hono<ModerationContext>()
     jsxRenderer(Main_Layout),
     zValidator("param", Entity_Schema),
     async function set_moderation({ render, req, set, status }, next) {
-      const { moncomptepro_pg } = getContext<App_Context>().var;
+      const { identite_pg } = getContext<App_Context>().var;
       const { id: moderation_id } = req.valid("param");
 
       const [moderation_error, moderation] = await to(
-        get_moderation({ pg: moncomptepro_pg }, { moderation_id }),
+        get_moderation({ pg: identite_pg }, { moderation_id }),
       );
 
       if (moderation_error instanceof NotFoundError) {
@@ -53,7 +53,7 @@ export default new Hono<ModerationContext>()
       return next();
     },
     set_context_variables<ContextVariablesType>(async () => {
-      const { moderation, moncomptepro_pg } = getContext<ContextType>().var;
+      const { moderation, identite_pg } = getContext<ContextType>().var;
 
       //
 
@@ -64,7 +64,7 @@ export default new Hono<ModerationContext>()
       //
 
       const organization_member = await get_organization_member(
-        { pg: moncomptepro_pg },
+        { pg: identite_pg },
         {
           organization_id: moderation.organization_id,
           user_id: moderation.user.id,
@@ -74,7 +74,7 @@ export default new Hono<ModerationContext>()
       //
 
       const get_fiche_organization_by_id = GetFicheOrganizationById({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       });
       const organization_fiche = await get_fiche_organization_by_id(
         moderation.organization_id,
@@ -87,11 +87,11 @@ export default new Hono<ModerationContext>()
         moderation,
         organization_fiche,
         organization_member,
-        query_domain_count: get_domain_count(moncomptepro_pg, {
+        query_domain_count: get_domain_count(identite_pg, {
           organization_id: moderation.organization_id,
         }),
         query_organization_members_count: get_organization_members_count(
-          moncomptepro_pg,
+          identite_pg,
           {
             organization_id: moderation.organization_id,
           },

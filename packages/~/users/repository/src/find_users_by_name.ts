@@ -1,12 +1,15 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { ilike, or } from "drizzle-orm";
 
 //
 
 export async function find_users_by_name(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   { name }: { name: string },
 ) {
   return pg.query.users.findMany({

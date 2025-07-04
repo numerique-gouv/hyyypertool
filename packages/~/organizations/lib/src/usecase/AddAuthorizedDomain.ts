@@ -3,13 +3,13 @@
 import { BadRequestError } from "@~/app.core/error";
 import {
   schema,
-  type MonCompteProDatabaseCradle,
-} from "@~/moncomptepro.database";
-import { EmailDomain_Type_Schema } from "@~/moncomptepro.lib/email_domain";
+  type IdentiteProconnectDatabaseCradle,
+} from "@~/identite-proconnect.database";
+import { EmailDomain_Type_Schema } from "@~/identite-proconnect.lib/email_domain";
 
 //
 
-export function AddAuthorizedDomain({ pg }: MonCompteProDatabaseCradle) {
+export function AddAuthorizedDomain({ pg }: IdentiteProconnectDatabaseCradle) {
   return async function add_authorized_domain(
     organization_id: number,
     domain: string,

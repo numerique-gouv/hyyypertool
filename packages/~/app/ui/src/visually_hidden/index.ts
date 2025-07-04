@@ -10,9 +10,9 @@ export const visually_hidden = tv({
     h-px!
     w-px!
     overflow-hidden!
-    whitespace-nowrap!
     border-0!
     p-0!
+    whitespace-nowrap!
     [clip:rect(0,0,0,0)]!
   `,
 });
