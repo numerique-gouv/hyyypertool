@@ -9,7 +9,6 @@
     }
   },
   "dependencies": {
-    "@gouvfr-lasuite/moncomptepro.core": "0.1.0",
     "@~/app.layout": "workspace:*",
     "@~/app.middleware": "workspace:*",
     "@~/app.ui": "workspace:*",
@@ -17,15 +16,16 @@
     "@~/organizations.repository": "workspace:*",
     "@~/organizations.ui": "workspace:*",
     "@~/users.repository": "workspace:*",
-    "hono": "4.7.6",
+    "@gouvfr-lasuite/proconnect.core": "0.6.0",
+    "hono": "4.8.2",
     "lodash.sortby": "4.7.0",
-    "tailwind-variants": "0.3.1",
-    "ts-pattern": "5.7.0",
-    "zod": "3.24.1"
+    "tailwind-variants": "1.0.0",
+    "ts-pattern": "5.7.1",
+    "zod": "3.25.64"
   },
   "devDependencies": {
-    "@types/lodash.sortby": "4.7.9",
     "@~/config.tailwindcss": "workspace:*",
-    "@~/config.typescript": "workspace:*"
+    "@~/config.typescript": "workspace:*",
+    "@types/lodash.sortby": "4.7.9"
   }
 }

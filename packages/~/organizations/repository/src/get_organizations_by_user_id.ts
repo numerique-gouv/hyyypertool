@@ -1,15 +1,15 @@
 //
 
 import { type Pagination } from "@~/app.core/schema";
-import type { MonComptePro_PgDatabase } from "@~/moncomptepro.database";
-import { schema } from "@~/moncomptepro.database";
-import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/types";
+import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
+import { schema } from "@~/identite-proconnect.database";
+import type { MCP_EmailDomain_Type } from "@~/identite-proconnect.lib/types";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 
 //
 
 export function get_organizations_by_user_id(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   {
     user_id,
     pagination = { page: 0, page_size: 10 },

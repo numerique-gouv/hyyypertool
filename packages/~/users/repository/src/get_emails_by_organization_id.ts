@@ -1,12 +1,15 @@
 //
 
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { and, eq, ilike } from "drizzle-orm";
 
 //
 
 export async function get_emails_by_organization_id(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   {
     family_name,
     organization_id,

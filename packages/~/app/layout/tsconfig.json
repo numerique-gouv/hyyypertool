@@ -2,8 +2,7 @@
   "compilerOptions": {
     "jsxImportSource": "hono/jsx",
     "outDir": "./node_modules/.cache/tsc",
-    "lib": ["DOM"],
-    "types": ["bun-types", "hono"]
+    "lib": ["DOM"]
   },
   "extends": "@~/config.typescript/tsx/tsconfig.json",
   "references": [
@@ -12,6 +11,9 @@
     },
     {
       "path": "../middleware"
+    },
+    {
+      "path": "../ui"
     },
     {
       "path": "../urls"

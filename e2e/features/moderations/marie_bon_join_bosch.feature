@@ -3,6 +3,7 @@ Fonctionnalité: Moderation non blockante
 
   Contexte: Marie Bon veut rejoindre l'organisation Dengi - Leclerc
     Soit une base de données nourrie au grain
+    * un server faut server "identite.proconnect.gouv.fr"
     Quand je navigue sur la page
     * je vois "Bonjour Hyyypertool !"
     * je clique sur le bouton "ProConnect"
@@ -22,8 +23,10 @@ Fonctionnalité: Moderation non blockante
     Soit le tableau sous le title "domaine connu dans l'organisation"
     * le tableau est vide
     Quand je clique sur "✅ Accepter"
-    Quand je clique sur "J’autorise le domaine fr.bosch.com pour toute l’organisation"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "J’autorise le domaine fr.bosch.com en interne à l'organisation"
+    Quand je clique sur "Terminer"
+
+    Alors une notification mail n'est pas envoyée
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -39,7 +42,9 @@ Fonctionnalité: Moderation non blockante
     * le tableau est vide
     Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
-    Quand je clique sur "Notifier le membre et terminer"
+    Quand je clique sur "Terminer"
+
+    Alors une notification mail n'est pas envoyée
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
@@ -56,7 +61,9 @@ Fonctionnalité: Moderation non blockante
 
     Quand je clique sur "✅ Accepter"
     * je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
-    * je clique sur "Notifier le membre et terminer"
+    * je clique sur "Terminer"
+
+    Alors une notification mail n'est pas envoyée
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"

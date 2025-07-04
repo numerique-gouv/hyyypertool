@@ -1,8 +1,12 @@
 //
 
-import { create_unicorn_organization } from "@~/moncomptepro.database/seed/unicorn";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
-import type { MCP_EmailDomain_Type } from "@~/moncomptepro.lib/moncomptepro.d";
+import { create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
+import type { MCP_EmailDomain_Type } from "@~/identite-proconnect.lib/identite-proconnect.d";
 import { beforeAll, expect, setSystemTime, test } from "bun:test";
 import { update_domain_by_id } from "./update_domain_by_id";
 

@@ -1,7 +1,6 @@
 //
 
 import { expect, test } from "bun:test";
-import "htmx.org";
 import _hyperscript from "hyperscript.org";
 import { disable_until_htmx_afterOnLoad } from "./disable_until_htmx:afterOnLoad";
 

@@ -1,16 +1,12 @@
 import type { Env } from "hono";
 import type { Session } from "hono-sessions";
-import type { BaseClient, TokenSet } from "openid-client";
 import type { AgentConnect_UserInfo } from "./AgentConnect_UserInfo";
 
 //
 
 interface Session_KeyMapping {
-  verifier: string;
-  oidc: BaseClient;
   userinfo?: AgentConnect_UserInfo;
   idtoken: string;
-  oauth2token: TokenSet;
   state: string;
   nonce: string;
 }

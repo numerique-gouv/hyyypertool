@@ -2,9 +2,9 @@
 
 import { z_username } from "@~/app.core/schema/z_username";
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
+import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
 import { UpdateModerationById } from "@~/moderations.repository";
 import type { get_moderation_dto } from "@~/moderations.repository/get_moderation";
-import type { MonComptePro_PgDatabase } from "@~/moncomptepro.database";
 import { append_comment } from "../comment_message";
 
 //
@@ -17,7 +17,7 @@ export async function mark_moderatio_as_rejected({
 }: {
   moderation: get_moderation_dto;
   userinfo: AgentConnect_UserInfo;
-  pg: MonComptePro_PgDatabase;
+  pg: IdentiteProconnect_PgDatabase;
   reason: string;
 }) {
   const { comment, id: moderation_id } = moderation;

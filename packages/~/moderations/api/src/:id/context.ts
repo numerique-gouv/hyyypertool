@@ -3,7 +3,10 @@
 import { NotFoundError } from "@~/app.core/error";
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
 import { type get_domain_count_dto } from "@~/organizations.repository/get_domain_count";
 import { type get_organization_members_count_dto } from "@~/organizations.repository/get_organization_members_count";
@@ -47,7 +50,7 @@ export const usePageRequestContext = useRequestContext<
 //
 
 export async function get_organization_member(
-  { pg }: { pg: MonComptePro_PgDatabase },
+  { pg }: { pg: IdentiteProconnect_PgDatabase },
   { user_id, organization_id }: { user_id: number; organization_id: number },
 ) {
   return pg.query.users_organizations.findFirst({
@@ -65,7 +68,7 @@ export type get_organization_member_dto = Awaited<
 //
 
 export async function get_moderation(
-  { pg }: { pg: MonComptePro_PgDatabase },
+  { pg }: { pg: IdentiteProconnect_PgDatabase },
   { moderation_id }: { moderation_id: number },
 ) {
   const moderation = await pg.query.moderations.findFirst({

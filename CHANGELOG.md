@@ -1,54 +1,80 @@
 # Changelog
 
-## [2025.4.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.1...2025.4.2) (2025-04-30)
-
+## [2025.6.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.1...2025.6.2) (2025-06-17)
 
 ### Bug Fixes
 
-* **moderation:** use keydow and change to detect input changes ([#878](https://github.com/numerique-gouv/hyyypertool/issues/878)) ([5e7eaac](https://github.com/numerique-gouv/hyyypertool/commit/5e7eaac6178bd2cd835de56557bfdd85702a6e27))
-
+- **app:** redirect_uri missmatch issue ([#927](https://github.com/numerique-gouv/hyyypertool/issues/927)) ([f99b009](https://github.com/numerique-gouv/hyyypertool/commit/f99b009e1bba27175c4a300d64eaa777049bf540))
+- **readme:** fix error in doc links ([#923](https://github.com/numerique-gouv/hyyypertool/issues/923)) ([5d0c1c5](https://github.com/numerique-gouv/hyyypertool/commit/5d0c1c51185227e500df1f3cd67156c41e2b981d))
 
 ### Features
 
-* **ui:** add toasters ([#877](https://github.com/numerique-gouv/hyyypertool/issues/877)) ([5f3c73f](https://github.com/numerique-gouv/hyyypertool/commit/5f3c73f69e6aa3a71ba3e10e943ae1841d4327a9))
+- **moderation:** add new verification type ([#937](https://github.com/numerique-gouv/hyyypertool/issues/937)) ([2334540](https://github.com/numerique-gouv/hyyypertool/commit/2334540210204aedcaeb9dd50512a7d8f431920b))
+
+## [2025.6.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.0...2025.6.1) (2025-06-11)
+
+### Bug Fixes
+
+- **moderation:** add sendNotification component ([#919](https://github.com/numerique-gouv/hyyypertool/issues/919)) ([c16c108](https://github.com/numerique-gouv/hyyypertool/commit/c16c108eb2ed56db25281ce1c782da2223830768))
+
+# [2025.6.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.2...2025.6.0) (2025-06-10)
+
+## [2025.5.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.1...2025.5.2) (2025-05-28)
+
+## [2025.5.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.5.0...2025.5.1) (2025-05-28)
+
+### Bug Fixes
+
+- **moderation:** improvement ui ([#897](https://github.com/numerique-gouv/hyyypertool/issues/897)) ([bcf9ad3](https://github.com/numerique-gouv/hyyypertool/commit/bcf9ad3da4b85ffc729a2ca7973b1ced4b17b6e3))
+
+# [2025.5.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.2...2025.5.0) (2025-05-20)
+
+### Bug Fixes
+
+- **moderation:** hide the modal if the request is successful ([#879](https://github.com/numerique-gouv/hyyypertool/issues/879)) ([6fcf0a3](https://github.com/numerique-gouv/hyyypertool/commit/6fcf0a3456c35d6a56563afce8072aed52803e4c))
+
+## [2025.4.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.1...2025.4.2) (2025-04-30)
+
+### Bug Fixes
+
+- **moderation:** use keydow and change to detect input changes ([#878](https://github.com/numerique-gouv/hyyypertool/issues/878)) ([5e7eaac](https://github.com/numerique-gouv/hyyypertool/commit/5e7eaac6178bd2cd835de56557bfdd85702a6e27))
+
+### Features
+
+- **ui:** add toasters ([#877](https://github.com/numerique-gouv/hyyypertool/issues/877)) ([5f3c73f](https://github.com/numerique-gouv/hyyypertool/commit/5f3c73f69e6aa3a71ba3e10e943ae1841d4327a9))
 
 ## [2025.4.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.4.0...2025.4.1) (2025-04-30)
 
-
 ### Bug Fixes
 
-* **button:** add type="button" on button to close modal and not submit ([#875](https://github.com/numerique-gouv/hyyypertool/issues/875)) ([57cb658](https://github.com/numerique-gouv/hyyypertool/commit/57cb65850b57345e1ffd990c00b6f76503cf65a0))
-* **moderation:** replace subject by raison in comments ([#864](https://github.com/numerique-gouv/hyyypertool/issues/864)) ([7a17836](https://github.com/numerique-gouv/hyyypertool/commit/7a17836a31f4a8c41de3ebf0d91f435434bf3739))
+- **button:** add type="button" on button to close modal and not submit ([#875](https://github.com/numerique-gouv/hyyypertool/issues/875)) ([57cb658](https://github.com/numerique-gouv/hyyypertool/commit/57cb65850b57345e1ffd990c00b6f76503cf65a0))
+- **moderation:** replace subject by raison in comments ([#864](https://github.com/numerique-gouv/hyyypertool/issues/864)) ([7a17836](https://github.com/numerique-gouv/hyyypertool/commit/7a17836a31f4a8c41de3ebf0d91f435434bf3739))
 
 # [2025.4.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.1...2025.4.0) (2025-04-22)
 
-
 ### Features
 
-* **moderation:** design flow 2 💥 ([#832](https://github.com/numerique-gouv/hyyypertool/issues/832)) ([15b9931](https://github.com/numerique-gouv/hyyypertool/commit/15b99310e745f7238eb8be716a18492d91cb758a))
-* **moderations:** add why its rejected ([#846](https://github.com/numerique-gouv/hyyypertool/issues/846)) ([1db1ec7](https://github.com/numerique-gouv/hyyypertool/commit/1db1ec78df6528031383883027dd9e4716e39f49))
+- **moderation:** design flow 2 💥 ([#832](https://github.com/numerique-gouv/hyyypertool/issues/832)) ([15b9931](https://github.com/numerique-gouv/hyyypertool/commit/15b99310e745f7238eb8be716a18492d91cb758a))
+- **moderations:** add why its rejected ([#846](https://github.com/numerique-gouv/hyyypertool/issues/846)) ([1db1ec7](https://github.com/numerique-gouv/hyyypertool/commit/1db1ec78df6528031383883027dd9e4716e39f49))
 
 ## [2025.3.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.3.0...2025.3.1) (2025-03-24)
 
-
 ### Features
 
-* **moderation:** update responses types ([#826](https://github.com/numerique-gouv/hyyypertool/issues/826)) ([b74541c](https://github.com/numerique-gouv/hyyypertool/commit/b74541cfe8a36b849c47eee9e5d930a0cb242cc9))
+- **moderation:** update responses types ([#826](https://github.com/numerique-gouv/hyyypertool/issues/826)) ([b74541c](https://github.com/numerique-gouv/hyyypertool/commit/b74541cfe8a36b849c47eee9e5d930a0cb242cc9))
 
 # [2025.3.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.5...2025.3.0) (2025-03-07)
 
-
 ### Features
 
-* **moderation:** replace old mcp link with pc link ([#811](https://github.com/numerique-gouv/hyyypertool/issues/811)) ([2212e40](https://github.com/numerique-gouv/hyyypertool/commit/2212e4039187f9ac67fa343aceda1c125af0b604))
-* **moderation:** update content of mail from user_with_existing_pc_account ([#810](https://github.com/numerique-gouv/hyyypertool/issues/810)) ([3e16854](https://github.com/numerique-gouv/hyyypertool/commit/3e16854bb2cb220a7333e197798b13817178fc9c))
+- **moderation:** replace old mcp link with pc link ([#811](https://github.com/numerique-gouv/hyyypertool/issues/811)) ([2212e40](https://github.com/numerique-gouv/hyyypertool/commit/2212e4039187f9ac67fa343aceda1c125af0b604))
+- **moderation:** update content of mail from user_with_existing_pc_account ([#810](https://github.com/numerique-gouv/hyyypertool/issues/810)) ([3e16854](https://github.com/numerique-gouv/hyyypertool/commit/3e16854bb2cb220a7333e197798b13817178fc9c))
 
 ## [2025.2.5](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.4...2025.2.5) (2025-02-27)
 
-
 ### Bug Fixes
 
-* **organization:** list by user id pagination ([#803](https://github.com/numerique-gouv/hyyypertool/issues/803)) ([546eb58](https://github.com/numerique-gouv/hyyypertool/commit/546eb58e1e1c42e83ecb05deb3ad7c046c61dea4))
+- **organization:** list by user id pagination ([#803](https://github.com/numerique-gouv/hyyypertool/issues/803)) ([546eb58](https://github.com/numerique-gouv/hyyypertool/commit/546eb58e1e1c42e83ecb05deb3ad7c046c61dea4))
 
 ## [2025.2.4](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.3...2025.2.4) (2025-02-26)
 
@@ -56,103 +82,91 @@
 
 ## [2025.2.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.1...2025.2.2) (2025-02-19)
 
-
 ### Features
 
-* **infra:** use @gouvfr-lasuite/proconnect.identite ([#792](https://github.com/numerique-gouv/hyyypertool/issues/792)) ([8a9272d](https://github.com/numerique-gouv/hyyypertool/commit/8a9272d88456946eb227d9087d7735f3586d898d))
-* **moderation:** list organisation domain in reponse type ([#783](https://github.com/numerique-gouv/hyyypertool/issues/783)) ([b74138c](https://github.com/numerique-gouv/hyyypertool/commit/b74138c578d58f22e5216d5ab6f13e9292d49bcb))
+- **infra:** use @gouvfr-lasuite/proconnect.identite ([#792](https://github.com/numerique-gouv/hyyypertool/issues/792)) ([8a9272d](https://github.com/numerique-gouv/hyyypertool/commit/8a9272d88456946eb227d9087d7735f3586d898d))
+- **moderation:** list organisation domain in reponse type ([#783](https://github.com/numerique-gouv/hyyypertool/issues/783)) ([b74138c](https://github.com/numerique-gouv/hyyypertool/commit/b74138c578d58f22e5216d5ab6f13e9292d49bcb))
 
 ## [2025.2.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.2.0...2025.2.1) (2025-02-05)
 
-
 ### Bug Fixes
 
-* **crips:** add CRISP_RESOLVE_DELAY ([#774](https://github.com/numerique-gouv/hyyypertool/issues/774)) ([cd141b1](https://github.com/numerique-gouv/hyyypertool/commit/cd141b14d10e6862b1458f786ef73518c40347f1))
+- **crips:** add CRISP_RESOLVE_DELAY ([#774](https://github.com/numerique-gouv/hyyypertool/issues/774)) ([cd141b1](https://github.com/numerique-gouv/hyyypertool/commit/cd141b14d10e6862b1458f786ef73518c40347f1))
 
 # [2025.2.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.7...2025.2.0) (2025-02-03)
 
-
 ### Bug Fixes
 
-* **moderation:** existing email response ([#768](https://github.com/numerique-gouv/hyyypertool/issues/768)) ([24355a7](https://github.com/numerique-gouv/hyyypertool/commit/24355a7cd99b899f10041c1f220889b3ddf5f170))
+- **moderation:** existing email response ([#768](https://github.com/numerique-gouv/hyyypertool/issues/768)) ([24355a7](https://github.com/numerique-gouv/hyyypertool/commit/24355a7cd99b899f10041c1f220889b3ddf5f170))
 
 ## [2025.1.7](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.6...2025.1.7) (2025-01-27)
 
 ## [2025.1.6](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.5...2025.1.6) (2025-01-21)
 
-
 ### Features
 
-* **moderation:** delete unused responses type ([#753](https://github.com/numerique-gouv/hyyypertool/issues/753)) ([52b4170](https://github.com/numerique-gouv/hyyypertool/commit/52b4170025f2d424f52fddd3f38c8c02439b08a6))
+- **moderation:** delete unused responses type ([#753](https://github.com/numerique-gouv/hyyypertool/issues/753)) ([52b4170](https://github.com/numerique-gouv/hyyypertool/commit/52b4170025f2d424f52fddd3f38c8c02439b08a6))
 
 ## [2025.1.5](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.4...2025.1.5) (2025-01-21)
 
-
 ### Features
 
-* **moderation:** Agent “ComCom, ComAgglo, Métropole” —> Communes ([#752](https://github.com/numerique-gouv/hyyypertool/issues/752)) ([1afe024](https://github.com/numerique-gouv/hyyypertool/commit/1afe0241a0c8857e7c460153fdb80fd9fbd80d68))
+- **moderation:** Agent “ComCom, ComAgglo, Métropole” —> Communes ([#752](https://github.com/numerique-gouv/hyyypertool/issues/752)) ([1afe024](https://github.com/numerique-gouv/hyyypertool/commit/1afe0241a0c8857e7c460153fdb80fd9fbd80d68))
 
 ## [2025.1.4](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.3...2025.1.4) (2025-01-21)
 
-
 ### Bug Fixes
 
-* **moderation:** fix wrong label and describe test on moderation ([#751](https://github.com/numerique-gouv/hyyypertool/issues/751)) ([77fa403](https://github.com/numerique-gouv/hyyypertool/commit/77fa4030affa1667ecb38e3efbd5d222d9602598))
-
+- **moderation:** fix wrong label and describe test on moderation ([#751](https://github.com/numerique-gouv/hyyypertool/issues/751)) ([77fa403](https://github.com/numerique-gouv/hyyypertool/commit/77fa4030affa1667ecb38e3efbd5d222d9602598))
 
 ### Features
 
-* **moderation:** Agent - departmental e-mail address -> Admin centrale ([#740](https://github.com/numerique-gouv/hyyypertool/issues/740)) ([aea9285](https://github.com/numerique-gouv/hyyypertool/commit/aea9285b13981cc3b943217763f2a93a156a03a6))
+- **moderation:** Agent - departmental e-mail address -> Admin centrale ([#740](https://github.com/numerique-gouv/hyyypertool/issues/740)) ([aea9285](https://github.com/numerique-gouv/hyyypertool/commit/aea9285b13981cc3b943217763f2a93a156a03a6))
 
 ## [2025.1.3](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.2...2025.1.3) (2025-01-21)
 
-
 ### Features
 
-* **users:** display totp verified at ([#750](https://github.com/numerique-gouv/hyyypertool/issues/750)) ([fac20da](https://github.com/numerique-gouv/hyyypertool/commit/fac20da72475afbbeaefc16a0f6e3299a0d100d8))
+- **users:** display totp verified at ([#750](https://github.com/numerique-gouv/hyyypertool/issues/750)) ([fac20da](https://github.com/numerique-gouv/hyyypertool/commit/fac20da72475afbbeaefc16a0f6e3299a0d100d8))
 
 ## [2025.1.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.1...2025.1.2) (2025-01-20)
 
-
 ### Bug Fixes
 
-* **typo:** replace agentConnect with ProConnect ([#748](https://github.com/numerique-gouv/hyyypertool/issues/748)) ([f4ad32d](https://github.com/numerique-gouv/hyyypertool/commit/f4ad32d4ecf16dcf7f4381c177104eea5f883d63))
+- **typo:** replace agentConnect with ProConnect ([#748](https://github.com/numerique-gouv/hyyypertool/issues/748)) ([f4ad32d](https://github.com/numerique-gouv/hyyypertool/commit/f4ad32d4ecf16dcf7f4381c177104eea5f883d63))
 
 ## [2025.1.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.1.0...2025.1.1) (2025-01-20)
 
 # [2025.1.0](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.5...2025.1.0) (2025-01-20)
 
-
 ### Bug Fixes
 
-* **user:** typo on sent messages ([10d66f5](https://github.com/numerique-gouv/hyyypertool/commit/10d66f56330029d7da5b5bdb76816fc26b0764f9))
-
+- **user:** typo on sent messages ([10d66f5](https://github.com/numerique-gouv/hyyypertool/commit/10d66f56330029d7da5b5bdb76816fc26b0764f9))
 
 ### Features
 
-* **moderation:** add more precise existing establishment CNRS response ([#733](https://github.com/numerique-gouv/hyyypertool/issues/733)) ([8f2e803](https://github.com/numerique-gouv/hyyypertool/commit/8f2e803fa071555232f4c8c24285dba9e3796eb6))
-* **moderation:** add university email cnrs response ([#730](https://github.com/numerique-gouv/hyyypertool/issues/730)) ([d9d48b2](https://github.com/numerique-gouv/hyyypertool/commit/d9d48b27b692368f02c64751dfbf2274e08d7488))
-* **moderation:** add user with existing account moderation ([#729](https://github.com/numerique-gouv/hyyypertool/issues/729)) ([9242528](https://github.com/numerique-gouv/hyyypertool/commit/924252893079883b27678bb77d8e59edd5b860c1))
-* **moderation:** Agent outside Min Finances -> Chorus Pro ([#743](https://github.com/numerique-gouv/hyyypertool/issues/743)) ([4866930](https://github.com/numerique-gouv/hyyypertool/commit/4866930fa55f9aaa98e6e3e896ff6a6561068686))
-* **moderation:** association with staff but no domain name : ordinary person ([#736](https://github.com/numerique-gouv/hyyypertool/issues/736)) ([ca0f95f](https://github.com/numerique-gouv/hyyypertool/commit/ca0f95ffe70b03d963eed9c85301cc1fe55c1c2a))
-* **moderation:** association with staff but no domain name ([#735](https://github.com/numerique-gouv/hyyypertool/issues/735)) ([615d96a](https://github.com/numerique-gouv/hyyypertool/commit/615d96aeae975e2f9fb96ba2a42fdbaf0e0eccbe))
-* **moderation:** E-mail Public administration - Employing organisation ([#744](https://github.com/numerique-gouv/hyyypertool/issues/744)) ([29589ce](https://github.com/numerique-gouv/hyyypertool/commit/29589cea603104215b1df1a5139d001caa813227))
-* **moderation:** existing domain name response ([#734](https://github.com/numerique-gouv/hyyypertool/issues/734)) ([4fb852c](https://github.com/numerique-gouv/hyyypertool/commit/4fb852c4bde1de706422de772bad9cd9fe1b9d1c))
-* **moderation:** presta E-mail Employing organisation or beta.gouv ([#745](https://github.com/numerique-gouv/hyyypertool/issues/745)) ([3598025](https://github.com/numerique-gouv/hyyypertool/commit/3598025e72b5fd270848a9726d1f806f4141bd79))
-* **moderation:** Reservist or other - Personal e-mail ([#746](https://github.com/numerique-gouv/hyyypertool/issues/746)) ([6331134](https://github.com/numerique-gouv/hyyypertool/commit/6331134adea51fa7de80d0445e549f2d7efe3cc3))
-* **moderation:** Seconded agent diplomatie.gouv -> Ministry of the Interior ([#739](https://github.com/numerique-gouv/hyyypertool/issues/739)) ([a980a13](https://github.com/numerique-gouv/hyyypertool/commit/a980a13c876fc4007de97eee64f3b6b91e276a2b))
-* **moderation:** Student - Host organisation ([#741](https://github.com/numerique-gouv/hyyypertool/issues/741)) ([b91742a](https://github.com/numerique-gouv/hyyypertool/commit/b91742a284e0cefc3bb04249395427111e916bcd))
-* **moderation:** Student - School or training establishment ([#742](https://github.com/numerique-gouv/hyyypertool/issues/742)) ([6449c3f](https://github.com/numerique-gouv/hyyypertool/commit/6449c3f3d7fefbb5e21f44398b247e3061b78963))
-* **ui:** expect navigator.writeText to exist ([e3c6aa1](https://github.com/numerique-gouv/hyyypertool/commit/e3c6aa15f4888cd35174a8d1082c5dbcffcc4e92))
+- **moderation:** add more precise existing establishment CNRS response ([#733](https://github.com/numerique-gouv/hyyypertool/issues/733)) ([8f2e803](https://github.com/numerique-gouv/hyyypertool/commit/8f2e803fa071555232f4c8c24285dba9e3796eb6))
+- **moderation:** add university email cnrs response ([#730](https://github.com/numerique-gouv/hyyypertool/issues/730)) ([d9d48b2](https://github.com/numerique-gouv/hyyypertool/commit/d9d48b27b692368f02c64751dfbf2274e08d7488))
+- **moderation:** add user with existing account moderation ([#729](https://github.com/numerique-gouv/hyyypertool/issues/729)) ([9242528](https://github.com/numerique-gouv/hyyypertool/commit/924252893079883b27678bb77d8e59edd5b860c1))
+- **moderation:** Agent outside Min Finances -> Chorus Pro ([#743](https://github.com/numerique-gouv/hyyypertool/issues/743)) ([4866930](https://github.com/numerique-gouv/hyyypertool/commit/4866930fa55f9aaa98e6e3e896ff6a6561068686))
+- **moderation:** association with staff but no domain name : ordinary person ([#736](https://github.com/numerique-gouv/hyyypertool/issues/736)) ([ca0f95f](https://github.com/numerique-gouv/hyyypertool/commit/ca0f95ffe70b03d963eed9c85301cc1fe55c1c2a))
+- **moderation:** association with staff but no domain name ([#735](https://github.com/numerique-gouv/hyyypertool/issues/735)) ([615d96a](https://github.com/numerique-gouv/hyyypertool/commit/615d96aeae975e2f9fb96ba2a42fdbaf0e0eccbe))
+- **moderation:** E-mail Public administration - Employing organisation ([#744](https://github.com/numerique-gouv/hyyypertool/issues/744)) ([29589ce](https://github.com/numerique-gouv/hyyypertool/commit/29589cea603104215b1df1a5139d001caa813227))
+- **moderation:** existing domain name response ([#734](https://github.com/numerique-gouv/hyyypertool/issues/734)) ([4fb852c](https://github.com/numerique-gouv/hyyypertool/commit/4fb852c4bde1de706422de772bad9cd9fe1b9d1c))
+- **moderation:** presta E-mail Employing organisation or beta.gouv ([#745](https://github.com/numerique-gouv/hyyypertool/issues/745)) ([3598025](https://github.com/numerique-gouv/hyyypertool/commit/3598025e72b5fd270848a9726d1f806f4141bd79))
+- **moderation:** Reservist or other - Personal e-mail ([#746](https://github.com/numerique-gouv/hyyypertool/issues/746)) ([6331134](https://github.com/numerique-gouv/hyyypertool/commit/6331134adea51fa7de80d0445e549f2d7efe3cc3))
+- **moderation:** Seconded agent diplomatie.gouv -> Ministry of the Interior ([#739](https://github.com/numerique-gouv/hyyypertool/issues/739)) ([a980a13](https://github.com/numerique-gouv/hyyypertool/commit/a980a13c876fc4007de97eee64f3b6b91e276a2b))
+- **moderation:** Student - Host organisation ([#741](https://github.com/numerique-gouv/hyyypertool/issues/741)) ([b91742a](https://github.com/numerique-gouv/hyyypertool/commit/b91742a284e0cefc3bb04249395427111e916bcd))
+- **moderation:** Student - School or training establishment ([#742](https://github.com/numerique-gouv/hyyypertool/issues/742)) ([6449c3f](https://github.com/numerique-gouv/hyyypertool/commit/6449c3f3d7fefbb5e21f44398b247e3061b78963))
+- **ui:** expect navigator.writeText to exist ([e3c6aa1](https://github.com/numerique-gouv/hyyypertool/commit/e3c6aa15f4888cd35174a8d1082c5dbcffcc4e92))
 
 ## [2024.12.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.4...2024.12.5) (2024-12-17)
 
-
 ### Bug Fixes
 
-* **organization:** correct verified_by_coop_mediation_numerique label ([#701](https://github.com/numerique-gouv/hyyypertool/issues/701)) ([0fd162b](https://github.com/numerique-gouv/hyyypertool/commit/0fd162b3d357ac865486a62169da5e3cab628bb4))
-* **organization:** eol after domain creation date ([#707](https://github.com/numerique-gouv/hyyypertool/issues/707)) ([f0d18ff](https://github.com/numerique-gouv/hyyypertool/commit/f0d18ff7547894ed233946dbc2df24305ad751f2))
-* **users:** notify the user of the password reset ([#704](https://github.com/numerique-gouv/hyyypertool/issues/704)) ([df76994](https://github.com/numerique-gouv/hyyypertool/commit/df76994d6fd3166a6d99dfae9e485e7e6482670f))
+- **organization:** correct verified_by_coop_mediation_numerique label ([#701](https://github.com/numerique-gouv/hyyypertool/issues/701)) ([0fd162b](https://github.com/numerique-gouv/hyyypertool/commit/0fd162b3d357ac865486a62169da5e3cab628bb4))
+- **organization:** eol after domain creation date ([#707](https://github.com/numerique-gouv/hyyypertool/issues/707)) ([f0d18ff](https://github.com/numerique-gouv/hyyypertool/commit/f0d18ff7547894ed233946dbc2df24305ad751f2))
+- **users:** notify the user of the password reset ([#704](https://github.com/numerique-gouv/hyyypertool/issues/704)) ([df76994](https://github.com/numerique-gouv/hyyypertool/commit/df76994d6fd3166a6d99dfae9e485e7e6482670f))
 
 ## [2024.12.4](https://github.com/numerique-gouv/hyyypertool/compare/2024.12.3...2024.12.4) (2024-12-11)
 
@@ -190,7 +204,7 @@
 
 ### Features
 
-- **infra:** update moncomptepro schema ([#683](https://github.com/numerique-gouv/hyyypertool/issues/683)) ([c1dd743](https://github.com/numerique-gouv/hyyypertool/commit/c1dd7436d81ab4b6aeb501cfb61a2d6fefc11518))
+- **infra:** update identite schema ([#683](https://github.com/numerique-gouv/hyyypertool/issues/683)) ([c1dd743](https://github.com/numerique-gouv/hyyypertool/commit/c1dd7436d81ab4b6aeb501cfb61a2d6fefc11518))
 - **organization:** display verificated at date ([#685](https://github.com/numerique-gouv/hyyypertool/issues/685)) ([53e127d](https://github.com/numerique-gouv/hyyypertool/commit/53e127dd5e2f3647acb53c0d1992f572c0be04ee))
 - **users:** send crips message to informe the user ([#686](https://github.com/numerique-gouv/hyyypertool/issues/686)) ([75db022](https://github.com/numerique-gouv/hyyypertool/commit/75db022cd05bf815c1a17eed11d8e14e7d4722b5))
 - **users:** update user page ([#684](https://github.com/numerique-gouv/hyyypertool/issues/684)) ([c6dad3f](https://github.com/numerique-gouv/hyyypertool/commit/c6dad3f9f6cc7e2ac49c9f5acdd25f79e8d0968b))
@@ -441,8 +455,8 @@
 
 ### Features
 
-- **moderation:** use moncomptepro sdk ([2ccca91](https://github.com/numerique-gouv/hyyypertool/commit/2ccca9102a74f8f33f66310b0b940794affd3b0a))
-- **moncomptepro:** refactor moderations ([#411](https://github.com/numerique-gouv/hyyypertool/issues/411)) ([f193b79](https://github.com/numerique-gouv/hyyypertool/commit/f193b7934690d79e884c16477995e66d34300d53))
+- **moderation:** use identite sdk ([2ccca91](https://github.com/numerique-gouv/hyyypertool/commit/2ccca9102a74f8f33f66310b0b940794affd3b0a))
+- **identite:** refactor moderations ([#411](https://github.com/numerique-gouv/hyyypertool/issues/411)) ([f193b79](https://github.com/numerique-gouv/hyyypertool/commit/f193b7934690d79e884c16477995e66d34300d53))
 
 ## [2024.7.5](https://github.com/numerique-gouv/hyyypertool/compare/2024.7.4...2024.7.5) (2024-07-19)
 
@@ -535,7 +549,7 @@
 
 ### Features
 
-- **moncomptepro:** update database schema ([#284](https://github.com/numerique-gouv/hyyypertool/issues/284)) ([4f1fea1](https://github.com/numerique-gouv/hyyypertool/commit/4f1fea1e33eb3fa76500121902c62e0c69f17629))
+- **identite:** update database schema ([#284](https://github.com/numerique-gouv/hyyypertool/issues/284)) ([4f1fea1](https://github.com/numerique-gouv/hyyypertool/commit/4f1fea1e33eb3fa76500121902c62e0c69f17629))
 
 ### Reverts
 
@@ -759,7 +773,7 @@
 
 ### Features
 
-- **database:** update moncomptepro schema ([#58](https://github.com/numerique-gouv/hyyypertool/issues/58)) ([2814b0b](https://github.com/numerique-gouv/hyyypertool/commit/2814b0bf27d0be3798040d45c456336ea0219272))
+- **database:** update identite schema ([#58](https://github.com/numerique-gouv/hyyypertool/issues/58)) ([2814b0b](https://github.com/numerique-gouv/hyyypertool/commit/2814b0bf27d0be3798040d45c456336ea0219272))
 - **moderation:** create ticket from moderation reponse ([#61](https://github.com/numerique-gouv/hyyypertool/issues/61)) ([3812f2b](https://github.com/numerique-gouv/hyyypertool/commit/3812f2b9b1d60b7f4f3e0d873c3a2adcd599a8d4)), closes [#45](https://github.com/numerique-gouv/hyyypertool/issues/45)
 
 ## [2024.2.2](https://github.com/numerique-gouv/hyyypertool/compare/2024.2.1...2024.2.2) (2024-02-09)

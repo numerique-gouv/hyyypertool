@@ -16,7 +16,7 @@ export default new Hono<ContextType>().get(
   jsxRenderer(),
   zValidator("param", ParamSchema),
   zValidator("query", QuerySchema),
-  async function set_moderation({ req, set, var: { moncomptepro_pg } }, next) {
+  async function set_moderation({ req, set, var: { identite_pg } }, next) {
     const { id: user_id } = req.valid("param");
     const query = req.query();
     const pagination = match(
@@ -28,7 +28,7 @@ export default new Hono<ContextType>().get(
     set("pagination", pagination);
     set(
       "query_organizations_collection",
-      get_organizations_by_user_id(moncomptepro_pg, {
+      get_organizations_by_user_id(identite_pg, {
         user_id,
         pagination: { ...pagination, page: pagination.page - 1 },
       }),

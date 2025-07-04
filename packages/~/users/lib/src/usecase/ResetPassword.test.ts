@@ -2,9 +2,13 @@
 
 import { anais_tailhade } from "@~/app.middleware/set_userinfo#fixture";
 import { crisp } from "@~/crisp.lib/api#mock";
-import { schema } from "@~/moncomptepro.database";
-import { create_pink_diamond_user } from "@~/moncomptepro.database/seed/unicorn";
-import { empty_database, migrate, pg } from "@~/moncomptepro.database/testing";
+import { schema } from "@~/identite-proconnect.database";
+import { create_pink_diamond_user } from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { eq } from "drizzle-orm";
 import { ResetPassword } from "./ResetPassword";

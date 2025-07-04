@@ -13,6 +13,7 @@ test("returns agent 'Communes’ -> ComCom, ComAgglo, Métropole response", asyn
       <context.Provider
         value={
           {
+            domain: "🦒",
             moderation: {
               organization: { cached_libelle: "🦄" },
             },

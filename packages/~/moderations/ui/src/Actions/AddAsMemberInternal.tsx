@@ -20,8 +20,13 @@ export function AddAsMemberInternal() {
         type="radio"
         value={validate_form_schema.shape.add_member.Enum.AS_INTERNAL}
         checked={!is_already_internal_member}
+        _={`
+          on change
+            remove .hidden from #domainInternalSection
+            add .hidden to #domainExternalSection
+        `}
       />
-      <label class="fr-label !flex-row" for={id}>
+      <label class="fr-label flex-row!" for={id}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
         QU'INTERNE
       </label>

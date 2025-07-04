@@ -4,6 +4,7 @@ import { hx_urls } from "@~/app.urls";
 import { AddAsMemberExternal } from "./AddAsMemberExternal";
 import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
+import { SendNotification } from "./SendNotification";
 import { TagInput } from "./TagInput";
 
 export async function AcceptModal({
@@ -20,7 +21,7 @@ export async function AcceptModal({
   });
   return (
     <div
-      class="fixed bottom-14 right-0 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-[--text-action-high-blue-france] bg-[--blue-france-975-75] p-6"
+      class="fixed right-0 bottom-14 z-50 m-2 hidden w-1/2 justify-self-end border-solid border-(--text-action-high-blue-france) bg-(--blue-france-975-75) px-4 py-2"
       id="acceptModal"
       aria-label="la modale de validation"
     >
@@ -38,38 +39,45 @@ export async function AcceptModal({
       </div>
       <p>
         A propos de{" "}
-        <span class="font-bold text-[--text-action-high-blue-france]">
-          {userEmail}
+        <span class="font-bold text-(--text-action-high-blue-france)">
+          {userEmail}{" "}
         </span>
-        , je valide :
+        pour l'organisation <b>{moderation.organization.cached_libelle}</b>, je
+        valide :
       </p>
       <form
         {...hx_path_validate_moderation}
         hx-swap="none"
         _={`
             on submit
-              add .hidden to #acceptModal
               wait for ${Htmx_Events.enum.afterSettle}
+              add .hidden to #acceptModal
               go to the top of body smoothly
               wait 2s
               go back
           `}
       >
         <div class="mb-5">
-          <AddDomain />
-        </div>
-        <div class="mb-5">
           <AddAsMemberInternal />
+        </div>
+        <div class="mb-5" id="domainInternalSection">
+          <AddDomain mailType="interne" />
         </div>
         <div class="mb-5">
           <AddAsMemberExternal />
         </div>
+        <div class="mb-5 hidden" id="domainExternalSection">
+          <AddDomain mailType="externe" />
+        </div>
         <div class="mb-5">
           <TagInput />
         </div>
+        <div class="mb-5">
+          <SendNotification />
+        </div>
         <div>
-          <button class={`${button()} w-full justify-center`} type="submit">
-            Notifier le membre et terminer
+          <button class={`${button()} justify-center`} type="submit">
+            Terminer
           </button>
         </div>
       </form>

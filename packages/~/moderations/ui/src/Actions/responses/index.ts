@@ -1,6 +1,5 @@
 //
 
-import * as accountant from "./accountant";
 import * as admin_centrale from "./admin_centrale";
 import * as agent_comcom_comaglo from "./agent_comcom_comaglo";
 import * as agent_comcom_to_commune from "./agent_comcom_to_commune";
@@ -27,6 +26,7 @@ import * as presta_email_admin_public from "./presta_email_admin_public";
 import * as presta_email_orga_public_beta_gouv from "./presta_email_orga_public_beta_gouv";
 import * as public_or_private_organization from "./public_or_private_organization";
 import * as refusal_france_travail from "./refusal_france_travail";
+import * as refusal_interieur_gouv from "./refusal_interieur_gouv";
 import * as reservist_or_other_email_perso from "./reservist_or_other_email_perso";
 import * as seconded_agent_min_interior from "./seconded_agent_min_interior";
 import * as student_host_organisation from "./student_host_organisation";
@@ -41,7 +41,7 @@ import * as user_with_existing_pc_account from "./user_with_existing_pc_account"
 export const reponse_templates = [
   use_official_email,
   contractors,
-  accountant,
+  refusal_interieur_gouv,
   enseignement_agricole,
   missing_name,
   first_and_last_name_inversion,

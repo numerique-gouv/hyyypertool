@@ -46,7 +46,7 @@ jobs:
           echo "Fake https://entreprise.api.gouv.fr ready"
           curl -sSf -XGET http://127.0.0.1:6200/readyz
           echo
-          echo "Fake https://app.moncomptepro.beta.gouv.fr ready"
+          echo "Fake https://identite.proconnect.gouv.fr ready"
           curl -sSf -XGET http://127.0.0.1:6300/readyz
         working-directory: "."
 
@@ -55,7 +55,7 @@ jobs:
           touch package-lock.json
 
       - name: Cypress run
-        uses: cypress-io/github-action@108b8684ae52e735ff7891524cbffbcd4be5b19f # v6.7.16
+        uses: cypress-io/github-action@6c143abc292aa835d827652c2ea025d098311070 # v6.10.1
         env:
           CONSOLA_LEVEL: "2"
           DEPLOY_ENV: "production"

@@ -8,9 +8,9 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
-import * as schema from "../packages/~/infra/moncomptepro/database/src/drizzle/schema.js";
-import { delete_database } from "../packages/~/infra/moncomptepro/database/src/seed/delete.js";
-import { insert_database } from "../packages/~/infra/moncomptepro/database/src/seed/insert.js";
+import * as schema from "../packages/~/infra/identite-proconnect/database/src/drizzle/schema.js";
+import { delete_database } from "../packages/~/infra/identite-proconnect/database/src/seed/delete.js";
+import { insert_database } from "../packages/~/infra/identite-proconnect/database/src/seed/insert.js";
 
 //
 
@@ -25,6 +25,9 @@ export default defineConfig({
     setupNodeEvents,
     specPattern: "**/*.feature",
     supportFile: false,
+  },
+  env: {
+    APP_MONCOMPTEPRO_URL: "http://localhost:6300",
   },
   video: true,
 });

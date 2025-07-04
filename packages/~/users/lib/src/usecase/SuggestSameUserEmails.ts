@@ -3,10 +3,10 @@
 import type { Simplify } from "@~/app.core/types";
 import {
   schema,
-  type MonCompteProDatabaseCradle,
+  type IdentiteProconnectDatabaseCradle,
   type User,
   type Users_Organizations,
-} from "@~/moncomptepro.database";
+} from "@~/identite-proconnect.database";
 import { and, eq, ilike } from "drizzle-orm";
 
 //
@@ -14,7 +14,9 @@ import { and, eq, ilike } from "drizzle-orm";
 type Pattern = Simplify<
   Pick<User, "family_name"> & Pick<Users_Organizations, "organization_id">
 >;
-export function SuggestSameUserEmails({ pg }: MonCompteProDatabaseCradle) {
+export function SuggestSameUserEmails({
+  pg,
+}: IdentiteProconnectDatabaseCradle) {
   return async function suggest_same_user_emails(pattern: Pattern) {
     const { family_name, organization_id } = pattern;
     const same_family_name_members = await pg

@@ -6,7 +6,7 @@ import {
 } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
-import type { MonComptePro_Pg_Context } from "@~/app.middleware/moncomptepro_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
@@ -53,8 +53,8 @@ export function Moderations_Page({
   search: Search;
 }) {
   const {
-    var: { moncomptepro_pg },
-  } = useRequestContext<MonComptePro_Pg_Context>();
+    var: { identite_pg },
+  } = useRequestContext<IdentiteProconnect_Pg_Context>();
   const { page, page_size } = pagination;
   const {
     day: date,
@@ -64,7 +64,7 @@ export function Moderations_Page({
     search_email,
     search_siret,
   } = search;
-  const query_moderations_list = get_moderations_list(moncomptepro_pg, {
+  const query_moderations_list = get_moderations_list(identite_pg, {
     search: {
       created_at: date,
       email: search_email,
@@ -231,7 +231,7 @@ async function ModerationList_Table() {
     useContext(Moderations_Context);
   const { count, moderations } = await query_moderations_list;
   return (
-    <div class="fr-table [&>table]:table" id={MODERATION_TABLE_ID}>
+    <div class="fr-table *:table!" id={MODERATION_TABLE_ID}>
       <table>
         <thead>
           <tr>

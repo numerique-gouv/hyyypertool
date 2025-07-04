@@ -71,7 +71,7 @@ async function Table() {
       $table,
       hx_domains_query_props,
       query_unverified_domains,
-      moncomptepro_pg,
+      identite_pg,
     },
   } = usePageRequestContext();
   const { q } = req.valid("query");
@@ -81,13 +81,13 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, domains } = await query_unverified_domains(moncomptepro_pg, {
+  const { count, domains } = await query_unverified_domains(identite_pg, {
     pagination: { ...pagination, page: pagination.page - 1 },
     search: q ? String(q) : undefined,
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table aria-describedby={$describedby}>
         <thead>
           <tr>
@@ -152,7 +152,7 @@ function Row({
       <td>{organization.siret}</td>
       <td>{organization.cached_libelle}</td>
       <td>{organization.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }

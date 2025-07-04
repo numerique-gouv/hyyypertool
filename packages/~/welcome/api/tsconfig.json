@@ -4,7 +4,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "outDir": "./node_modules/.cache/tsc",
-    "types": ["bun-types"]
+    "types": []
   },
   "extends": "@~/config.typescript/api/tsconfig.json",
   "references": [

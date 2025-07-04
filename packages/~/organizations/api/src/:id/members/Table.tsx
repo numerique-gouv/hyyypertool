@@ -9,7 +9,7 @@ import { hx_urls, urls } from "@~/app.urls";
 import {
   Verification_Type_Schema,
   type Verification_Type,
-} from "@~/moncomptepro.lib/verification_type";
+} from "@~/identite-proconnect.lib/verification_type";
 import { useContext } from "hono/jsx";
 import type { VariantProps } from "tailwind-variants";
 import { Member_Context, usePageRequestContext } from "./context";
@@ -35,7 +35,7 @@ export async function Table() {
   };
 
   return (
-    <div class="fr-table [&>table]:table">
+    <div class="fr-table *:table!">
       <table aria-describedby={describedby}>
         <thead>
           <tr>
@@ -148,8 +148,7 @@ async function Row_Actions() {
                 user_id: user_id.toString(),
               },
               form: {
-                verification_type:
-                  Verification_Type_Schema.Enum.verified_email_domain,
+                verification_type: Verification_Type_Schema.Enum.domain,
               },
             })}
             hx-swap="none"

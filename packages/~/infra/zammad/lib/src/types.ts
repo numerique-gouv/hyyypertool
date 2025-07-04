@@ -59,7 +59,7 @@ export interface Article {
   content_type: "text/html";
   created_at: string;
   created_by: string;
-  from?: "MonComptePro" | string;
+  from?: "IdentiteProconnect" | string;
   id: number;
   internal?: boolean;
   sender_id: number;

@@ -5,13 +5,13 @@ import {
   create_pink_diamond_user,
   create_red_diamond_user,
   create_unicorn_organization,
-} from "@~/moncomptepro.database/seed/unicorn";
+} from "@~/identite-proconnect.database/seed/unicorn";
 import {
   add_user_to_organization,
   empty_database,
   migrate,
   pg,
-} from "@~/moncomptepro.database/testing";
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { SuggestSameUserEmails } from "./SuggestSameUserEmails";
 

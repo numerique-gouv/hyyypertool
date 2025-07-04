@@ -9,8 +9,6 @@
     }
   },
   "dependencies": {
-    "@hono/node-server": "1.14.0",
-    "@hono/sentry": "1.2.1",
     "@~/app.core": "workspace:*",
     "@~/app.layout": "workspace:*",
     "@~/app.sentry": "workspace:*",
@@ -20,14 +18,19 @@
     "@~/proxy.api": "workspace:*",
     "@~/users.api": "workspace:*",
     "@~/welcome.api": "workspace:*",
+    "@hono/node-server": "1.14.4",
+    "@hono/sentry": "1.2.2",
     "await-to-js": "3.0.0",
     "consola": "3.4.2",
     "drizzle-orm": "0.41.0",
-    "hono": "4.7.6",
-    "htmx.ext...chunked-transfer": "1.0.4",
-    "htmx.org": "1.9.12",
+    "hono": "4.8.2",
+    "htmx-ext-debug": "2.0.1",
+    "htmx-ext-include-vals": "2.0.1",
+    "htmx-ext-sse": "2.2.3",
+    "htmx.ext...chunked-transfer": "2.1.0",
+    "htmx.org": "2.0.0",
     "hyperscript.org": "0.9.14",
-    "ts-pattern": "5.7.0",
+    "ts-pattern": "5.7.1",
     "youch": "3.3.4"
   },
   "devDependencies": {

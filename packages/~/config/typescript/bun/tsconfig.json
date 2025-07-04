@@ -3,6 +3,6 @@
   "display": "Bun",
   "extends": "../base/tsconfig.json",
   "compilerOptions": {
-    "types": ["bun-types"]
+    "types": ["bun"]
   }
 }

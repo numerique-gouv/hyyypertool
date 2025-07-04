@@ -18,15 +18,15 @@ import { Hono } from "hono";
 export default new Hono<App_Context>().patch(
   "/",
   zValidator("param", Entity_Schema),
-  async ({ text, req, var: { moncomptepro_pg, userinfo } }) => {
+  async ({ text, req, var: { identite_pg, userinfo } }) => {
     const { id } = req.valid("param");
 
     const reprocess_moderation_by_id = ReprocessModerationById({
-      get_moderation_by_id: GetModerationById({ pg: moncomptepro_pg }),
+      get_moderation_by_id: GetModerationById({ pg: identite_pg }),
       remove_user_from_organization: RemoveUserFromOrganization({
-        pg: moncomptepro_pg,
+        pg: identite_pg,
       }),
-      update_moderation_by_id: UpdateModerationById({ pg: moncomptepro_pg }),
+      update_moderation_by_id: UpdateModerationById({ pg: identite_pg }),
       userinfo,
     });
 

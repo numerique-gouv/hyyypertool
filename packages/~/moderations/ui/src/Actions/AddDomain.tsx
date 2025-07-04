@@ -3,7 +3,7 @@ import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import { useContext } from "hono/jsx";
 import { context } from "./context";
 
-export function AddDomain() {
+export function AddDomain(props: { mailType: string }) {
   const { domain } = useContext(context);
   const id = hyper_ref();
   return (
@@ -14,9 +14,9 @@ export function AddDomain() {
         type="checkbox"
         value="true"
       />
-      <label class="fr-label !flex-row" for={id}>
-        J’autorise le domaine <b class="mx-1">{domain}</b> pour toute
-        l’organisation
+      <label for={id}>
+        J’autorise le domaine <b class="mx-1">{domain}</b> en {props.mailType} à
+        l'organisation
       </label>
     </div>
   );

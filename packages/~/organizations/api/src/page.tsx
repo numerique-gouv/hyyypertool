@@ -71,7 +71,7 @@ function Filter() {
 async function Table() {
   const {
     req,
-    var: { query_organizations, moncomptepro_pg },
+    var: { query_organizations, identite_pg },
   } = usePageRequestContext();
   const { q } = req.valid("query");
   const pagination = match(
@@ -80,13 +80,13 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, organizations } = await query_organizations(moncomptepro_pg, {
+  const { count, organizations } = await query_organizations(identite_pg, {
     pagination: { ...pagination, page: pagination.page - 1 },
     search: q ? String(q) : undefined,
   });
 
   return (
-    <div class="fr-table [&>table]:table" id={$table}>
+    <div class="fr-table *:table!" id={$table}>
       <table>
         <thead>
           <tr>
@@ -145,7 +145,7 @@ function Row({
       </td>
       <td>{organization.cached_code_officiel_geographique}</td>
       <td>{organization.id}</td>
-      <td class="!text-right">➡️</td>
+      <td class="text-right!">➡️</td>
     </tr>
   );
 }

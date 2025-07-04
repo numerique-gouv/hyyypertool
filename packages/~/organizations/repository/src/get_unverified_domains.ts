@@ -1,8 +1,11 @@
 //
 
-import most_used_free_email_domains from "@gouvfr-lasuite/moncomptepro.core/data/most-used-free-email-domains.js";
+import { mostUsedFreeEmailDomains as most_used_free_email_domains } from "@gouvfr-lasuite/proconnect.core/data";
 import type { Pagination } from "@~/app.core/schema";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import {
   and,
   asc,
@@ -33,7 +36,7 @@ const where_authorized_email_domains = and(
   isNull(schema.email_domains.verification_type),
 )!;
 
-// Inspired by https://github.com/numerique-gouv/moncomptepro/blob/f56812b300edcb6ef444ac07f91c1e8dbf411967/src/services/organization.ts#L9-L26
+// Inspired by https://github.com/numerique-gouv/identite-proconnect/blob/f56812b300edcb6ef444ac07f91c1e8dbf411967/src/services/organization.ts#L9-L26
 const where_unipersonnelle = and(
   isNotNull(schema.organizations.cached_libelle_categorie_juridique),
   inArray(schema.organizations.cached_libelle_categorie_juridique, [
@@ -60,7 +63,7 @@ const where_is_free_domain = inArray(
 //
 
 export async function get_unverified_domains(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   {
     pagination = { page: 0, page_size: 10 },
     search,

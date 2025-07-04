@@ -3,17 +3,17 @@
 exports[`returns use the neptune identity provider email 1`] = `
 "Bonjour,
 
-Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect.
 
-Pour des raisons de sécurité, il ne vous est pas possible de créer directement un compte sur notre plateforme. Vous devez impérativement passer par votre fournisseur d’identité Neptune pour vous connecter.
+Pour des raisons de sécurité, il ne vous est pas possible de créer directement un compte sur ProConnect.
+Vous devez impérativement passer par le Portail d&#39;authentification de France Travail « Neptune » pour vous connecter.
+Pour accéder à votre Portail via ProConnect, voici les étapes à suivre pour garantir une connexion réussie :
 
-Pour accéder à votre service via ProConnect, voici les étapes à suivre pour garantir une connexion réussie :
+- Cliquez sur le bouton « S’identifier avec ProConnect ».
+- Saisissez attentivement votre adresse mail dans le champ prévu.
+- Assurez-vous de ne pas faire d’erreur dans la saisie, car cette adresse est utilisée pour vous diriger automatiquement vers votre Portail d&#39;authentification.
 
-Cliquez sur le bouton &quot;Connexion ProConnect&quot;.
-
-Saisissez attentivement votre adresse e-mail dans le champ prévu. Assurez-vous de ne pas faire d’erreur dans la saisie, car cette adresse est utilisée pour vous diriger automatiquement vers le bon fournisseur d’identité.
-
-Si votre adresse e-mail est correctement saisie, vous serez redirigé(e) vers le fournisseur d’identité Neptune pour finaliser votre connexion.
+Si votre adresse mail est correctement saisie, vous serez redirigé(e) vers Portail d&#39;authentification de France Travail « Neptune » pour finaliser votre connexion.
 
 Bien cordialement,
 L’équipe ProConnect.

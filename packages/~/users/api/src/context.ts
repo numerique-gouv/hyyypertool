@@ -7,7 +7,10 @@ import {
 } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
-import { schema, type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import { desc, count as drizzle_count, ilike, or } from "drizzle-orm";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -39,7 +42,7 @@ export const usePageRequestContext = useRequestContext<
 //
 
 export function get_users_list(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   {
     pagination = { page: 0, page_size: 10 },
     search,

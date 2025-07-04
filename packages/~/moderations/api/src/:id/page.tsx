@@ -29,7 +29,7 @@ export default async function Moderation_Page() {
   const { moderation } = getContext<ModerationContext>().var;
   const {
     var: {
-      moncomptepro_pg,
+      identite_pg,
       organization_fiche,
       query_domain_count,
       query_organization_members_count,
@@ -70,7 +70,7 @@ export default async function Moderation_Page() {
 
       <hr class="bg-none pb-5" />
 
-      <About_User user={moderation.user} />
+      <About_User user={moderation.user} organization={organization_fiche} />
       <Investigation_User
         user={moderation.user}
         organization={moderation.organization}
@@ -86,7 +86,7 @@ export default async function Moderation_Page() {
       />
       <OrganizationsByUser
         user={moderation.user}
-        query_organization_count={CountUserMemberships({ pg: moncomptepro_pg })}
+        query_organization_count={CountUserMemberships({ pg: identite_pg })}
       />
 
       <UsersByOrganization
@@ -100,13 +100,13 @@ export default async function Moderation_Page() {
         value={{
           moderation,
           query_suggest_same_user_emails: SuggestSameUserEmails({
-            pg: moncomptepro_pg,
+            pg: identite_pg,
           }),
           query_is_user_external_member: IsUserExternalMember({
-            pg: moncomptepro_pg,
+            pg: identite_pg,
           }),
           query_suggest_organization_domains: SuggestOrganizationDomains({
-            pg: moncomptepro_pg,
+            pg: identite_pg,
           }),
         }}
       />

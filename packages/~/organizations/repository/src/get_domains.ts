@@ -1,11 +1,11 @@
 //
 
-import { type MonComptePro_PgDatabase } from "@~/moncomptepro.database";
+import { type IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
 
 //
 
 export async function get_domains(
-  pg: MonComptePro_PgDatabase,
+  pg: IdentiteProconnect_PgDatabase,
   { organization_id }: { organization_id: number },
 ) {
   return pg.query.email_domains.findMany({

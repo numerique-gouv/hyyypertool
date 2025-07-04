@@ -16,7 +16,7 @@ export function Main_Layout({ children }: PropsWithChildren) {
   const username = z_username.parse(userinfo);
   return (
     <Root_Layout>
-      <div class="flex min-h-full flex-grow flex-col">
+      <div class="flex min-h-full grow flex-col">
         <header role="banner" class="fr-header">
           <div class="fr-header__body">
             <div class="fr-container">
@@ -135,7 +135,7 @@ function Nav() {
             href={urls.organizations.domains.$url().pathname}
             target="_self"
           >
-            Domaines à verifier
+            Domaines à vérifier
           </a>
         </li>
       </ul>

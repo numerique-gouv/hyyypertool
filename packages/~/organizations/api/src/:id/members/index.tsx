@@ -39,7 +39,7 @@ export default new Hono<ContextType>()
       return next();
     },
     function set_query_members_collection(
-      { req, set, var: { moncomptepro_pg, organization_id } },
+      { req, set, var: { identite_pg, organization_id } },
       next,
     ) {
       const query = req.query();
@@ -52,7 +52,7 @@ export default new Hono<ContextType>()
       set("pagination", pagination);
       set(
         "query_members_collection",
-        get_users_by_organization_id(moncomptepro_pg, {
+        get_users_by_organization_id(identite_pg, {
           organization_id,
           pagination: { ...pagination, page: pagination.page - 1 },
         }),

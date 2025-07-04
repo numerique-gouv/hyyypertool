@@ -1,13 +1,13 @@
 {
   "name": "hyyypertool",
-  "version": "2025.4.2",
+  "version": "2025.6.2",
   "private": true,
   "type": "module",
   "workspaces": [
     "packages/~/app/*",
     "packages/~/auth/*",
     "packages/~/config/*",
-    "packages/~/infra/moncomptepro/*",
+    "packages/~/infra/identite-proconnect/*",
     "packages/~/infra/crisp/*",
     "packages/~/infra/zammad/*",
     "packages/~/moderations/*",
@@ -22,9 +22,9 @@
     "build:bun": "bun run ./scripts/build.ts",
     "build:tailwind": "bun x tailwindcss -i ./packages/~/app/ui/tailwind.css -o ./public/built/tailwind.css",
     "build:tsc": "bun x tsc --build",
-    "database:moncomptepro:migrator": "bun run database:moncomptepro:run migration",
-    "database:moncomptepro:run": "bun run --cwd packages/~/infra/moncomptepro/database",
-    "database:moncomptepro:seed": "bun run database:moncomptepro:run seed",
+    "database:identite-proconnect:migrator": "bun run database:identite-proconnect:run migration",
+    "database:identite-proconnect:run": "bun run --cwd packages/~/infra/identite-proconnect/database",
+    "database:identite-proconnect:seed": "bun run database:identite-proconnect:run seed",
     "dev": "tsx watch bin/src/index.ts",
     "dev:api": "bun x run-z dev:api:clean dev:api:tsc dev:api:cp dev:api:format",
     "dev:api:clean": "bun run --cwd packages/~/app/urls clean",
@@ -35,7 +35,7 @@
     "dev:tailwind": "bun run build:tailwind --watch",
     "e2e:install": "cd e2e && bun install",
     "e2e:run": "cd e2e && bun run",
-    "fixtures:load": "bun x run-z database:moncomptepro:migrator database:moncomptepro:seed",
+    "fixtures:load": "bun x run-z database:identite-proconnect:migrator database:identite-proconnect:seed",
     "format": "bun x prettier --check .",
     "format:fix": "bun x prettier --write .",
     "format:pkg": "bun x sort-package-json ./package.json ./packages/~/*/*/package.json ./e2e/package.json",
@@ -43,7 +43,7 @@
     "postadd": "bun run format:tsconfig",
     "renovate": "bun x npm-check-updates --packageManager bun --interactive --upgrade --deep",
     "start": "tsx bin/src/index.ts",
-    "studio:moncomptepro": "bun run database:moncomptepro:run studio",
+    "studio:identite-proconnect": "bun run database:identite-proconnect:run studio",
     "test": "bun run test:type-check && bun run test:all",
     "test:all": "bun test",
     "test:inspect": "bun test --inspect-wait=localhost:6499/",
@@ -59,30 +59,32 @@
     ],
     "tailwindPreserveWhitespace": true
   },
+  "overrides": {
+    "hono": "4.8.2",
+    "zod": "3.24.1"
+  },
   "dependencies": {
-    "@gouvfr/dsfr": "1.13.1",
+    "@gouvfr/dsfr": "1.13.2",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
     "dotenv": "16.5.0",
-    "hono": "4.7.6",
-    "tsx": "4.19.3"
+    "hono": "4.8.2",
+    "tsx": "4.20.3"
   },
   "devDependencies": {
-    "@csmith/release-it-calver-plugin": "2023.12.0",
-    "@release-it/conventional-changelog": "10.0.0",
-    "@tsconfig/bun": "1.0.7",
     "@~/config.tailwindcss": "workspace:*",
-    "bun-types": "1.2.9",
+    "@csmith/release-it-calver-plugin": "2023.12.0",
+    "@release-it/conventional-changelog": "10.0.1",
+    "@tailwindcss/cli": "4.1.11",
+    "@tsconfig/bun": "1.0.7",
+    "@types/bun": "1.2.16",
     "prettier": "3.5.3",
     "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-tailwindcss": "0.6.11",
+    "prettier-plugin-tailwindcss": "0.6.12",
     "release-it": "19.0.1",
-    "tailwindcss": "3.4.17",
-    "typescript": "5.7.3"
-  },
-  "overrides": {
-    "hono": "4.6.17"
+    "tailwindcss": "4.1.11",
+    "typescript": "5.8.3"
   },
   "release-it": {
     "git": {

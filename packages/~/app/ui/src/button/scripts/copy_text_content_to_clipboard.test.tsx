@@ -1,7 +1,6 @@
 //
 
 import { beforeEach, expect, test } from "bun:test";
-import "htmx.org";
 import _hyperscript from "hyperscript.org";
 import { copy_text_content_to_clipboard } from "./copy_text_content_to_clipboard";
 

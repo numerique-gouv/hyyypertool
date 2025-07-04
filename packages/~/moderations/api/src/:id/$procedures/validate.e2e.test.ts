@@ -2,24 +2,24 @@
 
 import { set_config } from "@~/app.middleware/set_config";
 import {
-  set_moncomptepro_pg,
-  set_moncomptepro_pg_client,
-} from "@~/app.middleware/set_moncomptepro_pg";
+  set_identite_pg,
+  set_identite_pg_client,
+} from "@~/app.middleware/set_identite_pg";
 import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { anais_tailhade } from "@~/app.middleware/set_userinfo#fixture";
-import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import {
   create_adora_pony_moderation,
   create_adora_pony_user,
   create_unicorn_organization,
-} from "@~/moncomptepro.database/seed/unicorn";
+} from "@~/identite-proconnect.database/seed/unicorn";
 import {
   client,
   empty_database,
   migrate,
   pg,
-} from "@~/moncomptepro.database/testing";
+} from "@~/identite-proconnect.database/testing";
+import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import { beforeAll, beforeEach, expect, setSystemTime, test } from "bun:test";
 import { Hono } from "hono";
 import app from "./validate";
@@ -42,8 +42,8 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
   );
   const response = await new Hono()
     .use(set_config({}))
-    .use(set_moncomptepro_pg(pg))
-    .use(set_moncomptepro_pg_client(client as any))
+    .use(set_identite_pg(pg))
+    .use(set_identite_pg_client(client as any))
     .use(set_nonce("nonce"))
     .use(set_userinfo(anais_tailhade))
     .route("/:id", app)
@@ -90,7 +90,7 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
     updated_at: "2222-01-02 00:00:00+00",
     user_id: adora_pony_user_id,
     verification_type: "domain",
-    verified_at: null,
+    verified_at: "2222-01-02 00:00:00+00",
   });
 });
 
@@ -106,8 +106,8 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
   );
   const response = await new Hono()
     .use(set_config({}))
-    .use(set_moncomptepro_pg(pg))
-    .use(set_moncomptepro_pg_client(client as any))
+    .use(set_identite_pg(pg))
+    .use(set_identite_pg_client(client as any))
     .use(set_nonce("nonce"))
     .use(set_userinfo(anais_tailhade))
     .route("/:id", app)
@@ -154,7 +154,7 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
     updated_at: "2222-01-02 00:00:00+00",
     user_id: adora_pony_user_id,
     verification_type: "domain",
-    verified_at: null,
+    verified_at: "2222-01-02 00:00:00+00",
   });
 });
 

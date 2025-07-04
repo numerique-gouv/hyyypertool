@@ -12,10 +12,10 @@
     }
   },
   "dependencies": {
-    "@~/moncomptepro.database": "workspace:*",
-    "@~/moncomptepro.lib": "workspace:*",
+    "@~/identite-proconnect.database": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
     "drizzle-orm": "0.41.0",
-    "ts-pattern": "5.7.0"
+    "ts-pattern": "5.7.1"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

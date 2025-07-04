@@ -2,7 +2,7 @@ declare const app: import("hono/hono-base").HonoBase<
   import("@~/app.middleware/set_nonce").NonceVariables_Context &
     import("@~/app.middleware/set_config").ConfigVariables_Context &
     import("@~/app.middleware/set_userinfo").UserInfoVariables_Context &
-    import("@~/app.middleware/moncomptepro_pg").MonComptePro_Pg_Context,
+    import("@~/app.middleware/identite_pg").IdentiteProconnect_Pg_Context,
   | ({
       "/healthz": {
         $get: {
@@ -89,7 +89,7 @@ declare const app: import("hono/hono-base").HonoBase<
           };
         };
       } & {
-        "/drizzle/moncomptepro": {
+        "/drizzle/identite": {
           $get: {
             input: {};
             output: string;
@@ -154,6 +154,7 @@ declare const app: import("hono/hono-base").HonoBase<
               query: {
                 code: string;
                 state: string;
+                iss: string;
               };
             };
             output: undefined;
@@ -222,8 +223,8 @@ declare const app: import("hono/hono-base").HonoBase<
                         };
                       } & {
                         query: {
-                          user_id: string;
                           organization_id: string;
+                          user_id: string;
                         };
                       };
                       output: {};
@@ -306,6 +307,22 @@ declare const app: import("hono/hono-base").HonoBase<
                               add_member: "AS_INTERNAL" | "AS_EXTERNAL";
                               add_domain?: string | undefined;
                               send_notitfication?: string | undefined;
+                              verification_type?:
+                                | "null"
+                                | "code_sent_to_official_contact_email"
+                                | "domain"
+                                | "imported_from_coop_mediation_numerique"
+                                | "imported_from_inclusion_connect"
+                                | "in_liste_dirigeants_rna"
+                                | "in_liste_dirigeants_rne"
+                                | "no_validation_means_available"
+                                | "no_verification_means_for_entreprise_unipersonnelle"
+                                | "no_verification_means_for_small_association"
+                                | "official_contact_email"
+                                | "organization_dirigeant"
+                                | "proof_received"
+                                | "bypassed"
+                                | undefined;
                             };
                           };
                           output: {};
@@ -644,18 +661,23 @@ declare const app: import("hono/hono-base").HonoBase<
                             };
                           } & {
                             form: {
-                              is_external?: string | undefined;
                               verification_type?:
                                 | ""
+                                | "domain"
                                 | "code_sent_to_official_contact_email"
+                                | "imported_from_coop_mediation_numerique"
+                                | "imported_from_inclusion_connect"
                                 | "in_liste_dirigeants_rna"
+                                | "in_liste_dirigeants_rne"
                                 | "no_validation_means_available"
-                                | "official_contact_domain"
+                                | "no_verification_means_for_entreprise_unipersonnelle"
+                                | "no_verification_means_for_small_association"
                                 | "official_contact_email"
-                                | "trackdechets_email_domain"
-                                | "verified_by_coop_mediation_numerique"
-                                | "verified_email_domain"
+                                | "organization_dirigeant"
+                                | "proof_received"
+                                | "bypassed"
                                 | undefined;
+                              is_external?: string | undefined;
                             };
                           };
                           output: "OK";
@@ -701,28 +723,6 @@ declare const app: import("hono/hono-base").HonoBase<
                     };
                   }),
                 "/members"
-              >
-            | import("hono/types").MergeSchemaPath<
-                | import("hono/types").BlankSchema
-                | import("hono/types").MergeSchemaPath<
-                    {
-                      "/:domain": {
-                        $patch: {
-                          input: {
-                            param: {
-                              id: string;
-                              domain: string;
-                            };
-                          };
-                          output: "OK";
-                          outputFormat: "text";
-                          status: 200;
-                        };
-                      };
-                    },
-                    "/verify"
-                  >,
-                "/$procedures"
               >,
             "/:id"
           >
@@ -731,10 +731,10 @@ declare const app: import("hono/hono-base").HonoBase<
           $get: {
             input: {
               query: {
-                id?: string | undefined;
                 page?: string | undefined;
                 page_size?: string | undefined;
                 q?: string | undefined;
+                id?: string | undefined;
               };
             };
             output: {};

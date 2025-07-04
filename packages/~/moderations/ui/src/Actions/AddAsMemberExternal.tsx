@@ -24,8 +24,13 @@ export function AddAsMemberExternal() {
         type="radio"
         value={validate_form_schema.shape.add_member.Enum.AS_EXTERNAL}
         checked={is_already_external_member}
+        _={`
+          on change
+            remove .hidden from #domainExternalSection
+            add .hidden to #domainInternalSection
+        `}
       />
-      <label class="fr-label !flex-row" for={id}>
+      <label class="fr-label flex-row!" for={id}>
         Ajouter <b class="mx-1">{given_name}</b> à l'organisation EN TANT
         QU'EXTERNE
       </label>

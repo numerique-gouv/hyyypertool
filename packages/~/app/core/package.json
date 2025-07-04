@@ -22,13 +22,12 @@
     "test": "bun test"
   },
   "dependencies": {
-    "modern-errors": "7.0.1",
-    "ts-pattern": "5.7.0",
-    "type-fest": "4.40.1",
-    "zod": "3.24.1"
+    "modern-errors": "7.1.2",
+    "ts-pattern": "5.7.1",
+    "type-fest": "4.41.0",
+    "zod": "3.25.64"
   },
   "devDependencies": {
-    "@~/config.typescript": "workspace:*",
-    "bun-types": "1.2.9"
+    "@~/config.typescript": "workspace:*"
   }
 }
