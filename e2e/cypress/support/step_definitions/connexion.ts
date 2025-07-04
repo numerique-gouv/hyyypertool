@@ -1,4 +1,7 @@
 //
+// Sentence description heavily inspired by UVV
+// https://e2e-test-quest.github.io/uuv/fr/docs/wordings/generated-wording-description/fr-generated-wording-description/
+//
 
 import { When } from "@badeball/cypress-cucumber-preprocessor";
 
