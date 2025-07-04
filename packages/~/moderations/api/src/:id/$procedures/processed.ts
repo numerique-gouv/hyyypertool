@@ -3,7 +3,7 @@
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/identite_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { mark_moderatio_as_rejected } from "@~/moderations.lib/usecase/mark_moderatio_as_rejected";

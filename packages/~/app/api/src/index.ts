@@ -4,6 +4,7 @@ import config from "@~/app.core/config";
 import { Root_Layout } from "@~/app.layout/root";
 import { hyyyyyypertool_session } from "@~/app.middleware/session";
 import { set_config } from "@~/app.middleware/set_config";
+import { set_identite_pg_database } from "@~/app.middleware/set_identite_pg";
 import { set_nonce } from "@~/app.middleware/set_nonce";
 import { set_userinfo } from "@~/app.middleware/set_userinfo";
 import { set_sentry } from "@~/app.sentry";
@@ -53,7 +54,7 @@ const app = new Hono()
   .route("/", welcome_router)
   .route("/auth", auth_router)
   //
-  .use(identite_pg_database({ connectionString: config.DATABASE_URL }))
+  .use(set_identite_pg_database({ connectionString: config.DATABASE_URL }))
   //
 
   .route("/moderations", moderations_router)

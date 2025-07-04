@@ -4,7 +4,7 @@ import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/identite_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { schema } from "@~/identite-proconnect.database";
 import { join_organization } from "@~/identite-proconnect.lib/index";
 import { Verification_Type_Schema } from "@~/identite-proconnect.lib/verification_type";

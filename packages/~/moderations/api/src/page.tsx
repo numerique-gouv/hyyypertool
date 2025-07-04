@@ -6,7 +6,7 @@ import {
 } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/identite_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";

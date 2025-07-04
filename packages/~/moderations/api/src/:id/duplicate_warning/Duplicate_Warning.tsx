@@ -2,7 +2,7 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { Htmx_Events } from "@~/app.core/htmx";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/identite_pg";
+import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
@@ -86,18 +86,30 @@ async function Alert_Duplicate_User() {
       </h3>
 
       <ul>
-        {duplicate_users.map(({ user_id, email, family_name, given_name }) => (
-          <li key={user_id}>
-            <a
-              href={
-                urls.users[":id"].$url({ param: { id: user_id.toString() } })
-                  .pathname
-              }
-            >
-              {given_name} {family_name} {`<${email}>`}
-            </a>
-          </li>
-        ))}
+        {duplicate_users.map(
+          ({
+            user_id,
+            email,
+            family_name,
+            given_name,
+          }: {
+            user_id: number;
+            email: string | null;
+            family_name: string | null;
+            given_name: string | null;
+          }) => (
+            <li key={user_id}>
+              <a
+                href={
+                  urls.users[":id"].$url({ param: { id: user_id.toString() } })
+                    .pathname
+                }
+              >
+                {given_name} {family_name} {`<${email}>`}
+              </a>
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );
