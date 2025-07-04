@@ -1,8 +1,6 @@
 //
 
-// TODO: Fix this import after migration - the data is not exported from proconnect.core
-// import most_used_free_email_domains from "@gouvfr-lasuite/proconnect.core/src/data/most-used-free-email-domains";
-const most_used_free_email_domains: string[] = [];
+import { mostUsedFreeEmailDomains as most_used_free_email_domains } from "@gouvfr-lasuite/proconnect.core/data";
 import type { Pagination } from "@~/app.core/schema";
 import {
   schema,
