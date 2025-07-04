@@ -80,6 +80,10 @@ When("je saisie {string} dans le champ nommé {string}", (text: string, name: st
   get_within_context().within(() => cy.findByLabelText(name).type(text));
 });
 
+When("je saisie le mot {string} dans la boîte à texte nommée {string}", (text: string, name: string) => {
+  get_within_context().within(() => cy.get(`input[placeholder="${name}"]`).type(text));
+});
+
 When("je clique sur l'élément contenant {string}", (text: string) => {
   get_within_context().within(() => cy.contains(text).click());
 });
