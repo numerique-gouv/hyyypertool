@@ -14,7 +14,7 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.8.2",
+    "hono": "4.8.4",
     "hono-slotify": "workspace:*",
     "tailwind-variants": "1.0.0"
   },
