@@ -9,7 +9,7 @@
         "@~/app.core": "workspace:*",
         "consola": "3.4.2",
         "dotenv": "16.5.0",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "tsx": "4.20.3",
       },
       "devDependencies": {
@@ -31,7 +31,7 @@
       "name": "hono-slotify",
       "version": "1.0.0",
       "dependencies": {
-        "hono": "4.8.2",
+        "hono": "4.8.4",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -55,7 +55,7 @@
         "await-to-js": "3.0.0",
         "consola": "3.4.2",
         "drizzle-orm": "0.41.0",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "htmx-ext-debug": "2.0.1",
         "htmx-ext-include-vals": "2.0.1",
         "htmx-ext-sse": "2.2.3",
@@ -90,7 +90,7 @@
         "@~/app.middleware": "workspace:*",
         "@~/app.ui": "workspace:*",
         "@~/app.urls": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "nprogress": "0.2.0",
       },
       "devDependencies": {
@@ -124,7 +124,7 @@
         "@sentry/profiling-node": "9.33.0",
         "@~/app.core": "workspace:*",
         "consola": "3.4.2",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -136,7 +136,7 @@
       "dependencies": {
         "@~/app.core": "workspace:*",
         "@~/app.urls": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "hono-slotify": "workspace:*",
         "tailwind-variants": "1.0.0",
       },
@@ -151,7 +151,7 @@
       "version": "1.0.0",
       "dependencies": {
         "consola": "3.4.2",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "static-path": "0.0.4",
       },
       "devDependencies": {
@@ -165,7 +165,7 @@
         "@~/app.core": "workspace:*",
         "@~/app.middleware": "workspace:*",
         "@~/app.urls": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "openid-client": "6.5.1",
         "zod": "3.25.64",
       },
@@ -197,7 +197,7 @@
         "@tsconfig/bun": "1.0.7",
         "@tsconfig/strictest": "2.0.5",
         "@types/bun": "1.2.16",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
       },
     },
     "packages/~/infra/crisp/lib": {
@@ -217,7 +217,7 @@
       "name": "@~/crisp.middleware",
       "version": "1.0.0",
       "dependencies": {
-        "hono": "4.8.2",
+        "hono": "4.8.4",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -249,7 +249,7 @@
         "@~/identite-proconnect.lib": "workspace:*",
         "consola": "3.4.2",
         "drizzle-orm": "0.41.0",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "pg": "8.16.2",
       },
       "devDependencies": {
@@ -283,7 +283,7 @@
         "@hono/zod-validator": "0.7.0",
         "@~/app.core": "workspace:*",
         "@~/zammad.lib": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
       },
@@ -325,7 +325,7 @@
         "@~/zammad.lib": "workspace:*",
         "await-to-js": "3.0.0",
         "drizzle-orm": "0.41.0",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "tailwind-variants": "1.0.0",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.7.1",
@@ -373,7 +373,7 @@
         "@~/moderations.lib": "workspace:*",
         "@~/organizations.lib": "workspace:*",
         "@~/users.lib": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "tailwind-variants": "1.0.0",
         "ts-pattern": "5.7.1",
       },
@@ -394,11 +394,11 @@
         "@~/organizations.repository": "workspace:*",
         "@~/organizations.ui": "workspace:*",
         "@~/users.repository": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "lodash.sortby": "4.7.0",
         "tailwind-variants": "1.0.0",
         "ts-pattern": "5.7.1",
-        "zod": "3.25.64",
+        "zod": "3.25.73",
       },
       "devDependencies": {
         "@types/lodash.sortby": "4.7.9",
@@ -440,7 +440,7 @@
         "@~/app.ui": "workspace:*",
         "@~/app.urls": "workspace:*",
         "@~/organizations.lib": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "tailwind-variants": "1.0.0",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
@@ -453,7 +453,7 @@
       "name": "@~/proxy.api",
       "version": "1.0.0",
       "dependencies": {
-        "hono": "4.8.2",
+        "hono": "4.8.4",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -470,7 +470,7 @@
         "@~/moderations.repository": "workspace:*",
         "@~/organizations.repository": "workspace:*",
         "@~/users.repository": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "ts-pattern": "5.7.1",
         "zod": "3.25.64",
       },
@@ -511,7 +511,7 @@
         "@~/moderations.lib": "workspace:*",
         "@~/organizations.lib": "workspace:*",
         "@~/users.lib": "workspace:*",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "tailwind-variants": "1.0.0",
         "ts-dedent": "2.2.0",
         "ts-pattern": "5.7.1",
@@ -531,7 +531,7 @@
         "@~/app.middleware": "workspace:*",
         "@~/app.urls": "workspace:*",
         "animate.css": "4.1.1",
-        "hono": "4.8.2",
+        "hono": "4.8.4",
         "lit": "3.3.0",
         "openid-client": "6.5.1",
       },
@@ -541,7 +541,7 @@
     },
   },
   "overrides": {
-    "hono": "4.8.2",
+    "hono": "4.8.4",
     "zod": "3.24.1",
   },
   "packages": {
@@ -2025,6 +2025,24 @@
 
     "@types/tedious/@types/node": ["@types/node@24.0.1", "", { "dependencies": { "undici-types": "~7.8.0" } }, "sha512-MX4Zioh39chHlDJbKmEgydJDS3tspMP/lnQC67G3SWsTnb9NeYVWOjkxpOSy4oMfPs4StcWHwBrvUb4ybfnuaw=="],
 
+    "@~/app.layout/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/app.middleware/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/app.sentry/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/app.ui/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/app.urls/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/config.typescript/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/identite-proconnect.database/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/organizations.api/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
+    "@~/organizations.ui/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
+
     "ansi-escapes/type-fest": ["type-fest@0.21.3", "", {}, "sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w=="],
 
     "anymatch/picomatch": ["picomatch@2.3.1", "", {}, "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="],
@@ -2046,6 +2064,8 @@
     "get-uri/data-uri-to-buffer": ["data-uri-to-buffer@6.0.2", "", {}, "sha512-7hvf7/GW8e86rW0ptuwS3OcBGDjIi6SZva7hCyWC0yYry2cOPmLIjXAUHI6DK2HsnwJd9ifmt57i8eV2n4YNpw=="],
 
     "glob/minimatch": ["minimatch@5.1.6", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g=="],
+
+    "hono-slotify/hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
 
     "hosted-git-info/lru-cache": ["lru-cache@10.4.3", "", {}, "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="],
 

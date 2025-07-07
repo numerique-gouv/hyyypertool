@@ -16,7 +16,7 @@
     "@~/app.middleware": "workspace:*",
     "@~/app.ui": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.8.2",
+    "hono": "4.8.4",
     "nprogress": "0.2.0"
   },
   "devDependencies": {
