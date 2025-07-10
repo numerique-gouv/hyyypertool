@@ -19,7 +19,7 @@
     "@~/identite-proconnect.lib": "workspace:*",
     "@~/organizations.repository": "workspace:*",
     "@~/users.repository": "workspace:*",
-    "zod": "3.25.64"
+    "zod": "4.0.2"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
