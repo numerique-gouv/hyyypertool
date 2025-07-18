@@ -14,10 +14,6 @@ const verificationType: Array<[Verification_Type, string]> = [
     Verification_Type_Schema.enum.in_liste_dirigeants_rne,
     "Liste des dirigeants RNE",
   ],
-  [
-    Verification_Type_Schema.enum.imported_from_coop_mediation_numerique,
-    "Coop",
-  ],
   [Verification_Type_Schema.enum.proof_received, "Justificatif transmis"],
 ];
 
