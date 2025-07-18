@@ -35,6 +35,7 @@ export function TagInput() {
               name="verification_type"
             />
             {key}
+            {/* je fais un test de ci */}
           </label>
         </li>
       ))}
