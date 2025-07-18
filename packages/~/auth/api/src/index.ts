@@ -49,7 +49,8 @@ export default new Hono<Oidc_Context & App_Context>()
     session.set("nonce", nonce);
 
     const redirectUrl = buildAuthorizationUrl(config, {
-      acr_values: "eidas1",
+      acr_values:
+        "eidas2 eidas3 https://proconnect.gouv.fr/assurance/self-asserted-2fa https://proconnect.gouv.fr/assurance/consistency-checked-2fa",
       nonce,
       redirect_uri,
       scope: env.AGENTCONNECT_OIDC_SCOPE,
