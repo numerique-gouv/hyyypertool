@@ -3,10 +3,12 @@
 import { zValidator } from "@hono/zod-validator";
 import env from "@~/app.core/config";
 import { AuthError } from "@~/app.core/error";
+import { MfaAcrValue_Schema } from "@~/app.core/schema/index";
 import type { App_Context } from "@~/app.middleware/context";
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
 import { urls } from "@~/app.urls";
 import { Hono } from "hono";
+import { HTTPException } from "hono/http-exception";
 import {
   authorizationCodeGrant,
   buildAuthorizationUrl,
@@ -29,6 +31,10 @@ export default new Hono<Oidc_Context & App_Context>()
       // do not break with missing session
     }
 
+    if (error instanceof HTTPException && error.status === 403) {
+      throw error;
+    }
+
     throw new AuthError("AgentConnect OIDC Error", { cause: error });
   })
 
@@ -49,7 +55,19 @@ export default new Hono<Oidc_Context & App_Context>()
     session.set("nonce", nonce);
 
     const redirectUrl = buildAuthorizationUrl(config, {
-      acr_values: "eidas1",
+      claims: JSON.stringify({
+        id_token: {
+          acr: {
+            essential: true,
+            values: [
+              "eidas2",
+              "eidas3",
+              "https://proconnect.gouv.fr/assurance/self-asserted-2fa",
+              "https://proconnect.gouv.fr/assurance/consistency-checked-2fa",
+            ],
+          },
+        },
+      }),
       nonce,
       redirect_uri,
       scope: env.AGENTCONNECT_OIDC_SCOPE,
@@ -106,6 +124,16 @@ export default new Hono<Oidc_Context & App_Context>()
       });
 
       const claims = tokens.claims();
+
+      const result = MfaAcrValue_Schema.safeParse(claims?.["acr"]);
+
+      if (!result.success) {
+        throw new HTTPException(403, {
+          message:
+            "Vous ne pouvez pas accéder au service sans avoir une double authentification installée. Veuillez installer une application d'authentification et vous connecter à nouveau.",
+        });
+      }
+
       const userinfo = await fetchUserInfo(
         config,
         tokens.access_token ?? "",
