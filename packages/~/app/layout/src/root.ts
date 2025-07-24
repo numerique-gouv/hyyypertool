@@ -73,25 +73,19 @@ export function Root_Layout({ children }: PropsWithChildren) {
           href="${config.ASSETS_PATH}/node_modules/animate.css/source/bouncing_entrances/bounceIn.css"
         />
 
-        <!--  -->
-
         ${config.NODE_ENV === "production"
-          ? html`<link
-                rel="stylesheet"
-                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
-              />
-              <link
-                rel="stylesheet"
-                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
-              />`
-          : html`<link
-                rel="stylesheet"
-                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-              />
-              <link
-                rel="stylesheet"
-                href="${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
-              />`}
+          ? html`<style>
+              @import "${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
+                layer(dsfr);
+              @import "${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+                layer(dsfr-utility);
+            </style>`
+          : html`<style>
+              @import "${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+                layer(dsfr);
+              @import "${config.ASSETS_PATH}/node_modules/@gouvfr/dsfr/dist/utility/utility.css"
+                layer(dsfr-utility);
+            </style>`}
 
         <!--  -->
 
@@ -159,14 +153,16 @@ export function Root_Layout({ children }: PropsWithChildren) {
 
       <!--  -->
 
-      ${config.NODE_ENV === "development"
+      ${config.NODE_ENV === "production"
         ? html`<script
             nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
+            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
+            type="module"
           ></script>`
         : html`<script
             nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
+            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
+            type="module"
           ></script>`}
 
       <meta
@@ -182,18 +178,19 @@ export function Root_Layout({ children }: PropsWithChildren) {
       ${config.DEPLOY_ENV === "preview"
         ? html`<script
             nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx-ext-debug/debug.js"
+            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/debug.js"
+            type="module"
           ></script>`
         : ""}
 
       <script
         nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx-ext-include-vals/include-vals.js"
+        src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/include-vals.js"
         type="module"
       ></script>
       <script
         nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx-ext-sse/dist/sse.js"
+        src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/ext/sse.js"
         type="module"
       ></script>
       <script
@@ -204,8 +201,12 @@ export function Root_Layout({ children }: PropsWithChildren) {
 
       <!--  -->
 
-      ${config.NODE_ENV === "development"
+      ${config.NODE_ENV === "production"
         ? html`<script
+            nonce="${nonce}"
+            src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
+          ></script> `
+        : html`<script
               nonce="${nonce}"
               src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.js"
             ></script>
@@ -213,11 +214,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
             <script
               nonce="${nonce}"
               src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/hdb.js"
-            ></script>`
-        : html`<script
-            nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
-          ></script> `}
+            ></script>`}
       <script
         nonce="${nonce}"
         src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/template.js"
