@@ -8,7 +8,7 @@ Fonctionnalité: Page organisation - domaine à vérifier
     * je clique sur le bouton "ProConnect"
 
   Scénario:
-    Quand je clique sur "Domaines à vérifier"
+    Quand je clique sur "Domaines à verifier"
     Alors je suis redirigé sur "/organizations/domains"
     * je vois "Liste des domaines à vérifier"
 
@@ -31,7 +31,7 @@ Fonctionnalité: Page organisation - domaine à vérifier
     Alors je vois la ligne "yeswehack.com" dans le tableau
     Et sur la même ligne je vois "✅"
 
-    Quand je clique sur "Domaines à vérifier"
+    Quand je clique sur "Domaines à verifier"
     Et je clique sur "Rafraichir"
     Soit le tableau sous le title "Liste des domaines à vérifier"
     Alors je vois 1 lignes dans le tableau
