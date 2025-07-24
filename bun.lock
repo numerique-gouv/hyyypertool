@@ -4,7 +4,7 @@
     "": {
       "name": "hyyypertool",
       "dependencies": {
-        "@gouvfr/dsfr": "1.14.0",
+        "@gouvfr/dsfr": "1.13.2",
         "@~/app.api": "workspace:*",
         "@~/app.core": "workspace:*",
         "consola": "3.4.2",
@@ -627,7 +627,7 @@
 
     "@gouvfr-lasuite/proconnect.insee": ["@gouvfr-lasuite/proconnect.insee@0.3.2", "", { "dependencies": { "axios": "^1.7.7" } }, "sha512-etFs8VT5VYU+WhBRB/kThUTlKg+WbAwuuoGpDaDuE+z6bx/6eBv6NTqQjgiZ4OJnkgfS9bYPmJEWJfOhRnNZrQ=="],
 
-    "@gouvfr/dsfr": ["@gouvfr/dsfr@1.14.0", "", {}, "sha512-lF02JujHsr4J39gnC7y+qe0LLnh01cb6JwbMIKK2YcNjzvmfb26C0uW0+gyugD41wjFQQcIFWz07g6ynqxjNzA=="],
+    "@gouvfr/dsfr": ["@gouvfr/dsfr@1.13.2", "", {}, "sha512-4Q9ggFFzwD/KFr37sJO1hFH9PcqlZ7F3jMiFJXnBLJfkH1+s28vnQp/oXoY8TosWsLMSjdhNCrxvrUdm5XzBlg=="],
 
     "@happy-dom/global-registrator": ["@happy-dom/global-registrator@18.0.1", "", { "dependencies": { "@types/node": "^20.0.0", "happy-dom": "^18.0.1" } }, "sha512-xCy/cpEP8xyJ6u0eokYgaQxeUmcKqHx/+aC3R0DLa7/S38efhZAVDQqLJ5zzTguLFS0gvAzZHP40NGaLwRyapQ=="],
 

@@ -64,7 +64,7 @@
     "zod": "3.24.1"
   },
   "dependencies": {
-    "@gouvfr/dsfr": "1.14.0",
+    "@gouvfr/dsfr": "1.13.2",
     "@~/app.api": "workspace:*",
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
