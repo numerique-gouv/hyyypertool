@@ -31,6 +31,57 @@ updates:
       prefix: ":arrow_upper_right: [patch]"
       include: "scope"
 
+  # Monorepo subconfigs for better Bun support
+  - package-ecosystem: "npm"
+    directory: "/packages/~/app/api"
+    schedule:
+      interval: "weekly"
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/~/app/middleware"
+    schedule:
+      interval: "weekly"
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/~/moderations/api"
+    schedule:
+      interval: "weekly"
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/~/organizations/api"
+    schedule:
+      interval: "weekly"
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/~/users/api"
+    schedule:
+      interval: "weekly"
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ":arrow_upper_right: [patch]"
+      include: "scope"
+
   - package-ecosystem: "npm"
     directory: "/e2e"
     schedule:
