@@ -3,11 +3,15 @@
 exports[`returns agent 'Communes’ -> ComCom, ComAgglo, Métropole response 1`] = `
 "Bonjour,
 
-Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect.
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
 
-Votre adresse mail de commune 🦒 ne vous permet pas de rattacher votre compte ProConnect à « 🦄 ».
-Nous vous invitons à créer à nouveau votre compte utilisateur, en le rattachant à la commune dans laquelle vous exercez.
-Si vous souhaitez rattacher votre compte à la « 🦄 », merci de créer à nouveau votre compte utilisateur avec une adresse mail dont le nom de domaine appartient à la « 🦄 ».
+Votre adresse e-mail de commune NOM DE DOMAINE DE LA COMMUNE ne vous permet pas de rattacher votre compte ProConnect à 🦄.
+
+Nous vous invitons à créer à nouveau votre compte utilisateur, en le rattachant à la commune dans laquelle vous exercez et correspondant au nom de domaine de votre adresse e-mail.
+
+Si vous souhaitez rejoindre 🦄, merci de créer à nouveau votre compte utilisateur avec une adresse e-mail dont le nom de domaine appartient à 🦄.
+
+Merci de votre compréhension,
 
 Bien cordialement,
 L’équipe ProConnect.
