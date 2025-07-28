@@ -4,22 +4,22 @@ Fonctionnalité: Page organisation
   Contexte:
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
-    * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "ProConnect"
-    # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
+    Et je vois "Bonjour Hyyypertool !"
+    Et je clique sur le bouton "ProConnect"
+    # Et je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario:
     Quand je clique sur "Organisations"
     Alors je suis redirigé sur "/organizations"
-    * je vois "Liste des organisations"
-    * je vois la ligne de table "13002526500013"
-    * sur la même ligne je vois "DINUM"
+    Et je vois "Liste des organisations"
+    Et je vois la ligne de table "13002526500013"
+    Et sur la même ligne je vois "DINUM"
 
   # Scénario: Fiche de DINUM
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "🏛 A propos de l'organisation"
-    * je vois "« DINUM »"
-    * je vois "Dénomination DINUM"
+    Et je vois "« DINUM »"
+    Et je vois "Dénomination DINUM"
     * je vois "Siret 13002526500013 Fiche annuaire"
     * je vois "NAF/APE 84.11Z - Administration publique générale"
     * je vois "Adresse 20 avenue de segur, 75007 Paris"

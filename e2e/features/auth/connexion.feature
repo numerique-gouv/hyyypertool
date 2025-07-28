@@ -3,7 +3,7 @@ Fonctionnalité: Connexion d'un utilisateur
 
   Contexte:
     Soit une base de données nourrie au grain
-    * un server faut server "auth.agentconnect.gouv.fr"
+    Et un faux serveur "auth.agentconnect.gouv.fr"
 
   Scénario: Connexion de user@yopmail.com
     Etant donné que je navigue sur la page
