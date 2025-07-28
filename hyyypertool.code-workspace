@@ -1,48 +1,48 @@
 {
   "folders": [
     {
-      "name": "🈸 packages/~/app/",
-      "path": "packages/~/app",
+      "name": "🈸 app/app/",
+      "path": "app/app",
     },
     {
-      "name": "📦 packages/~/moderations/",
-      "path": "packages/~/moderations",
+      "name": "📦 app/moderations/",
+      "path": "app/moderations",
     },
     {
-      "name": "📦 packages/~/organizations/",
-      "path": "packages/~/organizations",
+      "name": "📦 app/organizations/",
+      "path": "app/organizations",
     },
     {
-      "name": "📦 packages/~/users/",
-      "path": "packages/~/users",
+      "name": "📦 app/users/",
+      "path": "app/users",
     },
     {
-      "name": "📦 packages/~/auth/",
-      "path": "packages/~/auth",
+      "name": "📦 app/auth/",
+      "path": "app/auth",
     },
     {
-      "name": "📦 packages/~/welcome/",
-      "path": "packages/~/welcome",
+      "name": "📦 app/welcome/",
+      "path": "app/welcome",
     },
     {
-      "name": "📦 packages/~/proxy/",
-      "path": "packages/~/proxy",
+      "name": "📦 app/proxy/",
+      "path": "app/proxy",
     },
     {
-      "name": "🏗️ packages/~/infra/proconnect-identite/",
-      "path": "packages/~/infra/proconnect-identite",
+      "name": "🏗️ app/infra/proconnect-identite/",
+      "path": "app/infra/proconnect-identite",
     },
     {
-      "name": "🏗️ packages/~/infra/zammad/",
-      "path": "packages/~/infra/zammad",
+      "name": "🏗️ app/infra/zammad/",
+      "path": "app/infra/zammad",
     },
     {
-      "name": "🏗️ packages/~/infra/crisp/",
-      "path": "packages/~/infra/crisp",
+      "name": "🏗️ app/infra/crisp/",
+      "path": "app/infra/crisp",
     },
     {
-      "name": "⚙️ packages/~/config/",
-      "path": "packages/~/config",
+      "name": "⚙️ app/config/",
+      "path": "app/config",
     },
     {
       "name": "🎭 mocks/",
