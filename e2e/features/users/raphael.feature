@@ -4,21 +4,21 @@ Fonctionnalité: Page utilisateur
   Contexte:
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
-    * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "ProConnect"
-    # * je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
+    Et je vois "Bonjour Hyyypertool !"
+    Et je clique sur le bouton "ProConnect"
+    # Et je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
   Scénario:
   # Scénario: Fiche de Raphael
     Quand je clique sur "Utilisateurs"
     Alors je suis redirigé sur "/users"
-    * je vois "Liste des utilisateurs"
-    * je vois la ligne de table "Raphael"
+    Et je vois "Liste des utilisateurs"
+    Et je vois la ligne de table "Raphael"
 
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "👨‍💻 A propos de l'utilisateur"
-    * je vois "« Raphael Dubigny »"
-    * je vois "email rdubigny@beta.gouv.fr"
+    Et je vois "« Raphael Dubigny »"
+    Et je vois "email rdubigny@beta.gouv.fr"
     * je vois "prénomRaphael"
     * je vois "nomDubigny"
     * je vois "téléphone0123456789"
