@@ -104,8 +104,8 @@ export default new Hono<Oidc_Context & App_Context>()
       "query",
       z.object({
         code: z.string().trim(),
-        state: z.string(),
         iss: z.string(),
+        state: z.string(),
       }),
     ),
     async function oidc_callback(c) {
