@@ -7,11 +7,11 @@
   "include": [
     "bin/src",
     "build.ts",
-    "packages/~/*/*/*/src/**/*.tsx",
-    "packages/~/*/*/src/**/*.tsx"
+    "modules/*/*/*/src/**/*.tsx",
+    "modules/*/*/src/**/*.tsx"
   ],
   "references": [
-    { "path": "packages/~/app/api/tsconfig.json" },
-    { "path": "packages/~/app/core/tsconfig.json" }
+    { "path": "modules/app/api/tsconfig.json" },
+    { "path": "modules/app/core/tsconfig.json" }
   ]
 }

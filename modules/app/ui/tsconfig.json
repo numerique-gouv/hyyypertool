@@ -14,7 +14,7 @@
       "path": "../urls"
     },
     {
-      "path": "../../../hono-slotify"
+      "path": "../../../packages/hono-slotify"
     },
     {
       "path": "../../config/happydom"

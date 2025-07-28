@@ -20,7 +20,7 @@ drizzle-kit: v0.21.2
 drizzle-orm: v0.30.10
 
 No config path provided, using default path
-Reading config file '/home/x/zzz/github/numerique-gouv/hyyypertool/packages/~/infra/identite-proconnect/database/drizzle.config.ts'
+Reading config file '/home/x/zzz/github/numerique-gouv/hyyypertool/modules/infra/identite-proconnect/database/drizzle.config.ts'
 Using 'pg' driver for database querying
 
 # [...]

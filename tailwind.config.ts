@@ -7,15 +7,15 @@ import { Config } from "tailwindcss";
 
 const config: Pick<Config, "content" | "presets"> = {
   content: [
-    "./packages/~/**/*.{ts,tsx}",
-    "./packages/~/app/ui/src/**/*.{ts,tsx}",
-    "./packages/~/infra/crisp/ui/src/**/*.{ts,tsx}",
-    "./packages/~/moderations/api/src/**/*.{ts,tsx}",
-    "./packages/~/moderations/ui/src/**/*.{ts,tsx}",
-    "./packages/~/organizations/api/src/**/*.{ts,tsx}",
-    "./packages/~/organizations/ui/src/**/*.{ts,tsx}",
-    "./packages/~/users/api/src/**/*.{ts,tsx}",
-    "./packages/~/users/ui/src/**/*.{ts,tsx}",
+    "./modules/**/*.{ts,tsx}",
+    "./modules/app/ui/src/**/*.{ts,tsx}",
+    "./modules/infra/crisp/ui/src/**/*.{ts,tsx}",
+    "./modules/moderations/api/src/**/*.{ts,tsx}",
+    "./modules/moderations/ui/src/**/*.{ts,tsx}",
+    "./modules/organizations/api/src/**/*.{ts,tsx}",
+    "./modules/organizations/ui/src/**/*.{ts,tsx}",
+    "./modules/users/api/src/**/*.{ts,tsx}",
+    "./modules/users/ui/src/**/*.{ts,tsx}",
   ],
   presets: [base_config],
 };
