@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`development 1`] = `
 "<!DOCTYPE html>
@@ -57,14 +57,13 @@ exports[`development 1`] = `
 
         <!--  -->
 
-        <link
-                rel="stylesheet"
-                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
-              />
-              <link
-                rel="stylesheet"
-                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
-              />
+        <style>
+              @import "/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.css"
+                layer(dsfr);
+
+              @import "/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/utility/utility.css"
+                layer(dsfr-utility);
+            </style>
 
         <!--  -->
 
@@ -234,14 +233,13 @@ exports[`production 1`] = `
 
         <!--  -->
 
-        <link
-                rel="stylesheet"
-                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
-              />
-              <link
-                rel="stylesheet"
-                href="/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
-              />
+        <style>
+              @import "/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css"
+                layer(dsfr);
+
+              @import "/assets/ASSETS_PATH/node_modules/@gouvfr/dsfr/dist/utility/utility.min.css"
+                layer(dsfr-utility);
+            </style>
 
         <!--  -->
 
