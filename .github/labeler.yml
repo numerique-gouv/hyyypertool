@@ -17,50 +17,50 @@
 ":globe_with_meridians: api":
   - changed-files:
       - any-glob-to-any-file:
-          - "packages/~/app/api/**/*"
-          - "packages/~/*/api/**/*"
+          - "sources/app/api/**/*"
+          - "sources/*/api/**/*"
 ":file_cabinet: database":
   - changed-files:
       - any-glob-to-any-file:
-          - "packages/~/infra/*/database/**/*"
-          - "packages/~/*/repository/**/*"
+          - "sources/infra/*/database/**/*"
+          - "sources/*/repository/**/*"
 ":building_construction: infra":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/infra/**/*"
+      - any-glob-to-any-file: "sources/infra/**/*"
 ":books: lib":
   - changed-files:
       - any-glob-to-any-file:
-          - "packages/~/infra/*/lib/**/*"
-          - "packages/~/*/lib/**/*"
+          - "sources/infra/*/lib/**/*"
+          - "sources/*/lib/**/*"
 ":lipstick: ui":
   - changed-files:
       - any-glob-to-any-file:
-          - "packages/~/app/ui/**/*"
-          - "packages/~/*/ui/**/*"
+          - "sources/app/ui/**/*"
+          - "sources/*/ui/**/*"
 
 #
 
 "scope: app":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/app/**/*"
+      - any-glob-to-any-file: "sources/app/**/*"
 "scope: auth":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/auth/**/*"
+      - any-glob-to-any-file: "sources/auth/**/*"
 "scope: config":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/config/**/*"
+      - any-glob-to-any-file: "sources/config/**/*"
 "scope: moderations":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/moderations/**/*"
+      - any-glob-to-any-file: "sources/moderations/**/*"
 "scope: organizations":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/organizations/**/*"
+      - any-glob-to-any-file: "sources/organizations/**/*"
 "scope: proxy":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/proxy/**/*"
+      - any-glob-to-any-file: "sources/proxy/**/*"
 "scope: users":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/users/**/*"
+      - any-glob-to-any-file: "sources/users/**/*"
 "scope: welcome":
   - changed-files:
-      - any-glob-to-any-file: "packages/~/welcome/**/*"
+      - any-glob-to-any-file: "sources/welcome/**/*"

@@ -8,9 +8,9 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
-import * as schema from "../packages/~/infra/identite-proconnect/database/src/drizzle/schema.js";
-import { delete_database } from "../packages/~/infra/identite-proconnect/database/src/seed/delete.js";
-import { insert_database } from "../packages/~/infra/identite-proconnect/database/src/seed/insert.js";
+import * as schema from "../sources/infra/identite-proconnect/database/src/drizzle/schema.js";
+import { delete_database } from "../sources/infra/identite-proconnect/database/src/seed/delete.js";
+import { insert_database } from "../sources/infra/identite-proconnect/database/src/seed/insert.js";
 
 //
 
