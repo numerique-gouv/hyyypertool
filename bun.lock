@@ -37,7 +37,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/api": {
+    "sources/app/api": {
       "name": "@~/app.api",
       "version": "1.0.0",
       "dependencies": {
@@ -66,7 +66,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/core": {
+    "sources/app/core": {
       "name": "@~/app.core",
       "version": "1.0.0",
       "dependencies": {
@@ -79,7 +79,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/layout": {
+    "sources/app/layout": {
       "name": "@~/app.layout",
       "version": "1.0.0",
       "dependencies": {
@@ -95,7 +95,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/middleware": {
+    "sources/app/middleware": {
       "name": "@~/app.middleware",
       "version": "1.0.0",
       "dependencies": {
@@ -113,7 +113,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/sentry": {
+    "sources/app/sentry": {
       "name": "@~/app.sentry",
       "version": "1.0.0",
       "dependencies": {
@@ -127,7 +127,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/ui": {
+    "sources/app/ui": {
       "name": "@~/app.ui",
       "version": "1.0.0",
       "dependencies": {
@@ -143,7 +143,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/app/urls": {
+    "sources/app/urls": {
       "name": "@~/app.urls",
       "version": "1.0.0",
       "dependencies": {
@@ -155,7 +155,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/auth/api": {
+    "sources/auth/api": {
       "name": "@~/auth.api",
       "version": "1.0.0",
       "dependencies": {
@@ -170,14 +170,14 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/config/happydom": {
+    "sources/config/happydom": {
       "name": "@~/config.happydom",
       "version": "0.0.0",
       "dependencies": {
         "@happy-dom/global-registrator": "18.0.1",
       },
     },
-    "packages/~/config/tailwindcss": {
+    "sources/config/tailwindcss": {
       "name": "@~/config.tailwindcss",
       "version": "0.0.0",
       "dependencies": {
@@ -187,7 +187,7 @@
         "tailwindcss": "4.1.11",
       },
     },
-    "packages/~/config/typescript": {
+    "sources/config/typescript": {
       "name": "@~/config.typescript",
       "version": "0.0.0",
       "dependencies": {
@@ -197,7 +197,7 @@
         "hono": "4.8.4",
       },
     },
-    "packages/~/infra/crisp/lib": {
+    "sources/infra/crisp/lib": {
       "name": "@~/crisp.lib",
       "version": "1.0.0",
       "dependencies": {
@@ -210,7 +210,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/infra/crisp/middleware": {
+    "sources/infra/crisp/middleware": {
       "name": "@~/crisp.middleware",
       "version": "1.0.0",
       "dependencies": {
@@ -221,7 +221,7 @@
         "@~/crisp.lib": "workspace:*",
       },
     },
-    "packages/~/infra/crisp/ui": {
+    "sources/infra/crisp/ui": {
       "name": "@~/crisp.ui",
       "version": "1.0.0",
       "dependencies": {
@@ -238,7 +238,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/infra/identite-proconnect/database": {
+    "sources/infra/identite-proconnect/database": {
       "name": "@~/identite-proconnect.database",
       "version": "1.0.0",
       "dependencies": {
@@ -256,7 +256,7 @@
         "drizzle-kit": "0.31.4",
       },
     },
-    "packages/~/infra/identite-proconnect/lib": {
+    "sources/infra/identite-proconnect/lib": {
       "name": "@~/identite-proconnect.lib",
       "version": "1.0.0",
       "dependencies": {
@@ -273,7 +273,7 @@
         "pg": "8.16.3",
       },
     },
-    "packages/~/infra/zammad/api": {
+    "sources/infra/zammad/api": {
       "name": "@~/zammad.api",
       "version": "1.0.0",
       "dependencies": {
@@ -288,7 +288,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/infra/zammad/lib": {
+    "sources/infra/zammad/lib": {
       "name": "@~/zammad.lib",
       "version": "1.0.0",
       "dependencies": {
@@ -300,7 +300,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/moderations/api": {
+    "sources/moderations/api": {
       "name": "@~/moderations.api",
       "version": "1.0.0",
       "dependencies": {
@@ -333,7 +333,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/moderations/lib": {
+    "sources/moderations/lib": {
       "name": "@~/moderations.lib",
       "version": "1.0.0",
       "dependencies": {
@@ -350,7 +350,7 @@
         "@~/zammad.lib": "workspace:*",
       },
     },
-    "packages/~/moderations/repository": {
+    "sources/moderations/repository": {
       "name": "@~/moderations.repository",
       "version": "1.0.0",
       "dependencies": {
@@ -361,7 +361,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/moderations/ui": {
+    "sources/moderations/ui": {
       "name": "@~/moderations.ui",
       "version": "1.0.0",
       "dependencies": {
@@ -379,7 +379,7 @@
         "@~/crisp.lib": "workspace:*",
       },
     },
-    "packages/~/organizations/api": {
+    "sources/organizations/api": {
       "name": "@~/organizations.api",
       "version": "1.0.0",
       "dependencies": {
@@ -403,7 +403,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/organizations/lib": {
+    "sources/organizations/lib": {
       "name": "@~/organizations.lib",
       "version": "1.0.0",
       "dependencies": {
@@ -417,7 +417,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/organizations/repository": {
+    "sources/organizations/repository": {
       "name": "@~/organizations.repository",
       "version": "1.0.0",
       "dependencies": {
@@ -430,7 +430,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/organizations/ui": {
+    "sources/organizations/ui": {
       "name": "@~/organizations.ui",
       "version": "1.0.0",
       "dependencies": {
@@ -446,7 +446,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/proxy/api": {
+    "sources/proxy/api": {
       "name": "@~/proxy.api",
       "version": "1.0.0",
       "dependencies": {
@@ -456,7 +456,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/users/api": {
+    "sources/users/api": {
       "name": "@~/users.api",
       "version": "1.0.0",
       "dependencies": {
@@ -476,7 +476,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/users/lib": {
+    "sources/users/lib": {
       "name": "@~/users.lib",
       "version": "1.0.0",
       "dependencies": {
@@ -488,7 +488,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/users/repository": {
+    "sources/users/repository": {
       "name": "@~/users.repository",
       "version": "1.0.0",
       "dependencies": {
@@ -499,7 +499,7 @@
         "@~/config.typescript": "workspace:*",
       },
     },
-    "packages/~/users/ui": {
+    "sources/users/ui": {
       "name": "@~/users.ui",
       "version": "1.0.0",
       "dependencies": {
@@ -518,7 +518,7 @@
         "@~/crisp.lib": "workspace:*",
       },
     },
-    "packages/~/welcome/api": {
+    "sources/welcome/api": {
       "name": "@~/welcome.api",
       "version": "1.0.0",
       "dependencies": {
@@ -942,69 +942,69 @@
 
     "@zootools/email-spell-checker": ["@zootools/email-spell-checker@1.12.0", "", {}, "sha512-yM0lH4yjg+jZG5QubtvpHE+ahSnsHbw9ilnQgKgOF3fk6OBVQLRsEq4NR+/nRvrwG8Vo+29bzKwhXk5y1b/FwA=="],
 
-    "@~/app.api": ["@~/app.api@workspace:packages/~/app/api"],
+    "@~/app.api": ["@~/app.api@workspace:sources/app/api"],
 
-    "@~/app.core": ["@~/app.core@workspace:packages/~/app/core"],
+    "@~/app.core": ["@~/app.core@workspace:sources/app/core"],
 
-    "@~/app.layout": ["@~/app.layout@workspace:packages/~/app/layout"],
+    "@~/app.layout": ["@~/app.layout@workspace:sources/app/layout"],
 
-    "@~/app.middleware": ["@~/app.middleware@workspace:packages/~/app/middleware"],
+    "@~/app.middleware": ["@~/app.middleware@workspace:sources/app/middleware"],
 
-    "@~/app.sentry": ["@~/app.sentry@workspace:packages/~/app/sentry"],
+    "@~/app.sentry": ["@~/app.sentry@workspace:sources/app/sentry"],
 
-    "@~/app.ui": ["@~/app.ui@workspace:packages/~/app/ui"],
+    "@~/app.ui": ["@~/app.ui@workspace:sources/app/ui"],
 
-    "@~/app.urls": ["@~/app.urls@workspace:packages/~/app/urls"],
+    "@~/app.urls": ["@~/app.urls@workspace:sources/app/urls"],
 
-    "@~/auth.api": ["@~/auth.api@workspace:packages/~/auth/api"],
+    "@~/auth.api": ["@~/auth.api@workspace:sources/auth/api"],
 
-    "@~/config.happydom": ["@~/config.happydom@workspace:packages/~/config/happydom"],
+    "@~/config.happydom": ["@~/config.happydom@workspace:sources/config/happydom"],
 
-    "@~/config.tailwindcss": ["@~/config.tailwindcss@workspace:packages/~/config/tailwindcss"],
+    "@~/config.tailwindcss": ["@~/config.tailwindcss@workspace:sources/config/tailwindcss"],
 
-    "@~/config.typescript": ["@~/config.typescript@workspace:packages/~/config/typescript"],
+    "@~/config.typescript": ["@~/config.typescript@workspace:sources/config/typescript"],
 
-    "@~/crisp.lib": ["@~/crisp.lib@workspace:packages/~/infra/crisp/lib"],
+    "@~/crisp.lib": ["@~/crisp.lib@workspace:sources/infra/crisp/lib"],
 
-    "@~/crisp.middleware": ["@~/crisp.middleware@workspace:packages/~/infra/crisp/middleware"],
+    "@~/crisp.middleware": ["@~/crisp.middleware@workspace:sources/infra/crisp/middleware"],
 
-    "@~/crisp.ui": ["@~/crisp.ui@workspace:packages/~/infra/crisp/ui"],
+    "@~/crisp.ui": ["@~/crisp.ui@workspace:sources/infra/crisp/ui"],
 
-    "@~/identite-proconnect.database": ["@~/identite-proconnect.database@workspace:packages/~/infra/identite-proconnect/database"],
+    "@~/identite-proconnect.database": ["@~/identite-proconnect.database@workspace:sources/infra/identite-proconnect/database"],
 
-    "@~/identite-proconnect.lib": ["@~/identite-proconnect.lib@workspace:packages/~/infra/identite-proconnect/lib"],
+    "@~/identite-proconnect.lib": ["@~/identite-proconnect.lib@workspace:sources/infra/identite-proconnect/lib"],
 
-    "@~/moderations.api": ["@~/moderations.api@workspace:packages/~/moderations/api"],
+    "@~/moderations.api": ["@~/moderations.api@workspace:sources/moderations/api"],
 
-    "@~/moderations.lib": ["@~/moderations.lib@workspace:packages/~/moderations/lib"],
+    "@~/moderations.lib": ["@~/moderations.lib@workspace:sources/moderations/lib"],
 
-    "@~/moderations.repository": ["@~/moderations.repository@workspace:packages/~/moderations/repository"],
+    "@~/moderations.repository": ["@~/moderations.repository@workspace:sources/moderations/repository"],
 
-    "@~/moderations.ui": ["@~/moderations.ui@workspace:packages/~/moderations/ui"],
+    "@~/moderations.ui": ["@~/moderations.ui@workspace:sources/moderations/ui"],
 
-    "@~/organizations.api": ["@~/organizations.api@workspace:packages/~/organizations/api"],
+    "@~/organizations.api": ["@~/organizations.api@workspace:sources/organizations/api"],
 
-    "@~/organizations.lib": ["@~/organizations.lib@workspace:packages/~/organizations/lib"],
+    "@~/organizations.lib": ["@~/organizations.lib@workspace:sources/organizations/lib"],
 
-    "@~/organizations.repository": ["@~/organizations.repository@workspace:packages/~/organizations/repository"],
+    "@~/organizations.repository": ["@~/organizations.repository@workspace:sources/organizations/repository"],
 
-    "@~/organizations.ui": ["@~/organizations.ui@workspace:packages/~/organizations/ui"],
+    "@~/organizations.ui": ["@~/organizations.ui@workspace:sources/organizations/ui"],
 
-    "@~/proxy.api": ["@~/proxy.api@workspace:packages/~/proxy/api"],
+    "@~/proxy.api": ["@~/proxy.api@workspace:sources/proxy/api"],
 
-    "@~/users.api": ["@~/users.api@workspace:packages/~/users/api"],
+    "@~/users.api": ["@~/users.api@workspace:sources/users/api"],
 
-    "@~/users.lib": ["@~/users.lib@workspace:packages/~/users/lib"],
+    "@~/users.lib": ["@~/users.lib@workspace:sources/users/lib"],
 
-    "@~/users.repository": ["@~/users.repository@workspace:packages/~/users/repository"],
+    "@~/users.repository": ["@~/users.repository@workspace:sources/users/repository"],
 
-    "@~/users.ui": ["@~/users.ui@workspace:packages/~/users/ui"],
+    "@~/users.ui": ["@~/users.ui@workspace:sources/users/ui"],
 
-    "@~/welcome.api": ["@~/welcome.api@workspace:packages/~/welcome/api"],
+    "@~/welcome.api": ["@~/welcome.api@workspace:sources/welcome/api"],
 
-    "@~/zammad.api": ["@~/zammad.api@workspace:packages/~/infra/zammad/api"],
+    "@~/zammad.api": ["@~/zammad.api@workspace:sources/infra/zammad/api"],
 
-    "@~/zammad.lib": ["@~/zammad.lib@workspace:packages/~/infra/zammad/lib"],
+    "@~/zammad.lib": ["@~/zammad.lib@workspace:sources/infra/zammad/lib"],
 
     "acorn": ["acorn@8.15.0", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg=="],
 
