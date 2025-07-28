@@ -106,7 +106,7 @@
         "@~/identite-proconnect.database": "workspace:*",
         "@~/identite-proconnect.lib": "workspace:*",
         "hono": "4.8.4",
-        "hono-sessions": "0.7.2",
+        "hono-sessions": "0.8.0",
         "openid-client": "6.6.2",
       },
       "devDependencies": {
@@ -1344,7 +1344,7 @@
 
     "hono": ["hono@4.8.4", "", {}, "sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg=="],
 
-    "hono-sessions": ["hono-sessions@0.7.2", "", { "dependencies": { "hono": "^4.0.0", "iron-webcrypto": "^1.2.1" } }, "sha512-QuoDqovzibnIYK0E3G7Pfoe63mYsyY8WgR1wmAuRDWpxpIglDVxShBn4VveFC+VGZummY407XeImoJhUpGcJMg=="],
+    "hono-sessions": ["hono-sessions@0.8.0", "", { "dependencies": { "hono": "^4.0.0", "iron-webcrypto": "^1.2.1", "ohash": "^2" } }, "sha512-44nDuxcGTlk1hKE+7vH8KnNleKYnr8p3i/vkT8640jU8V0F1Tm873F5NdfXpctZax3CtnQ4cUKyEF1axXdkZrw=="],
 
     "hono-slotify": ["hono-slotify@workspace:packages/hono-slotify"],
 
