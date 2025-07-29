@@ -13,7 +13,7 @@ type MockServerRequestVerificationBody = {
   };
 };
 
-Given("un server faut server {string}", function (server: string) {
+Given("un faux serveur {string}", function (server: string) {
   cy.exec(`docker compose restart ${server}`);
   cy.exec(`docker compose up --wait ${server}`);
 });

@@ -1,0 +1,17 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`returns seconded agent diplomatie.gouv - Ministry of the Interior 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Vous semblez être un Agent ayant été détaché dans une administration française à l&#39;étranger.
+Si tel est le cas, nous vous invitons à créer à nouveau votre compte utilisateur, en le rattachant à l&#39;organisation dans laquelle vous avez été détaché.
+Ex : vous avez été détaché dans l&#39;Ambassade de France en IRAK, veuillez rattacher votre compte à celle-ci.
+
+Vous trouverez le SIRET de l&#39;administration dans laquelle vous avez été détaché, sur l’Annuaire des Entreprises : https://annuaire-entreprises.data.gouv.fr/.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;

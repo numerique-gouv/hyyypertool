@@ -1,5 +1,27 @@
 # Changelog
 
+## [2025.7.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.7.1...2025.7.2) (2025-07-25)
+
+## [2025.7.1](https://github.com/numerique-gouv/hyyypertool/compare/2025.7.0...2025.7.1) (2025-07-24)
+
+# [2025.7.0](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.2...2025.7.0) (2025-07-24)
+
+
+### Bug Fixes
+
+* **typo:** add accent to vérifier ([#947](https://github.com/numerique-gouv/hyyypertool/issues/947)) ([e2db914](https://github.com/numerique-gouv/hyyypertool/commit/e2db914f3d6a081a0fcd6e2a703daca4414fc1a2))
+
+
+### Features
+
+* migrate from MonComptePro to Identité ProConnect ([#971](https://github.com/numerique-gouv/hyyypertool/issues/971)) ([48bce06](https://github.com/numerique-gouv/hyyypertool/commit/48bce0683e771d7aea71f46a0de19871afbe21b8))
+* **moderation:** update agent_comcom_comaglo ([#961](https://github.com/numerique-gouv/hyyypertool/issues/961)) ([734c5f5](https://github.com/numerique-gouv/hyyypertool/commit/734c5f5cab9e45a3d3763c11425d5921805b4048))
+
+
+### Reverts
+
+* Revert "🔧 improve dependabot config for bun monorepo support (#975)" (#990) ([8df2db2](https://github.com/numerique-gouv/hyyypertool/commit/8df2db2121173fa8aa87085fa92ee1d4781c6922)), closes [#975](https://github.com/numerique-gouv/hyyypertool/issues/975) [#990](https://github.com/numerique-gouv/hyyypertool/issues/990)
+
 ## [2025.6.2](https://github.com/numerique-gouv/hyyypertool/compare/2025.6.1...2025.6.2) (2025-06-17)
 
 ### Bug Fixes

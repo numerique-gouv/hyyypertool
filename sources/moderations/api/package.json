@@ -1,0 +1,46 @@
+{
+  "name": "@~/moderations.api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.tsx"
+    },
+    "./*": {
+      "default": "./src/*.tsx"
+    }
+  },
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@~/app.layout": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "@~/crisp.lib": "workspace:*",
+    "@~/crisp.middleware": "workspace:*",
+    "@~/crisp.ui": "workspace:*",
+    "@~/moderations.lib": "workspace:*",
+    "@~/moderations.ui": "workspace:*",
+    "@~/identite-proconnect.database": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
+    "@~/organizations.repository": "workspace:*",
+    "@~/organizations.ui": "workspace:*",
+    "@~/users.lib": "workspace:*",
+    "@~/users.ui": "workspace:*",
+    "@~/zammad.lib": "workspace:*",
+    "await-to-js": "3.0.0",
+    "drizzle-orm": "0.41.0",
+    "hono": "4.8.4",
+    "tailwind-variants": "1.0.0",
+    "ts-dedent": "2.2.0",
+    "ts-pattern": "5.7.1",
+    "zod": "4.0.2"
+  },
+  "devDependencies": {
+    "@~/config.tailwindcss": "workspace:*",
+    "@~/config.typescript": "workspace:*"
+  }
+}

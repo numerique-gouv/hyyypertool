@@ -3,17 +3,17 @@ Fonctionnalité: Moderation blockante à accepter
 
   Contexte: Jean Bon veut rejoindre l'organisation « Abracadabra »
     Soit une base de données nourrie au grain
-    * un server faut server "identite.proconnect.gouv.fr"
-    * je reinitialise le contexte
+    Et un faux serveur "identite.proconnect.gouv.fr"
+    Et je réinitialise le contexte
     Quand je navigue sur la page
-    * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "ProConnect"
+    Et je vois "Bonjour Hyyypertool !"
+    Et je clique sur le bouton "ProConnect"
 
     Alors je vois "Liste des moderations"
-    * je vois la ligne de table "51935970700022"
-    * sur la même ligne je vois "Bon"
-    * sur la même ligne je vois "Jean"
-    * sur la même ligne je vois "jeanbon@yopmail.com"
+    Et je vois la ligne de table "51935970700022"
+    Et sur la même ligne je vois "Bon"
+    Et sur la même ligne je vois "Jean"
+    Et sur la même ligne je vois "jeanbon@yopmail.com"
 
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"
@@ -22,9 +22,9 @@ Fonctionnalité: Moderation blockante à accepter
 
   Scénario: Domaine interne
     Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
-    * je vois la ligne "yopmail.com" dans le tableau
-    * sur la même ligne je vois "❓"
-    * sur la même ligne je vois "Menu"
+    Et je vois la ligne "yopmail.com" dans le tableau
+    Et sur la même ligne je vois "❓"
+    Et sur la même ligne je vois "Menu"
 
     Quand j'ouvre le menu déroulant sur la même ligne
     Et je clique sur "✅ Domaine autorisé"
@@ -37,7 +37,7 @@ Fonctionnalité: Moderation blockante à accepter
     Alors sur la même ligne je vois "refused"
 
     Quand je clique sur le champs dans le tableau
-    * je tape "poymail.com"
+    Et je tape "poymail.com"
     * je clique sur "Ajouter" dans le tableau
 
     Alors je vois la ligne "poymail.com" dans le tableau
@@ -56,7 +56,7 @@ Fonctionnalité: Moderation blockante à accepter
 
     Soit je vais à l'intérieur du dialogue nommé "la modale de validation"
     Quand je clique sur "Terminer"
-    * je reinitialise le contexte
+    Et je réinitialise le contexte
     * je vois "Cette modération a été marqué comme traitée le"
     * je vois "Validé par user@yopmail.com"
 

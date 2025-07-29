@@ -4,23 +4,23 @@ Fonctionnalité: Page organisation - domaine à vérifier
   Contexte:
     Soit une base de données nourrie au grain
     Quand je navigue sur la page
-    * je vois "Bonjour Hyyypertool !"
-    * je clique sur le bouton "ProConnect"
+    Et je vois "Bonjour Hyyypertool !"
+    Et je clique sur le bouton "ProConnect"
 
   Scénario:
     Quand je clique sur "Domaines à vérifier"
     Alors je suis redirigé sur "/organizations/domains"
-    * je vois "Liste des domaines à vérifier"
+    Et je vois "Liste des domaines à vérifier"
 
     Soit le tableau sous le title "Liste des domaines à vérifier"
-    * je vois 2 lignes dans le tableau
-    * je vois la ligne de table "81403721400016"
-    * sur la même ligne je vois "Yes we hack"
+    Et je vois 2 lignes dans le tableau
+    Et je vois la ligne de table "81403721400016"
+    Et sur la même ligne je vois "Yes we hack"
 
     Quand sur la même ligne je clique sur "➡️"
     Alors je vois "🏛 A propos de l'organisation"
-    * je vois "« Yes we hack »"
-    * je vois "Dénomination Yes we hack"
+    Et je vois "« Yes we hack »"
+    Et je vois "Dénomination Yes we hack"
 
     Soit le tableau sous le title "domaine connu dans l'organisation"
     * je vois la ligne "yeswehack.com" dans le tableau
