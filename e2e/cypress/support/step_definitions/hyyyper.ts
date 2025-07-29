@@ -159,38 +159,4 @@ When("je reviens en avant", () => {
 // Domain-specific step definitions for Hyyypertool
 //
 
-// Enhanced table interactions (project-specific)
-Given("je consulte la ligne contenant {string}", (text: string) => {
-  cy.contains("td", text).parent("tr").as("current-row");
-});
-
-When("sur la ligne sélectionnée je clique sur {string}", (text: string) => {
-  cy.get("@current-row").contains(text).click();
-});
-
-Then("sur la ligne sélectionnée je vois {string}", (text: string) => {
-  cy.get("@current-row").contains(text).should("be.visible");
-});
-
-When("je consulte le tableau {string}", (title: string) => {
-  cy.contains(title)
-    .invoke("attr", "id")
-    .then((id) => {
-      cy.get(`[aria-describedby="${id}"]`).as("current-table");
-    });
-});
-
-Then("le tableau sélectionné est vide", () => {
-  cy.get("@current-table").within(() =>
-    cy.get("tbody > tr").should("have.length", 0),
-  );
-});
-
-Then("je vois {int} lignes dans le tableau sélectionné", (count: number) => {
-  cy.get("@current-table").find("tbody > tr").should("have.length", count);
-});
-
-When("dans le tableau sélectionné je clique sur {string}", (text: string) => {
-  cy.get("@current-table").contains(text).click();
-});
 
