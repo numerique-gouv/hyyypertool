@@ -18,6 +18,8 @@ Fonctionnalité: Moderation blockante à refuser
     Et je vois "Jean"
     Et je vois "jeanbon@yopmail.com"
     Et je clique sur "➡️"
+
+    Et je dois voir le titre de page "Modération a traiter de Jean Bon pour 13002526500013"
     Et je réinitialise le contexte
     Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 

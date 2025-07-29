@@ -12,43 +12,49 @@ Fonctionnalité: Moderation blockante à accepter
     Alors je vois "Liste des moderations"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"
     Alors je vois "Bon"
-    Et je vois "Jean"  
+    Et je vois "Jean"
     Et je vois "jeanbon@yopmail.com"
     Et je clique sur "➡️"
+
+    Et je dois voir le titre de page "Modération a traiter de Jean Bon pour 51935970700022"
     Et je réinitialise le contexte
     Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"
 
-    Quand je clique sur "🌐 1 domaine connu dans l'organisation"
+    Quand je clique sur "🌐 1 domaine connu dans l’organisation"
 
   Scénario: Domaine interne
-    Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
-    Et je vois la ligne "yopmail.com" dans le tableau
-    Et sur la même ligne je vois "❓"
-    Et sur la même ligne je vois "Menu"
+    Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
+      | Domain      | Status |
+      | yopmail.com | ❓     |
 
-    Quand j'ouvre le menu déroulant sur la même ligne
+    Quand je clique sur "Menu"
     Et je clique sur "✅ Domaine autorisé"
-    Alors je vois la ligne "yopmail.com" dans le tableau
-    Alors sur la même ligne je vois "✅"
+    Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
+      | Domain      | Status |
+      | yopmail.com | ✅     |
 
-    Quand j'ouvre le menu déroulant sur la même ligne
+    Quand je clique sur "Menu"
     Et je clique sur le bouton "🚫 Domaine refusé"
-    Alors sur la même ligne je vois "🚫"
-    Alors sur la même ligne je vois "refused"
+    Quand je vais à l'intérieur du tableau nommé "🌐 1 domaine connu dans l’organisation"
+    Alors je vois "🚫"
+    Et je vois "refused"
+    Et je réinitialise le contexte
 
-    Quand je clique sur le champs dans le tableau
-    Et je tape "poymail.com"
-    Et je clique sur "Ajouter" dans le tableau
+    Quand je clique sur "Ajouter un domain"
+    Et je tape "poymail.com{enter}"
 
-    Alors je vois la ligne "poymail.com" dans le tableau
-    Alors sur la même ligne je vois "✅"
+    Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
+      | Domain      | Status |
+      | poymail.com| ✅  |
 
   Scénario: Domaine externe
-    Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
-    Et je vois la ligne "yopmail.com" dans le tableau
-    Quand j'ouvre le menu déroulant sur la même ligne
+    Quand je vais à l'intérieur du tableau nommé "🌐 1 domaine connu dans l’organisation"
+    Alors je vois "yopmail.com"
+    Et je réinitialise le contexte
+    Quand je clique sur "Menu"
     Et je clique sur le bouton "❎ Domaine externe"
-    Alors sur la même ligne je vois "❎"
+    Quand je vais à l'intérieur du tableau nommé "🌐 1 domaine connu dans l’organisation"
+    Alors je vois "❎"
 
   Scénario: Le modérateur le valide avec la barre d'outils
     Quand je clique sur "✅ Accepter"

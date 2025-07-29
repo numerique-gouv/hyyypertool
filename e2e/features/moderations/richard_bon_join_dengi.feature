@@ -18,6 +18,8 @@ Fonctionnalité: Duplicate Moderation
     Et je vois "Richard"
     Et je vois "richardbon@leclerc.fr"
     Et je clique sur "➡️"
+
+    Et je dois voir le titre de page "Modération a traiter de Richard Bon pour 38514019900014"
     Et je réinitialise le contexte
     Alors je vois "Richard Bon veut rejoindre l'organisation « Dengi - Leclerc »"
 

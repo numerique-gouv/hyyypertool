@@ -12,6 +12,7 @@ Fonctionnalité: Page utilisateur
   # Scénario: Fiche de Raphael
     Quand je clique sur "Utilisateurs"
     Alors je suis redirigé sur "/users"
+    Et je dois voir le titre de page "Liste des utilisateurs"
     Et je vois "Liste des utilisateurs"
     Quand je vais à l'intérieur de la rangée nommée "Utilisateur Raphael Dubigny (rdubigny@beta.gouv.fr)"
     Et je clique sur "➡️"

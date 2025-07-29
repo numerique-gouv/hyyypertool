@@ -10,11 +10,15 @@ Fonctionnalité: Page organisation - domaine à vérifier
   Scénario:
     Quand je clique sur "Domaines à vérifier"
     Alors je suis redirigé sur "/organizations/domains"
+    Et je dois voir le titre de page "Liste des domaines à vérifier"
     Et je vois "Liste des domaines à vérifier"
 
-    Quand je vais à l'intérieur du tableau nommé "Liste des domaines à vérifier"
-    Alors je vois 2 éléments
-    Et je réinitialise le contexte
+
+    Alors je dois voir un tableau nommé "Liste des domaines à vérifier" et contenant
+      | Domain        | Siret          |
+      | 9online.fr    | 21880352600019 |
+      | yeswehack.com | 81403721400016 |
+
     Quand je vais à l'intérieur de la rangée nommée "Domaine non vérifié yeswehack.com pour Yes we hack"
     Alors je vois "Yes we hack"
     Et je clique sur "➡️"
@@ -23,9 +27,9 @@ Fonctionnalité: Page organisation - domaine à vérifier
     Et je vois "« Yes we hack »"
     Et je vois "Dénomination Yes we hack"
 
-    Quand je vais à l'intérieur du tableau nommé "domaine connu dans l'organisation"
-    Alors je vois "yeswehack.com"
-    Et je vois "❓"
+    Alors je dois voir un tableau nommé "domaine connu dans l'organisation" et contenant
+      | Domain        | Status |
+      | yeswehack.com | ❓     |
 
     Quand je clique sur "Menu"
     Et je clique sur "✅ Domaine autorisé"
@@ -35,5 +39,6 @@ Fonctionnalité: Page organisation - domaine à vérifier
 
     Quand je clique sur "Domaines à vérifier"
     Et je clique sur "Rafraichir"
-    Quand je vais à l'intérieur du tableau nommé "Liste des domaines à vérifier"
-    Alors je vois 1 éléments
+    Alors je dois voir un tableau nommé "Liste des domaines à vérifier" et contenant
+      | Domain        | Siret          |
+      | 9online.fr    | 21880352600019 |

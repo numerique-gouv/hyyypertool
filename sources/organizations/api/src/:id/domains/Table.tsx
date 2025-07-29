@@ -1,5 +1,6 @@
 //
 
+import { hyper_ref } from "@~/app.core/html";
 import { button } from "@~/app.ui/button";
 import { GoogleSearchButton } from "@~/app.ui/button/components";
 import { menu_item } from "@~/app.ui/menu";
@@ -39,21 +40,15 @@ export function Table() {
             <Row key={`${domain.id}`} organization_domain={domain} />
           ))}
         </tbody>
-        <tfoot>
-          <tr>
-            <td colspan={6}>
-              <Add_Domain />
-            </td>
-          </tr>
-        </tfoot>
       </table>
     </div>
   );
 }
 
-async function Add_Domain() {
+export async function Add_Domain() {
   const { req } = usePageRequestContext();
   const { id: organization_id } = req.valid("param");
+  const $describedby = hyper_ref("add_domain");
 
   const hx_add_domain_props = await hx_urls.organizations[":id"].domains.$put({
     param: {
@@ -62,19 +57,24 @@ async function Add_Domain() {
   });
 
   return (
-    <form
-      {...hx_add_domain_props}
-      hx-swap="none"
-      class="grid grid-cols-[1fr_min-content]"
-    >
-      <input
-        class="fr-input"
-        type="text"
-        name={AddDomainParams_Schema.keyof().Enum.domain}
-      />
-      <button class="fr-btn" type="submit">
-        Ajouter
-      </button>
+    <form {...hx_add_domain_props} hx-swap="none">
+      <div class="fr-input-group">
+        <label class="fr-label" for={$describedby}>
+          Ajouter un domain
+        </label>
+        <div class="fr-input-wrap fr-input-wrap--addon">
+          <input
+            aria-describedby={$describedby}
+            id={$describedby}
+            class="fr-input"
+            type="text"
+            name={AddDomainParams_Schema.keyof().Enum.domain}
+          />
+          <button class="fr-btn" type="submit">
+            Ajouter
+          </button>
+        </div>
+      </div>
     </form>
   );
 }
@@ -139,10 +139,7 @@ function Row({
     verified_at,
   } = organization_domain;
   return (
-    <tr 
-      aria-label={`Domaine ${domain} (${verification_type})`}
-      key={key}
-    >
+    <tr aria-label={`Domaine ${domain} (${verification_type})`} key={key}>
       <td>
         <TypeToEmoji type={verification_type as MCP_EmailDomain_Type} />
       </td>

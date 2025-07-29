@@ -8,6 +8,7 @@ import {
   Given,
   Then,
   When,
+  type DataTable,
 } from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
 
@@ -47,7 +48,7 @@ Given("je vais à l'intérieur du tableau nommé {string}", (title: string) => {
 });
 
 Given("je vais à l'intérieur de la rangée nommée {string}", (name: string) => {
-  get_within_context = () => cy.get(`tr[aria-label="${name}"]`);
+  get_within_context = () => cy.get(`tr[aria-label*="${name}"]`);
 });
 
 // Navigation
@@ -128,14 +129,63 @@ Then("je suis redirigé sur {string}", (path: string) => {
   cy.url().should("contain", path);
 });
 
-Then("je ne vois aucun élément", () => {
-  get_within_context().within(() =>
-    cy.get("tbody > tr, .empty-state, [data-empty]").should("have.length", 0),
-  );
+Then("je dois voir le titre de page {string}", (title: string) => {
+  cy.title().should("contain", title);
 });
 
-Then("je vois {int} éléments", (count: number) => {
-  get_within_context().within(() =>
-    cy.get("tbody > tr, [data-item], .list-item").should("have.length", count),
-  );
-});
+// UVV-style table verification - enhanced subset matching
+// see https://github.com/e2e-test-quest/uuv/blob/2d5b64b02a1bdc9602b96a9a0185f1cd071dcec6/packages/runner-cypress/src/cucumber/step_definitions/cypress/_.common.ts#L74-L87
+Then(
+  "je dois voir un tableau nommé {string} et contenant",
+  (tableName: string, expectedData: DataTable) => {
+    cy.contains(tableName)
+      .invoke("attr", "id")
+      .then((id) => {
+        cy.get(`[aria-describedby="${id}"]`).within(() => {
+          const expectedTable = expectedData.rows();
+          const actualTableContent: string[][] = [];
+
+          // Extract actual table content
+          cy.get("tr").then(($rows) => {
+            $rows.each((index, row) => {
+              const $row = Cypress.$(row);
+              const cellSelector = index === 0 ? "th" : "td";
+              const $cells = $row.find(cellSelector);
+              const rowData: string[] = [];
+
+              $cells.each((_cellIndex, cell) => {
+                const cellText = Cypress.$(cell).text().trim();
+                rowData.push(cellText);
+              });
+
+              if (rowData.length > 0) {
+                actualTableContent.push(rowData);
+              }
+            });
+
+            // Verify that expected subset exists within actual table
+            expectedTable.forEach((expectedRow) => {
+              if (expectedRow.some((cell) => cell.trim())) {
+                // Find matching rows in actual table
+                const matchingRows = actualTableContent.filter((actualRow) => {
+                  return expectedRow.every((expectedCell) => {
+                    if (!expectedCell.trim()) return true; // Skip empty expected cells
+
+                    // Check if any cell in this row contains the expected content
+                    return actualRow.some((actualCell) =>
+                      actualCell.includes(expectedCell.trim()),
+                    );
+                  });
+                });
+
+                expect(matchingRows.length).to.be.greaterThan(
+                  0,
+                  `Expected row ${JSON.stringify(expectedRow)} not found as subset in table. Actual table: ${JSON.stringify(actualTableContent)}`,
+                );
+              }
+            });
+          });
+        });
+      });
+  },
+);

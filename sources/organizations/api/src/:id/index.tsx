@@ -100,7 +100,8 @@ export default new Hono<ContextType>()
           ctx.var.query_organization_members_count,
       }))(ctx as any, next);
     },
-    async function GET({ render }) {
+    async function GET({ render, set, var: { organization } }) {
+      set("page_title", `Organisation ${organization.cached_libelle} (${organization.siret})`);
       return render(<Organization_Page />);
     },
   )

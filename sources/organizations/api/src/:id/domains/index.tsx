@@ -19,7 +19,7 @@ import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
 import type { ContextType } from "./context";
-import { Table } from "./Table";
+import { Add_Domain, Table } from "./Table";
 
 //
 
@@ -45,7 +45,12 @@ export default new Hono<ContextType>()
       return next();
     },
     async function GET({ render }) {
-      return render(<Table />);
+      return render(
+        <>
+          <Table />
+          <Add_Domain />
+        </>,
+      );
     },
   )
   .put(

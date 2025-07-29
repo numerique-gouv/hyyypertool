@@ -11,6 +11,7 @@ Fonctionnalité: Page organisation
   Scénario:
     Quand je clique sur "Organisations"
     Alors je suis redirigé sur "/organizations"
+    Et je dois voir le titre de page "Liste des organisations"
     Et je vois "Liste des organisations"
     Quand je vais à l'intérieur de la rangée nommée "Organisation DINUM (13002526500013)"
     Alors je vois "DINUM"
@@ -26,19 +27,15 @@ Fonctionnalité: Page organisation
     Et je vois "Tranche d effectif 100 à 199 salariés, en 2021 (code : 22) (liste code effectif INSEE)"
 
   # Scénario: domaine connu dans l'organisation DINUM
-    Soit le tableau sous le title "🌐 3 domaines connu dans l'organisation"
-    Et je vois la ligne "beta.gouv.fr" dans le tableau
-    Et sur la même ligne je vois "✅"
-    Et sur la même ligne je vois "verified"
-    Et je vois la ligne "modernisation.gouv.fr" dans le tableau
-    Et sur la même ligne je vois "✅"
-    Et sur la même ligne je vois "verified"
-    Et je vois la ligne "prestataire.modernisation.gouv.fr" dans le tableau
-    Et sur la même ligne je vois "❎"
-    Et sur la même ligne je vois "external"
+    Alors je dois voir un tableau nommé "🌐 3 domaines connu dans l'organisation" et contenant
+      | Status | Domain                             | Type     |
+      | ✅     | beta.gouv.fr                       | verified |
+      | ✅     | modernisation.gouv.fr              | verified |
+      | ❎     | prestataire.modernisation.gouv.fr  | external |
 
   # Scénario: Membres de DINUM
-    Quand je clique sur "1 membre enregistré dans l'organisation :"
+    Et je vois "1 membre"
+    Quand je clique sur "1 membre"
     Quand je vais à l'intérieur de la rangée nommée "Membre Raphael Dubigny (rdubigny@beta.gouv.fr)"
     Alors je vois "Raphael"
     Et je vois "Dubigny"

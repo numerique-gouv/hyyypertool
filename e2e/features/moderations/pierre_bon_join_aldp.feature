@@ -18,6 +18,8 @@ Fonctionnalité: Association Moderation
     Et je vois "Pierre"
     Et je vois "pierrebon@aldp-asso.fr"
     Et je clique sur "➡️"
+
+    Et je dois voir le titre de page "Modération big organisation de Pierre Bon pour 81797266400038"
     Et je réinitialise le contexte
     Alors je vois "Pierre Bon a rejoint l'organisation de plus de 50 employés « ALDP »"
     Et je vois "Liste dirigeants - Annuaire entreprise API"
