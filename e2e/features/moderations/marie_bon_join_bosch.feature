@@ -23,7 +23,7 @@ Fonctionnalité: Moderation non blockante
   Scénario: Le nom de domaine est vérifié
     Quand je consulte le tableau "domaine connu dans l'organisation"
     Et le tableau sélectionné est vide
-    Quand j'accepte la demande d'adhésion
+    Quand je clique sur "✅ Accepter"
     Quand je clique sur "J’autorise le domaine fr.bosch.com en interne à l'organisation"
     Quand je clique sur "Terminer"
 
@@ -41,7 +41,7 @@ Fonctionnalité: Moderation non blockante
   Scénario: Marie est un membre interne de l'organization.
     Soit le tableau sous le title "0 membre connu dans l’organisation"
     Et le tableau est vide
-    Quand j'accepte la demande d'adhésion
+    Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
     Quand je clique sur "Terminer"
 
@@ -60,7 +60,7 @@ Fonctionnalité: Moderation non blockante
     Soit le tableau sous le title "0 membre connu dans l’organisation"
     Et le tableau est vide
 
-    Quand j'accepte la demande d'adhésion
+    Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
     Et je clique sur "Terminer"
 

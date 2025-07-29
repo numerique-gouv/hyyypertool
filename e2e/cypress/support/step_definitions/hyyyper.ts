@@ -113,12 +113,9 @@ When("j'ouvre le menu déroulant sur la même ligne", () => {
   cy.get(row_scope).contains("button", "Menu").click();
 });
 
-When(
-  "je clique sur {string} dans le tableau",
-  function (text: string, context: string) {
-    cy.get(table_scope).contains(text).click();
-  },
-);
+When("je clique sur {string} dans le tableau", function (text: string) {
+  cy.get(table_scope).contains(text).click();
+});
 
 When("je clique sur le champs dans le tableau", () => {
   cy.get(table_scope).within(() => {
@@ -217,35 +214,4 @@ When("j'annule l'action via le dialogue", () => {
   get_within_context().within(() => {
     cy.contains("button", /Annuler|Non|Fermer/).click();
   });
-});
-
-// Organization workflow patterns (Hyyypertool specific)
-When("j'accepte la demande d'adhésion", () => {
-  cy.contains("✅ Accepter").click();
-});
-
-When("je refuse la demande d'adhésion", () => {
-  cy.contains("❌ Refuser").click();
-});
-
-When("j'autorise le domaine {string} en interne", (domain: string) => {
-  cy.contains(
-    `J'autorise le domaine ${domain} en interne à l'organisation`,
-  ).click();
-});
-
-When("j'ajoute l'utilisateur en tant qu'interne", () => {
-  cy.contains("Ajouter").contains("EN TANT QU'INTERNE").click();
-});
-
-When("j'ajoute l'utilisateur en tant qu'externe", () => {
-  cy.contains("Ajouter").contains("EN TANT QU'EXTERNE").click();
-});
-
-When("je termine la modération", () => {
-  cy.contains("Terminer").click();
-});
-
-When("je retraite la modération", () => {
-  cy.contains("Retraiter").click();
 });

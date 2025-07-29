@@ -17,7 +17,7 @@ Fonctionnalité: Retraiter une moderation
     Et je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Bosch rexroth d.s.i. »"
 
   Scénario: Marie Bon à rejoindre l'organisation Bosch par erreur
-    Quand je retraite la modération
+    Quand je clique sur "Retraiter"
     Alors je ne vois pas "Cette modération a été marqué comme traité"
 
     Soit le tableau sous le title "membre connu dans l’organisation"
