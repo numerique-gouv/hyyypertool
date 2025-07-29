@@ -18,8 +18,8 @@ type Props = {
 };
 export async function OrganizationsByUser(props: Props) {
   const { user, query_organization_count } = props;
-  const $describedby = hyper_ref();
-  const $page_ref = hyper_ref();
+  const $describedby = hyper_ref("organizations_by_user");
+  const $page_ref = hyper_ref("organizations_by_user_page");
   const count = await query_organization_count(user.id);
   const isOpen = props.isOpen ?? false;
   const hx_get_organizations_by_user = await hx_urls.users[

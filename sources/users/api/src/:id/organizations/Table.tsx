@@ -8,7 +8,6 @@ import { Time } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
 import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
 import { usePageRequestContext } from "./context";
-import { usePageRequestContext as useParentPageContext } from "../context";
 
 //
 
@@ -74,9 +73,6 @@ export function Row({
   organization: Awaited<get_organizations_by_user_id_dto>["organizations"][number];
 }) {
   const {
-    var: { user },
-  } = useParentPageContext();
-  const {
     cached_code_officiel_geographique,
     cached_libelle,
     created_at,
@@ -86,10 +82,7 @@ export function Row({
   } = organization;
 
   return (
-    <tr 
-      aria-label={`Organisation ${cached_libelle} pour ${user.given_name} ${user.family_name}`}
-      key={key}
-    >
+    <tr aria-label={`Organisation ${cached_libelle} pour (${siret})`} key={key}>
       <td>
         <Time date={created_at}>
           {date_to_dom_string(new Date(created_at))}
