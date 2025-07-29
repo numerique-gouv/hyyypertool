@@ -38,12 +38,8 @@ Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
   get_within_context = () => cy.findAllByLabelText(text);
 });
 
-Given("je vais à l'intérieur du tableau {string}", (title: string) => {
-  cy.contains(title)
-    .invoke("attr", "id")
-    .then((id) => {
-      get_within_context = () => cy.get(`[aria-describedby="${id}"]`);
-    });
+Given("je vais à l'intérieur du tableau nommé {string}", (title: string) => {
+  get_within_context = () => cy.contains(title).parent().find('table');
 });
 
 Given("je vais à l'intérieur de la rangée nommée {string}", (name: string) => {

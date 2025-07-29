@@ -21,8 +21,9 @@ Fonctionnalité: Moderation non blockante
     Alors je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Robert bosch france » avec l’adresse marie.bon@fr.bosch.com"
 
   Scénario: Le nom de domaine est vérifié
-    Soit le tableau sous le title "domaine connu dans l'organisation"
-    Et le tableau est vide
+    Quand je vais à l'intérieur du tableau nommé "🌐 0 domaine connu dans l'organisation"
+    Alors je vois 0 éléments
+    Et je réinitialise le contexte
     Quand je clique sur "✅ Accepter"
     Quand je clique sur "J’autorise le domaine fr.bosch.com en interne à l'organisation"
     Quand je clique sur "Terminer"
@@ -31,16 +32,19 @@ Fonctionnalité: Moderation non blockante
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
-    Et je vois la ligne de table "57206768400017"
-    Quand sur la même ligne je clique sur "✅"
+    Quand je vais à l'intérieur de la rangée nommée "Modération non vérifié de Marie Bon pour 57206768400017"
+    Et je clique sur "✅"
+    Et je réinitialise le contexte
 
-    Soit le tableau sous le title "domaine connu dans l'organisation"
-    Et je vois la ligne "fr.bosch.com" dans le tableau
-    Et sur la même ligne je vois "✅"
+    Quand je vais à l'intérieur du tableau nommé "🌐 0 domaine connu dans l'organisation"
+    Alors je vois "fr.bosch.com"
+    Et je vois "✅"
+    Et je réinitialise le contexte
 
   Scénario: Marie est un membre interne de l'organization.
-    Soit le tableau sous le title "0 membre connu dans l’organisation"
-    Et le tableau est vide
+    Quand je vais à l'intérieur du tableau nommé "👥 0 membre connu dans l'organisation"
+    Alors je vois 0 éléments
+    Et je réinitialise le contexte
     Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
     Quand je clique sur "Terminer"
@@ -53,13 +57,14 @@ Fonctionnalité: Moderation non blockante
     Et je clique sur "✅"
     Et je réinitialise le contexte
 
-    Soit le tableau sous le title "1 membre connu dans l'organisation"
-    Alors je vois "fr.bosch.com" dans le tableau
-    Et je vois "✅" dans le tableau
+    Quand je vais à l'intérieur du tableau nommé "👥 1 membre connu dans l'organisation"
+    Alors je vois "fr.bosch.com"
+    Et je vois "✅"
 
   Scénario: Marie est un membre externe de l'organization.
-    Soit le tableau sous le title "0 membre connu dans l’organisation"
-    Et le tableau est vide
+    Quand je vais à l'intérieur du tableau nommé "👥 0 membre connu dans l'organisation"
+    Alors je vois 0 éléments
+    Et je réinitialise le contexte
 
     Quand je clique sur "✅ Accepter"
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
@@ -73,6 +78,6 @@ Fonctionnalité: Moderation non blockante
     Et je clique sur "✅"
     Et je réinitialise le contexte
 
-    Soit le tableau sous le title "1 membre connu dans l'organisation"
-    Alors je vois "fr.bosch.com" dans le tableau
-    Et je vois "❌" dans le tableau
+    Quand je vais à l'intérieur du tableau nommé "👥 1 membre connu dans l'organisation"
+    Alors je vois "fr.bosch.com"
+    Et je vois "❌"
