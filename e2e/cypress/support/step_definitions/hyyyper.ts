@@ -5,7 +5,6 @@
 
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
-import { get_within_context, set_within_context } from "./uvv.js";
 
 //
 
@@ -82,15 +81,6 @@ Then(
   },
 );
 
-Then("je vois la ligne {string} dans le tableau", function (text: string) {
-  cy.get(table_scope).contains("td", text).parent("tr").as(`${text}-row`);
-  row_scope = `@${text}-row`;
-});
-
-Then("je vois la ligne de table {string}", function (text: string) {
-  cy.contains("td", text).parent("tr").as(`${text}-row`);
-  row_scope = `@${text}-row`;
-});
 
 Then("sur la même ligne je vois {string}", function (text: string) {
   cy.get(row_scope).contains(text);
@@ -154,9 +144,3 @@ Then(
 When("je reviens en avant", () => {
   cy.go(1);
 });
-
-//
-// Domain-specific step definitions for Hyyypertool
-//
-
-

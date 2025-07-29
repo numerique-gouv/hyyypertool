@@ -13,12 +13,12 @@ Fonctionnalité: Duplicate Moderation
 
   Scénario: Richard Bon veut rejoindre l'organisation Dengi - Leclerc
     Alors je vois "Liste des moderations"
-    Et je vois la ligne de table "38514019900014"
-    Et sur la même ligne je vois "Bon"
-    Et sur la même ligne je vois "Richard"
-    Et sur la même ligne je vois "richardbon@leclerc.fr"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Richard Bon pour 38514019900014"
+    Alors je vois "Bon"
+    Et je vois "Richard"
+    Et je vois "richardbon@leclerc.fr"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "Richard Bon veut rejoindre l'organisation « Dengi - Leclerc »"
 
     Alors je vois "Attention : demande multiples"

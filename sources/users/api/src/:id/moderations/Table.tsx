@@ -49,7 +49,7 @@ export function Row({
 }) {
   return (
     <tr 
-      aria-label={`Modération ${moderation_type_to_title(moderation.type).toLowerCase()} du ${date_to_string(new Date(moderation.created_at))}`}
+      aria-label={`Modération ${moderation_type_to_title(moderation.type).toLowerCase()} (ID ${moderation.id})`}
       key={key}
     >
       <td>{moderation.id}</td>

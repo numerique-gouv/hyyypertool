@@ -12,11 +12,10 @@ Fonctionnalité: Page organisation
     Quand je clique sur "Organisations"
     Alors je suis redirigé sur "/organizations"
     Et je vois "Liste des organisations"
-    Et je vois la ligne de table "13002526500013"
-    Et sur la même ligne je vois "DINUM"
-
-  # Scénario: Fiche de DINUM
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Organisation DINUM (13002526500013)"
+    Alors je vois "DINUM"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "🏛 A propos de l'organisation"
     Et je vois "« DINUM »"
     Et je vois "Dénomination DINUM"
@@ -39,9 +38,10 @@ Fonctionnalité: Page organisation
     Et sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM
-    Quand je clique sur "1 membre enregistré dans l’organisation :"
-    Et je vois la ligne de table "rdubigny@beta.gouv.fr"
-    Et sur la même ligne je vois "Raphael"
-    Et sur la même ligne je vois "Dubigny"
-    Et sur la même ligne je vois "✅"
-    Et sur la même ligne je vois "Chef"
+    Quand je clique sur "1 membre enregistré dans l'organisation :"
+    Quand je vais à l'intérieur de la rangée nommée "Membre Raphael Dubigny (rdubigny@beta.gouv.fr)"
+    Alors je vois "Raphael"
+    Et je vois "Dubigny"
+    Et je vois "✅"
+    Et je vois "Chef"
+    Et je réinitialise le contexte

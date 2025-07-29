@@ -13,9 +13,9 @@ Fonctionnalité: Page utilisateur
     Quand je clique sur "Utilisateurs"
     Alors je suis redirigé sur "/users"
     Et je vois "Liste des utilisateurs"
-    Et je vois la ligne de table "Raphael"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Utilisateur Raphael Dubigny (rdubigny@beta.gouv.fr)"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "👨‍💻 A propos de l'utilisateur"
     Et je vois "« Raphael Dubigny »"
     Et je vois "email rdubigny@beta.gouv.fr"

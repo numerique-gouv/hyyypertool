@@ -49,10 +49,11 @@ Fonctionnalité: Moderation non blockante
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
-    Et je vois la ligne de table "57206768400017"
-    Quand sur la même ligne je clique sur "✅"
+    Quand je vais à l'intérieur de la rangée nommée "Modération non vérifié de Marie Bon pour 57206768400017"
+    Et je clique sur "✅"
+    Et je réinitialise le contexte
 
-    Soit le tableau sous le title "1 membre connu dans l’organisation"
+    Soit le tableau sous le title "1 membre connu dans l'organisation"
     Alors je vois "fr.bosch.com" dans le tableau
     Et je vois "✅" dans le tableau
 
@@ -68,9 +69,10 @@ Fonctionnalité: Moderation non blockante
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
-    Et je vois la ligne de table "57206768400017"
-    Et sur la même ligne je clique sur "✅"
+    Quand je vais à l'intérieur de la rangée nommée "Modération non vérifié de Marie Bon pour 57206768400017"
+    Et je clique sur "✅"
+    Et je réinitialise le contexte
 
-    Soit le tableau sous le title "1 membre connu dans l’organisation"
+    Soit le tableau sous le title "1 membre connu dans l'organisation"
     Alors je vois "fr.bosch.com" dans le tableau
     Et je vois "❌" dans le tableau

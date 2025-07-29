@@ -14,10 +14,10 @@ Fonctionnalité: Page organisation - domaine à vérifier
 
     Soit le tableau sous le title "Liste des domaines à vérifier"
     Et je vois 2 lignes dans le tableau
-    Et je vois la ligne de table "81403721400016"
-    Et sur la même ligne je vois "Yes we hack"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Domaine non vérifié yeswehack.com pour Yes we hack"
+    Alors je vois "Yes we hack"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "🏛 A propos de l'organisation"
     Et je vois "« Yes we hack »"
     Et je vois "Dénomination Yes we hack"

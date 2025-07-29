@@ -13,9 +13,9 @@ Fonctionnalité: Page utilisateur with moderations
     Quand je clique sur "Utilisateurs"
     Alors je suis redirigé sur "/users"
     Et je vois "Liste des utilisateurs"
-    Et je vois la ligne de table "jeanbon@yopmail.com"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Utilisateur Jean Bon (jeanbon@yopmail.com)"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "👨‍💻 A propos de l'utilisateur"
     Et je vois "« Jean Bon »"
     Et je vois "email jeanbon@yopmail.com"
@@ -28,4 +28,5 @@ Fonctionnalité: Page utilisateur with moderations
 
   # Scénario: Organisations de Raphael
     Alors je vois "Jean est enregistré(e) dans les modérations suivantes :"
-    Et je vois la ligne de table "11/11/2011 11:11:11"
+    Quand je vais à l'intérieur de la rangée nommée "Modération a traiter (ID 1)"
+    Et je réinitialise le contexte

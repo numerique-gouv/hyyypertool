@@ -13,12 +13,12 @@ Fonctionnalité: Moderation blockante à refuser
     Et je tape "2011-11-11"
     Et je retire le focus
 
-    Alors je vois la ligne de table "13002526500013"
-    Et sur la même ligne je vois "Bon"
-    Et sur la même ligne je vois "Jean"
-    Et sur la même ligne je vois "jeanbon@yopmail.com"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 13002526500013"
+    Alors je vois "Bon"
+    Et je vois "Jean"
+    Et je vois "jeanbon@yopmail.com"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 
   Scénario: Le modérateur le refuse avec la barre d'outils
