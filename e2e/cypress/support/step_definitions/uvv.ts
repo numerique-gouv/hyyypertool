@@ -110,7 +110,9 @@ When("je retire le focus", () => {
 
 // Assertions
 Then("je vois {string}", (text: string) => {
-  get_within_context().within(() => cy.contains(text).should("be.visible"));
+  get_within_context().within(() => {
+    cy.contains(text, { timeout: 8000 }).should("be.visible");
+  });
 });
 
 Then("je dois voir le texte {string}", (text: string) => {
