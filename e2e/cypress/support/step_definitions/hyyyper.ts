@@ -99,9 +99,6 @@ Then("sur la ligne suivante je vois {string}", function (text: string) {
 
 // Button click step moved to uvv.ts
 
-When("j'ouvre le menu déroulant sur la même ligne", () => {
-  cy.get(row_scope).contains("button", "Menu").click();
-});
 
 When("je clique sur {string} dans le tableau", function (text: string) {
   cy.get(table_scope).contains(text).click();
