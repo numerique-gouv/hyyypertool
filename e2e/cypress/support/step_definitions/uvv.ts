@@ -46,13 +46,9 @@ Given("je vais à l'intérieur du tableau {string}", (title: string) => {
     });
 });
 
-Given(
-  "je vais à l'intérieur de la ligne contenant {string}",
-  (text: string) => {
-    cy.contains("td", text).parent("tr").as("current-row");
-    get_within_context = () => cy.get("@current-row");
-  },
-);
+Given("je vais à l'intérieur de la rangée nommée {string}", (name: string) => {
+  get_within_context = () => cy.get(`tr[aria-label="${name}"]`);
+});
 
 // Navigation
 Given("je suis sur la page {string}", (path: string) => {

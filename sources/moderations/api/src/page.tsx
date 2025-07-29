@@ -272,6 +272,7 @@ function Row({
   const { user, organization } = moderation;
   return (
     <tr
+      aria-label={`Modération ${moderation_type_to_title(moderation.type).toLowerCase()} de ${user.given_name} ${user.family_name} pour ${organization.siret}`}
       key={key}
       _={`on click set the window's location to '${
         urls.moderations[":id"].$url({

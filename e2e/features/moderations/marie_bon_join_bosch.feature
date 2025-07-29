@@ -12,12 +12,12 @@ Fonctionnalité: Moderation non blockante
     # Et je me connecte en tant que user@yopmail.com sur dev-agentconnect.fr
 
     Alors je vois "Liste des moderations"
-    Et je vois la ligne de table "57206768400017"
-    Et sur la même ligne je vois "Bon"
-    Et sur la même ligne je vois "Marie"
-    Et sur la même ligne je vois "marie.bon@fr.bosch.com"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Modération non vérifié de Marie Bon pour 57206768400017"
+    Alors je vois "Bon"
+    Et je vois "Marie"
+    Et je vois "marie.bon@fr.bosch.com"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Robert bosch france » avec l’adresse marie.bon@fr.bosch.com"
 
   Scénario: Le nom de domaine est vérifié

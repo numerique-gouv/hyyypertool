@@ -10,12 +10,12 @@ Fonctionnalité: Moderation blockante à accepter
     Et je clique sur le bouton "ProConnect"
 
     Alors je vois "Liste des moderations"
-    Et je vois la ligne de table "51935970700022"
-    Et sur la même ligne je vois "Bon"
-    Et sur la même ligne je vois "Jean"
-    Et sur la même ligne je vois "jeanbon@yopmail.com"
-
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"
+    Alors je vois "Bon"
+    Et je vois "Jean"  
+    Et je vois "jeanbon@yopmail.com"
+    Et je clique sur "➡️"
+    Et je réinitialise le contexte
     Alors je vois "Jean Bon veut rejoindre l'organisation « Abracadabra » avec l’adresse jeanbon@yopmail.com"
 
     Quand je clique sur "🌐 1 domaine connu dans l'organisation"
