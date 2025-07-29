@@ -194,24 +194,3 @@ When("dans le tableau sélectionné je clique sur {string}", (text: string) => {
   cy.get("@current-table").contains(text).click();
 });
 
-// Modal/Dialog interactions (application-specific)
-When("j'ouvre le dialogue {string}", (title: string) => {
-  cy.findAllByLabelText(title).as("current-dialog");
-  set_within_context(() => cy.get("@current-dialog"));
-});
-
-When("je ferme le dialogue", () => {
-  set_within_context(() => cy.get("body"));
-});
-
-When("je confirme l'action via le dialogue", () => {
-  get_within_context().within(() => {
-    cy.contains("button", /Confirmer|Valider|OK|Oui/).click();
-  });
-});
-
-When("j'annule l'action via le dialogue", () => {
-  get_within_context().within(() => {
-    cy.contains("button", /Annuler|Non|Fermer/).click();
-  });
-});
