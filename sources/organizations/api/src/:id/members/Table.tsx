@@ -72,7 +72,10 @@ function Row({ variants }: { variants?: VariantProps<typeof row> }) {
   const { user } = useContext(Member_Context);
   const verification_type = user.verification_type as Verification_Type;
   return (
-    <tr class={row(variants)}>
+    <tr 
+      aria-label={`Membre ${user.given_name} ${user.family_name} (${user.email})`}
+      class={row(variants)}
+    >
       <td>{user.given_name}</td>
       <td>{user.family_name}</td>
       <td>{user.is_external ? "❌" : "✅"}</td>

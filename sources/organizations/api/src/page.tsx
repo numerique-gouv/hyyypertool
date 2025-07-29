@@ -125,6 +125,7 @@ function Row({
 }) {
   return (
     <tr
+      aria-label={`Organisation ${organization.cached_libelle} (${organization.siret})`}
       _={`on click set the window's location to '${
         urls.organizations[":id"].$url({
           param: { id: organization.id.toString() },

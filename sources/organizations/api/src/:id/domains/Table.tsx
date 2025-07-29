@@ -139,7 +139,10 @@ function Row({
     verified_at,
   } = organization_domain;
   return (
-    <tr key={key}>
+    <tr 
+      aria-label={`Domaine ${domain} (${verification_type})`}
+      key={key}
+    >
       <td>
         <TypeToEmoji type={verification_type as MCP_EmailDomain_Type} />
       </td>

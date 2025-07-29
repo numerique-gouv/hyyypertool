@@ -125,6 +125,7 @@ function Row({
   const $domain = hyper_ref();
   return (
     <tr
+      aria-label={`Domaine non vérifié ${domain} pour ${organization.cached_libelle}`}
       _={`on click set the window's location to '${
         urls.organizations[":id"].$url({
           param: { id: organization.id.toString() },
