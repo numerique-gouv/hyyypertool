@@ -22,10 +22,10 @@ Fonctionnalité: Page utilisateur with moderations
     Et je vois "prénomJean"
     Et je vois "nomBon"
     Et je vois "téléphone0123456789"
-    * je vois "Création13/07/2018 15:35:15"
-    * je vois "Dernière modification22/06/2023 14:34:34"
-    * je vois "Email vérifié envoyé le22/06/2023 14:34:34"
+    Et je vois "Création13/07/2018 15:35:15"
+    Et je vois "Dernière modification22/06/2023 14:34:34"
+    Et je vois "Email vérifié envoyé le22/06/2023 14:34:34"
 
   # Scénario: Organisations de Raphael
     Alors je vois "Jean est enregistré(e) dans les modérations suivantes :"
-    * je vois la ligne de table "11/11/2011 11:11:11"
+    Et je vois la ligne de table "11/11/2011 11:11:11"

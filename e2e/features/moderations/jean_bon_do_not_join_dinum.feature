@@ -28,8 +28,8 @@ Fonctionnalité: Moderation blockante à refuser
     Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
     Et je clique sur "Notifier et terminer"
-    Etant donné que je reinitialise le contexte
     Quand je reviens en avant
+    Et je réinitialise le contexte
     Alors je vois "Cette modération a été marqué comme traitée le"
     Et je vois "Rejeté par user@yopmail.com"
     Et je vois 'Raison : "Nom de domaine introuvable"'

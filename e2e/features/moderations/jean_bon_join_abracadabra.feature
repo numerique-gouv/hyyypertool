@@ -4,8 +4,8 @@ Fonctionnalité: Moderation blockante à accepter
   Contexte: Jean Bon veut rejoindre l'organisation « Abracadabra »
     Soit une base de données nourrie au grain
     Et un faux serveur "identite.proconnect.gouv.fr"
-    Et je réinitialise le contexte
     Quand je navigue sur la page
+    Et je réinitialise le contexte
     Et je vois "Bonjour Hyyypertool !"
     Et je clique sur le bouton "ProConnect"
 
@@ -38,16 +38,16 @@ Fonctionnalité: Moderation blockante à accepter
 
     Quand je clique sur le champs dans le tableau
     Et je tape "poymail.com"
-    * je clique sur "Ajouter" dans le tableau
+    Et je clique sur "Ajouter" dans le tableau
 
     Alors je vois la ligne "poymail.com" dans le tableau
     Alors sur la même ligne je vois "✅"
 
   Scénario: Domaine externe
     Soit le tableau sous le title "🌐 1 domaine connu dans l'organisation"
-    * je vois la ligne "yopmail.com" dans le tableau
+    Et je vois la ligne "yopmail.com" dans le tableau
     Quand j'ouvre le menu déroulant sur la même ligne
-    * je clique sur le bouton "❎ Domaine externe"
+    Et je clique sur le bouton "❎ Domaine externe"
     Alors sur la même ligne je vois "❎"
 
   Scénario: Le modérateur le valide avec la barre d'outils
@@ -57,8 +57,8 @@ Fonctionnalité: Moderation blockante à accepter
     Soit je vais à l'intérieur du dialogue nommé "la modale de validation"
     Quand je clique sur "Terminer"
     Et je réinitialise le contexte
-    * je vois "Cette modération a été marqué comme traitée le"
-    * je vois "Validé par user@yopmail.com"
+    Et je vois "Cette modération a été marqué comme traitée le"
+    Et je vois "Validé par user@yopmail.com"
 
     Alors je vois "Liste des moderations"
     Alors je ne vois pas "51935970700022"

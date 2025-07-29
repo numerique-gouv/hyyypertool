@@ -23,8 +23,8 @@ Fonctionnalité: Page organisation - domaine à vérifier
     Et je vois "Dénomination Yes we hack"
 
     Soit le tableau sous le title "domaine connu dans l'organisation"
-    * je vois la ligne "yeswehack.com" dans le tableau
-    * sur la même ligne je vois "❓"
+    Et je vois la ligne "yeswehack.com" dans le tableau
+    Et sur la même ligne je vois "❓"
 
     Quand j'ouvre le menu déroulant sur la même ligne
     Et je clique sur "✅ Domaine autorisé"

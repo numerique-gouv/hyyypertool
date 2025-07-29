@@ -22,7 +22,7 @@ Fonctionnalité: Moderation non blockante
 
   Scénario: Le nom de domaine est vérifié
     Quand je consulte le tableau "domaine connu dans l'organisation"
-    * le tableau sélectionné est vide
+    Et le tableau sélectionné est vide
     Quand j'accepte la demande d'adhésion
     Quand je clique sur "J’autorise le domaine fr.bosch.com en interne à l'organisation"
     Quand je clique sur "Terminer"
@@ -31,16 +31,16 @@ Fonctionnalité: Moderation non blockante
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
-    * je vois la ligne de table "57206768400017"
+    Et je vois la ligne de table "57206768400017"
     Quand sur la même ligne je clique sur "✅"
 
     Quand je consulte le tableau "domaine connu dans l'organisation"
-    * je consulte la ligne contenant "fr.bosch.com"
-    * sur la ligne sélectionnée je vois "✅"
+    Et je consulte la ligne contenant "fr.bosch.com"
+    Et sur la ligne sélectionnée je vois "✅"
 
   Scénario: Marie est un membre interne de l'organization.
     Soit le tableau sous le title "0 membre connu dans l’organisation"
-    * le tableau est vide
+    Et le tableau est vide
     Quand j'accepte la demande d'adhésion
     Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'INTERNE"
     Quand je clique sur "Terminer"
@@ -49,7 +49,7 @@ Fonctionnalité: Moderation non blockante
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
-    * je vois la ligne de table "57206768400017"
+    Et je vois la ligne de table "57206768400017"
     Quand sur la même ligne je clique sur "✅"
 
     Soit le tableau sous le title "1 membre connu dans l’organisation"
@@ -58,18 +58,18 @@ Fonctionnalité: Moderation non blockante
 
   Scénario: Marie est un membre externe de l'organization.
     Soit le tableau sous le title "0 membre connu dans l’organisation"
-    * le tableau est vide
+    Et le tableau est vide
 
     Quand j'accepte la demande d'adhésion
-    * je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
-    * je clique sur "Terminer"
+    Et je clique sur "Ajouter Marie à l'organisation EN TANT QU'EXTERNE"
+    Et je clique sur "Terminer"
 
     Alors une notification mail n'est pas envoyée
 
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
-    * je vois la ligne de table "57206768400017"
-    * sur la même ligne je clique sur "✅"
+    Et je vois la ligne de table "57206768400017"
+    Et sur la même ligne je clique sur "✅"
 
     Soit le tableau sous le title "1 membre connu dans l’organisation"
     Alors je vois "fr.bosch.com" dans le tableau

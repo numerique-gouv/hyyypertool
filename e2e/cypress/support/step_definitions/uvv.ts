@@ -54,10 +54,6 @@ Given(
   },
 );
 
-Given("je réinitialise le contexte", () => {
-  get_within_context = () => cy.get("body");
-});
-
 // Navigation
 Given("je suis sur la page {string}", (path: string) => {
   cy.visit(path);
@@ -68,6 +64,11 @@ Given("je navigue sur la page", () => {
 });
 
 // Actions
+
+When("je réinitialise le contexte", () => {
+  get_within_context = () => cy.get("body");
+});
+
 When("je clique sur {string}", (text: string) => {
   get_within_context().within(() => cy.contains(text).click());
 });

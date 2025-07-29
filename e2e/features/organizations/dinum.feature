@@ -20,28 +20,28 @@ Fonctionnalité: Page organisation
     Alors je vois "🏛 A propos de l'organisation"
     Et je vois "« DINUM »"
     Et je vois "Dénomination DINUM"
-    * je vois "Siret 13002526500013 Fiche annuaire"
-    * je vois "NAF/APE 84.11Z - Administration publique générale"
-    * je vois "Adresse 20 avenue de segur, 75007 Paris"
-    * je vois "Nature juridique SA nationale à conseil d'administration (Service central d'un ministère)"
-    * je vois "Tranche d effectif 100 à 199 salariés, en 2021 (code : 22) (liste code effectif INSEE)"
+    Et je vois "Siret 13002526500013 Fiche annuaire"
+    Et je vois "NAF/APE 84.11Z - Administration publique générale"
+    Et je vois "Adresse 20 avenue de segur, 75007 Paris"
+    Et je vois "Nature juridique SA nationale à conseil d'administration (Service central d'un ministère)"
+    Et je vois "Tranche d effectif 100 à 199 salariés, en 2021 (code : 22) (liste code effectif INSEE)"
 
   # Scénario: domaine connu dans l'organisation DINUM
     Soit le tableau sous le title "🌐 3 domaines connu dans l'organisation"
-    * je vois la ligne "beta.gouv.fr" dans le tableau
-    * sur la même ligne je vois "✅"
-    * sur la même ligne je vois "verified"
-    * je vois la ligne "modernisation.gouv.fr" dans le tableau
-    * sur la même ligne je vois "✅"
-    * sur la même ligne je vois "verified"
-    * je vois la ligne "prestataire.modernisation.gouv.fr" dans le tableau
-    * sur la même ligne je vois "❎"
-    * sur la même ligne je vois "external"
+    Et je vois la ligne "beta.gouv.fr" dans le tableau
+    Et sur la même ligne je vois "✅"
+    Et sur la même ligne je vois "verified"
+    Et je vois la ligne "modernisation.gouv.fr" dans le tableau
+    Et sur la même ligne je vois "✅"
+    Et sur la même ligne je vois "verified"
+    Et je vois la ligne "prestataire.modernisation.gouv.fr" dans le tableau
+    Et sur la même ligne je vois "❎"
+    Et sur la même ligne je vois "external"
 
   # Scénario: Membres de DINUM
     Quand je clique sur "1 membre enregistré dans l’organisation :"
-    * je vois la ligne de table "rdubigny@beta.gouv.fr"
-    * sur la même ligne je vois "Raphael"
-    * sur la même ligne je vois "Dubigny"
-    * sur la même ligne je vois "✅"
-    * sur la même ligne je vois "Chef"
+    Et je vois la ligne de table "rdubigny@beta.gouv.fr"
+    Et sur la même ligne je vois "Raphael"
+    Et sur la même ligne je vois "Dubigny"
+    Et sur la même ligne je vois "✅"
+    Et sur la même ligne je vois "Chef"

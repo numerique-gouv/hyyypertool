@@ -5,7 +5,7 @@
 
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import "@testing-library/cypress/add-commands";
-import { get_within_context, set_within_context } from "./uvv";
+import { get_within_context, set_within_context } from "./uvv.js";
 
 //
 
