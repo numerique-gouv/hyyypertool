@@ -23,7 +23,9 @@ export let get_within_context: () => Cypress.Chainable<JQuery<HTMLElement>>;
 /**
  * Sets the current context for domain-specific step definitions
  */
-export const set_within_context = (context: () => Cypress.Chainable<JQuery<HTMLElement>>) => {
+export const set_within_context = (
+  context: () => Cypress.Chainable<JQuery<HTMLElement>>,
+) => {
   get_within_context = context;
 };
 
@@ -44,12 +46,15 @@ Given("je vais à l'intérieur du tableau {string}", (title: string) => {
     });
 });
 
-Given("je vais à l'intérieur de la ligne contenant {string}", (text: string) => {
-  cy.contains("td", text).parent("tr").as("current-row");
-  get_within_context = () => cy.get("@current-row");
-});
+Given(
+  "je vais à l'intérieur de la ligne contenant {string}",
+  (text: string) => {
+    cy.contains("td", text).parent("tr").as("current-row");
+    get_within_context = () => cy.get("@current-row");
+  },
+);
 
-Given("je reinitialise le contexte", () => {
+Given("je réinitialise le contexte", () => {
   get_within_context = () => cy.get("body");
 });
 
@@ -68,7 +73,7 @@ When("je clique sur {string}", (text: string) => {
 });
 
 When("je clique sur le bouton {string}", (text: string) => {
-  cy.contains("button", text).click({ force: true });
+  cy.contains("button", text).click();
 });
 
 When("je clique sur le bouton nommé {string}", (text: string) => {
@@ -79,13 +84,21 @@ When("je clique sur le lien nommé {string}", (text: string) => {
   get_within_context().within(() => cy.contains("a", text).click());
 });
 
-When("je saisie {string} dans le champ nommé {string}", (text: string, name: string) => {
-  get_within_context().within(() => cy.findByLabelText(name).type(text));
-});
+When(
+  "je saisie {string} dans le champ nommé {string}",
+  (text: string, name: string) => {
+    get_within_context().within(() => cy.findByLabelText(name).type(text));
+  },
+);
 
-When("je saisie le mot {string} dans la boîte à texte nommée {string}", (text: string, name: string) => {
-  get_within_context().within(() => cy.get(`input[placeholder="${name}"]`).type(text));
-});
+When(
+  "je saisie le mot {string} dans la boîte à texte nommée {string}",
+  (text: string, name: string) => {
+    get_within_context().within(() =>
+      cy.get(`input[placeholder="${name}"]`).type(text),
+    );
+  },
+);
 
 When("je tape {string}", (text: string) => {
   cy.focused().type(text);
@@ -117,14 +130,13 @@ Then("je suis redirigé sur {string}", (path: string) => {
 });
 
 Then("je ne vois aucun élément", () => {
-  get_within_context().within(() => 
-    cy.get("tbody > tr, .empty-state, [data-empty]").should("have.length", 0)
+  get_within_context().within(() =>
+    cy.get("tbody > tr, .empty-state, [data-empty]").should("have.length", 0),
   );
 });
 
 Then("je vois {int} éléments", (count: number) => {
-  get_within_context().within(() => 
-    cy.get("tbody > tr, [data-item], .list-item").should("have.length", count)
+  get_within_context().within(() =>
+    cy.get("tbody > tr, [data-item], .list-item").should("have.length", count),
   );
 });
-
