@@ -13,10 +13,13 @@ Fonctionnalité: Association Moderation
 
   Scénario: Pierre Bon veut rejoindre l'association ALDP
     Alors je vois "Liste des moderations"
-    Et je vois la ligne de table "81797266400038"
-    Et sur la même ligne je vois "Bon"
-    Et sur la même ligne je vois "Pierre"
-    Et sur la même ligne je vois "pierrebon@aldp-asso.fr"
-    Quand sur la même ligne je clique sur "➡️"
+    Quand je vais à l'intérieur de la rangée nommée "Modération big organisation de Pierre Bon pour 81797266400038"
+    Alors je vois "Bon"
+    Et je vois "Pierre"
+    Et je vois "pierrebon@aldp-asso.fr"
+    Et je clique sur "➡️"
+
+    Et je dois voir le titre de page "Modération big organisation de Pierre Bon pour 81797266400038"
+    Et je réinitialise le contexte
     Alors je vois "Pierre Bon a rejoint l'organisation de plus de 50 employés « ALDP »"
     Et je vois "Liste dirigeants - Annuaire entreprise API"

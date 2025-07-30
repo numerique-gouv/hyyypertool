@@ -82,7 +82,7 @@ export function Row({
   } = organization;
 
   return (
-    <tr key={key}>
+    <tr aria-label={`Organisation ${cached_libelle} pour (${siret})`} key={key}>
       <td>
         <Time date={created_at}>
           {date_to_dom_string(new Date(created_at))}

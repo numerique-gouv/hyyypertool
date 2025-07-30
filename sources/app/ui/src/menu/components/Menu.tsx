@@ -12,21 +12,28 @@ export interface MenuProps {
 }
 
 export function Menu({ children, ...props }: PropsWithChildren<MenuProps>) {
-  const $trigger = hyper_ref();
-  const $popover = hyper_ref();
+  const $trigger = hyper_ref("menu_trigger");
+  const $popover = hyper_ref("menu_popover");
+  const is_open = props.is_open ?? false;
 
   return (
     <div class="relative inline-block">
       <Menu.Trigger.Renderer
+        aria-controls={$popover}
+        aria-expanded={is_open}
+        aria-haspopup="menu"
         childs={children}
-        target_id={$popover}
         id={$trigger}
+        role="button"
+        target_id={$popover}
       />
-      <Popover.Context.Provider value={{ is_open: props.is_open ?? false }}>
+      <Popover.Context.Provider value={{ is_open }}>
         <Menu.Popover.Renderer
+          aria-hidden={!is_open}
           aria-labelledby={$trigger}
           childs={children}
           id={$popover}
+          role="menu"
         />
       </Popover.Context.Provider>
     </div>
@@ -35,5 +42,7 @@ export function Menu({ children, ...props }: PropsWithChildren<MenuProps>) {
 
 //
 
-Menu.Trigger = createSlot<{ id?: string; target_id: string }>();
+Menu.Trigger = createSlot<
+  JSX.IntrinsicElements["div"] & { target_id: string }
+>();
 Menu.Popover = createSlot<JSX.IntrinsicElements["div"]>();

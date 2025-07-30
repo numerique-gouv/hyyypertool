@@ -21,6 +21,7 @@ export interface App_Config extends App_Env {
 export interface AppVariables_Context extends Env {
   Variables: {
     readonly nonce: string;
+    readonly page_title: string;
     readonly config: App_Config;
   };
 }

@@ -11,8 +11,11 @@ Fonctionnalité: Retraiter une moderation
     Et je clique sur "Voir les demandes traitées"
     Et je clique sur "Filtrer par jours"
     Et je tape "2011-11-12"
-    Et je vois la ligne de table "44023386400014"
-    Et sur la même ligne je clique sur "✅"
+    Quand je vais à l'intérieur de la rangée nommée "Modération non vérifié de Marie Bon pour 44023386400014"
+    Et je clique sur "✅"
+
+    Et je dois voir le titre de page "Modération non vérifié de Marie Bon pour 44023386400014"
+    Et je réinitialise le contexte
     Et je vois "Cette modération a été marqué comme traité"
     Et je vois "Marie Bon a rejoint une organisation avec un domain non vérifié « Bosch rexroth d.s.i. »"
 
@@ -20,5 +23,5 @@ Fonctionnalité: Retraiter une moderation
     Quand je clique sur "Retraiter"
     Alors je ne vois pas "Cette modération a été marqué comme traité"
 
-    Soit le tableau sous le title "membre connu dans l’organisation"
-    Alors le tableau est vide
+    Alors je dois voir un tableau nommé "👥 0 membre connu dans l’organisation" et contenant
+      | |

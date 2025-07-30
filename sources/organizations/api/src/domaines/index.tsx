@@ -9,7 +9,7 @@ import { get_unverified_domains } from "@~/organizations.repository/get_unverifi
 import consola from "consola";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { query_schema, set_variables } from "./context";
+import { query_schema, set_variables, type ContextType } from "./context";
 import { Page } from "./Page";
 
 //
@@ -18,7 +18,7 @@ const $describedby = hyper_ref();
 const $table = hyper_ref();
 const $search = hyper_ref();
 
-export default new Hono().use("/", jsxRenderer(Main_Layout)).get(
+export default new Hono<ContextType>().use("/", jsxRenderer(Main_Layout)).get(
   "/",
   zValidator("query", query_schema, function hook(result, { redirect }) {
     if (result.success) return undefined;
@@ -46,7 +46,8 @@ export default new Hono().use("/", jsxRenderer(Main_Layout)).get(
       query_unverified_domains: get_unverified_domains,
     };
   }),
-  async function GET({ render }) {
+  async function GET({ render, set }) {
+    set("page_title", "Liste des domaines à vérifier");
     return render(<Page />);
   },
 );

@@ -131,6 +131,7 @@ function Row({
 }) {
   return (
     <tr
+      aria-label={`Utilisateur ${user.given_name} ${user.family_name} (${user.email})`}
       _={`on click set the window's location to '${
         urls.users[":id"].$url({
           param: { id: user.id.toString() },

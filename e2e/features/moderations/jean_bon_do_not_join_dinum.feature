@@ -13,12 +13,14 @@ Fonctionnalité: Moderation blockante à refuser
     Et je tape "2011-11-11"
     Et je retire le focus
 
-    Alors je vois la ligne de table "13002526500013"
-    Et sur la même ligne je vois "Bon"
-    Et sur la même ligne je vois "Jean"
-    Et sur la même ligne je vois "jeanbon@yopmail.com"
+    Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 13002526500013"
+    Alors je vois "Bon"
+    Et je vois "Jean"
+    Et je vois "jeanbon@yopmail.com"
+    Et je clique sur "➡️"
 
-    Quand sur la même ligne je clique sur "➡️"
+    Et je dois voir le titre de page "Modération a traiter de Jean Bon pour 13002526500013"
+    Et je réinitialise le contexte
     Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 
   Scénario: Le modérateur le refuse avec la barre d'outils
@@ -28,8 +30,8 @@ Fonctionnalité: Moderation blockante à refuser
     Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
     Et je clique sur "Notifier et terminer"
-    Etant donné que je reinitialise le contexte
     Quand je reviens en avant
+    Et je réinitialise le contexte
     Alors je vois "Cette modération a été marqué comme traitée le"
     Et je vois "Rejeté par user@yopmail.com"
     Et je vois 'Raison : "Nom de domaine introuvable"'

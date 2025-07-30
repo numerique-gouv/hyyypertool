@@ -43,7 +43,8 @@ export default new Hono<ContextType>()
       set("user", user);
       return next();
     },
-    async function GET({ render }) {
+    async function GET({ render, set, var: { user } }) {
+      set("page_title", `Utilisateur ${user.given_name} ${user.family_name} (${user.email})`);
       return render(<Page />);
     },
   )

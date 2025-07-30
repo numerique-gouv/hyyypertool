@@ -29,7 +29,8 @@ export default new Hono<ContextType>()
       set("query_organizations", get_organizations_list);
       return next();
     },
-    function GET({ render }) {
+    function GET({ render, set }) {
+      set("page_title", "Liste des organisations");
       return render(<Page />);
     },
   );

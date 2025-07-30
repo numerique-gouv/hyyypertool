@@ -10,7 +10,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 export function Root_Layout({ children }: PropsWithChildren) {
   const {
-    var: { config, nonce, sentry_trace_meta_tags },
+    var: { config, nonce, sentry_trace_meta_tags, page_title },
   } = useRequestContext<App_Context>();
 
   return html`
@@ -115,9 +115,12 @@ export function Root_Layout({ children }: PropsWithChildren) {
         </script>
 
         <title>
-          H${Array.from({ length: Math.max(3, nonce.length) })
-            .fill("y")
-            .join("") + "pertool"}
+          ${page_title ??
+          `H${
+            Array.from({ length: Math.max(3, nonce.length) })
+              .fill("y")
+              .join("") + "pertool"
+          }`}
         </title>
       </head>
       <body

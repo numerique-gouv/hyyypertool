@@ -17,8 +17,8 @@ type Props = {
   query_members_count: Promise<number>;
 };
 export async function UsersByOrganization(props: Props) {
-  const $describedby = hyper_ref();
-  const $page_ref = hyper_ref();
+  const $describedby = hyper_ref("users_by_organization");
+  const $page_ref = hyper_ref("users_by_organization_page");
   const { organization, query_members_count } = props;
   const count = await query_members_count;
   const isOpen =

@@ -30,7 +30,8 @@ export default new Hono<ContextType>()
       consola.error(result.error);
       return redirect(urls.users.$url().pathname);
     }),
-    async function GET({ render }) {
+    async function GET({ render, set }) {
+      set("page_title", "Liste des utilisateurs");
       return render(<Page />);
     },
   );

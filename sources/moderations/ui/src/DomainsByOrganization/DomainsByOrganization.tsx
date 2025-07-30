@@ -35,9 +35,9 @@ export async function DomainsByOrganization(props: Props) {
             🌐 {count}{" "}
             {formattedPlural(count, {
               one: "domaine connu",
-              other: "domaine connus",
+              other: "domaines connus",
             })}{" "}
-            dans l'organisation
+            dans l’organisation
           </h3>
         </summary>
         <div

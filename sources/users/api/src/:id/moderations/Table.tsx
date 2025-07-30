@@ -48,7 +48,10 @@ export function Row({
   moderation: ModerationList[number];
 }) {
   return (
-    <tr key={key}>
+    <tr 
+      aria-label={`Modération ${moderation_type_to_title(moderation.type).toLowerCase()} (ID ${moderation.id})`}
+      key={key}
+    >
       <td>{moderation.id}</td>
       <td>
         <span title={moderation.type}>

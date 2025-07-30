@@ -7,6 +7,7 @@ import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { Main_Layout } from "@~/app.layout/index";
 import type { App_Context } from "@~/app.middleware/context";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";
+import { moderation_type_to_title } from "@~/moderations.lib/moderation_type.mapper";
 import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
 import { get_domain_count } from "@~/organizations.repository/get_domain_count";
 import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
@@ -20,7 +21,6 @@ import {
   get_organization_member,
   type ContextType,
   type ContextVariablesType,
-  type ModerationContext,
 } from "./context";
 import duplicate_warning_router from "./duplicate_warning";
 import moderation_email_router from "./email/index";
@@ -29,7 +29,7 @@ import Page from "./page";
 
 //
 
-export default new Hono<ModerationContext>()
+export default new Hono<ContextType>()
   .get(
     "/",
     jsxRenderer(Main_Layout),
@@ -98,7 +98,11 @@ export default new Hono<ModerationContext>()
         ),
       };
     }),
-    function GET({ render }) {
+    function GET({ render, set, var: { moderation } }) {
+      set(
+        "page_title",
+        `Modération ${moderation_type_to_title(moderation.type).toLowerCase()} de ${moderation.user.given_name} ${moderation.user.family_name} pour ${moderation.organization.siret}`,
+      );
       return render(<Page />);
     },
   )
