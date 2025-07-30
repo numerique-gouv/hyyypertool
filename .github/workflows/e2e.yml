@@ -86,6 +86,15 @@ jobs:
       matrix:
         e2e_test:
           - auth
-          - moderations
+          - moderations/accept_blocking_moderation.feature
+          - moderations/reject_blocking_moderation.feature
+          - moderations/verify_domain.feature
+          - moderations/add_internal_member.feature
+          - moderations/add_external_member.feature
+          - moderations/manage_internal_domain.feature
+          - moderations/manage_external_domain.feature
+          - moderations/handle_big_organization.feature
+          - moderations/handle_duplicate_requests.feature
+          - moderations/reprocess_completed_moderation.feature
           - organizations
           - users
