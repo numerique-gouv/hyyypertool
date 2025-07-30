@@ -9,6 +9,7 @@ Fonctionnalité: Moderation blockante à accepter
     Et je vois "Bonjour Hyyypertool !"
     Et je clique sur le bouton "ProConnect"
 
+    Et je dois voir le titre de page "Liste des moderations"
     Alors je vois "Liste des moderations"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"
     Alors je vois "Bon"
