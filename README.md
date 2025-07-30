@@ -28,6 +28,10 @@ Reset the local database with : `bun run scripts/seed.ts`.
 > This will delete all the data in the database.
 > There is a lock in the [scripts/seed.ts](scripts/seed.ts) file to prevent production database seeding.
 
+### E2E Testing
+
+Run specific e2e test: `bun run e2e:run test --spec="features/organizations/dinum.feature"`
+
 ## Deployment 🚀
 
 You need to create a release, for that:

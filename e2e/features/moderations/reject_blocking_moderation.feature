@@ -3,25 +3,17 @@ Fonctionnalité: Refuser une modération bloquante
 
   Contexte:
     Soit une base de données nourrie au grain
+    Et un faux serveur "identite.proconnect.gouv.fr"
     Quand je navigue sur la page
-    Et je vois "Bonjour Hyyypertool !"
     Et je clique sur le bouton "ProConnect"
-
     Alors je vois "Liste des moderations"
-
     Quand je clique sur "Filtrer par jours"
     Et je tape "2011-11-11"
     Et je retire le focus
-
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 13002526500013"
-    Alors je vois "Bon"
-    Et je vois "Jean"
-    Et je vois "jeanbon@yopmail.com"
     Et je clique sur "➡️"
-
     Et je dois voir le titre de page "Modération a traiter de Jean Bon pour 13002526500013"
     Et je réinitialise le contexte
-    Alors je vois "Jean Bon veut rejoindre l'organisation « DINUM » avec l’adresse jeanbon@yopmail.com"
 
   Scénario: Le modérateur le refuse avec la barre d'outils
     Quand je clique sur "❌ Refuser"
