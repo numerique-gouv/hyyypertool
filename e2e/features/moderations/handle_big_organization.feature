@@ -2,7 +2,7 @@
 
 #
 
-Fonctionnalité: Association Moderation
+Fonctionnalité: Gérer une modération pour une grande organisation
 
   Contexte:
     Soit une base de données nourrie au grain

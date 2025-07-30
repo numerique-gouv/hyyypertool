@@ -2,7 +2,7 @@
 
 #
 
-Fonctionnalité: Duplicate Moderation
+Fonctionnalité: Gérer les demandes de modération en double
 
   Contexte:
     Soit une base de données nourrie au grain

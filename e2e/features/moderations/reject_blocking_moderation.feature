@@ -1,5 +1,5 @@
 #language: fr
-Fonctionnalité: Moderation blockante à refuser
+Fonctionnalité: Refuser une modération bloquante
 
   Contexte:
     Soit une base de données nourrie au grain

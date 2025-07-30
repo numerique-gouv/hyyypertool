@@ -1,6 +1,6 @@
 
 #language: fr
-Fonctionnalité: Retraiter une moderation
+Fonctionnalité: Retraiter une modération terminée
 
   Contexte:
     Soit une base de données nourrie au grain
