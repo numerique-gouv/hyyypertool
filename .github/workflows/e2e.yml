@@ -96,5 +96,6 @@ jobs:
           - moderations/handle_big_organization.feature
           - moderations/handle_duplicate_requests.feature
           - moderations/reprocess_completed_moderation.feature
+          - moderations/select_verification_type.feature
           - organizations
           - users
