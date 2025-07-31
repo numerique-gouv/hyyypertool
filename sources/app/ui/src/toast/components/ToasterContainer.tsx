@@ -1,32 +1,18 @@
 //
 
 import { Htmx_Events } from "@~/app.core/htmx";
-import type { Child, PropsWithChildren } from "hono/jsx";
-import type { VariantProps } from "tailwind-variants";
-import { toast } from "../index";
+import { raw } from "hono/html";
+import type { JSX } from "hono/jsx/jsx-runtime";
 
 //
 
-export const DefaultToast = CommonToastFactory(
-  <svg
-    class="h-4 w-4"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 18 20"
-  >
-    <path
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M15.147 15.085a7.159 7.159 0 0 1-6.189 3.307A6.713 6.713 0 0 1 3.1 15.444c-2.679-4.513.287-8.737.888-9.548A4.373 4.373 0 0 0 5 1.608c1.287.953 6.445 3.218 5.537 10.5 1.5-1.122 2.706-3.01 2.853-6.14 1.433 1.049 3.993 5.395 1.757 9.117Z"
-    />
-  </svg>,
-  "Fire icon",
-);
+type ToastType = "error" | "success" | "warning";
 
-export const SuccessToast = CommonToastFactory(
+interface ToasterContainerProps {
+  iconsByTypes?: Record<ToastType, JSX.Element>;
+  duration?: `${number}s` | `${number}ms`;
+}
+export const SuccessIcon = () => (
   <svg
     class="h-5 w-5"
     aria-hidden="true"
@@ -35,11 +21,10 @@ export const SuccessToast = CommonToastFactory(
     viewBox="0 0 20 20"
   >
     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-  </svg>,
-  "Check icon",
+  </svg>
 );
 
-export const ErrorToast = CommonToastFactory(
+export const ErrorIcon = () => (
   <svg
     class="h-5 w-5"
     aria-hidden="true"
@@ -48,11 +33,10 @@ export const ErrorToast = CommonToastFactory(
     viewBox="0 0 20 20"
   >
     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
-  </svg>,
-  "Error icon",
+  </svg>
 );
 
-export const WarningToast = CommonToastFactory(
+export const WarningIcon = () => (
   <svg
     class="h-5 w-5"
     aria-hidden="true"
@@ -61,76 +45,87 @@ export const WarningToast = CommonToastFactory(
     viewBox="0 0 20 20"
   >
     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
-  </svg>,
-  "Warning icon",
+  </svg>
 );
 
-export function ToasterContainer() {
+export function ToasterContainer(props: ToasterContainerProps = {}) {
   return (
-    <div class="fixed bottom-4 left-4 z-50 flex flex-col gap-2">
-      <template>
-        <DefaultToast>DefaultToast</DefaultToast>
-      </template>
-      <template>
-        <SuccessToast variant={{ color: "success" }}>SuccessToast</SuccessToast>
-      </template>
-      <template
-        _={`
+    <div
+      class="fixed bottom-4 left-4 z-50"
+      _={raw(`
+        on toast:show(detail) from body
+          -- Get the template and clone it
+          set template to #toast-template
+          set clone to template.cloneNode(true).content
+
+          -- Set the message
+          set messageElement to clone.querySelector('slot[name=message]')
+          put detail.message into messageElement
+
+          -- Set the icon
+          set type to detail.type or 'success'
+          set templateId to 'toast-icon-' + type
+          set iconTemplate to #{templateId}
+          if iconTemplate
+            set iconClone to iconTemplate.cloneNode(true).content
+            set iconContainer to clone.querySelector('slot[name=icon]')
+            put iconClone into iconContainer
+          end
+
+          -- Add the toast to the container
+          put clone into <hyyyper-toast-container />
+
+          --
+
           on every ${Htmx_Events.enum.responseError} from body
-            render me then put it after me
-          `}
-      >
-        <ErrorToast variant={{ color: "danger" }}>
-          Une erreur est survenue !
-        </ErrorToast>
+            trigger toast:show(type: 'error', message: 'Une erreur est survenue !') on me
+            halt
+      `)}
+    >
+      {Object.entries(props.iconsByTypes ?? {}).map(([type, IconComponent]) => (
+        <template id={`toast-icon-${type}`}>{IconComponent}</template>
+      ))}
+      <template id="toast-template">
+        <div
+          _={raw(`
+            init wait ${props.duration ?? "5s"} then remove me
+            on click from <button[aria-label='Close'] /> remove me
+          `)}
+          class="flex w-full max-w-xs items-center rounded-lg border border-solid border-gray-300 bg-white p-4 text-gray-500 shadow-sm"
+          role="alert"
+        >
+          <div class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500">
+            <slot name="icon"></slot>
+            <span class="sr-only">Icon</span>
+          </div>
+          <div class="ms-3 text-sm font-normal">
+            <slot name="message"></slot>
+          </div>
+          <button
+            type="button"
+            class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300"
+            aria-label="Close"
+          >
+            <span class="sr-only">Close</span>
+            <svg
+              class="h-3 w-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+          </button>
+        </div>
       </template>
-      <template>
-        <WarningToast variant={{ color: "warning" }}>WarningToast</WarningToast>
-      </template>
+      <hyyyper-toast-container class="flex flex-col gap-2"></hyyyper-toast-container>
     </div>
   );
 }
-
-export function CommonToastFactory(iconNode: Child, title: string) {
-  return function Toast(props: ToastProps) {
-    const { children, variant } = props;
-    const { base, body, icon, close_button } = toast(variant);
-
-    return (
-      <div class={base()} role="alert">
-        <div class={icon()}>
-          {iconNode}
-          <span class="sr-only">{title}</span>
-        </div>
-        <div class={body()}>{children}</div>
-        <button
-          _="on click remove closest <div[role='alert']/> "
-          type="button"
-          class={close_button()}
-          aria-label="Close"
-        >
-          <span class="sr-only">Close</span>
-          <svg
-            class="h-3 w-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-          </svg>
-        </button>
-      </div>
-    );
-  };
-}
-
-type ToastProps = PropsWithChildren<{
-  variant?: VariantProps<typeof toast>;
-}>;

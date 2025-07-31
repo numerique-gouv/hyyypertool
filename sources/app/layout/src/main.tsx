@@ -2,7 +2,12 @@
 
 import { z_username } from "@~/app.core/schema/z_username";
 import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
-import { ToasterContainer } from "@~/app.ui/toast/components";
+import {
+  ErrorIcon,
+  SuccessIcon,
+  ToasterContainer,
+  WarningIcon,
+} from "@~/app.ui/toast/components";
 import { urls } from "@~/app.urls";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -36,7 +41,14 @@ export function Main_Layout({ children }: PropsWithChildren) {
         </header>
         <div class="relative flex flex-1 flex-col">{children}</div>
       </div>
-      <ToasterContainer />
+      <ToasterContainer
+        duration="5s"
+        iconsByTypes={{
+          success: <SuccessIcon />,
+          error: <ErrorIcon />,
+          warning: <WarningIcon />,
+        }}
+      />
     </Root_Layout>
   );
 }

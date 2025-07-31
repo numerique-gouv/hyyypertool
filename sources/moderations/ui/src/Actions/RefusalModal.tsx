@@ -24,11 +24,11 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
         hx-swap="none"
         _={`
           on submit
-            wait for ${Htmx_Events.enum.afterSettle}
+            wait for ${Htmx_Events.enum.afterSettle}(detail)
+            if detail.failed then exit
+            trigger toast:show(type: 'success', message: 'Modération refusé !')
             add .hidden to #refusalModal
             go to the top of body smoothly
-            wait 2s
-            go back
           `}
       >
         <div class="mb-1 flex items-center justify-between">

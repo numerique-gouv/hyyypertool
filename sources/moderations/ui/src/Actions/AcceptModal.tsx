@@ -50,11 +50,11 @@ export async function AcceptModal({
         hx-swap="none"
         _={`
             on submit
-              wait for ${Htmx_Events.enum.afterSettle}
+              wait for ${Htmx_Events.enum.afterSettle}(detail)
+              if detail.failed then exit
+              trigger toast:show(type: 'success', message: 'Modération accepté !')
               add .hidden to #acceptModal
               go to the top of body smoothly
-              wait 2s
-              go back
           `}
       >
         <div class="mb-5">
