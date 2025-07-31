@@ -32,6 +32,7 @@ const minify = true;
   const { logs, outputs, success } = await Bun.build({
     entrypoints: [
       "./sources/app/layout/src/_client/nprogress.ts",
+      "./sources/app/ui/src/toast/_client/toast.ts",
       "./sources/welcome/api/src/_client/hyyypertitle.ts",
     ],
     external: ["lit", "@~/app.core/config"],

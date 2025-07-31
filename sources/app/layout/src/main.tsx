@@ -1,8 +1,8 @@
 //
 
 import { z_username } from "@~/app.core/schema/z_username";
-import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
-import { ToasterContainer } from "@~/app.ui/toast/components";
+
+import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -11,8 +11,8 @@ import { Root_Layout } from "./root";
 //
 export function Main_Layout({ children }: PropsWithChildren) {
   const {
-    var: { userinfo },
-  } = useRequestContext<UserInfoVariables_Context>();
+    var: { config, nonce, userinfo },
+  } = useRequestContext<App_Context>();
   const username = z_username.parse(userinfo);
   return (
     <Root_Layout>
@@ -36,7 +36,12 @@ export function Main_Layout({ children }: PropsWithChildren) {
         </header>
         <div class="relative flex flex-1 flex-col">{children}</div>
       </div>
-      <ToasterContainer />
+      <hyyyper-toaster />
+      <script
+        nonce={nonce}
+        src={`${config.PUBLIC_ASSETS_PATH}/app/ui/src/toast/_client/toast.js`}
+        type="module"
+      ></script>
     </Root_Layout>
   );
 }

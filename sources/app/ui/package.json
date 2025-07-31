@@ -16,6 +16,7 @@
     "@~/app.urls": "workspace:*",
     "hono": "4.8.4",
     "hono-slotify": "workspace:*",
+    "lit": "^3.3.1",
     "tailwind-variants": "1.0.0"
   },
   "devDependencies": {

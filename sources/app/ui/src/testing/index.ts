@@ -9,6 +9,14 @@ import { format, type Options } from "prettier";
 export const render_html = PrettyRenderer({ parser: "html" });
 export const render_md = PrettyRenderer({ parser: "mdx" });
 
+export function render_lit_html(innerHTML: string) {
+  return render_html(
+    innerHTML
+      .replace(/<!--\?lit\$[^>]*-->/g, "") // Remove Lit markers
+      .trim(),
+  );
+}
+
 //
 
 export function PrettyRenderer(options: Options) {
