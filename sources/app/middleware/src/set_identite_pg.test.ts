@@ -1,8 +1,7 @@
 //
 
-import type { App_Config } from "@~/app.core/config";
 import { pg } from "@~/identite-proconnect.database/testing";
-import { expect, mock, test } from "bun:test";
+import { expect, test } from "bun:test";
 import { sql } from "drizzle-orm";
 import { Hono } from "hono";
 
@@ -27,10 +26,6 @@ test("set_identite_pg middleware", async () => {
 });
 
 test("set_identite_pg_database middleware", async () => {
-  mock.module("@~/app.core/config", (): { default: Partial<App_Config> } => ({
-    default: {},
-  }));
-
   const { set_identite_pg_database } = await import("./set_identite_pg");
 
   const app = new Hono()
