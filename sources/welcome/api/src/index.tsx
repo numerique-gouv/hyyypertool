@@ -12,11 +12,16 @@ import { jsxRenderer } from "hono/jsx-renderer";
 export default new Hono<App_Context>().get(
   "/",
   jsxRenderer(Root_Layout),
-  function GET({ render, redirect, var: { nonce, userinfo } }) {
-    if (userinfo) {
-      return redirect(urls.moderations.$url().pathname);
-    }
+  function GET({ render, redirect, req, set, var: { nonce, userinfo } }) {
+    const redirect_to = new URL(req.url).searchParams.get("redirect_to");
+    if (userinfo)
+      return redirect(redirect_to ?? urls.moderations.$url().pathname);
 
+    const login_uri = redirect_to
+      ? `${urls.auth.login.$url().pathname}?redirect_to=${redirect_to}`
+      : urls.auth.login.$url().pathname;
+
+    set("page_title", "Accueil");
     return render(
       <main class="flex h-full grow flex-col items-center justify-center">
         <h1 class="fr-display--xl drop-shadow-lg">
@@ -30,7 +35,7 @@ export default new Hono<App_Context>().get(
 
         <div class="animated delay-2s fadeInLeftBig flex flex-col items-center">
           <button class="agentconnect-button"></button>
-          <form method="post" action={urls.auth.login.$url().pathname}>
+          <form method="post" action={login_uri}>
             <div class="fr-connect-group">
               <button class="fr-connect" type="submit">
                 <span class="fr-connect__login">S’identifier avec</span>

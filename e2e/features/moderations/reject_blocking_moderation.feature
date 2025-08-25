@@ -4,7 +4,7 @@ Fonctionnalité: Refuser une modération bloquante
   Contexte:
     Soit une base de données nourrie au grain
     Et un faux serveur "identite.proconnect.gouv.fr"
-    Quand je navigue sur la page
+    Quand je visite l'Url "/"
     Et je clique sur le bouton "ProConnect"
     Alors je vois "Liste des moderations"
     Quand je clique sur "Filtrer par jours"

@@ -5,7 +5,7 @@ Fonctionnalité: Retraiter une modération terminée
   Contexte:
     Soit une base de données nourrie au grain
     Et un faux serveur "identite.proconnect.gouv.fr"
-    Quand je navigue sur la page
+    Quand je visite l'Url "/"
     Et je clique sur le bouton "ProConnect"
     Alors je vois "Liste des moderations"
     Et je clique sur "Voir les demandes traitées"
