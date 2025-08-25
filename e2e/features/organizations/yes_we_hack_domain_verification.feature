@@ -3,7 +3,7 @@ Fonctionnalité: Page organisation - domaine à vérifier
 
   Contexte:
     Soit une base de données nourrie au grain
-    Quand je navigue sur la page
+    Quand je visite l'Url "/"
     Et je vois "Bonjour Hyyypertool !"
     Et je clique sur le bouton "ProConnect"
 

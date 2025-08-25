@@ -22,6 +22,8 @@ import { agentconnect, type Oidc_Context } from "./agentconnect";
 
 //
 
+const DEFAULT_REDIRECT_URL = urls.moderations.$url().pathname;
+
 export default new Hono<Oidc_Context & App_Context>()
   .onError((error, c) => {
     try {
@@ -53,6 +55,11 @@ export default new Hono<Oidc_Context & App_Context>()
 
     session.set("state", state);
     session.set("nonce", nonce);
+
+    session.set(
+      "post_login_redirect",
+      new URL(req.url).searchParams.get("redirect_to") ?? undefined,
+    );
 
     const redirectUrl = buildAuthorizationUrl(config, {
       claims: JSON.stringify({
@@ -96,7 +103,10 @@ export default new Hono<Oidc_Context & App_Context>()
     });
     session.set("idtoken", "");
 
-    return redirect(urls.moderations.$url().pathname);
+    const post_login_redirect = session.get("post_login_redirect");
+    if (post_login_redirect) session.set("post_login_redirect", undefined);
+
+    return redirect(post_login_redirect ?? DEFAULT_REDIRECT_URL);
   })
   .get(
     `/login/callback`,
@@ -143,7 +153,10 @@ export default new Hono<Oidc_Context & App_Context>()
       session.set("userinfo", userinfo as AgentConnect_UserInfo);
       session.set("idtoken", tokens.id_token ?? "");
 
-      return redirect(urls.moderations.$url().pathname);
+      const post_login_redirect = session.get("post_login_redirect");
+      if (post_login_redirect) session.set("post_login_redirect", undefined);
+
+      return redirect(post_login_redirect ?? DEFAULT_REDIRECT_URL);
     },
   )
   .get("/logout", ({ redirect, req, set, var: { oidc_config, session } }) => {
