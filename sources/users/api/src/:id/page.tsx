@@ -173,7 +173,7 @@ async function Actions() {
         </button>
       </div>
       <button
-        class={`${button({ intent: "dark" })} mt-5 w-full justify-center`}
+        class={button({ class: "mt-5 w-full justify-center", intent: "dark" })} 
         hx-confirm={"Confirmez-vous la suppression de ce compte ?"}
         hx-swap="none"
         {...await hx_urls.users[":id"].$delete({
