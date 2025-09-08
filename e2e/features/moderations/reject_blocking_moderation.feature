@@ -23,8 +23,10 @@ Fonctionnalité: Refuser une modération bloquante
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
     Et je clique sur "Notifier et terminer"
     Et je réinitialise le contexte
+
     Quand je clique sur "Annuler"
     Alors je vois "Cette modération a été marqué comme traitée le"
+    Quand je clique sur le bouton "retour"
 
     Quand je clique sur "Moderations"
     Et je dois voir le titre de page "Liste des moderations"
