@@ -28,6 +28,7 @@ export async function get_user_by_id(
       updated_at: true,
       verify_email_sent_at: true,
       totp_key_verified_at: true,
+      force_2fa: true,
     },
     where: eq(schema.users.id, id),
   });
