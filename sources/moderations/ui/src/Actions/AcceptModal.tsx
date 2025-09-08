@@ -1,3 +1,4 @@
+import { AUTO_GO_BACK_EVENT } from "#ui/AutoGoBack";
 import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
@@ -53,8 +54,7 @@ export async function AcceptModal({
               wait for ${Htmx_Events.enum.afterSettle}
               add .hidden to #acceptModal
               go to the top of body smoothly
-              wait 2s
-              go back
+              trigger ${AUTO_GO_BACK_EVENT}(type: 'success', message: 'Modération accepté !') on #auto_go_back
           `}
       >
         <div class="mb-5">

@@ -21,9 +21,9 @@ export interface Values {
       user: Pick<User, "email" | "id" | "family_name" | "given_name">;
     }
   >;
-  $reject: string;
   $accept: string;
   $decision_form: string;
+  $reject: string;
   query_suggest_same_user_emails: SuggestSameUserEmailsHandler;
   query_is_user_external_member: IsUserExternalMemberHandler;
   query_suggest_organization_domains: SuggestOrganizationDomainsHandler;
