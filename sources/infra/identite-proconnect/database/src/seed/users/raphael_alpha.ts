@@ -13,6 +13,8 @@ export async function insert_raphael_alpha(db: IdentiteProconnect_PgDatabase) {
       phone_number: "0123456789",
       updated_at: new Date("2023-06-22 14:34:34").toISOString(),
       verify_email_sent_at: new Date("2023-06-22 14:34:34").toISOString(),
+      totp_key_verified_at: new Date("2023-06-22 14:34:34").toISOString(),
+      force_2fa: true,
     })
     .returning();
 

@@ -79,7 +79,56 @@ export async function UserPage() {
         </div>
       </div>
       <hr />
+      <div class="fr-container py-6">
+        <h1>🔓 MFA</h1>
+        <MFA />
+      </div>
+      <hr />
     </main>
+  );
+}
+
+async function MFA() {
+  const {
+    var: { user, authenticators },
+  } = usePageRequestContext();
+
+  const hasTOTP = user.totp_key_verified_at !== null;
+  const hasPasskeys = authenticators && authenticators.length > 0;
+  const hasMFA = hasTOTP || hasPasskeys;
+
+  if (!hasMFA) {
+    return <p>L'utilisateur n'a pas de MFA configurée.</p>;
+  }
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      <div class="fr-card p-6!">
+        <h2 class="text-(--text-action-high-blue-france)">TOTP</h2>
+        <p class="mb-1">
+          <b>TOTP enrôlé le :</b> {user.totp_key_verified_at}
+        </p>
+        <p class="mb-1">
+          <b>Force la 2FA sur tous les sites :</b>{" "}
+          {user.force_2fa ? "✅" : "❌"}
+        </p>
+      </div>
+      {authenticators.map((authenticator) => (
+        <div class="fr-card p-6!">
+          <h2 class="text-(--text-action-high-blue-france)">
+            Passkey - {authenticator.display_name}
+          </h2>
+          <p class="mb-1">
+            <b>Création :</b> {authenticator.created_at}
+          </p>
+          <p class="mb-1">
+            <b>Dernière utilisation :</b> {authenticator.last_used_at}
+          </p>
+          <p class="mb-1">
+            <b>Nombre d'utilisation :</b> {authenticator.usage_count}
+          </p>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -91,38 +140,40 @@ async function Actions() {
   const { id } = user;
 
   return (
-    <div class="grid grid-cols-3 justify-items-center gap-1">
+    <div>
+      <div class="flex justify-between gap-1">
+        <button
+          class={button({ intent: "danger" })}
+          {...await hx_urls.users[":id"].reset.email_verified.$patch({
+            param: { id: id.toString() },
+          })}
+          hx-swap="none"
+        >
+          🚫 réinitialiser la vérification de l’email (bloquer)
+        </button>
+        <button
+          class={button({ intent: "danger" })}
+          hx-confirm={"Confirmez-vous la réinitialisation du mot de passe ?"}
+          {...await hx_urls.users[":id"].reset.password.$patch({
+            param: { id: id.toString() },
+          })}
+          hx-swap="none"
+        >
+          🔐 réinitialiser le mot de passe
+        </button>
+        <button
+          class={button({ intent: "danger" })}
+          hx-confirm={"Confirmez-vous la réinitialisation de la MFA ?"}
+          {...await hx_urls.users[":id"].reset.mfa.$patch({
+            param: { id: id.toString() },
+          })}
+          hx-swap="none"
+        >
+          📵 réinitialiser la MFA
+        </button>
+      </div>
       <button
-        class={button({ intent: "danger" })}
-        {...await hx_urls.users[":id"].reset.email_verified.$patch({
-          param: { id: id.toString() },
-        })}
-        hx-swap="none"
-      >
-        🚫 réinitialiser la vérification de l’email (bloquer)
-      </button>
-      <button
-        class={button({ intent: "danger" })}
-        hx-confirm={"Confirmez-vous la réinitialisation du mot de passe ?"}
-        {...await hx_urls.users[":id"].reset.password.$patch({
-          param: { id: id.toString() },
-        })}
-        hx-swap="none"
-      >
-        🔐 réinitialiser le mot de passe
-      </button>
-      <button
-        class={button({ intent: "danger" })}
-        hx-confirm={"Confirmez-vous la réinitialisation de la MFA ?"}
-        {...await hx_urls.users[":id"].reset.mfa.$patch({
-          param: { id: id.toString() },
-        })}
-        hx-swap="none"
-      >
-        📵 réinitialiser la MFA
-      </button>
-      <button
-        class={button({ intent: "dark" })}
+        class={`${button({ intent: "dark" })} mt-5 w-full justify-center`}
         hx-confirm={"Confirmez-vous la suppression de ce compte ?"}
         hx-swap="none"
         {...await hx_urls.users[":id"].$delete({
@@ -271,12 +322,12 @@ function AccountInfo() {
         </b>
       </dd>
 
-      <dt class={dt()}>TOTP vérifié envoyé le</dt>
+      {/* <dt class={dt()}>TOTP vérifié envoyé le</dt>
       <dd class={dd()}>
         <b>
           <LocalTime date={user.totp_key_verified_at} />
         </b>
-      </dd>
+      </dd> */}
     </dl>
   );
 }
