@@ -6,6 +6,7 @@ import { hx_urls } from "@~/app.urls";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { IsUserExternalMember } from "@~/moderations.lib/usecase/IsUserExternalMember";
 import { Actions } from "@~/moderations.ui/Actions";
+import { AutoGoBack } from "@~/moderations.ui/AutoGoBack";
 import { DomainsByOrganization } from "@~/moderations.ui/DomainsByOrganization";
 import { Header } from "@~/moderations.ui/Header";
 import { OrganizationsByUser } from "@~/moderations.ui/OrganizationsByUser";
@@ -27,6 +28,7 @@ import { Moderation_Exchanges } from "./Moderation_Exchanges";
 
 export default async function Moderation_Page() {
   const { moderation } = getContext<ModerationContext>().var;
+  const moderation_id = `moderation-${moderation.id.toString()}`;
   const {
     var: {
       identite_pg,
@@ -37,20 +39,7 @@ export default async function Moderation_Page() {
   } = usePageRequestContext();
 
   return (
-    <main
-      class="fr-container my-12"
-      hx-disinherit="*"
-      {...await hx_urls.moderations[":id"].$get(
-        {
-          param: { id: moderation.id.toString() },
-        },
-        {},
-      )}
-      hx-select="main"
-      hx-trigger={hx_trigger_from_body([
-        MODERATION_EVENTS.Enum.MODERATION_UPDATED,
-      ])}
-    >
+    <main class="fr-container my-12">
       <button
         _="on click go back"
         class={button({
@@ -61,63 +50,78 @@ export default async function Moderation_Page() {
       >
         retour
       </button>
+      <AutoGoBack id="auto_go_back" />
 
       <hr class="bg-none pb-5" />
+      <section
+        hx-disinherit="*"
+        {...await hx_urls.moderations[":id"].$get(
+          {
+            param: { id: moderation.id.toString() },
+          },
+          {},
+        )}
+        hx-select={`#${moderation_id}`}
+        hx-trigger={hx_trigger_from_body([
+          MODERATION_EVENTS.Enum.MODERATION_UPDATED,
+        ])}
+        id={moderation_id}
+      >
+        <Header.Provier value={{ moderation }}>
+          <Header />
+        </Header.Provier>
 
-      <Header.Provier value={{ moderation }}>
-        <Header />
-      </Header.Provier>
+        <hr class="bg-none pb-5" />
 
-      <hr class="bg-none pb-5" />
+        <About_User user={moderation.user} organization={organization_fiche} />
+        <Investigation_User
+          user={moderation.user}
+          organization={moderation.organization}
+        />
+        <About_Organization organization={organization_fiche} />
+        <Investigation_Organization organization={moderation.organization} />
 
-      <About_User user={moderation.user} organization={organization_fiche} />
-      <Investigation_User
-        user={moderation.user}
-        organization={moderation.organization}
-      />
-      <About_Organization organization={organization_fiche} />
-      <Investigation_Organization organization={moderation.organization} />
+        <hr class="bg-none" />
 
-      <hr class="bg-none" />
+        <DomainsByOrganization
+          organization={moderation.organization}
+          query_domain_count={query_domain_count}
+        />
+        <OrganizationsByUser
+          user={moderation.user}
+          query_organization_count={CountUserMemberships({ pg: identite_pg })}
+        />
 
-      <DomainsByOrganization
-        organization={moderation.organization}
-        query_domain_count={query_domain_count}
-      />
-      <OrganizationsByUser
-        user={moderation.user}
-        query_organization_count={CountUserMemberships({ pg: identite_pg })}
-      />
+        <UsersByOrganization
+          organization={moderation.organization}
+          query_members_count={query_organization_members_count}
+        />
 
-      <UsersByOrganization
-        organization={moderation.organization}
-        query_members_count={query_organization_members_count}
-      />
+        <hr class="bg-none" />
 
-      <hr class="bg-none" />
+        <Actions
+          value={{
+            moderation,
+            query_suggest_same_user_emails: SuggestSameUserEmails({
+              pg: identite_pg,
+            }),
+            query_is_user_external_member: IsUserExternalMember({
+              pg: identite_pg,
+            }),
+            query_suggest_organization_domains: SuggestOrganizationDomains({
+              pg: identite_pg,
+            }),
+          }}
+        />
 
-      <Actions
-        value={{
-          moderation,
-          query_suggest_same_user_emails: SuggestSameUserEmails({
-            pg: identite_pg,
-          }),
-          query_is_user_external_member: IsUserExternalMember({
-            pg: identite_pg,
-          }),
-          query_suggest_organization_domains: SuggestOrganizationDomains({
-            pg: identite_pg,
-          }),
-        }}
-      />
+        <hr class="bg-none" />
 
-      <hr class="bg-none" />
+        <hr />
 
-      <hr />
+        <hr class="bg-none" />
 
-      <hr class="bg-none" />
-
-      <Moderation_Exchanges />
+        <Moderation_Exchanges />
+      </section>
     </main>
   );
 }
