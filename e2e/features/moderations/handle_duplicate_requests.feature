@@ -7,7 +7,7 @@ Fonctionnalité: Gérer les demandes de modération en double
   Contexte:
     Soit une base de données nourrie au grain
     Et un faux serveur "identite.proconnect.gouv.fr"
-    Quand je navigue sur la page
+    Quand je visite l'Url "/"
     Et je clique sur le bouton "ProConnect"
     Alors je vois "Liste des moderations"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Richard Bon pour 38514019900014"

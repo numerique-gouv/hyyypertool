@@ -9,6 +9,7 @@ interface Session_KeyMapping {
   idtoken: string;
   state: string;
   nonce: string;
+  post_login_redirect?: string;
 }
 
 export interface Session_Context extends Env {

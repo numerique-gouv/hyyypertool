@@ -4,7 +4,7 @@ Fonctionnalité: Gérer un domaine interne lors de la modération
   Contexte:
     Soit une base de données nourrie au grain
     Et un faux serveur "identite.proconnect.gouv.fr"
-    Quand je navigue sur la page
+    Quand je visite l'Url "/"
     Et je clique sur le bouton "ProConnect"
     Alors je vois "Liste des moderations"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"

@@ -56,8 +56,8 @@ Given("je suis sur la page {string}", (path: string) => {
   cy.visit(path);
 });
 
-Given("je navigue sur la page", () => {
-  cy.visit("/");
+When("je visite l'Url {string}", (path: string) => {
+  cy.visit(path);
 });
 
 // Actions

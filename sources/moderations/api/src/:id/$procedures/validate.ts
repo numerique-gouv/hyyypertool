@@ -40,6 +40,7 @@ export default new Hono<App_Context>().patch(
     notFound,
     var: { identite_pg_client, identite_pg, userinfo, sentry },
   }) {
+    throw new Error("nope");
     const { id } = req.valid("param");
     const { add_domain, add_member, send_notitfication, verification_type } =
       req.valid("form");
