@@ -21,10 +21,7 @@ import { tv } from "tailwind-variants";
  * ```
  */
 export const callout = tv({
-  base: `
-    fr-callout
-    fr-icon-information-line
-  `,
+  base: "fr-callout",
   slots: {
     title: "fr-callout__title",
     text: "fr-callout__text",
@@ -32,7 +29,7 @@ export const callout = tv({
   variants: {
     intent: {
       success: {
-        base: "fr-callout--green-emeraude",
+        base: "fr-callout--green-emeraude fr-icon-information-line",
       },
       warning: {
         base: "fr-callout--brown-caramel",

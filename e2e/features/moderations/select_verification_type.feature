@@ -19,8 +19,10 @@ Fonctionnalité: Sélectionner un type de vérification lors de l'acceptation
     Quand je clique sur "<type_verification>"
     Quand je clique sur "Terminer"
     Et je réinitialise le contexte
+    Quand je clique sur "Annuler"
     Alors je vois "Cette modération a été marqué comme traitée le"
     Et je vois "Validé par user@yopmail.com"
+    Quand je clique sur le bouton "retour"
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"
