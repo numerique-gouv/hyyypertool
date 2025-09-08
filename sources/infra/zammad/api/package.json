@@ -12,7 +12,7 @@
     "test": "bun test"
   },
   "dependencies": {
-    "@hono/zod-validator": "0.7.0",
+    "@hono/zod-validator": "0.7.2",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "hono": "4.8.4",
