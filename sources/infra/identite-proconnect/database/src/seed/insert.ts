@@ -4,6 +4,7 @@ import type { MCP_Moderation } from "@~/identite-proconnect.lib/identite-proconn
 import consola from "consola";
 import type { IdentiteProconnect_PgDatabase } from "../index";
 import { schema } from "../index";
+import { insert_nordPass_authenticator } from "./authenticators/nordPass";
 import { insert_1Password_authenticator } from "./authenticators/onePassword";
 import { insert_abracadabra } from "./organizations/abracadabra";
 import { insert_aldp } from "./organizations/aldp";
@@ -193,6 +194,8 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     consola.verbose(
       `🌱 INSERT ${raphael_alpha.given_name} OnePassword setup...`,
     );
+    await insert_nordPass_authenticator(db, raphael_alpha.id);
+    consola.verbose(`🌱 INSERT ${raphael_alpha.given_name} NordPass setup...`);
   } catch (err) {
     console.error("Something went wrong...");
     console.error(err);
