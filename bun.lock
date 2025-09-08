@@ -59,7 +59,7 @@
         "htmx-ext-debug": "2.0.1",
         "htmx-ext-include-vals": "2.0.1",
         "htmx-ext-sse": "2.2.3",
-        "htmx.ext...chunked-transfer": "2.1.0",
+        "htmx.ext...chunked-transfer": "2.1.1",
         "htmx.org": "2.0.0",
         "hyperscript.org": "0.9.14",
         "ts-pattern": "5.7.1",
@@ -1367,7 +1367,7 @@
 
     "htmx-ext-sse": ["htmx-ext-sse@2.2.3", "", { "dependencies": { "htmx.org": "^2.0.2" } }, "sha512-DDahTngA+XSUeX4/EFAzAGDkvY8pdr/FmelHzag0FvZpUOh41G08P1fwp+jfFZCQphkA7/z06l90FN4iyD6O2w=="],
 
-    "htmx.ext...chunked-transfer": ["htmx.ext...chunked-transfer@2.1.0", "", {}, "sha512-b3o+gZS2EH8XTgct+gE8iw3i761jttj1vz1PQev3cho+Fr2Q3cDX9u8/Z7Tv5FxZljgx3hlDxHeOO0pWWOOXnw=="],
+    "htmx.ext...chunked-transfer": ["htmx.ext...chunked-transfer@2.1.1", "", {}, "sha512-7HOMKEU8WXS0uBv7uVbwsY8WY9laxZSNRW0Ghuvc8nkVrtb76jzZoLzSkwNYZ+8Jida/9PPHNZxxVgsOVgAKwg=="],
 
     "htmx.org": ["htmx.org@2.0.0", "", {}, "sha512-N0r1VjrqeCpig0mTi2/sooDZBeQlp1RBohnWQ/ufqc7ICaI0yjs04fNGhawm6+/HWhJFlcXn8MqOjWI9QGG2lQ=="],
 
