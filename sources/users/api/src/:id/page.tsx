@@ -173,7 +173,7 @@ async function Actions() {
         </button>
       </div>
       <button
-        class={button({ class: "mt-5 w-full justify-center", intent: "dark" })} 
+        class={button({ class: "mt-5 w-full justify-center", intent: "dark" })}
         hx-confirm={"Confirmez-vous la suppression de ce compte ?"}
         hx-swap="none"
         {...await hx_urls.users[":id"].$delete({
@@ -321,13 +321,6 @@ function AccountInfo() {
           <LocalTime date={user.reset_password_sent_at} />
         </b>
       </dd>
-
-      {/* <dt class={dt()}>TOTP vérifié envoyé le</dt>
-      <dd class={dd()}>
-        <b>
-          <LocalTime date={user.totp_key_verified_at} />
-        </b>
-      </dd> */}
     </dl>
   );
 }
