@@ -32,7 +32,7 @@
     "@~/users.ui": "workspace:*",
     "@~/zammad.lib": "workspace:*",
     "await-to-js": "3.0.0",
-    "drizzle-orm": "0.41.0",
+    "drizzle-orm": "0.44.5",
     "hono": "4.8.4",
     "tailwind-variants": "3.1.0",
     "ts-dedent": "2.2.0",
