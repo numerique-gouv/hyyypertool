@@ -60,7 +60,7 @@
     "tailwindPreserveWhitespace": true
   },
   "overrides": {
-    "hono": "4.8.4",
+    "hono": "4.9.6",
     "zod": "3.24.1"
   },
   "dependencies": {
