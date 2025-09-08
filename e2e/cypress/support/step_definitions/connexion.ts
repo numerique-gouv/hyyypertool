@@ -1,4 +1,7 @@
 //
+// Sentence description heavily inspired by UVV
+// https://e2e-test-quest.github.io/uuv/fr/docs/wordings/generated-wording-description/fr-generated-wording-description/
+//
 
 import { When } from "@badeball/cypress-cucumber-preprocessor";
 
@@ -11,7 +14,7 @@ When(
       cy.get("#email-input").type("user@yopmail.com");
       cy.contains("button", "Se connecter").click();
     });
-    cy.origin("https://app-test.moncomptepro.beta.gouv.fr", () => {
+    cy.origin("https://app-test.identite.beta.gouv.fr", () => {
       cy.get('[name="password"]').type("user@yopmail.com");
       cy.contains("button", "S’identifier").click();
       cy.contains("button", "Continuer").click();

@@ -1,0 +1,25 @@
+{
+  "name": "@~/users.lib",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./usecase": {
+      "default": "./src/usecase/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.middleware": "workspace:*",
+    "@~/crisp.lib": "workspace:*",
+    "@~/identite-proconnect.database": "workspace:*"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

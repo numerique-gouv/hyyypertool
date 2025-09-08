@@ -1,72 +1,73 @@
 {
   "folders": [
     {
-      "name": "🈸 app",
-      "path": "packages/~/app",
+      "name": "🈸 sources/app/",
+      "path": "sources/app",
     },
     {
-      "name": "📦 moderations",
-      "path": "packages/~/moderations",
+      "name": "📦 sources/moderations/",
+      "path": "sources/moderations",
     },
     {
-      "name": "📦 organizations",
-      "path": "packages/~/organizations",
+      "name": "📦 sources/organizations/",
+      "path": "sources/organizations",
     },
     {
-      "name": "📦 users",
-      "path": "packages/~/users",
+      "name": "📦 sources/users/",
+      "path": "sources/users",
     },
     {
-      "name": "📦 auth",
-      "path": "packages/~/auth",
+      "name": "📦 sources/auth/",
+      "path": "sources/auth",
     },
     {
-      "name": "📦 welcome",
-      "path": "packages/~/welcome",
+      "name": "📦 sources/welcome/",
+      "path": "sources/welcome",
     },
     {
-      "name": "📦 proxy",
-      "path": "packages/~/proxy",
+      "name": "📦 sources/proxy/",
+      "path": "sources/proxy",
     },
     {
-      "name": "🏗️ moncomptepro",
-      "path": "packages/~/infra/moncomptepro",
+      "name": "🏗️ sources/infra/proconnect-identite/",
+      "path": "sources/infra/proconnect-identite",
     },
     {
-      "name": "🏗️ zammad",
-      "path": "packages/~/infra/zammad",
+      "name": "🏗️ sources/infra/zammad/",
+      "path": "sources/infra/zammad",
     },
     {
-      "name": "🏗️ crisp",
-      "path": "packages/~/infra/crisp",
+      "name": "🏗️ sources/infra/crisp/",
+      "path": "sources/infra/crisp",
     },
     {
-      "name": "⚙️ config",
-      "path": "packages/~/config",
+      "name": "⚙️ sources/config/",
+      "path": "sources/config",
     },
     {
-      "name": "🎭 mocks",
+      "name": "🎭 mocks/",
       "path": "mocks",
     },
     {
-      "name": "🚀 bin",
+      "name": "🚀 bin/",
       "path": "bin",
     },
     {
-      "name": "🚥 e2e",
+      "name": "🚥 e2e/",
       "path": "e2e",
     },
     {
-      "name": "root",
+      "name": "/",
       "path": ".",
     },
   ],
   "extensions": {
     "recommendations": [
       "bradlc.vscode-tailwindcss",
+      "CucumberOpen.cucumber-official",
+      "dz4k.vscode-hyperscript-org",
       "esbenp.prettier-vscode",
       "oxc.oxc-vscode",
-      "dz4k.vscode-hyperscript-org",
     ],
   },
   "settings": {
@@ -97,6 +98,11 @@
       ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"], // tv(`...`)
     ],
     "autoHide.autoHidePanel": false,
+    //
+
+    "cSpell.language": "en,fr",
+    "cucumber.features": ["features/**/*.feature"],
+    "cucumber.glue": ["cypress/support/step_definitions/**/*.ts"],
   },
   "tasks": {
     "version": "2.0.0",
@@ -107,7 +113,7 @@
         "args": ["run", "build"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": {
             "NODE_ENV": "development",
           },
@@ -134,7 +140,7 @@
         "args": ["run", "dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": {
             "NODE_ENV": "development",
           },
@@ -151,7 +157,7 @@
         "group": "build",
         "label": "📦 Tailwind Dev",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
@@ -164,7 +170,7 @@
         "group": "build",
         "label": "📦 Types Dev",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
@@ -177,7 +183,7 @@
         "group": "build",
         "label": "📦 Api Urls Dev",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
           "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
@@ -189,7 +195,7 @@
         "command": "docker compose up --detach --wait",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "group": "build",
         "runOptions": {
@@ -201,7 +207,7 @@
         "command": "docker compose down --volumes",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "group": "build",
         "runOptions": {
@@ -214,7 +220,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -225,7 +231,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -236,7 +242,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -247,7 +253,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -258,7 +264,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -269,7 +275,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🚥 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -280,7 +286,7 @@
         "type": "shell",
         "group": "build",
         "options": {
-          "cwd": "${workspaceFolder:🚥 e2e}",
+          "cwd": "${workspaceFolder:🚥 e2e/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
@@ -288,10 +294,10 @@
       {
         "label": "🏗️ Database MonComptePro Migrate",
         "command": "bun",
-        "args": ["run", "database:moncomptepro:migrator"],
+        "args": ["run", "database:proconnect-identite:migrator"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -302,10 +308,10 @@
       {
         "label": "🏗️ Database MonComptePro Seed",
         "command": "bun",
-        "args": ["run", "database:moncomptepro:seed"],
+        "args": ["run", "database:identite-proconnect:seed"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -316,10 +322,10 @@
       {
         "label": "🏗️ Database MonComptePro Studio",
         "command": "bun",
-        "args": ["run", "studio:moncomptepro"],
+        "args": ["run", "studio:proconnect-identite"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}",
+          "cwd": "${workspaceFolder:/}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -337,13 +343,13 @@
         "type": "node",
         "request": "launch",
         "program": "bin/src/index.ts",
-        "cwd": "${workspaceFolder:root}",
-        "runtimeExecutable": "${workspaceFolder:root}/node_modules/.bin/tsx",
+        "cwd": "${workspaceFolder:/}",
+        "runtimeExecutable": "${workspaceFolder:/}/node_modules/.bin/tsx",
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
         "skipFiles": [
           "<node_internals>/**",
-          "${workspaceFolder:root}/node_modules/**",
+          "${workspaceFolder:/}/node_modules/**",
         ],
       },
       {
@@ -353,7 +359,7 @@
         "port": 9229,
         "skipFiles": [
           "<node_internals>/**",
-          "${workspaceFolder:root}/node_modules/**",
+          "${workspaceFolder:/}/node_modules/**",
         ],
       },
       {
@@ -369,12 +375,12 @@
         "type": "node",
         "request": "launch",
         "program": "${file}",
-        "runtimeExecutable": "${workspaceFolder:root}/node_modules/.bin/tsx",
+        "runtimeExecutable": "${workspaceFolder:/}/node_modules/.bin/tsx",
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
         "skipFiles": [
           "<node_internals>/**",
-          "${workspaceFolder:root}/node_modules/**",
+          "${workspaceFolder:/}/node_modules/**",
         ],
       },
     ],

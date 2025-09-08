@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base",
+  "extends": "@tsconfig/bun/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "5.0",
+    "isolatedModules": true,
+    "noEmit": false,
+    "preserveWatchOutput": true,
+    "types": ["bun"]
+  }
+}

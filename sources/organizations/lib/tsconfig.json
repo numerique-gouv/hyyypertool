@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./node_modules/.cache/tsc"
+  },
+  "extends": "@~/config.typescript/tsx/tsconfig.json",
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../infra/identite-proconnect/database"
+    },
+    {
+      "path": "../../infra/identite-proconnect/lib"
+    },
+    {
+      "path": "../repository"
+    },
+    {
+      "path": "../../users/repository"
+    }
+  ]
+}

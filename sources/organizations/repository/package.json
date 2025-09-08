@@ -1,0 +1,23 @@
+{
+  "name": "@~/organizations.repository",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/identite-proconnect.database": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
+    "drizzle-orm": "0.41.0",
+    "ts-pattern": "5.7.1"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}

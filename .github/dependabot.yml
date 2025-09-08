@@ -1,5 +1,7 @@
 version: 2
 
+enable-beta-ecosystems: true
+
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -13,6 +15,14 @@ updates:
 
   - package-ecosystem: "npm"
     directory: "/"
+    groups:
+      sentry:
+        patterns:
+          - "@sentry/*"
+      tailwindcss:
+        patterns:
+          - "@tailwindcss/*"
+          - "tailwindcss"
     schedule:
       interval: "weekly"
     labels:

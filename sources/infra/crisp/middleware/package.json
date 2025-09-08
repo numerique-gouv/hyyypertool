@@ -1,0 +1,21 @@
+{
+  "name": "@~/crisp.middleware",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "hono": "4.8.4"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*",
+    "@~/crisp.lib": "workspace:*"
+  }
+}

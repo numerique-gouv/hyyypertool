@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`render basic slot 1`] = `"<div>beforecomponent<div>beforeslot IN_SLOT afterslot; ownChildren: BEFORE_SLOTAFTER_SLOT</div>aftercomponent</div>"`;
 

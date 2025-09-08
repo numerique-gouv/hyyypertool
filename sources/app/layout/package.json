@@ -1,0 +1,26 @@
+{
+  "name": "@~/app.layout",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "hono": "4.8.4",
+    "nprogress": "0.2.0"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*",
+    "@types/nprogress": "0.2.3"
+  }
+}

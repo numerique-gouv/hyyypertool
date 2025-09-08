@@ -1,0 +1,37 @@
+{
+  "name": "@~/identite-proconnect.database",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./testing": {
+      "default": "./src/testing/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "introspect": "bun x drizzle introspect:pg",
+    "migration": "bun run bin/migration.ts",
+    "seed": "bun run bin/seed.ts",
+    "studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
+    "consola": "3.4.2",
+    "drizzle-orm": "0.41.0",
+    "hono": "4.8.4",
+    "pg": "8.16.3"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.3.4",
+    "@types/pg": "8.15.4",
+    "@~/config.typescript": "workspace:*",
+    "drizzle-kit": "0.31.4"
+  }
+}

@@ -20,10 +20,15 @@ jobs:
         working-directory: "e2e"
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set artifact name
+        id: artifact
+        run: echo "name=$(echo '${{ matrix.e2e_test }}' | sed 's/\//-/g')" >> $GITHUB_OUTPUT
+        working-directory: "."
 
-      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af #v4.1.0
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 #v4.4.0
         with:
           node-version: "node"
 
@@ -32,7 +37,7 @@ jobs:
         working-directory: "."
 
       - name: 🌭 Install bun
-        uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
 
       - run: bun install --frozen-lockfile
         working-directory: "."
@@ -46,7 +51,7 @@ jobs:
           echo "Fake https://entreprise.api.gouv.fr ready"
           curl -sSf -XGET http://127.0.0.1:6200/readyz
           echo
-          echo "Fake https://app.moncomptepro.beta.gouv.fr ready"
+          echo "Fake https://identite.proconnect.gouv.fr ready"
           curl -sSf -XGET http://127.0.0.1:6300/readyz
         working-directory: "."
 
@@ -55,7 +60,7 @@ jobs:
           touch package-lock.json
 
       - name: Cypress run
-        uses: cypress-io/github-action@57b70560982e6a11d23d4b8bec7f8a487cdbb71b # v6.7.8
+        uses: cypress-io/github-action@b8ba51a856ba5f4c15cf39007636d4ab04f23e3c # v6.10.2
         env:
           CONSOLA_LEVEL: "2"
           DEPLOY_ENV: "production"
@@ -67,25 +72,35 @@ jobs:
           start: bun run start
           working-directory: e2e
 
-      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           compression-level: 9
-          name: cypress-${{ matrix.e2e_test }}-screenshots
+          name: cypress-${{ steps.artifact.outputs.name }}-screenshots
           path: e2e/cypress/screenshots
-          spec: features/${{ matrix.e2e_test }}
 
-      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           compression-level: 9
-          name: cypress-${{ matrix.e2e_test }}-videos
+          name: cypress-${{ steps.artifact.outputs.name }}-videos
           path: e2e/cypress/videos
 
     strategy:
+      max-parallel: 6
       matrix:
         e2e_test:
           - auth
-          - moderations
+          - moderations/accept_blocking_moderation.feature
+          - moderations/reject_blocking_moderation.feature
+          - moderations/verify_domain.feature
+          - moderations/add_internal_member.feature
+          - moderations/add_external_member.feature
+          - moderations/manage_internal_domain.feature
+          - moderations/manage_external_domain.feature
+          - moderations/handle_big_organization.feature
+          - moderations/handle_duplicate_requests.feature
+          - moderations/reprocess_completed_moderation.feature
+          - moderations/select_verification_type.feature
           - organizations
           - users

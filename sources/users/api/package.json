@@ -1,0 +1,27 @@
+{
+  "name": "@~/users.api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.tsx"
+    }
+  },
+  "dependencies": {
+    "@~/app.layout": "workspace:*",
+    "@~/app.middleware": "workspace:*",
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "@~/moderations.repository": "workspace:*",
+    "@~/organizations.repository": "workspace:*",
+    "@~/users.repository": "workspace:*",
+    "hono": "4.8.4",
+    "ts-pattern": "5.7.1",
+    "zod": "4.0.2"
+  },
+  "devDependencies": {
+    "@~/config.tailwindcss": "workspace:*",
+    "@~/config.typescript": "workspace:*"
+  }
+}

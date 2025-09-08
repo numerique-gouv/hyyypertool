@@ -1,0 +1,32 @@
+{
+  "name": "@~/moderations.ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#ui/*": {
+      "types": "./src/*/index.ts",
+      "default": "./src/*/index.ts"
+    }
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*/index.ts",
+      "default": "./src/*/index.ts"
+    }
+  },
+  "dependencies": {
+    "@~/app.ui": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "@~/moderations.lib": "workspace:*",
+    "@~/organizations.lib": "workspace:*",
+    "@~/users.lib": "workspace:*",
+    "hono": "4.8.4",
+    "tailwind-variants": "3.1.0",
+    "ts-pattern": "5.7.1"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*",
+    "@~/crisp.lib": "workspace:*"
+  }
+}

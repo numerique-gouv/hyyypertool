@@ -1,0 +1,26 @@
+{
+  "name": "@~/app.ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "default": "./src/*/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@~/app.core": "workspace:*",
+    "@~/app.urls": "workspace:*",
+    "hono": "4.8.4",
+    "hono-slotify": "workspace:*",
+    "tailwind-variants": "3.1.0"
+  },
+  "devDependencies": {
+    "@~/config.happydom": "workspace:*",
+    "@~/config.tailwindcss": "workspace:*",
+    "@~/config.typescript": "workspace:*"
+  }
+}

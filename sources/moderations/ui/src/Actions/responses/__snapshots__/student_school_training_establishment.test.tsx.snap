@@ -1,0 +1,15 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`returns Student School or training establishment response 1`] = `
+"Bonjour,
+
+Nous avons bien reçu votre demande de rattachement à l&#39;organisation « 🦄 » sur ProConnect (anciennement : AgentConnect, MonComptePro).
+
+Nous sommes contraints de refuser votre demande de création de compte ProConnect.
+Pour information, les étudiants ne sont pas autorisés à se rattacher à leur établissement scolaire ou de formation sur ProConnect, car cela leur donnerait des droits d&#39;accès à des services et démarches réservés uniquement aux Agents (ou employés) de l&#39;établissement.
+Veuillez accéder au service souhaité en vous créant un compte, sans passer par ProConnect.
+
+Bien cordialement,
+L’équipe ProConnect.
+"
+`;

@@ -2,17 +2,16 @@
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "types": ["bun-types"]
+    "jsxImportSource": "hono/jsx"
   },
   "include": [
     "bin/src",
     "build.ts",
-    "packages/~/*/*/*/src/**/*.tsx",
-    "packages/~/*/*/src/**/*.tsx"
+    "sources/*/*/*/src/**/*.tsx",
+    "sources/*/*/src/**/*.tsx"
   ],
   "references": [
-    { "path": "packages/~/app/api/tsconfig.json" },
-    { "path": "packages/~/app/core/tsconfig.json" }
+    { "path": "sources/app/api/tsconfig.json" },
+    { "path": "sources/app/core/tsconfig.json" }
   ]
 }

@@ -7,6 +7,8 @@
 $ bun install
 # Run all the test in headless mode
 $ bun run test
+# Run specific test file
+$ bun run e2e:run test --spec="features/organizations/dinum.feature"
 # Open cypress in electron
 $ bun run open
 ```

@@ -1,0 +1,13 @@
+{
+  "name": "@~/config.typescript",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [],
+  "dependencies": {
+    "@tsconfig/bun": "1.0.7",
+    "@tsconfig/strictest": "2.0.5",
+    "@types/bun": "1.2.19",
+    "hono": "4.8.4"
+  }
+}

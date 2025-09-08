@@ -1,0 +1,27 @@
+{
+  "name": "@~/organizations.lib",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./usecase": {
+      "default": "./src/usecase/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@~/identite-proconnect.database": "workspace:*",
+    "@~/identite-proconnect.lib": "workspace:*",
+    "@~/organizations.repository": "workspace:*",
+    "@~/users.repository": "workspace:*",
+    "zod": "4.0.2"
+  },
+  "devDependencies": {
+    "@~/config.typescript": "workspace:*"
+  }
+}
