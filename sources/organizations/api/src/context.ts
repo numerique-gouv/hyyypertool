@@ -7,7 +7,7 @@ import {
 } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
-import type { get_organizations_list } from "@~/organizations.repository/get_organizations_list";
+import type { GetOrganizationsListHandler } from "@~/organizations.repository/GetOrganizationsList";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 
@@ -15,7 +15,7 @@ import { useRequestContext } from "hono/jsx-renderer";
 
 export interface ContextVariablesType extends Env {
   Variables: {
-    query_organizations: typeof get_organizations_list;
+    query_organizations: GetOrganizationsListHandler;
   };
 }
 export type ContextType = App_Context & ContextVariablesType;

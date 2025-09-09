@@ -6,7 +6,7 @@ import {
   Entity_Schema,
   Pagination_Schema,
 } from "@~/app.core/schema";
-import { get_users_by_organization_id } from "@~/users.repository/get_users_by_organization_id";
+import { GetUsersByOrganizationId } from "@~/users.repository/GetUsersByOrganizationId";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { match } from "ts-pattern";
@@ -52,7 +52,7 @@ export default new Hono<ContextType>()
       set("pagination", pagination);
       set(
         "query_members_collection",
-        get_users_by_organization_id(identite_pg, {
+        GetUsersByOrganizationId(identite_pg)({
           organization_id,
           pagination: { ...pagination, page: pagination.page - 1 },
         }),

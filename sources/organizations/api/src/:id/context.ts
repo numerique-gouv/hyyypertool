@@ -4,8 +4,8 @@ import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { Organization } from "@~/organizations.lib/entities/Organization";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
-import { type get_domain_count_dto } from "@~/organizations.repository/get_domain_count";
-import { type get_organization_members_count_dto } from "@~/organizations.repository/get_organization_members_count";
+import { type GetDomainCountDto } from "@~/organizations.repository/GetDomainCount";
+import { type GetOrganizationMembersCountDto } from "@~/organizations.repository/GetOrganizationMembersCount";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 //
@@ -32,8 +32,8 @@ export interface ContextVariablesType extends Env {
   Variables: {
     organization_fiche: Awaited<ReturnType<GetFicheOrganizationByIdHandler>>;
     organization: FicheOrganization;
-    query_organization_domains_count: Promise<get_domain_count_dto>;
-    query_organization_members_count: Promise<get_organization_members_count_dto>;
+    query_organization_domains_count: Promise<GetDomainCountDto>;
+    query_organization_members_count: Promise<GetOrganizationMembersCountDto>;
   };
 }
 export type ContextType = App_Context & ContextVariablesType;
