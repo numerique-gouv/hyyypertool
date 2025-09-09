@@ -9,6 +9,7 @@ import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { schema } from "@~/identite-proconnect.database";
 import { ResetMFA, ResetPassword } from "@~/users.lib/usecase";
+import { get_authenticators_by_user_id } from "@~/users.repository";
 import { get_user_by_id } from "@~/users.repository/get_user_by_id";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
@@ -41,6 +42,13 @@ export default new Hono<ContextType>()
       }
 
       set("user", user);
+
+      const authenticators = await get_authenticators_by_user_id(identite_pg, {
+        id: user.id,
+      });
+
+      set("authenticators", authenticators);
+
       return next();
     },
     async function GET({ render, set, var: { user } }) {
