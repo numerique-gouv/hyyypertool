@@ -14,6 +14,7 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
+import { bytea } from "../orm/columes/bytea";
 
 export const pgmigrations_id_seq = pgSequence("pgmigrations_id_seq", {
   startWith: "1",
@@ -40,27 +41,27 @@ export const email_domains = pgTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
   },
-  (table) => {
-    return {
-      email_domains_organization_id_fkey: foreignKey({
-        columns: [table.organization_id],
-        foreignColumns: [organizations.id],
-        name: "email_domains_organization_id_fkey",
-      }).onDelete("cascade"),
-      unique_organization_domain: unique("unique_organization_domain").on(
-        table.organization_id,
-        table.domain,
-        table.verification_type,
-      ),
-    };
-  },
+  (table) => [
+    foreignKey({
+      columns: [table.organization_id],
+      foreignColumns: [organizations.id],
+      name: "email_domains_organization_id_fkey",
+    }).onDelete("cascade"),
+    unique("unique_organization_domain").on(
+      table.organization_id,
+      table.domain,
+      table.verification_type,
+    ),
+  ],
 );
 
 export const authenticators = pgTable(
   "authenticators",
   {
     credential_id: text().primaryKey().notNull(),
-    credential_public_key: text().notNull(),
+    // TODO: failed to parse database type 'bytea'
+    credential_public_key: bytea("credential_public_key").notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     counter: bigint({ mode: "number" }).notNull(),
     credential_device_type: varchar({ length: 32 }),
     credential_backed_up: boolean().notNull(),
@@ -74,18 +75,46 @@ export const authenticators = pgTable(
     usage_count: integer().default(0).notNull(),
     user_verified: boolean().default(true).notNull(),
   },
-  (table) => {
-    return {
-      index_authenticators_on_credential_id: uniqueIndex(
-        "index_authenticators_on_credential_id",
-      ).using("btree", table.credential_id.asc().nullsLast().op("text_ops")),
-      authenticators_user_id_fkey: foreignKey({
-        columns: [table.user_id],
-        foreignColumns: [users.id],
-        name: "authenticators_user_id_fkey",
-      }).onDelete("cascade"),
-    };
+  (table) => [
+    uniqueIndex("index_authenticators_on_credential_id").using(
+      "btree",
+      table.credential_id.asc().nullsLast().op("text_ops"),
+    ),
+    foreignKey({
+      columns: [table.user_id],
+      foreignColumns: [users.id],
+      name: "authenticators_user_id_fkey",
+    }).onDelete("cascade"),
+  ],
+);
+
+export const moderations = pgTable(
+  "moderations",
+  {
+    id: serial().primaryKey().notNull(),
+    user_id: integer().notNull(),
+    organization_id: integer().notNull(),
+    type: varchar().notNull(),
+    created_at: timestamp({ withTimezone: true, mode: "string" })
+      .defaultNow()
+      .notNull(),
+    moderated_at: timestamp({ withTimezone: true, mode: "string" }),
+    comment: varchar(),
+    moderated_by: varchar(),
+    ticket_id: text(),
   },
+  (table) => [
+    foreignKey({
+      columns: [table.organization_id],
+      foreignColumns: [organizations.id],
+      name: "moderations_organization_id_fkey",
+    }).onDelete("cascade"),
+    foreignKey({
+      columns: [table.user_id],
+      foreignColumns: [users.id],
+      name: "moderations_user_id_fkey",
+    }).onDelete("cascade"),
+  ],
 );
 
 export const oidc_clients = pgTable("oidc_clients", {
@@ -110,37 +139,6 @@ export const oidc_clients = pgTable("oidc_clients", {
   introspection_signed_response_alg: varchar(),
   is_proconnect_federation: boolean().default(false).notNull(),
 });
-
-export const moderations = pgTable(
-  "moderations",
-  {
-    id: serial().primaryKey().notNull(),
-    user_id: integer().notNull(),
-    organization_id: integer().notNull(),
-    type: varchar().notNull(),
-    created_at: timestamp({ withTimezone: true, mode: "string" })
-      .defaultNow()
-      .notNull(),
-    moderated_at: timestamp({ withTimezone: true, mode: "string" }),
-    comment: varchar(),
-    moderated_by: varchar(),
-    ticket_id: text(),
-  },
-  (table) => {
-    return {
-      moderations_organization_id_fkey: foreignKey({
-        columns: [table.organization_id],
-        foreignColumns: [organizations.id],
-        name: "moderations_organization_id_fkey",
-      }).onDelete("cascade"),
-      moderations_user_id_fkey: foreignKey({
-        columns: [table.user_id],
-        foreignColumns: [users.id],
-        name: "moderations_user_id_fkey",
-      }).onDelete("cascade"),
-    };
-  },
-);
 
 export const organizations = pgTable(
   "organizations",
@@ -175,13 +173,12 @@ export const organizations = pgTable(
     }),
     cached_code_officiel_geographique: varchar(),
   },
-  (table) => {
-    return {
-      index_organizations_on_siret: uniqueIndex(
-        "index_organizations_on_siret",
-      ).using("btree", table.siret.asc().nullsLast().op("text_ops")),
-    };
-  },
+  (table) => [
+    uniqueIndex("index_organizations_on_siret").using(
+      "btree",
+      table.siret.asc().nullsLast().op("text_ops"),
+    ),
+  ],
 );
 
 export const users = pgTable(
@@ -213,20 +210,16 @@ export const users = pgTable(
     totp_key_verified_at: timestamp({ withTimezone: true, mode: "string" }),
     force_2fa: boolean().default(false).notNull(),
   },
-  (table) => {
-    return {
-      index_users_on_email: uniqueIndex("index_users_on_email").using(
-        "btree",
-        table.email.asc().nullsLast().op("text_ops"),
-      ),
-      index_users_on_reset_password_token: uniqueIndex(
-        "index_users_on_reset_password_token",
-      ).using(
-        "btree",
-        table.reset_password_token.asc().nullsLast().op("text_ops"),
-      ),
-    };
-  },
+  (table) => [
+    uniqueIndex("index_users_on_email").using(
+      "btree",
+      table.email.asc().nullsLast().op("text_ops"),
+    ),
+    uniqueIndex("index_users_on_reset_password_token").using(
+      "btree",
+      table.reset_password_token.asc().nullsLast().op("text_ops"),
+    ),
+  ],
 );
 
 export const users_oidc_clients = pgTable(
@@ -239,31 +232,29 @@ export const users_oidc_clients = pgTable(
     id: serial().primaryKey().notNull(),
     organization_id: integer(),
   },
-  (table) => {
-    return {
-      users_oidc_clients_oidc_client_id_fkey: foreignKey({
-        columns: [table.oidc_client_id],
-        foreignColumns: [oidc_clients.id],
-        name: "users_oidc_clients_oidc_client_id_fkey",
-      })
-        .onUpdate("cascade")
-        .onDelete("cascade"),
-      users_oidc_clients_organization_id_fkey: foreignKey({
-        columns: [table.organization_id],
-        foreignColumns: [organizations.id],
-        name: "users_oidc_clients_organization_id_fkey",
-      })
-        .onUpdate("cascade")
-        .onDelete("set null"),
-      users_oidc_clients_user_id_fkey: foreignKey({
-        columns: [table.user_id],
-        foreignColumns: [users.id],
-        name: "users_oidc_clients_user_id_fkey",
-      })
-        .onUpdate("cascade")
-        .onDelete("cascade"),
-    };
-  },
+  (table) => [
+    foreignKey({
+      columns: [table.oidc_client_id],
+      foreignColumns: [oidc_clients.id],
+      name: "users_oidc_clients_oidc_client_id_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.organization_id],
+      foreignColumns: [organizations.id],
+      name: "users_oidc_clients_organization_id_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("set null"),
+    foreignKey({
+      columns: [table.user_id],
+      foreignColumns: [users.id],
+      name: "users_oidc_clients_user_id_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
 );
 
 export const users_organizations = pgTable(
@@ -290,24 +281,22 @@ export const users_organizations = pgTable(
     }),
     verified_at: timestamp({ withTimezone: true, mode: "string" }),
   },
-  (table) => {
-    return {
-      users_organizations_organization_id_fkey: foreignKey({
-        columns: [table.organization_id],
-        foreignColumns: [organizations.id],
-        name: "users_organizations_organization_id_fkey",
-      }).onUpdate("cascade"),
-      users_organizations_user_id_fkey: foreignKey({
-        columns: [table.user_id],
-        foreignColumns: [users.id],
-        name: "users_organizations_user_id_fkey",
-      })
-        .onUpdate("cascade")
-        .onDelete("cascade"),
-      users_organizations_pkey: primaryKey({
-        columns: [table.user_id, table.organization_id],
-        name: "users_organizations_pkey",
-      }),
-    };
-  },
+  (table) => [
+    foreignKey({
+      columns: [table.organization_id],
+      foreignColumns: [organizations.id],
+      name: "users_organizations_organization_id_fkey",
+    }).onUpdate("cascade"),
+    foreignKey({
+      columns: [table.user_id],
+      foreignColumns: [users.id],
+      name: "users_organizations_user_id_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    primaryKey({
+      columns: [table.user_id, table.organization_id],
+      name: "users_organizations_pkey",
+    }),
+  ],
 );

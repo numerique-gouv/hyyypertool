@@ -2,7 +2,7 @@
 -- If you want to run this migration please uncomment this code before executing migrations
 
 CREATE SEQUENCE "public"."pgmigrations_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1;--> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "email_domains" (
+CREATE TABLE "email_domains" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"organization_id" integer NOT NULL,
 	"domain" varchar(255) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS "email_domains" (
 	CONSTRAINT "unique_organization_domain" UNIQUE("organization_id","domain","verification_type")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "authenticators" (
+CREATE TABLE "authenticators" (
 	"credential_id" text PRIMARY KEY NOT NULL,
 	"credential_public_key" "bytea" NOT NULL,
 	"counter" bigint NOT NULL,
@@ -29,7 +29,19 @@ CREATE TABLE IF NOT EXISTS "authenticators" (
 	"user_verified" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "oidc_clients" (
+CREATE TABLE "moderations" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"user_id" integer NOT NULL,
+	"organization_id" integer NOT NULL,
+	"type" varchar NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"moderated_at" timestamp with time zone,
+	"comment" varchar,
+	"moderated_by" varchar,
+	"ticket_id" text
+);
+--> statement-breakpoint
+CREATE TABLE "oidc_clients" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"client_name" varchar NOT NULL,
 	"client_id" varchar NOT NULL,
@@ -48,19 +60,7 @@ CREATE TABLE IF NOT EXISTS "oidc_clients" (
 	"is_proconnect_federation" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "moderations" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"user_id" integer NOT NULL,
-	"organization_id" integer NOT NULL,
-	"type" varchar NOT NULL,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"moderated_at" timestamp with time zone,
-	"comment" varchar,
-	"moderated_by" varchar,
-	"ticket_id" text
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "organizations" (
+CREATE TABLE "organizations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"siret" varchar NOT NULL,
 	"created_at" timestamp with time zone DEFAULT '1970-01-01 00:00:00' NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS "organizations" (
 	"cached_code_officiel_geographique" varchar
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "users" (
+CREATE TABLE "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"email" varchar DEFAULT '' NOT NULL,
 	"encrypted_password" varchar DEFAULT '',
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"force_2fa" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "users_oidc_clients" (
+CREATE TABLE "users_oidc_clients" (
 	"user_id" integer NOT NULL,
 	"oidc_client_id" integer NOT NULL,
 	"created_at" timestamp with time zone NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS "users_oidc_clients" (
 	"organization_id" integer
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "users_organizations" (
+CREATE TABLE "users_organizations" (
 	"user_id" integer NOT NULL,
 	"organization_id" integer NOT NULL,
 	"is_external" boolean DEFAULT false NOT NULL,
@@ -137,61 +137,16 @@ CREATE TABLE IF NOT EXISTS "users_organizations" (
 	CONSTRAINT "users_organizations_pkey" PRIMARY KEY("user_id","organization_id")
 );
 --> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "email_domains" ADD CONSTRAINT "email_domains_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "authenticators" ADD CONSTRAINT "authenticators_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "moderations" ADD CONSTRAINT "moderations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "moderations" ADD CONSTRAINT "moderations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_oidc_client_id_fkey" FOREIGN KEY ("oidc_client_id") REFERENCES "public"."oidc_clients"("id") ON DELETE cascade ON UPDATE cascade;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE set null ON UPDATE cascade;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "users_organizations" ADD CONSTRAINT "users_organizations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE cascade;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "users_organizations" ADD CONSTRAINT "users_organizations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_authenticators_on_credential_id" ON "authenticators" USING btree ("credential_id" text_ops);--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_organizations_on_siret" ON "organizations" USING btree ("siret" text_ops);--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" USING btree ("email" text_ops);--> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token" text_ops);
+ALTER TABLE "email_domains" ADD CONSTRAINT "email_domains_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "authenticators" ADD CONSTRAINT "authenticators_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "moderations" ADD CONSTRAINT "moderations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "moderations" ADD CONSTRAINT "moderations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_oidc_client_id_fkey" FOREIGN KEY ("oidc_client_id") REFERENCES "public"."oidc_clients"("id") ON DELETE cascade ON UPDATE cascade;--> statement-breakpoint
+ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE set null ON UPDATE cascade;--> statement-breakpoint
+ALTER TABLE "users_oidc_clients" ADD CONSTRAINT "users_oidc_clients_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;--> statement-breakpoint
+ALTER TABLE "users_organizations" ADD CONSTRAINT "users_organizations_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE cascade;--> statement-breakpoint
+ALTER TABLE "users_organizations" ADD CONSTRAINT "users_organizations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE cascade;--> statement-breakpoint
+CREATE UNIQUE INDEX "index_authenticators_on_credential_id" ON "authenticators" USING btree ("credential_id" text_ops);--> statement-breakpoint
+CREATE UNIQUE INDEX "index_organizations_on_siret" ON "organizations" USING btree ("siret" text_ops);--> statement-breakpoint
+CREATE UNIQUE INDEX "index_users_on_email" ON "users" USING btree ("email" text_ops);--> statement-breakpoint
+CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token" text_ops);
