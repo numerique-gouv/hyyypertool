@@ -1,7 +1,7 @@
 //
 
 export * from "./FindUsersByName";
-export * from "./get_member";
+export * from "./GetMember";
 export * from "./GetEmailsByOrganizationId";
 export * from "./GetUserById";
 export * from "./GetUsersByOrganizationId";
