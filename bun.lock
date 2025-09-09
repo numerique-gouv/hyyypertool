@@ -62,7 +62,7 @@
         "htmx.ext...chunked-transfer": "2.1.1",
         "htmx.org": "2.0.0",
         "hyperscript.org": "0.9.14",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "youch": "3.3.4",
       },
       "devDependencies": {
@@ -74,7 +74,7 @@
       "version": "1.0.0",
       "dependencies": {
         "modern-errors": "7.1.2",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "type-fest": "4.41.0",
         "zod": "4.0.2",
       },
@@ -234,7 +234,7 @@
         "rehype-stringify": "10.0.1",
         "remark-parse": "11.0.0",
         "remark-rehype": "11.1.2",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "unified": "11.0.5",
       },
       "devDependencies": {
@@ -285,7 +285,7 @@
         "@~/app.core": "workspace:*",
         "@~/zammad.lib": "workspace:*",
         "hono": "4.9.6",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "zod": "4.0.2",
       },
       "devDependencies": {
@@ -329,7 +329,7 @@
         "hono": "4.9.6",
         "tailwind-variants": "3.1.0",
         "ts-dedent": "2.2.0",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "zod": "4.0.2",
       },
       "devDependencies": {
@@ -346,7 +346,7 @@
         "@~/identite-proconnect.database": "workspace:*",
         "@~/moderations.repository": "workspace:*",
         "drizzle-orm": "0.44.5",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "zod": "4.0.2",
       },
       "devDependencies": {
@@ -376,7 +376,7 @@
         "@~/users.lib": "workspace:*",
         "hono": "4.9.6",
         "tailwind-variants": "3.1.0",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -398,7 +398,7 @@
         "hono": "4.9.6",
         "lodash.sortby": "4.7.0",
         "tailwind-variants": "3.1.0",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "zod": "4.0.2",
       },
       "devDependencies": {
@@ -428,7 +428,7 @@
         "@~/identite-proconnect.database": "workspace:*",
         "@~/identite-proconnect.lib": "workspace:*",
         "drizzle-orm": "0.44.5",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -443,7 +443,7 @@
         "@~/organizations.lib": "workspace:*",
         "hono": "4.9.6",
         "tailwind-variants": "3.1.0",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "zod": "4.0.2",
       },
       "devDependencies": {
@@ -472,7 +472,7 @@
         "@~/organizations.repository": "workspace:*",
         "@~/users.repository": "workspace:*",
         "hono": "4.9.6",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
         "zod": "4.0.2",
       },
       "devDependencies": {
@@ -515,7 +515,7 @@
         "hono": "4.9.6",
         "tailwind-variants": "3.1.0",
         "ts-dedent": "2.2.0",
-        "ts-pattern": "5.7.1",
+        "ts-pattern": "5.8.0",
       },
       "devDependencies": {
         "@~/config.typescript": "workspace:*",
@@ -1872,7 +1872,7 @@
 
     "ts-dedent": ["ts-dedent@2.2.0", "", {}, "sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ=="],
 
-    "ts-pattern": ["ts-pattern@5.7.1", "", {}, "sha512-EGs8PguQqAAUIcQfK4E9xdXxB6s2GK4sJfT/vcc9V1ELIvC4LH/zXu2t/5fajtv6oiRCxdv7BgtVK3vWgROxag=="],
+    "ts-pattern": ["ts-pattern@5.8.0", "", {}, "sha512-kIjN2qmWiHnhgr5DAkAafF9fwb0T5OhMVSWrm8XEdTFnX6+wfXwYOFjeF86UZ54vduqiR7BfqScFmXSzSaH8oA=="],
 
     "tslib": ["tslib@2.8.1", "", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
 
