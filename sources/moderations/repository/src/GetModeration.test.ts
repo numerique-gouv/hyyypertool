@@ -11,7 +11,7 @@ import {
   pg,
 } from "@~/identite-proconnect.database/testing";
 import { beforeAll, beforeEach, expect, setSystemTime, test } from "bun:test";
-import { GetModerationById } from "./GetModerationById";
+import { GetModeration } from "./GetModeration";
 
 //
 
@@ -24,29 +24,30 @@ beforeAll(() => {
 
 //
 
-test("get a moderation", async () => {
+test("get a moderation with minimal fields", async () => {
   await create_unicorn_organization(pg);
   await create_adora_pony_user(pg);
   const moderation_id = await create_adora_pony_moderation(pg, { type: "" });
 
-  const get_moderation_by_id = GetModerationById({ pg });
-  const moderation = await get_moderation_by_id(moderation_id, {
-    columns: {
-      id: true,
-      created_at: true,
-      moderated_at: true,
-      user_id: true,
-      organization_id: true,
-    },
-  });
+  const get_moderation = GetModeration(pg);
+  const moderation = await get_moderation(moderation_id);
 
   expect(moderation).toMatchInlineSnapshot(`
     {
-      "created_at": "2222-01-01 00:00:00+00",
+      "comment": null,
       "id": 1,
-      "moderated_at": null,
       "organization_id": 1,
+      "ticket_id": null,
+      "user": {
+        "email": "adora.pony@unicorn.xyz",
+      },
       "user_id": 1,
     }
   `);
+});
+
+test("throws NotFoundError when moderation does not exist", async () => {
+  const get_moderation = GetModeration(pg);
+
+  await expect(get_moderation(999999)).rejects.toThrow("Moderation not found.");
 });

@@ -57,8 +57,8 @@ export function GetModerationsList(pg: IdentiteProconnect_PgDatabase) {
         : undefined,
     );
 
-    return pg.transaction(async function moderation_count() {
-      const moderations = await pg
+    return pg.transaction(async function moderation_count(tx) {
+      const moderations = await tx
         .select({
           created_at: schema.moderations.created_at,
           id: schema.moderations.id,
@@ -84,7 +84,7 @@ export function GetModerationsList(pg: IdentiteProconnect_PgDatabase) {
         .orderBy(asc(schema.moderations.created_at))
         .limit(take)
         .offset(page * take);
-      const [{ value: count }] = await pg
+      const [{ value: count }] = await tx
         .select({ value: drizzle_count() })
         .from(schema.moderations)
         .innerJoin(
