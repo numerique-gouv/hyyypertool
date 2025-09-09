@@ -25,8 +25,8 @@ beforeAll(() => {
 //
 
 test("get a moderation with full organization and user details", async () => {
-  const organization_id = await create_unicorn_organization(pg);
-  const user_id = await create_adora_pony_user(pg);
+  await create_unicorn_organization(pg);
+  await create_adora_pony_user(pg);
   const moderation_id = await create_adora_pony_moderation(pg, { type: "" });
 
   const get_moderation_with_details = GetModerationWithDetails(pg);
