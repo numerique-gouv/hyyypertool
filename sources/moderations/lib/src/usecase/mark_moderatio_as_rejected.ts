@@ -3,8 +3,10 @@
 import { z_username } from "@~/app.core/schema/z_username";
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
-import { UpdateModerationById } from "@~/moderations.repository";
-import type { get_moderation_dto } from "@~/moderations.repository/get_moderation";
+import {
+  UpdateModerationById,
+  type GetModerationDto,
+} from "@~/moderations.repository";
 import { append_comment } from "../comment_message";
 
 //
@@ -15,7 +17,7 @@ export async function mark_moderatio_as_rejected({
   userinfo,
   reason,
 }: {
-  moderation: get_moderation_dto;
+  moderation: GetModerationDto;
   userinfo: AgentConnect_UserInfo;
   pg: IdentiteProconnect_PgDatabase;
   reason: string;

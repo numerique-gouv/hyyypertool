@@ -9,13 +9,10 @@ import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
 import { hx_urls, urls } from "@~/app.urls";
 import { schema } from "@~/identite-proconnect.database";
 import {
-  get_duplicate_moderations,
-  type get_duplicate_moderations_dto,
-} from "@~/moderations.repository/get_duplicate_moderations";
-import {
-  get_user_by_id,
-  type get_user_by_id_dto,
-} from "@~/users.repository/get_user_by_id";
+  GetDuplicateModerations,
+  type GetDuplicateModerationsDto,
+} from "@~/moderations.repository";
+import { GetUserById, type GetUserByIdDto } from "@~/users.repository";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
 import { to } from "await-to-js";
 import { and, asc, eq, ilike, not, or } from "drizzle-orm";
@@ -37,12 +34,14 @@ export async function Duplicate_Warning({
   const {
     var: { identite_pg },
   } = useRequestContext<IdentiteProconnect_Pg_Context>();
-  const moderations = await get_duplicate_moderations(identite_pg, {
+  const get_duplicate_moderations = GetDuplicateModerations(identite_pg);
+  const moderations = await get_duplicate_moderations({
     organization_id,
     user_id,
   });
 
-  const user = await get_user_by_id(identite_pg, { id: user_id });
+  const get_user_by_id = GetUserById(identite_pg);
+  const user = await get_user_by_id(user_id);
   if (!user) return <p>Utilisateur introuvable</p>;
 
   return (
@@ -61,8 +60,8 @@ export async function Duplicate_Warning({
 
 Duplicate_Warning.Context = createContext({
   moderation_id: NaN,
-  moderations: {} as get_duplicate_moderations_dto,
-  user: {} as NonNullable<Awaited<get_user_by_id_dto>>,
+  moderations: {} as GetDuplicateModerationsDto,
+  user: {} as NonNullable<GetUserByIdDto>,
 });
 
 //
@@ -191,7 +190,7 @@ async function MarkModerationAsProcessed() {
 
 //
 
-function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
+function get_moderation_tickets(moderations: GetDuplicateModerationsDto) {
   return Promise.all(
     moderations.map(async (moderation) => {
       if (!moderation.ticket_id) return { moderation };

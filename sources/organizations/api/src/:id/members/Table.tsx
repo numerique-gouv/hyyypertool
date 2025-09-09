@@ -72,7 +72,7 @@ function Row({ variants }: { variants?: VariantProps<typeof row> }) {
   const { user } = useContext(Member_Context);
   const verification_type = user.verification_type as Verification_Type;
   return (
-    <tr 
+    <tr
       aria-label={`Membre ${user.given_name} ${user.family_name} (${user.email})`}
       class={row(variants)}
     >

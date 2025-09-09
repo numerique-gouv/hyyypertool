@@ -6,7 +6,7 @@ import { Foot } from "@~/app.ui/hx_table";
 import { notice } from "@~/app.ui/notice";
 import { Time } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
-import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
+import type { GetOrganizationsByUserIdDto } from "@~/organizations.repository";
 import { usePageRequestContext } from "./context";
 
 //
@@ -70,7 +70,7 @@ export function Row({
   organization,
 }: {
   key?: string;
-  organization: Awaited<get_organizations_by_user_id_dto>["organizations"][number];
+  organization: GetOrganizationsByUserIdDto["organizations"][number];
 }) {
   const {
     cached_code_officiel_geographique,

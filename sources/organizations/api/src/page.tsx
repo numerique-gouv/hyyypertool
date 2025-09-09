@@ -8,7 +8,7 @@ import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { Time } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
-import type { get_organizations_dto } from "@~/organizations.repository/get_organizations_list";
+import { type GetOrganizationsListDto } from "@~/organizations.repository";
 import { match } from "ts-pattern";
 import { PageQuery_Schema, usePageRequestContext } from "./context";
 
@@ -71,7 +71,7 @@ function Filter() {
 async function Table() {
   const {
     req,
-    var: { query_organizations, identite_pg },
+    var: { query_organizations },
   } = usePageRequestContext();
   const { q } = req.valid("query");
   const pagination = match(
@@ -80,7 +80,7 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, organizations } = await query_organizations(identite_pg, {
+  const { count, organizations } = await query_organizations({
     pagination: { ...pagination, page: pagination.page - 1 },
     search: q ? String(q) : undefined,
   });
@@ -121,7 +121,7 @@ function Row({
   organization,
 }: {
   key?: string;
-  organization: get_organizations_dto["organizations"][number];
+  organization: GetOrganizationsListDto["organizations"][number];
 }) {
   return (
     <tr

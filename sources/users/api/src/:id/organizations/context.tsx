@@ -7,7 +7,7 @@ import {
   type Pagination,
 } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
-import type { get_organizations_by_user_id_dto } from "@~/organizations.repository/get_organizations_by_user_id";
+import type { GetOrganizationsByUserIdDto } from "@~/organizations.repository";
 import type { Env } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
@@ -25,7 +25,7 @@ export const ParamSchema = Entity_Schema;
 export interface ContextVariablesType extends Env {
   Variables: {
     pagination: Pagination;
-    query_organizations_collection: get_organizations_by_user_id_dto;
+    query_organizations_collection: Promise<GetOrganizationsByUserIdDto>;
   };
 }
 export type ContextType = App_Context & ContextVariablesType;

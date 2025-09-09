@@ -10,13 +10,13 @@ import {
   migrate,
   pg,
 } from "@~/identite-proconnect.database/testing";
-import { beforeAll, expect, setSystemTime, test } from "bun:test";
+import { beforeAll, beforeEach, expect, setSystemTime, test } from "bun:test";
 import { GetModerationById } from "./GetModerationById";
 
 //
 
 beforeAll(migrate);
-beforeAll(empty_database);
+beforeEach(empty_database);
 
 beforeAll(() => {
   setSystemTime(new Date("2222-01-01T00:00:00.000Z"));
@@ -24,9 +24,9 @@ beforeAll(() => {
 
 //
 
-test("get a moderation ", async () => {
-  const organization_id = await create_unicorn_organization(pg);
-  const user_id = await create_adora_pony_user(pg);
+test("get a moderation", async () => {
+  await create_unicorn_organization(pg);
+  await create_adora_pony_user(pg);
   const moderation_id = await create_adora_pony_moderation(pg, { type: "" });
 
   const get_moderation_by_id = GetModerationById({ pg });
@@ -40,11 +40,13 @@ test("get a moderation ", async () => {
     },
   });
 
-  expect(moderation).toEqual({
-    created_at: "2222-01-01 00:00:00+00",
-    id: moderation_id,
-    moderated_at: null,
-    organization_id,
-    user_id,
-  });
+  expect(moderation).toMatchInlineSnapshot(`
+    {
+      "created_at": "2222-01-01 00:00:00+00",
+      "id": 1,
+      "moderated_at": null,
+      "organization_id": 1,
+      "user_id": 1,
+    }
+  `);
 });

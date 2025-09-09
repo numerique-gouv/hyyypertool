@@ -7,7 +7,7 @@ import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identi
 import type { UserInfoVariables_Context } from "@~/app.middleware/set_userinfo";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { mark_moderatio_as_rejected } from "@~/moderations.lib/usecase/mark_moderatio_as_rejected";
-import { get_moderation } from "@~/moderations.repository/get_moderation";
+import { GetModeration } from "@~/moderations.repository";
 import { Hono } from "hono";
 
 //
@@ -20,9 +20,8 @@ export default new Hono<
   async ({ text, req, notFound, var: { identite_pg, userinfo } }) => {
     const { id } = req.valid("param");
 
-    const moderation = await get_moderation(identite_pg, {
-      moderation_id: id,
-    });
+    const get_moderation = await GetModeration(identite_pg);
+    const moderation = await get_moderation(id);
 
     if (!moderation) return notFound();
 

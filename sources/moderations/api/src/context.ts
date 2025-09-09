@@ -3,7 +3,7 @@
 import { Pagination_Schema, type Pagination } from "@~/app.core/schema";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import { z_empty_string_to_undefined } from "@~/app.core/schema/z_empty_string_to_undefined";
-import type { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
+import type { GetModerationsListHandler } from "@~/moderations.repository";
 import { createContext } from "hono/jsx";
 import { z } from "zod";
 
@@ -27,12 +27,11 @@ export const Page_Query = Search_Schema.merge(Pagination_Schema).partial();
 export type Search = z.infer<typeof Search_Schema>;
 
 //
+export type GetModerationsListDTO = Awaited<
+  ReturnType<GetModerationsListHandler>
+>;
 
 export default createContext({
-  query_moderations_list: {} as Promise<get_moderations_list_dto>,
+  query_moderations_list: {} as Promise<GetModerationsListDTO>,
   pagination: {} as Pagination,
 });
-
-export type get_moderations_list_dto = Awaited<
-  ReturnType<typeof get_moderations_list>
->;
