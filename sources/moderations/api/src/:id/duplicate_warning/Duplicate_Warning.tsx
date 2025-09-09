@@ -9,9 +9,9 @@ import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
 import { hx_urls, urls } from "@~/app.urls";
 import { schema } from "@~/identite-proconnect.database";
 import {
-  get_duplicate_moderations,
-  type get_duplicate_moderations_dto,
-} from "@~/moderations.repository/get_duplicate_moderations";
+  GetDuplicateModerations,
+  type GetDuplicateModerationsDto,
+} from "@~/moderations.repository";
 import {
   get_user_by_id,
   type get_user_by_id_dto,
@@ -37,7 +37,8 @@ export async function Duplicate_Warning({
   const {
     var: { identite_pg },
   } = useRequestContext<IdentiteProconnect_Pg_Context>();
-  const moderations = await get_duplicate_moderations(identite_pg, {
+  const get_duplicate_moderations = GetDuplicateModerations(identite_pg);
+  const moderations = await get_duplicate_moderations({
     organization_id,
     user_id,
   });
@@ -61,7 +62,7 @@ export async function Duplicate_Warning({
 
 Duplicate_Warning.Context = createContext({
   moderation_id: NaN,
-  moderations: {} as get_duplicate_moderations_dto,
+  moderations: {} as GetDuplicateModerationsDto,
   user: {} as NonNullable<Awaited<get_user_by_id_dto>>,
 });
 
@@ -191,7 +192,7 @@ async function MarkModerationAsProcessed() {
 
 //
 
-function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
+function get_moderation_tickets(moderations: GetDuplicateModerationsDto) {
   return Promise.all(
     moderations.map(async (moderation) => {
       if (!moderation.ticket_id) return { moderation };

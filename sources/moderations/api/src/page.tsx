@@ -14,15 +14,15 @@ import {
   moderation_type_to_emoji,
   moderation_type_to_title,
 } from "@~/moderations.lib/moderation_type.mapper";
-import { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
+import { GetModerationsList } from "@~/moderations.repository";
 import { useContext } from "hono/jsx";
 import { useRequestContext } from "hono/jsx-renderer";
 import Moderations_Context, {
   MODERATION_TABLE_ID,
   MODERATION_TABLE_PAGE_ID,
   Page_Query,
+  type GetModerationsListDTO,
   type Search,
-  type get_moderations_list_dto,
 } from "./context";
 
 //
@@ -64,7 +64,8 @@ export function Moderations_Page({
     search_email,
     search_siret,
   } = search;
-  const query_moderations_list = get_moderations_list(identite_pg, {
+  const get_moderations_list = GetModerationsList(identite_pg);
+  const query_moderations_list = get_moderations_list({
     search: {
       created_at: date,
       email: search_email,
@@ -267,7 +268,7 @@ function Row({
   moderation,
 }: {
   key?: string;
-  moderation: get_moderations_list_dto["moderations"][number];
+  moderation: GetModerationsListDTO["moderations"][number];
 }) {
   const { user, organization } = moderation;
   return (
