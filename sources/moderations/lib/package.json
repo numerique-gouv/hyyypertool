@@ -16,7 +16,7 @@
     "@~/crisp.lib": "workspace:*",
     "@~/moderations.repository": "workspace:*",
     "@~/identite-proconnect.database": "workspace:*",
-    "drizzle-orm": "0.41.0",
+    "drizzle-orm": "0.44.5",
     "ts-pattern": "5.7.1",
     "zod": "4.0.2"
   },
