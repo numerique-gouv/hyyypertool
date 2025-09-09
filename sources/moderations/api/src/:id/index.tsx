@@ -16,8 +16,8 @@ import { Hono } from "hono";
 import { getContext } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
 import moderation_procedures_router from "./$procedures";
+import { GetModerationWithDetails } from "@~/moderations.repository";
 import {
-  get_moderation,
   get_organization_member,
   type ContextType,
   type ContextVariablesType,
@@ -38,8 +38,9 @@ export default new Hono<ContextType>()
       const { identite_pg } = getContext<App_Context>().var;
       const { id: moderation_id } = req.valid("param");
 
+      const get_moderation_with_details = GetModerationWithDetails(identite_pg);
       const [moderation_error, moderation] = await to(
-        get_moderation({ pg: identite_pg }, { moderation_id }),
+        get_moderation_with_details(moderation_id),
       );
 
       if (moderation_error instanceof NotFoundError) {

@@ -11,7 +11,8 @@ import { to } from "await-to-js";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import Page from "./page";
-import { get_moderation, type ContextType } from "./page/context";
+import { GetModerationForEmail } from "@~/moderations.repository";
+import { type ContextType } from "./page/context";
 
 //
 
@@ -27,9 +28,8 @@ export default new Hono<ContextType>().get(
   },
   async function set_moderation({ req, set, var: { identite_pg } }, next) {
     const { id: moderation_id } = req.valid("param");
-    const moderation = await get_moderation(identite_pg, {
-      moderation_id,
-    });
+    const get_moderation_for_email = GetModerationForEmail(identite_pg);
+    const moderation = await get_moderation_for_email(moderation_id);
     set("moderation", moderation);
     return next();
   },
