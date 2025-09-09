@@ -17,8 +17,8 @@ import { getContext } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
 import moderation_procedures_router from "./$procedures";
 import { GetModerationWithDetails } from "@~/moderations.repository";
+import { GetOrganizationMember } from "@~/organizations.repository";
 import {
-  get_organization_member,
   type ContextType,
   type ContextVariablesType,
 } from "./context";
@@ -64,13 +64,11 @@ export default new Hono<ContextType>()
 
       //
 
-      const organization_member = await get_organization_member(
-        { pg: identite_pg },
-        {
-          organization_id: moderation.organization_id,
-          user_id: moderation.user.id,
-        },
-      );
+      const get_organization_member = GetOrganizationMember(identite_pg);
+      const organization_member = await get_organization_member({
+        organization_id: moderation.organization_id,
+        user_id: moderation.user.id,
+      });
 
       //
 
