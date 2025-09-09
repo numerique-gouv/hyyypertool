@@ -1,6 +1,6 @@
 //
 
-import { add_user_to_organization, pg } from "@~/identite-proconnect.database/testing";
+import { add_user_to_organization, empty_database, migrate, pg } from "@~/identite-proconnect.database/testing";
 import { beforeEach, describe, expect, test } from "bun:test";
 import { GetOrganizationsByUserId } from "./GetOrganizationsByUserId";
 
@@ -10,6 +10,8 @@ describe("GetOrganizationsByUserId", () => {
   let user_id: number;
 
   beforeEach(async () => {
+    await migrate();
+    await empty_database(pg);
     user_id = await add_user_to_organization({ pg });
   });
 

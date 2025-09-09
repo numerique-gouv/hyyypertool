@@ -1,6 +1,7 @@
 //
 
-import { add_organization } from "@~/app.database/seed_data";
+import { create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import { empty_database, migrate, pg } from "@~/identite-proconnect.database/testing";
 import { beforeEach, describe, expect, test } from "bun:test";
 import { AddVerifiedDomain } from "./AddVerifiedDomain";
 
@@ -10,12 +11,12 @@ describe("AddVerifiedDomain", () => {
   let organization_id: number;
 
   beforeEach(async () => {
-    const { pg } = await import("@~/app.database/pg");
-    organization_id = await add_organization({ pg });
+    await migrate();
+    await empty_database(pg);
+    organization_id = await create_unicorn_organization(pg);
   });
 
   test("updates domain verification status", async () => {
-    const { pg } = await import("@~/app.database/pg");
     const add_verified_domain = AddVerifiedDomain(pg);
 
     const result = add_verified_domain({

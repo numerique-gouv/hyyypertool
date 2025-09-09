@@ -1,6 +1,7 @@
 //
 
-import { add_organization, add_user } from "@~/app.database/seed_data";
+import { create_adora_pony_user, create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import { empty_database, migrate, pg } from "@~/identite-proconnect.database/testing";
 import { beforeEach, describe, expect, test } from "bun:test";
 import { AddMemberToOrganization } from "./AddMemberToOrganization";
 
@@ -11,13 +12,13 @@ describe("AddMemberToOrganization", () => {
   let organization_id: number;
 
   beforeEach(async () => {
-    const { pg } = await import("@~/app.database/pg");
-    user_id = await add_user({ pg });
-    organization_id = await add_organization({ pg });
+    await migrate();
+    await empty_database(pg);
+    user_id = await create_adora_pony_user(pg);
+    organization_id = await create_unicorn_organization(pg);
   });
 
   test("adds a member to an organization", async () => {
-    const { pg } = await import("@~/app.database/pg");
     const add_member_to_organization = AddMemberToOrganization(pg);
 
     const result = await add_member_to_organization({
