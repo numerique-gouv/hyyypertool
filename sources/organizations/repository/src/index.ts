@@ -4,7 +4,6 @@ export * from "./AddMemberToOrganization";
 export * from "./AddVerifiedDomain";
 export * from "./GetDomainCount";
 export * from "./GetDomains";
-export * from "./GetOrganizationById";
 export * from "./GetOrganizationMember";
 export * from "./GetOrganizationMembersCount";
 export * from "./GetOrganizationsByUserId";

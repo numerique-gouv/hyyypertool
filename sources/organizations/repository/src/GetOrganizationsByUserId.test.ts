@@ -1,41 +1,79 @@
 //
 
-import { add_user_to_organization, empty_database, migrate, pg } from "@~/identite-proconnect.database/testing";
-import { beforeEach, describe, expect, test } from "bun:test";
+import { create_pink_diamond_user, create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  add_user_to_organization,
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
+import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { GetOrganizationsByUserId } from "./GetOrganizationsByUserId";
 
 //
 
-describe("GetOrganizationsByUserId", () => {
-  let user_id: number;
+beforeAll(migrate);
+beforeEach(empty_database);
 
-  beforeEach(async () => {
-    await migrate();
-    await empty_database(pg);
-    user_id = await add_user_to_organization({ pg });
+//
+
+test("returns organizations for a user", async () => {
+  const organization_id = await create_unicorn_organization(pg);
+  const user_id = await create_pink_diamond_user(pg);
+  await add_user_to_organization({
+    organization_id,
+    user_id,
+  });
+  
+  const get_organizations_by_user_id = GetOrganizationsByUserId(pg);
+  const result = await get_organizations_by_user_id({ user_id });
+
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "count": 1,
+      "organizations": [
+        {
+          "cached_code_officiel_geographique": null,
+          "cached_libelle": "🦄 libelle",
+          "created_at": "1970-01-01T00:00:00+00:00",
+          "email_domains": [],
+          "id": 1,
+          "siret": "🦄 siret",
+          "verification_type": null,
+        },
+      ],
+    }
+  `);
+});
+
+test("supports pagination", async () => {
+  const organization_id = await create_unicorn_organization(pg);
+  const user_id = await create_pink_diamond_user(pg);
+  await add_user_to_organization({
+    organization_id,
+    user_id,
+  });
+  
+  const get_organizations_by_user_id = GetOrganizationsByUserId(pg);
+  const result = await get_organizations_by_user_id({
+    user_id,
+    pagination: { page: 0, page_size: 1 },
   });
 
-  test("returns organizations for a user", async () => {
-    const get_organizations_by_user_id = GetOrganizationsByUserId(pg);
-
-    const result = await get_organizations_by_user_id({
-      user_id,
-    });
-
-    expect(result.count).toBeGreaterThan(0);
-    expect(result.organizations).toHaveLength(result.count);
-    expect(result.organizations[0]).toHaveProperty("id");
-    expect(result.organizations[0]).toHaveProperty("siret");
-  });
-
-  test("supports pagination", async () => {
-    const get_organizations_by_user_id = GetOrganizationsByUserId(pg);
-
-    const result = await get_organizations_by_user_id({
-      user_id,
-      pagination: { page: 0, page_size: 1 },
-    });
-
-    expect(result.organizations).toHaveLength(Math.min(1, result.count));
-  });
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "count": 1,
+      "organizations": [
+        {
+          "cached_code_officiel_geographique": null,
+          "cached_libelle": "🦄 libelle",
+          "created_at": "1970-01-01T00:00:00+00:00",
+          "email_domains": [],
+          "id": 1,
+          "siret": "🦄 siret",
+          "verification_type": null,
+        },
+      ],
+    }
+  `);
 });

@@ -31,9 +31,7 @@ export function AddMemberToOrganization(pg: IdentiteProconnect_PgDatabase) {
 
       const organization = await tx.query.organizations.findFirst({
         columns: {
-          // external_authorized_email_domains: true,
-          // trackdechets_email_domains: true,
-          // verified_email_domains: true,
+          id: true,
         },
         where: eq(schema.organizations.id, values.organization_id),
       });
