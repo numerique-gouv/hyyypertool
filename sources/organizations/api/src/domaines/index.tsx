@@ -5,7 +5,6 @@ import { hyper_ref } from "@~/app.core/html";
 import { hx_include } from "@~/app.core/htmx";
 import { Main_Layout } from "@~/app.layout";
 import { hx_urls, urls } from "@~/app.urls";
-import { get_unverified_domains } from "@~/organizations.repository/get_unverified_domains";
 import consola from "consola";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -43,7 +42,6 @@ export default new Hono<ContextType>().use("/", jsxRenderer(Main_Layout)).get(
       $search,
       $table,
       hx_domains_query_props,
-      query_unverified_domains: get_unverified_domains,
     };
   }),
   async function GET({ render, set }) {

@@ -12,10 +12,7 @@ import {
   GetDuplicateModerations,
   type GetDuplicateModerationsDto,
 } from "@~/moderations.repository";
-import {
-  get_user_by_id,
-  type get_user_by_id_dto,
-} from "@~/users.repository/get_user_by_id";
+import { GetUserById, type GetUserByIdDto } from "@~/users.repository";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
 import { to } from "await-to-js";
 import { and, asc, eq, ilike, not, or } from "drizzle-orm";
@@ -43,7 +40,8 @@ export async function Duplicate_Warning({
     user_id,
   });
 
-  const user = await get_user_by_id(identite_pg, { id: user_id });
+  const get_user_by_id = GetUserById(identite_pg);
+  const user = await get_user_by_id(user_id);
   if (!user) return <p>Utilisateur introuvable</p>;
 
   return (
@@ -63,7 +61,7 @@ export async function Duplicate_Warning({
 Duplicate_Warning.Context = createContext({
   moderation_id: NaN,
   moderations: {} as GetDuplicateModerationsDto,
-  user: {} as NonNullable<Awaited<get_user_by_id_dto>>,
+  user: {} as NonNullable<GetUserByIdDto>,
 });
 
 //

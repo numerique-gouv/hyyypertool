@@ -7,7 +7,7 @@ import {
 } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
-import type { GetOrganizationsListHandler } from "@~/organizations.repository/GetOrganizationsList";
+import type { GetOrganizationsListHandler } from "@~/organizations.repository";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 

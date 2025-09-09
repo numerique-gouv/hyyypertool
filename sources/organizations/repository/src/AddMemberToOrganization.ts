@@ -78,5 +78,9 @@ export function AddMemberToOrganization(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type AddMemberToOrganizationHandler = ReturnType<typeof AddMemberToOrganization>;
-export type AddMemberToOrganizationDto = Awaited<ReturnType<AddMemberToOrganizationHandler>>;
+export type AddMemberToOrganizationHandler = ReturnType<
+  typeof AddMemberToOrganization
+>;
+export type AddMemberToOrganizationDto = Awaited<
+  ReturnType<AddMemberToOrganizationHandler>
+>;

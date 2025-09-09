@@ -25,5 +25,9 @@ export function GetModerationForEmail(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetModerationForEmailHandler = ReturnType<typeof GetModerationForEmail>;
-export type GetModerationForEmailDto = Awaited<ReturnType<GetModerationForEmailHandler>>;
+export type GetModerationForEmailHandler = ReturnType<
+  typeof GetModerationForEmail
+>;
+export type GetModerationForEmailDto = Awaited<
+  ReturnType<GetModerationForEmailHandler>
+>;

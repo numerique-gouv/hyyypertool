@@ -12,7 +12,10 @@ export function GetEmailsByOrganizationId(pg: IdentiteProconnect_PgDatabase) {
   return async function get_emails_by_organization_id({
     family_name,
     organization_id,
-  }: { family_name: string; organization_id: number }) {
+  }: {
+    family_name: string;
+    organization_id: number;
+  }) {
     const same_family_name_members = await pg
       .select({ email: schema.users.email })
       .from(schema.users)
@@ -40,5 +43,9 @@ export function GetEmailsByOrganizationId(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetEmailsByOrganizationIdHandler = ReturnType<typeof GetEmailsByOrganizationId>;
-export type GetEmailsByOrganizationIdDto = Awaited<ReturnType<GetEmailsByOrganizationIdHandler>>;
+export type GetEmailsByOrganizationIdHandler = ReturnType<
+  typeof GetEmailsByOrganizationId
+>;
+export type GetEmailsByOrganizationIdDto = Awaited<
+  ReturnType<GetEmailsByOrganizationIdHandler>
+>;

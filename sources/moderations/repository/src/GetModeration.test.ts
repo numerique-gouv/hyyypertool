@@ -10,17 +10,13 @@ import {
   migrate,
   pg,
 } from "@~/identite-proconnect.database/testing";
-import { beforeAll, beforeEach, expect, setSystemTime, test } from "bun:test";
+import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { GetModeration } from "./GetModeration";
 
 //
 
 beforeAll(migrate);
 beforeEach(empty_database);
-
-beforeAll(() => {
-  setSystemTime(new Date("2222-01-01T00:00:00.000Z"));
-});
 
 //
 

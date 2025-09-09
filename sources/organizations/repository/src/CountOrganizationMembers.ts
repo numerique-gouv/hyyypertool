@@ -8,10 +8,12 @@ import { count as drizzle_count, eq } from "drizzle-orm";
 
 //
 
-export function GetOrganizationMembersCount(pg: IdentiteProconnect_PgDatabase) {
-  return async function get_organization_members_count(
-    organization_id: number,
-  ) {
+export function CountOrganizationMembers(pg: IdentiteProconnect_PgDatabase) {
+  return async function count_organization_members({
+    organization_id,
+  }: {
+    organization_id: number;
+  }) {
     const [{ value: count }] = await pg
       .select({ value: drizzle_count() })
       .from(schema.users_organizations)
@@ -21,9 +23,9 @@ export function GetOrganizationMembersCount(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetOrganizationMembersCountHandler = ReturnType<
-  typeof GetOrganizationMembersCount
+export type CountOrganizationMembersHandler = ReturnType<
+  typeof CountOrganizationMembers
 >;
-export type GetOrganizationMembersCountDto = Awaited<
-  ReturnType<GetOrganizationMembersCountHandler>
+export type CountOrganizationMembersDto = Awaited<
+  ReturnType<CountOrganizationMembersHandler>
 >;

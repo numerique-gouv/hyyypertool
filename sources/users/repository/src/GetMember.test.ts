@@ -11,7 +11,7 @@ import {
   pg,
 } from "@~/identite-proconnect.database/testing";
 import { beforeAll, expect, setSystemTime, test } from "bun:test";
-import { GetMember } from "./get_member";
+import { GetMember } from "./GetMember";
 
 //
 

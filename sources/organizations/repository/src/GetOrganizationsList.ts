@@ -50,5 +50,9 @@ export function GetOrganizationsList(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetOrganizationsListHandler = ReturnType<typeof GetOrganizationsList>;
-export type GetOrganizationsListDto = Awaited<ReturnType<GetOrganizationsListHandler>>;
+export type GetOrganizationsListHandler = ReturnType<
+  typeof GetOrganizationsList
+>;
+export type GetOrganizationsListDto = Awaited<
+  ReturnType<GetOrganizationsListHandler>
+>;

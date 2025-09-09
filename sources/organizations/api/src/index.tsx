@@ -3,7 +3,7 @@
 import { zValidator } from "@hono/zod-validator";
 import { Main_Layout } from "@~/app.layout";
 import { authorized } from "@~/app.middleware/authorized";
-import { GetOrganizationsList } from "@~/organizations.repository/GetOrganizationsList";
+import { GetOrganizationsList } from "@~/organizations.repository";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import user_page_route from "./:id/index";
@@ -25,7 +25,10 @@ export default new Hono<ContextType>()
     "/",
     jsxRenderer(Main_Layout),
     zValidator("query", PageQuery_Schema),
-    async function set_query_organizations({ set, var: { identite_pg } }, next) {
+    async function set_query_organizations(
+      { set, var: { identite_pg } },
+      next,
+    ) {
       set("query_organizations", GetOrganizationsList(identite_pg));
       return next();
     },

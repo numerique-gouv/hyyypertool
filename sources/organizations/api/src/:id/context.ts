@@ -4,8 +4,10 @@ import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { Organization } from "@~/organizations.lib/entities/Organization";
 import type { GetFicheOrganizationByIdHandler } from "@~/organizations.lib/usecase";
-import { type GetDomainCountDto } from "@~/organizations.repository/GetDomainCount";
-import { type GetOrganizationMembersCountDto } from "@~/organizations.repository/GetOrganizationMembersCount";
+import {
+  type GetDomainCountDto,
+  type GetOrganizationMembersCountDto,
+} from "@~/organizations.repository";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 //

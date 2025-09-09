@@ -26,5 +26,9 @@ export function GetOrganizationMember(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetOrganizationMemberHandler = ReturnType<typeof GetOrganizationMember>;
-export type GetOrganizationMemberDto = Awaited<ReturnType<GetOrganizationMemberHandler>>;
+export type GetOrganizationMemberHandler = ReturnType<
+  typeof GetOrganizationMember
+>;
+export type GetOrganizationMemberDto = Awaited<
+  ReturnType<GetOrganizationMemberHandler>
+>;

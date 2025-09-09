@@ -6,9 +6,11 @@ import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";
 import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
-import { GetOrganizationById } from "@~/organizations.repository";
-import { GetDomainCount } from "@~/organizations.repository/GetDomainCount";
-import { GetOrganizationMembersCount } from "@~/organizations.repository/GetOrganizationMembersCount";
+import {
+  GetDomainCount,
+  GetOrganizationById,
+  GetOrganizationMembersCount,
+} from "@~/organizations.repository";
 import { to as await_to } from "await-to-js";
 import { Hono } from "hono";
 import { getContext } from "hono/context-storage";
@@ -73,9 +75,7 @@ export default new Hono<ContextType>()
     ) {
       set(
         "query_organization_members_count",
-        GetOrganizationMembersCount(identite_pg)({
-          organization_id: organization.id,
-        }),
+        GetOrganizationMembersCount(identite_pg)(organization.id),
       );
       return next();
     },
@@ -89,9 +89,8 @@ export default new Hono<ContextType>()
       });
       const organization_fiche =
         await get_fiche_organization_by_id(organization_id);
-      const query_organization_domains_count = GetDomainCount(identite_pg)({
-        organization_id,
-      });
+      const query_organization_domains_count =
+        GetDomainCount(identite_pg)(organization_id);
       return set_context_variables<ContextVariablesType>(() => ({
         organization_fiche,
         organization: ctx.var.organization,
@@ -101,7 +100,10 @@ export default new Hono<ContextType>()
       }))(ctx as any, next);
     },
     async function GET({ render, set, var: { organization } }) {
-      set("page_title", `Organisation ${organization.cached_libelle} (${organization.siret})`);
+      set(
+        "page_title",
+        `Organisation ${organization.cached_libelle} (${organization.siret})`,
+      );
       return render(<Organization_Page />);
     },
   )

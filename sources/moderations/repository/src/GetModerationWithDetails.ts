@@ -54,5 +54,9 @@ export function GetModerationWithDetails(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetModerationWithDetailsHandler = ReturnType<typeof GetModerationWithDetails>;
-export type GetModerationWithDetailsDto = Awaited<ReturnType<GetModerationWithDetailsHandler>>;
+export type GetModerationWithDetailsHandler = ReturnType<
+  typeof GetModerationWithDetails
+>;
+export type GetModerationWithDetailsDto = Awaited<
+  ReturnType<GetModerationWithDetailsHandler>
+>;

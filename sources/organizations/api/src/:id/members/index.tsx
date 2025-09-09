@@ -6,7 +6,7 @@ import {
   Entity_Schema,
   Pagination_Schema,
 } from "@~/app.core/schema";
-import { GetUsersByOrganizationId } from "@~/users.repository/GetUsersByOrganizationId";
+import { GetUsersByOrganizationId } from "@~/users.repository";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { match } from "ts-pattern";

@@ -9,7 +9,7 @@ import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { schema } from "@~/identite-proconnect.database";
 import { ResetMFA, ResetPassword } from "@~/users.lib/usecase";
-import { get_user_by_id } from "@~/users.repository/get_user_by_id";
+import { GetUserById } from "@~/users.repository";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
@@ -31,9 +31,8 @@ export default new Hono<ContextType>()
       next,
     ) {
       const { id } = req.valid("param");
-      const user = await get_user_by_id(identite_pg, {
-        id,
-      });
+      const get_user_by_id = GetUserById(identite_pg);
+      const user = await get_user_by_id(id);
 
       if (!user) {
         status(404);
@@ -44,7 +43,10 @@ export default new Hono<ContextType>()
       return next();
     },
     async function GET({ render, set, var: { user } }) {
-      set("page_title", `Utilisateur ${user.given_name} ${user.family_name} (${user.email})`);
+      set(
+        "page_title",
+        `Utilisateur ${user.given_name} ${user.family_name} (${user.email})`,
+      );
       return render(<Page />);
     },
   )

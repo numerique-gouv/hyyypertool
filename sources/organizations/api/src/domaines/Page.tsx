@@ -4,7 +4,10 @@ import { copy_value_to_clipboard } from "@~/app.ui/button/scripts";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { urls } from "@~/app.urls";
-import type { get_unverified_domains_dto } from "@~/organizations.repository/get_unverified_domains";
+import {
+  GetUnverifiedDomains,
+  type GetUnverifiedDomainsDto,
+} from "@~/organizations.repository";
 import { match } from "ts-pattern";
 import { query_schema, usePageRequestContext } from "./context";
 
@@ -66,13 +69,7 @@ function Filter() {
 async function Table() {
   const {
     req,
-    var: {
-      $describedby,
-      $table,
-      hx_domains_query_props,
-      query_unverified_domains,
-      identite_pg,
-    },
+    var: { $describedby, $table, hx_domains_query_props, identite_pg },
   } = usePageRequestContext();
   const { q } = req.valid("query");
   const pagination = match(
@@ -81,7 +78,8 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, domains } = await query_unverified_domains(identite_pg, {
+  const get_unverified_domains = GetUnverifiedDomains(identite_pg);
+  const { count, domains } = await get_unverified_domains({
     pagination: { ...pagination, page: pagination.page - 1 },
     search: q ? String(q) : undefined,
   });
@@ -120,7 +118,7 @@ function Row({
   domains: { organization, domain },
 }: {
   key?: string;
-  domains: get_unverified_domains_dto["domains"][number];
+  domains: GetUnverifiedDomainsDto["domains"][number];
 }) {
   const $domain = hyper_ref();
   return (

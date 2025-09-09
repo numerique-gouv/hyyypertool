@@ -1,6 +1,9 @@
 //
 
-import { create_pink_diamond_user, create_unicorn_organization } from "@~/identite-proconnect.database/seed/unicorn";
+import {
+  create_pink_diamond_user,
+  create_unicorn_organization,
+} from "@~/identite-proconnect.database/seed/unicorn";
 import {
   add_user_to_organization,
   empty_database,
@@ -24,7 +27,7 @@ test("returns organizations for a user", async () => {
     organization_id,
     user_id,
   });
-  
+
   const get_organizations_by_user_id = GetOrganizationsByUserId(pg);
   const result = await get_organizations_by_user_id({ user_id });
 
@@ -53,7 +56,7 @@ test("supports pagination", async () => {
     organization_id,
     user_id,
   });
-  
+
   const get_organizations_by_user_id = GetOrganizationsByUserId(pg);
   const result = await get_organizations_by_user_id({
     user_id,

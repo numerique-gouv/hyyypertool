@@ -1,8 +1,10 @@
 //
 
 import { type Pagination } from "@~/app.core/schema";
-import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
-import { schema } from "@~/identite-proconnect.database";
+import {
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import type { MCP_EmailDomain_Type } from "@~/identite-proconnect.lib/types";
 import { and, asc, count as drizzle_count, eq } from "drizzle-orm";
 
@@ -12,7 +14,10 @@ export function GetOrganizationsByUserId(pg: IdentiteProconnect_PgDatabase) {
   return async function get_organizations_by_user_id({
     user_id,
     pagination = { page: 0, page_size: 10 },
-  }: { user_id: number; pagination?: Pagination }) {
+  }: {
+    user_id: number;
+    pagination?: Pagination;
+  }) {
     const { page, page_size: take } = pagination;
 
     const where = and(eq(schema.users_organizations.user_id, user_id));
@@ -58,7 +63,10 @@ export function GetOrganizationsByUserId(pg: IdentiteProconnect_PgDatabase) {
         .from(schema.organizations)
         .innerJoin(
           schema.users_organizations,
-          eq(schema.organizations.id, schema.users_organizations.organization_id),
+          eq(
+            schema.organizations.id,
+            schema.users_organizations.organization_id,
+          ),
         )
         .where(where);
 
@@ -67,5 +75,9 @@ export function GetOrganizationsByUserId(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetOrganizationsByUserIdHandler = ReturnType<typeof GetOrganizationsByUserId>;
-export type GetOrganizationsByUserIdDto = Awaited<ReturnType<GetOrganizationsByUserIdHandler>>;
+export type GetOrganizationsByUserIdHandler = ReturnType<
+  typeof GetOrganizationsByUserId
+>;
+export type GetOrganizationsByUserIdDto = Awaited<
+  ReturnType<GetOrganizationsByUserIdHandler>
+>;

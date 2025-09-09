@@ -13,7 +13,10 @@ export function GetUsersByOrganizationId(pg: IdentiteProconnect_PgDatabase) {
   return async function get_users_by_organization_id({
     organization_id,
     pagination = { page: 0, page_size: 10 },
-  }: { organization_id: number; pagination?: Pagination }) {
+  }: {
+    organization_id: number;
+    pagination?: Pagination;
+  }) {
     const { page, page_size: take } = pagination;
 
     const where = and(
@@ -56,5 +59,9 @@ export function GetUsersByOrganizationId(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetUsersByOrganizationIdHandler = ReturnType<typeof GetUsersByOrganizationId>;
-export type GetUsersByOrganizationIdDto = Awaited<ReturnType<GetUsersByOrganizationIdHandler>>;
+export type GetUsersByOrganizationIdHandler = ReturnType<
+  typeof GetUsersByOrganizationId
+>;
+export type GetUsersByOrganizationIdDto = Awaited<
+  ReturnType<GetUsersByOrganizationIdHandler>
+>;

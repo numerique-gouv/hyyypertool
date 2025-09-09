@@ -2,7 +2,7 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Pagination_Schema } from "@~/app.core/schema/index";
-import { get_organizations_by_user_id } from "@~/organizations.repository/get_organizations_by_user_id";
+import { GetOrganizationsByUserId } from "@~/organizations.repository";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { match } from "ts-pattern";
@@ -25,10 +25,11 @@ export default new Hono<ContextType>().get(
       .with({ success: true }, ({ data }) => data)
       .otherwise(() => Pagination_Schema.parse({}));
 
+    const get_organizations_by_user_id = GetOrganizationsByUserId(identite_pg);
     set("pagination", pagination);
     set(
       "query_organizations_collection",
-      get_organizations_by_user_id(identite_pg, {
+      get_organizations_by_user_id({
         user_id,
         pagination: { ...pagination, page: pagination.page - 1 },
       }),

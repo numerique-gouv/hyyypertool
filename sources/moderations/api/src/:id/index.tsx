@@ -8,20 +8,19 @@ import { Main_Layout } from "@~/app.layout/index";
 import type { App_Context } from "@~/app.middleware/context";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";
 import { moderation_type_to_title } from "@~/moderations.lib/moderation_type.mapper";
+import { GetModerationWithDetails } from "@~/moderations.repository";
 import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
-import { get_domain_count } from "@~/organizations.repository/get_domain_count";
-import { get_organization_members_count } from "@~/organizations.repository/get_organization_members_count";
+import {
+  GetDomainCount,
+  GetOrganizationMember,
+  GetOrganizationMembersCount,
+} from "@~/organizations.repository";
 import { to } from "await-to-js";
 import { Hono } from "hono";
 import { getContext } from "hono/context-storage";
 import { jsxRenderer } from "hono/jsx-renderer";
 import moderation_procedures_router from "./$procedures";
-import { GetModerationWithDetails } from "@~/moderations.repository";
-import { GetOrganizationMember } from "@~/organizations.repository";
-import {
-  type ContextType,
-  type ContextVariablesType,
-} from "./context";
+import { type ContextType, type ContextVariablesType } from "./context";
 import duplicate_warning_router from "./duplicate_warning";
 import moderation_email_router from "./email/index";
 import { Moderation_NotFound } from "./not-found";
@@ -78,6 +77,9 @@ export default new Hono<ContextType>()
       const organization_fiche = await get_fiche_organization_by_id(
         moderation.organization_id,
       );
+      const get_organization_members_count =
+        GetOrganizationMembersCount(identite_pg);
+      const get_domain_count = GetDomainCount(identite_pg);
 
       //
 
@@ -86,14 +88,9 @@ export default new Hono<ContextType>()
         moderation,
         organization_fiche,
         organization_member,
-        query_domain_count: get_domain_count(identite_pg, {
-          organization_id: moderation.organization_id,
-        }),
+        query_domain_count: get_domain_count(moderation.organization_id),
         query_organization_members_count: get_organization_members_count(
-          identite_pg,
-          {
-            organization_id: moderation.organization_id,
-          },
+          moderation.organization_id,
         ),
       };
     }),
