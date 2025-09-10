@@ -215,6 +215,28 @@ test("returns user with specified columns", async () => {
 
 This separation ensures clear architectural boundaries between server-side data concerns and client-side UI state.
 
+### Page Variables Pattern
+
+Use `loadPageVariables` functions for consistent data loading:
+
+```typescript
+export async function loadDomainPageVariables(
+  pg: IdentiteProconnect_PgDatabase,
+  { id }: { id: number },
+) {
+  // Data loading logic
+  return { data1, data2, ... };
+}
+
+export interface ContextVariablesType extends Env {
+  Variables: Awaited<ReturnType<typeof loadDomainPageVariables>>;
+}
+```
+
+- **Naming**: `loadDomainPageVariables` (e.g., `loadUserPageVariables`)
+- **Type inference**: Use `Awaited<ReturnType<...>>` for automatic typing
+- **Single source**: Consolidate all page data loading in one function
+
 ---
 
 ## Questions or Help
