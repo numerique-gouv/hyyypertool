@@ -36,7 +36,7 @@ Run specific e2e test: `bun run e2e:run test --spec="features/organizations/dinu
 
 You need to create a release, for that:
 
-Go to the [Hyyypertool](https://github.com/numerique-gouv/hyyypertool/actions) repository
+Go to the [Hyyypertool](https://github.com/proconnect-gouv/hyyypertool/actions) repository
 
 Go to the ‘Actions’ tab, click on 'Release it!'
 
