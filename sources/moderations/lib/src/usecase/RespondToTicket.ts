@@ -28,7 +28,9 @@ export function RespondToTicket() {
       .with(null, () => {
         throw new NotFoundError("No existing ticket.");
       })
-      .when(is_crisp_ticket, () => respond_in_conversation(context, full_message))
+      .when(is_crisp_ticket, () =>
+        respond_in_conversation(context, full_message),
+      )
       .when(is_zammad_ticket, () =>
         respond_to_zammad_ticket(context, full_message),
       )
@@ -43,12 +45,7 @@ export function RespondToTicket() {
 export type RespondToTicketHandler = ReturnType<typeof RespondToTicket>;
 
 async function respond_in_conversation(
-  {
-    crisp,
-    moderation,
-    userinfo,
-    resolve_delay,
-  }: RejectedModeration_Context,
+  { crisp, moderation, userinfo, resolve_delay }: RejectedModeration_Context,
   { message }: { message: string },
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
@@ -71,7 +68,9 @@ async function respond_in_conversation(
   // Crisp seems to have a delay between the message being sent and the state being updated
   await new Promise((resolve) => setTimeout(resolve, resolve_delay));
 
-  await crisp.mark_conversation_as_resolved({ session_id: moderation.ticket_id });
+  await crisp.mark_conversation_as_resolved({
+    session_id: moderation.ticket_id,
+  });
 }
 
 async function respond_to_zammad_ticket(

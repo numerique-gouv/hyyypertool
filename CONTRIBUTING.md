@@ -102,7 +102,7 @@ export type UseCaseNameOutput = Awaited<ReturnType<UseCaseNameHandler>>;
 3. **Dependencies**: Use typed cradles (e.g., `IdentiteProconnectDatabaseCradle`) for dependency injection
 4. **Types**: Export `Handler` type for the returned function, optionally export `Output` type
 5. **Comments**: Use `//` comment blocks to separate sections
-6. **Error Handling**: 
+6. **Error Handling**:
    - Throw appropriate errors (e.g., `NotFoundError`) with descriptive messages
    - Prefer `import { to } from "await-to-js"` over try/catch blocks for cleaner error handling
    - Always try to track error cause when instantiating new errors using the `cause` option
@@ -141,17 +141,21 @@ export function ProcessUserData({ external_service }: Dependencies) {
   return async function process_user_data(id: number) {
     // Prefer this pattern over try/catch
     const [error, result] = await to(external_service.fetchData(id));
-    
+
     if (error) {
       // Handle specific error types and track the original cause
       if (error instanceof NetworkError) {
-        throw new ServiceUnavailableError("External service unavailable", { cause: error });
+        throw new ServiceUnavailableError("External service unavailable", {
+          cause: error,
+        });
       }
-      
+
       // Always preserve the original error as cause when wrapping
-      throw new ProcessingError("Failed to process user data", { cause: error });
+      throw new ProcessingError("Failed to process user data", {
+        cause: error,
+      });
     }
-    
+
     return result;
   };
 }
@@ -177,7 +181,11 @@ Write comprehensive tests following these guidelines:
 
 import { NotFoundError } from "@~/app.core/error";
 import { create_adora_pony_user } from "@~/identite-proconnect.database/seed/unicorn";
-import { empty_database, migrate, pg } from "@~/identite-proconnect.database/testing";
+import {
+  empty_database,
+  migrate,
+  pg,
+} from "@~/identite-proconnect.database/testing";
 import { beforeAll, beforeEach, expect, test } from "bun:test";
 import { GetUserById } from "./GetUserById";
 
@@ -188,7 +196,7 @@ beforeEach(empty_database);
 
 test("returns user with specified columns", async () => {
   const user_id = await create_adora_pony_user(pg);
-  
+
   const get_user_by_id = GetUserById(pg, {
     columns: { id: true, email: true, given_name: true },
   });

@@ -1,9 +1,7 @@
 //
 
 import { NotFoundError } from "@~/app.core/error";
-import {
-  create_adora_pony_user,
-} from "@~/identite-proconnect.database/seed/unicorn";
+import { create_adora_pony_user } from "@~/identite-proconnect.database/seed/unicorn";
 import {
   empty_database,
   migrate,
@@ -19,7 +17,7 @@ beforeEach(empty_database);
 
 test("returns user with specified columns", async () => {
   const user_id = await create_adora_pony_user(pg);
-  
+
   const get_user_by_id = GetUserById(pg, {
     columns: {
       id: true,
@@ -76,9 +74,7 @@ test("throws NotFoundError when user not found", async () => {
     columns: { id: true, email: true },
   });
 
-  await expect(
-    async () => await get_user_by_id(999999),
-  ).toThrow(NotFoundError);
+  await expect(async () => await get_user_by_id(999999)).toThrow(NotFoundError);
 });
 
 test("returns user with specific columns using snapshots", async () => {

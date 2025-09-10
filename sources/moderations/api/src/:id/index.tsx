@@ -3,7 +3,6 @@
 import { zValidator } from "@hono/zod-validator";
 import { NotFoundError } from "@~/app.core/error";
 import { Entity_Schema } from "@~/app.core/schema";
-import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import { Main_Layout } from "@~/app.layout/index";
 import type { App_Context } from "@~/app.middleware/context";
 import { set_context_variables } from "@~/app.middleware/set_context_variables";

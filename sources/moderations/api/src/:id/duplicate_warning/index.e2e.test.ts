@@ -55,9 +55,8 @@ test("GET /moderations/:id/duplicate_warning", async () => {
   if (response.status >= 400) throw await response.text();
 
   expect(response.status).toBe(200);
-  expect(
-    format(await response.text(), { parser: "html" }),
-  ).resolves.toMatchInlineSnapshot(`
+  expect(format(await response.text(), { parser: "html" })).resolves
+    .toMatchInlineSnapshot(`
     "<!DOCTYPE html>
     <div class="fr-alert fr-alert--warning">
       <h3 class="fr-alert__title">Attention : demande multiples</h3>

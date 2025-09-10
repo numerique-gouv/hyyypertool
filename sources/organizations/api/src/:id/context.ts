@@ -4,12 +4,13 @@ import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
 import type { Organization } from "@~/organizations.lib/entities/Organization";
-import { GetFicheOrganizationById, type GetFicheOrganizationByIdHandler, GetOrganizationById } from "@~/organizations.lib/usecase";
+import {
+  GetFicheOrganizationById,
+  GetOrganizationById,
+} from "@~/organizations.lib/usecase";
 import {
   GetDomainCount,
   GetOrganizationMembersCount,
-  type GetDomainCountDto,
-  type GetOrganizationMembersCountDto,
 } from "@~/organizations.repository";
 import { to as await_to } from "await-to-js";
 import type { Env, InferRequestType } from "hono";
@@ -69,7 +70,7 @@ export async function loadOrganizationPageVariables(
 
   const get_fiche_organization_by_id = GetFicheOrganizationById({ pg });
   const organization_fiche = await get_fiche_organization_by_id(id);
-  
+
   const query_organization_domains_count = GetDomainCount(pg)(id);
   const query_organization_members_count = GetOrganizationMembersCount(pg)(id);
 

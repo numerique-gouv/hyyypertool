@@ -21,14 +21,14 @@ export function SendRejectedMessageToUser({
     context: RejectedModeration_Context,
     { message: text_body, reason, subject }: RejectedMessage,
   ) {
-  const { moderation, userinfo } = context;
-  const username = z_username.parse(userinfo);
-  const body = text_body.concat(`  \n\n${username}`);
-  const to = moderation.user.email;
+    const { moderation, userinfo } = context;
+    const username = z_username.parse(userinfo);
+    const body = text_body.concat(`  \n\n${username}`);
+    const to = moderation.user.email;
 
-  const [error] = await await_to(
-    respond_to_ticket(context, { message: body, reason, subject, to }),
-  );
+    const [error] = await await_to(
+      respond_to_ticket(context, { message: body, reason, subject, to }),
+    );
     if (error instanceof NotFoundError) {
       consola.info(error);
       const create_and_send_email_to_user = CreateAndSendEmailToUser({
