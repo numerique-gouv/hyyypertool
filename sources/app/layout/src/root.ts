@@ -122,6 +122,85 @@ export function Root_Layout({ children }: PropsWithChildren) {
               .join("") + "pertool"
           }`}
         </title>
+
+        <!--  -->
+
+        <script
+          nonce="${nonce}"
+          src="${config.PUBLIC_ASSETS_PATH}/app/layout/src/_client/nprogress.js"
+          type="module"
+        ></script>
+
+        <link
+          rel="stylesheet"
+          href="${config.ASSETS_PATH}/node_modules/nprogress/nprogress.css"
+        />
+
+        <!--  -->
+
+        ${config.NODE_ENV === "development"
+          ? html`<script
+              nonce="${nonce}"
+              src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
+            ></script>`
+          : html`<script
+              nonce="${nonce}"
+              src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
+            ></script>`}
+
+        <meta
+          name="htmx-env"
+          content="${JSON.stringify({
+            defaultSettleDelay: 0,
+            globalViewTransitions: true,
+            historyEnabled: true,
+            inlineScriptNonce: nonce,
+          })}"
+        />
+
+        ${config.DEPLOY_ENV === "preview"
+          ? html`<script
+              nonce="${nonce}"
+              src="${config.ASSETS_PATH}/node_modules/htmx-ext-debug/debug.js"
+            ></script>`
+          : ""}
+
+        <script
+          nonce="${nonce}"
+          src="${config.ASSETS_PATH}/node_modules/htmx-ext-include-vals/include-vals.js"
+          type="module"
+        ></script>
+        <script
+          nonce="${nonce}"
+          src="${config.ASSETS_PATH}/node_modules/htmx-ext-sse/dist/sse.js"
+          type="module"
+        ></script>
+        <script
+          nonce="${nonce}"
+          src="${config.ASSETS_PATH}/node_modules/htmx.ext...chunked-transfer/dist/index.js"
+          type="module"
+        ></script>
+
+        <!--  -->
+
+        ${config.NODE_ENV === "development"
+          ? html`<script
+                nonce="${nonce}"
+                src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.js"
+              ></script>
+
+              <script
+                nonce="${nonce}"
+                src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/hdb.js"
+              ></script>`
+          : html`<script
+              nonce="${nonce}"
+              src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
+            ></script> `}
+        <script
+          nonce="${nonce}"
+          src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/template.js"
+        ></script>
       </head>
       <body
         _="
@@ -144,85 +223,6 @@ export function Root_Layout({ children }: PropsWithChildren) {
           </a>
         </footer>
       </body>
-
-      <!--  -->
-
-      <script
-        nonce="${nonce}"
-        src="${config.PUBLIC_ASSETS_PATH}/app/layout/src/_client/nprogress.js"
-        type="module"
-      ></script>
-
-      <link
-        rel="stylesheet"
-        href="${config.ASSETS_PATH}/node_modules/nprogress/nprogress.css"
-      />
-
-      <!--  -->
-
-      ${config.NODE_ENV === "development"
-        ? html`<script
-            nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.js"
-          ></script>`
-        : html`<script
-            nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx.org/dist/htmx.min.js"
-          ></script>`}
-
-      <meta
-        name="htmx-env"
-        content="${JSON.stringify({
-          defaultSettleDelay: 0,
-          globalViewTransitions: true,
-          historyEnabled: true,
-          inlineScriptNonce: nonce,
-        })}"
-      />
-
-      ${config.DEPLOY_ENV === "preview"
-        ? html`<script
-            nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/htmx-ext-debug/debug.js"
-          ></script>`
-        : ""}
-
-      <script
-        nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx-ext-include-vals/include-vals.js"
-        type="module"
-      ></script>
-      <script
-        nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx-ext-sse/dist/sse.js"
-        type="module"
-      ></script>
-      <script
-        nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/htmx.ext...chunked-transfer/dist/index.js"
-        type="module"
-      ></script>
-
-      <!--  -->
-
-      ${config.NODE_ENV === "development"
-        ? html`<script
-              nonce="${nonce}"
-              src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.js"
-            ></script>
-
-            <script
-              nonce="${nonce}"
-              src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/hdb.js"
-            ></script>`
-        : html`<script
-            nonce="${nonce}"
-            src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
-          ></script> `}
-      <script
-        nonce="${nonce}"
-        src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/template.js"
-      ></script>
     </html>
   `;
 }
