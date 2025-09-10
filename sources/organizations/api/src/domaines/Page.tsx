@@ -23,7 +23,6 @@ export async function Page() {
       {...hx_domains_query_props}
       hx-sync="this"
       hx-trigger={[
-        `load delay:1s`,
         `every 22s [document.visibilityState === 'visible']`,
         `visibilitychange[document.visibilityState === 'visible'] from:document`,
       ].join(", ")}
