@@ -7,13 +7,14 @@ import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
 import { SendNotification } from "./SendNotification";
 import { TagInput } from "./TagInput";
+import { type Values } from "./context";
 
 export async function AcceptModal({
   userEmail,
   moderation,
 }: {
   userEmail: string;
-  moderation: any;
+  moderation: Values["moderation"];
 }) {
   const hx_path_validate_moderation = await hx_urls.moderations[
     ":id"
@@ -76,7 +77,7 @@ export async function AcceptModal({
           <SendNotification />
         </div>
         <div>
-          <button class={`${button()} justify-center`} type="submit">
+          <button class={button()} type="submit">
             Terminer
           </button>
         </div>

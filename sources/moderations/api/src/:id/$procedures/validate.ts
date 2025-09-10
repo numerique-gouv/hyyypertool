@@ -41,7 +41,7 @@ export default new Hono<App_Context>().patch(
     var: { identite_pg_client, identite_pg, userinfo, sentry },
   }) {
     const { id } = req.valid("param");
-    const { add_domain, add_member, send_notitfication, verification_type } =
+    const { add_domain, add_member, send_notification, verification_type } =
       req.valid("form");
     const add_verified_domain = AddVerifiedDomain({
       get_organization_by_id: GetFicheOrganizationById({ pg: identite_pg }),
@@ -142,7 +142,7 @@ export default new Hono<App_Context>().patch(
     //#endregion
 
     //#region ✨ Send notification
-    if (send_notitfication) {
+    if (send_notification) {
       await send_moderation_processed_email({ organization_id, user_id });
     }
     //#endregion
