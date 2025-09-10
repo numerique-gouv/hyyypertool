@@ -1,5 +1,6 @@
 //
 
+import { NotFoundError } from "@~/app.core/error";
 import {
   schema,
   type IdentiteProconnect_PgDatabase,
@@ -7,30 +8,24 @@ import {
 import { eq } from "drizzle-orm";
 
 //
-
-export function GetUserById(pg: IdentiteProconnect_PgDatabase) {
+type UserQueryConfigColumns = Partial<
+  Record<keyof typeof schema.users._.columns, true>
+>;
+export function GetUserById<TColumns extends UserQueryConfigColumns>(
+  pg: IdentiteProconnect_PgDatabase,
+  { columns }: { columns: TColumns },
+) {
   return async function get_user_by_id(id: number) {
-    return pg.query.users.findFirst({
-      columns: {
-        created_at: true,
-        email_verified: true,
-        email: true,
-        family_name: true,
-        given_name: true,
-        id: true,
-        job: true,
-        last_sign_in_at: true,
-        phone_number: true,
-        reset_password_sent_at: true,
-        sign_in_count: true,
-        updated_at: true,
-        verify_email_sent_at: true,
-        totp_key_verified_at: true,
-      },
+    const user = await pg.query.users.findFirst({
+      columns,
       where: eq(schema.users.id, id),
     });
+
+    if (!user) throw new NotFoundError("User not found.");
+
+    return user;
   };
 }
 
-export type GetUserByIdHandler = ReturnType<typeof GetUserById>;
-export type GetUserByIdDto = Awaited<ReturnType<GetUserByIdHandler>>;
+export type GetUserByIdHandler<TColumns extends UserQueryConfigColumns> =
+  ReturnType<typeof GetUserById<TColumns>>;

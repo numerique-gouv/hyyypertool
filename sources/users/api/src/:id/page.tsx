@@ -13,7 +13,7 @@ import { usePageRequestContext } from "./context";
 
 //
 
-export default async function User_Page() {
+export async function UserPage() {
   const {
     var: { user },
   } = usePageRequestContext();

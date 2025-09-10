@@ -3,13 +3,15 @@
 import { zValidator } from "@hono/zod-validator";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
+import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { type RejectedModeration_Context } from "@~/moderations.lib/context/rejected";
 import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { reject_form_schema } from "@~/moderations.lib/schema/rejected.form";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
-import { send_rejected_message_to_user } from "@~/moderations.lib/usecase/send_rejected_message_to_user";
-import { GetModeration } from "@~/moderations.repository";
+import { RespondToTicket } from "@~/moderations.lib/usecase/RespondToTicket";
+import { SendRejectedMessageToUser } from "@~/moderations.lib/usecase/SendRejectedMessageToUser";
+import { GetModeration, UpdateModerationById } from "@~/moderations.repository";
 import { Hono } from "hono";
 import type { ContextType } from "./context";
 
@@ -30,8 +32,11 @@ export default new Hono<ContextType>().patch(
 
     const get_moderation = GetModeration(identite_pg);
     const moderation = await get_moderation(moderation_id);
+    const crisp = CrispApi(crisp_config);
+    const update_moderation_by_id = UpdateModerationById({ pg: identite_pg });
+    const respond_to_ticket = RespondToTicket();
     const context: RejectedModeration_Context = {
-      crisp_config,
+      crisp,
       moderation,
       pg: identite_pg,
       resolve_delay: config.CRISP_RESOLVE_DELAY,
@@ -39,6 +44,10 @@ export default new Hono<ContextType>().patch(
       subject,
       userinfo,
     };
+    const send_rejected_message_to_user = SendRejectedMessageToUser({
+      respond_to_ticket,
+      update_moderation_by_id,
+    });
     await send_rejected_message_to_user(context, {
       message,
       reason,

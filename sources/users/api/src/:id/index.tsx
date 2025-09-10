@@ -1,6 +1,7 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
+import { NotFoundError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout/index";
@@ -9,15 +10,15 @@ import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { schema } from "@~/identite-proconnect.database";
 import { ResetMFA, ResetPassword } from "@~/users.lib/usecase";
-import { GetUserById } from "@~/users.repository";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import type { ContextType } from "./context";
+import { loadUserPageVariables } from "./context";
 import user_moderations_route from "./moderations";
-import { User_NotFound } from "./not-found";
+import { UserNotFound } from "./not-found";
 import user_organizations_page_route from "./organizations";
-import Page from "./page";
+import { UserPage } from "./page";
 
 //
 
@@ -31,23 +32,25 @@ export default new Hono<ContextType>()
       next,
     ) {
       const { id } = req.valid("param");
-      const get_user_by_id = GetUserById(identite_pg);
-      const user = await get_user_by_id(id);
 
-      if (!user) {
-        status(404);
-        return render(<User_NotFound user_id={Number(req.param("id"))} />);
+      try {
+        const { user } = await loadUserPageVariables(identite_pg, { id });
+        set("user", user);
+        return next();
+      } catch (error) {
+        if (error instanceof NotFoundError) {
+          status(404);
+          return render(<UserNotFound user_id={id} />);
+        }
+        throw error;
       }
-
-      set("user", user);
-      return next();
     },
     async function GET({ render, set, var: { user } }) {
       set(
         "page_title",
         `Utilisateur ${user.given_name} ${user.family_name} (${user.email})`,
       );
-      return render(<Page />);
+      return render(<UserPage />);
     },
   )
   .delete(
