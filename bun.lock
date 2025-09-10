@@ -60,7 +60,7 @@
         "htmx-ext-include-vals": "2.0.1",
         "htmx-ext-sse": "2.2.3",
         "htmx.ext...chunked-transfer": "2.1.1",
-        "htmx.org": "2.0.0",
+        "htmx.org": "2.0.7",
         "hyperscript.org": "0.9.14",
         "ts-pattern": "5.8.0",
         "youch": "3.3.4",
@@ -1370,7 +1370,7 @@
 
     "htmx.ext...chunked-transfer": ["htmx.ext...chunked-transfer@2.1.1", "", {}, "sha512-7HOMKEU8WXS0uBv7uVbwsY8WY9laxZSNRW0Ghuvc8nkVrtb76jzZoLzSkwNYZ+8Jida/9PPHNZxxVgsOVgAKwg=="],
 
-    "htmx.org": ["htmx.org@2.0.0", "", {}, "sha512-N0r1VjrqeCpig0mTi2/sooDZBeQlp1RBohnWQ/ufqc7ICaI0yjs04fNGhawm6+/HWhJFlcXn8MqOjWI9QGG2lQ=="],
+    "htmx.org": ["htmx.org@2.0.7", "", {}, "sha512-YiJqF3U5KyO28VC5mPfehKJPF+n1Gni+cupK+D69TF0nm7wY6AXn3a4mPWIikfAXtl1u1F1+ZhSCS7KT8pVmqA=="],
 
     "http-proxy-agent": ["http-proxy-agent@7.0.2", "", { "dependencies": { "agent-base": "^7.1.0", "debug": "^4.3.4" } }, "sha512-T1gkAiYYDWYx3V5Bmyu7HcfcvL7mUrTWiM6yOfa3PIphViJ/gFPbvidQ+veqSOHci/PxBcDabeUNCzpOODJZig=="],
 
@@ -2009,12 +2009,6 @@
     "glob/minimatch": ["minimatch@5.1.6", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g=="],
 
     "hosted-git-info/lru-cache": ["lru-cache@10.4.3", "", {}, "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="],
-
-    "htmx-ext-debug/htmx.org": ["htmx.org@2.0.7", "", {}, "sha512-YiJqF3U5KyO28VC5mPfehKJPF+n1Gni+cupK+D69TF0nm7wY6AXn3a4mPWIikfAXtl1u1F1+ZhSCS7KT8pVmqA=="],
-
-    "htmx-ext-include-vals/htmx.org": ["htmx.org@2.0.7", "", {}, "sha512-YiJqF3U5KyO28VC5mPfehKJPF+n1Gni+cupK+D69TF0nm7wY6AXn3a4mPWIikfAXtl1u1F1+ZhSCS7KT8pVmqA=="],
-
-    "htmx-ext-sse/htmx.org": ["htmx.org@2.0.7", "", {}, "sha512-YiJqF3U5KyO28VC5mPfehKJPF+n1Gni+cupK+D69TF0nm7wY6AXn3a4mPWIikfAXtl1u1F1+ZhSCS7KT8pVmqA=="],
 
     "lightningcss/detect-libc": ["detect-libc@2.0.4", "", {}, "sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA=="],
 
