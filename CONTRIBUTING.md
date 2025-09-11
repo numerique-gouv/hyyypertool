@@ -173,6 +173,7 @@ Write comprehensive tests following these guidelines:
 2. **Database Setup**: Always include `beforeAll(migrate)` and `beforeEach(empty_database)`
 3. **Seed Data**: Use unicorn seed functions (e.g., `create_adora_pony_user`, `create_unicorn_organization`)
 4. **Snapshots Over Multiple Expects**: Prefer `toMatchInlineSnapshot()` for complex object assertions
+5. **Auto-generated Snapshots**: When using `toMatchInlineSnapshot()`, let Bun test write the string value automatically by running the test first with an empty string or no parameter
 
 ### Example
 
@@ -202,13 +203,15 @@ test("returns user with specified columns", async () => {
   });
   const result = await get_user_by_id(user_id);
 
+  // Let Bun auto-generate the snapshot by running test first with empty string
   expect(result).toMatchInlineSnapshot(`
-{
-  "email": "adora.pony@unicorn.xyz",
-  "given_name": "Adora", 
-  "id": ${user_id},
-}
-`);
+    {
+      "email": "adora.pony@unicorn.xyz",
+      "family_name": "Pony",
+      "given_name": "Adora",
+      "id": 1,
+    }
+  `);
 });
 ```
 

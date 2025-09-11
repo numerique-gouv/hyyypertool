@@ -1,39 +1,36 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { Entity_Schema } from "@~/app.core/schema";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
+import { set_variables } from "@~/app.middleware/context/set_variables";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { z } from "zod";
 import { Duplicate_Warning } from "./Duplicate_Warning";
+import { loadDuplicateWarningPageVariables, ParamSchema, QuerySchema, type ContextType } from "./context";
 
 //
 
-export default new Hono<IdentiteProconnect_Pg_Context>().get(
-  "/",
-  jsxRenderer(),
-  zValidator("param", Entity_Schema),
-  zValidator(
-    "query",
-    z.object({
-      organization_id: z.string().pipe(z.coerce.number().int().nonnegative()),
-      user_id: z.string().pipe(z.coerce.number().int().nonnegative()),
-    }),
-  ),
-  async function GET({ render, req, var: { identite_pg } }) {
-    const { id } = req.valid("param");
-    const { organization_id, user_id } = req.valid("query");
-    const value = await Duplicate_Warning.queryContextValues(identite_pg, {
-      moderation_id: id,
-      organization_id,
-      user_id,
-    });
-
-    return render(
-      <Duplicate_Warning.Context.Provider value={value}>
-        <Duplicate_Warning />
-      </Duplicate_Warning.Context.Provider>,
-    );
-  },
-);
+export default new Hono<ContextType>()
+  .get(
+    "/",
+    jsxRenderer(),
+    zValidator("param", ParamSchema),
+    zValidator("query", QuerySchema),
+    async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
+      const { id: moderation_id } = req.valid("param");
+      const { organization_id, user_id } = req.valid("query");
+      const variables = await loadDuplicateWarningPageVariables(identite_pg, {
+        moderation_id,
+        organization_id,
+        user_id,
+      });
+      set_variables(set, variables);
+      return next();
+    },
+    async function GET({ render, var: variables }) {
+      return render(
+        <Duplicate_Warning.Context.Provider value={variables}>
+          <Duplicate_Warning />
+        </Duplicate_Warning.Context.Provider>,
+      );
+    },
+  );

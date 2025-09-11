@@ -3,11 +3,11 @@
 import { zValidator } from "@hono/zod-validator";
 import { Main_Layout } from "@~/app.layout";
 import { authorized } from "@~/app.middleware/authorized";
-import { GetOrganizationsList } from "@~/organizations.repository";
+import { set_variables } from "@~/app.middleware/context/set_variables";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import user_page_route from "./:id/index";
-import { PageQuery_Schema, type ContextType } from "./context";
+import { loadOrganizationsListPageVariables, PageQuery_Schema, type ContextType } from "./context";
 import domains_router from "./domaines";
 import leaders_router from "./leaders";
 import Page from "./page";
@@ -25,11 +25,12 @@ export default new Hono<ContextType>()
     "/",
     jsxRenderer(Main_Layout),
     zValidator("query", PageQuery_Schema),
-    async function set_query_organizations(
+    async function set_variables_middleware(
       { set, var: { identite_pg } },
       next,
     ) {
-      set("query_organizations", GetOrganizationsList(identite_pg));
+      const variables = await loadOrganizationsListPageVariables(identite_pg);
+      set_variables(set, variables);
       return next();
     },
     function GET({ render, set }) {

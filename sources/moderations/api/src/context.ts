@@ -1,10 +1,13 @@
 //
 
 import { Pagination_Schema, type Pagination } from "@~/app.core/schema";
+import type { App_Context } from "@~/app.middleware/context";
 import { z_coerce_boolean } from "@~/app.core/schema/z_coerce_boolean";
 import { z_empty_string_to_undefined } from "@~/app.core/schema/z_empty_string_to_undefined";
 import type { GetModerationsListHandler } from "@~/moderations.repository";
 import { createContext } from "hono/jsx";
+import type { Env } from "hono";
+import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
 
 //
@@ -30,6 +33,30 @@ export type Search = z.infer<typeof Search_Schema>;
 export type GetModerationsListDTO = Awaited<
   ReturnType<GetModerationsListHandler>
 >;
+
+export async function loadModerationsListPageVariables(
+  { pagination, search }: { pagination: Pagination; search: Search },
+) {
+  return {
+    pagination,
+    search,
+  };
+}
+
+//
+
+export interface ContextVariablesType extends Env {
+  Variables: Awaited<ReturnType<typeof loadModerationsListPageVariables>>;
+}
+export type ContextType = App_Context & ContextVariablesType;
+
+//
+
+export const usePageRequestContext = useRequestContext<
+  ContextType,
+  any,
+  any
+>();
 
 export default createContext({
   query_moderations_list: {} as Promise<GetModerationsListDTO>,
