@@ -6,7 +6,6 @@ import {
 } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
@@ -16,11 +15,11 @@ import {
 } from "@~/moderations.lib/moderation_type.mapper";
 import { GetModerationsList } from "@~/moderations.repository";
 import { useContext } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
 import Moderations_Context, {
   MODERATION_TABLE_ID,
   MODERATION_TABLE_PAGE_ID,
   Page_Query,
+  usePageRequestContext,
   type GetModerationsListDTO,
   type Search,
 } from "./context";
@@ -54,7 +53,7 @@ export function Moderations_Page({
 }) {
   const {
     var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  } = usePageRequestContext();
   const { page, page_size } = pagination;
   const {
     day: date,

@@ -2,7 +2,6 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { Htmx_Events } from "@~/app.core/htmx";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
@@ -17,11 +16,11 @@ import {
 } from "@~/moderations.repository";
 import { GetUserById } from "@~/users.repository";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
+import { usePageRequestContext } from "./context";
 import { to } from "await-to-js";
 import { and, asc, eq, ilike, not, or } from "drizzle-orm";
 import { raw } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
@@ -210,7 +209,7 @@ function get_moderation_tickets(moderations: GetDuplicateModerationsDto) {
 async function get_moderation(moderation_id: number) {
   const {
     var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  } = usePageRequestContext();
 
   const moderation = await identite_pg.query.moderations.findFirst({
     columns: { moderated_at: true },
@@ -223,7 +222,7 @@ async function get_moderation(moderation_id: number) {
 async function get_duplicate_users(moderation_id: number) {
   const {
     var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  } = usePageRequestContext();
 
   const moderation = await identite_pg.query.moderations.findFirst({
     columns: { organization_id: true },
