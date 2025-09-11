@@ -2,10 +2,10 @@
 
 import { zValidator } from "@hono/zod-validator";
 import { Entity_Schema } from "@~/app.core/schema";
-import { GetModerationsByUserId } from "@~/moderations.repository/GetModerationsByUserId";
+import { set_variables } from "@~/app.middleware/context/set_variables";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import type { ContextType } from "./context";
+import { loadModerationsPageVariables, type ContextType } from "./context";
 import { Table } from "./Table";
 
 //
@@ -15,16 +15,13 @@ export default new Hono<ContextType>()
   .get(
     "/",
     zValidator("param", Entity_Schema),
-    async function GET({ render, req, set, var: { identite_pg } }) {
-      const { id } = req.valid("param");
-      const get_moderations_by_user_id = GetModerationsByUserId({
-        pg: identite_pg,
-      });
-      const moderations = await get_moderations_by_user_id(id);
-      set("moderations", moderations);
-
-      //
-
+    async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
+      const { id: user_id } = req.valid("param");
+      const variables = await loadModerationsPageVariables(identite_pg, { user_id });
+      set_variables(set, variables);
+      return next();
+    },
+    async function GET({ render }) {
       return render(<Table />);
     },
   );
