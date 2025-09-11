@@ -18,6 +18,7 @@ import { MemberJoinOrganization } from "@~/moderations.lib/usecase/member_join_o
 import {
   GetModerationById,
   GetModerationWithUser,
+  ValidateSimilarModerations,
 } from "@~/moderations.repository";
 import {
   AddVerifiedDomain,
@@ -44,6 +45,8 @@ export default new Hono<App_Context>().patch(
     const { id } = req.valid("param");
     const { add_domain, add_member, send_notification, verification_type } =
       req.valid("form");
+
+    //#region 💉 Inject dependencies
     const add_verified_domain = AddVerifiedDomain({
       get_organization_by_id: GetFicheOrganizationById({ pg: identite_pg }),
       mark_domain_as_verified: MarkDomainAsVerified(identite_pg_client),
@@ -52,6 +55,9 @@ export default new Hono<App_Context>().patch(
     const update_user_by_id_in_organization = UpdateUserByIdInOrganization({
       pg: identite_pg,
     });
+    const validate_similar_moderations =
+      ValidateSimilarModerations(identite_pg);
+    //#endregion
 
     const [moderation_error, moderation] = await to(
       get_moderation_with_user(id),
@@ -93,11 +99,18 @@ export default new Hono<App_Context>().patch(
           consola.error(domain_error);
           throw domain_error;
         });
+
+      await validate_similar_moderations({
+        organization_id,
+        domain,
+        domain_verification_type:
+          add_member === "AS_INTERNAL" ? "verified" : "external",
+        userinfo,
+      });
     }
     //#endregion
 
     //#region ✨ Member join organization
-
     const is_external = match(add_member)
       .with("AS_INTERNAL", () => false)
       .with("AS_EXTERNAL", () => true)

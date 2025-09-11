@@ -58,18 +58,19 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
     await pg.query.moderations.findFirst({
       where: (table, { eq }) => eq(table.id, moderation_id),
     }),
-  ).toEqual({
-    id: moderation_id,
-    organization_id: unicorn_organization_id,
-    user_id: adora_pony_user_id,
-    type: "",
-    ticket_id: null,
-    moderated_at: "2222-01-02 00:00:00+00",
-    moderated_by: "Anais Tailhade <anais.tailhade@omage.gouv.fr>",
-    comment:
-      "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr",
-    created_at: "2222-01-01 00:00:00+00",
-  });
+  ).toMatchInlineSnapshot(`
+    {
+      "comment": "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr | Raison : "[ProConnect] ✨ Modeation validée"",
+      "created_at": "2222-01-01 00:00:00+00",
+      "id": 1,
+      "moderated_at": "2222-01-02 00:00:00+00",
+      "moderated_by": "Anais Tailhade <anais.tailhade@omage.gouv.fr>",
+      "organization_id": 1,
+      "ticket_id": null,
+      "type": "",
+      "user_id": 1,
+    }
+  `);
 
   expect(
     await pg.query.users_organizations.findFirst({
@@ -79,19 +80,21 @@ test("GET /moderation/:id/$procedures/validate { add_domain: true, add_member: A
           eq(table.user_id, adora_pony_user_id),
         ),
     }),
-  ).toEqual({
-    created_at: "2222-01-02 00:00:00+00",
-    has_been_greeted: false,
-    is_external: false,
-    needs_official_contact_email_verification: false,
-    official_contact_email_verification_sent_at: null,
-    official_contact_email_verification_token: null,
-    organization_id: unicorn_organization_id,
-    updated_at: "2222-01-02 00:00:00+00",
-    user_id: adora_pony_user_id,
-    verification_type: "domain",
-    verified_at: "2222-01-02 00:00:00+00",
-  });
+  ).toMatchInlineSnapshot(`
+    {
+      "created_at": "2222-01-02 00:00:00+00",
+      "has_been_greeted": false,
+      "is_external": false,
+      "needs_official_contact_email_verification": false,
+      "official_contact_email_verification_sent_at": null,
+      "official_contact_email_verification_token": null,
+      "organization_id": 1,
+      "updated_at": "2222-01-02 00:00:00+00",
+      "user_id": 1,
+      "verification_type": "domain",
+      "verified_at": "2222-01-02 00:00:00+00",
+    }
+  `);
 });
 
 test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: AS_EXTERNAL }", async () => {
@@ -122,18 +125,19 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
     await pg.query.moderations.findFirst({
       where: (table, { eq }) => eq(table.id, moderation_id),
     }),
-  ).toEqual({
-    id: moderation_id,
-    organization_id: unicorn_organization_id,
-    user_id: adora_pony_user_id,
-    type: "",
-    ticket_id: null,
-    moderated_at: "2222-01-02 00:00:00+00",
-    moderated_by: "Anais Tailhade <anais.tailhade@omage.gouv.fr>",
-    comment:
-      "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr",
-    created_at: "2222-01-01 00:00:00+00",
-  });
+  ).toMatchInlineSnapshot(`
+    {
+      "comment": "7952428800000 anais.tailhade@omage.gouv.fr | Validé par anais.tailhade@omage.gouv.fr | Raison : "[ProConnect] ✨ Modeation validée"",
+      "created_at": "2222-01-01 00:00:00+00",
+      "id": 1,
+      "moderated_at": "2222-01-02 00:00:00+00",
+      "moderated_by": "Anais Tailhade <anais.tailhade@omage.gouv.fr>",
+      "organization_id": 1,
+      "ticket_id": null,
+      "type": "",
+      "user_id": 1,
+    }
+  `);
 
   expect(
     await pg.query.users_organizations.findFirst({
@@ -143,19 +147,21 @@ test("GET /moderation/:id/$procedures/validate { add_domain: false, add_member: 
           eq(table.user_id, adora_pony_user_id),
         ),
     }),
-  ).toEqual({
-    created_at: "2222-01-02 00:00:00+00",
-    has_been_greeted: false,
-    is_external: true,
-    needs_official_contact_email_verification: false,
-    official_contact_email_verification_sent_at: null,
-    official_contact_email_verification_token: null,
-    organization_id: unicorn_organization_id,
-    updated_at: "2222-01-02 00:00:00+00",
-    user_id: adora_pony_user_id,
-    verification_type: "domain",
-    verified_at: "2222-01-02 00:00:00+00",
-  });
+  ).toMatchInlineSnapshot(`
+    {
+      "created_at": "2222-01-02 00:00:00+00",
+      "has_been_greeted": false,
+      "is_external": true,
+      "needs_official_contact_email_verification": false,
+      "official_contact_email_verification_sent_at": null,
+      "official_contact_email_verification_token": null,
+      "organization_id": 1,
+      "updated_at": "2222-01-02 00:00:00+00",
+      "user_id": 1,
+      "verification_type": "domain",
+      "verified_at": "2222-01-02 00:00:00+00",
+    }
+  `);
 });
 
 async function given_moderation_42() {
