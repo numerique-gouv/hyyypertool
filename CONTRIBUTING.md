@@ -241,9 +241,25 @@ export interface ContextVariablesType extends Env {
 }
 ```
 
+#### Helper Function
+
+Use `set_variables` helper for bulk context variable assignment:
+
+```typescript
+import { set_variables } from "@~/app.middleware/context/set_variables";
+
+async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
+  const { id } = req.valid("param");
+  const variables = await loadPageVariables(identite_pg, { id });
+  set_variables(set, variables);
+  return next();
+}
+```
+
 - **Naming**: `loadDomainPageVariables` (e.g., `loadUserPageVariables`)
-- **Type inference**: Use `Awaited<ReturnType<...>>` for automatic typing
+- **Type inference**: Use `Awaited<ReturnType<...>>` for automatic typing  
 - **Single source**: Consolidate all page data loading in one function
+- **Helper usage**: Use `set_variables(set, variables)` for bulk assignment
 
 ---
 

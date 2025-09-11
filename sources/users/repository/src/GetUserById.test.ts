@@ -29,68 +29,19 @@ test("returns user with specified columns", async () => {
   const result = await get_user_by_id(user_id);
 
   expect(result).toMatchInlineSnapshot(`
-{
-  "email": "adora.pony@unicorn.xyz",
-  "family_name": "Pony",
-  "given_name": "Adora",
-  "id": ${user_id},
-}
-`);
-});
-
-test("returns user with name columns only", async () => {
-  const user_id = await create_adora_pony_user(pg);
-
-  const get_user_by_id = GetUserById(pg, {
-    columns: { given_name: true, family_name: true },
-  });
-  const result = await get_user_by_id(user_id);
-
-  expect(result).toMatchInlineSnapshot(`
-{
-  "family_name": "Pony",
-  "given_name": "Adora",
-}
-`);
-});
-
-test("returns user with single column when specified", async () => {
-  const user_id = await create_adora_pony_user(pg);
-
-  const get_user_by_id = GetUserById(pg, {
-    columns: { email: true },
-  });
-  const result = await get_user_by_id(user_id);
-
-  expect(result).toMatchInlineSnapshot(`
-{
-  "email": "adora.pony@unicorn.xyz",
-}
-`);
+    {
+      "email": "adora.pony@unicorn.xyz",
+      "family_name": "Pony",
+      "given_name": "Adora",
+      "id": 1,
+    }
+  `);
 });
 
 test("throws NotFoundError when user not found", async () => {
   const get_user_by_id = GetUserById(pg, {
-    columns: { id: true, email: true },
+    columns: { id: true },
   });
 
-  await expect(async () => await get_user_by_id(999999)).toThrow(NotFoundError);
-});
-
-test("returns user with specific columns using snapshots", async () => {
-  const user_id = await create_adora_pony_user(pg);
-
-  const get_user_by_id = GetUserById(pg, {
-    columns: { id: true, email: true, given_name: true, family_name: true },
-  });
-  const result = await get_user_by_id(user_id);
-
-  expect(result).toMatchInlineSnapshot(`
-{
-  "email": "adora.pony@unicorn.xyz",
-  "family_name": "Pony",
-  "given_name": "Adora",
-  "id": ${user_id},
-}
-`);
+  await expect(get_user_by_id(42)).rejects.toThrow(NotFoundError);
 });

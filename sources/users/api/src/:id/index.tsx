@@ -5,6 +5,7 @@ import { NotFoundError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout/index";
+import { set_variables } from "@~/app.middleware/context/set_variables";
 import { urls } from "@~/app.urls";
 import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
@@ -27,15 +28,15 @@ export default new Hono<ContextType>()
     "/",
     jsxRenderer(Main_Layout),
     zValidator("param", Entity_Schema),
-    async function set_user(
+    async function set_variables_middleware(
       { render, req, set, status, var: { identite_pg } },
       next,
     ) {
       const { id } = req.valid("param");
 
       try {
-        const { user } = await loadUserPageVariables(identite_pg, { id });
-        set("user", user);
+        const variables = await loadUserPageVariables(identite_pg, { id });
+        set_variables(set, variables);
         return next();
       } catch (error) {
         if (error instanceof NotFoundError) {
