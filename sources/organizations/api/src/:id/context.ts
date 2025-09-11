@@ -3,7 +3,6 @@
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
-import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
 import {
   GetDomainCount,
   GetOrganizationById,
@@ -21,9 +20,13 @@ export async function loadOrganizationPageVariables(
     columns: {
       cached_activite_principale: true,
       cached_adresse: true,
+      cached_categorie_juridique: true,
+      cached_code_officiel_geographique: true,
       cached_code_postal: true,
+      cached_enseigne: true,
       cached_est_active: true,
       cached_etat_administratif: true,
+      cached_libelle_activite_principale: true,
       cached_libelle_categorie_juridique: true,
       cached_libelle_tranche_effectif: true,
       cached_libelle: true,
@@ -38,16 +41,10 @@ export async function loadOrganizationPageVariables(
 
   const organization = await get_organization_by_id(id);
 
-  //
-
-  const get_fiche_organization_by_id = GetFicheOrganizationById({ pg });
-  const organization_fiche = await get_fiche_organization_by_id(id);
-
   const query_organization_domains_count = GetDomainCount(pg)(id);
   const query_organization_members_count = GetOrganizationMembersCount(pg)(id);
 
   return {
-    organization_fiche,
     organization,
     query_organization_domains_count,
     query_organization_members_count,

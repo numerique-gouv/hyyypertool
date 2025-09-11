@@ -56,7 +56,7 @@ export type ContextType = App_Context & ContextVariablesType;
 
 //
 
-export const usePageRequestContext = useRequestContext<ContextType, any, any>();
+export const usePageRequestContext = useRequestContext<ContextType, any, any>;
 
 export default createContext({
   query_moderations_list: {} as Promise<GetModerationsListDTO>,

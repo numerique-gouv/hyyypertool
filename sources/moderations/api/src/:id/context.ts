@@ -8,9 +8,9 @@ import {
   GetModerationWithDetails,
   type GetModerationWithDetailsDto,
 } from "@~/moderations.repository";
-import { GetFicheOrganizationById } from "@~/organizations.lib/usecase";
 import {
   GetDomainCount,
+  GetOrganizationById,
   GetOrganizationMember,
   GetOrganizationMembersCount,
 } from "@~/organizations.repository";
@@ -49,10 +49,29 @@ export async function loadModerationPageVariables(
 
   //
 
-  const get_fiche_organization_by_id = GetFicheOrganizationById({
-    pg,
+  const get_organization_by_id = GetOrganizationById(pg, {
+    columns: {
+      cached_activite_principale: true,
+      cached_adresse: true,
+      cached_categorie_juridique: true,
+      cached_code_officiel_geographique: true,
+      cached_code_postal: true,
+      cached_enseigne: true,
+      cached_est_active: true,
+      cached_etat_administratif: true,
+      cached_libelle_activite_principale: true,
+      cached_libelle_categorie_juridique: true,
+      cached_libelle_tranche_effectif: true,
+      cached_libelle: true,
+      cached_nom_complet: true,
+      cached_tranche_effectifs: true,
+      created_at: true,
+      id: true,
+      siret: true,
+      updated_at: true,
+    },
   });
-  const organization_fiche = await get_fiche_organization_by_id(
+  const organization_fiche = await get_organization_by_id(
     moderation.organization_id,
   );
 
