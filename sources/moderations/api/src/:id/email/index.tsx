@@ -22,7 +22,10 @@ export default new Hono<ContextType>().get(
     next,
   ) {
     const { id } = req.valid("param");
-    const variables = await loadEmailPageVariables(identite_pg, { id, crisp_config });
+    const variables = await loadEmailPageVariables(identite_pg, {
+      id,
+      crisp_config,
+    });
     set_variables(set, variables);
     return next();
   },

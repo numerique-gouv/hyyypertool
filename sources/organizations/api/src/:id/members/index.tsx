@@ -32,14 +32,20 @@ export default new Hono<ContextType>()
         page_ref: z.string(),
       }),
     ),
-    async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
+    async function set_variables_middleware(
+      { req, set, var: { identite_pg } },
+      next,
+    ) {
       const { id: organization_id } = req.valid("param");
       const pagination = match(
         Pagination_Schema.safeParse(req.query(), { path: ["query"] }),
       )
         .with({ success: true }, ({ data }) => data)
         .otherwise(() => Pagination_Schema.parse({}));
-      const variables = await loadMembersPageVariables(identite_pg, { organization_id, pagination });
+      const variables = await loadMembersPageVariables(identite_pg, {
+        organization_id,
+        pagination,
+      });
       set_variables(set, variables);
       return next();
     },

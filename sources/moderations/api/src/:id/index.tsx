@@ -29,7 +29,9 @@ export default new Hono<ContextType>()
       const { id } = req.valid("param");
 
       try {
-        const variables = await loadModerationPageVariables(identite_pg, { id });
+        const variables = await loadModerationPageVariables(identite_pg, {
+          id,
+        });
         set_variables(set, variables);
         return next();
       } catch (error) {

@@ -10,18 +10,21 @@ import { Table } from "./Table";
 
 //
 
-export default new Hono<ContextType>()
-  .use("/", jsxRenderer())
-  .get(
-    "/",
-    zValidator("param", Entity_Schema),
-    async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
-      const { id: user_id } = req.valid("param");
-      const variables = await loadModerationsPageVariables(identite_pg, { user_id });
-      set_variables(set, variables);
-      return next();
-    },
-    async function GET({ render }) {
-      return render(<Table />);
-    },
-  );
+export default new Hono<ContextType>().use("/", jsxRenderer()).get(
+  "/",
+  zValidator("param", Entity_Schema),
+  async function set_variables_middleware(
+    { req, set, var: { identite_pg } },
+    next,
+  ) {
+    const { id: user_id } = req.valid("param");
+    const variables = await loadModerationsPageVariables(identite_pg, {
+      user_id,
+    });
+    set_variables(set, variables);
+    return next();
+  },
+  async function GET({ render }) {
+    return render(<Table />);
+  },
+);

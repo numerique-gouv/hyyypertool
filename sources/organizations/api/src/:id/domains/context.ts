@@ -14,10 +14,7 @@ export async function loadDomainsPageVariables(
   pg: IdentiteProconnect_PgDatabase,
   { organization_id }: { organization_id: number },
 ) {
-  const domains = await get_orginization_domains(
-    { pg },
-    { organization_id },
-  );
+  const domains = await get_orginization_domains({ pg }, { organization_id });
 
   return {
     domains,

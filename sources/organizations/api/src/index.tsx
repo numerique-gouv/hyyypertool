@@ -7,7 +7,11 @@ import { set_variables } from "@~/app.middleware/context/set_variables";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import user_page_route from "./:id/index";
-import { loadOrganizationsListPageVariables, PageQuery_Schema, type ContextType } from "./context";
+import {
+  loadOrganizationsListPageVariables,
+  PageQuery_Schema,
+  type ContextType,
+} from "./context";
 import domains_router from "./domaines";
 import leaders_router from "./leaders";
 import Page from "./page";

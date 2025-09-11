@@ -1,9 +1,9 @@
 //
 
-import { Pagination_Schema, Search_Schema } from "@~/app.core/schema";
-import type { App_Context } from "@~/app.middleware/context";
 import { hyper_ref } from "@~/app.core/html";
 import { hx_include } from "@~/app.core/htmx";
+import { Pagination_Schema, Search_Schema } from "@~/app.core/schema";
+import type { App_Context } from "@~/app.middleware/context";
 import { hx_urls, urls } from "@~/app.urls";
 import { type Env, type InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
@@ -21,11 +21,7 @@ export async function loadDomainesPageVariables() {
 
   const hx_domains_query_props = {
     ...(await hx_urls.organizations.domains.$get({ query: {} })),
-    "hx-include": hx_include([
-      $search,
-      $table,
-      query_schema.keyof().enum.page,
-    ]),
+    "hx-include": hx_include([$search, $table, query_schema.keyof().enum.page]),
     "hx-replace-url": true,
     "hx-select": `#${$table} > table`,
     "hx-target": `#${$table}`,

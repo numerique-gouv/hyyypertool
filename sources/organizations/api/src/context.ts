@@ -8,7 +8,7 @@ import {
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
-import { GetOrganizationsList, type GetOrganizationsListHandler } from "@~/organizations.repository";
+import { GetOrganizationsList } from "@~/organizations.repository";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 

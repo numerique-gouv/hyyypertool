@@ -6,9 +6,13 @@ import { authorized } from "@~/app.middleware/authorized";
 import { set_variables } from "@~/app.middleware/context/set_variables";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { P, match } from "ts-pattern";
+import { match, P } from "ts-pattern";
 import moderation_router from "./:id/index";
-import { loadModerationsListPageVariables, Search_Schema, type ContextType } from "./context";
+import {
+  loadModerationsListPageVariables,
+  Search_Schema,
+  type ContextType,
+} from "./context";
 import { Moderations_Page } from "./page";
 
 //
@@ -41,13 +45,18 @@ export default new Hono<ContextType>()
         .with({ success: true }, ({ data }) => data)
         .otherwise(() => Pagination_Schema.parse({}));
 
-      const variables = await loadModerationsListPageVariables({ pagination, search });
+      const variables = await loadModerationsListPageVariables({
+        pagination,
+        search,
+      });
       set_variables(set, variables);
       return next();
     },
     function GET({ render, set, var: { pagination, search } }) {
       set("page_title", "Liste des moderations");
-      return render(<Moderations_Page pagination={pagination} search={search} />);
+      return render(
+        <Moderations_Page pagination={pagination} search={search} />,
+      );
     },
   );
 

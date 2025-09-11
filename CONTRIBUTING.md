@@ -171,45 +171,90 @@ Write comprehensive tests following these guidelines:
 
 1. **Use Real Database**: Import `pg` from `@~/identite-proconnect.database/testing` instead of mocking
 2. **Database Setup**: Always include `beforeAll(migrate)` and `beforeEach(empty_database)`
-3. **Seed Data**: Use unicorn seed functions (e.g., `create_adora_pony_user`, `create_unicorn_organization`)
-4. **Snapshots Over Multiple Expects**: Prefer `toMatchInlineSnapshot()` for complex object assertions
-5. **Auto-generated Snapshots**: When using `toMatchInlineSnapshot()`, let Bun test write the string value automatically by running the test first with an empty string or no parameter
+3. **Seed Data**: Use unicorn seed functions (e.g., `create_adora_pony_user`, `create_pink_diamond_user`, `create_red_diamond_user`)
+4. **Time Control**: Use `setSystemTime()` for deterministic timestamps in tests
+5. **Snapshots Over Multiple Expects**: Prefer `toMatchInlineSnapshot()` for complex object assertions over multiple individual expects
+6. **Auto-generated Snapshots**: When using `toMatchInlineSnapshot()`, let Bun test write the string value automatically by running the test first with an empty string or no parameter
+7. **Comprehensive Coverage**: Test all major functionality including:
+   - Basic operations (CRUD)
+   - Edge cases (empty results, not found)
+   - Filtering and search functionality
+   - Pagination behavior
+   - Data ordering
 
 ### Example
 
 ```typescript
 //
 
-import { NotFoundError } from "@~/app.core/error";
-import { create_adora_pony_user } from "@~/identite-proconnect.database/seed/unicorn";
+import { schema } from "@~/identite-proconnect.database";
+import {
+  create_adora_pony_user,
+  create_pink_diamond_user,
+} from "@~/identite-proconnect.database/seed/unicorn";
 import {
   empty_database,
   migrate,
   pg,
 } from "@~/identite-proconnect.database/testing";
-import { beforeAll, beforeEach, expect, test } from "bun:test";
-import { GetUserById } from "./GetUserById";
+import { beforeAll, beforeEach, expect, setSystemTime, test } from "bun:test";
+import { GetUsersList } from "./GetUsersList";
 
 //
 
 beforeAll(migrate);
 beforeEach(empty_database);
 
-test("returns user with specified columns", async () => {
-  const user_id = await create_adora_pony_user(pg);
+beforeAll(() => {
+  setSystemTime(new Date("2222-01-01T00:00:00.000Z"));
+});
 
-  const get_user_by_id = GetUserById(pg, {
-    columns: { id: true, email: true, given_name: true },
-  });
-  const result = await get_user_by_id(user_id);
+test("returns paginated users list with default pagination", async () => {
+  await create_adora_pony_user(pg);
 
-  // Let Bun auto-generate the snapshot by running test first with empty string
+  const get_users_list = GetUsersList(pg);
+  const result = await get_users_list({});
+
+  // Let Bun auto-generate the snapshot - comprehensive validation
   expect(result).toMatchInlineSnapshot(`
     {
-      "email": "adora.pony@unicorn.xyz",
-      "family_name": "Pony",
-      "given_name": "Adora",
-      "id": 1,
+      "count": 1,
+      "users": [
+        {
+          "created_at": "2222-01-01 00:00:00+00",
+          "email": "adora.pony@unicorn.xyz",
+          "email_verified_at": null,
+          "family_name": "Pony",
+          "given_name": "Adora",
+          "id": 1,
+          "last_sign_in_at": null,
+        },
+      ],
+    }
+  `);
+});
+
+test("filters users by search term", async () => {
+  await create_adora_pony_user(pg);
+  await create_pink_diamond_user(pg);
+
+  const get_users_list = GetUsersList(pg);
+  const result = await get_users_list({ search: "pony" });
+
+  expect(result).toMatchInlineSnapshot(`
+    {
+      "count": 1,
+      "users": [
+        {
+          "created_at": "2222-01-01 00:00:00+00",
+          "email": "adora.pony@unicorn.xyz",
+          "email_verified_at": null,
+          "family_name": "Pony",
+          "given_name": "Adora",
+          "id": 1,
+          "last_sign_in_at": null,
+        },
+      ],
     }
   `);
 });
@@ -251,7 +296,10 @@ Use `set_variables` helper for bulk context variable assignment:
 ```typescript
 import { set_variables } from "@~/app.middleware/context/set_variables";
 
-async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
+async function set_variables_middleware(
+  { req, set, var: { identite_pg } },
+  next,
+) {
   const { id } = req.valid("param");
   const variables = await loadPageVariables(identite_pg, { id });
   set_variables(set, variables);
@@ -260,7 +308,7 @@ async function set_variables_middleware({ req, set, var: { identite_pg } }, next
 ```
 
 - **Naming**: `loadDomainPageVariables` (e.g., `loadUserPageVariables`)
-- **Type inference**: Use `Awaited<ReturnType<...>>` for automatic typing  
+- **Type inference**: Use `Awaited<ReturnType<...>>` for automatic typing
 - **Single source**: Consolidate all page data loading in one function
 - **Helper usage**: Use `set_variables(set, variables)` for bulk assignment
 

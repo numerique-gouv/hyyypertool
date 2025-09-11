@@ -3,19 +3,23 @@
 import { Entity_Schema } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
-import { Duplicate_Warning } from "./Duplicate_Warning";
 import type { Env } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 import { z } from "zod";
+import { Duplicate_Warning } from "./Duplicate_Warning";
 
 //
 
 export async function loadDuplicateWarningPageVariables(
   pg: IdentiteProconnect_PgDatabase,
-  { moderation_id, organization_id, user_id }: { 
-    moderation_id: number; 
-    organization_id: number; 
-    user_id: number; 
+  {
+    moderation_id,
+    organization_id,
+    user_id,
+  }: {
+    moderation_id: number;
+    organization_id: number;
+    user_id: number;
   },
 ) {
   const value = await Duplicate_Warning.queryContextValues(pg, {
