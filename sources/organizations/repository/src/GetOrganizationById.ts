@@ -8,18 +8,14 @@ import {
 import { eq } from "drizzle-orm";
 
 //
+type OrganizationQueryConfigColumns = Partial<
+  Record<keyof typeof schema.organizations._.columns, true>
+>;
 
-export function GetOrganizationById({
-  pg,
-}: {
-  pg: IdentiteProconnect_PgDatabase;
-}) {
-  type Organizations = typeof schema.organizations.$inferSelect;
-  type OrganizationColumnsKeys = keyof Organizations;
-
-  return async function get_organization_by_id<
-    TColumns extends Partial<Record<OrganizationColumnsKeys, true>>,
-  >(organization_id: number, { columns }: { columns: TColumns }) {
+export function GetOrganizationById<
+  TColumns extends OrganizationQueryConfigColumns,
+>(pg: IdentiteProconnect_PgDatabase, { columns }: { columns: TColumns }) {
+  return async function get_organization_by_id(organization_id: number) {
     const organization = await pg.query.organizations.findFirst({
       columns,
       where: eq(schema.organizations.id, organization_id),
@@ -31,4 +27,6 @@ export function GetOrganizationById({
   };
 }
 
-export type GetOrganizationByIdHandler = ReturnType<typeof GetOrganizationById>;
+export type GetOrganizationByIdHandler<
+  TColumns extends OrganizationQueryConfigColumns,
+> = ReturnType<typeof GetOrganizationById<TColumns>>;

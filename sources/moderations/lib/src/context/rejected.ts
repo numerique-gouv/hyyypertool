@@ -1,7 +1,7 @@
 //
 
 import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
-import type { Config } from "@~/crisp.lib/types";
+import type { CrispApi } from "@~/crisp.lib/api";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
 import type { GetModerationDto } from "@~/moderations.repository";
 import type { RejectedMessage } from "../schema/rejected.form";
@@ -9,7 +9,7 @@ import type { RejectedMessage } from "../schema/rejected.form";
 //
 
 export type RejectedModeration_Context = {
-  crisp_config: Config;
+  crisp: CrispApi;
   moderation: GetModerationDto;
   pg: IdentiteProconnect_PgDatabase;
   reason: string;

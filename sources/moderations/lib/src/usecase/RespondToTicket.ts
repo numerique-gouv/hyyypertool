@@ -2,8 +2,7 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { z_username } from "@~/app.core/schema/z_username";
-import { get_user, is_crisp_ticket, send_message } from "@~/crisp.lib";
-import { CrispApi } from "@~/crisp.lib/api";
+import { is_crisp_ticket } from "@~/crisp.lib";
 import { get_full_ticket, send_zammad_response } from "@~/zammad.lib";
 import {
   ARTICLE_TYPE,
@@ -20,45 +19,46 @@ import type {
 
 //
 
-export async function respond_to_ticket(
-  context: RejectedModeration_Context,
-  full_message: RejectedFullMessage,
-) {
-  return match(context.moderation.ticket_id)
-    .with(null, () => {
-      throw new NotFoundError("No existing ticket.");
-    })
-    .when(is_crisp_ticket, () => respond_in_conversation(context, full_message))
-    .when(is_zammad_ticket, () =>
-      respond_to_zammad_ticket(context, full_message),
-    )
-    .otherwise(() => {
-      throw new NotFoundError(
-        `Unknown provider for "${context.moderation.id}"`,
-      );
-    });
+export function RespondToTicket() {
+  return async function respond_to_ticket(
+    context: RejectedModeration_Context,
+    full_message: RejectedFullMessage,
+  ) {
+    return match(context.moderation.ticket_id)
+      .with(null, () => {
+        throw new NotFoundError("No existing ticket.");
+      })
+      .when(is_crisp_ticket, () =>
+        respond_in_conversation(context, full_message),
+      )
+      .when(is_zammad_ticket, () =>
+        respond_to_zammad_ticket(context, full_message),
+      )
+      .otherwise(() => {
+        throw new NotFoundError(
+          `Unknown provider for "${context.moderation.id}"`,
+        );
+      });
+  };
 }
 
+export type RespondToTicketHandler = ReturnType<typeof RespondToTicket>;
+
 async function respond_in_conversation(
-  {
-    crisp_config,
-    moderation,
-    userinfo,
-    resolve_delay,
-  }: RejectedModeration_Context,
+  { crisp, moderation, userinfo, resolve_delay }: RejectedModeration_Context,
   { message }: { message: string },
 ) {
   if (!moderation.ticket_id) throw new NotFoundError("Ticket not found.");
 
   const [, found_user] = await await_to(
-    get_user(crisp_config, { email: userinfo.email }),
+    crisp.get_user({ email: userinfo.email }),
   );
   const user = found_user ?? {
     nickname: z_username.parse(userinfo),
     email: userinfo.email,
   };
 
-  await send_message(crisp_config, {
+  await crisp.send_message({
     content: message,
     user,
     session_id: moderation.ticket_id,
@@ -68,8 +68,9 @@ async function respond_in_conversation(
   // Crisp seems to have a delay between the message being sent and the state being updated
   await new Promise((resolve) => setTimeout(resolve, resolve_delay));
 
-  const { mark_conversation_as_resolved } = CrispApi(crisp_config);
-  await mark_conversation_as_resolved({ session_id: moderation.ticket_id });
+  await crisp.mark_conversation_as_resolved({
+    session_id: moderation.ticket_id,
+  });
 }
 
 async function respond_to_zammad_ticket(

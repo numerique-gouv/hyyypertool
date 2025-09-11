@@ -7,16 +7,25 @@ import {
 } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
 import type { urls } from "@~/app.urls";
-import type { GetOrganizationsListHandler } from "@~/organizations.repository";
+import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
+import { GetOrganizationsList } from "@~/organizations.repository";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 
 //
 
-export interface ContextVariablesType extends Env {
-  Variables: {
-    query_organizations: GetOrganizationsListHandler;
+export async function loadOrganizationsListPageVariables(
+  pg: IdentiteProconnect_PgDatabase,
+) {
+  return {
+    query_organizations: GetOrganizationsList(pg),
   };
+}
+
+//
+
+export interface ContextVariablesType extends Env {
+  Variables: Awaited<ReturnType<typeof loadOrganizationsListPageVariables>>;
 }
 export type ContextType = App_Context & ContextVariablesType;
 
