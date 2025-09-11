@@ -1,0 +1,6 @@
+{
+  "env": {
+    "DATABASE_URL": { "value": "$DATABASE_URL_PREPROD" },
+    "HOST": { "generator": "url" }
+  }
+}
