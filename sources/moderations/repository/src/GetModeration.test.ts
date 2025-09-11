@@ -45,5 +45,7 @@ test("get a moderation with minimal fields", async () => {
 test("throws NotFoundError when moderation does not exist", async () => {
   const get_moderation_with_user = GetModerationWithUser(pg);
 
-  await expect(get_moderation_with_user(999999)).rejects.toThrow("Moderation not found.");
+  await expect(get_moderation_with_user(999999)).rejects.toThrow(
+    "Moderation not found.",
+  );
 });

@@ -6,7 +6,6 @@ import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
 import type { App_Context } from "@~/app.middleware/context";
-import { schema } from "@~/identite-proconnect.database";
 import { send_moderation_processed_email } from "@~/identite-proconnect.lib/index";
 import {
   ForceJoinOrganization,
@@ -16,15 +15,17 @@ import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
 import { MemberJoinOrganization } from "@~/moderations.lib/usecase/member_join_organization";
-import { GetModerationById, GetModerationWithUser } from "@~/moderations.repository";
+import {
+  GetModerationById,
+  GetModerationWithUser,
+} from "@~/moderations.repository";
 import {
   AddVerifiedDomain,
   GetFicheOrganizationById,
 } from "@~/organizations.lib/usecase";
-import { GetMember } from "@~/users.repository";
+import { GetMember, UpdateUserByIdInOrganization } from "@~/users.repository";
 import { to } from "await-to-js";
 import consola from "consola";
-import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { P, match } from "ts-pattern";
 
@@ -48,9 +49,14 @@ export default new Hono<App_Context>().patch(
       mark_domain_as_verified: MarkDomainAsVerified(identite_pg_client),
     });
     const get_moderation_with_user = GetModerationWithUser(identite_pg);
-    
-    const [moderation_error, moderation] = await to(get_moderation_with_user(id));
-    
+    const update_user_by_id_in_organization = UpdateUserByIdInOrganization({
+      pg: identite_pg,
+    });
+
+    const [moderation_error, moderation] = await to(
+      get_moderation_with_user(id),
+    );
+
     if (moderation_error) {
       if (moderation_error instanceof NotFoundError) return notFound();
       throw moderation_error;
@@ -125,15 +131,10 @@ export default new Hono<App_Context>().patch(
 
     //#region ✨ Change the verification type of the user in the organization
     if (verification_type) {
-      await identite_pg
-        .update(schema.users_organizations)
-        .set({ verification_type })
-        .where(
-          and(
-            eq(schema.users_organizations.user_id, user_id),
-            eq(schema.users_organizations.organization_id, organization_id),
-          ),
-        );
+      await update_user_by_id_in_organization(
+        { organization_id, user_id },
+        { verification_type },
+      );
     }
     //#endregion
 
