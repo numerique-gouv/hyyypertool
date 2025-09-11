@@ -5,7 +5,7 @@ import type { AgentConnect_UserInfo } from "@~/app.middleware/session";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
 import {
   UpdateModerationById,
-  type GetModerationDto,
+  type GetModerationWithUserDto,
 } from "@~/moderations.repository";
 import { append_comment } from "../comment_message";
 
@@ -17,7 +17,7 @@ export async function mark_moderatio_as_rejected({
   userinfo,
   reason,
 }: {
-  moderation: GetModerationDto;
+  moderation: GetModerationWithUserDto;
   userinfo: AgentConnect_UserInfo;
   pg: IdentiteProconnect_PgDatabase;
   reason: string;

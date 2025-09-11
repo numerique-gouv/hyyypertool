@@ -11,7 +11,7 @@ import { reject_form_schema } from "@~/moderations.lib/schema/rejected.form";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
 import { RespondToTicket } from "@~/moderations.lib/usecase/RespondToTicket";
 import { SendRejectedMessageToUser } from "@~/moderations.lib/usecase/SendRejectedMessageToUser";
-import { GetModeration, UpdateModerationById } from "@~/moderations.repository";
+import { GetModerationWithUser, UpdateModerationById } from "@~/moderations.repository";
 import { Hono } from "hono";
 import type { ContextType } from "./context";
 
@@ -30,8 +30,8 @@ export default new Hono<ContextType>().patch(
     const { id: moderation_id } = req.valid("param");
     const { message, reason, subject } = req.valid("form");
 
-    const get_moderation = GetModeration(identite_pg);
-    const moderation = await get_moderation(moderation_id);
+    const get_moderation_with_user = GetModerationWithUser(identite_pg);
+    const moderation = await get_moderation_with_user(moderation_id);
     const crisp = CrispApi(crisp_config);
     const update_moderation_by_id = UpdateModerationById({ pg: identite_pg });
     const respond_to_ticket = RespondToTicket();
