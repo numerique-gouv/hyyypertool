@@ -1,7 +1,7 @@
 //
 
 export * from "./GetDuplicateModerations";
-export * from "./GetModeration";
+export * from "./GetModerationWithUser";
 export * from "./GetModerationById";
 export * from "./GetModerationForEmail";
 export * from "./GetModerationsByUserId";

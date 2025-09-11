@@ -9,8 +9,8 @@ import { eq } from "drizzle-orm";
 
 //
 
-export function GetModeration(pg: IdentiteProconnect_PgDatabase) {
-  return async function get_moderation(moderation_id: number) {
+export function GetModerationWithUser(pg: IdentiteProconnect_PgDatabase) {
+  return async function get_moderation_with_user(moderation_id: number) {
     const moderation = await pg.query.moderations.findFirst({
       columns: {
         id: true,
@@ -29,5 +29,5 @@ export function GetModeration(pg: IdentiteProconnect_PgDatabase) {
   };
 }
 
-export type GetModerationHandler = ReturnType<typeof GetModeration>;
-export type GetModerationDto = Awaited<ReturnType<GetModerationHandler>>;
+export type GetModerationWithUserHandler = ReturnType<typeof GetModerationWithUser>;
+export type GetModerationWithUserDto = Awaited<ReturnType<GetModerationWithUserHandler>>;

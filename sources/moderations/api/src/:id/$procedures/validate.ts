@@ -1,7 +1,7 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { HTTPError } from "@~/app.core/error";
+import { HTTPError, NotFoundError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { z_email_domain } from "@~/app.core/schema/z_email_domain";
@@ -16,7 +16,7 @@ import { MODERATION_EVENTS } from "@~/moderations.lib/event";
 import { validate_form_schema } from "@~/moderations.lib/schema/validate.form";
 import { mark_moderation_as } from "@~/moderations.lib/usecase/mark_moderation_as";
 import { MemberJoinOrganization } from "@~/moderations.lib/usecase/member_join_organization";
-import { GetModerationById } from "@~/moderations.repository";
+import { GetModerationById, GetModerationWithUser } from "@~/moderations.repository";
 import {
   AddVerifiedDomain,
   GetFicheOrganizationById,
@@ -47,18 +47,14 @@ export default new Hono<App_Context>().patch(
       get_organization_by_id: GetFicheOrganizationById({ pg: identite_pg }),
       mark_domain_as_verified: MarkDomainAsVerified(identite_pg_client),
     });
-    const moderation = await identite_pg.query.moderations.findFirst({
-      columns: {
-        comment: true,
-        id: true,
-        organization_id: true,
-        user_id: true,
-      },
-      with: { user: { columns: { email: true } } },
-      where: eq(schema.moderations.id, id),
-    });
-
-    if (!moderation) return notFound();
+    const get_moderation_with_user = GetModerationWithUser(identite_pg);
+    
+    const [moderation_error, moderation] = await to(get_moderation_with_user(id));
+    
+    if (moderation_error) {
+      if (moderation_error instanceof NotFoundError) return notFound();
+      throw moderation_error;
+    }
 
     const {
       organization_id,
@@ -71,7 +67,7 @@ export default new Hono<App_Context>().patch(
 
     //#region ✨ Add verified domain
     if (add_domain) {
-      const [error] = await to(
+      const [domain_error] = await to(
         add_verified_domain({
           organization_id,
           domain,
@@ -80,16 +76,16 @@ export default new Hono<App_Context>().patch(
         }),
       );
 
-      match(error)
+      match(domain_error)
         .with(P.instanceOf(HTTPError), () => {
-          consola.error(error);
-          sentry.captureException(error, {
+          consola.error(domain_error);
+          sentry.captureException(domain_error, {
             data: { domain, organization_id: id },
           });
         })
         .with(P.instanceOf(Error), () => {
-          consola.error(error);
-          throw error;
+          consola.error(domain_error);
+          throw domain_error;
         });
     }
     //#endregion
@@ -109,20 +105,20 @@ export default new Hono<App_Context>().patch(
       }),
       get_moderation_by_id: GetModerationById({ pg: identite_pg }),
     });
-    const [error] = await to(
+    const [join_error] = await to(
       member_join_organization({ is_external, moderation_id: id }),
     );
 
-    match(error)
+    match(join_error)
       .with(P.instanceOf(HTTPError), () => {
-        consola.error(error);
-        sentry.captureException(error, {
+        consola.error(join_error);
+        sentry.captureException(join_error, {
           data: { domain, organization_id: id },
         });
       })
       .with(P.instanceOf(Error), () => {
-        consola.error(error);
-        throw error;
+        consola.error(join_error);
+        throw join_error;
       });
 
     //#endregion
