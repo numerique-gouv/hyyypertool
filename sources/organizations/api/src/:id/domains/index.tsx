@@ -7,18 +7,18 @@ import {
   Entity_Schema,
   Id_Schema,
 } from "@~/app.core/schema";
+import { set_variables } from "@~/app.middleware/context/set_variables";
 import { EmailDomain_Type_Schema } from "@~/identite-proconnect.lib/email_domain";
 import { ORGANISATION_EVENTS } from "@~/organizations.lib/event";
 import {
   AddAuthorizedDomain,
   RemoveDomainEmailById,
 } from "@~/organizations.lib/usecase";
-import { get_orginization_domains } from "@~/organizations.repository/get_orginization_domains";
 import { update_domain_by_id } from "@~/organizations.repository/update_domain_by_id";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { z } from "zod";
-import type { ContextType } from "./context";
+import { loadDomainsPageVariables, type ContextType } from "./context";
 import { Add_Domain, Table } from "./Table";
 
 //
@@ -33,15 +33,10 @@ export default new Hono<ContextType>()
     jsxRenderer(),
     zValidator("param", Entity_Schema),
     zValidator("query", DescribedBy_Schema),
-    async function set_domains({ req, set, var: { identite_pg } }, next) {
+    async function set_variables_middleware({ req, set, var: { identite_pg } }, next) {
       const { id: organization_id } = req.valid("param");
-      const domains = await get_orginization_domains(
-        { pg: identite_pg },
-        {
-          organization_id: organization_id,
-        },
-      );
-      set("domains", domains);
+      const variables = await loadDomainsPageVariables(identite_pg, { organization_id });
+      set_variables(set, variables);
       return next();
     },
     async function GET({ render }) {
