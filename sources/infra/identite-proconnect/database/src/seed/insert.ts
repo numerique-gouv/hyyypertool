@@ -14,6 +14,7 @@ import { insert_dinum } from "./organizations/dinum";
 import { insert_sak } from "./organizations/sak";
 import { insert_yes_we_hack } from "./organizations/yes_we_hack";
 import { insert_jeanbon } from "./users/jeanbon";
+import { insert_jeandre } from "./users/jeandre";
 import { insert_mariebon } from "./users/mariebon";
 import { insert_pierrebon } from "./users/pierrebon";
 import { insert_raphael } from "./users/raphael";
@@ -35,6 +36,10 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     const jean_bon = await insert_jeanbon(db);
     consola.verbose(
       `🌱 INSERT user ${jean_bon.given_name} ${jean_bon.family_name}`,
+    );
+    const jean_dre = await insert_jeandre(db);
+    consola.verbose(
+      `🌱 INSERT user ${jean_dre.given_name} ${jean_dre.family_name}`,
     );
     const pierre_bon = await insert_pierrebon(db);
     consola.verbose(
@@ -109,6 +114,17 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     });
     consola.verbose(
       `🌱 INSERT ${jean_bon.given_name} wants to join ${abracadabra.cached_libelle}`,
+    );
+
+    await insert_moderation(db, {
+      created_at: new Date("2011-11-11 00:03:15").toISOString(),
+      organization_id: abracadabra.id,
+      type: "organization_join_block" as MCP_Moderation["type"],
+      user_id: jean_dre.id,
+      ticket_id: "session_789",
+    });
+    consola.verbose(
+      `🌱 INSERT ${jean_dre.given_name} wants to join ${abracadabra.cached_libelle}`,
     );
 
     await insert_moderation(db, {

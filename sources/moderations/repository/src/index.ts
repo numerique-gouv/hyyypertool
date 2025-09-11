@@ -9,3 +9,4 @@ export * from "./GetModerationWithDetails";
 export * from "./GetModerationWithUser";
 export * from "./RemoveUserFromOrganization";
 export * from "./UpdateModerationById";
+export * from "./ValidateSimilarModerations";

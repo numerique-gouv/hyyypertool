@@ -54,7 +54,7 @@ export async function UsersByOrganization(props: Props) {
           hx-include={hx_include([$page_ref])}
           hx-target="this"
           hx-trigger={[
-            "load",
+            "load delay:1s",
             hx_trigger_from_body([ORGANISATION_EVENTS.Enum.MEMBERS_UPDATED]),
           ].join(", ")}
         >
