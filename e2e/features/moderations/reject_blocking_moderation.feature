@@ -22,19 +22,13 @@ Fonctionnalité: Refuser une modération bloquante
     Soit je vais à l'intérieur du dialogue nommé "la modale de refus"
     Quand je saisie le mot "Nom de domaine introuvable{enter}" dans la boîte à texte nommée "Recherche d'une réponse type"
     Et je clique sur "Notifier et terminer"
-    Quand je reviens en avant
     Et je réinitialise le contexte
-    Alors je vois "Cette modération a été marqué comme traitée le"
-    Et je vois "Rejeté par user@yopmail.com"
-    Et je vois 'Raison : "Nom de domaine introuvable"'
 
+    Quand je clique sur "Annuler"
+    Alors je vois "Cette modération a été marqué comme traitée le"
+    Quand je clique sur le bouton "retour"
+
+    Quand je clique sur "Moderations"
+    Et je dois voir le titre de page "Liste des moderations"
     Alors je vois "Liste des moderations"
     Alors je ne vois pas "13002526500013"
-
-    Quand je reviens en avant
-    Alors je vois "Cette modération a été marqué comme traitée"
-
-
-    Quand je clique sur "Commentaires"
-    Alors je vois "Rejeté par user@yopmail.com"
-    Alors je vois 'Raison : "Nom de domaine introuvable"'

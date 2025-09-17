@@ -135,7 +135,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
         <footer class="container mx-auto flex flex-row justify-between p-2">
           <div>© ${new Date().getFullYear()} 🇫🇷</div>
           <a
-            href="https://github.com/numerique-gouv/hyyypertool/tree/${config.VERSION}"
+            href="https://github.com/proconnect-gouv/hyyypertool/tree/${config.VERSION}"
             rel="noopener noreferrer"
             target="_blank"
             safe
@@ -218,7 +218,7 @@ export function Root_Layout({ children }: PropsWithChildren) {
         : html`<script
             nonce="${nonce}"
             src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/_hyperscript.min.js"
-          ></script> `}
+          ></script>`}
       <script
         nonce="${nonce}"
         src="${config.ASSETS_PATH}/node_modules/hyperscript.org/dist/template.js"

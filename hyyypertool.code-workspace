@@ -103,6 +103,7 @@
     "cSpell.language": "en,fr",
     "cucumber.features": ["features/**/*.feature"],
     "cucumber.glue": ["cypress/support/step_definitions/**/*.ts"],
+    "cSpell.words": ["identite", "moderations", "proconnect", "zammad"],
   },
   "tasks": {
     "version": "2.0.0",

@@ -20,7 +20,7 @@ export function SendNotification() {
     <div class="fr-checkbox-group">
       <input
         id={$send_notification}
-        name={validate_form_schema.keyof().Enum.send_notitfication}
+        name={validate_form_schema.keyof().Enum.send_notification}
         type="checkbox"
         value="true"
         checked={

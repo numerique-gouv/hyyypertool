@@ -6,7 +6,6 @@ import {
 } from "@~/app.core/date/date_format";
 import { hx_include } from "@~/app.core/htmx";
 import type { Pagination } from "@~/app.core/schema";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { hx_urls, urls } from "@~/app.urls";
@@ -14,15 +13,15 @@ import {
   moderation_type_to_emoji,
   moderation_type_to_title,
 } from "@~/moderations.lib/moderation_type.mapper";
-import { get_moderations_list } from "@~/moderations.repository/get_moderations_list";
+import { GetModerationsList } from "@~/moderations.repository";
 import { useContext } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
 import Moderations_Context, {
   MODERATION_TABLE_ID,
   MODERATION_TABLE_PAGE_ID,
   Page_Query,
+  usePageRequestContext,
+  type GetModerationsListDTO,
   type Search,
-  type get_moderations_list_dto,
 } from "./context";
 
 //
@@ -54,7 +53,7 @@ export function Moderations_Page({
 }) {
   const {
     var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  } = usePageRequestContext();
   const { page, page_size } = pagination;
   const {
     day: date,
@@ -64,7 +63,8 @@ export function Moderations_Page({
     search_email,
     search_siret,
   } = search;
-  const query_moderations_list = get_moderations_list(identite_pg, {
+  const get_moderations_list = GetModerationsList(identite_pg);
+  const query_moderations_list = get_moderations_list({
     search: {
       created_at: date,
       email: search_email,
@@ -87,7 +87,6 @@ export function Moderations_Page({
         {...hx_moderations_query_props}
         hx-sync="this"
         hx-trigger={[
-          `load delay:3s`,
           `every 33s [document.visibilityState === 'visible']`,
           `visibilitychange[document.visibilityState === 'visible'] from:document`,
         ].join(", ")}
@@ -267,7 +266,7 @@ function Row({
   moderation,
 }: {
   key?: string;
-  moderation: get_moderations_list_dto["moderations"][number];
+  moderation: GetModerationsListDTO["moderations"][number];
 }) {
   const { user, organization } = moderation;
   return (

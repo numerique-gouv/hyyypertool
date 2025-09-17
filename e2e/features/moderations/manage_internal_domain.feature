@@ -18,17 +18,21 @@ Fonctionnalité: Gérer un domaine interne lors de la modération
       | Domain      | Status |
       | yopmail.com | ❓     |
 
+    Quand je vais à l'intérieur de la rangée nommée "Domaine yopmail.com (null)"
     Quand je clique sur "Menu"
     Et je clique sur "✅ Domaine autorisé"
+    Et je réinitialise le contexte
     Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
       | Domain      | Status |
       | yopmail.com | ✅     |
 
+    Quand je vais à l'intérieur de la rangée nommée "Domaine yopmail.com (verified)"
     Quand je clique sur "Menu"
     Et je clique sur le bouton "🚫 Domaine refusé"
-    Quand je vais à l'intérieur du tableau nommé "🌐 1 domaine connu dans l’organisation"
-    Alors je vois "🚫"
-    Et je vois "refused"
+    Et je réinitialise le contexte
+    Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
+      | Domain      | Status | Type    |
+      | yopmail.com | 🚫     | refused |
     Et je réinitialise le contexte
 
     Quand je clique sur "Ajouter un domain"

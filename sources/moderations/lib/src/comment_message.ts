@@ -9,6 +9,7 @@ const BUILTIN_COMMENT = z.object({
   created_by: z.string().email(),
 });
 const VALIDATED_COMMENT = BUILTIN_COMMENT.extend({
+  reason: z.string().optional(),
   type: z.literal("VALIDATED"),
 });
 const REJECTED_COMMENT = BUILTIN_COMMENT.extend({
@@ -28,7 +29,11 @@ export type Comment_Type =
 
 export function comment_message(comment_type: Comment_Type) {
   const comment_message = match(comment_type)
-    .with({ type: "VALIDATED" }, ({ created_by }) => `Validé par ${created_by}`)
+    .with({ type: "VALIDATED" }, ({ created_by, reason }) =>
+      [`Validé par ${created_by}`, reason ? `Raison : "${reason}"` : false]
+        .filter(Boolean)
+        .join(" | "),
+    )
     .with(
       { type: "REPROCESSED" },
       ({ created_by }) => `Réouverte par ${created_by}`,

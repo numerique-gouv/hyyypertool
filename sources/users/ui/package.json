@@ -21,10 +21,10 @@
     "@~/moderations.lib": "workspace:*",
     "@~/organizations.lib": "workspace:*",
     "@~/users.lib": "workspace:*",
-    "hono": "4.8.4",
+    "hono": "4.9.6",
     "tailwind-variants": "3.1.0",
     "ts-dedent": "2.2.0",
-    "ts-pattern": "5.7.1"
+    "ts-pattern": "5.8.0"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
