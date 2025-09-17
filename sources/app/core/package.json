@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "modern-errors": "7.1.2",
-    "ts-pattern": "5.7.1",
+    "ts-pattern": "5.8.0",
     "type-fest": "4.41.0",
     "zod": "4.0.2"
   },

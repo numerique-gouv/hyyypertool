@@ -7,12 +7,9 @@ import { Foot } from "@~/app.ui/hx_table";
 import { row } from "@~/app.ui/table";
 import { LocalTime } from "@~/app.ui/time";
 import { hx_urls, urls } from "@~/app.urls";
+import type { GetUsersListDto } from "@~/users.repository";
 import { match } from "ts-pattern";
-import {
-  PageInput_Schema,
-  usePageRequestContext,
-  type get_users_list_dto,
-} from "./context";
+import { PageInput_Schema, usePageRequestContext } from "./context";
 
 //
 
@@ -75,7 +72,7 @@ function Filter() {
 async function Table() {
   const {
     req,
-    var: { query_users, identite_pg },
+    var: { query_users },
   } = usePageRequestContext();
 
   const { q } = req.valid("query");
@@ -85,7 +82,7 @@ async function Table() {
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => Pagination_Schema.parse({}));
 
-  const { count, users } = await query_users(identite_pg, {
+  const { count, users } = await query_users({
     search: q ? String(q) : undefined,
     pagination: { ...pagination, page: pagination.page - 1 },
   });
@@ -127,7 +124,7 @@ function Row({
   user,
 }: {
   key?: string;
-  user: get_users_list_dto["users"][number];
+  user: GetUsersListDto["users"][number];
 }) {
   return (
     <tr

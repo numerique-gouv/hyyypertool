@@ -1,3 +1,4 @@
+import { AUTO_GO_BACK_EVENT } from "#ui/AutoGoBack";
 import { Htmx_Events, hx_disabled_form_elements } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
@@ -27,8 +28,7 @@ export async function RefusalModal({ userEmail }: { userEmail: string }) {
             wait for ${Htmx_Events.enum.afterSettle}
             add .hidden to #refusalModal
             go to the top of body smoothly
-            wait 2s
-            go back
+            trigger ${AUTO_GO_BACK_EVENT}(type: 'success', message: 'Modération refusé !') on #auto_go_back
           `}
       >
         <div class="mb-1 flex items-center justify-between">

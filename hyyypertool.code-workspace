@@ -1,47 +1,47 @@
 {
   "folders": [
     {
-      "name": "🈸 modules/app/",
+      "name": "🈸 sources/app/",
       "path": "sources/app",
     },
     {
-      "name": "📦 modules/moderations/",
+      "name": "📦 sources/moderations/",
       "path": "sources/moderations",
     },
     {
-      "name": "📦 modules/organizations/",
+      "name": "📦 sources/organizations/",
       "path": "sources/organizations",
     },
     {
-      "name": "📦 modules/users/",
+      "name": "📦 sources/users/",
       "path": "sources/users",
     },
     {
-      "name": "📦 modules/auth/",
+      "name": "📦 sources/auth/",
       "path": "sources/auth",
     },
     {
-      "name": "📦 modules/welcome/",
+      "name": "📦 sources/welcome/",
       "path": "sources/welcome",
     },
     {
-      "name": "📦 modules/proxy/",
+      "name": "📦 sources/proxy/",
       "path": "sources/proxy",
     },
     {
-      "name": "🏗️ modules/infra/proconnect-identite/",
+      "name": "🏗️ sources/infra/proconnect-identite/",
       "path": "sources/infra/proconnect-identite",
     },
     {
-      "name": "🏗️ modules/infra/zammad/",
+      "name": "🏗️ sources/infra/zammad/",
       "path": "sources/infra/zammad",
     },
     {
-      "name": "🏗️ modules/infra/crisp/",
+      "name": "🏗️ sources/infra/crisp/",
       "path": "sources/infra/crisp",
     },
     {
-      "name": "⚙️ modules/config/",
+      "name": "⚙️ sources/config/",
       "path": "sources/config",
     },
     {
@@ -103,6 +103,7 @@
     "cSpell.language": "en,fr",
     "cucumber.features": ["features/**/*.feature"],
     "cucumber.glue": ["cypress/support/step_definitions/**/*.ts"],
+    "cSpell.words": ["identite", "moderations", "proconnect", "zammad"],
   },
   "tasks": {
     "version": "2.0.0",
@@ -308,7 +309,7 @@
       {
         "label": "🏗️ Database MonComptePro Seed",
         "command": "bun",
-        "args": ["run", "database:proconnect-identite:seed"],
+        "args": ["run", "database:identite-proconnect:seed"],
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:/}",

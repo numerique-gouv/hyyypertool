@@ -1,3 +1,4 @@
+import { AUTO_GO_BACK_EVENT } from "#ui/AutoGoBack";
 import { Htmx_Events } from "@~/app.core/htmx";
 import { button } from "@~/app.ui/button";
 import { hx_urls } from "@~/app.urls";
@@ -6,13 +7,14 @@ import { AddAsMemberInternal } from "./AddAsMemberInternal";
 import { AddDomain } from "./AddDomain";
 import { SendNotification } from "./SendNotification";
 import { TagInput } from "./TagInput";
+import { type Values } from "./context";
 
 export async function AcceptModal({
   userEmail,
   moderation,
 }: {
   userEmail: string;
-  moderation: any;
+  moderation: Values["moderation"];
 }) {
   const hx_path_validate_moderation = await hx_urls.moderations[
     ":id"
@@ -53,8 +55,7 @@ export async function AcceptModal({
               wait for ${Htmx_Events.enum.afterSettle}
               add .hidden to #acceptModal
               go to the top of body smoothly
-              wait 2s
-              go back
+              trigger ${AUTO_GO_BACK_EVENT}(type: 'success', message: 'Modération accepté !') on #auto_go_back
           `}
       >
         <div class="mb-5">
@@ -76,7 +77,7 @@ export async function AcceptModal({
           <SendNotification />
         </div>
         <div>
-          <button class={`${button()} justify-center`} type="submit">
+          <button class={button()} type="submit">
             Terminer
           </button>
         </div>

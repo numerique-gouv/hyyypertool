@@ -31,18 +31,24 @@ Drizzle Studio is up and running on https://local.drizzle.studio
 # Format the generated code
 $ bun x prettier -w .
 
-# Fixing varchar("xxxxxx", { length:  }) error : remove ", { length:  }"
+# Fixing varchar("xxxxxx", { length:  })
+# error : remove ", { length:  }"
 $ sed -i 's/, { length:  }//g' src/drizzle/schema.ts
 $ bun x prettier -w .
 
-# Fixing timestamp("xxxxxx").default('1970-01-01 00:00:00'::timestamp without time zone) error : replace by .defaultNow()
-$ sed -i "s/.default('1970-01-01 00:00:00'::timestamp without time zone)/.defaultNow()/g" src/drizzle/schema.ts
+# Fixing varchar("xxxxxx", { length:  })
+# error : remove ".default('')"
+$ sed -i "s/.default(')/.default('')/g" src/drizzle/schema.ts
+$ bun x prettier -w .
+
+# Fixing credential_public_key: unknown("credential_public_key")
+# error : import { bytea } from "../orm/columes/bytea";
+$ sed -i "s/credential_public_key: unknown("credential_public_key")/credential_public_key: bytea("credential_public_key")/g" src/drizzle/schema.ts
 $ bun x prettier -w .
 
 # You might want to use an empty database to
-$ docker compose stop
-$ docker volume rm identite_postgres
-$ docker compose up --build --detach
+$ docker compose down --volumes
+$ docker compose up --build --wait --remove-orphans
 
 # Uncomment the generated database/src/drizzle/0000_xxxxxxx.sql snapshot
 # And run the migration on your local empty database

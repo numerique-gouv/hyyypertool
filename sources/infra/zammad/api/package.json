@@ -12,11 +12,11 @@
     "test": "bun test"
   },
   "dependencies": {
-    "@hono/zod-validator": "0.7.0",
+    "@hono/zod-validator": "0.7.2",
     "@~/app.core": "workspace:*",
     "@~/zammad.lib": "workspace:*",
-    "hono": "4.8.4",
-    "ts-pattern": "5.7.1",
+    "hono": "4.9.6",
+    "ts-pattern": "5.8.0",
     "zod": "4.0.2"
   },
   "devDependencies": {

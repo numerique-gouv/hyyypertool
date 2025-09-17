@@ -1,37 +1,78 @@
 //
 
-import { NotFoundError } from "@~/app.core/error";
 import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
 import type { App_Context } from "@~/app.middleware/context";
+import { get_crisp_mail } from "@~/crisp.lib";
 import type { Crisp_Context } from "@~/crisp.middleware";
-import {
-  schema,
-  type IdentiteProconnect_PgDatabase,
-} from "@~/identite-proconnect.database";
-import type { GetCripsFromSessionIdHandler } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
-import { type get_zammad_mail_dto } from "@~/zammad.lib/get_zammad_mail";
-import { eq } from "drizzle-orm";
+import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
+import { GetCripsFromSessionId } from "@~/moderations.lib/usecase/GetCripsFromSessionId";
+import { GetZammadFromTicketId } from "@~/moderations.lib/usecase/GetZammadFromTicketId";
+import { GetModerationForEmail } from "@~/moderations.repository";
+import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
+import { to } from "await-to-js";
 import { type Env } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 import type { z } from "zod";
 
 //
 
-export interface ContextVariablesType extends Env {
-  Variables: {
-    MAX_ARTICLE_COUNT: number;
-    //
-    crisp?: Awaited<ReturnType<GetCripsFromSessionIdHandler>>;
-    moderation: get_moderation_dto;
-    zammad:
-      | undefined
-      | {
-          articles: get_zammad_mail_dto;
-          show_more: boolean;
-          subject: string;
-          ticket_id: string;
-        };
+export async function loadEmailPageVariables(
+  pg: IdentiteProconnect_PgDatabase,
+  { id, crisp_config }: { id: number; crisp_config: any },
+) {
+  const MAX_ARTICLE_COUNT = 3;
+
+  // Load moderation data
+  const get_moderation_for_email = GetModerationForEmail(pg);
+  const moderation = await get_moderation_for_email(id);
+
+  // Load zammad data if ticket_id exists
+  if (moderation.ticket_id) {
+    const get_zammad_from_ticket_id = GetZammadFromTicketId({
+      fetch_zammad_mail: get_zammad_mail,
+    });
+    const [, zammad_result] = await to(
+      get_zammad_from_ticket_id({
+        ticket_id: moderation.ticket_id,
+        limit: MAX_ARTICLE_COUNT,
+      }),
+    );
+    return {
+      MAX_ARTICLE_COUNT,
+      moderation,
+      zammad: zammad_result,
+    };
+  }
+
+  // Load crisp data if session_id exists (using ticket_id as session_id)
+  if (moderation.ticket_id) {
+    const get_crisp_from_session_id = GetCripsFromSessionId({
+      crisp_config,
+      fetch_crisp_mail: get_crisp_mail,
+    });
+    const [, crisp_result] = await to(
+      get_crisp_from_session_id({
+        session_id: moderation.ticket_id,
+        limit: MAX_ARTICLE_COUNT,
+      }),
+    );
+    return {
+      MAX_ARTICLE_COUNT,
+      moderation,
+      crisp: crisp_result,
+    };
+  }
+
+  return {
+    MAX_ARTICLE_COUNT,
+    moderation,
   };
+}
+
+//
+
+export interface ContextVariablesType extends Env {
+  Variables: Awaited<ReturnType<typeof loadEmailPageVariables>>;
 }
 export type ContextType = App_Context & Crisp_Context & ContextVariablesType;
 
@@ -49,24 +90,3 @@ export const usePageRequestContext = useRequestContext<
   any,
   PageInputType
 >;
-
-//
-
-export async function get_moderation(
-  pg: IdentiteProconnect_PgDatabase,
-  { moderation_id }: { moderation_id: number },
-) {
-  const moderation = await pg.query.moderations.findFirst({
-    columns: { ticket_id: true },
-    where: eq(schema.moderations.id, moderation_id),
-    with: { user: { columns: { email: true } } },
-  });
-
-  if (!moderation) {
-    throw new NotFoundError("Moderation not found");
-  }
-
-  return moderation;
-}
-
-export type get_moderation_dto = Awaited<ReturnType<typeof get_moderation>>;

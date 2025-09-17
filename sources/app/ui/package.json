@@ -14,9 +14,9 @@
   "dependencies": {
     "@~/app.core": "workspace:*",
     "@~/app.urls": "workspace:*",
-    "hono": "4.8.4",
+    "hono": "4.9.6",
     "hono-slotify": "workspace:*",
-    "tailwind-variants": "1.0.0"
+    "tailwind-variants": "3.1.0"
   },
   "devDependencies": {
     "@~/config.happydom": "workspace:*",

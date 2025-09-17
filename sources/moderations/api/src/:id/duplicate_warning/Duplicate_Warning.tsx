@@ -2,68 +2,70 @@
 
 import { NotFoundError } from "@~/app.core/error";
 import { Htmx_Events } from "@~/app.core/htmx";
-import type { IdentiteProconnect_Pg_Context } from "@~/app.middleware/set_identite_pg";
 import { button } from "@~/app.ui/button";
 import { fieldset } from "@~/app.ui/form";
 import { OpenInZammad, SearchInZammad } from "@~/app.ui/zammad/components";
 import { hx_urls, urls } from "@~/app.urls";
-import { schema } from "@~/identite-proconnect.database";
 import {
-  get_duplicate_moderations,
-  type get_duplicate_moderations_dto,
-} from "@~/moderations.repository/get_duplicate_moderations";
+  schema,
+  type IdentiteProconnect_PgDatabase,
+} from "@~/identite-proconnect.database";
 import {
-  get_user_by_id,
-  type get_user_by_id_dto,
-} from "@~/users.repository/get_user_by_id";
+  GetDuplicateModerations,
+  type GetDuplicateModerationsDto,
+} from "@~/moderations.repository";
+import { GetUserById } from "@~/users.repository";
 import { get_zammad_mail } from "@~/zammad.lib/get_zammad_mail";
 import { to } from "await-to-js";
 import { and, asc, eq, ilike, not, or } from "drizzle-orm";
 import { raw } from "hono/html";
 import { createContext, useContext } from "hono/jsx";
-import { useRequestContext } from "hono/jsx-renderer";
+import { usePageRequestContext } from "./context";
 
 //
 
-export async function Duplicate_Warning({
-  moderation_id,
-  organization_id,
-  user_id,
-}: {
-  moderation_id: number;
-  organization_id: number;
-  user_id: number;
-}) {
-  const {
-    var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
-  const moderations = await get_duplicate_moderations(identite_pg, {
-    organization_id,
-    user_id,
-  });
-
-  const user = await get_user_by_id(identite_pg, { id: user_id });
-  if (!user) return <p>Utilisateur introuvable</p>;
-
+export async function Duplicate_Warning() {
   return (
-    <Duplicate_Warning.Context.Provider
-      value={{
-        moderation_id,
-        moderations,
-        user,
-      }}
-    >
+    <>
       <Alert_Duplicate_Moderation />
       <Alert_Duplicate_User />
-    </Duplicate_Warning.Context.Provider>
+    </>
   );
 }
 
-Duplicate_Warning.Context = createContext({
-  moderation_id: NaN,
-  moderations: {} as get_duplicate_moderations_dto,
-  user: {} as NonNullable<Awaited<get_user_by_id_dto>>,
-});
+async function createDuplicateWarningContextValues(
+  pg: IdentiteProconnect_PgDatabase,
+  {
+    organization_id,
+    user_id,
+    moderation_id,
+  }: { organization_id: number; user_id: number; moderation_id: number },
+) {
+  const get_duplicate_moderations = GetDuplicateModerations(pg);
+
+  const get_user_by_id = GetUserById(pg, {
+    columns: {
+      id: true,
+      email: true,
+      given_name: true,
+      family_name: true,
+    },
+  });
+
+  return {
+    moderation_id,
+    moderations: await get_duplicate_moderations({
+      organization_id,
+      user_id,
+    }),
+    user: await get_user_by_id(user_id),
+  };
+}
+
+Duplicate_Warning.queryContextValues = createDuplicateWarningContextValues;
+Duplicate_Warning.Context = createContext(
+  {} as Awaited<ReturnType<typeof Duplicate_Warning.queryContextValues>>,
+);
 
 //
 
@@ -191,7 +193,7 @@ async function MarkModerationAsProcessed() {
 
 //
 
-function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
+function get_moderation_tickets(moderations: GetDuplicateModerationsDto) {
   return Promise.all(
     moderations.map(async (moderation) => {
       if (!moderation.ticket_id) return { moderation };
@@ -207,7 +209,7 @@ function get_moderation_tickets(moderations: get_duplicate_moderations_dto) {
 async function get_moderation(moderation_id: number) {
   const {
     var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  } = usePageRequestContext();
 
   const moderation = await identite_pg.query.moderations.findFirst({
     columns: { moderated_at: true },
@@ -220,7 +222,7 @@ async function get_moderation(moderation_id: number) {
 async function get_duplicate_users(moderation_id: number) {
   const {
     var: { identite_pg },
-  } = useRequestContext<IdentiteProconnect_Pg_Context>();
+  } = usePageRequestContext();
 
   const moderation = await identite_pg.query.moderations.findFirst({
     columns: { organization_id: true },

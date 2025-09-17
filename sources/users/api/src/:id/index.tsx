@@ -1,23 +1,25 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
+import { NotFoundError } from "@~/app.core/error";
 import type { Htmx_Header } from "@~/app.core/htmx";
 import { Entity_Schema } from "@~/app.core/schema";
 import { Main_Layout } from "@~/app.layout/index";
+import { set_variables } from "@~/app.middleware/context/set_variables";
 import { urls } from "@~/app.urls";
 import { CrispApi } from "@~/crisp.lib/api";
 import { set_crisp_config } from "@~/crisp.middleware";
 import { schema } from "@~/identite-proconnect.database";
 import { ResetMFA, ResetPassword } from "@~/users.lib/usecase";
-import { get_user_by_id } from "@~/users.repository/get_user_by_id";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
 import type { ContextType } from "./context";
+import { loadUserPageVariables } from "./context";
 import user_moderations_route from "./moderations";
-import { User_NotFound } from "./not-found";
+import { UserNotFound } from "./not-found";
 import user_organizations_page_route from "./organizations";
-import Page from "./page";
+import { UserPage } from "./page";
 
 //
 
@@ -26,26 +28,30 @@ export default new Hono<ContextType>()
     "/",
     jsxRenderer(Main_Layout),
     zValidator("param", Entity_Schema),
-    async function set_user(
+    async function set_variables_middleware(
       { render, req, set, status, var: { identite_pg } },
       next,
     ) {
       const { id } = req.valid("param");
-      const user = await get_user_by_id(identite_pg, {
-        id,
-      });
 
-      if (!user) {
-        status(404);
-        return render(<User_NotFound user_id={Number(req.param("id"))} />);
+      try {
+        const variables = await loadUserPageVariables(identite_pg, { id });
+        set_variables(set, variables);
+        return next();
+      } catch (error) {
+        if (error instanceof NotFoundError) {
+          status(404);
+          return render(<UserNotFound user_id={id} />);
+        }
+        throw error;
       }
-
-      set("user", user);
-      return next();
     },
     async function GET({ render, set, var: { user } }) {
-      set("page_title", `Utilisateur ${user.given_name} ${user.family_name} (${user.email})`);
-      return render(<Page />);
+      set(
+        "page_title",
+        `Utilisateur ${user.given_name} ${user.family_name} (${user.email})`,
+      );
+      return render(<UserPage />);
     },
   )
   .delete(

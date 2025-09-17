@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@~/identite-proconnect.database": "workspace:*",
-    "drizzle-orm": "0.41.0"
+    "drizzle-orm": "0.44.5"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"

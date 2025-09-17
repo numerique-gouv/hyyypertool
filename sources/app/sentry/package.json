@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@~/app.core": "workspace:*",
-    "@sentry/node": "9.42.1",
-    "@sentry/profiling-node": "9.42.1",
+    "@sentry/node": "10.11.0",
+    "@sentry/profiling-node": "10.11.0",
     "consola": "3.4.2",
-    "hono": "4.8.4"
+    "hono": "4.9.6"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*"
