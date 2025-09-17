@@ -26,7 +26,6 @@ Fonctionnalité: Refuser une modération bloquante
 
     Quand je clique sur "Annuler"
     Alors je vois "Cette modération a été marqué comme traitée le"
-    Quand je clique sur le bouton "retour"
 
     Quand je clique sur "Moderations"
     Et je dois voir le titre de page "Liste des moderations"

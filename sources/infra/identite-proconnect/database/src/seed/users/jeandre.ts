@@ -9,11 +9,11 @@ export async function insert_jeandre(db: IdentiteProconnect_PgDatabase) {
   const insert = await db
     .insert(schema.users)
     .values({
-      created_at: new Date("2024-01-15T10:30:00.000Z").toISOString(),
+      created_at: "2024-01-15T11:30:00.000+02:00",
       email: "jeandre@yopmail.com",
       family_name: "Dré",
       given_name: "Jean",
-      updated_at: new Date("2024-01-15T10:30:00.000Z").toISOString(),
+      updated_at: "2024-01-15T11:30:00.000+02:00",
     })
     .returning();
 

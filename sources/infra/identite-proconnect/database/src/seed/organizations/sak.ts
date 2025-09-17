@@ -7,8 +7,8 @@ export async function insert_sak(db: IdentiteProconnect_PgDatabase) {
     .insert(schema.organizations)
     .values({
       siret: "20006967200018",
-      created_at: "1970-01-01 00:00:00+00",
-      updated_at: "1970-01-01 00:00:00+00",
+      created_at: "1970-01-01T00:00:00+02:00",
+      updated_at: "1970-01-01T00:00:00+02:00",
       cached_libelle: "Cc du ternois",
       cached_nom_complet: "Cc du ternois",
       cached_enseigne: null,
@@ -27,7 +27,7 @@ export async function insert_sak(db: IdentiteProconnect_PgDatabase) {
         "84.11Z - Administration publique générale",
       cached_categorie_juridique: "7346",
       cached_libelle_categorie_juridique: "Communauté de communes",
-      organization_info_fetched_at: "2022-08-08 16:17:39.373+00",
+      organization_info_fetched_at: "2022-08-08T16:17:39.373+02:00",
       cached_code_officiel_geographique: null,
     })
     .returning();
@@ -40,8 +40,8 @@ export async function insert_sak(db: IdentiteProconnect_PgDatabase) {
       verification_type: null satisfies EmailDomainVerificationType,
       can_be_suggested: true,
       verified_at: null,
-      created_at: "1970-01-01 00:00:00+00",
-      updated_at: "1970-01-01 00:00:00+00",
+      created_at: "1970-01-01T00:00:00+02:00",
+      updated_at: "1970-01-01T00:00:00+02:00",
     },
   ]);
 
