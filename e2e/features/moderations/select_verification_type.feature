@@ -6,9 +6,12 @@ Fonctionnalité: Sélectionner un type de vérification lors de l'acceptation
     Et un faux serveur "identite.proconnect.gouv.fr"
     Quand je navigue sur la page
     Et je clique sur le bouton "ProConnect"
+
+    Et je dois voir le titre de page "Liste des moderations"
     Alors je vois "Liste des moderations"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"
     Et je clique sur "➡️"
+
     Et je dois voir le titre de page "Modération a traiter de Jean Bon pour 51935970700022"
     Et je réinitialise le contexte
     Et je clique sur "✅ Accepter"
@@ -22,7 +25,9 @@ Fonctionnalité: Sélectionner un type de vérification lors de l'acceptation
     Quand je clique sur "Annuler"
     Alors je vois "Cette modération a été marqué comme traitée le"
     Et je vois "Validé par user@yopmail.com"
-    Quand je clique sur le bouton "retour"
+    Quand je clique sur "Moderations"
+
+    Et je dois voir le titre de page "Liste des moderations"
     Alors je vois "Liste des moderations"
     Quand je clique sur "Voir les demandes traitées"
     Quand je vais à l'intérieur de la rangée nommée "Modération a traiter de Jean Bon pour 51935970700022"
