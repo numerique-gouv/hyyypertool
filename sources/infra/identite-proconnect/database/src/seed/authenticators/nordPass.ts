@@ -10,11 +10,7 @@ export function insert_nordPass_authenticator(
     last_used_at: new Date("2024-06-15T12:00:00.000Z").toISOString(),
     usage_count: 87,
     credential_id: "2",
-    // adds the type any because Drizzle & @electric-sql/pglite don't support Buffer
-    credential_public_key: Buffer.from(
-      "mock-credential-key-data",
-      "utf8",
-    ) as any,
+    credential_public_key: Buffer.from("mock-credential-key-data", "utf8"),
     counter: 0,
     credential_backed_up: false,
     user_id,

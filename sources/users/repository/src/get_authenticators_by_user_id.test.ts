@@ -25,7 +25,16 @@ test("should returns one authenticator", async () => {
   const authenticators =
     await get_authenticators_by_user_id(pink_diamond_user_id);
 
-  expect(authenticators).toHaveLength(1);
+  expect(authenticators).toMatchInlineSnapshot(`
+    [
+      {
+        "created_at": "2024-06-10 10:00:00+00",
+        "display_name": "1Password",
+        "last_used_at": "2024-06-15 12:00:00+00",
+        "usage_count": 5,
+      },
+    ]
+  `);
 });
 
 test("should returns two authenticators & structure of authenticators", async () => {
@@ -37,21 +46,22 @@ test("should returns two authenticators & structure of authenticators", async ()
   const authenticators =
     await get_authenticators_by_user_id(pink_diamond_user_id);
 
-  expect(authenticators).toHaveLength(2);
-  expect(authenticators).toEqual([
-    {
-      display_name: "1Password",
-      created_at: expect.any(String),
-      last_used_at: expect.any(String),
-      usage_count: expect.any(Number),
-    },
-    {
-      display_name: "NordPass",
-      created_at: expect.any(String),
-      last_used_at: expect.any(String),
-      usage_count: expect.any(Number),
-    },
-  ]);
+  expect(authenticators).toMatchInlineSnapshot(`
+    [
+      {
+        "created_at": "2024-06-10 10:00:00+00",
+        "display_name": "1Password",
+        "last_used_at": "2024-06-15 12:00:00+00",
+        "usage_count": 5,
+      },
+      {
+        "created_at": "2024-06-10 10:00:00+00",
+        "display_name": "NordPass",
+        "last_used_at": "2024-06-15 12:00:00+00",
+        "usage_count": 87,
+      },
+    ]
+  `);
 });
 
 test("should returns zero authenticator", async () => {
