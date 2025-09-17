@@ -17,9 +17,9 @@ export async function insert_bosch_rexroth(pg: IdentiteProconnect_PgDatabase) {
       cached_libelle: "Bosch rexroth d.s.i.",
       cached_nom_complet: "Bosch rexroth d.s.i.",
       cached_tranche_effectifs: "41",
-      created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
+      created_at: "2024-01-19T22:27:42.009+02:00",
       siret: "44023386400014 ",
-      updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
+      updated_at: "2024-02-15T14:45:32.598+02:00",
     })
     .returning({ id: schema.organizations.id });
 
@@ -28,9 +28,9 @@ export async function insert_bosch_rexroth(pg: IdentiteProconnect_PgDatabase) {
     organization_id,
     verification_type: "verified",
     can_be_suggested: true,
-    verified_at: "2022-05-11 15:31:44.199+00",
-    created_at: "2022-04-11 15:31:44.199+00",
-    updated_at: "2022-04-11 15:31:44.199+00",
+    verified_at: "2022-05-11T17:31:44.199+02:00",
+    created_at: "2022-04-11T17:31:44.199+02:00",
+    updated_at: "2022-04-11T17:31:44.199+02:00",
   });
 
   return organization_id;

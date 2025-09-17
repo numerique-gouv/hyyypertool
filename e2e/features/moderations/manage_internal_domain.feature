@@ -38,6 +38,8 @@ Fonctionnalité: Gérer un domaine interne lors de la modération
     Quand je clique sur "Ajouter un domain"
     Et je tape "poymail.com{enter}"
 
+    # TODO(douglasduteil): We should update the title when adding a domain
+    Et je vois "poymail.com"
     Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
       | Domain      | Status | Type     |
       | poymail.com | ✅     | verified |

@@ -29,8 +29,8 @@
       "path": "sources/proxy",
     },
     {
-      "name": "🏗️ sources/infra/proconnect-identite/",
-      "path": "sources/infra/proconnect-identite",
+      "name": "🏗️ sources/infra/identite-proconnect/",
+      "path": "sources/infra/identite-proconnect",
     },
     {
       "name": "🏗️ sources/infra/zammad/",
