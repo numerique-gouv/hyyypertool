@@ -23,9 +23,9 @@ Fonctionnalité: Page utilisateur
     Et je vois "prénomRaphael"
     Et je vois "nomDubigny"
     Et je vois "téléphone0123456789"
-    Et je vois "Création13/07/2018 15:35:15"
-    Et je vois "Dernière modification22/06/2023 14:34:34"
-    Et je vois "Email vérifié envoyé le22/06/2023 14:34:34"
+    Et je vois "Création13/07/2018 17:35:15"
+    Et je vois "Dernière modification22/06/2023 16:34:34"
+    Et je vois "Email vérifié envoyé le22/06/2023 16:34:34"
 
   # Scénario: Organisations de Raphael
     Alors je vois "Raphael est enregistré(e) dans les organisations suivantes "

@@ -26,10 +26,10 @@ export async function insert_commune_de_pompierre(
       cached_statut_diffusion: "O",
       cached_tranche_effectifs_unite_legale: "02",
       cached_tranche_effectifs: "01",
-      created_at: "2022-04-11 15:31:44.199+00",
-      organization_info_fetched_at: "2022-08-08 17:36:27.443+00",
+      created_at: "2022-04-11T15:31:44.199+02:00",
+      organization_info_fetched_at: "2022-08-08T17:36:27.443+02:00",
       siret: "21880352600019",
-      updated_at: "2022-04-11 15:31:44.199+00",
+      updated_at: "2022-04-11T15:31:44.199+02:00",
     })
     .returning({ id: schema.organizations.id });
 
@@ -39,8 +39,8 @@ export async function insert_commune_de_pompierre(
     verification_type: null,
     can_be_suggested: true,
     verified_at: null,
-    created_at: "2022-04-11 15:31:44.199+00",
-    updated_at: "2022-04-11 15:31:44.199+00",
+    created_at: "2022-04-11T15:31:44.199+02:00",
+    updated_at: "2022-04-11T15:31:44.199+02:00",
   });
 
   return organization_id;

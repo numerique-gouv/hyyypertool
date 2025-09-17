@@ -16,9 +16,9 @@ export async function insert_aldp(db: IdentiteProconnect_PgDatabase) {
       cached_nom_complet:
         "Association des loisirs de la diversite et du partage (ALDP)",
       cached_tranche_effectifs: "21",
-      created_at: new Date("2022-02-03T12:27:30.000Z").toISOString(),
+      created_at: "2022-02-03T13:27:30.000+02:00",
       siret: "81797266400038",
-      updated_at: new Date("2022-02-03T12:27:30.000Z").toISOString(),
+      updated_at: "2022-02-03T13:27:30.000+02:00",
     })
     .returning();
   const organization = insert.at(0)!;

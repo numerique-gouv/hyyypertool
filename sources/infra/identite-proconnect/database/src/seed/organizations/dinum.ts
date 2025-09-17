@@ -21,9 +21,9 @@ export async function insert_dinum(db: IdentiteProconnect_PgDatabase) {
       cached_libelle: "DINUM",
       cached_nom_complet: "Direction interministerielle du numerique (DINUM)",
       cached_tranche_effectifs: "22",
-      created_at: new Date("2018-07-13 15:35:15").toISOString(),
+      created_at: "2018-07-13T17:35:15+02:00",
       siret: "13002526500013",
-      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      updated_at: "2023-06-22T16:34:34+02:00",
     })
     .returning();
 

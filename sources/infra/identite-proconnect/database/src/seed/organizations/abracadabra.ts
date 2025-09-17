@@ -17,12 +17,10 @@ export async function insert_abracadabra(db: IdentiteProconnect_PgDatabase) {
       cached_libelle: "Abracadabra",
       cached_nom_complet: "Abracadabra (ABRACADABRA)",
       cached_tranche_effectifs: "11",
-      created_at: new Date("2022-08-08T15:43:15.501Z").toISOString(),
-      organization_info_fetched_at: new Date(
-        "2022-08-08T15:43:15.501Z",
-      ).toISOString(),
+      created_at: "2022-08-08T17:43:15.501+02:00",
+      organization_info_fetched_at: "2022-08-08T17:43:15.501+02:00",
       siret: "51935970700022",
-      updated_at: new Date("2022-08-08T15:43:15.501Z").toISOString(),
+      updated_at: "2022-08-08T17:43:15.501+02:00",
     })
     .returning();
 
