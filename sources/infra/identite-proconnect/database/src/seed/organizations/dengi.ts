@@ -15,9 +15,9 @@ export async function insert_dengi(db: IdentiteProconnect_PgDatabase) {
       cached_libelle: "Dengi - Leclerc",
       cached_nom_complet: "Dengi",
       cached_tranche_effectifs: "21",
-      created_at: new Date("2018-07-13 15:35:15").toISOString(),
+      created_at: "2018-07-13T17:35:15+02:00",
       siret: "38514019900014",
-      updated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      updated_at: "2023-06-22T16:34:34+02:00",
     })
     .returning();
 

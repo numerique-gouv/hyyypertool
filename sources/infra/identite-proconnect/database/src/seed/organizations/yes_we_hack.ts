@@ -24,10 +24,10 @@ export async function insert_yes_we_hack(pg: IdentiteProconnect_PgDatabase) {
       cached_statut_diffusion: "O",
       cached_tranche_effectifs_unite_legale: "21",
       cached_tranche_effectifs: "12",
-      created_at: "2023-12-19 10:02:33.274+00",
-      organization_info_fetched_at: "2024-09-24 09:15:41.308+00",
+      created_at: "2023-12-19T10:02:33.274+02:00",
+      organization_info_fetched_at: "2024-09-24T09:15:41.308+02:00",
       siret: "81403721400016",
-      updated_at: "2024-09-24 09:15:41.308+00",
+      updated_at: "2024-09-24T09:15:41.308+02:00",
     })
     .returning({ id: schema.organizations.id });
 
@@ -36,9 +36,9 @@ export async function insert_yes_we_hack(pg: IdentiteProconnect_PgDatabase) {
     domain: "yeswehack.com",
     verification_type: null,
     can_be_suggested: true,
-    verified_at: "2024-03-26 05:37:24.197+00",
-    created_at: "2023-12-19 10:02:33.274+00",
-    updated_at: "2024-03-26 05:37:24.197+00",
+    verified_at: "2024-03-26T05:37:24.197+02:00",
+    created_at: "2023-12-19T10:02:33.274+02:00",
+    updated_at: "2024-03-26T05:37:24.197+02:00",
   });
 
   return organization_id;

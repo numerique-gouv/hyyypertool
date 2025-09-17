@@ -95,7 +95,7 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     //
 
     await insert_moderation(db, {
-      created_at: new Date("2011-11-11 11:11:11").toISOString(),
+      created_at: "2011-11-11T12:11:11+02:00",
       organization_id: dinum.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
@@ -106,7 +106,7 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     );
 
     await insert_moderation(db, {
-      created_at: new Date("2011-11-11 00:02:59").toISOString(),
+      created_at: "2011-11-11T01:02:59+02:00",
       organization_id: abracadabra.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_bon.id,
@@ -117,7 +117,7 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     );
 
     await insert_moderation(db, {
-      created_at: new Date("2011-11-11 00:03:15").toISOString(),
+      created_at: "2011-11-11T01:03:15+02:00",
       organization_id: abracadabra.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: jean_dre.id,
@@ -140,7 +140,7 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
       organization_id: dengi.id,
       type: "organization_join_block" as MCP_Moderation["type"],
       user_id: richard_bon.id,
-      moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      moderated_at: "2023-06-22T16:34:34+02:00",
       ticket_id: "session_789",
     });
     consola.verbose(
@@ -168,11 +168,11 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
     );
 
     await insert_moderation(db, {
-      created_at: new Date("2011-11-12 11:11:12").toISOString(),
+      created_at: "2011-11-12T12:11:12+02:00",
       organization_id: bosch_rexroth,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: marie_bon,
-      moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      moderated_at: "2023-06-22T16:34:34+02:00",
       ticket_id: "session_987",
     });
     consola.verbose(
@@ -182,7 +182,7 @@ export async function insert_database(db: IdentiteProconnect_PgDatabase) {
       organization_id: dinum.id,
       type: "non_verified_domain" as MCP_Moderation["type"],
       user_id: raphael_alpha.id,
-      moderated_at: new Date("2023-06-22 14:34:34").toISOString(),
+      moderated_at: "2023-06-22T16:34:34+02:00",
       ticket_id: "session_111",
     });
     consola.verbose(

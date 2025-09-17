@@ -8,15 +8,15 @@ export async function insert_mariebon(pg: IdentiteProconnect_PgDatabase) {
   const [{ id: user_id }] = await pg
     .insert(schema.users)
     .values({
-      created_at: new Date("2014-02-13T17:25:09.000Z").toISOString(),
+      created_at: "2014-02-13T18:25:09.000+02:00",
       email_verified: true,
       email: "marie.bon@fr.bosch.com",
       family_name: "Bon",
       given_name: "Marie",
       job: "Gestionnaire données sociales",
-      last_sign_in_at: new Date("2024-02-15T12:48:00.106Z").toISOString(),
+      last_sign_in_at: "2024-02-15T13:48:00.106+02:00",
       sign_in_count: 3,
-      updated_at: new Date("2014-02-15T13:48:00.000Z").toISOString(),
+      updated_at: "2014-02-15T14:48:00.000+02:00",
     })
     .returning({ id: schema.users.id });
 

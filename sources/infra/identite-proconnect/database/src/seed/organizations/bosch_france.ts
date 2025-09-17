@@ -19,9 +19,9 @@ export async function insert_bosch_france(pg: IdentiteProconnect_PgDatabase) {
       cached_libelle: "Robert bosch france",
       cached_nom_complet: "Robert bosch france",
       cached_tranche_effectifs: "41",
-      created_at: new Date("2024-01-19T21:27:42.009Z").toISOString(),
+      created_at: "2024-01-19T22:27:42.009+02:00",
       siret: "57206768400017",
-      updated_at: new Date("2024-02-15T13:45:32.598Z").toISOString(),
+      updated_at: "2024-02-15T14:45:32.598+02:00",
     })
     .returning({ id: schema.organizations.id });
 
