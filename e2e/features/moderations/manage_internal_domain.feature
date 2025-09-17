@@ -23,8 +23,8 @@ Fonctionnalité: Gérer un domaine interne lors de la modération
     Et je clique sur "✅ Domaine autorisé"
     Et je réinitialise le contexte
     Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
-      | Domain      | Status |
-      | yopmail.com | ✅     |
+      | Domain      | Status | Type     |
+      | yopmail.com | ✅     | verified |
 
     Quand je vais à l'intérieur de la rangée nommée "Domaine yopmail.com (verified)"
     Quand je clique sur "Menu"
@@ -39,5 +39,5 @@ Fonctionnalité: Gérer un domaine interne lors de la modération
     Et je tape "poymail.com{enter}"
 
     Alors je dois voir un tableau nommé "🌐 1 domaine connu dans l’organisation" et contenant
-      | Domain      | Status |
-      | poymail.com| ✅  |
+      | Domain      | Status | Type     |
+      | poymail.com | ✅     | verified |

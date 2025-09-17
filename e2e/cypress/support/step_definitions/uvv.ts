@@ -35,11 +35,12 @@ Before(() => {
 });
 
 // Context management
+
 Given("je vais à l'intérieur du dialogue nommé {string}", (text: string) => {
   get_within_context = () => cy.findAllByLabelText(text);
 });
 
-Given("je vais à l'intérieur du tableau nommé {string}", (title: string) => {
+Given("je vais à l'intérieur de l'élément nommé {string}", (title: string) => {
   cy.contains(title)
     .invoke("attr", "id")
     .then((id) => {
@@ -109,7 +110,7 @@ When("je retire le focus", () => {
 // Assertions
 Then("je vois {string}", (text: string) => {
   get_within_context().within(() => {
-    cy.contains(text, { timeout: 8000 }).should("be.visible");
+    cy.contains(text, { timeout: 8_000 }).should("be.visible");
   });
 });
 

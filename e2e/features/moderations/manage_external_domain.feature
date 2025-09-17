@@ -14,10 +14,10 @@ Fonctionnalité: Gérer un domaine externe lors de la modération
     Et je clique sur "🌐 1 domaine connu dans l’organisation"
 
   Scénario: Domaine externe
-    Quand je vais à l'intérieur du tableau nommé "🌐 1 domaine connu dans l’organisation"
+    Quand je vais à l'intérieur de l'élément nommé "🌐 1 domaine connu dans l’organisation"
     Alors je vois "yopmail.com"
     Et je réinitialise le contexte
     Quand je clique sur "Menu"
     Et je clique sur le bouton "❎ Domaine externe"
-    Quand je vais à l'intérieur du tableau nommé "🌐 1 domaine connu dans l’organisation"
+    Quand je vais à l'intérieur de l'élément nommé "🌐 1 domaine connu dans l’organisation"
     Alors je vois "❎"

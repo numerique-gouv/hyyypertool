@@ -17,16 +17,20 @@ export async function UserPage() {
   const {
     var: { user },
   } = usePageRequestContext();
+  const $organizations_describedby = hyper_ref("user_organizations");
+  const $moderations_describedby = hyper_ref("user_moderations");
+
   const hx_get_user_organizations_props = await hx_urls.users[
     ":id"
   ].organizations.$get({
     param: { id: user.id.toString() },
-    query: { describedby: hyper_ref(), page_ref: hyper_ref() },
+    query: { describedby: $organizations_describedby, page_ref: hyper_ref() },
   });
   const hx_get_user_moderations_props = await hx_urls.users[
     ":id"
   ].moderations.$get({
     param: { id: user.id.toString() },
+    query: { describedby: $moderations_describedby },
   });
 
   return (
@@ -49,27 +53,28 @@ export async function UserPage() {
       </div>
       <hr />
       <div class="fr-container">
-        <b>{user.given_name}</b> est enregistré(e) dans les organisations
-        suivantes :
+        <h1 id={$organizations_describedby}>
+          Liste des organisations de {user.given_name}
+        </h1>
         <div class="fr-table max-w-full overflow-x-auto">
           <div
             {...hx_get_user_organizations_props}
             hx-target="this"
             hx-trigger="load"
             class="fr-table"
-            id="table-user-organisations"
           ></div>
         </div>
         <hr />
-        <b>{user.given_name}</b> est enregistré(e) dans les modérations
-        suivantes :
+        <h1 id={$moderations_describedby}>
+          Liste des modérations de {user.given_name}
+        </h1>
+
         <div class="fr-table max-w-full overflow-x-auto">
           <div
             {...hx_get_user_moderations_props}
             hx-target="this"
             hx-trigger="load"
             class="fr-table"
-            id="table-user-organisations"
           ></div>
         </div>
       </div>
@@ -79,8 +84,8 @@ export async function UserPage() {
         </div>
       </div>
       <hr />
-      <div class="fr-container py-6">
-        <h1>🔓 MFA</h1>
+      <div aria-describedby="mfa" class="fr-container py-6">
+        <h1 id="mfa">🔓 MFA</h1>
         <MFA />
       </div>
       <hr />
@@ -100,12 +105,15 @@ async function MFA() {
   if (!hasMFA) {
     return <p>L'utilisateur n'a pas de MFA configurée.</p>;
   }
+
   return (
     <div className="grid grid-cols-2 gap-4">
-      <div class="fr-card p-6!">
-        <h2 class="text-(--text-action-high-blue-france)">TOTP</h2>
+      <div aria-describedby="totp" class="fr-card p-6!">
+        <h2 class="text-(--text-action-high-blue-france)" id="totp">
+          TOTP
+        </h2>
         <p class="mb-1">
-          <b>TOTP enrôlé le :</b> {user.totp_key_verified_at}
+          <b>TOTP enrôlé le :</b> <LocalTime date={user.totp_key_verified_at} />
         </p>
         <p class="mb-1">
           <b>Force la 2FA sur tous les sites :</b>{" "}
@@ -113,15 +121,22 @@ async function MFA() {
         </p>
       </div>
       {authenticators.map((authenticator) => (
-        <div class="fr-card p-6!">
-          <h2 class="text-(--text-action-high-blue-france)">
+        <div
+          aria-describedby={`passkey-${authenticator.credential_id}`}
+          class="fr-card p-6!"
+        >
+          <h2
+            class="text-(--text-action-high-blue-france)"
+            id={`passkey-${authenticator.credential_id}`}
+          >
             Passkey - {authenticator.display_name}
           </h2>
           <p class="mb-1">
-            <b>Création :</b> {authenticator.created_at}
+            <b>Création :</b> <LocalTime date={authenticator.created_at} />
           </p>
           <p class="mb-1">
-            <b>Dernière utilisation :</b> {authenticator.last_used_at}
+            <b>Dernière utilisation :</b>{" "}
+            <LocalTime date={authenticator.last_used_at} />
           </p>
           <p class="mb-1">
             <b>Nombre d'utilisation :</b> {authenticator.usage_count}

@@ -11,7 +11,7 @@
     "sources/*/*/src/**/*.tsx"
   ],
   "references": [
-    { "path": "sources/app/api/tsconfig.json" },
-    { "path": "sources/app/core/tsconfig.json" }
+    { "path": "./sources/app/api/tsconfig.json" },
+    { "path": "./sources/app/core/tsconfig.json" }
   ]
 }

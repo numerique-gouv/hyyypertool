@@ -5,9 +5,9 @@ export function insert_1Password_authenticator(
   user_id: number,
 ) {
   return db.insert(schema.authenticators).values({
-    created_at: new Date("2024-06-10T10:00:00.000Z").toISOString(),
+    created_at: new Date("2023-06-23 3:33:33").toISOString(),
     display_name: "1Password",
-    last_used_at: new Date("2024-06-15T12:00:00.000Z").toISOString(),
+    last_used_at: new Date("2023-06-24 4:44:44").toISOString(),
     usage_count: 5,
     credential_id: "1",
     credential_public_key: Buffer.from("mock-credential-key-data", "utf8"),

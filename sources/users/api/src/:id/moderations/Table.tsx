@@ -12,11 +12,12 @@ import { usePageRequestContext, type ModerationList } from "./context";
 
 export function Table() {
   const {
-    var: { moderations },
+    var: { describedby, moderations },
   } = usePageRequestContext();
+
   return (
     <div class="fr-table *:table!">
-      <table>
+      <table aria-describedby={describedby}>
         <thead>
           <tr>
             <th>ID</th>

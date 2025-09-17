@@ -13,6 +13,7 @@ export function GetAuthenticatorByUserId(pg: IdentiteProconnect_PgDatabase) {
     return pg.query.authenticators.findMany({
       columns: {
         created_at: true,
+        credential_id: true,
         display_name: true,
         last_used_at: true,
         usage_count: true,
