@@ -68,6 +68,7 @@ jobs:
           CONSOLA_LEVEL: "2"
           DEPLOY_ENV: "production"
           NODE_ENV: "development"
+          TZ: "Europe/Paris"
         with:
           browser: chrome
           build: bun run build
