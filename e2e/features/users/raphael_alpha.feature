@@ -23,9 +23,9 @@ Fonctionnalité: Page utilisateur avec MFA
     Et je vois "prénomRaphael"
     Et je vois "nomDubigny"
     Et je vois "téléphone0123456789"
-    Et je vois "Création13/07/2018 15:35:15"
-    Et je vois "Dernière modification22/06/2023 14:34:34"
-    Et je vois "Email vérifié envoyé le22/06/2023 14:34:34"
+    Et je vois "Création13/07/2018 17:35:15"
+    Et je vois "Dernière modification22/06/2023 16:34:34"
+    Et je vois "Email vérifié envoyé le22/06/2023 16:34:34"
 
     Alors je dois voir un tableau nommé "Liste des modérations de Raphael" et contenant
       | Type	 |
@@ -38,7 +38,7 @@ Fonctionnalité: Page utilisateur avec MFA
     Alors je vois "Passkey - NordPass"
 
     Sachant que je vais à l'intérieur de l'élément nommé "TOTP"
-    Alors je vois "TOTP enrôlé le : 22/06/2023 14:34:34"
+    Alors je vois "TOTP enrôlé le : 22/06/2023 16:34:34"
     Alors je vois "Force la 2FA sur tous les sites : ✅"
     Et je réinitialise le contexte
 
