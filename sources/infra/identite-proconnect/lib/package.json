@@ -21,7 +21,7 @@
     "@gouvfr-lasuite/proconnect.entreprise": "0.0.0",
     "@~/app.core": "workspace:*",
     "consola": "3.4.2",
-    "zod": "4.0.2"
+    "zod": "4.1.8"
   },
   "devDependencies": {
     "@~/config.typescript": "workspace:*",
