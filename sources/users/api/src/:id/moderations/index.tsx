@@ -1,27 +1,33 @@
 //
 
 import { zValidator } from "@hono/zod-validator";
-import { Entity_Schema } from "@~/app.core/schema";
+import { DescribedBy_Schema, Entity_Schema } from "@~/app.core/schema";
+import type { App_Context } from "@~/app.middleware/context";
 import { set_variables } from "@~/app.middleware/context/set_variables";
 import { Hono } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { loadModerationsPageVariables, type ContextType } from "./context";
+import { loadModerationsPageVariables } from "./context";
 import { Table } from "./Table";
 
 //
 
-export default new Hono<ContextType>().use("/", jsxRenderer()).get(
+export default new Hono<App_Context>().use("/", jsxRenderer()).get(
   "/",
   zValidator("param", Entity_Schema),
+  zValidator("query", DescribedBy_Schema),
   async function set_variables_middleware(
     { req, set, var: { identite_pg } },
     next,
   ) {
     const { id: user_id } = req.valid("param");
-    const variables = await loadModerationsPageVariables(identite_pg, {
-      user_id,
-    });
-    set_variables(set, variables);
+    const { describedby } = req.valid("query");
+    set_variables(
+      set,
+      await loadModerationsPageVariables(identite_pg, {
+        describedby,
+        user_id,
+      }),
+    );
     return next();
   },
   async function GET({ render }) {

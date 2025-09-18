@@ -3,7 +3,7 @@
 import type { App_Context } from "@~/app.middleware/context";
 import { urls } from "@~/app.urls";
 import type { IdentiteProconnect_PgDatabase } from "@~/identite-proconnect.database";
-import { GetUserById } from "@~/users.repository";
+import { GetAuthenticatorByUserId, GetUserById } from "@~/users.repository";
 import type { Env, InferRequestType } from "hono";
 import { useRequestContext } from "hono/jsx-renderer";
 
@@ -29,11 +29,15 @@ export async function loadUserPageVariables(
       updated_at: true,
       verify_email_sent_at: true,
       totp_key_verified_at: true,
+      force_2fa: true,
     },
   });
 
+  const get_authenticators_by_user_id = GetAuthenticatorByUserId(pg);
+
   return {
     user: await get_user_by_id(id),
+    authenticators: await get_authenticators_by_user_id(id),
   };
 }
 
